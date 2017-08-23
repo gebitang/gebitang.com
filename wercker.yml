@@ -1,7 +1,7 @@
 box: debian
 build:
   steps:
-    - arjen/hugo-build
+    - arjen/hugo-build:
         version: "0.17"
         theme: blackburn
         flags: --buildDrafts=true

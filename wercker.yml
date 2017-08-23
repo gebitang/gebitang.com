@@ -1,0 +1,6 @@
+box: debian
+build:
+  steps:
+    - arjen/hugo-build@1.19.0
+        theme: blackburn
+        flags: --buildDrafts=true

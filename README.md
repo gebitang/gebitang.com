@@ -5,9 +5,7 @@ My personal website hosted on GitHub Pages.
 ## Powered by
 - [Hugo](//gohugo.io/)
 - [Pure CSS](//purecss.io/)
-
-## Theme by [YY](https://github.com/yoshiharuyamashita)
-- [blackburn](https://themes.gohugo.io/theme/blackburn/)
+- [blackburn](https://themes.gohugo.io/theme/blackburn/) by [YY](https://github.com/yoshiharuyamashita)
 
 ## Built and Deployed with Wercker
 

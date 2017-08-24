@@ -5,7 +5,7 @@ tags = [
     "shell",
     "work"
 ]
-date = "2017-08-24"
+date = "2017-08-23"
 topics = [
     "work"
 ]

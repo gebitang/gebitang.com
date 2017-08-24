@@ -5,7 +5,7 @@ tags = [
     "shell",
     "work"
 ]
-date = "2017-08-24 10:41:50"
+date = "2017-08-24"
 topics = [
     "work"
 ]
@@ -64,5 +64,28 @@ joechin@ubuntu:~$ date +%Y%m%d%H%M%S
 
 ```
 
+## Git命令使用
+可配合GUI工具和命令行工具参考。
+
+0x0. 命令行单独对不同的文件进行commit操作
+```
+#理解暂存区的概念，多个文件即可分别处理
+git add new.file/modified.file
+#然后进行commit，即完成分别进行commit的动作
+git commit 
+
+#-a参数对所有工作区的文件都有效，未添加到跟踪区的文件除外
+git commit -a 
+```
+
 [^1]: the footnote text.
 [^2]: the footnote text 2.
+
+## Powered by
+- [Hugo](//gohugo.io/)
+- [Pure CSS](//purecss.io/)
+- [blackburn](https://themes.gohugo.io/theme/blackburn/) by [YY](https://github.com/yoshiharuyamashita)
+
+## Built and Deployed with Wercker
+
+[![wercker status](https://app.wercker.com/status/e0d626037da0e4c7f1bee4dcdda350e5/m/master "wercker status")](https://app.wercker.com/project/byKey/e0d626037da0e4c7f1bee4dcdda350e5)

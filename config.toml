@@ -15,8 +15,8 @@ paginate = 5
   # Shown in the home page
   subtitle = "埋头过坎 功不唐捐"
   brand = "Gebitang"
-  googleAnalytics = "Your Google Analytics tracking ID"
-  disqus = "Your Disqus shortname"
+  googleAnalytics = "UA-34303694-1"
+  disqus = "gebitang"
   # CSS name for highlight.js
   highlightjs = "androidstudio"
   highlightjs_extra_languages = ["yaml"]

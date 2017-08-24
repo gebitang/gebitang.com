@@ -14,6 +14,10 @@ topics = [
 ]
 +++
 
+4 steps to start hugo
+
+<!--more-->
+
 ## Step 1. Install Hugo
 
 Goto [hugo releases](https://github.com/spf13/hugo/releases) and download the

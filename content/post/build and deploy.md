@@ -12,6 +12,10 @@ topics = [
 ]
 +++
 
+how to build and deploy automatically.
+
+<!--more-->
+
 ## 部署记录
 - [Host on GitHub](https://gohugo.io/hosting-and-deployment/hosting-on-github/)
 

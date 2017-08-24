@@ -6,6 +6,7 @@ theme = "blackburn"
 copyright = "&copy; 2017. All rights reserved."
 canonifyurls = true
 paginate = 5
+hasCJKLanguage = true
 
 [indexes]
   tag = "tags"

@@ -13,7 +13,8 @@ topics = [
 ]
 +++
 
-
+How to create a theme
+<!--more-->
 
 ## Introduction
 

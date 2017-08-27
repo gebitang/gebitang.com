@@ -1,5 +1,5 @@
 +++
-title = "Daily Workground"
+title = "Daily Playground"
 description = "good good study, day day up. "
 tags = [
     "shell",
@@ -90,13 +90,16 @@ git commit -a
 
 1. 生成rsa文件时可以指定不同的名称，以保证可以生成使用多个
 2. 需要输入passphrase，否则系统认定不够安全，不允许添加到ssh-agent中
-3. 配置config 文件
+3. 配置config 文件，[支持多个git账号](https://my.oschina.net/csensix/blog/184434)
+4. 如果不进行config的配置，在添加ssh key之后，将统一使用global的设置
 
 ```
+# use git config --help to get the details
 #Default Git
-Host github
+Host github.com
  HostName github.com
  AddKeysToAgent yes
+ User gebitang
  UseKeychain yes
  IdentityFile ~/.ssh/id_rsa_github
 

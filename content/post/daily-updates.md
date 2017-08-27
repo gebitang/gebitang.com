@@ -85,6 +85,29 @@ git commit
 git commit -a 
 ```
 
+0x1. 配置github账号
+注意事项：[source](https://help.github.com/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent/)
+
+1. 生成rsa文件时可以指定不同的名称，以保证可以生成使用多个
+2. 需要输入passphrase，否则系统认定不够安全，不允许添加到ssh-agent中
+3. 配置config 文件
+
+```
+#Default Git
+Host github
+ HostName github.com
+ AddKeysToAgent yes
+ UseKeychain yes
+ IdentityFile ~/.ssh/id_rsa_github
+
+Host office
+ HostName IP address
+ AddKeysToAgent yes
+ User userName
+ UseKeychain yes
+ IdentityFile ~/.ssh/id_rsa
+```
+
 [^1]: the footnote text.
 [^2]: the footnote text 2.
 

@@ -32,13 +32,43 @@ This is a footnote.[^2]
 
 ## linux 环境
 
-16.04root密码
+### 16.04root密码
 
 1. 默认root密码是随机的，即每次开机都有一个新的root密码
 2. 在终端输命令 sudo passwd，然后输入当前用户的密码
 3. 输入新的密码并确认，此时的密码就是root新密码
 4. 修改成功后，输入命令 su root，再输入新的密码
 
+```
+#查看当前登录用户，需要root权限 w
+root@localhost:~# w
+ 10:48:38 up 17 days, 19:06,  1 user,  load average: 0.00, 0.02, 0.05
+USER     TTY      FROM              LOGIN@   IDLE   JCPU   PCPU WHAT
+root     pts/0    10.32.22.66      10:10    6.00s  0.15s  0.00s w
+
+# 踢掉在线用户
+pkill -kill -t pts/0
+
+```
+
+### 命令行快捷键
+
+```
+#光标移到行首， 辅助：Ctrl All必须从头开始
+Ctrl + A 
+#光标移到行尾， E represents end
+Ctrl + E 
+
+#向前移动一个字符 forward；在vim环境——包括man command也是vim环境——中，则表示向下翻页
+Ctrl + F 
+#向后移动一个字符 backward 在vim环境——包括man command也是vim环境——中，则表示向上翻页
+Ctrl + B 
+
+#向前移动一个单词 辅助：Alt意味着alternative取舍，选择。所以是按照有意义的操作进行
+Alt + F 
+#向后移动一个单词
+Alt + B 
+```
 ## Shell commands
 
 任何场景下，使用
@@ -51,7 +81,6 @@ man command
 ```
 Ctrl+Alt+T
 ```
-
 
 0x1. 等待
 	
@@ -70,6 +99,41 @@ joechin@ubuntu:~$ date +%Y%m%d%H%M%S
 20170824115957
 
 ```
+
+0x3. 判断进程是否存在
+
+```
+#!/bin/bash
+
+# Create dir logs if it doesn't exist
+if [ ! -d "./_logs" ]
+then
+    mkdir ./_logs
+fi
+
+# 判断是否存在文件 
+# ls所有以.txt为后缀的文件，如果不存在，将标准错误重定向到标准输出，
+# 2>&1 的意思就是将标准错误也输出到标准输出当中。
+# 重定向中 0-标准输出，1-标准输出，2-标准错误，而No such file or directory是一个标准错误。
+if ls *.txt >/dev/null 2>&1; then
+　　echo "file exist."
+else
+    echo "no txt file"
+fi
+
+controller=$(ps -aux|grep -F "ycdh"|grep -vF grep|awk '{printf $0}' |awk '{print $2}')
+
+# 中括号前后必须有空格，否则报 [: missing `]' 错误
+# 需要两个中括号，因为当变量为空时，会报 "[: =: unary operator expected" 错误
+if [[ $controller -ne 0 ]] ; then
+   echo "try to kill $controller"
+   kill -9 $controller
+else
+  echo "ycdh not running."
+fi
+
+```
+
 
 ## Git命令使用
 可配合GUI工具和命令行工具参考。
@@ -133,6 +197,11 @@ taskkill /IM notepad.exe
 ## Wercker Status
 
 [![wercker status](https://app.wercker.com/status/e0d626037da0e4c7f1bee4dcdda350e5/m/master "wercker status")](https://app.wercker.com/project/byKey/e0d626037da0e4c7f1bee4dcdda350e5)
+
+[![](https://cdn.80000hours.org/wp-content/uploads/2016/05/80K_incomewellnessC_V6.png "High income improves evaluation of life but not emotional well-being")](https://80000hours.org/career-guide/job-satisfaction/#money-makes-you-happier-but-only-a-little)
+
+[![](https://cdn.80000hours.org/wp-content/uploads/2016/03/80K_challengegraph_V1.png "The sweet spot")](https://80000hours.org/career-guide/job-satisfaction/#dont-aim-for-low-stress)
+
 
 [^1]: the footnote text.
 [^2]: the footnote text 2.

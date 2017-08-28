@@ -94,7 +94,7 @@ git commit -a
 4. 如果不进行config的配置，在添加ssh key之后，将统一使用global的设置
 
 ```
-# use git config --help to get the details
+# 对于ssh的配置
 #Default Git
 Host github.com
  HostName github.com
@@ -111,6 +111,14 @@ Host office
  IdentityFile ~/.ssh/id_rsa
 ```
 
+- ssh配置
+
+>添加ssh key（id_rsa_xxx、id_rsa_xxx.pub）到对应的repository，如github、gitlab，即可保证可以从对应的设备上就可以访问对应的repository。</br>
+
+- git配置
+
+>git config 配置完全局的 --global user.name 和 --global  user.email之后，可以在对应的仓库下，配置当前仓库使用的user.name 和user.email
+
 ## Windows命令
 ```
 #命令行杀死进程
@@ -122,13 +130,7 @@ taskkill /PID 11112
 taskkill /IM notepad.exe
 ```
 
-
-## Powered by
-- [Hugo](//gohugo.io/)
-- [Pure CSS](//purecss.io/)
-- [blackburn](https://themes.gohugo.io/theme/blackburn/) by [YY](https://github.com/yoshiharuyamashita)
-
-## Built and Deployed with Wercker
+## Wercker Status
 
 [![wercker status](https://app.wercker.com/status/e0d626037da0e4c7f1bee4dcdda350e5/m/master "wercker status")](https://app.wercker.com/project/byKey/e0d626037da0e4c7f1bee4dcdda350e5)
 

@@ -5,7 +5,7 @@ tags = [
     "shell",
     "work"
 ]
-date = "2017-08-23"
+date = "2017-08-24"
 topics = [
     "work"
 ]
@@ -111,8 +111,17 @@ Host office
  IdentityFile ~/.ssh/id_rsa
 ```
 
-[^1]: the footnote text.
-[^2]: the footnote text 2.
+## Windows命令
+```
+#命令行杀死进程
+#查看进程 
+tasklist
+   
+#杀死进程 查看帮助 taskkill /?
+taskkill /PID 11112
+taskkill /IM notepad.exe
+```
+
 
 ## Powered by
 - [Hugo](//gohugo.io/)
@@ -122,3 +131,6 @@ Host office
 ## Built and Deployed with Wercker
 
 [![wercker status](https://app.wercker.com/status/e0d626037da0e4c7f1bee4dcdda350e5/m/master "wercker status")](https://app.wercker.com/project/byKey/e0d626037da0e4c7f1bee4dcdda350e5)
+
+[^1]: the footnote text.
+[^2]: the footnote text 2.

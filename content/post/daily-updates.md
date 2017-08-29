@@ -247,6 +247,23 @@ Host office
 
 >git config 配置完全局的 --global user.name 和 --global  user.email之后，可以在对应的仓库下，配置当前仓库使用的user.name 和user.email
 
+0x2. commit amend修改commit
+使用 git commit --amend 参数可以对最近的提交进行修改。</br>
+作用相当于新提交了一个commit。
+如果修改前的commit已经被同步过，需要先进行拉取 git pull的操作
+否则在推送amend之后的commit时会提示:
+```
+$ git push origin master
+To git@github.com:gebitang/gebitang.com.git
+ ! [rejected]        master -> master (non-fast-forward)
+error: failed to push some refs to 'git@github.com:gebitang/gebitang.com.git'
+hint: Updates were rejected because the tip of your current branch is behind
+hint: its remote counterpart. Integrate the remote changes (e.g.
+hint: 'git pull ...') before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+```
+
+
 ## Windows命令
 ```
 #命令行杀死进程

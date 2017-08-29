@@ -134,6 +134,70 @@ fi
 
 ```
 
+## 线程控制批量执行
+- 循环体的命令用&符号放入后台运行实现多线程效果
+- 利用有名管道特性实现线程控制
+
+```
+#!/bin/bash
+# must /bin/bash add method not work while using /bin/sh
+
+# http://www.cnblogs.com/chenjiahe/p/6268853.html
+#定义脚本运行的开始时间
+start_time=`date +%s`
+# need to make sure root user can remote login
+passwd='passwordForRoot'
+#创建有名管道
+[ -e /tmp/fd1 ] || mkfifo /tmp/fd1 
+#创建文件描述符，以可读（<）可写（>）的方式关联管道文件，文件描述符9就有了有名管道文件的所有特性
+#has to be number?
+exec 9<>/tmp/fd1                   
+#关联后的文件描述符拥有管道文件的所有特性,所以这时候管道文件可以删除，留下文件描述符即可
+rm -rf /tmp/fd1                    
+for ((i=1;i<=5;i++))
+do
+#&9代表引用文件描述符9，这条命令代表往管道里面放入了一个"令牌"
+    echo >&9                   
+done
+
+for ip in 10.34.16.25 10.34.16.27 10.34.7.200
+do
+#代表从管道中读取一个令牌
+read -u9
+{
+	if ping -c 1 -W 5 $ip > /dev/null;then
+			#http://www.cnblogs.com/autopenguin/p/5918717.html
+			/usr/bin/expect <<-EOF
+			set timeout -1
+
+			spawn ssh root@$ip "cd /data/itestin-m/; bash /data/itestin-m/dh.sh"
+			expect {
+					"*yes/no" { send "yes\r"; exp_continue }
+					"*password:" { send "$passwd\r" }
+			}
+			expect eof
+
+			EOF
+			echo -e "~~~~good $ip~~~\n"
+	else
+			echo -e "=====can't connect@@@@$ip==\n\n"
+	fi
+	#代表命令执行到最后，把令牌放回管道
+	echo >&9   
+}&                           
+done
+wait
+
+stop_time=`date +%s`  #定义脚本运行的结束时间
+ 
+echo "TIME:`expr $stop_time - $start_time`"
+#关闭文件描述符的读，必须分开写
+exec 9<&-
+#关闭文件描述符的写           
+exec 9>&-
+
+```
+
 
 ## Git命令使用
 可配合GUI工具和命令行工具参考。

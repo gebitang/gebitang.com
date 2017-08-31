@@ -134,7 +134,7 @@ fi
 
 ```
 
-## 线程控制批量执行
+0x4. 线程控制批量执行
 - 循环体的命令用&符号放入后台运行实现多线程效果
 - 利用有名管道特性实现线程控制
 
@@ -196,6 +196,12 @@ exec 9<&-
 #关闭文件描述符的写           
 exec 9>&-
 
+```
+
+0x5. 过滤logcat输出并保存到文件
+```shell
+#使用 --line-buffered 参数 https://stackoverflow.com/a/18146279/1087122
+adb logcat -v time | grep --line-buffered UIA > log.log
 ```
 
 

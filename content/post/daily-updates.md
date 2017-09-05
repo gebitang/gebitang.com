@@ -9,14 +9,13 @@ date = "2017-08-24"
 topics = [
     "work"
 ]
+toc = true
 +++
 
 
 收集整理记录日常工作中用到的技术点。
 
 <!--more-->
-
-
 
 ## Markdown 语法练习
 This is a footnote.[^1]

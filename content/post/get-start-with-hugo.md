@@ -12,6 +12,7 @@ topics = [
     "Development",
     "golang"
 ]
+toc = true
 +++
 
 4 steps to start hugo

@@ -8,6 +8,10 @@
 
   {{ partial "post_meta.html" . }}
 
+  {{ if .Params.toc }}
+	{{ .TableOfContents }}
+  {{ end }}
+
   {{ .Content }}
 
   {{ partial "prev_next_post.html" . }}

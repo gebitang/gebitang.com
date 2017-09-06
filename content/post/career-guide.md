@@ -18,12 +18,19 @@ topics = [
 
 2. 处理人际关系：帮助他人，自己擅长。也是商业成功之道
 
-3. 做事虎头蛇尾，坚持
+3. 做事不要虎头蛇尾，坚持到底
 
 
 <img src="https://cdn.80000hours.org/wp-content/uploads/2017/06/80K_articles_personalfitformula_V5.jpg" height="268" width="1024" />
 
+## 一般如何开始？
 
+评估自己？如何评估？
+如何寻找机会？
+如何准备面试？
+
+
+## 80000小时如何对待这个问题？
 
 
 Contents
@@ -48,8 +55,4 @@ Practical tips on how to build connections
 15. Work on becoming a better person
 
 How to be successful: the compounding benefits of investing in yourself
-
-
-https://www.moodscope.com/register
-https://www.headspace.com/
 

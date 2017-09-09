@@ -232,7 +232,7 @@ adb logcat -v time | grep --line-buffered UIA > log.log
 ## Git命令使用
 可配合GUI工具和命令行工具参考。
 
-0x0. 命令行单独对不同的文件进行commit操作
+### 0x0. 命令行单独对不同的文件进行commit操作
 ```
 #理解暂存区的概念，多个文件即可分别处理
 git add new.file/modified.file
@@ -243,7 +243,7 @@ git commit
 git commit -a 
 ```
 
-0x1. 配置github账号
+### 0x1. 配置github账号
 注意事项：[source](https://help.github.com/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent/)
 
 1. 生成rsa文件时可以指定不同的名称，以保证可以生成使用多个
@@ -261,6 +261,11 @@ Host github.com
  UseKeychain yes
  IdentityFile ~/.ssh/id_rsa_github
 
+Host git.coding.net
+ User gebitang
+ PreferredAuthentications publickey
+ IdentityFile ~/.ssh/id_rsa_coding
+
 Host office
  HostName IP address
  AddKeysToAgent yes
@@ -277,7 +282,7 @@ Host office
 
 >git config 配置完全局的 --global user.name 和 --global  user.email之后，可以在对应的仓库下，配置当前仓库使用的user.name 和user.email
 
-0x2. commit amend修改commit
+### 0x2. commit amend修改commit
 使用 git commit --amend 参数可以对最近的提交进行修改。</br>
 作用相当于新提交了一个commit。
 如果修改前的commit已经被同步过，需要先进行拉取 git pull的操作
@@ -292,7 +297,14 @@ hint: its remote counterpart. Integrate the remote changes (e.g.
 hint: 'git pull ...') before pushing again.
 hint: See the 'Note about fast-forwards' in 'git push --help' for details.
 ```
-
+### 0x3. Permission denied (publickey)问题
+[原因：SSH的配置文件ssh_config中的“IdentityFile“ 与实际情况不相符](http://blog.itpub.net/25851087/viewspace-1262468/)</br>
+生成的一对秘钥，公钥上传到对应的站点后，使用-vt参数进行调试验证
+```
+#测试连接情况
+# v for verbose mode, V for version
+ssh -vT git@git.coding.net 
+```
 
 ## Windows命令
 ```

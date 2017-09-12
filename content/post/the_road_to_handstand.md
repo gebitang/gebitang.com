@@ -1,0 +1,37 @@
++++
+title = "The Road To Handstand"
+description = "倒立之路"
+tags = [
+    "handstand",
+    "flag"
+]
+date = "2017-12-17"
+topics = [
+    "practice",
+    "life"
+]
+toc = true
++++
+
+Flag1：</br>
+始于2017-09-14，记录练习手倒立的历史，到今年12月17日之前，完成手倒立动作。</br>
+依据[**九步练习**](https://mp.weixin.qq.com/s/Iwnz2-U4H70ZNzWEe4t_Bg)，每个动作练习10天左右，每次练习至少3组。</br>
+记录每天的练习、感受、调整、完成与否的过程。
+
+<!--more-->
+[努力焦虑症 by 动机在杭州](https://zhuanlan.zhihu.com/p/29253331?group_id=890709963381547008)
+
+>1. 第一种努力，是有明确的目标，并且知道自己在做什么；这些人其实不在乎努力，他们只在乎这些目标是否能够达成；
+
+>2. 第二种努力，是暂时没有明确目标，但想生活得更积极向上些的努力；
+
+>3. 第三种努力，则根本不想要努力，只想要一种努力的感觉。无论这些努力在别人看来是多么徒劳，它都是我们缓解焦虑的方式。可焦虑的背后又是什么呢？
+
+
+## 一、斜板式
+- 手倒立的秘密（以及其他任何手和手臂平衡的动作）就是核心。斜板式可以同时锻炼到核心和手臂力量。
+- 从四脚板凳是开始，双脚往后走，与髋同宽，脚趾踩地，肩膀在手腕正上方。
+- 微收下巴，身体一条直线。肚脐收向脊柱，脚跟往前推，力量到头顶。
+- 确保肩胛骨均展平。肘关节放松。
+- 循序渐进加长保持时间，30秒、40秒，然后50秒、1分钟。
+![](http://mmbiz.qpic.cn/mmbiz_jpg/8Giaia9RfhgjglicJAX6kn4S38fMt1N9QZnjRQxicrTOwG7RoanoCkZTBWoJnPibVrYdI95hzVjH5icjoeuwc4TCAPJg/640?wx_fmt=jpeg&tp=webp&wxfrom=5&wx_lazy=1)

@@ -37,16 +37,20 @@ Flag1：</br>
 ![](http://mmbiz.qpic.cn/mmbiz_jpg/8Giaia9RfhgjglicJAX6kn4S38fMt1N9QZnjRQxicrTOwG7RoanoCkZTBWoJnPibVrYdI95hzVjH5icjoeuwc4TCAPJg/640?wx_fmt=jpeg&tp=webp&wxfrom=5&wx_lazy=1)
 
 ### Day1 @2017-09-13
-
 练习3次，每次>40秒。近来有一只锻炼身体，第一个基础动作完成的比较轻松。</br>
 需要注意的是将锻炼的次数增加的同时，将锻炼的时间固定下来，比如早起1次；午饭前一次；下午3点一次；5点一次。可以设定固定闹钟进行提醒，最近两周可以按照这个节奏。
 
 ### Day2 @2017-09-14
-
 - 早上练习三组，每组100秒
 - 瑜伽垫到位，下午练习一组30秒
 
 ### Day3 @2017-09-15
-
 - 早上练习三组，每组110秒
 - 仰卧起坐100个，一组
+
+### Day4 @2017-09-16
+- 早上练习三组，每组110秒
+- 仰卧起坐111个一组
+- 俯卧撑一组20个
+
+

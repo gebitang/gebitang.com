@@ -149,7 +149,7 @@ public class Test {
 [How are integers internally represented at a bit level in Java?](https://stackoverflow.com/questions/13422259/how-are-integers-internally-represented-at-a-bit-level-in-java)</br>
 [Binary presentation of negative integer in Java](https://stackoverflow.com/questions/26315782/binary-presentation-of-negative-integer-in-java)</br>
 </br>
-
+[java原码、补码、反码总结](http://blog.csdn.net/qq_30739519/article/details/50991484)
 
 
 [TOP命令各个参数代表意义详解](https://blog.linuxeye.cn/139.html)</br>

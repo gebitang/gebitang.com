@@ -227,6 +227,26 @@ exec 9>&-
 adb logcat -v time | grep --line-buffered UIA > log.log
 ```
 
+### 0x6. 查看端口占有
+```
+# 查看已经连接的服务端口（ESTABLISHED）
+netstat -a
+
+#查看所有的服务端口（LISTEN，ESTABLISHED）
+netstat -ap
+
+# 查看具体哪个进程占有对应的端口，端口号为特指
+lsof -i:9988
+```
+
+### 0x7. apt-get安装卸载
+```
+# 查看已安装应用 dpkg -l配合grep
+dpkg -l |grep 'deja-dup'
+
+# 卸载应用 -q for quiet， 可以通过 man apt-get 搜索 -qq查看更多信息
+apt-get -q remove deja-dup
+```
 
 
 ## Git命令使用

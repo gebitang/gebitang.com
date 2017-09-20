@@ -12,8 +12,11 @@ topics = [
 toc = true
 +++
 
-
 收集整理记录日常工作中用到的技术点。
+
+{{< fluid_imgs
+  "pure-u-1-1|https://cdn.80000hours.org/wp-content/uploads/2016/03/80K_challengegraph_V1.png|The sweet spot|https://80000hours.org/career-guide/job-satisfaction/#dont-aim-for-low-stress"
+>}}
 
 <!--more-->
 
@@ -341,9 +344,12 @@ taskkill /IM notepad.exe
 
 [![wercker status](https://app.wercker.com/status/e0d626037da0e4c7f1bee4dcdda350e5/m/master "wercker status")](https://app.wercker.com/project/byKey/e0d626037da0e4c7f1bee4dcdda350e5)
 
-[![](https://cdn.80000hours.org/wp-content/uploads/2016/05/80K_incomewellnessC_V6.png "High income improves evaluation of life but not emotional well-being")](https://80000hours.org/career-guide/job-satisfaction/#money-makes-you-happier-but-only-a-little)
+{{< fluid_imgs
+  "pure-u-1-1|https://cdn.80000hours.org/wp-content/uploads/2016/05/80K_incomewellnessC_V6.png|High income improves evaluation of life but not emotional well-being|https://80000hours.org/career-guide/job-satisfaction/#money-makes-you-happier-but-only-a-little"
+>}}
 
-[![](https://cdn.80000hours.org/wp-content/uploads/2016/03/80K_challengegraph_V1.png "The sweet spot")](https://80000hours.org/career-guide/job-satisfaction/#dont-aim-for-low-stress)
+
+
 
 
 [^1]: the footnote text.

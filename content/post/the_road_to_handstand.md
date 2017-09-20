@@ -13,10 +13,15 @@ topics = [
 toc = true
 +++
 
-Flag1：</br>
 始于2017-09-13，记录练习手倒立的历史，到今年12月17日之前，完成手倒立动作。</br>
 依据[**九步练习**](https://mp.weixin.qq.com/s/Iwnz2-U4H70ZNzWEe4t_Bg)，每个动作练习10天左右，每次练习至少3组。</br>
 记录每天的练习、感受、调整、完成与否的过程。
+
+
+
+{{< fluid_imgs
+  "pure-u-1-1|https://yoga.com/media/cache/75/7c/757c6c1e214ffe19a01b9a4877aa0243.jpg|handstand|https://www.fitnessmagazine.com/workout/yoga/poses/9-yoga-poses-to-help-you-build-the-strength-for-a-yoga-handstand/"
+>}}
 
 <!--more-->
 [努力焦虑症 by 动机在杭州](https://zhuanlan.zhihu.com/p/29253331?group_id=890709963381547008)
@@ -28,7 +33,8 @@ Flag1：</br>
 >3. 第三种努力，则根本不想要努力，只想要一种努力的感觉。无论这些努力在别人看来是多么徒劳，它都是我们缓解焦虑的方式。可焦虑的背后又是什么呢？
 
 
-## 一、斜板式
+
+## I. Plank
 - 手倒立的秘密（以及其他任何手和手臂平衡的动作）就是核心。斜板式可以同时锻炼到核心和手臂力量。
 - 从四脚板凳是开始，双脚往后走，与髋同宽，脚趾踩地，肩膀在手腕正上方。
 - 微收下巴，身体一条直线。肚脐收向脊柱，脚跟往前推，力量到头顶。
@@ -37,7 +43,7 @@ Flag1：</br>
 
 
 {{< fluid_imgs
-  "pure-u-1-1|http://mmbiz.qpic.cn/mmbiz_jpg/8Giaia9RfhgjglicJAX6kn4S38fMt1N9QZnjRQxicrTOwG7RoanoCkZTBWoJnPibVrYdI95hzVjH5icjoeuwc4TCAPJg/640?wx_fmt=jpeg&tp=webp&wxfrom=5&wx_lazy=1|斜板式"
+  "pure-u-1-1|https://www.fitnessmagazine.com/sites/fitnessmagazine.com/files/styles/slide/public/img_2584.jpg|Plank"
 >}}
 
 
@@ -78,3 +84,60 @@ Flag1：</br>
 - 仰卧起坐两组，每组100个
 - 俯卧撑两组，每组20个
 - 靠墙蹲起一组20个
+
+
+## II. Low Boat Pose
+
+
+{{< fluid_imgs
+  "pure-u-1-1|https://www.fitnessmagazine.com/sites/fitnessmagazine.com/files/styles/slide/public/img_2630_0.jpg|Low Boat Pose"
+>}}
+
+
+## III. Lying Down Broken Stick
+
+{{< fluid_imgs
+  "pure-u-1-1|https://www.fitnessmagazine.com/sites/fitnessmagazine.com/files/styles/slide/public/img_2636.jpg|Lying Down Broken Stick"
+>}}
+
+
+
+## IV. Warrior Three
+
+{{< fluid_imgs
+  "pure-u-1-1|https://www.fitnessmagazine.com/sites/fitnessmagazine.com/files/styles/slide/public/img_2617.jpg?itok=CA7PET8e|Warrior Three"
+>}}
+
+
+## V. Standing Split
+
+{{< fluid_imgs
+  "pure-u-1-1|https://www.fitnessmagazine.com/sites/fitnessmagazine.com/files/styles/slide/public/img_2596.jpg|Standing Split"
+>}}
+
+## VI. L Handstand at Wall
+{{< fluid_imgs
+  "pure-u-1-1|https://www.fitnessmagazine.com/sites/fitnessmagazine.com/files/styles/slide/public/img_2655.jpg|L Handstand at Wall"
+>}}
+
+## VII. L- Hops
+{{< fluid_imgs
+  "pure-u-1-1|https://www.fitnessmagazine.com/sites/fitnessmagazine.com/files/styles/slide/public/img_2576.jpg|L- Hops"
+>}}
+
+## VIII. Handstand with Split Legs
+{{< fluid_imgs
+  "pure-u-1-1|https://www.fitnessmagazine.com/sites/fitnessmagazine.com/files/styles/slide/public/img_2567.jpg|Handstand with Split Legs"
+>}}
+
+## IX. Handstand
+
+{{< fluid_imgs
+  "pure-u-1-1|https://www.fitnessmagazine.com/sites/fitnessmagazine.com/files/styles/slide/public/img_2572_0.jpg|Handstand"
+>}}
+
+
+
+
+
+

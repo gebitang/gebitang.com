@@ -34,7 +34,12 @@ Flag1：</br>
 - 微收下巴，身体一条直线。肚脐收向脊柱，脚跟往前推，力量到头顶。
 - 确保肩胛骨均展平。肘关节放松。
 - 循序渐进加长保持时间，30秒、40秒，然后50秒、1分钟。
-![](http://mmbiz.qpic.cn/mmbiz_jpg/8Giaia9RfhgjglicJAX6kn4S38fMt1N9QZnjRQxicrTOwG7RoanoCkZTBWoJnPibVrYdI95hzVjH5icjoeuwc4TCAPJg/640?wx_fmt=jpeg&tp=webp&wxfrom=5&wx_lazy=1)
+
+
+{{< fluid_imgs
+  "pure-u-1-1|http://mmbiz.qpic.cn/mmbiz_jpg/8Giaia9RfhgjglicJAX6kn4S38fMt1N9QZnjRQxicrTOwG7RoanoCkZTBWoJnPibVrYdI95hzVjH5icjoeuwc4TCAPJg/640?wx_fmt=jpeg&tp=webp&wxfrom=5&wx_lazy=1|斜板式"
+>}}
+
 
 ### Day1 @2017-09-13
 练习3次，每次>40秒。近来有一只锻炼身体，第一个基础动作完成的比较轻松。</br>

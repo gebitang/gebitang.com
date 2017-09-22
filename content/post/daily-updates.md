@@ -32,6 +32,41 @@ This is a footnote.[^1]
 
 This is a footnote.[^2]
 
+## Maven 本地使用
+
+- 下载apache-maven-3.5.0-bin.tar.gz到本地
+- 解压：`tar -xvf apache-maven-3.5.0-bin.tar.gz`
+- 更新配置文件：
+
+```
+M2_HOME=/Users/gebitang/apache-maven-3.5.0
+PATH=$PATH:$JAVA_HOME/bin:/Users/gebitang/libs/:/usr/local/smlnj/bin:$M2_HOME/bin
+```
+
+- 如需要，修改conf文件夹下的settings文件中的localRepository
+
+### 安装jar包到本地
+```
+mvn install:install-file -Dfile=itestin.jar -DgroupId=cn.itestin.cv -DartifactId=itestin -Dversion=170921 -Dpackaging=jar
+
+[INFO] Scanning for projects...
+[INFO]
+[INFO] ------------------------------------------------------------------------
+[INFO] Building Maven Stub Project (No POM) 1
+[INFO] ------------------------------------------------------------------------
+[INFO]
+[INFO] --- maven-install-plugin:2.4:install-file (default-cli) @ standalone-pom ---
+[INFO] Installing /Users/gebitang/Downloads/itestin.jar to /Users/gebitang/.m2/repository/cn/itestin/cv/itestin/170921/itestin-170921.jar
+[INFO] Installing /var/folders/tw/pwg0lcfx4j79s8txc3z10dqm0000gn/T/mvninstall8572123810588485936.pom to /Users/gebitang/.m2/repository/cn/itestin/cv/itestin/170921/itestin-170921.pom
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time: 0.828 s
+[INFO] Finished at: 2017-09-22T10:14:08+08:00
+[INFO] Final Memory: 5M/123M
+[INFO] ------------------------------------------------------------------------
+```
+
 ## linux 环境
 
 ### 16.04root密码
@@ -251,6 +286,17 @@ dpkg -l |grep 'deja-dup'
 apt-get -q remove deja-dup
 ```
 
+
+### Shell接受参数
+
+接收来自命令行传入的参数，第一个参数用$1表示，第二个参数$2表示，。。。以此类推。注意：$0表示脚本文件名。另外一个在shell编程中经常用到 的是“$@”这个代表所有的参数，。你可以用一个循环来遍历这个参数。如果用java来类比的话，可以把$@看作是man函数中定义的那个数组
+```
+#!/bin/bash
+for args in $@
+  do
+  	echo $args
+  done
+```
 
 ## Git命令使用
 可配合GUI工具和命令行工具参考。

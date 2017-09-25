@@ -375,6 +375,8 @@ hint: See the 'Note about fast-forwards' in 'git push --help' for details.
 ssh -vT git@git.coding.net 
 ```
 
+>如果clone时使用了https格式，则再次推送时总是会提示输入用户名密码，可以通过`git config --list`查看，然后修改`remote.origin.url`的值
+
 ## Windows命令
 ```
 #命令行杀死进程

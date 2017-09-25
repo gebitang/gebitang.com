@@ -91,17 +91,33 @@ toc = true
 - 俯卧撑两组，每组20个
 - 靠墙蹲起一组20个
 
-### Day0 #2017-09-22
+### 0Day #2017-09-22
 
 半夜被老婆的消息叫醒，后来睡得就比较累，早上没起来锻炼。一是睡得稍晚；二是醒得过早；三是要收拾行李。
 
-## II. Low Boat Pose
 
+## II. Low Boat Pose
 
 {{< fluid_imgs
   "pure-u-1-1|https://www.fitnessmagazine.com/sites/fitnessmagazine.com/files/styles/slide/public/img_2630_0.jpg|Low Boat Pose"
 >}}
 
+- 低位船式可以启动核心。
+- 来到正常的船式。然后中下背部放在地面，肚脐收向脊柱，保持肩膀和头抬起来。
+- 腿慢慢往下放，保持并拢，直到离地面15厘米。
+- 启动腹部肌肉和股四头肌，保持5-10个深呼吸。
+
+
+{{< fluid_imgs
+  "pure-u-1-1|https://static1.squarespace.com/static/5008a3c6c4aa6450352d2303/t/556708d9e4b0ce372e10ce65/1432815841568/|Boat Pose"
+>}}
+
+### Day1 @2017-09-25
+- 早上练习三组，每组111秒
+- 仰卧起坐一组100个
+- 俯卧撑一组20个
+- 靠墙蹲起一组20个
+- 船式转低位船式5个，每组5次深呼吸
 
 ## III. Lying Down Broken Stick
 

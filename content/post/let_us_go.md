@@ -18,6 +18,9 @@ Let's Go.
 
 [Go 1.9 is released](https://blog.golang.org/go1.9). [**Here**](https://blog.golang.org/index) are all the blogs about go.
 
+[Go: Ten years and climbing](https://commandcenter.blogspot.co.uk/2017/09/go-ten-years-and-climbing.html)
+[Go十年](http://tonybai.com/2017/09/24/go-ten-years-and-climbing/)
+
 <!--more-->
 
 

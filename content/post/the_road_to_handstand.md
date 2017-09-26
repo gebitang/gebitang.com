@@ -41,6 +41,7 @@ toc = true
 - 确保肩胛骨均展平。肘关节放松。
 - 循序渐进加长保持时间，30秒、40秒，然后50秒、1分钟。
 
+>The secret to handstand—and any other balance on your hands or arms—is actually core strength. The limiting factor is almost never in your arms. (But if you feel like you want stronger arms, check out these yoga poses to help build your strength.) Plank is the best pose to work both arm and core strength all at once. Start on hands and knees. Step feet back so they are hip-width apart, keeping toes tucked and shoulders and wrists in line. Tuck chin slightly, keeping spine in line with body. Engage navel to spine and energetically reach back through heels while pushing through crown of head. Make sure shoulder blades are equally engaged down the back. Do not lock elbows. Breathe here for 30 seconds, then 40 seconds, then 50, then 1 minute.
 
 {{< fluid_imgs
   "pure-u-1-1|https://www.fitnessmagazine.com/sites/fitnessmagazine.com/files/styles/slide/public/img_2584.jpg|Plank"
@@ -107,6 +108,7 @@ toc = true
 - 腿慢慢往下放，保持并拢，直到离地面15厘米。
 - 启动腹部肌肉和股四头肌，保持5-10个深呼吸。
 
+>Low boat pose is a great way to integrate the core in the same way required for a handstand. Come to a regular boat pose. Lower middle back toward the ground, pulling belly button to spine and keeping head and shoulders lifted off the ground. Lower legs—keeping them together—until feet are about 6 inches from the ground. Engage abdominal muscles and quadriceps, and breathe here for 5-10 deep breaths.
 
 {{< fluid_imgs
   "pure-u-1-1|https://static1.squarespace.com/static/5008a3c6c4aa6450352d2303/t/556708d9e4b0ce372e10ce65/1432815841568/|Boat Pose"
@@ -117,7 +119,13 @@ toc = true
 - 仰卧起坐一组100个
 - 俯卧撑一组20个
 - 靠墙蹲起一组20个
-- 船式转低位船式5个，每组5次深呼吸
+- 船式转低位船式5组，每组5次深呼吸
+
+### Day2 @2017-09-26
+- 早上练习三组，每组111秒
+- 仰卧起坐一组100个
+- 俯卧撑一组20个
+- 船式转低位船式5组，每组10次深呼吸
 
 ## III. Lying Down Broken Stick
 
@@ -125,7 +133,13 @@ toc = true
   "pure-u-1-1|https://www.fitnessmagazine.com/sites/fitnessmagazine.com/files/styles/slide/public/img_2636.jpg|Lying Down Broken Stick"
 >}}
 
+- 这个体式就像躺下来的手倒立。
+- 从低位船式，双手举过头顶，一条腿往上伸直（双腿90°）。
+- 大腿内旋寻找彼此，从脚趾开始拉长双腿。
+- 手腕弯曲，让手背和手臂90°，就像在做手倒立一样。
+- 保持5-20个呼吸。然后换边。
 
+>This pose is really just a handstand on your back. From low boat, reach arms overhead while reaching one leg straight up (so legs are at a 90-degree angle). Internally rotate thighs toward one another and reach long through toes. Flex through palms as if you are in a handstand and breathe here for 5-20 deep breaths. Repeat with the other leg.
 
 ## IV. Warrior Three
 

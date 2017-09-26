@@ -298,6 +298,17 @@ for args in $@
   done
 ```
 
+### Shell自动登录expect
+```
+# 需要安装expect
+#!/usr/bin/expect
+spawn ssh root@192.168.22.194
+expect "*password:"
+send "123\r"
+expect "*#"
+interact
+```
+
 ## Git命令使用
 可配合GUI工具和命令行工具参考。
 

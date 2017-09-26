@@ -111,8 +111,14 @@ toc = true
 >Low boat pose is a great way to integrate the core in the same way required for a handstand. Come to a regular boat pose. Lower middle back toward the ground, pulling belly button to spine and keeping head and shoulders lifted off the ground. Lower legs—keeping them together—until feet are about 6 inches from the ground. Engage abdominal muscles and quadriceps, and breathe here for 5-10 deep breaths.
 
 {{< fluid_imgs
-  "pure-u-1-1|https://static1.squarespace.com/static/5008a3c6c4aa6450352d2303/t/556708d9e4b0ce372e10ce65/1432815841568/|Boat Pose"
+  "pure-u-1-1|http://owv7qyago.bkt.clouddn.com/correct.jpe?imageslim|Correct Boat Pose"
 >}}
+
+{{< fluid_imgs
+  "pure-u-1-1|http://owv7qyago.bkt.clouddn.com/wrong.jpe?imageslim|Wrong Boat Pose"
+>}}
+
+
 
 ### Day1 @2017-09-25
 - 早上练习三组，每组111秒

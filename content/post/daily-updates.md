@@ -20,6 +20,22 @@ toc = true
 
 <!--more-->
 
+## Java IDE
+
+### It is indirectly referenced from required .class files
+
+[参考](http://blog.csdn.net/hello_yz/article/details/40113213)
+
+- jdk版本问题
+- 如果是在IDEA中，在Project Structure中对几个项目使用的jdk版本做统一处理
+
+### cannot be resolved to a type
+
+[参考](http://blog.csdn.net/testcs_dn/article/details/39643119)
+
+- JDK版本不匹配
+- jar包缺失或冲突 
+
 ## Markdown 语法练习
 This is a footnote.[^1]
 

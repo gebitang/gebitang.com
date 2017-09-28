@@ -22,6 +22,13 @@ toc = true
 
 ## Java IDE
 
+### slice2java ice生成java文件
+
+根据具体的.ice文件，执行命令
+```
+slice2java --output-dir=output/dir/path xxx.ice
+```
+
 ### It is indirectly referenced from required .class files
 
 [参考](http://blog.csdn.net/hello_yz/article/details/40113213)

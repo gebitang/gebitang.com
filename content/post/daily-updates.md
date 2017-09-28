@@ -36,6 +36,30 @@ toc = true
 - JDK版本不匹配
 - jar包缺失或冲突 
 
+### Maven Failed to read artifact descriptor 导致dependency文件无法识别
+
+[参考](https://stackoverflow.com/questions/6642146/maven-failed-to-read-artifact-descriptor)
+
+在对应的根目录下执行 `mvn -U clean install` 重新下载识别
+
+### Failed to read artifact descriptor for xxx
+
+对应的jar包无法获取到。1. 更改repository； 2. 或者不跟踪更高版本的jar包
+
+### Dependencies version
+
+[Reference](http://maven.apache.org/pom.html)
+```
+1.0: "Soft" requirement on 1.0 (just a recommendation, if it matches all other ranges for the dependency)
+[1.0]: "Hard" requirement on 1.0
+(,1.0]: x <= 1.0
+[1.2,1.3]: 1.2 <= x <= 1.3
+[1.0,2.0): 1.0 <= x < 2.0
+[1.5,): x >= 1.5
+(,1.0],[1.2,): x <= 1.0 or x >= 1.2; multiple sets are comma-separated
+(,1.1),(1.1,): this excludes 1.1 (for example if it is known not to work in combination with this library)
+```
+
 ## Markdown 语法练习
 This is a footnote.[^1]
 
@@ -84,6 +108,23 @@ mvn install:install-file -Dfile=itestin.jar -DgroupId=cn.itestin.cv -DartifactId
 ```
 
 ## linux 环境
+
+### 查看启动时间
+
+[Linux查看系统开机时间](http://www.cnblogs.com/kerrycode/p/3759395.html)
+```
+#  查看最后一次系统启动的时间
+gebitang@ubuntu# who -b
+         system boot  2017-09-19 16:25
+gebitang@ubuntu# who -r
+         run-level 5  2017-09-19 16:25
+gebitang@ubuntu# last reboot
+reboot   system boot  4.4.0-62-generic Tue Sep 19 16:25   still running
+reboot   system boot  4.4.0-62-generic Tue Sep 19 14:56   still running
+reboot   system boot  4.4.0-62-generic Tue Sep 19 20:12   still running
+reboot   system boot  4.4.0-62-generic Tue Sep 19 18:50   still running
+# top命令的提示信息中也有
+```
 
 ### 16.04root密码
 
@@ -324,6 +365,15 @@ send "123\r"
 expect "*#"
 interact
 ```
+
+### for循环读取文件作为变量
+```
+for line in `cat filename`
+do
+  echo $line
+done
+```
+可配合上面的使用，变量单独存在文件中
 
 ## Git命令使用
 可配合GUI工具和命令行工具参考。

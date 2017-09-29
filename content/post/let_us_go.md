@@ -20,6 +20,7 @@ Let's Go.
 
 [Go: Ten years and climbing](https://commandcenter.blogspot.co.uk/2017/09/go-ten-years-and-climbing.html)
 [Go十年](http://tonybai.com/2017/09/24/go-ten-years-and-climbing/)
+[BIG: Blockchain In Go](https://jeiwan.cc/tags/blockchain/)
 
 <!--more-->
 
@@ -28,7 +29,7 @@ As you append to a slice, its capacity [doubles in size](https://stackoverflow.c
 
 dream job
 
-钱多事少离家近，但是day-by-day, hour-by-hour
+day-by-day, hour-by-hour
 
 
 the six ingredients

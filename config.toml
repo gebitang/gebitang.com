@@ -3,7 +3,7 @@ languageCode = "en-us"
 title = "戈壁堂"
 theme = "blackburn"
 
-copyright = "&copy; 2017. All rights reserved."
+copyright = ""
 canonifyurls = true
 paginate = 5
 hasCJKLanguage = true

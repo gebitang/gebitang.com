@@ -461,6 +461,16 @@ ssh -vT git@git.coding.net
 
 >如果clone时使用了https格式，则再次推送时总是会提示输入用户名密码，可以通过`git config --list`查看，然后修改`remote.origin.url`的值
 
+### 0x4. 合并commits
+[参考](http://www.jianshu.com/p/964de879904a)
+```
+# -i for interactive, 而不是指 其中，-i 的参数是不需要合并的 commit 的 hash 值 
+# commitid 可理解为在此commit上进行rebase。即此commit之后的commit都可以进行rebase:)
+git rebase -i commitid
+```
+原理：选择要rebase的基础commit，进入交互模式，根据提示对不同的commit处理为pick或squash
+
+
 ## Windows命令
 ```
 #命令行杀死进程

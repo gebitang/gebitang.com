@@ -20,6 +20,49 @@ toc = true
 
 <!--more-->
 
+## 命令行FTP操作
+
+完成登录，上传、下载文件
+[参考](http://blog.csdn.net/indexman/article/details/46387561)
+
+```
+# 1. login 
+ftp xx.xxx.xx.ip
+# 2. input username and password accrodingly
+
+# show local dir 
+!dir 
+
+# change local dir 
+lcd /data/
+
+# cd, ls, pwd, dir, works for remote.
+ftp> ls
+200 PORT command successful. Consider using PASV.
+150 Here comes the directory listing.
+drwxrwxr-x    5 600      600          4096 Feb 24  2017 test1
+drwxrwxr-x    5 600      600          4096 Feb 13  2017 test2
+226 Directory send OK.
+ftp> cd zt/install
+250 Directory successfully changed.
+ftp> ls
+200 PORT command successful. Consider using PASV.
+150 Here comes the directory listing.
+drwxrwxr-x    2 600      600          4096 Jan 21  2016 adb
+
+# upload file to remote.
+ftp> put uitest.apk
+
+# dowload file to local
+ftp> get uitest.apk
+local: uitest.apk remote: uitest.apk
+200 PORT command successful. Consider using PASV.
+150 Opening BINARY mode data connection for uitest.apk (393600 bytes).
+226 Transfer complete.
+393600 bytes received in 0.22 secs (1719.1 kB/s)
+
+```
+
 ## Java IDE
 
 ### slice2java ice生成java文件

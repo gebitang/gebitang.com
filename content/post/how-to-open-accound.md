@@ -71,7 +71,8 @@ toc = true
 2. 预申请完成后可在48小时后登陆网站查询初审结
 3. 初审结果30日有效，申请人通过初审的，请及时预约，并于预约时间到达选定的出入境接待大厅，按照现场办证流程提示完成现场申请
 
-[办理机构地址](http://www.bjgaj.gov.cn/web/detail_getZwgkInfo_44404.html)
+[办理机构地址](http://www.bjgaj.gov.cn/web/detail_getZwgkInfo_44404.html)周一至周六9: 00-12: 00 14：00-17：30；</br>
+[拍照机构地址](http://bj.e-photo.cn/xgmd.html) 周一至周六9:00-17:30 
 
 ****
 

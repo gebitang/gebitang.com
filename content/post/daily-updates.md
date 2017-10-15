@@ -20,6 +20,13 @@ toc = true
 
 <!--more-->
 
+## VirtualBox 识别网银UKey
+
+- 在启动前插入UKey
+- 在设置页面选择端口操作，选择USB
+- 添加过滤，自动识别的UKey
+
+
 ## 命令行FTP操作
 
 完成登录，上传、下载文件

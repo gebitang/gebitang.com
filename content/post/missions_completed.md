@@ -16,7 +16,11 @@ toc = true
 - THIS.RECORDING
 - [BIG: Blockchain In Go](https://jeiwan.cc/tags/blockchain/)
 
+## TODO 
 
+- 拍照：2寸for港澳通行证，1寸for工作居住证
+- 个税：-自助打印
+- VIM 
 
 ## IDEAS
 

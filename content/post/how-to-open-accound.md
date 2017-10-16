@@ -187,3 +187,14 @@ toc = true
 - web: http://hk.cmbc.com.cn/
 - 客服：852-25195568(香港)86-95568(内地)
 - [常见问题](http://hk.cmbc.com.cn/personal/faq/index.htm)
+
+## 公开数据
+
+- [sse披露报告](http://listxbrl.sse.com.cn/)
+- [sz上市公司公告](http://disclosure.szse.cn/m/drgg.htm)
+- [hk](http://www.hkexnews.hk/listedco/listconews/mainindex/sehk_listedco_datetime_today_c.htm)
+- [sec](https://www.sec.gov/edgar/quickedgar.htm)
+- [10-k](https://www.sec.gov/cgi-bin/browse-edgar?company=&CIK=&type=10-k&owner=include&count=40&action=getcurrent)
+- [web itiger](https://web.itiger.com)
+- [老虎证券](https://www.itiger.com/help)
+- [follow questions](https://www.zhihu.com/people/gebitang/following/questions)

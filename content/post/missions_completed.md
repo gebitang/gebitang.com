@@ -25,7 +25,8 @@ toc = true
 - 流程中添加zip包检查逻辑——避免走到了执行阶段才发现条件不符合要求
 - 源码阅读理解，以故事的方式解释代码逻辑
 - 七牛图床使用
-- BIG：Blockchani In Go
+- [BIG：Blockchani In Go](https://jeiwan.cc/tags/blockchain/)
+- 练手：使用Go抓取雪球API，跟踪年报
 
 
 ## READING MATERIALS

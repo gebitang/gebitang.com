@@ -66,9 +66,34 @@ Ctrl+r --> 前进
 :bn next open file
 :bp previous open file 
 ```
+### day2 2017-10-17
+
+```
+:1, 10d #删除当前光标之后的10行
+:E # 打开当前目录，光标选择之后，o for open打开当前文件。
+:9, 15 copy 18 # 复制第9行至15行的内容到 18行
+```
 
 ## 练习材料
 [Learn Vim Progressively](http://yannesposito.com/Scratch/en/blog/Learn-Vim-Progressively/)
 
 [LVP中文](https://coolshell.cn/articles/5426.html)
+
+[vimdoc](http://vimdoc.sourceforge.net/htmldoc/usr_toc.html)
+
+[打造属于自己的Vim神器](https://zilongshanren.com/blog/2014-06-19-make-your-vim-weapon.html)
+
+```
+# from shell, vimtutor
+vimtutor
+
+# manual 
+:help user-manual
+
+# 打开手册后会自动分割出新窗口，ctrl+c+w在不同窗口见切换。
+# g+] 在手册的不同章节间切换——需要先选中对应章节
+# :q 可以关闭光标所在的窗口。
+```
+
+
 

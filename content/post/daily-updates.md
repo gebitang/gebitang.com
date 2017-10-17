@@ -72,6 +72,9 @@ local: uitest.apk remote: uitest.apk
 
 ## Java IDE
 
+### Log4j生成的log内容时间与系统时间不匹配
+启动时指定Java参数 -Duser.timezone=GMT+08
+
 ### slice2java ice生成java文件
 
 根据具体的.ice文件，执行命令

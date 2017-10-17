@@ -171,14 +171,20 @@ toc = true
 - 俯卧撑两组，每组20个
 
 ### Day9 @2017-10-16
-- 早上练习三组，每组111秒
+- 早上练习三组，每组200秒
 - 船式转低位船式6组，每组10次深呼吸
 - 靠墙蹲起一组20个
 - 仰卧起坐一组111个
 - 俯卧撑两组，每组20个
 
-## III. Lying Down Broken Stick
+### Day10 @2017-10-17
+- 早上练习三组，每组200秒
+- 船式转低位船式6组，每组10次深呼吸
+- 靠墙蹲起一组20个
+- 仰卧起坐一组50个
+- 俯卧撑一组20个
 
+## III. Lying Down Broken Stick
 {{< fluid_imgs
   "pure-u-1-1|https://www.fitnessmagazine.com/sites/fitnessmagazine.com/files/styles/slide/public/img_2636.jpg|Lying Down Broken Stick"
 >}}

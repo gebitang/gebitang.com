@@ -73,6 +73,10 @@ Ctrl+r --> 前进
 :E # 打开当前目录，光标选择之后，o for open打开当前文件。
 :9, 15 copy 18 # 复制第9行至15行的内容到 18行
 ```
+### day3 2017-10-18
+
+使用VIM编辑content下的内容
+练习保存，复制功能
 
 ## 练习材料
 [Learn Vim Progressively](http://yannesposito.com/Scratch/en/blog/Learn-Vim-Progressively/)

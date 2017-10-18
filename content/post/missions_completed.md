@@ -18,9 +18,15 @@ toc = true
 
 ## TODO 
 
-- 拍照：2寸for港澳通行证，1寸for工作居住证
-- 个税：-自助打印
-- VIM 
+- 极客邦直播？
+- TIM阅读邮件Leo 
+
+>- Start very small
+>- Do only one change at a time
+>- Be present and enjoy the activity(don't focus on results)
+>- Be grateful for every step you take.
+
+
 
 ## IDEAS
 

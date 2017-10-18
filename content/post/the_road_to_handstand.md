@@ -184,6 +184,7 @@ toc = true
 - 仰卧起坐一组50个
 - 俯卧撑一组20个
 
+
 ## III. Lying Down Broken Stick
 {{< fluid_imgs
   "pure-u-1-1|https://www.fitnessmagazine.com/sites/fitnessmagazine.com/files/styles/slide/public/img_2636.jpg|Lying Down Broken Stick"
@@ -196,6 +197,13 @@ toc = true
 - 保持5-20个呼吸。然后换边。
 
 >This pose is really just a handstand on your back. From low boat, reach arms overhead while reaching one leg straight up (so legs are at a 90-degree angle). Internally rotate thighs toward one another and reach long through toes. Flex through palms as if you are in a handstand and breathe here for 5-20 deep breaths. Repeat with the other leg.
+
+### Day1 @2017-10-18
+- 早上练习三组，每组200秒
+- 躺式倒立6组，每组10次深呼吸
+- 靠墙蹲起2组，每组20个
+- 仰卧起坐一组120个
+- 俯卧撑2组，每组20个
 
 ## IV. Warrior Three
 

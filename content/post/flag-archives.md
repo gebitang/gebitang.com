@@ -20,6 +20,8 @@ toc = true
 
 - 极客邦直播？
 - TIM阅读邮件Leo 
+- hecCode订阅，进入android开发？
+- [段永平博客](http://nteswjq.blog.163.com/blog/#m=0) 学习投资理念
 
 >- Start very small
 >- Do only one change at a time

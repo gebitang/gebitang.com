@@ -16,6 +16,10 @@ how to build and deploy automatically.
 
 <!--more-->
 
+run local:
+```
+hugo server --watch --verbose
+```
 ## 部署记录
 - [Host on GitHub](https://gohugo.io/hosting-and-deployment/hosting-on-github/)
 

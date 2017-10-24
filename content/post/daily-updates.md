@@ -404,7 +404,7 @@ apt-get -q remove deja-dup
 ```
 
 
-### Shell接受参数
+### 0x8. Shell接受参数
 
 接收来自命令行传入的参数，第一个参数用$1表示，第二个参数$2表示，。。。以此类推。注意：$0表示脚本文件名。另外一个在shell编程中经常用到 的是“$@”这个代表所有的参数，。你可以用一个循环来遍历这个参数。如果用java来类比的话，可以把$@看作是man函数中定义的那个数组
 ```
@@ -415,7 +415,7 @@ for args in $@
   done
 ```
 
-### Shell自动登录expect
+### 0x9. Shell自动登录expect
 ```
 # 需要安装expect
 #!/usr/bin/expect
@@ -426,7 +426,7 @@ expect "*#"
 interact
 ```
 
-### for循环读取文件作为变量
+### 0xa. for循环读取文件作为变量
 ```
 for line in `cat filename`
 do
@@ -434,6 +434,20 @@ do
 done
 ```
 可配合上面的使用，变量单独存在文件中
+
+### 0xb. 查找包含某字符的所有文件
+```
+grep -rn "word to find" *
+# * 表示当前目录所有文件，支持通配符
+# -r 递归查找
+# -n 显示行号
+# -R 查找当前目录的所有子目录， 深递归
+# -i 忽略大小写
+```
+### 0xc. 显示n到m行的文件内容
+```
+sed -n '100, 150p' path/to/filename
+```
 
 ## Git命令使用
 可配合GUI工具和命令行工具参考。
@@ -525,6 +539,8 @@ git rebase -i commitid
 
 
 ## Windows命令
+
+### 杀死进程
 ```
 #命令行杀死进程
 #查看进程 
@@ -534,6 +550,15 @@ tasklist
 taskkill /PID 11112
 taskkill /IM notepad.exe
 ```
+
+### bat目录提示‘此处不该有xxx’
+```
+@echo off
+set port=%1
+set EXISTS_FLAG=false
+for /f "tokens=2" %%i in ('netstat -ano ^|findstr ":%port%"') do echo %%i|findstr /E ":%port%" && set EXISTS_FLAG=true && exit
+```
+for/f中的命令如果有特殊字符需要加转义字符^，您的批处理改成这样就行了。
 
 ## Wercker Status
 

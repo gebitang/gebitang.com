@@ -496,6 +496,10 @@ Host office
 
 - ssh配置
 
+生成ssh-key
+```
+ssh-keygen -t rsa -C "email@address.com"
+```
 >添加ssh key（id_rsa_xxx、id_rsa_xxx.pub）到对应的repository，如github、gitlab，即可保证可以从对应的设备上就可以访问对应的repository。</br>
 
 - git配置

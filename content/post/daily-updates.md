@@ -96,29 +96,6 @@ slice2java --output-dir=output/dir/path xxx.ice
 - JDK版本不匹配
 - jar包缺失或冲突 
 
-### Maven Failed to read artifact descriptor 导致dependency文件无法识别
-
-[参考](https://stackoverflow.com/questions/6642146/maven-failed-to-read-artifact-descriptor)
-
-在对应的根目录下执行 `mvn -U clean install` 重新下载识别
-
-### Failed to read artifact descriptor for xxx
-
-对应的jar包无法获取到。1. 更改repository； 2. 或者不跟踪更高版本的jar包
-
-### Dependencies version
-
-[Reference](http://maven.apache.org/pom.html)
-```
-1.0: "Soft" requirement on 1.0 (just a recommendation, if it matches all other ranges for the dependency)
-[1.0]: "Hard" requirement on 1.0
-(,1.0]: x <= 1.0
-[1.2,1.3]: 1.2 <= x <= 1.3
-[1.0,2.0): 1.0 <= x < 2.0
-[1.5,): x >= 1.5
-(,1.0],[1.2,): x <= 1.0 or x >= 1.2; multiple sets are comma-separated
-(,1.1),(1.1,): this excludes 1.1 (for example if it is known not to work in combination with this library)
-```
 
 ## Markdown 语法练习
 This is a footnote.[^1]
@@ -167,7 +144,60 @@ mvn install:install-file -Dfile=itestin.jar -DgroupId=cn.itestin.cv -DartifactId
 [INFO] ------------------------------------------------------------------------
 ```
 
+### 红色波浪线 Maven Failed to read artifact descriptor 导致dependency文件无法识别
+
+[参考](https://stackoverflow.com/questions/6642146/maven-failed-to-read-artifact-descriptor)
+
+在对应的根目录下执行 
+```
+# -U Forces a check for updated releases and snapshots on remote repositories
+# run clean and install
+mvn -U clean install
+``` 
+重新下载识别
+
+为完成git merge，执行了`git clean -d -fx`清理后，整个工程中的配置都会消失——因会恢复到git仓库中的内容，当前目前下其他的内容都会被清理。
+
+打开maven窗口，选择重新导入，可能出现pom文件中的dependency文件本地都有，但maven认为dependency都无法识别——显示红色波浪线。
+
+此时执行该命令会强制重新安装。然后根据错误提示——如果本地有的jar包url仓库中没有会报错——进行对应操作即可。
+
+### Failed to read artifact descriptor for xxx
+
+对应的jar包无法获取到。1. 更改repository； 2. 或者不跟踪更高版本的jar包
+
+### Dependencies version
+
+[Reference](http://maven.apache.org/pom.html)
+```
+1.0: "Soft" requirement on 1.0 (just a recommendation, if it matches all other ranges for the dependency)
+[1.0]: "Hard" requirement on 1.0
+(,1.0]: x <= 1.0
+[1.2,1.3]: 1.2 <= x <= 1.3
+[1.0,2.0): 1.0 <= x < 2.0
+[1.5,): x >= 1.5
+(,1.0],[1.2,): x <= 1.0 or x >= 1.2; multiple sets are comma-separated
+(,1.1),(1.1,): this excludes 1.1 (for example if it is known not to work in combination with this library)
+```
+
+### pom文件报错
+
+dependency注意空格格式
+
 ## linux 环境
+
+### 设置时区
+```
+# 安装ntp，非必要
+apt-get install ntp
+
+# tzselect timezone
+tzselct 
+# then select your timezone
+date -R # to check the result.
+
+cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime # make it permenent.
+```
 
 ### 查看启动时间
 
@@ -540,6 +570,19 @@ ssh -vT git@git.coding.net
 git rebase -i commitid
 ```
 原理：选择要rebase的基础commit，进入交互模式，根据提示对不同的commit处理为pick或squash
+
+### ox5. 清理、合并操作
+
+>Your local changes to the following files would be overwritten by merge
+
+提示上述错误信息时，可以使用下面的命令清理
+```
+git clean -d -fx
+```
+注意：会导致工程的所有配置都会丢失
+```
+git merge branch.name
+```
 
 
 ## Windows命令

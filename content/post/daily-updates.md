@@ -571,7 +571,7 @@ git rebase -i commitid
 ```
 原理：选择要rebase的基础commit，进入交互模式，根据提示对不同的commit处理为pick或squash
 
-### ox5. 清理、合并操作
+### 0x5. 清理、合并操作
 
 >Your local changes to the following files would be overwritten by merge
 
@@ -584,6 +584,14 @@ git clean -d -fx
 git merge branch.name
 ```
 
+### 0x6. 重新添加已经忽略的文件
+```
+#添加已经忽略的文件 
+git add -f ignored/file/name
+#忽略已经添加的文件 
+git rm --cached file/want/to/be/ignore
+```
+[参考](http://blog.csdn.net/cyxlzzs/article/details/61422214)
 
 ## Windows命令
 

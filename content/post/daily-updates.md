@@ -20,6 +20,14 @@ toc = true
 
 <!--more-->
 
+## Gradle入门
+
+
+[中文手册1.5版本](https://dongchuan.gitbooks.io/gradle-user-guide-/java_quickstart/the_java_plugin.html)</br>
+[极客学院版](http://wiki.jikexueyuan.com/project/gradle/java-quickstart.html)</br>
+[official](https://docs.gradle.org/current/userguide/userguide_single.html)</br>
+[official guides](https://gradle.org/guides/)
+
 ## VirtualBox 识别网银UKey
 
 - 在启动前插入UKey

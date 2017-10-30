@@ -26,7 +26,8 @@ toc = true
 [中文手册1.5版本](https://dongchuan.gitbooks.io/gradle-user-guide-/java_quickstart/the_java_plugin.html)</br>
 [极客学院版](http://wiki.jikexueyuan.com/project/gradle/java-quickstart.html)</br>
 [official](https://docs.gradle.org/current/userguide/userguide_single.html)</br>
-[official guides](https://gradle.org/guides/)
+[official guides](https://gradle.org/guides/)</br>
+下载完整版本安装后，在安装目录下的`docs/userguide/userguide.html`下有完整的手册
 
 ## VirtualBox 识别网银UKey
 

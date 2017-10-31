@@ -78,6 +78,24 @@ Ctrl+r --> 前进
 使用VIM编辑content下的内容
 练习保存，复制功能
 
+### 查找替换
+
+```
+# 用字符串 str2 替换正文中所有出现的字符串 str1
+g/str1/s//str2/g
+
+:s/vivian/sky/         #替换当前行第一个 vivian 为 sky
+:s/vivian/sky/g     #替换当前行所有 vivian 为 sky
+:n,$s/vivian/sky/     #替换第 n 行开始到最后一行中每一行的第一个 vivian 为 sky
+:n,$s/vivian/sky/g     #替换第 n 行开始到最后一行中每一行所有 vivian 为 sky
+ （n 为数字，若 n 为 .，表示从当前行开始到最后一行）
+
+# 替换每一行的第一个 vivian 为 sky
+:%s/vivian/sky/        #（等同于:1,$s/vivian/sky/   :g/vivian/s//sky/） 
+
+
+```
+
 ## 练习材料
 [Learn Vim Progressively](http://yannesposito.com/Scratch/en/blog/Learn-Vim-Progressively/)
 

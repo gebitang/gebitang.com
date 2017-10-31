@@ -207,12 +207,13 @@ toc = true
 学历：</br>
 中国高等教育学生信息网(学信网)</br>
 教育部指定的学历查询唯一网站、教育部高校招生阳光工程指定网站、全国硕士研究生招生报名和调剂指定网站。</br>
-[学信网](www.chsi.com.cn)
+[学信网](http://www.chsi.com.cn)
 [在线认证学历](http://www.chsi.com.cn/xlrz/index.jsp)
 
 学位:</br>
 中国学位与研究生教育信息网(学位网)-中国教育文凭认证</br>
 [学位网](http://www.cdgdc.edu.cn/)
+[学位认证查询](http://www.chinadegrees.com.cn/)
 
 
 >- 申请人的毕业证原件、复印件；

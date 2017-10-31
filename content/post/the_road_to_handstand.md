@@ -271,12 +271,29 @@ toc = true
 - 靠墙蹲起20个
 - 俯卧撑一组20个
 - 仰卧起坐一组120个
+
 ## IV. Warrior Three
 
 {{< fluid_imgs
   "pure-u-1-1|https://www.fitnessmagazine.com/sites/fitnessmagazine.com/files/styles/slide/public/img_2617.jpg?itok=CA7PET8e|Warrior Three"
 >}}
 
+- 战士三式就像上面第3个动作站起来的版本。
+- 从站立开始，然后往前往下折叠，双手来到肩膀下方，放到地面或砖块上。
+- 保持膝盖柔软，重量来到左腿，后腿往后往上抬。
+- 从右脚跟开始内旋大腿往下，脚趾回勾指向地面。
+- 当你觉得稳定，双手抬起来往前延展在头两侧。
+- 保持5-10个呼吸，然后换边。
+
+>Warrior three is a split leg or broken stick handstand on your foot. Begin in a standing position, then fold forward, walk hands underneath shoulders, and place them on the floor or blocks. Keeping knees soft, shift weight into left foot and lift right leg behind you. Reach through right heel and internally rotate right thigh down so toes point toward the ground. When you feel steady, lift arms and reach them forward on either side of the head to frame your face. Breathe here for 5-10 deep breaths and then repeat on the other side.
+
+### Day1 @2017-10-31
+- 靠墙蹲起20个
+- Plank一组120秒  
+- 战士三式初试
+- 仰卧起坐50个
+
+看起来很简单的动作，第一次练习居然无法保持平衡。腿部肌肉欠缺力量？单脚无法稳定支持，前举手时就马上失去平衡，腿发颤。
 
 ## V. Standing Split
 

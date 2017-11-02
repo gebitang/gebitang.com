@@ -317,7 +317,7 @@ joechin@ubuntu:~$ date +%Y%m%d%H%M%S
 
 ```
 
-### 0x3. 判断进程是否存在
+### 0x3. 判断文件夹、进程是否存在
 
 ```
 #!/bin/bash
@@ -487,6 +487,15 @@ grep -rn "word to find" *
 ```
 sed -n '100, 150p' path/to/filename
 ```
+### 0xd. shell中调用另外一个shell脚本
+
+[fork exec source](http://blog.csdn.net/l_nan/article/details/21874679)
+
+fork方式为直接执行，直接写被调用脚本的路径即可。在子命令执行完后再执行父级命令。子级的环境变量不会影响到父级。
+
+exec path/to/call/script.sh 执行子级的命令后，不再执行父级命令
+
+source path/to/call/sciprt.sh 执行子级命令后继续执行父级命令，同时子级设置的环境变量会影响到父级的环境变量。
 
 ## Git命令使用
 可配合GUI工具和命令行工具参考。

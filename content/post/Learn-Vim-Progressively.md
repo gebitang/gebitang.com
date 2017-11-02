@@ -120,6 +120,15 @@ vimtutor
 ### 跳转到最后一行 G
 
 
+### E484: Can't open file /usr/share/vim/vim74/syntax/syntax.vim 
+缺少对应的文件导致的，可以先进行删除处理
 
+### 删除提示 subprocess installed post-installation script returned error exit status 
 
-
+执行自动清理和升级动作
+```
+apt-get autoclean
+apt-get autoremove
+apt-get update
+```
+重新安装对应的应用

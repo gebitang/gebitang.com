@@ -497,6 +497,22 @@ exec path/to/call/script.sh 执行子级的命令后，不再执行父级命令
 
 source path/to/call/sciprt.sh 执行子级命令后继续执行父级命令，同时子级设置的环境变量会影响到父级的环境变量。
 
+### 0xe. awk基本使用
+
+[详解](http://www.cnblogs.com/ggjucheng/archive/2013/01/13/2858470.html)
+
+读入有'\n'换行符分割的一条记录，然后将记录按指定的域分隔符划分域，填充域，$0则表示所有域,$1表示第一个域,$n表示第n个域。默认域分隔符是"空白键" 或 "[tab]键"
+
+可以使用 -F 指定分割符合
+
+```
+awk -F: '{print $7}' /etc/passwd
+# root:x:0:0:root:/root:/bin/bash
+/bin/bash
+# 以:为分隔符，打印第7个，所有输出 /bin/bash
+
+```
+
 ## Git命令使用
 可配合GUI工具和命令行工具参考。
 

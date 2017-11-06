@@ -102,7 +102,12 @@ toc = true
 - 劳动合同需要配合暂住证办理，缴税+住房租赁合同住房材料可以代替，带了
 - 扫描登记材料，直接打印回执单
 
+### 11-03
 
+- 收到居中证卡
+- 申请学历认证，准备办理工作居住证
+
+明天出差，差户口薄信息，只能回来再申请港澳通行证了
 
 #### 港澳通行证
 
@@ -207,15 +212,17 @@ toc = true
 学历：</br>
 中国高等教育学生信息网(学信网)</br>
 教育部指定的学历查询唯一网站、教育部高校招生阳光工程指定网站、全国硕士研究生招生报名和调剂指定网站。</br>
+
 [学信网](http://www.chsi.com.cn)</br>
 [在线认证学历](http://www.chsi.com.cn/xlrz/index.jsp)</br>
-[学历认证](http://www.chsi.com.cn/xlrz/201202/20120228/284945923.html)
+[北京高校学历认证系统](http://xlrz.bjbys.net.cn/applyAction_applyResult!applyResult)
 
 学位:</br>
 中国学位与研究生教育信息网(学位网)-中国教育文凭认证</br>
 [学位网](http://www.cdgdc.edu.cn/)</br>
 [学位认证查询](http://www.chinadegrees.com.cn/)</br>
-[学位认证](http://www.chinadegrees.cn/cqva/personal/apply/step2.html?_r=0.01324945257141752)
+[学位网学历认证](http://www.chinadegrees.cn/cqva/personal/index.html)
+
 
 >- 申请人的毕业证原件、复印件；
 >- 留学取得的证书需经教育部认证，提交认证报告的原件、复印件。

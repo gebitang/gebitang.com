@@ -77,6 +77,11 @@ local: uitest.apk remote: uitest.apk
 226 Transfer complete.
 393600 bytes received in 0.22 secs (1719.1 kB/s)
 
+
+# rename file name
+ftp>rename file.original.name file.renamed.name
+350 Ready for RNTO.
+250 Rename successful.
 ```
 
 ## Java IDE
@@ -262,6 +267,10 @@ Alt + F
 #向后移动一个单词
 Alt + B 
 ```
+
+### 强制清空命令行已有数据 ctlr + c
+
+
 
 ### 配置DNS服务器
 [资料](https://segmentfault.com/a/1190000002387446)
@@ -512,6 +521,8 @@ awk -F: '{print $7}' /etc/passwd
 # 以:为分隔符，打印第7个，所有输出 /bin/bash
 
 ```
+
+### grep 之后只显示部分行数 grep '' | head -200
 
 ## Git命令使用
 可配合GUI工具和命令行工具参考。

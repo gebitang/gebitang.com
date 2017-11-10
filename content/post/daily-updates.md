@@ -638,6 +638,25 @@ git rm --cached file/want/to/be/ignore
 ```
 [参考](http://blog.csdn.net/cyxlzzs/article/details/61422214)
 
+
+### 更新mac后默认自带的git无法使用
+
+[StackOverFlow](https://stackoverflow.com/questions/32661484/os-x-cant-start-git-usr-bin-git-probably-the-path-to-git-executable-is-not)
+```
+➜  gebitang.com git status
+xcrun: error: invalid active developer path (/Library/Developer/CommandLineTools), missing xcrun at: /Library/Developer/CommandLineTools/usr/bin/xcrun
+➜  gebitang.com sudo xcodebuild -license
+Password:
+xcode-select: error: tool 'xcodebuild' requires Xcode, but active developer directory '/Library/Developer/CommandLineTools' is a command line tools instance
+➜  gebitang.com sudo /usr/bin/git
+xcrun: error: invalid active developer path (/Library/Developer/CommandLineTools), missing xcrun at: /Library/Developer/CommandLineTools/usr/bin/xcrun
+➜  gebitang.com xcode-select --install
+xcode-select: note: install requested for command line developer tools
+➜  gebitang.com
+➜  gebitang.com git:(master) ✗
+➜  gebitang.com git:(master) ✗
+```
+
 ## Windows命令
 
 ### 杀死进程

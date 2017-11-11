@@ -20,6 +20,53 @@ toc = true
 
 <!--more-->
 
+## iTerm2 ssh登录后无法显示中文
+
+[Mac用iTerm2连接到Linux上,不能输入中文](https://blog.fazero.me/2015/09/04/Mac-iTerm2--chinese/)
+
+服务器是ubuntu，用Mac的iterm2 ssh连上去，终端显示中文乱码，也不能输入中文，然而本地终端可以显示和输入。
+
+**终端和服务器的字符集不匹配**。
+
+因为我在本地和服务器都用zsh替代了bash，而且使用了oh-my-zsh，而默认的.zshrc没有设置为utf-8编码，所以本地和服务器端都要在.zshrc设置，步骤如下，bash对应.bash_profile或.bashrc文件。
+
+在对应的配置文件末端添加
+```
+export LC_ALL=en_US.UTF-8  
+export LANG=en_US.UTF-8
+```
+
+3.如果设置之后出现以下问题
+`-bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)`
+解决办法：
+```
+sudo locale-gen en_US.UTF-8
+sudo dpkg-reconfigure locales
+```
+
+
+```
+➜  ~ locale
+LANG=
+LC_COLLATE="C"
+LC_CTYPE="UTF-8"
+LC_MESSAGES="C"
+LC_MONETARY="C"
+LC_NUMERIC="C"
+LC_TIME="C"
+LC_ALL=
+➜  ~ source ~/.zshrc
+➜  ~ locale
+LANG="en_US.UTF-8"
+LC_COLLATE="en_US.UTF-8"
+LC_CTYPE="en_US.UTF-8"
+LC_MESSAGES="en_US.UTF-8"
+LC_MONETARY="en_US.UTF-8"
+LC_NUMERIC="en_US.UTF-8"
+LC_TIME="en_US.UTF-8"
+LC_ALL="en_US.UTF-8"
+```
+
 ## Gradle入门
 
 

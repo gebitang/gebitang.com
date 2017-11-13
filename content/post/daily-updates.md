@@ -704,6 +704,18 @@ xcode-select: note: install requested for command line developer tools
 ➜  gebitang.com git:(master) ✗
 ```
 
+### git log历史
+
+```
+git log --oneline # show all logs line by line
+git show commit # show the commit detail 
+
+git log commit 　　# 查询commit之前的记录，包含commit
+git log commit1 commit2  # 查询commit1与commit2之间的记录，包括commit1和commit2
+git log commit1..commit2 # 同上，但是不包括commit1
+```
+
+
 ## Windows命令
 
 ### 杀死进程

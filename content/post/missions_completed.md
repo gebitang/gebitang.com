@@ -18,9 +18,7 @@ toc = true
 
 ## TODO 
 
-- 拍照：2寸for港澳通行证，1寸for工作居住证
-- 个税：-自助打印
-- VIM 
+[Linux中gdb 查看core堆栈信息](http://blog.csdn.net/suxinpingtao51/article/details/12072559)
 
 ## IDEAS
 

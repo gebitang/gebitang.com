@@ -571,6 +571,29 @@ awk -F: '{print $7}' /etc/passwd
 
 ### 0xf. du -h 查看文件具体大小
 
+[Linux下查看文件和文件夹大小](https://www.cnblogs.com/benio/archive/2010/10/13/1849946.html)
+
+df命令可以显示目前所有文件系统的可用空间及使用情形
+
+du：查询文件或文件夹的磁盘使用空间
+```
+test@pp:/data/itestin-m# du -h --max-depth=1 .
+4.0K	./auto_update
+386M	./tools
+861M	./data
+1.6G	./logs
+18G	./download
+1.3G	./temp
+4.0K	./user
+340K	./config
+91M	./ycdh_lib
+4.0K	./script
+4.0K	./tmpp
+4.0K	./report
+6.2G	./_logs
+29G	.
+```
+
 ### grep 之后只显示部分行数 grep '' | head -200
 
 ## Git命令使用

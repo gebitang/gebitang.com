@@ -569,6 +569,8 @@ awk -F: '{print $7}' /etc/passwd
 
 ```
 
+### 0xf. du -h 查看文件具体大小
+
 ### grep 之后只显示部分行数 grep '' | head -200
 
 ## Git命令使用

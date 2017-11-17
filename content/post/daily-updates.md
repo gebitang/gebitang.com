@@ -342,6 +342,28 @@ sudo chattr +i /etc/resolv.conf
 sudo chattr -i /etc/resolv.conf
 ```
 
+### 查看系统版本 cat /etc/issue
+
+```
+root@testin-DH:~# lsb_release -a
+No LSB modules are available.
+Distributor ID:	Ubuntu
+Description:	Ubuntu 14.04.5 LTS
+Release:	14.04
+Codename:	trusty
+root@testin-DH:~# cat /etc/lsb-release
+DISTRIB_ID=Ubuntu
+DISTRIB_RELEASE=14.04
+DISTRIB_CODENAME=trusty
+DISTRIB_DESCRIPTION="Ubuntu 14.04.5 LTS"
+root@testin-DH:~# cat /etc/issue
+Ubuntu 14.04.5 LTS \n \l
+
+root@testin-DH:~# cat /proc/version
+Linux version 4.4.0-31-generic (buildd@lgw01-43) (gcc version 4.8.4 (Ubuntu 4.8.4-2ubuntu1~14.04.3) ) #50~14.04.1-Ubuntu SMP Wed Jul 13 01:07:32 UTC 2016
+root@testin-DH:~#
+```
+
 ## Shell commands
 
 任何场景下，使用

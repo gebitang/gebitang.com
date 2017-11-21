@@ -429,6 +429,55 @@ fi
 
 ```
 
+```
+#!/bin/sh  
+  
+myPath="/var/log/httpd/"  
+myFile="/var /log/httpd/access.log"  
+  
+#这里的-x 参数判断$myPath是否存在并且是否具有可执行权限  
+if [ ! -x "$myPath"]; then  
+　　mkdir "$myPath"  
+fi  
+
+#这里的-d 参数判断$myPath是否存在  
+if [ ! -d "$myPath"]; then  
+　　mkdir "$myPath"  
+fi  
+  
+#这里的-f参数判断$myFile是否存在  
+if [ ! -f "$myFile" ]; then  
+　　touch "$myFile"  
+fi  
+  
+#其他参数还有-n,-n是判断一个变量是否是否有值  
+if [ ! -n "$myVar" ]; then  
+　　echo "$myVar is empty"  
+　　exit 0  
+fi  
+  
+#两个变量判断是否相等  
+if [ "$var1" = "$var2" ]; then  
+　　echo '$var1 eq $var2'  
+else  
+　　echo '$var1 not eq $var2'  
+fi  
+
+
+-e filename  如果 filename存在，则为真  [ -e /var/log/syslog ]
+-d filename  如果 filename为目录，则为真  [ -d /tmp/mydir ]
+-f filename  如果 filename为常规文件，则为真  [ -f /usr/bin/grep ]
+-L filename  如果 filename为符号链接，则为真  [ -L /usr/bin/grep ]
+-r filename  如果 filename可读，则为真  [ -r /var/log/syslog ]
+-w filename  如果 filename可写，则为真  [ -w /var/mytmp.txt ]
+-x filename  如果 filename可执行，则为真  [ -L /usr/bin/grep ]
+filename1-nt filename2  如果 filename1比 filename2新，则为真 
+ [ /tmp/install/etc/services -nt /etc/services ]
+filename1-ot filename2  如果 filename1比 filename2旧，则为真  
+ [ /boot/bzImage -ot arch/i386/boot/bzImage ]
+
+```
+
 ### 0x4. 线程控制批量执行
 - 循环体的命令用&符号放入后台运行实现多线程效果
 - 利用有名管道特性实现线程控制

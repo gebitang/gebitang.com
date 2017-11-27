@@ -20,6 +20,28 @@ toc = true
 
 <!--more-->
 
+## Mysql
+
+```
+
+# 安装 
+apt-get install mysql-server mysql-client
+
+#登录mysql
+mysql -u root -p
+
+# 运行远程访问
+GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY 'youpassword' WITH GRANT OPTION;
+FLUSH PRIVILEGES ;
+
+# 需要修改 /etc/mysql/my.cnf的配置
+# 修改bind-address=127.0.0.1为bind-address=0.0.0.0
+
+# 如何查看mysql数据库的端口
+# 启动，并进入mysql后，输入命令：show global variables like 'port';
+
+```
+
 ## iTerm2 ssh登录后无法显示中文
 
 [Mac用iTerm2连接到Linux上,不能输入中文](https://blog.fazero.me/2015/09/04/Mac-iTerm2--chinese/)

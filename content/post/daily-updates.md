@@ -22,6 +22,7 @@ toc = true
 
 ## Mysql
 
+### 运行远程访问
 ```
 
 # 安装 
@@ -40,7 +41,44 @@ FLUSH PRIVILEGES ;
 # 如何查看mysql数据库的端口
 # 启动，并进入mysql后，输入命令：show global variables like 'port';
 
+
 ```
+
+### 备份数据库表结构
+
+命令行下具体用法如下：  mysqldump -u用戶名 -p密码 -d 數據库名 表名 脚本名;
+
+```
+	# 1.导出整个数据库  
+    # mysqldump -u用户名 -p密码  数据库名 > 导出的文件名 
+　　mysqldump -uroot -pmysql sva_rec  > e:\sva_rec.sql 
+
+　　# 2.导出一个表，包括表结构和数据 
+
+　　# mysqldump -u用户名 -p 密码  数据库名 表名> 导出的文件名 
+　　mysqldump -uroot -pmysql sva_rec date_rec_drv> e:\date_rec_drv.sql 
+
+　　# 3.导出一个数据库结构 增加 -d 参数
+　　mysqldump -uroot -pmysql -d sva_rec > e:\sva_rec.sql 
+
+    # 4.导出一个表，只有表结构 
+
+　　mysqldump -u用户名 -p 密码 -d数据库名  表名> 导出的文件名 
+　　mysqldump -uroot -pmysql -d sva_rec date_rec_drv> e:\date_rec_drv.sql 
+```
+### 导入数据 
+
+[导入\导出表结构或数据](https://www.cnblogs.com/zcw-ios/articles/3319480.html)
+[mysql导入导出sql文件](https://www.cnblogs.com/yuwensong/p/3955834.html)
+```
+#常用source 命令
+#进入mysql数据库控制台，如
+mysql -u root -p
+mysql>use 数据库
+# 然后使用source命令，后面参数为脚本文件(如这里用到的.sql)
+mysql>source path/to/dbname.sql
+```
+
 
 ## iTerm2 ssh登录后无法显示中文
 

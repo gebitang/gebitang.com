@@ -20,6 +20,12 @@ toc = true
 
 <!--more-->
 
+## Grails 
+
+[Groovy 基础](https://www.w3cschool.cn/groovy/groovy_basic_syntax.html)
+[用 Groovy 服务器页面（GSP）改变视图](https://www.ibm.com/developerworks/cn/java/j-grails03118/index.html)</br>
+[GSP 学习笔记(1)-- GRAILS开发](http://blog.csdn.net/netdevgirl/article/details/3720890)
+
 ## Mysql
 
 ### 运行远程访问

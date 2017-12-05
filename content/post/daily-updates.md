@@ -902,6 +902,12 @@ for /f "tokens=2" %%i in ('netstat -ano ^|findstr ":%port%"') do echo %%i|findst
 ```
 for/f中的命令如果有特殊字符需要加转义字符^，您的批处理改成这样就行了。
 
+### 提高CMD显示行数
+
+修改属性、布局、屏幕缓冲区大小、高度。
+
+如果命令行输出被截断，进行重定向吧:(
+
 ## Wercker Status
 
 [![wercker status](https://app.wercker.com/status/e0d626037da0e4c7f1bee4dcdda350e5/m/master "wercker status")](https://app.wercker.com/project/byKey/e0d626037da0e4c7f1bee4dcdda350e5)

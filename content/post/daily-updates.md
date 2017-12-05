@@ -20,11 +20,35 @@ toc = true
 
 <!--more-->
 
-## Grails 
+## Grails - Groovy - Gradle
 
-[Groovy 基础](https://www.w3cschool.cn/groovy/groovy_basic_syntax.html)
+### grails
+[grails 2.5.6 doc](https://grails.github.io/grails2-doc/2.5.6/guide/single.html)
+
+```
+# 启动、指定端口、编码
+grails -Dfile.encoding=UTF-8 -Dserver.port=8090 run-app
+
+```
+
+### groovy
+[offical doc](http://groovy-lang.org/documentation.html#gettingstarted)
+[single page](http://groovy-lang.org/single-page-documentation.html)
+
+[Groovy 基础](https://www.w3cschool.cn/groovy/groovy_basic_syntax.html)</br>
 [用 Groovy 服务器页面（GSP）改变视图](https://www.ibm.com/developerworks/cn/java/j-grails03118/index.html)</br>
 [GSP 学习笔记(1)-- GRAILS开发](http://blog.csdn.net/netdevgirl/article/details/3720890)
+
+
+### gradle
+
+[中文手册1.5版本](https://dongchuan.gitbooks.io/gradle-user-guide-/java_quickstart/the_java_plugin.html)</br>
+[极客学院版](http://wiki.jikexueyuan.com/project/gradle/java-quickstart.html)</br>
+[official](https://docs.gradle.org/current/userguide/userguide_single.html)</br>
+[official guides](https://gradle.org/guides/)</br>
+下载完整版本安装后，在安装目录下的`docs/userguide/userguide.html`下有完整的手册
+
+
 
 ## Mysql
 
@@ -135,14 +159,6 @@ LC_TIME="en_US.UTF-8"
 LC_ALL="en_US.UTF-8"
 ```
 
-## Gradle入门
-
-
-[中文手册1.5版本](https://dongchuan.gitbooks.io/gradle-user-guide-/java_quickstart/the_java_plugin.html)</br>
-[极客学院版](http://wiki.jikexueyuan.com/project/gradle/java-quickstart.html)</br>
-[official](https://docs.gradle.org/current/userguide/userguide_single.html)</br>
-[official guides](https://gradle.org/guides/)</br>
-下载完整版本安装后，在安装目录下的`docs/userguide/userguide.html`下有完整的手册
 
 ## VirtualBox 识别网银UKey
 
@@ -907,6 +923,20 @@ for/f中的命令如果有特殊字符需要加转义字符^，您的批处理�
 修改属性、布局、屏幕缓冲区大小、高度。
 
 如果命令行输出被截断，进行重定向吧:(
+
+mode命令显示当前窗口设置状态
+```
+F:\>mode
+
+设备状态 CON:
+---------
+    行:　       3000
+    列:　　     80
+    键盘速度:   31
+    键盘延迟:　 1
+    代码页:     936
+
+```
 
 ## Wercker Status
 

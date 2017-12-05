@@ -37,7 +37,7 @@ apt-get install mysql-server mysql-client
 #登录mysql
 mysql -u root -p
 
-# 运行远程访问
+# 运行远程访问 注意 youpassword
 GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY 'youpassword' WITH GRANT OPTION;
 FLUSH PRIVILEGES ;
 
@@ -47,6 +47,8 @@ FLUSH PRIVILEGES ;
 # 如何查看mysql数据库的端口
 # 启动，并进入mysql后，输入命令：show global variables like 'port';
 
+# 重启服务 start stop 
+service mysqld restart
 
 ```
 

@@ -32,8 +32,9 @@ grails -Dfile.encoding=UTF-8 -Dserver.port=8090 run-app
 ```
 
 ### groovy
-[offical doc](http://groovy-lang.org/documentation.html#gettingstarted)
-[single page](http://groovy-lang.org/single-page-documentation.html)
+[offical doc](http://groovy-lang.org/documentation.html#gettingstarted)</br>
+[single page](http://groovy-lang.org/single-page-documentation.html)</br>
+[下载离线文档](http://groovy-lang.org/download.html)
 
 [Groovy 基础](https://www.w3cschool.cn/groovy/groovy_basic_syntax.html)</br>
 [用 Groovy 服务器页面（GSP）改变视图](https://www.ibm.com/developerworks/cn/java/j-grails03118/index.html)</br>

@@ -23,6 +23,8 @@ toc = true
 ## Grails - Groovy - Gradle
 
 ### grails
+[officail doc](http://docs.grails.org/snapshot/guide/single.html)</br>
+[documentation](http://grails.org/documentation.html)</br>
 [grails 2.5.6 doc](https://grails.github.io/grails2-doc/2.5.6/guide/single.html)
 
 ```
@@ -42,10 +44,9 @@ grails -Dfile.encoding=UTF-8 -Dserver.port=8090 run-app
 
 
 ### gradle
-
+[official doc](https://docs.gradle.org/current/userguide/userguide_single.html)</br>
 [中文手册1.5版本](https://dongchuan.gitbooks.io/gradle-user-guide-/java_quickstart/the_java_plugin.html)</br>
 [极客学院版](http://wiki.jikexueyuan.com/project/gradle/java-quickstart.html)</br>
-[official](https://docs.gradle.org/current/userguide/userguide_single.html)</br>
 [official guides](https://gradle.org/guides/)</br>
 下载完整版本安装后，在安装目录下的`docs/userguide/userguide.html`下有完整的手册
 

@@ -69,7 +69,7 @@ For every buyger there must be a seller -- Or, more accurately, for every one hu
 
 Those selling at this stage are not, as a rule, the largest holders. The largest holders are usually those whose judgment is sound enough, or whose connections are good enough, so that they have made a good deal of money; and neither a sound judgment nor the best advisers are likely to favor selling so early in the advance, when much larger profits can be secured by simply holding on.
 
-The height to which prices can now be carried depends on the underlying conditions. If money is easy and general business prosperous a prolonged bull movement may result, while strained banking resources or depressed trade will set a definite limit to the possible advance. If conditions are bearish, the driving of the biggest shorts to cover will practically end the rise; but in a genuine bull market the advance will continue until checked by sales of stocks held for investment, which come upon the market only when prices are believed to be unduly high. 
+The height to which prices can now be carried depends on the underlying conditions. If money is easy and general business prosperous a prolonged bull movement may result, while strained banking resources or depressed trade will set a definite limit to the possible advance. If conditions are bearish, the driving of the biggest shorts to cover will practically end the rise; but in a genuine bull market the advance will continue until checked by sales of stocks held for investment, which come upon the market only when prices are believed to be unduly high.  
 
 
 

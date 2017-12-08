@@ -506,6 +506,12 @@ Leo的最新文章[A Guide to Finding Calm & Being Less Frustrated](https://zenh
 计划跟着练习学习hencoder内容；
 API调用地址
 
+### 2017-12-08
+
+- [7 to 10](https://www.stevepavlina.com/blog/2005/07/how-to-get-from-a-7-to-a-10/)，醍醐之效
+- 实现coinUtil接口
+- 学习Android画图
+
 [^1]:模板文件不支持链接
 [^2]:支持系统出现这种异常场景时，也跳出了支撑系统，使用个人邮箱，个人账户现象。第二天在通知解决前，已经知道结果。跨过代理商，直接与航空公司客服联系，确定了代理商已经完成了修改动作。航空公司——>代理商——>去哪儿——>个人。最终还是个人账号发送的修改后行程单。
 [^3]:需求实现

@@ -908,6 +908,8 @@ tasklist
    
 #杀死进程 查看帮助 taskkill /?
 taskkill /PID 11112
+# 强制kill
+taskkill /F /PID 4684
 taskkill /IM notepad.exe
 ```
 

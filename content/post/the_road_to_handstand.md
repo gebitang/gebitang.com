@@ -458,11 +458,28 @@ toc = true
 - 仰卧起坐100个
 - 俯卧撑20一组
 
+### Day21 @2017-12-14
+- 靠墙蹲起20个
+- Plank一组120秒 + 战士三式5秒。共三组
+- 靠墙蹲起20个
+- 俯卧撑20一组
+- 仰卧起坐100个
+- 俯卧撑20一组
+
+
 ## V. Standing Split
 
 {{< fluid_imgs
   "pure-u-1-1|https://www.fitnessmagazine.com/sites/fitnessmagazine.com/files/styles/slide/public/img_2596.jpg|Standing Split"
 >}}
+
+- 站立劈腿帮助放松大腿后侧，更容易进入手倒立。
+- 从站立前屈开始，双手撑地。
+- 把重量来到左腿，抬起右腿往上。绷脚背朝上，髋尽量摆正。
+- 手往后走，与脚趾一条直线（手也可以放在地面或砖块上），低头放松。
+- 保持5-10个呼吸，然后换边。
+
+>Standing split helps loosen up your hamstrings to allow for easier entry into a handstand. Begin in a standing forward bend with both hands on the ground. Transfer weight into left foot; lift right leg high. Point or floint toes towards the ceiling, and square hips as much as possible. Walk hands back in line with toes (on the floor or on blocks or as close to feet as feels comfortable) and drop head. Breathe here for 5-10 deep breaths and then repeat on the other side. (If you have extra tight hamstrings, be sure to check out these yoga poses to help loosen them up.)
 
 ## VI. L Handstand at Wall
 {{< fluid_imgs

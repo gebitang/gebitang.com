@@ -210,6 +210,8 @@ toc = true
 ```
 关注微信：北京地税
 
+[社保定制](http://www.bjrbj.gov.cn/csibiz/indinfo/index.jsp)
+
 [办税地图](http://shiju.tax861.gov.cn/bjds/zwgk/bmfw/lxfs/index.asp)</br>
 [自助办税服务网点](http://bj.bendibao.com/zffw/201565/190664.shtm) 可自助打印所得税证明</br>
 [搜索结果-个税查询](http://search.tax861.gov.cn/sousuo/search_result.cgi)</br>

@@ -481,6 +481,17 @@ toc = true
 
 >Standing split helps loosen up your hamstrings to allow for easier entry into a handstand. Begin in a standing forward bend with both hands on the ground. Transfer weight into left foot; lift right leg high. Point or floint toes towards the ceiling, and square hips as much as possible. Walk hands back in line with toes (on the floor or on blocks or as close to feet as feels comfortable) and drop head. Breathe here for 5-10 deep breaths and then repeat on the other side. (If you have extra tight hamstrings, be sure to check out these yoga poses to help loosen them up.)
 
+
+### Day1 @2017-12-15
+- 靠墙蹲起20个
+- Plank一组120秒 + 站立劈腿5秒 + 战士三式5秒。共三组
+- 靠墙蹲起20个
+- 俯卧撑20一组
+- 仰卧起坐100个
+- 俯卧撑20一组
+
+注意髋骨摆正。
+
 ## VI. L Handstand at Wall
 {{< fluid_imgs
   "pure-u-1-1|https://www.fitnessmagazine.com/sites/fitnessmagazine.com/files/styles/slide/public/img_2655.jpg|L Handstand at Wall"

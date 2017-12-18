@@ -492,6 +492,13 @@ toc = true
 
 注意髋骨摆正。
 
+### Day2 @2017-12-18
+- 靠墙蹲起20个
+- Plank一组120秒 + 站立劈腿5秒 + 战士三式5秒。共三组
+- 靠墙蹲起20个
+- 俯卧撑20一组
+
+
 ## VI. L Handstand at Wall
 {{< fluid_imgs
   "pure-u-1-1|https://www.fitnessmagazine.com/sites/fitnessmagazine.com/files/styles/slide/public/img_2655.jpg|L Handstand at Wall"

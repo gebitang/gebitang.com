@@ -753,6 +753,12 @@ test@pp:/data/itestin-m# du -h --max-depth=1 .
 
 ### grep 之后只显示部分行数 grep '' | head -200
 
+### 处理 Binary file xxx.log matches
+grep认为这是二进制文件，解决方案：grep -a
+```
+cat log-20171218074617.txt |grep -a c33a1478fa479153124f938541022398
+```
+
 ## Git命令使用
 可配合GUI工具和命令行工具参考。
 

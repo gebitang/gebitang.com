@@ -113,6 +113,13 @@ mysql>use 数据库
 mysql>source path/to/dbname.sql
 ```
 
+### 数据库查询时间转换
+
+FROM_UNIXTIME
+```
+SELECT FROM_UNIXTIME(ii.match_time/1000), ii.* FROM `intervene_info` as ii 
+	where ii.adapt_id in('xxx') and ii.tindex>0 and ii.swj_email='intervene.109@xxx.cn';
+```
 
 ## iTerm2 ssh登录后无法显示中文
 

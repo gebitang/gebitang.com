@@ -265,7 +265,10 @@ This is a footnote.[^2]
 
 ## Maven 
 
-### dependency中有对应的条目，到提示找不到类
+### cannot resolve symbol
+
+dependency中有对应的条目，到提示找不到类
+
 
 不同的工程打开后使用的Maven配置不同，打开相同工程时，对应的jar包条目存在，但实际的类找不到--（没有下载到）
 注意使用不同的Maven设置即可

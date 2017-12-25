@@ -513,6 +513,16 @@ toc = true
 - 仰卧起坐100个
 - 俯卧撑20一组
 
+### Day5 @2017-12-25
+- 靠墙蹲起20个
+- Plank一组120秒 + 站立劈腿5秒 + 战士三式5秒。共三组
+- 靠墙蹲起20个
+- 俯卧撑20一组
+- 仰卧起坐100个
+- 俯卧撑20一组
+
+需要特意练习一下右腿支撑？还是不稳。
+
 ## VI. L Handstand at Wall
 {{< fluid_imgs
   "pure-u-1-1|https://www.fitnessmagazine.com/sites/fitnessmagazine.com/files/styles/slide/public/img_2655.jpg|L Handstand at Wall"

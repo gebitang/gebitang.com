@@ -263,11 +263,22 @@ This is a footnote.[^1]
 
 This is a footnote.[^2]
 
-## Maven 本地使用
+## Maven 
+
+### dependency中有对应的条目，到提示找不到类
+
+不同的工程打开后使用的Maven配置不同，打开相同工程时，对应的jar包条目存在，但实际的类找不到--（没有下载到）
+注意使用不同的Maven设置即可
+
+
+### 依赖多个模块
+依赖模块的Maven需要重新导入 `reimport all maven projects` 之后，依赖模块的maven工程才会利用自己的pom文件生成依赖。
 
 - 下载apache-maven-3.5.0-bin.tar.gz到本地
 - 解压：`tar -xvf apache-maven-3.5.0-bin.tar.gz`
 - 更新配置文件：
+
+### Maven 本地使用
 
 ```
 M2_HOME=/Users/gebitang/apache-maven-3.5.0

@@ -14,10 +14,9 @@ toc = true
 +++
 
 始于2017-09-13，记录练习手倒立的历史，到今年12月17日之前，完成手倒立动作。</br>
+Flag到期日，完成度50%。不再谈努力，只在意明确目标，最终目标是否达成。这两点之间依赖的是清晰的路径，方法论是具体而微的操作步骤，与努力无关。</br>
 依据[**九步练习**](https://mp.weixin.qq.com/s/Iwnz2-U4H70ZNzWEe4t_Bg)，每个动作练习10天左右，每次练习至少3组。</br>
 记录每天的练习、感受、调整、完成与否的过程。
-
-
 
 {{< fluid_imgs
   "pure-u-1-1|https://yoga.com/media/cache/75/7c/757c6c1e214ffe19a01b9a4877aa0243.jpg|handstand|https://www.fitnessmagazine.com/workout/yoga/poses/9-yoga-poses-to-help-you-build-the-strength-for-a-yoga-handstand/"
@@ -31,7 +30,6 @@ toc = true
 >2. 第二种努力，是暂时没有明确目标，但想生活得更积极向上些的努力；
 
 >3. 第三种努力，则根本不想要努力，只想要一种努力的感觉。无论这些努力在别人看来是多么徒劳，它都是我们缓解焦虑的方式。可焦虑的背后又是什么呢？
-
 
 
 ## I. Plank
@@ -522,6 +520,19 @@ toc = true
 - 俯卧撑20一组
 
 需要特意练习一下右腿支撑？还是不稳。
+
+### Day6 @2017-12-27
+- 靠墙蹲起20个
+- 站立劈腿5秒 + 战士三式5秒 + Plank一组120秒。共三组
+- 靠墙蹲起20个
+- 俯卧撑20一组
+- 仰卧起坐100个
+- 俯卧撑20一组
+
+站立劈腿很难到位：绷脚背朝上，手与脚趾成一线
+战士三式：支撑不稳
+
+这两个姿势要多练习了。
 
 ## VI. L Handstand at Wall
 {{< fluid_imgs

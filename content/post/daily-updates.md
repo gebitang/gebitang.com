@@ -924,6 +924,29 @@ git log commit1 commit2  # 查询commit1与commit2之间的记录，包括commit
 git log commit1..commit2 # 同上，但是不包括commit1
 ```
 
+### 项目初始化
+
+- create empty project
+
+```
+# from 0 to 1
+mkdir gotourgo
+cd gotourgo
+git init
+echo "# gotourgo" >> README.md
+git add README.md
+git commit -m "first commit"
+git remote add origin git@git.coding.net:gebitang/gotourgo.git
+git push -u origin master
+
+```
+
+- add existed one 
+
+```
+git remote add origin git@git.coding.net:gebitang/gotourgo.git
+git push -u origin master
+```
 
 ## Windows命令
 

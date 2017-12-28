@@ -3,7 +3,7 @@ title = "Book Reading Plan"
 description = "新年读书计划"
 tags = [
     "book",
-    "affiliate"
+    "Daniel Kahneman"
 ]
 date = "2017-12-27"
 topics = [

@@ -226,6 +226,9 @@ ftp>rename file.original.name file.renamed.name
 
 ## Java IDE
 
+### Error:java: Compilation failed: internal java compiler error
+设置里的java complier设置与当前工程的设置冲突造成的
+
 ### Log4j生成的log内容时间与系统时间不匹配
 启动时指定Java参数 -Duser.timezone=GMT+08
 

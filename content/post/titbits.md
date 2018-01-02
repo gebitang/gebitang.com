@@ -141,7 +141,7 @@ toc = true
 
 读书也可以参考锻炼的模式，单开一贴，记录每天的阅读成果和笔记总结。集腋成裘。
 
-
+### 2012-12-27
 Flag到期日，完成度50%。不再谈努力，只在意明确目标，最终目标是否达成。这两点之间依赖的是清晰的路径，方法论是具体而微的操作步骤，与努力无关。
 
 [努力焦虑症 by 动机在杭州](https://zhuanlan.zhihu.com/p/29253331?group_id=890709963381547008)
@@ -151,3 +151,57 @@ Flag到期日，完成度50%。不再谈努力，只在意明确目标，最终�
 >2. 第二种努力，是暂时没有明确目标，但想生活得更积极向上些的努力；
 
 >3. 第三种努力，则根本不想要努力，只想要一种努力的感觉。无论这些努力在别人看来是多么徒劳，它都是我们缓解焦虑的方式。可焦虑的背后又是什么呢？
+
+
+### Concepts while reading
+
+
+- Müller-Lyer illusion 缪勒-莱尔错觉
+
+{{< fluid_imgs
+  "pure-u-1-1|https://upload.wikimedia.org/wikipedia/commons/f/fe/Müller-Lyer_illusion.svg|Müller-Lyer illusion|https://en.wikipedia.org/wiki/Müller-Lyer_illusion"
+>}}
+
+光学错觉，[更多Optical illusion](https://en.wikipedia.org/wiki/List_of_optical_illusions)
+
+
+- FLOW by Mihaly Csikszentmihalyi
+
+- Apathy 毫无兴趣，不关心
+- Boredom 厌倦
+- Relaxation 放松
+- Arousal 唤醒，觉醒
+- Worry 担心
+- Anxiety 焦虑
+- Control 掌控
+
+<div >
+<map name="ImageMap_1_1055083357" id="ImageMap_1_1055083357">
+<area href="https://en.wikipedia.org/wiki/Anxiety" target="_blank" shape="poly" coords="163,138,33,83,33,8,105,8" alt="Anxiety" title="Anxiety">
+<area href="https://en.wikipedia.org/wiki/Arousal" target="_blank" shape="poly" coords="163,138,103,8,219,8" alt="Arousal" title="Arousal">
+<area href="https://en.wikipedia.org/wiki/Flow_(psychology)" target="_blank" shape="poly" coords="163,138,219,8,292,8,292,83" alt="Flow (psychology)" title="Flow (psychology)">
+<area href="https://en.wikipedia.org/wiki/Control_(psychology)" target="_blank" shape="poly" coords="163,138,292,83,292,191" alt="Control (psychology)" title="Control (psychology)">
+<area href="https://en.wikipedia.org/wiki/Relaxation_(psychology)" target="_blank" shape="poly" coords="163,138,292,191,292,266,219,266" alt="Relaxation (psychology)" title="Relaxation (psychology)">
+<area href="https://en.wikipedia.org/wiki/Boredom" target="_blank" shape="poly" coords="163,138,219,266,107,266" alt="Boredom" title="Boredom">
+<area href="https://en.wikipedia.org/wiki/Apathy" target="_blank" shape="poly" coords="163,138,107,266,33,266,33,191" alt="Apathy" title="Apathy">
+<area href="https://en.wikipedia.org/wiki/Worry" target="_blank" shape="poly" coords="163,138,33,191,33,83" alt="Worry" title="Worry">
+</map>
+<img alt="" src="https://upload.wikimedia.org/wikipedia/commons/f/f6/Challenge_vs_skill.svg" width="300" height="292" class="thumbimage" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/f/f6/Challenge_vs_skill.svg/450px-Challenge_vs_skill.svg.png 1.5x, //upload.wikimedia.org/wikipedia/commons/thumb/f/f6/Challenge_vs_skill.svg/600px-Challenge_vs_skill.svg.png 2x" data-file-width="472" data-file-height="460" usemap="#ImageMap_1_1055083357">
+</div>
+
+### 2018-01-02
+Vison 
+
+[Vision Without Execution Is Just Hallucination](https://www.goodreads.com/quotes/155966-vision-without-execution-is-just-hallucination) -- Henry Ford
+[Vision Without Execution Is Hallucination](https://www.forbes.com/sites/bryanstolle/2014/07/22/vision-without-execution-is-just-hallucination) -- Thomas Edison 
+
+"Vision without action is a daydream. Action without vision is a nightmare." - Japanese Proverb
+
+Plan -- Focus -- Motivate -- Measure -- Reward 
+
+Plan
+Great execution starts with a plan.  The plan sets the stage with strategy (the why), then lays out the objectives (the what), and then the required steps and actions (the how), to be carried out by the respective members (the who), and the timeframe in which the actions should be accomplished (the when).   
+
+Like the vision, it needs to be clear.  Unlike the vision, it needs to be as comprehensive as possible, with a robust appreciation of the risks and challenges, and well thought-out “plan B’s” for all the major risk points or hurdles.
+
+"Good business leaders create a vision, articulate the vision, passionately own the vision, and relentlessly drive it to completion." - Jack Welch

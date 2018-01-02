@@ -29,6 +29,7 @@ toc = true
 
 <a href="https://www.amazon.cn/dp/B00KXNH264/" target="_blank"><img src="https://images-cn.ssl-images-amazon.com/images/I/51kU9szNf-L.jpg"> </a>
 
+2012-12-31
 为了买上面那本而买了两年期的Kindle Unlimited，结果发现上面那本还是limited的内容，随手选了这本借出来看，干活慢慢。一下午基本一口气看完了，看得看第一手材料才能看得更清楚。人生经历，商届浮沉，一大闲人。
 
 营销大师 + 游戏大师。 好广告、好游戏都是**改**出来的。

@@ -34,8 +34,8 @@ toc = true
 1. 观察上线情况
 2. 准备数据模块独立
 
-
 - 曾鸣书院听课vison
-
+- 工程初始化 jetty, mysql, log4j2
+- 问题定位：多次出现的fatalException
 
 

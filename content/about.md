@@ -1,31 +1,39 @@
 +++
-title = "About"
+title = "埋头过坎 功不唐捐"
 date = "2014-04-09"
 sidemenu = "true"
-description = "About me and this site"
+description = "Keep growing, All efforts are not made for nothing."
 +++
 
-Hugo is a static site engine written in Go.
+Plan -- Focus -- Motivate -- Measure -- Reward 
 
+[A Guide to Making This Your Best Year Ever](https://zenhabits.net/best-year/)
 
-It makes use of a variety of open source projects including:
+希望做哪些事？--> 为什么做这些事？足够得重要 --> 有哪些rituals？--> 如果完成这些日常任务Structures？
 
-* [Cobra](https://github.com/spf13/cobra)
-* [Viper](https://github.com/spf13/viper)
-* [J Walter Weatherman](https://github.com/spf13/jWalterWeatherman)
-* [Cast](https://github.com/spf13/cast)
+-----
+⣻⣻⣻⣻⣻⣻⣻⣻⣻
 
-Learn more and contribute on [GitHub](https://github.com/spf13).
+- 数据中心模块  →DC ☯☯☯☯☯
 
-## Setup
+>>真实、原始数据。调试方便，跟踪每个设备的利用率、使用周期，成本核算+设备利用
 
-Some fun facts about [Hugo](http://gohugo.io/):
+- android开发 →AF ☯☯☯☯
 
-* Built in [Go](http://golang.org/)
-* Loosely inspired by [Jekyll](http://jekyllrb.com/)
-* Primarily developed by [spf13](http://spf13.com/) on the train while commuting to and from Manhattan.
-* Coded in [Vim](http://vim.org) using [spf13-vim](http://vim.spf13.com/)
+>>android测试开发，懂测试，懂开发；懂测试开发；懂android开发。
 
-Have questions or suggestions? Feel free to [open an issue on GitHub](https://github.com/spf13/hugo/issues/new) or [ask me on Twitter](https://twitter.com/spf13).
+- Go、Python学习 →GP ☯☯☯
 
-Thanks for reading!
+>>跟踪新趋势。掌握基本语言，应用到下一步的数学学习中
+
+- 锻炼&打坐 →FM ☯☯
+
+>>从0到1的1
+
+- 投资读书&写作 →iRW ☯ 
+
+>>阅读记录，写作练习
+
+⣻⣻⣻⣻⣻⣻⣻⣻⣻
+
+-----

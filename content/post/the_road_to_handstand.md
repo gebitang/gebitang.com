@@ -563,6 +563,15 @@ Flag到期日，完成度50%。不再谈努力，只在意明确目标，最终�
 
 战士三式屈膝后腿抬起控制好平衡再伸展双臂，这样容易稳定
 
+### Day10 @2018-01-03
+- 靠墙蹲起20个
+- Plank一组120秒 + 站立劈腿5秒 + 战士三式5秒 。共三组
+- 靠墙蹲起20个
+- 俯卧撑10合掌+10平肩一组 
+- 仰卧起坐100个
+- 俯卧撑10合掌+10平肩一组
+
+
 ## VI. L Handstand at Wall
 {{< fluid_imgs
   "pure-u-1-1|https://www.fitnessmagazine.com/sites/fitnessmagazine.com/files/styles/slide/public/img_2655.jpg|L Handstand at Wall"

@@ -474,6 +474,20 @@ Linux version 4.4.0-31-generic (buildd@lgw01-43) (gcc version 4.8.4 (Ubuntu 4.8.
 root@testin-DH:~#
 ```
 
+### 测试I/O数据 dd
+
+```
+time dd bs=64k count=4k if=/dev/zero of=test
+4096+0 records in
+4096+0 records out
+268435456 bytes (268 MB, 256 MiB) copied, 1.01641 s, 264 MB/s
+
+real    0m1.025s
+user    0m0.000s
+sys     0m0.940s
+
+```
+
 ## Shell commands
 
 任何场景下，使用

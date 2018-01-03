@@ -189,8 +189,8 @@ Flag到期日，完成度50%。不再谈努力，只在意明确目标，最终�
 <img alt="" src="https://upload.wikimedia.org/wikipedia/commons/f/f6/Challenge_vs_skill.svg" width="300" height="292" class="thumbimage" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/f/f6/Challenge_vs_skill.svg/450px-Challenge_vs_skill.svg.png 1.5x, //upload.wikimedia.org/wikipedia/commons/thumb/f/f6/Challenge_vs_skill.svg/600px-Challenge_vs_skill.svg.png 2x" data-file-width="472" data-file-height="460" usemap="#ImageMap_1_1055083357">
 </div>
 
-### 2018-01-02
-Vison 
+### 2018-01-02 Vison 
+❖✠✡✢✣✤✥✦✧✩✪✫✬✭✮✯✰✱✲✳✴✵✶✷✸✹✺✻✼✽✾✿❀❁❂❃❄❅❆❇❈❉❊❋❖
 
 [Vision Without Execution Is Just Hallucination](https://www.goodreads.com/quotes/155966-vision-without-execution-is-just-hallucination) -- Henry Ford
 [Vision Without Execution Is Hallucination](https://www.forbes.com/sites/bryanstolle/2014/07/22/vision-without-execution-is-just-hallucination) -- Thomas Edison 
@@ -205,3 +205,44 @@ Great execution starts with a plan.  The plan sets the stage with strategy (the 
 Like the vision, it needs to be clear.  Unlike the vision, it needs to be as comprehensive as possible, with a robust appreciation of the risks and challenges, and well thought-out “plan B’s” for all the major risk points or hurdles.
 
 "Good business leaders create a vision, articulate the vision, passionately own the vision, and relentlessly drive it to completion." - Jack Welch
+
+
+### 2018-01-03 5Step
+Plan -- Focus -- Motivate -- Measure -- Reward 
+
+[A Guide to Making This Your Best Year Ever](https://zenhabits.net/best-year/)
+
+希望做哪些事？--> 为什么做这些事？足够得重要 --> 有哪些rituals？--> 如果完成这些日常任务Structures？
+
+-----
+⣻⣻⣻⣻⣻⣻⣻⣻⣻
+
+- 数据中心模块  →DC ☯☯☯☯☯
+
+>>真实、原始数据。调试方便，跟踪每个设备的利用率、使用周期，成本核算+设备利用
+
+- android开发 →AF ☯☯☯☯
+
+>>android测试开发，懂测试，懂开发；懂测试开发；懂android开发。
+
+- Go、Python学习 →GP ☯☯☯
+
+>>跟踪新趋势。掌握基本语言，应用到下一步的数学学习中
+
+- 锻炼&打坐 →FM ☯☯
+
+>>从0到1的1
+
+- 投资读书&写作 →iRW ☯ 
+
+>>阅读记录，写作练习
+
+⣻⣻⣻⣻⣻⣻⣻⣻⣻
+
+-----
+
+minicat app学习 
+
+不一定每天都将所有的任务都执行到。但每开始执行一个任务时，需要专注，weekly里记录执行情况，每日JS的日常总结提供反馈调整。
+
+-----

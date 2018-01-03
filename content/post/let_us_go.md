@@ -110,3 +110,4 @@ the context of the work, not the content.
 When have you been most fulfilled in the past? What did these times have in common? </br>
 Imagine you just found out you’re going to die in ten years. What would you spend your time doing?</br>
 Can you make any of our six factors more specific? e.g. what *kinds* of people do you most like to work with?
+

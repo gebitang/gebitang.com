@@ -1,6 +1,6 @@
 +++
 title = "Weekly 2018"
-description = "一周之记"
+description = "Vision Without Execution Is Hallucination"
 tags = [
     "life",
     "work"
@@ -36,6 +36,11 @@ toc = true
 
 - 曾鸣书院听课vison
 - 工程初始化 jetty, mysql, log4j2
-- 问题定位：多次出现的fatalException
+- 问题定位：多次出现的fatalException，修复
+
+### 2018-01-03
+1. Vision --> 5Steps
+2. 框架搭建：API接收数据 ~~并存入数据库~~
 
 
+- [A Guide to Making This Your Best Year Ever](https://zenhabits.net/best-year/)

@@ -246,3 +246,9 @@ minicat app学习
 不一定每天都将所有的任务都执行到。但每开始执行一个任务时，需要专注，weekly里记录执行情况，每日JS的日常总结提供反馈调整。
 
 -----
+
+### 2018-01-04
+
+[Go Deeper, Not Wider](http://www.raptitude.com/2017/12/go-deeper-not-wider/) 
+
+>As long as we live in a consumer culture, it may always be easier to go wider than deeper. Going deeper requires patience, practice, and engagement during stretches where nothing much is happening. It’s during those moments that switching pursuits is most tempting. Newness doesn’t require much at all, except, sometimes, a bit of disposable income.

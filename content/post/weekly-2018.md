@@ -63,3 +63,6 @@ toc = true
 - 看十年第三模块，51信用卡创始过程音频
 - 协助OCR定位
 - [Use Dashboard](https://zenhabits.net/dashboard/) to [Go Deeper, Not Wider](http://www.raptitude.com/2017/12/go-deeper-not-wider/) 
+- 定位问题，Log监测遇到启动就Die的场景
+- 定位无效任务
+- DC支持下载服务

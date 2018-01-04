@@ -61,7 +61,5 @@ toc = true
 3. 表格式嵌入分享
 
 - 看十年第三模块，51信用卡创始过程音频
-
-
-
-
+- 协助OCR定位
+- [Use Dashboard](https://zenhabits.net/dashboard/) to [Go Deeper, Not Wider](http://www.raptitude.com/2017/12/go-deeper-not-wider/) 

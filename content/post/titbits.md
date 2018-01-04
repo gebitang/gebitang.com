@@ -247,8 +247,53 @@ minicat app学习
 
 -----
 
-### 2018-01-04
+### 2018-01-04 Deeper not Wider
 
 [Go Deeper, Not Wider](http://www.raptitude.com/2017/12/go-deeper-not-wider/) 
 
 >As long as we live in a consumer culture, it may always be easier to go wider than deeper. Going deeper requires patience, practice, and engagement during stretches where nothing much is happening. It’s during those moments that switching pursuits is most tempting. Newness doesn’t require much at all, except, sometimes, a bit of disposable income.
+
+#### dream job
+
+day-by-day, hour-by-hour
+
+the six ingredients
+
+1. Work that’s engaging
+2. Work that helps others
+3. Work you’re good at
+4. Work with supportive colleagues
+5. Lack of major negatives
+6. Work that fits with the rest of your life
+
+So to say 
+```
+1. Work you’re good at,
+2. Work that helps others,
+3. Engaging work that lets you enter a state of flow (freedom, variety, clear tasks, feedback),
+4. Supportive colleagues,
+5. No major negatives like long hours or unfair pay, and
+6. A job that fits your personal life.
+```
+
+How to engage
+
+>The **freedom** to decide how to perform your work.</br>
+>**Clear tasks**, with a clearly defined start and end.</br>
+>**Variety** in the types of task.</br>
+>**Feedback**, so you know how well you’re doing.</br>
+
+What's the major negatives
+
+- A long commute, especially if it’s over an hour by bus.
+- Very long hours.
+- Pay you feel is unfair.
+- Job insecurity.
+
+
+the context of the work, not the content.
+
+When have you been most fulfilled in the past? What did these times have in common? </br>
+Imagine you just found out you’re going to die in ten years. What would you spend your time doing?</br>
+Can you make any of our six factors more specific? e.g. what *kinds* of people do you most like to work with?
+

@@ -13,3 +13,6 @@ topics = [
 toc = true
 +++
 ☯☯☯ Go、Python学习 →GP 技术学习。
+
+
+hugo theme update，add function to [scroll to top](https://www.w3schools.com/howto/howto_js_scroll_to_top.asp)

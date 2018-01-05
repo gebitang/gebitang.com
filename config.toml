@@ -24,8 +24,8 @@ hasCJKLanguage = true
   dateFormat = "2006-01-02"
   # Include any custom CSS and/or JS files
   # (relative to /static folder)
-  # custom_css = ["css/my.css"]
-  # custom_js = ["js/my.js"]
+  custom_css = ["css/my.css"]
+  custom_js = ["js/my.js"]
 
 [menu]
   # Shown in the side menu.

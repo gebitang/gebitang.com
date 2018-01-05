@@ -20,6 +20,8 @@ toc = true
 
 <!--more-->
 
+
+
 ## Grails - Groovy - Gradle
 
 ### grails
@@ -49,7 +51,6 @@ grails -Dfile.encoding=UTF-8 -Dserver.port=8090 run-app
 [极客学院版](http://wiki.jikexueyuan.com/project/gradle/java-quickstart.html)</br>
 [official guides](https://gradle.org/guides/)</br>
 下载完整版本安装后，在安装目录下的`docs/userguide/userguide.html`下有完整的手册
-
 
 
 ## Mysql
@@ -224,7 +225,31 @@ ftp>rename file.original.name file.renamed.name
 250 Rename successful.
 ```
 
+## Javac编译
+
+### javac编译的步骤：
+```
+#1.先找出所有需要编译的java文件并保存到文件列表到javaFiles.txt
+find src -name \*.java >javaFiles.txt
+#2.使用javac进行编译，因为源代码依赖lib里面的库，所以需要指定classpath参数
+javac -d bin -cp .:./lib/*  @.javaFiles.txt
+# -d 指定输出目录  
+# -cp 指定classpath为当前目录和lib目录下面所有的库文件   
+# @ 后面指定需要编译的文件列表
+```
+### 验证java文件编译的版本
+
+从jar包中解压处理任意一个类文件
+```
+javap -verbose PointImg.class |findstr "version"
+```
+
+### proguard混淆
+```
+java -jar "/home/lib/proguard.jar" @/home/project-java8-linux.pro
+```
 ## Java IDE
+
 
 ### Error:java: Compilation failed: internal java compiler error
 设置里的java complier设置与当前工程的设置冲突造成的
@@ -357,6 +382,44 @@ dependency注意空格格式
 
 ## linux 环境
 
+### tar命令基本操作
+
+```
+#打包
+tar -czvf ycdh.tar.gz ycdh.jar ycdh_lib tools config log4j.properties build.properties dh.sh noLog.sh updateself.sh
+
+#查看文件，但不解压
+tar -tzvf ycdh.tar.gz
+
+#解压
+tar -zxvf ycdh.tar.gz;
+```
+
+### ubuntu多版本java支持
+
+#### 使用ppa/源方式安装
+1. 添加ppa
+```
+sudo add-apt-repository ppa:webupd8team/java
+sudo apt-get update
+```
+
+2. 安装oracle-java-installer
+```
+sudo apt-get install oracle-java6-installer
+sudo apt-get install oracle-java7-installer
+sudo apt-get install oracle-java8-installer
+```
+
+查看java多版本
+```
+sudo update-java-alternatives -l
+```
+切换到其它java版本
+``` 
+sudo update-java-alternatives -s java-8-oracle
+```
+
 ### 设置时区
 ```
 # 安装ntp，非必要
@@ -485,6 +548,31 @@ time dd bs=64k count=4k if=/dev/zero of=test
 real    0m1.025s
 user    0m0.000s
 sys     0m0.940s
+
+```
+
+### 查找网站ip 
+
+```
+## 10086短信被劫持
+~#nslookup bjmobliis.cn
+Server:         127.0.1.1
+Address:        127.0.1.1#53
+
+Non-authoritative answer:
+Name:   bjmobliis.cn
+Address: 45.124.113.90
+
+# ping 
+ping bjmobliis.cn
+PING bjmobliis.cn (45.124.113.90) 56(84) bytes of data.
+64 bytes from 45.124.113.90: icmp_seq=1 ttl=109 time=120 ms
+64 bytes from 45.124.113.90: icmp_seq=2 ttl=109 time=128 ms
+64 bytes from 45.124.113.90: icmp_seq=3 ttl=109 time=117 ms
+64 bytes from 45.124.113.90: icmp_seq=4 ttl=109 time=120 ms
+64 bytes from 45.124.113.90: icmp_seq=5 ttl=109 time=123 ms
+64 bytes from 45.124.113.90: icmp_seq=6 ttl=109 time=119 ms
+64 bytes from 45.124.113.90: icmp_seq=7 ttl=109 time=127 ms
 
 ```
 
@@ -965,6 +1053,36 @@ git remote add origin git@git.coding.net:gebitang/gotourgo.git
 git push -u origin master
 ```
 
+### 指定branch复制
+```
+git clone git@192.168.1.93:Automation/project.git -b next next
+```
+
+### 修改、忽略、撤销、删除、更新url
+
+```
+# 修改已提交的commit
+git commit --amend
+#忽略已跟踪的文件
+git update-index --assume-unchanged filename
+#撤销用：
+git update-index --no-assume-unchanged filename
+#删除已入仓库的文件夹
+git rm -r --cached .idea/
+git rm -r --cached 要忽略的文件
+
+#git修改文件名大小写的方法。
+#首先，在git命令行里面运行：
+git config core.ignorecase false
+
+#更新url
+git remote set-url origin new-url
+
+#rebase
+git rebase -i base-commit-hash
+```
+
+
 ## Windows命令
 
 ### 杀死进程
@@ -1008,6 +1126,64 @@ F:\>mode
     代码页:     936
 
 ```
+
+## C++ Basic
+
+
+当 std::condition_variable 对象的某个 wait 函数被调用的时候，它使用 std::unique_lock(通过 std::mutex) 来锁住当前线程。当前线程会一直被阻塞，直到另外一个线程在相同的 std::condition_variable 对象上调用了 notification 函数来唤醒当前线程。
+ wait_for 可以指定一个时间段，在当前线程收到通知或者指定的时间 rel_time 超时之前，该线程都会处于阻塞状态。而一旦超时或者收到了其他线程的通知，wait_for 返回
+
+std::condition_variable::notify_one() 介绍
+唤醒某个等待(wait)线程。如果当前没有等待线程，则该函数什么也不做，如果同时存在多个等待线程，则唤醒某个线程是不确定的(unspecified)。
+
+unique_lock 对象以独占所有权的方式（ unique owership）管理 mutex 对象的上锁和解锁操作，所谓独占所有权，就是没有其他的 unique_lock 对象同时拥有某个 mutex 对象的所有权。
+
+
+跟踪头文件中的变量
+
+free与malloc()函数配对使用，释放malloc函数申请的动态内存。
+
+mmap将一个文件或者其它对象映射进内存。文件被映射到多个页上，如果文件的大小不是所有页的大小之和，最后一个页不被使用的空间将会清零。
+munmap执行相反的操作，删除特定地址区域的对象映射
+```
+返回说明：   
+成功执行时，mmap()返回被映射区的指针，munmap()返回0。失败时，mmap()返回MAP_FAILED[其值为(void *)-1]，munmap返回-1。errno被设为以下的某个值   
+
+EACCES：访问出错
+EAGAIN：文件已被锁定，或者太多的内存已被锁定
+EBADF：fd不是有效的文件描述词
+EINVAL：一个或者多个参数无效
+ENFILE：已达到系统对打开文件的限制
+ENODEV：指定文件所在的文件系统不支持内存映射
+ENOMEM：内存不足，或者进程已超出最大内存映射数量
+EPERM：权能不足，操作不允许
+ETXTBSY：已写的方式打开文件，同时指定MAP_DENYWRITE标志
+SIGSEGV：试着向只读区写入
+SIGBUS：试着访问不属于进程的内存区
+```
+
+
+memset是以字节为单位，初始化内存块。
+```void *memset(void *s,int c,size_t n)```
+总的作用：将已开辟内存空间 s 的首 n 个字节的值设为值 c。
+ 
+把资源内存（src所指向的内存区域） 拷贝到目标内存（dest所指向的内存区域）；拷贝多少个？有一个size变量控制
+```void *memcpy(void *dest, void *src, unsigned int size);```
+
+函数指针：
+
+搞懂C/C++函数指针 [一](http://hipercomer.blog.51cto.com/4415661/792300)、[二](http://hipercomer.blog.51cto.com/4415661/792301)、[三](http://hipercomer.blog.51cto.com/4415661/792302)
+
+[C++ 函数指针 & 类成员函数指针](http://blog.csdn.net/crayondeng/article/details/16868351)
+
+
+[生产消费模型：C++11 并发指南系列](http://www.cnblogs.com/haippy/p/3284540.html)
+
+[Virtual： 虚函数 基类的虚函数必须在派生类中重写](http://www.cnblogs.com/xd502djj/archive/2010/09/22/1832912.html)
+
+[Template： 实现多态](http://www.cnblogs.com/gw811/archive/2012/10/25/2738929.html)
+
+ioctl是设备驱动程序中对设备的I/O通道进行管理的函数
 
 ## Wercker Status
 

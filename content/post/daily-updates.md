@@ -293,6 +293,32 @@ This is a footnote.[^2]
 
 ## Maven 
 
+### maven项目默认Java编译版本
+Intellij Idea 创建Maven项目时，默认的Java Language是1.5。[修改](https://www.cnblogs.com/liu-s/p/5371289.html)
+```
+<properties>
+    <maven.compiler.source>1.8</maven.compiler.source>
+    <maven.compiler.target>1.8</maven.compiler.target>
+</properties>
+
+# 或
+<build>
+    <plugins>
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-compiler-plugin</artifactId>
+            <version>3.1</version>
+            <configuration>
+                <!-- http://maven.apache.org/plugins/maven-compiler-plugin/ -->
+                <source>1.8</source>
+                <target>1.8</target>
+            </configuration>
+        </plugin>
+    </plugins>
+</build>
+```
+
+
 ### cannot resolve symbol
 
 dependency中有对应的条目，到提示找不到类

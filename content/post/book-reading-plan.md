@@ -27,6 +27,9 @@ toc = true
 也有称之为[dual process theory](https://conceptually.org/concepts/dual-processing-theory)，双工系统。来源应该也是这本书，附一篇书评：
 [Of 2 Minds: How Fast and Slow Thinking Shape Perception and Choice \[Excerpt\]](https://www.scientificamerican.com/article/kahneman-excerpt-thinking-fast-and-slow/)
 
+### Two Basic
+1. [Structure and Interpretation of Computer Programs](https://mitpress.mit.edu/sicp/full-text/book/book.html)
+2. [How to Design Programs: An Introduction to Computing and Programming](http://www.htdp.org/2003-09-26/Book/curriculum.html)
 
 ## 中文
 

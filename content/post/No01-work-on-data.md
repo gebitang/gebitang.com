@@ -20,3 +20,6 @@ toc = true
 - DC支持下载服务
 
 Log处理问题- pending
+
+### 2018-01-05
+- Log配置问题 done

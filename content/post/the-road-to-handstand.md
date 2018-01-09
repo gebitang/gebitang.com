@@ -589,6 +589,16 @@ Flag到期日，完成度50%。不再谈努力，只在意明确目标，最终�
 
 真·三天不练手生。
 
+### Day13 @2018-01-09
+- 靠墙蹲起20个
+- Plank一组120秒 + 站立劈腿5秒 + 战士三式5秒 。共三组
+- 俯卧撑10合掌+10平肩一组 
+- 仰卧起坐100个
+- 俯卧撑10合掌+10平肩一组
+- 靠墙蹲起20个
+
+今天的站立劈腿和战士三式做起来比较轻松，尤其是右腿支撑的战士三式。
+
 ## VI. L Handstand at Wall
 {{< fluid_imgs
   "pure-u-1-1|https://www.fitnessmagazine.com/sites/fitnessmagazine.com/files/styles/slide/public/img_2655.jpg|L Handstand at Wall"

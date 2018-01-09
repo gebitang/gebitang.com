@@ -20,7 +20,61 @@ toc = true
 
 <!--more-->
 
+## RBT工具使用
 
+### rbtools提交、更新
+[RBT工具使用](https://www.zybuluo.com/Jazka/note/173956#code-review)
+
+- 首次提交review 
+
+一般建议在独立的 task 分支进行开发, 在合并到 release 或者 master 等分支之前, 需要提交 review.
+
+```
+# 使用 -d 参数打印更多信息
+rbt post -d --tracking-branch=my.local.debug.branch
+```
+
+- 追加修改
+
+```
+# 需要在对应的目录下执行
+rbt  post -d -r 2919 --parent=base.changed.commit
+```
+
+### rbtools 提示错误ascii codec can t decode byte 0xe0
+[参考](http://jingyan.baidu.com/article/eae07827a6f5a11fec5485f4.html)</br>
+[立即停止在 Python 中使用 setdefaultencoding('utf-8')， 以及为什么](http://blog.ernest.me/post/python-setdefaultencoding-unicode-bytes)
+
+- 这是Python 2 mimetypes的bug
+- 需要将Python2.7/lib/mimetypes.py文件中如下片段注释或删除：
+
+```
+try:
+    ctype = ctype.encode(default_encoding) # omit in 3.x!
+except UnicodeEncodeError:
+    pass
+```
+
+补充其它解决办法
+
+解决办法： 在报错的页面添加代码： 
+```
+import sys 
+reload(sys) 
+sys.setdefaultencoding('utf8')
+```
+
+执行 Python ez_setup.py，报错：
+```
+UnicodeDecodeError: 'utf8' codec can't decode byte 0xb0 in position 35: invalid start byte
+```
+解决办法：
+在报错的页面添加代码： 
+```
+import sys 
+reload(sys) 
+sys.setdefaultencoding('gb18030')
+```
 
 ## Grails - Groovy - Gradle
 

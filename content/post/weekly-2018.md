@@ -90,10 +90,27 @@ toc = true
 ## week02
 1. 指定年度计划的月度计划详情
 
-### 2018-01-08 一
+Mon.(Monday) Tues.(Tuesday) Wed.(Wednesday) Thu.(Thursday) Fri.(Friday) Sat.(Saturday) Sun.(Sunday)
+
+### 2018-01-08 Mon.
 需要明确早上做的事情，尽快进入学习模式，尤其是周一的时候。
 
 - 讨论设计重启场景
 - 初步实现功能
 
 >>在UIA端实现了完整的场景，验证时发现又遇到了之前遇到过的问题——**APK无权限执行shell命令**。浪费了设计，只能从头再来，这次该长记性了吧:(
+
+- 晚上看了锤子科技三人组在陌陌的2017年度好物推荐
+
+### 2018-01-09 Tue.
+1. 完成功能实现集成
+
+- from [How to Make (and Keep) a New Year's Resolution](https://www.nytimes.com/guides/smarterliving/resolution-ideas) find out [History of SMART Objectives](https://rapidbi.com/history-of-smart-objectives/) and [A BRIEF HISTORY OF SMART GOALS](https://www.projectsmart.co.uk/brief-history-of-smart-goals.php)
+- [backUp HowTOMake](https://www.evernote.com/shard/s225/sh/8011fc29-fa30-4536-a0b9-fec308b56a5e/dcc5f3b77c4dfcb64cb3c202911acdcf)
+- [goal Vs. objective](https://rapidbi.com/the-difference-between-goals-objectives/)
+- 定位问题log：ZT&YT
+- 调试问题——stop调用
+- review process for RecorderTool, RBTools
+- 集成YT+UIA重启逻辑-almost done
+
+今天效率不错，都忘记去打球了:) 

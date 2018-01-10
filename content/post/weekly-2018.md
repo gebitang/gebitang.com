@@ -114,3 +114,11 @@ Mon.(Monday) Tues.(Tuesday) Wed.(Wednesday) Thu.(Thursday) Fri.(Friday) Sat.(Sat
 - 集成YT+UIA重启逻辑-almost done
 
 今天效率不错，都忘记去打球了:) 
+
+### 2018-01-10 Wed.
+1. 重启流程处理
+
+- reading <<Think, Fast and Slow>>
+- go flow control module.
+- 重启流程完成
+- 定位FML问题

@@ -13,7 +13,7 @@ topics = [
 toc = true
 +++
 
-
+## Three Questions
 [我有什么？我要什么？我为此愿意付出什么？](http://weibo.com/1918628847/FdrWemSH8)
 
 
@@ -341,3 +341,14 @@ List of Cognitive Bias
 9. focus on the argument best calculated to persuade your audience 
 10. never use an argument you do not believe is sound or relevant
 11. allow time for your view to gain acceptance
+
+
+## Simplify
+[zen archives](https://zenhabits.net/archives/)</br>
+[The Simplicity Cycle: Returning to Paring Down to Find Your True Needs](https://zenhabits.net/cycle/)
+
+- 固定的时间做事，形成routine。定义的时间一到，即使不做这件事，也**不允许**做其他事。
+
+>这样可以形成一个缓冲期，督促进入这个objective
+
+- 订阅内容浏览式阅读

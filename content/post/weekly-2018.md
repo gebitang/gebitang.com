@@ -21,7 +21,7 @@ toc = true
 
 <!--more-->
 
-## week1
+## week01
 
 ### 2018-01-01
 - 思考数据模块可能的实现方式
@@ -77,3 +77,58 @@ toc = true
 - Log4j 2!配置 - done
 
 沟通事实需求，注意情绪。
+
+### week01 weekend
+洗衣，读书。似乎忘记了记录。现在(下周一)回忆居然有点模糊。
+
+
+- 两天应该都读了一点书。
+- 但tech内容没有学习，需要更大的动力？
+- 到时准备了两个主题：上当充值、自动部署
+>>然后发现自动部署写一篇详细的说明文档还挺复杂的。重新读了相关的连接文章，最后还是没有写出来。
+
+## week02
+1. 指定年度计划的月度计划详情
+
+Mon.(Monday) Tues.(Tuesday) Wed.(Wednesday) Thu.(Thursday) Fri.(Friday) Sat.(Saturday) Sun.(Sunday)
+
+### 2018-01-08 Mon.
+需要明确早上做的事情，尽快进入学习模式，尤其是周一的时候。
+
+- 讨论设计重启场景
+- 初步实现功能
+
+>>在UIA端实现了完整的场景，验证时发现又遇到了之前遇到过的问题——**APK无权限执行shell命令**。浪费了设计，只能从头再来，这次该长记性了吧:(
+
+- 晚上看了锤子科技三人组在陌陌的2017年度好物推荐
+
+### 2018-01-09 Tue.
+1. 完成功能实现集成
+
+- from [How to Make (and Keep) a New Year's Resolution](https://www.nytimes.com/guides/smarterliving/resolution-ideas) find out [History of SMART Objectives](https://rapidbi.com/history-of-smart-objectives/) and [A BRIEF HISTORY OF SMART GOALS](https://www.projectsmart.co.uk/brief-history-of-smart-goals.php)
+- [backUp HowTOMake](https://www.evernote.com/shard/s225/sh/8011fc29-fa30-4536-a0b9-fec308b56a5e/dcc5f3b77c4dfcb64cb3c202911acdcf)
+- [goal Vs. objective](https://rapidbi.com/the-difference-between-goals-objectives/)
+- 定位问题log：ZT&YT
+- 调试问题——stop调用
+- review process for RecorderTool, RBTools
+- 集成YT+UIA重启逻辑-almost done
+
+今天效率不错，都忘记去打球了:) 
+
+### 2018-01-10 Wed.
+1. 重启流程处理
+
+- reading <<Think, Fast and Slow>>
+- go flow control module.
+- 重启流程完成
+- 定位FML问题
+
+### 2018-01-11 Thu.
+
+- 继续定位FML问题，果然最后是一个极容易忽略的问题导致的
+- 重启流程正式收尾提交，等待发布
+- 居住证提交、汇款咨询
+- update zt install tar包
+- update zt imsi file
+
+- 遇到反馈的诡异问题：卡死后设备页面全部空白——设备位置丢失

@@ -14,9 +14,23 @@ toc = true
 
 ☯ 投资读书&写作 →iRW 
 
-System 1和2的第一次实战：
-system 1. 优惠力度、10086真实号码
+1. 
+System 1和2的第一次实战：</br>
+system 1. 优惠力度、10086真实号码</br>
 system 2. 网站名称、支付后的收款方
 
+2. github and wreck
 
+前提：
 
+- 安装好hugo环境
+- git 基本操作
+- github账号
+- 域名
+
+[Deployment with Wercker](https://gohugo.io/hosting-and-deployment/deployment-with-wercker/)</br>
+[Create Wercker step](https://app.wercker.com/applications/create-step)</br>
+[Using a custom domain with GitHub Pages](https://help.github.com/articles/using-a-custom-domain-with-github-pages/)</br>
+[DNS record doesn't point to GitHub's server](https://help.github.com/articles/troubleshooting-custom-domains/#dns-configuration-errors)</br>
+[Creating Steps doc](http://devcenter.wercker.com/docs/steps/creating-steps)
+[token generate](https://help.github.com/articles/creating-a-personal-access-token-for-the-command-line/)

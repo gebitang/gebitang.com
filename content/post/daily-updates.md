@@ -911,6 +911,31 @@ grep认为这是二进制文件，解决方案：grep -a
 cat log-20171218074617.txt |grep -a c33a1478fa479153124f938541022398
 ```
 
+### dig查看域名解析
+
+```
+dig qq.com +nostats +nocomments +nocmd
+
+; <<>> DiG 9.9.7-P3 <<>> qq.com +nostats +nocomments +nocmd
+;; global options: +cmd
+;qq.com.				IN	A
+qq.com.			600	IN	A	125.39.240.113
+qq.com.			600	IN	A	61.135.157.156
+qq.com.			17879	IN	NS	ns4.qq.com.
+qq.com.			17879	IN	NS	ns2.qq.com.
+qq.com.			17879	IN	NS	ns1.qq.com.
+qq.com.			17879	IN	NS	ns3.qq.com.
+ns1.qq.com.		3706	IN	A	101.226.68.138
+ns1.qq.com.		3706	IN	A	14.17.19.139
+ns2.qq.com.		18704	IN	A	101.227.169.106
+ns3.qq.com.		106736	IN	A	182.140.177.149
+ns3.qq.com.		106736	IN	A	182.140.167.157
+ns4.qq.com.		106736	IN	A	123.151.178.115
+ns4.qq.com.		106736	IN	A	125.39.247.247
+ns4.qq.com.		106736	IN	A	184.105.206.124
+ns4.qq.com.		106736	IN	A	203.205.144.156
+```
+
 ## Git命令使用
 可配合GUI工具和命令行工具参考。
 

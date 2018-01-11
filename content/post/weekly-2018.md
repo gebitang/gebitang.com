@@ -122,3 +122,13 @@ Mon.(Monday) Tues.(Tuesday) Wed.(Wednesday) Thu.(Thursday) Fri.(Friday) Sat.(Sat
 - go flow control module.
 - 重启流程完成
 - 定位FML问题
+
+### 2018-01-11 Thu.
+
+- 继续定位FML问题，果然最后是一个极容易忽略的问题导致的
+- 重启流程正式收尾提交，等待发布
+- 居住证提交、汇款咨询
+- update zt install tar包
+- update zt imsi file
+
+- 遇到反馈的诡异问题：卡死后设备页面全部空白——设备位置丢失

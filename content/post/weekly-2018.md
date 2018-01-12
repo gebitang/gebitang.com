@@ -132,3 +132,10 @@ Mon.(Monday) Tues.(Tuesday) Wed.(Wednesday) Thu.(Thursday) Fri.(Friday) Sat.(Sat
 - update zt imsi file
 
 - 遇到反馈的诡异问题：卡死后设备页面全部空白——设备位置丢失
+
+### 2018-01-12 Fri.
+
+- 排查问题
+- 修复掉线引起的上报问题
+- 远程更新支持
+- 新建分支、cherry pick、自动编译、增量升级、验证、推送

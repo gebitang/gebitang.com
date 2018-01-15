@@ -34,3 +34,7 @@ system 2. 网站名称、支付后的收款方
 [DNS record doesn't point to GitHub's server](https://help.github.com/articles/troubleshooting-custom-domains/#dns-configuration-errors)</br>
 [Creating Steps doc](http://devcenter.wercker.com/docs/steps/creating-steps)
 [token generate](https://help.github.com/articles/creating-a-personal-access-token-for-the-command-line/)
+
+3. KDW晒吃相
+FaceBook封锁莆田IP、派安盈25美金返利从100美金提高到1000美金、撸羊毛专业
+——钻规则的空子

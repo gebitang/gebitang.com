@@ -617,6 +617,23 @@ Flag到期日，完成度50%。不再谈努力，只在意明确目标，最终�
   "pure-u-1-1|https://www.fitnessmagazine.com/sites/fitnessmagazine.com/files/styles/slide/public/img_2655.jpg|L Handstand at Wall"
 >}}
 
+- 双手离墙一条腿的距离。先做四角板凳式。双手与肩同宽。
+- 双脚慢慢往墙上走，直到身体呈“L”型，头放松，头顶朝地面。
+- 尝试肩膀手腕一条直线，臀部会有点超过它们。
+- 保持5-10个呼吸。
+
+>Measure a leg's distance away from the wall (or lamp post!) to determine where to put hands on the ground. Face away from the wall on all fours. Place hands shoulder width apart on the ground where you measured your leg distance. Walk feet up the wall until your body forms an "L" position, letting your head fall toward the ground. Try to line up shoulders and wrists as best as you can; hips will move beyond them. Stay here for 5-10 deep breaths
+
+### Day01 @2018-01-15
+- 靠墙蹲起20个
+- Plank一组120秒，共三组
+- 俯卧撑20合掌一组 
+- 仰卧起坐100个
+- 靠墙蹲起20个
+- 俯卧撑20合掌一组 
+
+这个动作暂时完全无法完成。一腿的距离，只能倒立撑起，向下走的时候，双臂已经很难支持住身体前倾造成的压力。坚持每天早上锻练，看这个动作什么时候可以做出来。
+
 ## VII. L- Hops
 {{< fluid_imgs
   "pure-u-1-1|https://www.fitnessmagazine.com/sites/fitnessmagazine.com/files/styles/slide/public/img_2576.jpg|L- Hops"

@@ -462,6 +462,48 @@ dependency注意空格格式
 
 ## linux 环境
 
+### Linux下adb不能识别Android设备
+
+[Linux下adb不能识别Android设备](http://blog.csdn.net/momo0853/article/details/45726583)</br>
+[adb连接不上android手机的终极解决方案](http://blog.csdn.net/liuqz2009/article/details/7942569)
+
+利用 `lsusb` 获取usb设备的vendor信息、将此信息添加到 `~/.android/adb_usb.ini` 文件下（文件不存在则手动创建）
+
+但 `lsusb` 本身就获取不到设备就尴尬了
+```
+root@testin-MS-7788:~/.android# lsusb
+Bus 002 Device 039: ID 093a:2510 Pixart Imaging, Inc. Optical Mouse
+Bus 002 Device 006: ID 1a40:0201 Terminus Technology Inc. FE 2.1 7-port Hub
+Bus 002 Device 004: ID 1a40:0101 Terminus Technology Inc. Hub
+Bus 002 Device 051: ID 2b0e:179d
+Bus 002 Device 002: ID 8087:0024 Intel Corp. Integrated Rate Matching Hub
+Bus 002 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
+Bus 001 Device 051: ID 1a40:0201 Terminus Technology Inc. FE 2.1 7-port Hub
+Bus 001 Device 050: ID 1a40:0101 Terminus Technology Inc. Hub
+Bus 001 Device 002: ID 8087:0024 Intel Corp. Integrated Rate Matching Hub
+Bus 001 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
+root@testin-MS-7788:~/.android#
+root@testin-MS-7788:~/.android#
+root@testin-MS-7788:~/.android#
+root@testin-MS-7788:~/.android# adb devices -l
+List of devices attached
+LP036878A7130052555[usb#2-1.4]          device usb:2-1.4 product:X7_CN model:LEX651 device:le_x7
+
+root@testin-MS-7788:~/.android# adb devices -l
+List of devices attached
+
+root@testin-MS-7788:~/.android# lsusb
+Bus 002 Device 039: ID 093a:2510 Pixart Imaging, Inc. Optical Mouse
+Bus 002 Device 006: ID 1a40:0201 Terminus Technology Inc. FE 2.1 7-port Hub
+Bus 002 Device 004: ID 1a40:0101 Terminus Technology Inc. Hub
+Bus 002 Device 002: ID 8087:0024 Intel Corp. Integrated Rate Matching Hub
+Bus 002 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
+Bus 001 Device 051: ID 1a40:0201 Terminus Technology Inc. FE 2.1 7-port Hub
+Bus 001 Device 050: ID 1a40:0101 Terminus Technology Inc. Hub
+Bus 001 Device 002: ID 8087:0024 Intel Corp. Integrated Rate Matching Hub
+Bus 001 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
+```
+
 ### tar命令基本操作
 
 ```

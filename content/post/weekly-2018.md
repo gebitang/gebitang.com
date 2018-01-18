@@ -186,4 +186,5 @@ Go语言编程 from 多抓鱼
 - 系统维护偏差——重新配置机器 12:25
 - 设备升级诡异现象定位——更换PC，yt依然使用了旧版本
 - Go study——interface
+- worker project update
 - 截图问题定位：端口重复导致

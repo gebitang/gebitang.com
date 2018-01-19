@@ -572,15 +572,20 @@ reboot   system boot  4.4.0-62-generic Tue Sep 19 18:50   still running
 # top命令的提示信息中也有
 ```
 
-### 16.04root密码
+### 16.04root密码及用户管理
 
 1. 默认root密码是随机的，即每次开机都有一个新的root密码
 2. 在终端输命令 sudo passwd，然后输入当前用户的密码
 3. 输入新的密码并确认，此时的密码就是root新密码
 4. 修改成功后，输入命令 su root，再输入新的密码
 
+#### 用户管理
+[Linux查看和剔除当前登录用户](https://www.cnblogs.com/saptechnique/archive/2012/04/10/2441383.html)
 ```
 #查看当前登录用户，需要root权限 w
+# 第一列是用户名,
+# 第二列是连接的终端,tty表示显示器,pts表示远程连接,
+# 第三列是登陆时间,
 root@localhost:~# w
  10:48:38 up 17 days, 19:06,  1 user,  load average: 0.00, 0.02, 0.05
 USER     TTY      FROM              LOGIN@   IDLE   JCPU   PCPU WHAT
@@ -588,6 +593,12 @@ root     pts/0    10.32.22.66      10:10    6.00s  0.15s  0.00s w
 
 # 踢掉在线用户
 pkill -kill -t pts/0
+
+# 查看登陆用户历史
+node8:/ # last
+root     pts/0        10.35.0.4        Fri Jan 19 15:20   still logged in
+home   pts/0        10.34.18.238     Mon Jan  8 08:08 - 08:28  (00:20)
+root     pts/0        10.35.0.4        Thu Jan  4 15:39 - 15:41  (00:01)
 
 ```
 

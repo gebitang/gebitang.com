@@ -151,6 +151,7 @@ Go语言编程 from 多抓鱼
 
 ## week03
 每天工作内容完成后及时记录。
+Mon.(Monday) Tues.(Tuesday) Wed.(Wednesday) Thu.(Thursday) Fri.(Friday) Sat.(Saturday) Sun.(Sunday)
 
 ### 2018-01-15 Mon.
 - 点线面体的分析惊出一身冷汗
@@ -199,4 +200,38 @@ Go语言编程 from 多抓鱼
 
 - 短信问题数据查询 -done
 - 定位yt执行问题 -done
+- 重复截图问题修复验证
+
+
+### 2018-01-20 Sat.
+- 集体定位了一天的问题，最后就改了一行代码
+
+### 2018-01-21 Sun.
+- 群里讨论的很兴奋，听了近3小时的在线课程blcokchain
+- 了解EOS周边：创世团队、steemit上的、youtube上的
+
+从技术入门难度比较高，迎难而上吧
+
+## week04
+每天工作内容完成后及时记录。
+Mon.(Monday) Tues.(Tuesday) Wed.(Wednesday) Thu.(Thursday) Fri.(Friday) Sat.(Saturday) Sun.(Sunday)
+
+### 2018-01-22 Mon.
+
+- 完成ZT升级版本
+- 完成YT升级版本
+- 新思路解决Copy Fail问题——顽疾解决
+- [在线阅读epub](http://www.neat-reader.com/app#/epubreader)
+
+>>微信提示升级，但直接在线升级时多次下载失败。</br>
+>>Chrome下载时根据语言设置自动判断推送的英文版本，从Firefox下载中文新版</br>
+>>然后自主升级又成功了。
+
+升级内容：只描述3点内容，web版本给出了每一点的说明和图示；应用启动后会提示，只显示内容，无提示。
+
+中午听到的产品思维课刚好讲的微信的“迭代”方式：
+
+- 前一版是后一版的准备动作
+- 第一版只是核心，发布后“自然生长”
+
 

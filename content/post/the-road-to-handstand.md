@@ -681,6 +681,19 @@ Flag到期日，完成度50%。不再谈努力，只在意明确目标，最终�
 
 战士三式稳定态。
 
+### Day06 @2018-01-23
+- 靠墙蹲起20个
+- 组合技三组
+
+>> Plank120秒</br>
+>> 站立劈腿5秒 </br>
+>> 战士三式5秒</br>
+>> 靠墙倒立5秒</br>
+
+- 仰卧起坐100个
+- 俯卧撑20合掌一组 
+
+
 ## VII. L- Hops
 {{< fluid_imgs
   "pure-u-1-1|https://www.fitnessmagazine.com/sites/fitnessmagazine.com/files/styles/slide/public/img_2576.jpg|L- Hops"

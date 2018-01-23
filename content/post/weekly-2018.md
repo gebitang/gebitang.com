@@ -235,3 +235,12 @@ Mon.(Monday) Tues.(Tuesday) Wed.(Wednesday) Thu.(Thursday) Fri.(Friday) Sat.(Sat
 - 第一版只是核心，发布后“自然生长”
 
 
+### 2018-01-23 Tue.
+
+- Blockchain address
+- 复制提醒功能
+- 讨论独立短信模块服务
+- debug安装问题
+
+
+

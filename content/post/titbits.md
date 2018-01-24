@@ -352,3 +352,15 @@ List of Cognitive Bias
 >这样可以形成一个缓冲期，督促进入这个objective
 
 - 订阅内容浏览式阅读
+
+### 2018-01-24 Thu.
+
+- [用户体验要素](https://github.com/willianjusten/hangouts/blob/master/ux/The%20Elements%20of%20User%20Experience%20-%20Jesse%20James%20Garrett.pdf)
+
+用户体验要素 VS. 用户体验的五个层次</br>
+一通百通。这和结婚教练篇里识人里的概念一样。</br>
+产品：战略存在、能力圈、资源结构、角色框架和感知层。</br>
+人：存在感、能力圈、资源层、角色层、感知层。</br>
+教练篇就是用产品概念教人结婚的，这篇算“详情”。</br>
+那篇笑来老师评论『用户体验要素：战略，范围，框架，结构，表现。用了另一种说法，新的视角。』
+

@@ -14,12 +14,11 @@ toc = true
 
 ☯ 投资读书&写作 →iRW 
 
-1. 
-System 1和2的第一次实战：</br>
+- System 1和2的第一次实战：</br>
 system 1. 优惠力度、10086真实号码</br>
 system 2. 网站名称、支付后的收款方
 
-2. github and wreck
+- github and wreck
 
 前提：
 
@@ -35,10 +34,14 @@ system 2. 网站名称、支付后的收款方
 [Creating Steps doc](http://devcenter.wercker.com/docs/steps/creating-steps)
 [token generate](https://help.github.com/articles/creating-a-personal-access-token-for-the-command-line/)
 
-3. KDW晒吃相
+- KDW晒吃相
 FaceBook封锁莆田IP、派安盈25美金返利从100美金提高到1000美金、撸羊毛专业
 ——钻规则的空子
 
-4. 湖畔大学文章思考回复 + 产品思维30讲的思考练习 + 华与华简书
+- 湖畔大学文章思考回复 + 产品思维30讲的思考练习 + 华与华简书
 
-5. 对外(高质量)输出：不用总想着一步到位，写出来多么好的文字。即使是简单的说明、教程也有意义。重要的是每天都要练习。
+- 对外(高质量)输出：不用总想着一步到位，写出来多么好的文字。即使是简单的说明、教程也有意义。重要的是每天都要练习。
+
+- tiger+evernote笔记练习——应该增加这方面的训练。
+
+- 推广发布的文章要写好：详细，不断修改

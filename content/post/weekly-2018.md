@@ -247,5 +247,15 @@ Mon.(Monday) Tues.(Tuesday) Wed.(Wednesday) Thu.(Thursday) Fri.(Friday) Sat.(Sat
 
 - [用户体验要素](https://github.com/willianjusten/hangouts/blob/master/ux/The%20Elements%20of%20User%20Experience%20-%20Jesse%20James%20Garrett.pdf)
 - 问题修复。饶了一圈，最后还是一个极简单的场景
+- tiger+evernote笔记练习——应该增加这方面的训练。
 
 重新捡起来minicap相关内容，NKD编译新版本，准备测试环境、验证、再验证。最后发现是so文件的问题。
+
+### 2018-01-25 Fri.
+1. apk获取短信
+
+- 产品思维之用户体验地图 VS. 服务蓝图
+- review and design for new feature and newbie
+- hot-fix bug 需求实现的偏差，定义清楚行为
+- update accounts in personal project
+- apk获取短信，请求server发送短信

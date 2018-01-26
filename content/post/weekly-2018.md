@@ -242,7 +242,7 @@ Mon.(Monday) Tues.(Tuesday) Wed.(Wednesday) Thu.(Thursday) Fri.(Friday) Sat.(Sat
 - 讨论独立短信模块服务
 - debug安装问题
 
-### 2018-01-24 Thu.
+### 2018-01-24 Wed.
 1. minicap单张截图支持8.0设备
 
 - [用户体验要素](https://github.com/willianjusten/hangouts/blob/master/ux/The%20Elements%20of%20User%20Experience%20-%20Jesse%20James%20Garrett.pdf)
@@ -251,7 +251,7 @@ Mon.(Monday) Tues.(Tuesday) Wed.(Wednesday) Thu.(Thursday) Fri.(Friday) Sat.(Sat
 
 重新捡起来minicap相关内容，NKD编译新版本，准备测试环境、验证、再验证。最后发现是so文件的问题。
 
-### 2018-01-25 Fri.
+### 2018-01-25 Thu.
 1. apk获取短信
 
 - 产品思维之用户体验地图 VS. 服务蓝图
@@ -259,3 +259,9 @@ Mon.(Monday) Tues.(Tuesday) Wed.(Wednesday) Thu.(Thursday) Fri.(Friday) Sat.(Sat
 - hot-fix bug 需求实现的偏差，定义清楚行为
 - update accounts in personal project
 - apk获取短信，请求server发送短信
+
+### 2018-01-26 Fri.
+
+- SharedPreference保存信息
+- 动态获取读取短信权限 -pending
+- 集成测试

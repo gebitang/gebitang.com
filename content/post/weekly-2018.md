@@ -265,3 +265,4 @@ Mon.(Monday) Tues.(Tuesday) Wed.(Wednesday) Thu.(Thursday) Fri.(Friday) Sat.(Sat
 - SharedPreference保存信息
 - 动态获取读取短信权限 -pending
 - 集成测试
+- 代码提交、发布版本

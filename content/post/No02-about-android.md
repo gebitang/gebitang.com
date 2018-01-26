@@ -13,6 +13,18 @@ toc = true
 
 ☯☯☯☯ android开发 →AF  android测试开发，懂测试，懂开发；懂测试开发；懂android开发。
 
+## Android APK
+
+### 静态变量失效，数据保存
+
+实际使用中发现静态变量赋值后再次使用时依然是原始默认值。建议[使用Shared Preferences](https://stackoverflow.com/a/10962472/1087122)或者统一定义 [Application](https://stackoverflow.com/a/8504129/1087122)中。
+
+### 读取短信信息，动态请求权限
+
+- [动态请求读取短信权限](https://android.jlelse.eu/detecting-sending-sms-on-android-8a154562597f) - pending
+
+
+
 ## Android Surface System
 
 Bn: BinderNative</br>

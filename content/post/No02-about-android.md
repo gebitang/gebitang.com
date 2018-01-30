@@ -23,6 +23,62 @@ toc = true
 
 - [动态请求读取短信权限](https://android.jlelse.eu/detecting-sending-sms-on-android-8a154562597f) - pending
 
+设置[android:priority](https://developer.android.com/guide/topics/manifest/intent-filter-element.html)，
+```
+# AndroidManifest.xml
+<receiver
+    android:name=".SmsBroadcastReceiver"
+    android:enabled="true"
+    android:exported="true">
+    <intent-filter android:priority="1000">
+        <action android:name="android.provider.Telephony.SMS_RECEIVED" />
+    </intent-filter>
+</receiver>
+
+#发送短信
+public class SmsBroadcastReceiver extends BroadcastReceiver {
+
+    @Override
+    public void onReceive(Context context, Intent intent) {
+        sendSms(context, intent);
+    }
+}
+
+# actual method
+void sendSms(Context context, Intent intent) {
+  if (Telephony.Sms.Intents.SMS_RECEIVED_ACTION.equals(intent.getAction())) {
+      String smsSender = "";
+      StringBuilder sb = new StringBuilder();
+      if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+          for (SmsMessage smsMessage : Telephony.Sms.Intents.getMessagesFromIntent(intent)) {
+              smsSender = smsMessage.getDisplayOriginatingAddress();
+              sb.append(smsMessage.getMessageBody());
+          }
+      } else {
+          Bundle smsBundle = intent.getExtras();
+          if (smsBundle != null) {
+              Object[] pdus = (Object[]) smsBundle.get("pdus");
+              if (pdus == null) {
+                  // Display some error to the user
+                  Log.e(Utils.tag, "SmsBundle had no pdus key");
+                  return;
+              }
+              SmsMessage[] messages = new SmsMessage[pdus.length];
+              for (int i = 0; i < messages.length; i++) {
+                  messages[i] = SmsMessage.createFromPdu((byte[]) pdus[i]);
+                  sb.append(messages[i].getMessageBody());
+              }
+              smsSender = messages[0].getOriginatingAddress();
+          }
+      }
+      SharedPreferences settings = context.getSharedPreferences(Const.SAVE_DATE, 0);
+      String phone = settings.getString(Const.phoneNum, SmsHelper.getPhoneNumber());
+      String url = settings.getString(Const.smsUrl, SmsHelper.getReceiveSmsUrl());
+      //Log.i(Utils.tag,  url+ " now phone number: " + phone);
+      HttpClientUtil.uploadSmsInBackground(smsSender, sb.toString(), phone, url);
+  }
+```
+
 
 
 ## Android Surface System

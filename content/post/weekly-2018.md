@@ -266,3 +266,36 @@ Mon.(Monday) Tues.(Tuesday) Wed.(Wednesday) Thu.(Thursday) Fri.(Friday) Sat.(Sat
 - 动态获取读取短信权限 -pending
 - 集成测试
 - 代码提交、发布版本
+
+### 2018-01-27 Sat.
+- 思考、快与慢阅读
+- 球赛、游戏183
+- 洗衣
+- 然后就睡觉+万万没想到
+
+### 2018-01-28 Sun.
+- 精通比特币初版阅读
+- wercker文章
+
+## week05
+每天工作内容完成后及时记录。
+Mon.(Monday) Tues.(Tuesday) Wed.(Wednesday) Thu.(Thursday) Fri.(Friday) Sat.(Saturday) Sun.(Sunday)
+
+### 2018-01-29 Mon.
+- 问题修复：安装失败后没有自动结束任务
+- 干预接口增加参数
+- 重启脚本解析
+- 手机自动断线现象
+- socket协议区分
+
+### 2018-01-30 Tue.
+
+- 升级结果检查
+- keybase基础使用，channel创建
+- 点、线、面培训业务场景、流程、步骤
+- 日志问题定位——重启logcat导致
+- George Lakoff books
+- 重启脚本
+- 解析日期已经掉线处理
+
+可以分析对应log是否有异常信息

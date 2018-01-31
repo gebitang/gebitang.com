@@ -299,3 +299,12 @@ Mon.(Monday) Tues.(Tuesday) Wed.(Wednesday) Thu.(Thursday) Fri.(Friday) Sat.(Sat
 - 解析日期已经掉线处理
 
 可以分析对应log是否有异常信息
+
+### 2018-01-31 Wen.
+
+- 升级环境统一检查，更新安装配置手册
+- 完善短信平台设计——主动性，结果不错。
+- go runtine学习
+- 以太坊MetaMask
+
+老友来电&知识付费的观点。 

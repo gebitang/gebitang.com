@@ -307,4 +307,9 @@ Mon.(Monday) Tues.(Tuesday) Wed.(Wednesday) Thu.(Thursday) Fri.(Friday) Sat.(Sat
 - go runtine学习
 - 以太坊MetaMask
 
-老友来电&知识付费的观点。 
+老友来电&知识付费的观点。
+
+### 2018-02-01 Tue.
+- 定位执行问题
+- 修复重启bug
+- 短信本地培训

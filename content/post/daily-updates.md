@@ -20,6 +20,23 @@ toc = true
 
 <!--more-->
 
+## VS code
+
+类似sublime，`ctrl+alt+P` 打开管理，
+
+### 支持go语言
+安装插件 `go`， 在extention中搜索go
+
+### 支持CPP
+
+[C/C++ for VS Code](https://code.visualstudio.com/docs/languages/cpp)，[官方文档](https://github.com/Microsoft/vscode-cpptools/blob/master/Documentation/Getting%20started.md)
+
+You can also generate or edit a c_cpp_properties.json file with the **C/Cpp: Edit Configurations** command from the Command Palette (**Ctrl+Shift+P**).
+
+[Visual Studio Code如何编写运行C、C++](https://www.zhihu.com/question/30315894/answer/154979413)
+
+
+
 ## RBT工具使用
 
 ### rbtools提交、更新
@@ -304,6 +321,11 @@ java -jar "/home/lib/proguard.jar" @/home/project-java8-linux.pro
 ```
 ## Java IDE
 
+### idea import *
+
+```
+Setting -- Editor -- Code Style -- Java -- Imports -- Class count to use import with '*':
+```
 
 ### Error:java: Compilation failed: internal java compiler error
 设置里的java complier设置与当前工程的设置冲突造成的
@@ -461,6 +483,9 @@ mvn -U clean install
 dependency注意空格格式
 
 ## linux 环境
+
+### 安装ubuntu
+[下载镜像](http://old-releases.ubuntu.com/releases/)，使用[**Rufus**](https://rufus.akeo.ie/)，[创建启动盘](https://tutorials.ubuntu.com/tutorial/tutorial-create-a-usb-stick-on-windows)。
 
 ### Linux下adb不能识别Android设备
 
@@ -1043,8 +1068,13 @@ ns4.qq.com.		106736	IN	A	184.105.206.124
 ns4.qq.com.		106736	IN	A	203.205.144.156
 ```
 
+## Test format (TOB)
+
 ## Git命令使用
 可配合GUI工具和命令行工具参考。
+
+### 指定branch clone
+` git clone -b dawn-2.x git@github.com:EOSIO/eos.git`
 
 ### 0x0. 命令行单独对不同的文件进行commit操作
 ```

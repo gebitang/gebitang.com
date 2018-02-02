@@ -23,6 +23,7 @@ hugo theme update，add function to [scroll to top](https://www.w3schools.com/ho
 [Your state is not mine: a closer look at evading stateful internet censorship](https://dl.acm.org/citation.cfm?doid=3131365.3131374)
 
 
+
 Go release 1.9 version on 24 August 2017. I'm the [31,365](https://github.com/golang/go/stargazers) people to start it on github and just get started to learn it :). 
 
 Let's Go. 

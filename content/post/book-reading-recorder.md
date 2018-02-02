@@ -47,8 +47,8 @@ toc = true
 
 ## Part Ⅲ. Heuristics and Biases
 
-### 19. The Illusion of Understanding
-### 20. The Illusion of Validity
+### 19. The Illusion of Understanding (2/1)
+### 20. The Illusion of Validity (2/2)
 ### 21. Intuitions Vs. Formulas
 ### 22. Expert Intuition: When Can We Trust It?
 ### 23. The Outside View

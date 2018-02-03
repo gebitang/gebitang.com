@@ -126,6 +126,31 @@ grails -Dfile.encoding=UTF-8 -Dserver.port=8090 run-app
 
 ## Mysql
 
+### 查询数据库版本号 select @@Version
+
+### CLIENT_PLUGIN_AUTH is required 报错
+
+版本过高，降低mysql-connector-java的版本。
+
+```
+# 6.0.6 com.mysql.cj.jdbc.Driver
+String driver = "com.mysql.jdbc.Driver"; //
+String url = "jdbc:mysql://" + DB_ADDRESS + ":" + DB_PORT + "/" + DB_NAME
+        + "?connectTimeout=10000&characterEncoding=UTF-8";
+String user = DB_USER;
+String password = DB_PASS;
+
+try {
+    Class.forName(driver);
+    DriverManager.setLoginTimeout(10);
+    SmsService.conn = DriverManager.getConnection(url, user, password);
+} catch (ClassNotFoundException e) {
+    e.printStackTrace();
+} catch (SQLException e) {
+    e.printStackTrace();
+}
+```
+
 ### 运行远程访问
 ```
 

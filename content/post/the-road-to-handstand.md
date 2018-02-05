@@ -742,6 +742,19 @@ Flag到期日，完成度50%。不再谈努力，只在意明确目标，最终�
 
 正常起床后应该尽快起床，这样锻炼后还可以洗澡、读书
 
+### Day12 @2018-02-35
+- 靠墙蹲起20个
+- 组合技一组
+
+>> Plank120秒</br>
+>> 站立劈腿10秒 </br>
+>> 战士三式10秒</br>
+
+- 仰卧起坐100个
+- 俯卧撑20合掌一组 
+
+这一下又断了好几天，中间两天算简单练习了下靠墙蹲起，不构成记录的成果。还是应该继续坚持。
+
 ## VII. L- Hops
 {{< fluid_imgs
   "pure-u-1-1|https://www.fitnessmagazine.com/sites/fitnessmagazine.com/files/styles/slide/public/img_2576.jpg|L- Hops"

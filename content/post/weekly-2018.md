@@ -313,3 +313,12 @@ Mon.(Monday) Tues.(Tuesday) Wed.(Wednesday) Thu.(Thursday) Fri.(Friday) Sat.(Sat
 - 定位执行问题
 - 修复重启bug
 - 短信本地培训
+
+
+## week06 
+每天工作内容完成后及时记录。
+Mon.(Monday) Tues.(Tuesday) Wed.(Wednesday) Thu.(Thursday) Fri.(Friday) Sat.(Saturday) Sun.(Sunday)
+
+### 2018-02-05 Mon.
+- getmonero info
+- DC add one api

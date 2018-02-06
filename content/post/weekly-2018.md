@@ -322,3 +322,22 @@ Mon.(Monday) Tues.(Tuesday) Wed.(Wednesday) Thu.(Thursday) Fri.(Friday) Sat.(Sat
 ### 2018-02-05 Mon.
 - getmonero info
 - DC add one api
+
+### 2018-02-06 Tue.
+1. 双工位部署更新方案
+2. 邮件替代方案
+3. 短信验证
+
+- 双工位方案-done
+
+```
+tar -czvf ycyt.tar.gz ycdh.jar config/custom.ini ycdh_lib tools log4j.properties
+
+#解压到升级文件夹
+tar -xvf ycyt.tar.gz
+# 执行远程更新
+```
+- 邮件替代方案完成上线
+- 短信问题为手机特殊情况-pending
+- 修复重启逻辑bug
+- 配置dispatch方法

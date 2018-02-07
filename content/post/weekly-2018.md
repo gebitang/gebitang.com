@@ -341,3 +341,13 @@ tar -xvf ycyt.tar.gz
 - 短信问题为手机特殊情况-pending
 - 修复重启逻辑bug
 - 配置dispatch方法
+
+
+### 2018-02-0 Wen.
+1. 升级zt
+
+- 查询monitor record集成
+- 升级zt——done
+- 海外任务联调
+- 配置不同的启动方式
+- 问题定位，短信平台环境更新

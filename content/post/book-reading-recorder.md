@@ -49,7 +49,18 @@ toc = true
 
 ### 19. The Illusion of Understanding (2/1)
 ### 20. The Illusion of Validity (2/2)
-### 21. Intuitions Vs. Formulas
+### 21. Intuitions Vs. Formulas (2/6)
+
+实践检验：专家不如“公式化”意见，尤其是在对人的“未来”事件进行预测时。当下的评估会受到halo effect、system 1的各种偏见影响，甚至是在没有意识到的场景下。
+
+而公式化评估是有方法论的。[Paul E. Meehl](https://en.wikipedia.org/wiki/Paul_E._Meehl)
+
+1. 选定需要评估的彼此独立的角度，如“专注度”、“社交性”等，不超过6个
+2. 创建“事实性”的问题进行评估，用1-5分评估每一个方面的得分。
+3. 甚至不需要加权处理，综合得分最高的即可
+
+
+
 ### 22. Expert Intuition: When Can We Trust It?
 ### 23. The Outside View
 ### 24. The Engine of Capitalism

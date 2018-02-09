@@ -15,6 +15,12 @@ toc = true
 
 ## Android APK
 
+### 签名、打包release版本
+
+[Android Studio的两种模式及签名配置](https://www.cnblogs.com/details-666/p/keystore.html)
+
+- 使用release版本 by Build Variants 
+
 ### 静态变量失效，数据保存
 
 实际使用中发现静态变量赋值后再次使用时依然是原始默认值。建议[使用Shared Preferences](https://stackoverflow.com/a/10962472/1087122)或者统一定义 [Application](https://stackoverflow.com/a/8504129/1087122)中。

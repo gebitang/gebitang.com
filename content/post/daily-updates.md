@@ -20,6 +20,21 @@ toc = true
 
 <!--more-->
 
+## HTTP
+
+### get方法传递数组
+
+```
+# 只需要使用相同的参数名称即可
+http://gebitang.com?key=kvalue&reboot=1&charge_id=1&charge_id=2
+
+# 在 HttpServletRequest中获取
+Map<String, String[]> map = request.getParameterMap();
+String[] ss = request.getParameterValues("charge_id");
+String[] ss1 = request.getParameterValues("reboot");
+String r = request.getParameter("key");
+```
+
 ## VS code
 
 类似sublime，`ctrl+alt+P` 打开管理，

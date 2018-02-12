@@ -374,3 +374,12 @@ idea：map映射上报的类型；
 - 新定义任务
 - 重构重启接口逻辑：重启属于设备的方法；支持接口调用进行重启。
 - java调用执行shell脚本
+- 完成核心功能调用
+
+## week07
+每天工作内容完成后及时记录。
+Mon.(Monday) Tues.(Tuesday) Wed.(Wednesday) Thu.(Thursday) Fri.(Friday) Sat.(Saturday) Sun.(Sunday)
+
+### 2018-02-12 Mon.
+- 完善调用逻辑
+- 支持图像录制合成功能

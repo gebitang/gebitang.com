@@ -20,6 +20,12 @@ toc = true
 
 <!--more-->
 
+## curl命令调用post方法
+
+```
+curl -i -H "Accept:application/json" -H "Content-Type:application/json" -XPOST "http://sss.com/abc/" -d '{"op":"Device.restartDevice","device":{"imei":"866568023794679"}}'
+```
+
 ## HTTP
 
 ### get方法传递数组
@@ -119,6 +125,14 @@ sys.setdefaultencoding('gb18030')
 # 启动、指定端口、编码
 grails -Dfile.encoding=UTF-8 -Dserver.port=8090 run-app
 
+```
+
+### 打包部署
+
+```
+#查看帮助 grails help
+# 打包 
+grails war
 ```
 
 ### groovy

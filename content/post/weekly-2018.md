@@ -383,3 +383,4 @@ Mon.(Monday) Tues.(Tuesday) Wed.(Wednesday) Thu.(Thursday) Fri.(Friday) Sat.(Sat
 ### 2018-02-12 Mon.
 - 完善调用逻辑
 - 支持图像录制合成功能
+- android通知栏常驻

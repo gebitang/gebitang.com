@@ -384,3 +384,11 @@ Mon.(Monday) Tues.(Tuesday) Wed.(Wednesday) Thu.(Thursday) Fri.(Friday) Sat.(Sat
 - 完善调用逻辑
 - 支持图像录制合成功能
 - android通知栏常驻
+- 后台管理页面升级：支持重启
+
+### 2018-02-13 Tue.
+- 修复提示信息问题
+- 部署测试工位
+- 调用方法更新，邮件内容展示任务信息
+- 定位调试问题：点击取消按钮
+

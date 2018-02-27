@@ -392,6 +392,10 @@ Mon.(Monday) Tues.(Tuesday) Wed.(Wednesday) Thu.(Thursday) Fri.(Friday) Sat.(Sat
 - 调用方法更新，邮件内容展示任务信息
 - 定位调试问题：点击取消按钮
 
+### 2018-02-14 V day
+
+V day and last work day. good:)
+
 ## week08  过年啦
 
 ## week09 
@@ -406,3 +410,6 @@ Mon.(Monday) Tues.(Tuesday) Wed.(Wednesday) Thu.(Thursday) Fri.(Friday) Sat.(Sat
 - [设计7步](https://medium.com/refactoring-ui/7-practical-tips-for-cheating-at-design-40c736799886)
 - 更新版本，API调用记录url地址
 - 重温[编程的智慧](http://www.yinwang.org/blog-cn/2015/11/21/programming-philosophy)
+
+
+

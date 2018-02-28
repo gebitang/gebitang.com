@@ -1122,10 +1122,41 @@ ns4.qq.com.		106736	IN	A	184.105.206.124
 ns4.qq.com.		106736	IN	A	203.205.144.156
 ```
 
-## Test format (TOB)
 
 ## Git命令使用
 可配合GUI工具和命令行工具参考。
+
+### Fork and Sync Repo
+
+```
+1. git remote add upstream  https://github.com/url/project.git
+2. git fetch upstream
+3. git merge upstream/master
+```
+- 从其他人的Repo中fork分支到自己的Repo下
+- clone当前工程到本地
+- [添加远程跟踪源(需要以http的方式添加)](https://help.github.com/articles/fork-a-repo/)
+
+```
+$ git remote add upstream  https://github.com/b3log/pipe.git
+
+#查看添加结果
+$ git remote -v
+origin  git@github.com:gebitang/pipe.git (fetch)
+origin  git@github.com:gebitang/pipe.git (push)
+upstream        https://github.com/b3log/pipe.git (fetch)
+upstream        https://github.com/b3log/pipe.git (push)
+
+```
+
+- [同步远程的跟踪源并合并到本地分支下](https://help.github.com/articles/syncing-a-fork/)
+
+```
+$ git fetch upstream
+
+$ git merge upstream/master
+```
+
 
 ### 指定branch clone
 ` git clone -b dawn-2.x git@github.com:EOSIO/eos.git`

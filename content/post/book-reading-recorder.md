@@ -61,8 +61,14 @@ toc = true
 
 
 
-### 22. Expert Intuition: When Can We Trust It?
-### 23. The Outside View
+### 22. Expert Intuition: When Can We Trust It? (2/14)
+
+### 23. The Outside View (2/28)
+
+评估事件时的外部视角和内部视角。实例说明，站着内部视角时，会自动忽略“外部视角”。导致本来外部视角可以带来的锚定效果背忽略。
+
+更严重的是甚至不知道“外部视角”的存在（unknown unknowns），完全从内部视角进行评估。 
+
 ### 24. The Engine of Capitalism
 
 

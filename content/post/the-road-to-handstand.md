@@ -766,6 +766,16 @@ Flag到期日，完成度50%。不再谈努力，只在意明确目标，最终�
 
 每逢过年胖三斤。回来需要重新开始继续了。
 
+### Day14 @2018-03-01
+- 靠墙蹲起20个
+- 组合技
+
+>> Plank120秒</br>
+>> 站立劈腿10秒 </br>
+>> 战士三式10秒</br>
+>> 靠墙倒立10秒</br>
+>> 仰卧起坐100个
+
 ## VII. L- Hops
 {{< fluid_imgs
   "pure-u-1-1|https://www.fitnessmagazine.com/sites/fitnessmagazine.com/files/styles/slide/public/img_2576.jpg|L- Hops"

@@ -411,5 +411,9 @@ Mon.(Monday) Tues.(Tuesday) Wed.(Wednesday) Thu.(Thursday) Fri.(Friday) Sat.(Sat
 - 更新版本，API调用记录url地址
 - 重温[编程的智慧](http://www.yinwang.org/blog-cn/2015/11/21/programming-philosophy)
 
+### 2018-02-28 Wed.
+- 录屏设置
 
-
+### 2018-03-01 Thu.
+- 定位、提测、定位
+- update three interfaces

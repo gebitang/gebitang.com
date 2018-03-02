@@ -417,3 +417,7 @@ Mon.(Monday) Tues.(Tuesday) Wed.(Wednesday) Thu.(Thursday) Fri.(Friday) Sat.(Sat
 ### 2018-03-01 Thu.
 - 定位、提测、定位
 - update three interfaces
+
+### 2018-03-02 Fri.
+- 定位、提测、定位
+- 更新短信应用

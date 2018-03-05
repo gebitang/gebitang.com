@@ -776,6 +776,27 @@ Flag到期日，完成度50%。不再谈努力，只在意明确目标，最终�
 >> 靠墙倒立10秒</br>
 >> 仰卧起坐100个
 
+### Day15 @2018-03-03
+- 靠墙蹲起20个
+- 组合技2组
+
+>> 窄距俯卧撑20个</br>
+>> Plank60秒</br>
+>> 站立劈腿10秒 </br>
+>> 战士三式10秒</br>
+>> 靠墙倒立10秒</br>
+>> 仰卧起坐100个
+
+### Day15 @2018-03-05
+- 靠墙蹲起20个
+- 组合技一组
+
+>> 窄距俯卧撑20个</br>
+>> 站立劈腿10秒 </br>
+>> 战士三式10秒</br>
+>> 靠墙倒立10秒</br>
+>> 仰卧起坐100个
+
 ## VII. L- Hops
 {{< fluid_imgs
   "pure-u-1-1|https://www.fitnessmagazine.com/sites/fitnessmagazine.com/files/styles/slide/public/img_2576.jpg|L- Hops"

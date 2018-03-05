@@ -421,3 +421,11 @@ Mon.(Monday) Tues.(Tuesday) Wed.(Wednesday) Thu.(Thursday) Fri.(Friday) Sat.(Sat
 ### 2018-03-02 Fri.
 - 定位、提测、定位
 - 更新短信应用
+
+## week10 
+Mon.(Monday) Tues.(Tuesday) Wed.(Wednesday) Thu.(Thursday) Fri.(Friday) Sat.(Saturday) Sun.(Sunday)
+
+### 2018-03-05 Mon.
+- 组合升级zt、yt
+- 定位魅族设备原因
+- 手动、广播设置手机号

@@ -429,3 +429,15 @@ Mon.(Monday) Tues.(Tuesday) Wed.(Wednesday) Thu.(Thursday) Fri.(Friday) Sat.(Sat
 - 组合升级zt、yt
 - 定位魅族设备原因
 - 手动、广播设置手机号
+
+### 2018-03-06 Tue.
+- 重启脚本问题定位（not found）
+- 屏幕方向问题
+
+### 2018-03-07 Wed.
+1. zt广播设置
+2. helper兼容
+
+- zt广播设置--done 10:15
+- 协助问题定位(zt,test)
+- 定位自动转屏问题

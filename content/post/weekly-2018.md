@@ -441,3 +441,6 @@ Mon.(Monday) Tues.(Tuesday) Wed.(Wednesday) Thu.(Thursday) Fri.(Friday) Sat.(Sat
 - zt广播设置--done 10:15
 - 协助问题定位(zt,test)
 - 定位自动转屏问题
+
+### 2018-03-08 Thu.
+- shakeShaker，论起名字的重要性

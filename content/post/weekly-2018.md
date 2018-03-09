@@ -444,3 +444,9 @@ Mon.(Monday) Tues.(Tuesday) Wed.(Wednesday) Thu.(Thursday) Fri.(Friday) Sat.(Sat
 
 ### 2018-03-08 Thu.
 - shakeShaker，论起名字的重要性
+
+### 2018-03-09 Fri.
+1. 成长激励计划
+
+- minicap指定fps，减少图片传输
+- 上报任务耗时、结果

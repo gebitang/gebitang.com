@@ -450,3 +450,10 @@ Mon.(Monday) Tues.(Tuesday) Wed.(Wednesday) Thu.(Thursday) Fri.(Friday) Sat.(Sat
 
 - minicap指定fps，减少图片传输
 - 上报任务耗时、结果
+
+## week11 
+Mon.(Monday) Tues.(Tuesday) Wed.(Wednesday) Thu.(Thursday) Fri.(Friday) Sat.(Saturday) Sun.(Sunday)
+
+### 2018-03-12 Mon.
+- 新方案确定
+- 升级zt、ty版本

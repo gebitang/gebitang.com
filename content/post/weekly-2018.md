@@ -457,3 +457,7 @@ Mon.(Monday) Tues.(Tuesday) Wed.(Wednesday) Thu.(Thursday) Fri.(Friday) Sat.(Sat
 ### 2018-03-12 Mon.
 - 新方案确定
 - 升级zt、ty版本
+
+### 2018-03-13 Tue.
+- 重构逻辑
+- 实现方案，待测

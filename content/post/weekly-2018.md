@@ -461,3 +461,8 @@ Mon.(Monday) Tues.(Tuesday) Wed.(Wednesday) Thu.(Thursday) Fri.(Friday) Sat.(Sat
 ### 2018-03-13 Tue.
 - 重构逻辑
 - 实现方案，待测
+
+### 2018-03-14 Wed.
+- 提供api服务：支持shell命令执行
+- 支持repetition逻辑：异常信息依然启用干预机制
+- 修复部分手机安装后启动失败的问题

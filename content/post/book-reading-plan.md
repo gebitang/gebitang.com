@@ -96,3 +96,10 @@ toc = true
 尾声</br> 
 
 买的 [kindle](https://www.amazon.cn/dp/B01DXSM5RQ/) 版本，购买出现一点曲折，但买了就迫不及待地读起来，加上周末的时间，算是一鼓作气读完了。波澜壮阔，跌宕起伏。
+
+### 03. 《八万四千问》
+
+
+<a href="https://www.amazon.cn/dp/B01HERFL4G" target="_blank"><img src="https://images-cn.ssl-images-amazon.com/images/I/51THJ4cjD4L._SX384_BO1,204,203,200_.jpg"> </a>
+
+一本有关佛教的小书，但问题却与日常生活息息相关。

@@ -1358,6 +1358,27 @@ git rebase -i base-commit-hash
 
 ## Windows命令
 
+### 获取时间戳
+[获取系统日期、时间戳记](http://atgfss.iteye.com/blog/354054)</br>
+
+格式： %date:~x,y%以及%time:~x,y% </br>
+说明： x是开始位置，y是取得字符数 </br>
+```
+# 获取完整的日期和时间， 
+格式： %date:~0,4%%date:~5,2%%date:~8,2%%time:~0,2%%time:~3,2%%time:~6,2% 
+结果： 20180316175313 
+```
+
+### CMD重定向
+
+[cmd命令的重定向输出](https://www.cnblogs.com/dewin/archive/2009/09/19/1569869.html)
+```
+# 2>&1
+java -Dshow.debug.info=true -jar ./App.jar >> log-%date:~0,4%%date:~5,2%%date:~8,2%%time:~0,2%%time:~3,2%%time:~6,2%.txt 2>&1
+```
+
+
+
 ### 杀死进程
 ```
 #命令行杀死进程

@@ -538,10 +538,25 @@ dependency注意空格格式
 
 ## linux 环境
 
+### CentOS Another app is currently holding the yum lock; waiting for it to exit...
+
+```
+Another app is currently holding the yum lock; waiting for it to exit...
+  The other application is: PackageKit
+    Memory :  31 M RSS (348 MB VSZ)
+    Started: Wed Feb 14 20:49:26 2018 - 02:02 ago
+    State  : Running, pid: 18008
+```
+[解决方案](https://www.cnblogs.com/lzxianren/p/4254059.html)
+
+- 查找运行yum的pid，kill后再强制删除对应的pid文件 `rm -f /var/run/yum.pid`
+
+
 ### 安装ubuntu
 [下载镜像](http://old-releases.ubuntu.com/releases/)，使用[**Rufus**](https://rufus.akeo.ie/)，[创建启动盘](https://tutorials.ubuntu.com/tutorial/tutorial-create-a-usb-stick-on-windows)。
 
 ### Linux下adb不能识别Android设备
+
 
 [Linux下adb不能识别Android设备](http://blog.csdn.net/momo0853/article/details/45726583)</br>
 [adb连接不上android手机的终极解决方案](http://blog.csdn.net/liuqz2009/article/details/7942569)

@@ -467,6 +467,7 @@ Mon.(Monday) Tues.(Tuesday) Wed.(Wednesday) Thu.(Thursday) Fri.(Friday) Sat.(Sat
 - 支持repetition逻辑：异常信息依然启用干预机制
 - 修复部分手机安装后启动失败的问题
 
+
 ### 2018-03-15 Thu.
 - A little Java A few Patterns
 - 升级跟踪
@@ -476,3 +477,14 @@ Mon.(Monday) Tues.(Tuesday) Wed.(Wednesday) Thu.(Thursday) Fri.(Friday) Sat.(Sat
 - 大工位原型
 - 升级YT、ZT
 - 同步工程
+
+
+## week12
+Mon.(Monday) Tues.(Tuesday) Wed.(Wednesday) Thu.(Thursday) Fri.(Friday) Sat.(Saturday) Sun.(Sunday)
+
+### 2018-03-19 Mon.
+- 实现大工位方案
+
+
+### 2018-03-20 Tue.
+- 优化方案定义

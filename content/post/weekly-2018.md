@@ -488,3 +488,13 @@ Mon.(Monday) Tues.(Tuesday) Wed.(Wednesday) Thu.(Thursday) Fri.(Friday) Sat.(Sat
 
 ### 2018-03-20 Tue.
 - 优化方案定义
+- 短信获取问题定位，新方案分析验证
+
+### 2018-03-21 Wen.
+- 新方案实现部署
+- YT异常问题定位——未知
+- 修复多线程交互时执行顺序导致的问题
+
+
+
+

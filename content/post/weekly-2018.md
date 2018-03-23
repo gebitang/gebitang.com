@@ -495,6 +495,14 @@ Mon.(Monday) Tues.(Tuesday) Wed.(Wednesday) Thu.(Thursday) Fri.(Friday) Sat.(Sat
 - YT异常问题定位——未知
 - 修复多线程交互时执行顺序导致的问题
 
+### 2018-03-22 Thu.
+- bug修复：过滤无效任务
+- 定位：SharedPreferences无法共享数据问题
 
+### 2018-03-23 Fri.
+1. SharedPreferences问题
+
+- 发现问题：重复执行的上报出现重复ID
+- 升级阻挡问题：强调干预完成
 
 

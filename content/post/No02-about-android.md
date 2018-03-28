@@ -15,6 +15,48 @@ toc = true
 
 ## Android APK
 
+### 生成签名文件
+
+```
+# need java JDK environment
+# keytool --help
+# keytool -genkey -help
+ ~ keytool -genkey -alias gebitang.keystore -keyalg RSA -validity 20000 -keystore ./gebitang.keystore
+Enter keystore password:
+Re-enter new password:
+What is your first and last name?
+  [Unknown]:  JOECHINLEE
+What is the name of your organizational unit?
+  [Unknown]:  gebitang
+What is the name of your organization?
+  [Unknown]:  geb
+What is the name of your City or Locality?
+  [Unknown]:  Beijing
+What is the name of your State or Province?
+  [Unknown]:  Beijing
+What is the two-letter country code for this unit?
+  [Unknown]:  cn
+Is CN=JOECHINLEE, OU=gebitang, O=geb, L=Beijing, ST=Beijing, C=cn correct?
+  [no]:
+What is your first and last name?
+  [JOECHINLEE]:
+What is the name of your organizational unit?
+  [gebitang]:
+What is the name of your organization?
+  [geb]:
+What is the name of your City or Locality?
+  [Beijing]:
+What is the name of your State or Province?
+  [Beijing]:
+What is the two-letter country code for this unit?
+  [cn]:
+Is CN=JOECHINLEE, OU=gebitang, O=geb, L=Beijing, ST=Beijing, C=cn correct?
+  [no]:  yes
+
+Enter key password for <gebitang.keystore>
+  (RETURN if same as keystore password):
+```
+
 ### 签名、打包release版本
 
 [Android Studio的两种模式及签名配置](https://www.cnblogs.com/details-666/p/keystore.html)

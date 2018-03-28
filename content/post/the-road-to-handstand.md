@@ -892,6 +892,8 @@ Flag到期日，完成度50%。不再谈努力，只在意明确目标，最终�
 >> 仰卧起坐100个
 
 
+呼噜吵得只能半夜在床头听“电影”《新少林五组》了- -当然这只是今天早上没能起来锻炼的借口。
+
 ## VII. L- Hops
 {{< fluid_imgs
   "pure-u-1-1|https://www.fitnessmagazine.com/sites/fitnessmagazine.com/files/styles/slide/public/img_2576.jpg|L- Hops"

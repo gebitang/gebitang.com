@@ -535,4 +535,10 @@ Mon.(Monday) Tues.(Tuesday) Wed.(Wednesday) Thu.(Thursday) Fri.(Friday) Sat.(Sat
 - 排查心跳设备状态
 - 主动保活动作
 
+### 2018-03-29 Thu.
+
+- 升级问题定位
+- 查找问题: 安装UIA问题、任务下发问题
+- git lessons
+- 设备空闲问题
 

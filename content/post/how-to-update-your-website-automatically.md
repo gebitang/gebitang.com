@@ -319,6 +319,39 @@ To github.com:gebitang/geb.im.git
 ➜  geb.im git:(gh-pages)
 ```
 
+### 更新远程分支
+当gh-pages分支已经在远端存切与本地有关联时。
+
+- 删除远程分支
+- 重置本地的跟踪
+- 重新推送到远端
+
+```
+# 删除远端分支
+
+➜  geb.im git:(master) git push origin :gh-pages
+To github.com:gebitang/geb.im.git
+ - [deleted]         gh-pages
+
+# unset跟踪关系
+ geb.im git:(master) git checkout gh-pages
+Switched to branch 'gh-pages'
+Your branch is based on 'origin/gh-pages', but the upstream is gone.
+  (use "git branch --unset-upstream" to fixup)
+➜  geb.im git:(gh-pages) git branch --unset-upstream
+➜  geb.im git:(gh-pages) gi
+
+# 重新上传分支
+➜  geb.im git:(gh-pages) git push origin gh-pages
+Counting objects: 33, done.
+Writing objects: 100% (33/33), 14.36 KiB | 2.05 MiB/s, done.
+Total 33 (delta 0), reused 0 (delta 0)
+To github.com:gebitang/geb.im.git
+ * [new branch]      gh-pages -> gh-pages
+➜  geb.im git:(gh-pages)
+```
+
+
 ### 配置wercker
 - 使用github账户登录wercter站点: Login with github
 

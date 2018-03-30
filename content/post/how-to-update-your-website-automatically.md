@@ -428,12 +428,18 @@ f1g1ns1.dnspod.net.	64252	IN	A	182.140.167.166
 
 ### 为wercker配置token
 
-- 重置远程分支
+- [生成tokens](https://github.com/settings/tokens)
+为了在wercer.yaml文件中使用变量而不是直接暴露自己的token
+
+### 重置远程分支
 
 删除远程分支；`git push original :gh-pages`
 
 如果出错，先清理远程分支，再重新同步远程分支
 
+### 配置pipeline
+
+在对应的workflow tab页下配置需要的pipeline，然后编辑整个的workflow过程
 
 https://help.github.com/articles/setting-up-an-apex-domain/
 

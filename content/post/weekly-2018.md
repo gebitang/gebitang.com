@@ -542,3 +542,17 @@ Mon.(Monday) Tues.(Tuesday) Wed.(Wednesday) Thu.(Thursday) Fri.(Friday) Sat.(Sat
 - git lessons
 - 设备空闲问题
 
+### 2018-03-30 Fri.
+- 定位变量输入问题，解决更新
+- code review
+- ANR log收集
+
+Ready Player One，连看三场，重要看到一场好电影。 
+
+### 2018-03-31 Sat.
+- Android dev -- Sync function done.
+
+
+
+
+

@@ -553,6 +553,16 @@ Ready Player One，连看三场，重要看到一场好电影。
 - Android dev -- Sync function done.
 
 
+### 2018-04-01 Sun.
+- Big station demo
 
+## week14
+Mon.(Monday) Tues.(Tuesday) Wed.(Wednesday) Thu.(Thursday) Fri.(Friday) Sat.(Saturday) Sun.(Sunday)
+
+### 2018-04-02 Mon.
+- oauth认证未果
+
+### 2018-04-03 Thu.
+- xauth认证成功
 
 

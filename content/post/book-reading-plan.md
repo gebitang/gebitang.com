@@ -103,3 +103,15 @@ toc = true
 <a href="https://www.amazon.cn/dp/B01HERFL4G" target="_blank"><img src="https://images-cn.ssl-images-amazon.com/images/I/51THJ4cjD4L._SX384_BO1,204,203,200_.jpg"> </a>
 
 一本有关佛教的小书，但问题却与日常生活息息相关。
+
+### 04. 《皮囊》
+No more than skins
+
+前三篇看得禁不止流泪。后面的没有那么重的情感冲击了，但看得到更多同龄的境遇，困惑。哪些始终要面对的问题谁也没有答案，每个人只能自己面对自己的问题，做成自己的选择。
+
+Skin in the game。
+
+
+
+
+

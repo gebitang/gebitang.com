@@ -811,6 +811,15 @@ man command
 ``` 
 查看命令详情 
 
+### 端口占用
+利用netstat 或fuser 命令查找
+```
+netstat -ano |grep 9988
+# -k 参数可以kill相应的进程
+fuser 9988/tcp
+##java可利用ManagementFactory.getRuntimeMXBean().getName()获取进程
+```
+
 0x0. 启动terminal 快捷键  
 ```
 Ctrl+Alt+T

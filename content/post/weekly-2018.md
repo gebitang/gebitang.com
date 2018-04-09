@@ -565,4 +565,20 @@ Mon.(Monday) Tues.(Tuesday) Wed.(Wednesday) Thu.(Thursday) Fri.(Friday) Sat.(Sat
 ### 2018-04-03 Thu.
 - xauth认证成功
 
+### 2018-04-04 Wed.
+- 验证SMS service
 
+### Tomb-sweeping holiday
+
+### 2018-04-08 Sun.
+- 实现新版本接口实现
+- two advices：接口参数、实现效果
+
+
+## week15
+Mon.(Monday) Tues.(Tuesday) Wed.(Wednesday) Thu.(Thursday) Fri.(Friday) Sat.(Saturday) Sun.(Sunday)
+
+
+### 2018-04-09 Mon.
+- 端口占用问题处理
+- 方案选型

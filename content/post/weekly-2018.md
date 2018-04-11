@@ -581,4 +581,16 @@ Mon.(Monday) Tues.(Tuesday) Wed.(Wednesday) Thu.(Thursday) Fri.(Friday) Sat.(Sat
 
 ### 2018-04-09 Mon.
 - 端口占用问题处理
-- 方案选型
+- 新版本接口支持
+- 优化ddmlib截图不全导致的DPI判断问题
+
+### 2018-04-10 Tue.
+- zt客户端升级
+- 批量查看环境问题，修复
+- 结对走查ztios
+- x5debug问题定位
+- 更新yt-api
+
+### 2018-04-11 Wed.
+- 新增API
+- 升级zt

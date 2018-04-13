@@ -247,6 +247,27 @@ SELECT FROM_UNIXTIME(ii.match_time/1000), ii.* FROM `intervene_info` as ii
 	where ii.adapt_id in('xxx') and ii.tindex>0 and ii.swj_email='intervene.109@xxx.cn';
 ```
 
+### 修改表名、列名
+
+```
+--修改表名 
+alter table test rename test1; 
+
+--添加表列 
+alter table test add  column name varchar(10); 
+
+--删除表列 
+alter table test drop  column name; 
+
+--修改表列类型 
+alter table test modify address char(10) 
+--修改表列类型
+alter table test change address address char(40) 
+
+--修改表列名
+alter table test change  column address address1 varchar(30)
+```
+
 ## iTerm2 ssh登录后无法显示中文
 
 [Mac用iTerm2连接到Linux上,不能输入中文](https://blog.fazero.me/2015/09/04/Mac-iTerm2--chinese/)

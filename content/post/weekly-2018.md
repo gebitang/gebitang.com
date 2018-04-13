@@ -594,3 +594,15 @@ Mon.(Monday) Tues.(Tuesday) Wed.(Wednesday) Thu.(Thursday) Fri.(Friday) Sat.(Sat
 ### 2018-04-11 Wed.
 - 新增API
 - 升级zt
+
+### 2018-04-12 Thu.
+- 截图优化升级
+- 同步相似度逻辑
+- 接口问题修复：不执行无效任务
+- 验证：删除无效依赖
+- 新接口smsTask
+
+### 2018-04-13 Fri.
+- 完成新接口测试验证
+- 修复自定义接口bug
+- 任务设置逻辑更新：全局生效->当前任务生效

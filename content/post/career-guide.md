@@ -33,6 +33,8 @@ toc = true
 
 ## 80000小时如何对待这个问题？
 
+[8000 hours career guide](https://80000hours.org/career-guide/)
+
 
 ### First, what makes for a dream job?
 Research suggests focusing on six key factors:

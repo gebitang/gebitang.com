@@ -18,7 +18,7 @@ toc = true
 2. 使用Github pages部署网站
 3. 利用Wercker完成自动更新部署
 
-写完，commit到仓库，同步本地仓库到github即完成了网站的自动更新。
+写完，commit到仓库，同步本地仓库到github即完成了网站的自动更新。[Official Doc](https://gohugo.io/hosting-and-deployment/deployment-with-wercker/)
 
 最少必要知识：
 

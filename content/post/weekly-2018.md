@@ -621,3 +621,11 @@ Mon.(Monday) Tues.(Tuesday) Wed.(Wednesday) Thu.(Thursday) Fri.(Friday) Sat.(Sat
 提到了[80000小时网站](80000hours.org)在[Daily Playground](../daily-updates/#80000)和[Career Guide](../career-guide/)都有涉及。还是更喜欢Tim Urban的这篇:) [8000 hours career guide](https://80000hours.org/career-guide/)这一系列（8篇）当初也读了好几天？但现在已经全都忘记了- -||今天读的这篇不知一段时间之后还能记得多少。
 
 看起来，读过什么并不重要；“知道不是懂得；做到才是学到。”上面的文章都有很强的可操作性，但只是简单读过，然后自我感觉良好——也许未来未知的某一天被重新唤起，这算是唯一的价值？——并没有实践。这样吸收的效率就很低了。重要的道理没有几个，实践做到才是学到。
+
+### 2018-04-17 Tue.
+- 重定“预估时间”方案
+- 接口实现、验证、上线
+- 多种类型截图步骤执行支持
+
+### 2018-04-18 Wed.
+人脑多线程处理任务消耗巨大- -||

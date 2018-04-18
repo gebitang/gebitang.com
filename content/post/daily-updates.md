@@ -1079,9 +1079,13 @@ grep -rn "word to find" *
 # -R 查找当前目录的所有子目录， 深递归
 # -i 忽略大小写
 ```
-### 0xc. 显示n到m行的文件内容
+### 0xc. 显示n到m行的文件内容，或n到结尾的内容
 ```
 sed -n '100, 150p' path/to/filename
+
+sed '100,$!d' path/to/filename
+#或
+sed '100,$!p' path/to/filename
 ```
 ### 0xd. shell中调用另外一个shell脚本
 

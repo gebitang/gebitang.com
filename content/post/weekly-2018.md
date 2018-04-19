@@ -629,3 +629,8 @@ Mon.(Monday) Tues.(Tuesday) Wed.(Wednesday) Thu.(Thursday) Fri.(Friday) Sat.(Sat
 
 ### 2018-04-18 Wed.
 人脑多线程处理任务消耗巨大- -||
+
+### 2018-04-19 Thu.
+- new API for update file and other fields.
+
+基础不牢，写起来就比较费劲。

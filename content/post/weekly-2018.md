@@ -634,3 +634,7 @@ Mon.(Monday) Tues.(Tuesday) Wed.(Wednesday) Thu.(Thursday) Fri.(Friday) Sat.(Sat
 - new API for update file and other fields.
 
 基础不牢，写起来就比较费劲。
+
+### 2018-04-20 Fri.
+- 定位问题
+- 结合[blog](http://gityuan.com/)理解源码

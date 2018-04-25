@@ -638,3 +638,24 @@ Mon.(Monday) Tues.(Tuesday) Wed.(Wednesday) Thu.(Thursday) Fri.(Friday) Sat.(Sat
 ### 2018-04-20 Fri.
 - 定位问题
 - 结合[blog](http://gityuan.com/)理解源码
+
+
+## week17
+Mon.(Monday) Tues.(Tuesday) Wed.(Wednesday) Thu.(Thursday) Fri.(Friday) Sat.(Saturday) Sun.(Sunday)
+
+### 2018-04-23 Mon.
+- 合并工位部署、备份
+- 工作问题处理123
+- zt升级处理业务逻辑
+- runner执行问题定位
+
+不记录果然回顾的时候不太记得清楚了。
+
+### 2018-04-24 Tue.
+- 问题定位——排优先级，忽略
+- 机械手方案实现
+
+### 2018-04-25 Wen.
+- 机械手交互式调用
+- 新增api接口
+- 点亮+滑屏进行防锁屏

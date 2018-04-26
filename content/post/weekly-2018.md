@@ -659,3 +659,7 @@ Mon.(Monday) Tues.(Tuesday) Wed.(Wednesday) Thu.(Thursday) Fri.(Friday) Sat.(Sat
 - 机械手交互式调用
 - 新增api接口
 - 点亮+滑屏进行防锁屏
+
+### 2018-04-26 Thu.
+- 问题跟踪、定位、修复
+- check git log for detail

@@ -663,3 +663,22 @@ Mon.(Monday) Tues.(Tuesday) Wed.(Wednesday) Thu.(Thursday) Fri.(Friday) Sat.(Sat
 ### 2018-04-26 Thu.
 - 问题跟踪、定位、修复
 - check git log for detail
+
+### 2018-04-27 Fri.
+根据log信息分析还原测试场景，处理可能出现的异常。不要受限于现有的解决方式
+
+### 2018-04-28 Sat.
+- update ytzt system.
+
+分析定位问题。在特定场景下“升级出现问题，反复定位复现始终没有发现为什么”——大脑容易形成思维定式，一些事后看起来“明显”的问题在当下始终不明白为什么。“反斜杠转义”问题就是一例，假期完成回来一下就意识到问题的原因。
+
+### Happy Labor Day Holiday :)
+
+
+
+## week18
+Mon.(Monday) Tues.(Tuesday) Wed.(Wednesday) Thu.(Thursday) Fri.(Friday) Sat.(Saturday) Sun.(Sunday)
+
+### 2018-05-02 Wen.
+- 综合定位问题：执行log、设备log--> 启动优化
+

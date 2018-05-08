@@ -57,7 +57,8 @@ Enter key password for <gebitang.keystore>
   (RETURN if same as keystore password):
 ```
 
-### dumpsys & 
+### dumpsys command
+[dumpsys command](http://gityuan.com/2016/05/14/dumpsys-command/)
 ```
 # list?
 adb shell dumpsys -l

@@ -682,3 +682,21 @@ Mon.(Monday) Tues.(Tuesday) Wed.(Wednesday) Thu.(Thursday) Fri.(Friday) Sat.(Sat
 ### 2018-05-02 Wen.
 - 综合定位问题：执行log、设备log--> 启动优化
 
+### 2018-05-03 Thu.
+- android 系统
+
+### 2018-05-04 Fri.
+- SharedPreferences
+
+
+## week19
+Mon.(Monday) Tues.(Tuesday) Wed.(Wednesday) Thu.(Thursday) Fri.(Friday) Sat.(Saturday) Sun.(Sunday)
+
+### 2018-05-07 Mon.
+- ETF, eat that frog
+- 方案核心功能demo完成
+
+### 2018-05-08 Tue.
+- 方案讨论完善
+- 确定实现步骤
+- 升级ytzt

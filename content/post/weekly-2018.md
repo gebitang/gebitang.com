@@ -700,3 +700,10 @@ Mon.(Monday) Tues.(Tuesday) Wed.(Wednesday) Thu.(Thursday) Fri.(Friday) Sat.(Sat
 - 方案讨论完善
 - 确定实现步骤
 - 升级ytzt
+
+### 2018-05-09 Wen.
+- 定位、处理升级问题——幽灵任务导致的文件剧增
+- plus设计、实施
+
+### 2018-05-10 Thu.
+- plus方案原型完成

@@ -15,6 +15,9 @@ toc = true
 
 ## Android APK
 
+### 点击icon到启动应用
+[详解安卓从图表icon点击到APP启动界面加载流程](https://blog.csdn.net/qq_25047355/article/details/55260980)
+
 ### 生成签名文件
 
 ```

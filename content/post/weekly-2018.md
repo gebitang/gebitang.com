@@ -707,3 +707,14 @@ Mon.(Monday) Tues.(Tuesday) Wed.(Wednesday) Thu.(Thursday) Fri.(Friday) Sat.(Sat
 
 ### 2018-05-10 Thu.
 - plus方案原型完成
+
+### 2018-05-11 Fri.
+- 机械手功能实现
+- 上传下载原型
+
+## week20
+Mon.(Monday) Tues.(Tuesday) Wed.(Wednesday) Thu.(Thursday) Fri.(Friday) Sat.(Saturday) Sun.(Sunday)
+
+### 2018-05-14 Mon.
+- 定位两个诡异的现象：push失效问题+线程卡死
+- new feature for plus

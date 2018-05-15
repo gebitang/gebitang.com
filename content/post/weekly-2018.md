@@ -718,3 +718,12 @@ Mon.(Monday) Tues.(Tuesday) Wed.(Wednesday) Thu.(Thursday) Fri.(Friday) Sat.(Sat
 ### 2018-05-14 Mon.
 - 定位两个诡异的现象：push失效问题+线程卡死
 - new feature for plus
+
+### 2018-05-15 Tue.
+1. 验证空指针问题 done
+2. 幽灵任务监控 done
+3. plus变量使用验证
+
+- 验证空指针问题 done
+- 幽灵任务监控 done
+- plus变量使用验证：必须为全局变量(有些有用，有些备用)?局部变量依然可以使用 done

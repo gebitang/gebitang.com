@@ -369,13 +369,14 @@ To github.com:gebitang/geb.im.git
 
 - 可以在Step Repository中搜索`hugo build`
 
+[hugo-build](https://app.wercker.com/steps/arjen/hugo-build)，升级到最新版本为0.40.3，测试可用。~~0.17的旧版本不可用~~
 
 ```
 box: wercker/default
 build:
   steps:
     - arjen/hugo-build:
-        version: "0.17"
+        version: "0.40.3"
         theme: purehugo
 ```
 

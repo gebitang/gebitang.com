@@ -727,3 +727,7 @@ Mon.(Monday) Tues.(Tuesday) Wed.(Wednesday) Thu.(Thursday) Fri.(Friday) Sat.(Sat
 - 验证空指针问题 done
 - 幽灵任务监控 done
 - plus变量使用验证：必须为全局变量(有些有用，有些备用)?局部变量依然可以使用 done
+
+### 2018-05-16 Wed.
+
+- 二期完成。人人为我，我为人人。

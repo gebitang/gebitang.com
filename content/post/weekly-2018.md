@@ -731,3 +731,6 @@ Mon.(Monday) Tues.(Tuesday) Wed.(Wednesday) Thu.(Thursday) Fri.(Friday) Sat.(Sat
 ### 2018-05-16 Wed.
 
 - 二期完成。人人为我，我为人人。
+
+### 2018-05-17 Thu
+- support specific configuration.

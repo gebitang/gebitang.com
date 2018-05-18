@@ -576,6 +576,16 @@ Another app is currently holding the yum lock; waiting for it to exit...
 ### 安装ubuntu
 [下载镜像](http://old-releases.ubuntu.com/releases/)，使用[**Rufus**](https://rufus.akeo.ie/)，[创建启动盘](https://tutorials.ubuntu.com/tutorial/tutorial-create-a-usb-stick-on-windows)。
 
+### vmware player安装vmware tools
+提示“正在进行简易安装时，无法手动启动 vmware tools 安装”。
+
+解决：
+
+1. 在虚拟机配置中，将CD/DVD中的镜像移除，修改为“使用物理设备”。 然后重新选择安装vmware tools工具。——会将此工具自动挂载到CD中。
+2. 进入此目录，将对应的gz包复制到本地工作目录，解压后执行`./vmware-install.pl`根据提示处理即可
+
+
+
 ### Linux下adb不能识别Android设备
 
 

@@ -1181,6 +1181,43 @@ ns4.qq.com.		106736	IN	A	184.105.206.124
 ns4.qq.com.		106736	IN	A	203.205.144.156
 ```
 
+### 统计当前文件夹下文件的个数
+
+```
+#1、 统计当前文件夹下文件的个数
+ls -l |grep "^-"|wc -l
+
+#2、 统计当前文件夹下目录的个数
+ls -l |grep "^d"|wc -l
+
+#3、统计当前文件夹下文件的个数，包括子文件夹里的 
+ls -lR|grep "^-"|wc -l
+
+#4、统计文件夹下目录的个数，包括子文件夹里的
+ls -lR|grep "^d"|wc -l
+```
+
+### Argument list too long， use xargs or exec
+传递给ls, rm等命令的参数过长。
+```
+#递归查找所有pdf文件并删除
+find . -name "*.pdf" -print0 | xargs -0 rm
+
+# xargs 命令是给其他命令传递参数的一个过滤器，-i会将xargs的内容赋值给{}。
+find . -name "*.jpeg" | xargs -i rm {}
+
+# 非递归，指定查找深度
+find . -maxdepth 1 -name "*.jpeg" -print0 | xargs -0 rm
+
+## 问题：要拷贝test文件夹下以jpg结尾的文件到train目录。
+#命令1为：
+find test/ -name "*.jpg" | xargs -i cp {} train
+
+#命令2为：
+find test/ -name "*.jpg" -exec cp {} train \;
+
+```
+
 
 ## Git命令使用
 可配合GUI工具和命令行工具参考。

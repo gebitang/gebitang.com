@@ -20,6 +20,18 @@ toc = true
 
 <!--more-->
 
+## brew 安装应用的地址
+
+```
+# brew install hugo
+# https://discourse.gohugo.io/t/hugo-homebrew-update-for-osx/82
+brew update
+brew install hugo
+
+# 安装的路径：/usr/local/Cellar/hugo/
+
+```
+
 ## curl命令调用post方法
 
 ```

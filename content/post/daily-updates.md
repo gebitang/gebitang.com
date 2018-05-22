@@ -20,7 +20,8 @@ toc = true
 
 <!--more-->
 
-## brew 安装应用的地址
+## Mac 相关
+### brew 安装应用的地址
 
 ```
 # brew install hugo
@@ -31,6 +32,14 @@ brew install hugo
 # 安装的路径：/usr/local/Cellar/hugo/
 
 ```
+
+### 强制退出程序
+
+使用快捷键：Command+Option+Esc 打开强制退出程序窗口，然后选中你需要退出的程序，再点右下方的“强制退出”即可。
+
+### 解压jar文件 jar xf xxx.jar
+
+将把xxx.jar解压到当前目录下，可使用 man jar进行查看参数。
 
 ## curl命令调用post方法
 
@@ -846,6 +855,287 @@ PING bjmobliis.cn (45.124.113.90) 56(84) bytes of data.
 
 ```
 
+
+### SSH Server安装
+1. 先创建一个root账号，命令：
+sudo passwd root
+输入新密码 xxxxx
+
+2. 安装ssh server. 如果是刚安装好系统，第一步是先更新一下源。
+sudo apt-get update
+更新完了后，安装ssh server 
+
+
+3. 检查ssh server配置，允许root用户登录：
+
+```
+sudo gedit /etc/ssh/sshd_config
+找到PermitRootLogin = without-password改成PermitRootLogin yes 最后执行一下
+```
+
+```
+# 测试可用
+sudo apt-get install ssh
+
+#或
+sudo apt-get install openssh-server --fix-missing
+```
+
+启动 sudo service ssh start
+
+### 安装oracel jdk 8
+```
+sudo add-apt-repository ppa:webupd8team/java
+sudo apt-get update
+sudo apt-get install oracle-java8-installer
+```
+
+```
+test@test:~$ sudo add-apt-repository ppa:webupd8team/java
+[sudo] testin 的密码：
+ Oracle Java (JDK) Installer (automatically downloads and installs Oracle JDK8). There are no actual Java files in this PPA.
+
+Important -> Why Oracle Java 7 And 6 Installers No Longer Work: http://www.webupd8.org/2017/06/why-oracle-java-7-and-6-installers-no.html
+
+Update: Oracle Java 9 has reached end of life: http://www.oracle.com/technetwork/java/javase/downloads/jdk9-downloads-3848520.html
+
+The PPA supports Ubuntu 18.04, 17.10, 16.04, 14.04 and 12.04.
+
+More info (and Ubuntu installation instructions):
+- for Oracle Java 8: http://www.webupd8.org/2012/09/install-oracle-java-8-in-ubuntu-via-ppa.html
+
+Debian installation instructions:
+- Oracle Java 8: http://www.webupd8.org/2014/03/how-to-install-oracle-java-8-in-debian.html
+
+For Oracle Java 10, see a different PPA: https://www.linuxuprising.com/2018/04/install-oracle-java-10-in-ubuntu-or.html
+ 更多信息： https://launchpad.net/~webupd8team/+archive/ubuntu/java
+按 [ENTER] 继续或 Ctrl-c 取消安装。
+
+命中:1 http://cn.archive.ubuntu.com/ubuntu bionic InRelease
+获取:2 http://ppa.launchpad.net/webupd8team/java/ubuntu bionic InRelease [15.4 kB]
+获取:3 http://security.ubuntu.com/ubuntu bionic-security InRelease [83.2 kB]
+获取:4 http://cn.archive.ubuntu.com/ubuntu bionic-updates InRelease [83.2 kB]
+获取:5 http://ppa.launchpad.net/webupd8team/java/ubuntu bionic/main amd64 Packages [1,556 B]
+命中:6 http://cn.archive.ubuntu.com/ubuntu bionic-backports InRelease
+获取:7 http://cn.archive.ubuntu.com/ubuntu bionic/main Translation-zh_CN [67.7 kB]
+获取:8 http://cn.archive.ubuntu.com/ubuntu bionic/restricted Translation-zh_CN [1,188 B]
+获取:9 http://cn.archive.ubuntu.com/ubuntu bionic/universe Translation-zh_CN [174 kB]
+获取:10 http://security.ubuntu.com/ubuntu bionic-security/main amd64 DEP-11 Metadata [204 B]
+获取:11 http://ppa.launchpad.net/webupd8team/java/ubuntu bionic/main i386 Packages [1,556 B]
+获取:12 http://cn.archive.ubuntu.com/ubuntu bionic/multiverse Translation-zh_CN [4,768 B]
+获取:13 http://cn.archive.ubuntu.com/ubuntu bionic-updates/main amd64 DEP-11 Metadata [12.1 kB]
+获取:14 http://cn.archive.ubuntu.com/ubuntu bionic-updates/main DEP-11 48x48 Icons [8,503 B]
+获取:15 http://cn.archive.ubuntu.com/ubuntu bionic-updates/main DEP-11 64x64 Icons [13.1 kB]
+获取:16 http://cn.archive.ubuntu.com/ubuntu bionic-updates/universe amd64 DEP-11 Metadata [5,716 B]
+获取:17 http://cn.archive.ubuntu.com/ubuntu bionic-updates/universe DEP-11 64x64 Icons [14.8 kB]
+获取:18 http://security.ubuntu.com/ubuntu bionic-security/universe amd64 DEP-11 Metadata [2,456 B]
+获取:19 http://ppa.launchpad.net/webupd8team/java/ubuntu bionic/main Translation-en [928 B]
+已下载 491 kB，耗时 3秒 (164 kB/s)
+正在读取软件包列表... 完成
+testin@testin-T-001:~$ sudo apt-get update
+命中:1 http://security.ubuntu.com/ubuntu bionic-security InRelease
+命中:2 http://cn.archive.ubuntu.com/ubuntu bionic InRelease
+命中:3 http://ppa.launchpad.net/webupd8team/java/ubuntu bionic InRelease
+命中:4 http://cn.archive.ubuntu.com/ubuntu bionic-updates InRelease
+命中:5 http://cn.archive.ubuntu.com/ubuntu bionic-backports InRelease
+正在读取软件包列表... 完成
+testin@testin-T-001:~$ sudo apt-get install oracle-java8-
+oracle-java8-installer             oracle-java8-set-default           oracle-java8-unlimited-jce-policy
+testin@testin-T-001:~$ sudo apt-get install oracle-java8-installer
+正在读取软件包列表... 完成
+正在分析软件包的依赖关系树
+正在读取状态信息... 完成
+将会同时安装下列软件：
+  gsfonts-x11 java-common oracle-java8-set-default
+建议安装：
+  binfmt-support visualvm ttf-baekmuk | ttf-unfonts | ttf-unfonts-core ttf-kochi-gothic | ttf-sazanami-gothic
+  ttf-kochi-mincho | ttf-sazanami-mincho ttf-arphic-uming
+下列【新】软件包将被安装：
+  gsfonts-x11 java-common oracle-java8-installer oracle-java8-set-default
+升级了 0 个软件包，新安装了 4 个软件包，要卸载 0 个软件包，有 33 个软件包未被升级。
+需要下载 54.4 kB 的归档。
+解压缩后会消耗 274 kB 的额外空间。
+您希望继续执行吗？ [Y/n] Y
+获取:1 http://cn.archive.ubuntu.com/ubuntu bionic/main amd64 java-common all 0.63ubuntu1~02 [7,032 B]
+获取:2 http://ppa.launchpad.net/webupd8team/java/ubuntu bionic/main amd64 oracle-java8-installer all 8u171-1~webupd8~0 [33.3 kB]
+获取:3 http://cn.archive.ubuntu.com/ubuntu bionic/universe amd64 gsfonts-x11 all 0.25 [7,264 B]
+获取:4 http://ppa.launchpad.net/webupd8team/java/ubuntu bionic/main amd64 oracle-java8-set-default all 8u171-1~webupd8~0 [6,846 B]
+已下载 54.4 kB，耗时 2秒 (23.8 kB/s)
+正在预设定软件包 ...
+正在选中未选择的软件包 java-common。
+(正在读取数据库 ... 系统当前共安装有 130445 个文件和目录。)
+正准备解包 .../java-common_0.63ubuntu1~02_all.deb  ...
+正在解包 java-common (0.63ubuntu1~02) ...
+正在选中未选择的软件包 oracle-java8-installer。
+正准备解包 .../oracle-java8-installer_8u171-1~webupd8~0_all.deb  ...
+正在解包 oracle-java8-installer (8u171-1~webupd8~0) ...
+正在设置 java-common (0.63ubuntu1~02) ...
+正在设置 oracle-java8-installer (8u171-1~webupd8~0) ...
+No /var/cache/oracle-jdk8-installer/wgetrc file found.
+Creating /var/cache/oracle-jdk8-installer/wgetrc and
+using default oracle-java8-installer wgetrc settings for it.
+Downloading Oracle Java 8...
+--2018-05-21 14:57:49--  http://download.oracle.com/otn-pub/java/jdk/8u171-b11/512cd62ec5174c3487ac17c61aaa89e8/jdk-8u171-linux-x64.tar.gz
+正在解析主机 download.oracle.com (download.oracle.com)... 104.119.255.30
+正在连接 download.oracle.com (download.oracle.com)|104.119.255.30|:80... 已连接。
+已发出 HTTP 请求，正在等待回应... 302 Moved Temporarily
+位置：https://edelivery.oracle.com/otn-pub/java/jdk/8u171-b11/512cd62ec5174c3487ac17c61aaa89e8/jdk-8u171-linux-x64.tar.gz [跟随至新的 URL]
+--2018-05-21 14:57:49--  https://edelivery.oracle.com/otn-pub/java/jdk/8u171-b11/512cd62ec5174c3487ac17c61aaa89e8/jdk-8u171-linux-x64.tar.gz
+正在解析主机 edelivery.oracle.com (edelivery.oracle.com)... 184.50.91.58, 2600:1417:76:19a::2d3e, 2600:1417:76:181::2d3e
+正在连接 edelivery.oracle.com (edelivery.oracle.com)|184.50.91.58|:443... 已连接。
+已发出 HTTP 请求，正在等待回应... 302 Moved Temporarily
+位置：http://download.oracle.com/otn-pub/java/jdk/8u171-b11/512cd62ec5174c3487ac17c61aaa89e8/jdk-8u171-linux-x64.tar.gz?AuthParam=1526885989_493b38bfe4ffc433156ef17f0d5e2d7e [跟随至新的 URL]
+--2018-05-21 14:57:49--  http://download.oracle.com/otn-pub/java/jdk/8u171-b11/512cd62ec5174c3487ac17c61aaa89e8/jdk-8u171-linux-x64.tar.gz?AuthParam=1526885989_493b38bfe4ffc433156ef17f0d5e2d7e
+正在连接 download.oracle.com (download.oracle.com)|104.119.255.30|:80... 已连接。
+已发出 HTTP 请求，正在等待回应... 200 OK
+长度： 190890122 (182M) [application/x-gzip]
+正在保存至: “jdk-8u171-linux-x64.tar.gz”
+
+     0K ........ ........ ........ ........ ........ ........  1% 4.19M 43s
+  3072K ........ ........ ........ ........ ........ ........  3% 9.83M 30s
+  6144K ........ ........ ........ ........ ........ ........  4% 8.88M 26s
+  9216K ........ ........ ........ ........ ........ ........  6% 8.76M 24s
+ 12288K ........ ........ ........ ........ ........ ........  8% 8.86M 23s
+ 15360K ........ ........ ........ ........ ........ ........  9% 9.32M 22s
+ 18432K ........ ........ ........ ........ ........ ........ 11% 9.95M 20s
+ 21504K ........ ........ ........ ........ ........ ........ 13% 9.24M 20s
+ 24576K ........ ........ ........ ........ ........ ........ 14% 8.24M 19s
+ 27648K ........ ........ ........ ........ ........ ........ 16% 7.98M 19s
+ 30720K ........ ........ ........ ........ ........ ........ 18% 8.70M 18s
+ 33792K ........ ........ ........ ........ ........ ........ 19% 9.55M 18s
+ 36864K ........ ........ ........ ........ ........ ........ 21% 9.38M 17s
+ 39936K ........ ........ ........ ........ ........ ........ 23% 6.52M 17s
+ 43008K ........ ........ ........ ........ ........ ........ 24% 7.57M 17s
+ 46080K ........ ........ ........ ........ ........ ........ 26% 7.98M 17s
+ 49152K ........ ........ ........ ........ ........ ........ 28% 8.83M 16s
+ 52224K ........ ........ ........ ........ ........ ........ 29% 9.33M 16s
+ 55296K ........ ........ ........ ........ ........ ........ 31% 9.03M 15s
+ 58368K ........ ........ ........ ........ ........ ........ 32% 8.49M 15s
+ 61440K ........ ........ ........ ........ ........ ........ 34% 8.85M 14s
+ 64512K ........ ........ ........ ........ ........ ........ 36% 7.66M 14s
+ 67584K ........ ........ ........ ........ ........ ........ 37% 8.06M 14s
+ 70656K ........ ........ ........ ........ ........ ........ 39% 8.51M 13s
+ 73728K ........ ........ ........ ........ ........ ........ 41% 8.48M 13s
+ 76800K ........ ........ ........ ........ ........ ........ 42% 8.69M 13s
+ 79872K ........ ........ ........ ........ ........ ........ 44% 7.73M 12s
+ 82944K ........ ........ ........ ........ ........ ........ 46% 8.65M 12s
+ 86016K ........ ........ ........ ........ ........ ........ 47% 9.35M 11s
+ 89088K ........ ........ ........ ........ ........ ........ 49% 9.55M 11s
+ 92160K ........ ........ ........ ........ ........ ........ 51% 8.85M 11s
+ 95232K ........ ........ ........ ........ ........ ........ 52% 7.21M 10s
+ 98304K ........ ........ ........ ........ ........ ........ 54% 7.69M 10s
+101376K ........ ........ ........ ........ ........ ........ 56% 7.50M 10s
+104448K ........ ........ ........ ........ ........ ........ 57% 8.09M 9s
+107520K ........ ........ ........ ........ ........ ........ 59% 7.24M 9s
+110592K ........ ........ ........ ........ ........ ........ 60% 7.33M 9s
+113664K ........ ........ ........ ........ ........ ........ 62% 6.81M 8s
+116736K ........ ........ ........ ........ ........ ........ 64% 6.65M 8s
+119808K ........ ........ ........ ........ ........ ........ 65% 5.40M 8s
+122880K ........ ........ ........ ........ ........ ........ 67% 6.92M 7s
+125952K ........ ........ ........ ........ ........ ........ 69% 7.58M 7s
+129024K ........ ........ ........ ........ ........ ........ 70% 7.91M 7s
+132096K ........ ........ ........ ........ ........ ........ 72% 7.46M 6s
+135168K ........ ........ ........ ........ ........ ........ 74% 8.61M 6s
+138240K ........ ........ ........ ........ ........ ........ 75% 7.38M 6s
+141312K ........ ........ ........ ........ ........ ........ 77% 6.23M 5s
+144384K ........ ........ ........ ........ ........ ........ 79% 6.80M 5s
+147456K ........ ........ ........ ........ ........ ........ 80% 7.13M 4s
+150528K ........ ........ ........ ........ ........ ........ 82% 7.23M 4s
+153600K ........ ........ ........ ........ ........ ........ 84% 7.10M 4s
+156672K ........ ........ ........ ........ ........ ........ 85% 7.39M 3s
+159744K ........ ........ ........ ........ ........ ........ 87% 6.93M 3s
+162816K ........ ........ ........ ........ ........ ........ 88% 7.48M 3s
+165888K ........ ........ ........ ........ ........ ........ 90% 7.64M 2s
+168960K ........ ........ ........ ........ ........ ........ 92% 8.30M 2s
+172032K ........ ........ ........ ........ ........ ........ 93% 8.98M 1s
+175104K ........ ........ ........ ........ ........ ........ 95% 9.00M 1s
+178176K ........ ........ ........ ........ ........ ........ 97% 9.14M 1s
+181248K ........ ........ ........ ........ ........ ........ 98% 9.89M 0s
+184320K ........ ........ ........ ........                  100% 10.2M=23s
+
+2018-05-21 14:58:13 (7.90 MB/s) - 已保存 “jdk-8u171-linux-x64.tar.gz” [190890122/190890122])
+
+Download done.
+Removing outdated cached downloads...
+update-alternatives: 错误: 无 java 的候选项
+update-alternatives: 使用 /usr/lib/jvm/java-8-oracle/jre/bin/ControlPanel 来在自动模式中提供 /usr/bin/ControlPanel (ControlPanel)
+update-alternatives: 使用 /usr/lib/jvm/java-8-oracle/jre/bin/java 来在自动模式中提供 /usr/bin/java (java)
+update-alternatives: 使用 /usr/lib/jvm/java-8-oracle/jre/bin/javaws 来在自动模式中提供 /usr/bin/javaws (javaws)
+update-alternatives: 使用 /usr/lib/jvm/java-8-oracle/jre/bin/jcontrol 来在自动模式中提供 /usr/bin/jcontrol (jcontrol)
+update-alternatives: 使用 /usr/lib/jvm/java-8-oracle/jre/bin/jjs 来在自动模式中提供 /usr/bin/jjs (jjs)
+update-alternatives: 使用 /usr/lib/jvm/java-8-oracle/jre/bin/keytool 来在自动模式中提供 /usr/bin/keytool (keytool)
+update-alternatives: 使用 /usr/lib/jvm/java-8-oracle/jre/bin/orbd 来在自动模式中提供 /usr/bin/orbd (orbd)
+update-alternatives: 使用 /usr/lib/jvm/java-8-oracle/jre/bin/pack200 来在自动模式中提供 /usr/bin/pack200 (pack200)
+update-alternatives: 使用 /usr/lib/jvm/java-8-oracle/jre/bin/policytool 来在自动模式中提供 /usr/bin/policytool (policytool)
+update-alternatives: 使用 /usr/lib/jvm/java-8-oracle/jre/bin/rmid 来在自动模式中提供 /usr/bin/rmid (rmid)
+update-alternatives: 使用 /usr/lib/jvm/java-8-oracle/jre/bin/rmiregistry 来在自动模式中提供 /usr/bin/rmiregistry (rmiregistry)
+update-alternatives: 使用 /usr/lib/jvm/java-8-oracle/jre/bin/servertool 来在自动模式中提供 /usr/bin/servertool (servertool)
+update-alternatives: 使用 /usr/lib/jvm/java-8-oracle/jre/bin/tnameserv 来在自动模式中提供 /usr/bin/tnameserv (tnameserv)
+update-alternatives: 使用 /usr/lib/jvm/java-8-oracle/jre/bin/unpack200 来在自动模式中提供 /usr/bin/unpack200 (unpack200)
+update-alternatives: 使用 /usr/lib/jvm/java-8-oracle/jre/lib/jexec 来在自动模式中提供 /usr/bin/jexec (jexec)
+update-alternatives: 使用 /usr/lib/jvm/java-8-oracle/bin/appletviewer 来在自动模式中提供 /usr/bin/appletviewer (appletviewer)
+update-alternatives: 使用 /usr/lib/jvm/java-8-oracle/bin/extcheck 来在自动模式中提供 /usr/bin/extcheck (extcheck)
+update-alternatives: 使用 /usr/lib/jvm/java-8-oracle/bin/idlj 来在自动模式中提供 /usr/bin/idlj (idlj)
+update-alternatives: 使用 /usr/lib/jvm/java-8-oracle/bin/jar 来在自动模式中提供 /usr/bin/jar (jar)
+update-alternatives: 使用 /usr/lib/jvm/java-8-oracle/bin/jarsigner 来在自动模式中提供 /usr/bin/jarsigner (jarsigner)
+update-alternatives: 使用 /usr/lib/jvm/java-8-oracle/bin/javac 来在自动模式中提供 /usr/bin/javac (javac)
+update-alternatives: 使用 /usr/lib/jvm/java-8-oracle/bin/javadoc 来在自动模式中提供 /usr/bin/javadoc (javadoc)
+update-alternatives: 使用 /usr/lib/jvm/java-8-oracle/bin/javafxpackager 来在自动模式中提供 /usr/bin/javafxpackager (javafxpackager)
+update-alternatives: 使用 /usr/lib/jvm/java-8-oracle/bin/javah 来在自动模式中提供 /usr/bin/javah (javah)
+update-alternatives: 使用 /usr/lib/jvm/java-8-oracle/bin/javap 来在自动模式中提供 /usr/bin/javap (javap)
+update-alternatives: 使用 /usr/lib/jvm/java-8-oracle/bin/javapackager 来在自动模式中提供 /usr/bin/javapackager (javapackager)
+update-alternatives: 使用 /usr/lib/jvm/java-8-oracle/bin/jcmd 来在自动模式中提供 /usr/bin/jcmd (jcmd)
+update-alternatives: 使用 /usr/lib/jvm/java-8-oracle/bin/jconsole 来在自动模式中提供 /usr/bin/jconsole (jconsole)
+update-alternatives: 使用 /usr/lib/jvm/java-8-oracle/bin/jdb 来在自动模式中提供 /usr/bin/jdb (jdb)
+update-alternatives: 使用 /usr/lib/jvm/java-8-oracle/bin/jdeps 来在自动模式中提供 /usr/bin/jdeps (jdeps)
+update-alternatives: 使用 /usr/lib/jvm/java-8-oracle/bin/jhat 来在自动模式中提供 /usr/bin/jhat (jhat)
+update-alternatives: 使用 /usr/lib/jvm/java-8-oracle/bin/jinfo 来在自动模式中提供 /usr/bin/jinfo (jinfo)
+update-alternatives: 使用 /usr/lib/jvm/java-8-oracle/bin/jmap 来在自动模式中提供 /usr/bin/jmap (jmap)
+update-alternatives: 使用 /usr/lib/jvm/java-8-oracle/bin/jmc 来在自动模式中提供 /usr/bin/jmc (jmc)
+update-alternatives: 使用 /usr/lib/jvm/java-8-oracle/bin/jps 来在自动模式中提供 /usr/bin/jps (jps)
+update-alternatives: 使用 /usr/lib/jvm/java-8-oracle/bin/jrunscript 来在自动模式中提供 /usr/bin/jrunscript (jrunscript)
+update-alternatives: 使用 /usr/lib/jvm/java-8-oracle/bin/jsadebugd 来在自动模式中提供 /usr/bin/jsadebugd (jsadebugd)
+update-alternatives: 使用 /usr/lib/jvm/java-8-oracle/bin/jstack 来在自动模式中提供 /usr/bin/jstack (jstack)
+update-alternatives: 使用 /usr/lib/jvm/java-8-oracle/bin/jstat 来在自动模式中提供 /usr/bin/jstat (jstat)
+update-alternatives: 使用 /usr/lib/jvm/java-8-oracle/bin/jstatd 来在自动模式中提供 /usr/bin/jstatd (jstatd)
+update-alternatives: 使用 /usr/lib/jvm/java-8-oracle/bin/jvisualvm 来在自动模式中提供 /usr/bin/jvisualvm (jvisualvm)
+update-alternatives: 使用 /usr/lib/jvm/java-8-oracle/bin/native2ascii 来在自动模式中提供 /usr/bin/native2ascii (native2ascii)
+update-alternatives: 使用 /usr/lib/jvm/java-8-oracle/bin/rmic 来在自动模式中提供 /usr/bin/rmic (rmic)
+update-alternatives: 使用 /usr/lib/jvm/java-8-oracle/bin/schemagen 来在自动模式中提供 /usr/bin/schemagen (schemagen)
+update-alternatives: 使用 /usr/lib/jvm/java-8-oracle/bin/serialver 来在自动模式中提供 /usr/bin/serialver (serialver)
+update-alternatives: 使用 /usr/lib/jvm/java-8-oracle/bin/wsgen 来在自动模式中提供 /usr/bin/wsgen (wsgen)
+update-alternatives: 使用 /usr/lib/jvm/java-8-oracle/bin/wsimport 来在自动模式中提供 /usr/bin/wsimport (wsimport)
+update-alternatives: 使用 /usr/lib/jvm/java-8-oracle/bin/xjc 来在自动模式中提供 /usr/bin/xjc (xjc)
+update-alternatives: 使用 /usr/lib/jvm/java-8-oracle/jre/lib/amd64/libnpjp2.so 来在自动模式中提供 /usr/lib/mozilla/plugins/libjavaplugin.so (mozilla-javaplugin.so)
+Oracle JDK 8 installed
+
+#####Important########
+To set Oracle JDK8 as default, install the "oracle-java8-set-default" package.
+E.g.: sudo apt install oracle-java8-set-default
+On Ubuntu systems, oracle-java8-set-default is most probably installed
+automatically with this package.
+######################
+
+正在选中未选择的软件包 oracle-java8-set-default。
+正在处理用于 desktop-file-utils (0.23-1ubuntu3) 的触发器 ...
+(正在读取数据库 ... 系统当前共安装有 130481 个文件和目录。)
+正准备解包 .../oracle-java8-set-default_8u171-1~webupd8~0_all.deb  ...
+正在解包 oracle-java8-set-default (8u171-1~webupd8~0) ...
+正在选中未选择的软件包 gsfonts-x11。
+正准备解包 .../gsfonts-x11_0.25_all.deb  ...
+正在解包 gsfonts-x11 (0.25) ...
+正在设置 gsfonts-x11 (0.25) ...
+正在处理用于 mime-support (3.60ubuntu1) 的触发器 ...
+正在设置 oracle-java8-set-default (8u171-1~webupd8~0) ...
+正在处理用于 man-db (2.8.3-2) 的触发器 ...
+正在处理用于 shared-mime-info (1.9-2) 的触发器 ...
+正在处理用于 gnome-menus (3.13.3-11ubuntu1) 的触发器 ...
+正在处理用于 hicolor-icon-theme (0.17-2) 的触发器 ...
+正在处理用于 fontconfig (2.12.6-0ubuntu2) 的触发器 ...
+```
+
+
+
 ## Shell commands
 
 任何场景下，使用
@@ -1230,6 +1520,23 @@ find test/ -name "*.jpg" -exec cp {} train \;
 
 ```
 
+### linux修改文件所有者和文件所在组
+ 
+```
+# change group
+chgrp -R  用户名    文件名 
+# need to run with root 
+chown -R 用户名   文件名  -R
+
+#     r： 4（读权限）
+#     w： 2（写权限）
+#     x： 1（执行权限）
+# 将这些数字相加，就得到每一组的权限值，例如
+-rw-r--r--  1 myy groupa 0 Sep 26 06:07 filed
+第一组（user）：rw- = 4+2+0 = 6
+第二组（group）：r-- = 4+0+0 = 4
+第三组（others）：r-- = 4+0+0 = 4
+```
 
 ## Git命令使用
 可配合GUI工具和命令行工具参考。
@@ -1268,6 +1575,16 @@ $ git merge upstream/master
 
 ### 指定branch clone
 ` git clone -b dawn-2.x git@github.com:EOSIO/eos.git`
+
+### git checkout 
+
+```
+test@test~$git checkout -b upcoming origin/upcoming
+正在检出文件: 100% (1718/1718), 完成.
+分支 'upcoming' 设置为跟踪来自 'origin' 的远程分支 'upcoming'。
+切换到一个新分支 'upcoming'
+test@test~$
+```
 
 ### 0x0. 命令行单独对不同的文件进行commit操作
 ```

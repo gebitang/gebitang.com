@@ -1538,6 +1538,29 @@ chown -R 用户名   文件名  -R
 第三组（others）：r-- = 4+0+0 = 4
 ```
 
+###zsh 安装使用
+
+[zsh安装使用](https://blog.csdn.net/gatieme/article/details/52741221)
+```
+sudo apt-get install zsh
+#进入zsh
+zsh
+
+#安装oh-my-zsh
+sh -c "$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"1
+
+```
+
+###命令行直接打开指定文件目录
+```
+# 安装 
+sudo apt install libgnome2-bin 
+
+#使用 gnome-open path
+gnome-open path/to/destination
+```
+
+
 ## Git命令使用
 可配合GUI工具和命令行工具参考。
 

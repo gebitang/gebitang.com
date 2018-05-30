@@ -1560,6 +1560,7 @@ sudo apt install libgnome2-bin
 gnome-open path/to/destination
 ```
 
+###命令行复制粘贴 Ctrl + Shift + C / V 
 
 ## Git命令使用
 可配合GUI工具和命令行工具参考。
@@ -1661,7 +1662,7 @@ ssh-keygen -t rsa -C "email@address.com"
 
 - git配置
 
->git config 配置完全局的 --global user.name 和 --global  user.email之后，可以在对应的仓库下，配置当前仓库使用的user.name 和user.email
+>git config 配置完全局的 `--global user.name` 和 `--global  user.email`之后，可以在对应的仓库下，配置当前仓库使用的user.name 和user.email
 
 ### 0x2. commit amend修改commit
 使用 git commit --amend 参数可以对最近的提交进行修改。</br>

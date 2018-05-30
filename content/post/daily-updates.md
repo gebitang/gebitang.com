@@ -580,6 +580,18 @@ dependency注意空格格式
 
 ## linux 环境
 
+### ubuntu 18.04 启动自动的拼音输入法
+
+[ubuntu 18.04 安装自带的中文输入法](https://blog.csdn.net/mint_ying/article/details/80267005)
+
+英文页面进行安装。需要先安装输入法 `sudo apt-get install ibus-pinyin` 
+
+然后在 settings 的 Region & Language 的 Input Sources设置栏中
+
+1. 点击 `Manage Installed Language` ，初次进入会安装些字体等相关信息。重启后使之生效。
+2. 点击 + 添加 `Chinese(Intelligent Pinyin)`。重启后使之生效。 
+
+
 ### CentOS Another app is currently holding the yum lock; waiting for it to exit...
 
 ```
@@ -1143,6 +1155,21 @@ automatically with this package.
 man command
 ``` 
 查看命令详情 
+
+### 使用zsh
+
+1. 安装 `sudo apt-get install zsh` 
+2. 配置默认的sh `chsh -s /bin/zsh` 或 `chsh -s 'which zsh'`，切换为旧bash `chsh -s /bin/bash`
+3. 安装 oh-my-zsh [github repo](https://github.com/robbyrussell/oh-my-zsh)
+
+```
+# curl方式
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+
+# wget 方式
+sh -c "$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
+
+```
 
 ### 端口占用
 利用netstat 或fuser 命令查找

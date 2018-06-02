@@ -1145,7 +1145,63 @@ automatically with this package.
 正在处理用于 hicolor-icon-theme (0.17-2) 的触发器 ...
 正在处理用于 fontconfig (2.12.6-0ubuntu2) 的触发器 ...
 ```
+### 更新profile
 
+修改 全局的 profile文件 `vi /etc/profile`，执行 `source /etc/profile`可立即生效
+
+在/etc/profile文件中添加变量【对所有用户生效（永久的）】  
+用vim在文件/etc/profile文件中增加变量，该变量将会对Linux下所有用户有效，并且是“永久的”。  
+要让刚才的修改马上生效，需要执行以下代码  
+`source /etc/profile`
+  
+方法二：  
+在用户目录下的.bash_profile文件中增加变量【对单一用户生效（永久的）】  
+用vim在用户目录下的.bash_profile文件中增加变量，改变量仅会对当前用户有效，并且是“永久的”。  
+要让刚才的修改马上生效，需要在用户目录下执行以下代码  
+`source .bash_profile `
+
+方法三：  
+直接运行export命令定义变量【只对当前shell（BASH）有效（临时的）】  
+在shell的命令行下直接使用[export  变量名=变量值]定义变量，该变量只在当前的shell（BASH）或其子shell（BASH）下是有效的，shell关闭了，变量也就失效了，再打开新shell时就没有这个变量，需要使用的话还需要重新定义。  
+
+### ulimit用法 
+
+[ulimit 用法](http://man.linuxde.net/ulimit)
+
+```
+-a：显示目前资源限制的设定；
+-c <core文件上限>：设定core文件的最大值，单位为区块；
+-d <数据节区大小>：程序数据节区的最大值，单位为KB；
+-f <文件大小>：shell所能建立的最大文件，单位为区块；
+-H：设定资源的硬性限制，也就是管理员所设下的限制；
+-m <内存大小>：指定可使用内存的上限，单位为KB；
+-n <文件数目>：指定同一时间最多可开启的文件数；
+-p <缓冲区大小>：指定管道缓冲区的大小，单位512字节；
+-s <堆叠大小>：指定堆叠的上限，单位为KB；
+-S：设定资源的弹性限制；
+-t <CPU时间>：指定CPU使用时间的上限，单位为秒；
+-u <程序数目>：用户最多可开启的程序数目；
+-v <虚拟内存大小>：指定可使用的虚拟内存上限，单位为KB。
+
+
+[root@localhost ~]# ulimit -a
+core file size          (blocks, -c) 0           #core文件的最大值为100 blocks。
+data seg size           (kbytes, -d) unlimited   #进程的数据段可以任意大。
+scheduling priority             (-e) 0
+file size               (blocks, -f) unlimited   #文件可以任意大。
+pending signals                 (-i) 98304       #最多有98304个待处理的信号。
+max locked memory       (kbytes, -l) 32          #一个任务锁住的物理内存的最大值为32KB。
+max memory size         (kbytes, -m) unlimited   #一个任务的常驻物理内存的最大值。
+open files                      (-n) 1024        #一个任务最多可以同时打开1024的文件。
+pipe size            (512 bytes, -p) 8           #管道的最大空间为4096字节。
+POSIX message queues     (bytes, -q) 819200      #POSIX的消息队列的最大值为819200字节。
+real-time priority              (-r) 0
+stack size              (kbytes, -s) 10240       #进程的栈的最大值为10240字节。
+cpu time               (seconds, -t) unlimited   #进程使用的CPU时间。
+max user processes              (-u) 98304       #当前用户同时打开的进程（包括线程）的最大个数为98304。
+virtual memory          (kbytes, -v) unlimited   #没有限制进程的最大地址空间。
+file locks                      (-x) unlimited   #所能锁住的文件的最大个数没有限制。
+```
 
 
 ## Shell commands

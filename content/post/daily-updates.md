@@ -43,7 +43,8 @@ brew install hugo
 
 ## Sublime Text 
 
-[Official Doc](http://www.sublimetext.com/docs/3/)
+[Official Doc](http://www.sublimetext.com/docs/3/)</br>
+[Eclipse、Sublime快捷键](https://www.zybuluo.com/Gebitang/note/82413)
 
 ### Install for Ubuntu
 [install doc](http://www.sublimetext.com/docs/3/linux_repositories.html)

@@ -612,6 +612,31 @@ dependency注意空格格式
 
 ## linux 环境
 
+### Make shell execute by dobule click
+[How to make a shell file execute by double click ](https://askubuntu.com/questions/465531/how-to-make-a-shell-file-execute-by-double-click/465549#465549)
+
+To run your script by double clicking on its icon, you will need to create a .desktop file for it:
+```
+[Desktop Entry]
+Name=My script
+Comment=Test hello world script
+Exec=/home/user/yourscript.sh
+Icon=/home/user/youricon.gif
+Terminal=false
+Type=Application
+```
+Save the above as a file on your Desktop with a .desktop extension. Change `/home/user/yourscript.sh` and `/home/user/youricon.gif` to the paths of your script and whichever icon you want it ot have respectively and then you'll be able to launch by double clicking it.
+
+make yourscript.sh executable, and use it to run the actual script. such as:
+```
+#!/bin/bash
+cd /home/user/Desktop/plus/
+echo "to start"
+exec ./run.sh
+```
+
+
+### Ubuntu 显示桌面快捷键 ctrl+win+D
 ### ubuntu 18.04 启动自动的拼音输入法
 
 [ubuntu 18.04 安装自带的中文输入法](https://blog.csdn.net/mint_ying/article/details/80267005)

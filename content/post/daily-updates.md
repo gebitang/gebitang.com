@@ -666,6 +666,13 @@ Another app is currently holding the yum lock; waiting for it to exit...
 ### 安装ubuntu
 [下载镜像](http://old-releases.ubuntu.com/releases/)，使用[**Rufus**](https://rufus.akeo.ie/)，[创建启动盘](https://tutorials.ubuntu.com/tutorial/tutorial-create-a-usb-stick-on-windows)。
 
+```
+1. 识别U盘，
+2. 选择MBR分区方案用于BIOS或UEFI模式(MBR partition scheme for UEFI)
+3. 文件系统选择FAT32、簇大小8192字节
+4. 点击光盘icon，选择镜像文件，创建iso镜像
+```
+
 ### vmware player安装vmware tools
 提示“正在进行简易安装时，无法手动启动 vmware tools 安装”。
 

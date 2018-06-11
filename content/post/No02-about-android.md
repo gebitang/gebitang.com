@@ -13,6 +13,36 @@ toc = true
 
 ☯☯☯☯ android开发 →AF  android测试开发，懂测试，懂开发；懂测试开发；懂android开发。
 
+## Android ADB 
+
+[commond line adb](https://developer.android.com/studio/command-line/adb)</br>
+[doc for cn](https://developer.android.google.cn/studio/command-line/adb)
+
+### how does adb shell getprop and setprop work
+
+[Android system properties are being managed](https://stackoverflow.com/a/40624561/1087122)  by special property_service. The `/system/build.prop` is just one out of 4-6 (depending on the version) read-only files containing the default values that `property_service` uses to populate its internal in-memory database with during start-up. So changes to the files during run time would not propagate until after reboot.
+
+The setprop and getprop commands are used to access the data in that database. Unless the property name starts with persist. - then the value gets stored in `/data/property` folder.
+
+### adb overview and services
+
+[question](https://stackoverflow.com/a/21338505/1087122)</br>
+
+**A client**, which sends commands. The client runs on your development machine. You can invoke a client from a command-line terminal by issuing an adb command.</br>
+**A daemon (adbd)**, which runs commands on a device. The daemon runs as a background process on each device.</br>
+**A server**, which manages communication between the client and the daemon. The server runs as a background process on your development machine.
+
+The source code for all 3 parts of ADB is in the same [system/core/adb](https://android.googlesource.com/platform/system/core/+/master/adb) folder. </br>
+[overview](https://android.googlesource.com/platform/system/core/+/master/adb/OVERVIEW.TXT)</br>
+[services](https://android.googlesource.com/platform/system/core/+/master/adb/SERVICES.TXT)
+
+### adb devices 
+[Where is the ADB server code that handles the “devices” command?](https://stackoverflow.com/a/21338505/1087122)
+
+[source code for this question](https://github.com/aosp-mirror/platform_system_core/tree/master/adb)
+
+[ it's in adb.cpp](https://github.com/aosp-mirror/platform_system_core/blob/9f5e6dbe854ca41d337a1fa8fc8efe95e22db04b/adb/adb.cpp#L1094)
+
 ## Android APK
 
 ### 点击icon到启动应用

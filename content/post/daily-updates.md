@@ -681,6 +681,29 @@ Another app is currently holding the yum lock; waiting for it to exit...
 1. 在虚拟机配置中，将CD/DVD中的镜像移除，修改为“使用物理设备”。 然后重新选择安装vmware tools工具。——会将此工具自动挂载到CD中。
 2. 进入此目录，将对应的gz包复制到本地工作目录，解压后执行`./vmware-install.pl`根据提示处理即可
 
+提示找不到 ipconfig、gcc等，需要安装对应的工具。
+
+```
+sudo apt update
+# for ipconfig
+sudo apt install net-tools
+# for gcc 
+sudo apt install build-essential
+# check gcc version
+gcc --version
+
+# check system version for gcc
+cat /proc/version
+Linux version 4.15.0-22-generic (buildd@lgw01-amd64-013) (gcc version 7.3.0 (Ubuntu 7.3.0-16ubuntu3)) #24-Ubuntu SMP Wed May 16 12:15:17 UTC 2018
+# this means you need gcc 7.3 version
+
+gcc --version
+gcc (Ubuntu 7.3.0-16ubuntu3) 7.3.0
+Copyright (C) 2017 Free Software Foundation, Inc.
+This is free software; see the source for copying conditions.  There is NO
+warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
+```
 
 
 ### Linux下adb不能识别Android设备

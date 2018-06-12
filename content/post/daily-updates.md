@@ -424,6 +424,24 @@ ftp>rename file.original.name file.renamed.name
 250 Rename successful.
 ```
 
+### 提示500 Illegal PORT command. ftp: bind: Address already in use
+
+登录进入FTP后，修改传输模式。执行：`quote paswv`，然后执行 `passive`。
+有可能的影响是，传输时不会再提示传输进度。需要主动结束？
+```
+ftp> quote pasv
+227 Entering Passive Mode (xxx).
+ftp> passive
+Passive mode on.
+ftp> ls
+227 Entering Passive Mode (xxx).
+150 Here comes the directory listing.
+drwxrwxr-x    2 653      653          4096 Oct 19  2017 171021
+drwxrwxr-x    5 600      600          4096 Feb 24  2017 xxx
+drwxrwxr-x    5 600      600          4096 Feb 13  2017 yyy
+
+```
+
 ## Javac编译
 
 ### javac编译的步骤：
@@ -634,6 +652,9 @@ cd /home/user/Desktop/plus/
 echo "to start"
 exec ./run.sh
 ```
+
+[参考资料](https://help.ubuntu.com/community/UnityLaunchersAndDesktopFiles)</br>
+[不支持相对路径](https://stackoverflow.com/a/3879096/1087122)
 
 
 ### Ubuntu 显示桌面快捷键 ctrl+win+D

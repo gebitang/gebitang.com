@@ -467,6 +467,12 @@ java -jar "/home/lib/proguard.jar" @/home/project-java8-linux.pro
 ```
 ## Java IDE
 
+### "find usages" not working
+
+方法、变量的调用不再有效，所有方法认为“never used”。 原因：异常关闭导致的工程的index错乱
+
+`File --> Invalidate Caches and restart` 重启后会重新建立index，比较耗时。
+
 ### idea import *
 
 ```

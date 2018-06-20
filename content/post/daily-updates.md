@@ -821,6 +821,33 @@ date -R # to check the result.
 cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime # make it permenent.
 ```
 
+ubuntu14.04上提示错误：
+```
+#ubuntu14.04的一个bug
+$ tzselect
+/usr/bin/tzselect: line 171:/home/ubuntu/iso3166.tab: No such file or  directory
+/usr/bin/tzselect: time zone files are not set up correctly
+
+#解决办法:
+vim /usr/bin/tzselect
+${TZDIR=`pwd`}
+改为
+${TZDIR=/usr/share/zoneinfo}
+```
+
+### 设置时间 
+
+```
+# date命令将日期设置为2014年6月18日
+date -s 06/18/14
+
+# 将时间设置为14点20分50秒
+date -s 14:20:50
+
+# 将时间设置为2014年6月18日14点16分30秒（MMDDhhmmYYYY.ss）
+date 0618141614.30
+```
+
 ### 查看启动时间
 
 [Linux查看系统开机时间](http://www.cnblogs.com/kerrycode/p/3759395.html)

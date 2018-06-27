@@ -20,6 +20,50 @@ toc = true
 
 <!--more-->
 
+## Python
+
+### python2 & 3
+```
+root@PublicPro:/data# python --version
+Python 2.7.6
+root@PublicPro:/data# python3 --version
+Python 3.4.3
+
+#install python2 in ubuntu18.04
+apt-get install -y python2.7; cp /usr/bin/python2.7 /usr/bin/python
+```
+
+### python3环境+ shapely 模块
+```
+#0. 安装libgeos-dev支持CDLL(libgeos_c.so)
+sudo apt-get install -y libgeos-dev
+
+#1. python3 安装pip 
+apt-get install python3-pip
+
+#2. 安装Shapely
+pip3 install Shapely
+
+#4. 验证
+python3 dumputil.py 1523520544882_windowinfo
+4b9b792b7975f243b0949ae77e2fba56
+
+问题：
+## window上安装Shapely依赖 geos_c.dll，需要确认本地的python版本是32位还是64位
+Python 3.6.0 (v3.6.0:41df79263a11, Dec 23 2016, 07:18:10) [MSC v.1900 32 bit (Intel)] on win32
+Python 2.7.9 (default, Dec 10 2014, 12:24:55) [MSC v.1500 32 bit (Intel)] on win32
+安装对应的geos版本
+https://trac.osgeo.org/osgeo4w/
+
+目的是得到  geos_c.dll文件；之后复制到python对应的DLLS目录即可 
+
+有可能保存的内容包括：
+找不到文件 geoc_c.dll——没有该文件
+OSError: [WinError 193] %1 不是有效的 Win32 应用程序。
+
+```
+
+
 ## Mac 相关
 ### brew 安装应用的地址
 

@@ -488,6 +488,70 @@ drwxrwxr-x    5 600      600          4096 Feb 13  2017 yyy
 
 ## Javac编译
 
+### JVM 参数 -Xms -Xmx 
+
+How is the default Java heap size determined?
+
+[oracle Default headp size](https://docs.oracle.com/javase/8/docs/technotes/guides/vm/gctuning/parallel.html#default_heap_size)
+
+Default Heap Size
+Unless the initial and maximum heap sizes are specified on the command line, they are calculated based on the amount of memory on the machine.
+
+**Client JVM Default Initial and Maximum Heap Sizes**
+
+The default maximum heap size is half of the physical memory up to a physical memory size of 192 megabytes (MB) and otherwise one fourth of the physical memory up to a physical memory size of 1 gigabyte (GB).
+
+For example, if your computer has 128 MB of physical memory, then the maximum heap size is 64 MB, and greater than or equal to 1 GB of physical memory results in a maximum heap size of 256 MB.
+
+The maximum heap size is not actually used by the JVM unless your program creates enough objects to require it. A much smaller amount, called the initial heap size, is allocated during JVM initialization. This amount is at least 8 MB and otherwise 1/64th of physical memory up to a physical memory size of 1 GB.
+
+The maximum amount of space allocated to the young generation is one third of the total heap size.
+
+**Server JVM Default Initial and Maximum Heap Sizes**
+
+The default initial and maximum heap sizes work similarly on the server JVM as it does on the client JVM, except that the default values can go higher. On 32-bit JVMs, the default maximum heap size can be up to 1 GB if there is 4 GB or more of physical memory. On 64-bit JVMs, the default maximum heap size can be up to 32 GB if there is 128 GB or more of physical memory. You can always set a higher or lower initial and maximum heap by specifying those values directly; see the next section.
+
+**Specifying Initial and Maximum Heap Sizes**
+
+You can specify the initial and maximum heap sizes using the flags `-Xms (initial heap size)` and `-Xmx (maximum heap size)`. If you know how much heap your application needs to work well, you can set -Xms and -Xmx to the same value. If not, the JVM will start by using the initial heap size and will then grow the Java heap until it finds a balance between heap usage and performance.
+
+Other parameters and options can affect these defaults. To verify your default values, use the -XX:+PrintFlagsFinal option and look for MaxHeapSize in the output. For example, on Linux or Solaris, you can run the following:
+
+`java -XX:+PrintFlagsFinal <GC options> -version | grep MaxHeapSize`
+
+```
+#https://stackoverflow.com/a/13871564/1087122
+root@ubuntu:# java -XX:+PrintFlagsFinal -version|grep HeapSize
+    uintx ErgoHeapSizeLimit                         = 0          {product}
+    uintx HeapSizePerGCThread                       = 87241520   {product}
+    uintx InitialHeapSize                          := 262144000  {product}
+    uintx LargePageHeapSizeThreshold                = 134217728  {product}
+    uintx MaxHeapSize                              := 4171235328 {product}
+openjdk version "1.8.0_151"
+OpenJDK Runtime Environment (build 1.8.0_151-8u151-b12-0ubuntu0.16.04.2-b12)
+OpenJDK 64-Bit Server VM (build 25.151-b12, mixed mode)
+
+C:\Users\gebitang>java -XX:+PrintFlagsFinal -version |findstr HeapSize
+    uintx ErgoHeapSizeLimit                         = 0         {product}
+    uintx HeapSizePerGCThread                       = 87241520  {product}
+    uintx InitialHeapSize                          := 268435456 {product}
+    uintx LargePageHeapSizeThreshold                = 134217728 {product}
+    uintx MaxHeapSize                              := 4280287232{product}
+java version "1.8.0_151"
+Java(TM) SE Runtime Environment (build 1.8.0_151-b12)
+Java HotSpot(TM) 64-Bit Server VM (build 25.151-b12, mixed mode)
+
+```
+
+[堆内存分配](https://www.cnblogs.com/happyPawpaw/p/3868363.html)
+
+* JVM初始分配的堆内存由-Xms指定，默认是物理内存的1/64；
+* JVM最大分配的堆内存由-Xmx指定，默认是物理内存的1/4。
+* 默认空余堆内存小于40%时，JVM就会增大堆直到-Xmx的最大限制；
+* 空余堆内存大于70%时，JVM会减少堆直到-Xms的最小限制。
+
+因此服务器一般设置-Xms、-Xmx 相等以避免在每次GC 后调整堆的大小。
+
 ### javac编译的步骤：
 ```
 #1.先找出所有需要编译的java文件并保存到文件列表到javaFiles.txt

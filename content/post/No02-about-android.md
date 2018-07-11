@@ -13,6 +13,16 @@ toc = true
 
 ☯☯☯☯ android开发 →AF  android测试开发，懂测试，懂开发；懂测试开发；懂android开发。
 
+## Android problem
+
+### DELETE_FAILED_DEVICE_POLICY_MANAGER 
+
+[应用程序不能卸载](https://blog.csdn.net/the01hierarch/article/details/7313071)是因为在手机的`安全-->设备管理器`中进行了激活，只有取消激活后才能删除。
+
+[卸载程序](https://blog.csdn.net/kitty_landon/article/details/47300907)要调`IDevicePolicyManager`服务里（在`DevicePolicyManagerService.java`里实现）的`packageHasActiveAdmins()`函数检查是否具备admin权限，如果没有admin权限，则直接返回不卸载程序，有了admin才去卸载程序。
+
+dump应用的权限信息通常可以看到 `provides-component:'device-admin'`
+
 ## Android ADB 
 
 [commond line adb](https://developer.android.com/studio/command-line/adb)</br>
@@ -44,6 +54,8 @@ The source code for all 3 parts of ADB is in the same [system/core/adb](https://
 [ it's in adb.cpp](https://github.com/aosp-mirror/platform_system_core/blob/9f5e6dbe854ca41d337a1fa8fc8efe95e22db04b/adb/adb.cpp#L1094)
 
 ## Android APK
+
+
 
 ### 点击icon到启动应用
 [详解安卓从图表icon点击到APP启动界面加载流程](https://blog.csdn.net/qq_25047355/article/details/55260980)

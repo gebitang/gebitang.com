@@ -1452,6 +1452,19 @@ virtual memory          (kbytes, -v) unlimited   #没有限制进程的最大地
 file locks                      (-x) unlimited   #所能锁住的文件的最大个数没有限制。
 ```
 
+### lsof 打开文件过多
+
+[检查以及处理](https://blog.csdn.net/roy_70/article/details/78423880)
+
+```
+#1. 查看进程 
+ps aux |grep java
+
+#2. 查看进程打开的文件
+lsof -p pid
+
+#3. 修改ulimit条件
+```
 
 ## Shell commands
 
@@ -1460,6 +1473,27 @@ file locks                      (-x) unlimited   #所能锁住的文件的最大
 man command
 ``` 
 查看命令详情 
+
+### split & cat使用
+
+
+```
+-b：值为每一输出档案的大小，单位为 byte。
+-C：每一输出档中，单行的最大 byte 数。
+-d：使用数字作为后缀。
+-l：值为每一输出档的列数大小。
+
+split -b 102400k all.log
+~# ls
+all.log   xaa  xab  xac  xad
+
+cat xaa xab xac xad  >back.log
+~# md5sum back.log
+ab9a814d0d7f412555c48689d6037050  back.log
+~# md5sum all.log
+ab9a814d0d7f412555c48689d6037050  all.log
+```
+
 
 ### 使用zsh
 

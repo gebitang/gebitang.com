@@ -45,3 +45,10 @@ FaceBook封锁莆田IP、派安盈25美金返利从100美金提高到1000美金�
 - tiger+evernote笔记练习——应该增加这方面的训练。
 
 - 推广发布的文章要写好：详细，不断修改
+
+
+[九边谈学习](https://mp.weixin.qq.com/s/wAfO34JxvIH95oln9gx0OA)
+[wikipedia Laws_of_thermodynamics](https://en.wikipedia.org/wiki/Laws_of_thermodynamics)
+[百科 热力学三大定律](https://baike.baidu.com/item/热力学三大定律/10572632)
+[“负熵流”的由来历史](http://blog.sciencenet.cn/blog-267-870126.html)
+

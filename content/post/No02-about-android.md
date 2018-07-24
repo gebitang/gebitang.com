@@ -11,7 +11,33 @@ topics = [
 toc = true
 +++
 
-☯☯☯☯ android开发 →AF  android测试开发，懂测试，懂开发；懂测试开发；懂android开发。
+## about icon
+
+[Android drawable的细节](https://blog.csdn.net/guolin_blog/article/details/50727753)
+
+```
+# icon size 
+密度  建议尺寸
+mipmap-mdpi 48 * 48
+mipmap-hdpi 72 * 72
+mipmap-xhdpi  96 * 96
+mipmap-xxhdpi 144 * 144
+mipmap-xxxhdpi  192 * 192
+
+# about dpi
+float xdpi = getResources().getDisplayMetrics().xdpi;
+float ydpi = getResources().getDisplayMetrics().ydpi;
+
+dpi范围 密度
+0dpi ~ 120dpi ldpi
+120dpi ~ 160dpi mdpi
+160dpi ~ 240dpi hdpi
+240dpi ~ 320dpi xhdpi
+320dpi ~ 480dpi xxhdpi
+480dpi ~ 640dpi xxxhdpi
+```
+
+
 
 ## Android problem
 

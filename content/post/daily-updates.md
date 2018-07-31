@@ -488,6 +488,11 @@ drwxrwxr-x    5 600      600          4096 Feb 13  2017 yyy
 
 ## Javac编译
 
+### 用Jstack把java进程中的堆栈信息输出到文件
+```
+java -l PID >txt.txt
+```
+
 ### JVM 参数 -Xms -Xmx 
 
 How is the default Java heap size determined?

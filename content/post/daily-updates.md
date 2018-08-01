@@ -486,7 +486,46 @@ drwxrwxr-x    5 600      600          4096 Feb 13  2017 yyy
 
 ```
 
-## Javac编译
+## JVM 
+
+### JMX 
+
+[openJDK The JavaTMManagement Extensions (JMX) API](http://openjdk.java.net/groups/jmx/)</br>
+[How to Monitor a Remote JVM running on RHEL](https://johnpfield.wordpress.com/2014/01/29/how-to-monitor-a-remote-jvm-running-on-rhel/)
+
+[Official FAQ](https://www.oracle.com/technetwork/java/hotspotfaq-138619.html)
+
+[关键系统的JVM参数推荐(2018仲夏版) wx](https://mp.weixin.qq.com/s/FHY0MelBfmgdRpT4zWF9dQ)</br>
+[关键系统的JVM参数推荐(2018仲夏版) web](http://calvin1978.blogcn.com/articles/jvmoption-7.html)
+
+### 查看默认参数
+
+[JDK 8: Thread Stack Size Tuning](http://xmlandmore.blogspot.com/2014/09/jdk-8-thread-stack-size-tuning.html)</br>
+[Default -Xss value on Windows for JDK 8](https://stackoverflow.com/a/45142459/1087122)
+
+```
+# on linux: intx ThreadStackSize     = 1024    {pd product}
+java -XX:+PrintFlagsFinal -version
+
+# on windows:
+# In JDK 8, HotSpot installation comes with a feature named Native Memory Tracking (default: disabled).
+# To enable it, use:
+
+-XX:NativeMemoryTracking=[off|detail|summary]
+java -XX:+UnlockDiagnosticVMOptions -XX:NativeMemoryTracking=summary -XX:+PrintNMTStatistics -version
+
+
+```
+
+### 运行jar包中指定的 main 方法 -cp
+
+```
+# -cp 参数后面是类路径，是指定给解释器到哪里找到你的.class文件， 
+# 指定类运行所依赖其他类的路径，通常是类库，jar包之类，需要全路径到jar包
+# 写法： java -cp .;myClass.jar packname.mainclassname   
+#  java -Xmx512m -XX:+UseSerialGC -XX:-TieredCompilation -XX:CICompilerCount=2 -XX:AutoBoxCacheMax=20000 -cp vjtop.jar:/usr/lib/jvm/java-8-openjdk-amd64/lib/tool.jar com.vip.vjtools.vjtop.VJTop 
+java -cp XXXX.jar com.smbea.dubbo.bin.Console
+```
 
 ### 用Jstack把java进程中的堆栈信息输出到文件
 ```
@@ -749,6 +788,18 @@ dependency注意空格格式
 
 ## linux 环境
 
+### echo 换行 
+
+```
+# -e 参数将解析换行符，以及变量值的实际值
+root@ubuntu:~# echo -e 'text\ntest'
+text
+test
+
+# 更新profile
+ echo 'export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64'>>/etc/profile; echo 'export JRE_HOME=${JAVA_HOME}/jre'>>/etc/profile;echo 'export CLASSPATH=.:${JAVA_HOME}/lib:${JRE_HOME}/lib'>>/etc/profile;echo 'export PATH=${JAVA_HOME}/bin:$PATH'>>/etc/profile
+
+```
 ### 配置定时任务 crontab
 
 [定时任务Crontab命令详解](https://www.cnblogs.com/intval/p/5763929.html)
@@ -1460,7 +1511,14 @@ automatically with this package.
 正在处理用于 hicolor-icon-theme (0.17-2) 的触发器 ...
 正在处理用于 fontconfig (2.12.6-0ubuntu2) 的触发器 ...
 ```
-### 更新profile
+### 更新profile JAVA_HOME
+
+```
+export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
+export JRE_HOME=${JAVA_HOME}/jre
+export CLASSPATH=.:${JAVA_HOME}/lib:${JRE_HOME}/lib
+export PATH=${JAVA_HOME}/bin:$PATH
+```
 
 修改 全局的 profile文件 `vi /etc/profile`，执行 `source /etc/profile`可立即生效
 
@@ -2238,6 +2296,17 @@ git rebase -i base-commit-hash
 
 
 ## Windows命令
+
+### 开机自启动
+
+```
+#1. 编辑注册表 Ctrl+R --> regedit 
+计算机\HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Run
+
+#2. 右键新建 "字符串"" 类型，自定义名字
+#3. 知道该名称的数据值，即要启动应用的全目录，如 F:\Tools\ss\Shadowsocks.exe
+
+```
 
 ### 获取时间戳
 [获取系统日期、时间戳记](http://atgfss.iteye.com/blog/354054)</br>

@@ -1598,6 +1598,18 @@ man command
 ``` 
 查看命令详情 
 
+### /dev/null 2>&1含义
+
+[What is /dev/null 2>&1?](https://stackoverflow.com/q/10508843/1087122)</br>
+[2>&1>/dev/null](https://blog.csdn.net/zhongqi2513/article/details/78613768)</br>
+[shell中命令>/dev/null 2>&1含义](http://tang9140.iteye.com/blog/2254020)</br>
+
+标准输出被重定向到空的设备文件，即不显示，标准错误输出被重定向到标准输出，而标准输出已被重定向到空的设备文件，所以标准错误输出也不显示。
+
+标准输入0    从键盘获得输入 /proc/self/fd/0 </br>
+标准输出1    输出到屏幕（即控制台） /proc/self/fd/1 </br>
+错误输出2    输出到屏幕（即控制台） /proc/self/fd/2 </br>
+
 ### split & cat使用
 
 

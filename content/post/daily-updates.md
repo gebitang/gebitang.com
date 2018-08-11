@@ -788,6 +788,16 @@ dependency注意空格格式
 
 ## linux 环境
 
+### sed 查找替换冒号
+
+sed如何转义单引号和双引号：如果外面是双引号，里面的双引号就要转义；写成\"，单引号则不用转义，如果外面是单引号就反过来。
+
+```
+# 替换 GRUB_CMDLINE_LINUX="" 为 GRUB_CMDLINE_LINUX="net.ifnames=0 biosdevname=0" 
+sed -i "s/GRUB_CMDLINE_LINUX=\"\"/GRUB_CMDLINE_LINUX=\"net.ifnames=0 biosdevname=0\"/g" /etc/default/grub
+
+```
+
 ### 修改16.04的网卡默认名称
 
 [ubuntu 16.04 重命名网卡](https://blog.csdn.net/u013932687/article/details/70344686)
@@ -838,7 +848,19 @@ iface eth0 inet static
     dns-nameservers 114.114.114.114
 
 #6. 需要重启生效
+
+#7. 批量处理上述业务的脚本
+#!/bin/bash
+
+oldname=$(ifconfig |grep HWaddr |awk '{print $1}')
+
+sed -i "s/GRUB_CMDLINE_LINUX=\"\"/GRUB_CMDLINE_LINUX=\"net.ifnames=0 biosdevname=0\"/g" /etc/default/grub
+
+grub-mkconfig -o /boot/grub/grub.cfg
+
+sed -i "s/$oldname/eth0/g" /etc/network/interfaces
 ```
+
 
 
 ### echo 换行 

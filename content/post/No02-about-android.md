@@ -11,6 +11,12 @@ topics = [
 toc = true
 +++
 
+### insufficient permissions for device
+
+need to restart adb server. `adb kill-server ； adb start-server`
+
+[adb shell 出现 insufficient permissions for device](https://www.cnblogs.com/sipher/articles/2471205.html)
+
 ## about icon
 
 [Android drawable的细节](https://blog.csdn.net/guolin_blog/article/details/50727753)

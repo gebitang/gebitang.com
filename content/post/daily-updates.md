@@ -495,6 +495,38 @@ drwxrwxr-x    5 600      600          4096 Feb 13  2017 yyy
 
 [file format infor](https://docs.oracle.com/javase/8/docs/technotes/guides/troubleshoot/felog003.html)
 
+#### Registers
+
+```
+数据寄存器分为：
+AH&AL=AX(accumulator)：累加寄存器，常用于运算;在乘除等指令中指定用来存放操作数，
+另外,所有的I/O指令都使用这一寄存器与外界设备传送数据。
+BH&BL=BX(base)：基址寄存器，常用于地址索引
+CH&CL=CX(count)：计数寄存器，常用于计数；常用于保存计算值，
+如在移位指令,循环(loop)和串处理指令中用作隐含的计数器.
+DH&DL=DX(data)：数据寄存器，常用于数据传递。
+他们的特点是，这4个16位的寄存器可以分为高8位: AH, BH, CH, DH.
+以及低八位：AL,BL,CL,DL。
+这2组8位寄存器可以分别寻址，并单独使用。
+
+
+另一组是指针寄存器和变址寄存器，包括：
+SP（Stack Pointer）：堆栈指针，与SS配合使用，可指向目前的堆栈位置
+BP（Base Pointer）：基址指针寄存器，可用作SS的一个相对基址位置
+SI（Source Index）：源变址寄存器，可用来存放相对于DS段之源变址指针
+DI（Destination Index）：目的变址寄存器，可用来存放相对于ES 段之目的变址指针。
+这4个16位寄存器只能按16位进行存取操作，
+主要用来形成操作数的地址，用于堆栈操作和变址运算中计算操作数的有效地址。
+
+
+Registers:
+RAX=0x00007f76b9117b3f, RBX=0x0000000000000001, RCX=0x00106e4e63fcb4e0, RDX=0x000feed7222f6800
+RSP=0x00007f778c6393c0, RBP=0x00007f77b4f2c6c8, RSI=0x0000000000000000, RDI=0x00007f7740000020
+R8 =0x0000000000000000, R9 =0x00007f76b9117c20, R10=0x00007f778c639100, R11=0x00007f76d50f3112
+R12=0x0000000000000001, R13=0x00007f7741cd4cf0, R14=0x00007f774c16d130, R15=0x00007f778c639428
+RIP=0x00007f77b4ba610d, EFLAGS=0x0000000000010216, CSGSFS=0x0000000000000033, ERR=0x0000000000000000
+  TRAPNO=0x000000000000000d
+```
 ### JMX 
 
 [openJDK The JavaTMManagement Extensions (JMX) API](http://openjdk.java.net/groups/jmx/)</br>

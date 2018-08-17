@@ -488,6 +488,13 @@ drwxrwxr-x    5 600      600          4096 Feb 13  2017 yyy
 
 ## JVM 
 
+### how to investigate hs_err_pid.log?
+
+[Can anybody tell me details about hs_err_pid.log file generated when Tomcat crashes?](https://stackoverflow.com/a/8121186/1087122)</br>
+[Troubleshooting Java SE. official doc](http://www.oracle.com/technetwork/java/javase/index-138283.html),and here is the [detail doc](https://docs.oracle.com/javase/8/docs/technotes/guides/troubleshoot/index.html), refer to the chapter "5 Troubleshoot System Crashes" and "A Fatal Error Log".
+
+[file format infor](https://docs.oracle.com/javase/8/docs/technotes/guides/troubleshoot/felog003.html)
+
 ### JMX 
 
 [openJDK The JavaTMManagement Extensions (JMX) API](http://openjdk.java.net/groups/jmx/)</br>

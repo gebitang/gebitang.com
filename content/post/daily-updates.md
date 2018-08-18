@@ -2226,6 +2226,24 @@ gnome-open path/to/destination
 ## Git命令使用
 可配合GUI工具和命令行工具参考。
 
+
+### Git Bash: Could not open a connection to your authentication agent
+生成公钥添加到对应的网站后，直接clone时，可能提示无法验证。
+```
+# need to start ssh-agent first.
+eval `ssh-agent -s`
+```
+
+### Permission denied (publickey).
+添加公钥之后，测试验证时会提示“Permission denied (publickey).”。这是因为还没有将生成的对应的key添加到ssh管理中（默认生成的会自动添加，后续生成的多个rsa文件需要手动添加）
+```
+# add the_abs_path_of_the_new_RSA_file, such as ~/.ssh/coding_id_rsa
+ssh-add coding_id_rsa
+
+# then it could be cloned normaly.
+```
+
+
 ### Fork and Sync Repo
 
 ```

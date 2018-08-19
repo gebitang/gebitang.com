@@ -2486,6 +2486,82 @@ git rebase -i base-commit-hash
 
 ## Windows命令
 
+### win10 鼠标一直显示转圈
+[windows 10 鼠标光标经常出现蓝色转圈](https://answers.microsoft.com/zh-hans/windows/forum/windows_10-performance/windows-10/6f0f590c-997b-4daf-9b7b-7280dcdb080b)
+
+通常为有应用一直在占用资源。我遇到的是 小米wifi网口一直未启动导致的（拔掉小米wifi后恢复正常），在设备管理器-->网络适配器中的adapter有个向下的箭头，右键可以选择启用设备。启用设备后，转圈提示消失。
+
+### 系统自检wifi热点（需要无线网卡支持）
+
+推荐使用小米wifi：即可以提供wifi热点给其他设备使用；又可以作为无线网卡连接其他wifi上网。
+
+```
+#0. 使用管理员权限运行cmd命令行
+#1. 检查是否包含无线网卡 （没有无线网卡的就不可用）
+netsh wlan show driver
+
+接口名称: WLAN
+
+    驱动程序                  : Broadcom BCM943228HMB 802.11abgn 2x2 Wi-Fi Adapter
+    供应商                    : Broadcom
+    提供程序                  : Broadcom
+    日期                      : 2014/6/9
+    版本                      : 6.30.223.245
+    INF 文件                  : C:\windows\INF\oem46.inf
+    文件                      : 4 total
+                                C:\windows\system32\DRIVERS\BCMWL63a.SYS
+                                C:\windows\system32\bcmihvsrv64.dll
+                                C:\windows\system32\bcmihvui64.dll
+                                C:\windows\system32\drivers\vwifibus.sys
+    类型                      : 本机 WLAN 驱动程序
+    支持的无线电类型          : 802.11n 802.11a 802.11g 802.11b
+    支持 FIPS 140-2 模式: 是
+    支持 802.11w 管理帧保护 : 是
+    支持的承载网络  : 是
+    基础结构模式中支持的身份验证和密码:
+                                开放式             无
+                                开放式             WEP
+                                WPA2 - 企业       TKIP
+                                WPA2 - 个人       TKIP
+                                WPA2 - 企业       CCMP
+                                WPA2 - 个人       CCMP
+                                供应商定义的          供应商定义的
+                                供应商定义的          供应商定义的
+                                WPA - 企业        TKIP
+                                WPA - 个人        TKIP
+                                WPA - 企业        CCMP
+                                WPA - 个人        CCMP
+    临时模式中支持的身份验证和密码:
+                                WPA2 - 个人       CCMP
+                                开放式             无
+                                开放式             WEP
+    是否存在 IHV 服务         : 是
+    IHV 适配器 OUI            : [00 10 18]，类型: [00]
+    IHV 扩展 DLL 路径         : C:\windows\System32\bcmihvsrv64.dll
+    IHV UI 扩展 ClSID         : {aaa6dee9-31b9-4f18-ab39-82ef9b06eb73}
+    IHV 诊断 CLSID            : {00000000-0000-0000-0000-000000000000}
+
+#2. 创建无线热点 网络连接中会多出一个网卡“Microsoft Virtual WiFi Miniport Adapter”
+# mode：是否启用虚拟WIFI网卡，改为disallow则为禁用。
+# ssid：无线网名称，最好用英文（以cai为例）。
+# key：无线网密码，
+netsh set hostednetwork mode=allow ssid=nameOfwifi key=pwdForssid
+承载网络模式已设置为允许。
+已成功更改承载网络的 SSID。
+已成功更改托管网络的用户密钥密码。
+
+ 
+#3. 启动/停止此连接 netsh wlan start/stop hostednetwork
+C:\windows\system32>netsh wlan start hostednetwork
+已启动承载网络。
+
+#4. 设置本地的有线连接为共享模式
+在“网络连接”窗口中，右键单击已连接到Internet的网络连接，
+选择“属性”→“共享”，勾上“允许其他······连接（N）”并选择新创建的wifi连接点
+
+```
+netsh wlan set hostednetwork mode=allow ssid=cai key=12345678
+
 ### 开机自启动
 
 ```

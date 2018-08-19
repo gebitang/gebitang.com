@@ -2316,27 +2316,39 @@ git commit -a
 3. 配置config 文件，[支持多个git账号](https://my.oschina.net/csensix/blog/184434)
 4. 如果不进行config的配置，在添加ssh key之后，将统一使用global的设置
 
+
+### ssh config 示例
+[SSH CONFIG FILE](https://www.ssh.com/ssh/config/)</br>
+[OpenSSH Config File Examples](https://www.cyberciti.biz/faq/create-ssh-config-file-on-linux-unix/)
+
+配置了config文件后，idea中会根据这个配置文件使用对应的key[Using Git integration](https://www.jetbrains.com/help/idea/using-git-integration.html#SSH-access)
+
+提交commit时，依然需要至少有**`user.name`**和**`user.email`**信息
 ```
 # 对于ssh的配置
-#Default Git
+# Defines for which host or hosts the configuration section applies. 
+# The section ends with a new Host section or the end of the file. 
+# A single * as a pattern can be used to provide global defaults for all hosts.
 Host github.com
- HostName github.com
- AddKeysToAgent yes
- User gebitang
- UseKeychain yes
- IdentityFile ~/.ssh/id_rsa_github
-
+    # Specifies the real host name to log into. Numeric IP addresses are also permitted.
+    HostName github.com
+    # Defines the username for the SSH connection.
+    User gebitang
+    # Specifies a file from which the user’s DSA, ECDSA or DSA authentication identity is read. 
+    IdentityFile ~/.ssh/id_rsa
+Host prj.testin.cn
+    HostName prj.testin.cn
+    # Specifies the port number to connect on the remote host.
+    Port 8201
+    # The default is ~/.ssh/identity for protocol version 1, and ~/.ssh/id_dsa, ~/.ssh/id_ecdsa and ~/.ssh/id_rsa for protocol version 2.
+    IdentityFile ~/.ssh/gitlab_id_rsa
 Host git.coding.net
- User gebitang
- PreferredAuthentications publickey
- IdentityFile ~/.ssh/id_rsa_coding
+    HostName git.coding.net
+    IdentityFile ~/.ssh/coding_id_rsa
+Host bitbucket
+    HostName bitbucket.org
+    IdentityFile ~/.ssh/bitbucket_id_rsa
 
-Host office
- HostName IP address
- AddKeysToAgent yes
- User userName
- UseKeychain yes
- IdentityFile ~/.ssh/id_rsa
 ```
 
 - ssh配置

@@ -740,6 +740,14 @@ This is a footnote.[^2]
 
 ## Maven 
 
+### 无法获取到dependency的jar包
+
+新系统下一阵慌乱：本地仓库无法修改？dependency无法下载？（恢复默认，重新加载……都不好使）
+
+仔细检查一下：最终结果是——1. 内网搭建的仓库下没有对应的jar包；2. aliyun的仓库居然罕见的正遇上无法访问。
+
+没有黑魔法，知道原理，明白到底发生了什么，就没什么好慌乱的了。
+
 ### maven项目默认Java编译版本
 Intellij Idea 创建Maven项目时，默认的Java Language是1.5。[修改](https://www.cnblogs.com/liu-s/p/5371289.html)
 ```

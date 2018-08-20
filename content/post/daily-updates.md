@@ -740,6 +740,10 @@ This is a footnote.[^2]
 
 ## Maven 
 
+### editor不报错，但执行main方法时提示找不到class
+
+可能的情况是：工程配置中的`sources`的路径配置错误或没有指定对应的文件夹。
+
 ### 无法获取到dependency的jar包
 
 新系统下一阵慌乱：本地仓库无法修改？dependency无法下载？（恢复默认，重新加载……都不好使）
@@ -2505,6 +2509,38 @@ git rebase -i base-commit-hash
 
 
 ## Windows命令
+
+### 修改用户名
+
+[How to Change Your Account Name in Windows 10](https://www.groovypost.com/howto/change-account-name-windows-10/)</br>
+[How to Find Security Identifier (SID) of User in Windows](https://www.tenforums.com/tutorials/84467-find-security-identifier-sid-user-windows.html)</br>
+[Security identifiers official doc](https://docs.microsoft.com/en-us/windows/security/identity-protection/access-control/security-identifiers)
+
+查看SID值：使用管理员打开cmd目录，执行`wmic useraccount`会展示所有用户的列表信息
+
+```
+PS D:\> whoami /user
+
+用户信息
+----------------
+
+用户名           SID
+================ ==============================================
+gebitang\joechin S-1-5-21-3801529287-1954174758-2671260994-1001
+PS D:\>
+```
+
+基本流程：</br>
+
+1. 新建一个管理员账号并使用这个账号登陆
+2. 修改原用户的名称
+3. 修改注册码`regedit `修改`HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Profilelist `下原用户名的security identifier (SID)的ProfileImagePath的值。
+4. 重启切换到原用户登陆
+
+
+上面的操作可以实际修改了用户名，但在系统设置-->环境变量中的UI显示还是修改之前的名称。可以使用`netplwiz`修改显示的用户名
+
+Press Windows key + R, type: `netplwiz` or `control userpasswords2` then hit Enter. Select the account then click Properties.
 
 ### win10 鼠标一直显示转圈
 [windows 10 鼠标光标经常出现蓝色转圈](https://answers.microsoft.com/zh-hans/windows/forum/windows_10-performance/windows-10/6f0f590c-997b-4daf-9b7b-7280dcdb080b)

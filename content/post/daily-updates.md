@@ -2649,8 +2649,6 @@ netsh wlan set hostednetwork mode=allow ssid=cai key=12345678
 java -Dshow.debug.info=true -jar ./App.jar >> log-%date:~0,4%%date:~5,2%%date:~8,2%%time:~0,2%%time:~3,2%%time:~6,2%.txt 2>&1
 ```
 
-
-
 ### 杀死进程
 ```
 #命令行杀死进程
@@ -2692,6 +2690,12 @@ F:\>mode
     代码页:     936
 
 ```
+
+### Notepad++ 插件管理
+
+默认的安装是不带PluginManager的，官方下载，指向到[github地址](https://github.com/bruderstein/nppPluginManager/releases)。 32为的选择后缀为UNI的，下载解压到对应的安装目录plugin、update文件夹下。
+
+通常用的三个插件：compare、JSON Viewer、XML tools。通过PM安装、重启即可。
 
 ## C++ Basic
 

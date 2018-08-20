@@ -2691,6 +2691,20 @@ F:\>mode
 
 ```
 
+### 窗口保护色 #c7edcc
+
+[在线RGB取色器](http://xiaohudie.net/RGB.html)
+
+[修改窗口背景颜色为护眼颜色](https://blog.csdn.net/u010739973/article/details/45675515)，需要重启生效。
+
+```
+202 234 206 #caeace
+199 237 204 #c7edcc
+
+# HKEY_CURRENT_USER\Control Panel\Colors\下的Window的值默认为255 255 255（白色）， 设置为199 237 204（浅绿）
+# HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\DefaultColors\Standard下的Window的数值默认 ffffff，修改为
+```
+
 ### Notepad++ 插件管理
 
 默认的安装是不带PluginManager的，官方下载，指向到[github地址](https://github.com/bruderstein/nppPluginManager/releases)。 32为的选择后缀为UNI的，下载解压到对应的安装目录plugin、update文件夹下。

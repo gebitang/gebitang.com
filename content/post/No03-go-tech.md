@@ -12,17 +12,6 @@ topics = [
 ]
 toc = true
 +++
-☯☯☯ Go、Python学习 →GP 技术学习。
-
-
-hugo theme update，add function to [scroll to top](https://www.w3schools.com/howto/howto_js_scroll_to_top.asp)
-
-固定每天早上的时间进行练习
-
-[GFW状态机的新分析提出了新的TCP层穿墙方法，经过广泛测试成功率高达98%](https://juejin.im/pin/59fc12a46d6def143500d190)
-[Your state is not mine: a closer look at evading stateful internet censorship](https://dl.acm.org/citation.cfm?doid=3131365.3131374)
-
-
 
 Go release 1.9 version on 24 August 2017. I'm the [31,365](https://github.com/golang/go/stargazers) people to start it on github and just get started to learn it :). 
 
@@ -37,6 +26,12 @@ Let's Go.
 [BIG: Blockchain In Go](https://jeiwan.cc/tags/blockchain/)
 
 <!--more-->
+
+VS环境设置：
+[Go tools that the Go extension depends on](https://github.com/Microsoft/vscode-go/wiki/Go-tools-that-the-Go-extension-depends-on)
+
+Ctrl + b: 显示/隐藏侧边栏
+Ctrl + j: 显示/隐藏Panel控制栏
 
 ### update project 
 

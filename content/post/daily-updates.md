@@ -2705,6 +2705,45 @@ F:\>mode
 # HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\DefaultColors\Standard下的Window的数值默认 ffffff，修改为
 ```
 
+### CMD here for win10
+
+[How to return the 'Open command window here' option to Windows 10's context menu](https://www.windowscentral.com/add-open-command-window-here-back-context-menu-windows-10)这个链接操作了半天还是不好使。直接修改注册表吧，不能迷信外语资料:)
+
+报错下面的内容到文本文件，重命名为.reg，双击执行即可。 
+
+说明：修改不同的注册表值。
+```
+
+```
+给以下注册表添加了新内容：
+[HKEY_LOCAL_MACHINE\SOFTWARE\Classes\Directory\background\shell]
+增加一个条目cmd_here：指定名称、icon和执行的命令
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Classes\Folder\shell]
+增加一个条目cmdPrompt：指定名称、icon和执行的命令
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Classes\Directory\shell]
+增加一个条目cmd_here：指定名称、icon和执行的命令
+```
+Windows Registry Editor Version 5.00
+[HKEY_LOCAL_MACHINE\SOFTWARE\Classes\Directory\background\shell\cmd_here]
+@="cmd here"
+"Icon"="cmd.exe"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Classes\Directory\background\shell\cmd_here\command]
+@="\"C:\\Windows\\System32\\cmd.exe\""
+[HKEY_LOCAL_MACHINE\SOFTWARE\Classes\Folder\shell\cmdPrompt]
+@="cmd here"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Classes\Folder\shell\cmdPrompt\command]
+@="\"C:\\Windows\\System32\\cmd.exe\" \"cd %1\""
+[HKEY_LOCAL_MACHINE\SOFTWARE\Classes\Directory\shell\cmd_here]
+@="cmd here"
+"Icon"="cmd.exe"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Classes\Directory\shell\cmd_here\command]
+@="\"C:\\Windows\\System32\\cmd.exe\""
+
+```
+
+
 ### Notepad++ 插件管理
 
 默认的安装是不带PluginManager的，官方下载，指向到[github地址](https://github.com/bruderstein/nppPluginManager/releases)。 32为的选择后缀为UNI的，下载解压到对应的安装目录plugin、update文件夹下。

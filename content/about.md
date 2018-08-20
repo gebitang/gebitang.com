@@ -14,25 +14,18 @@ Plan -- Focus -- Motivate -- Measure -- Reward
 -----
 ⣻⣻⣻⣻⣻⣻⣻⣻⣻
 
-- 数据中心模块  →DC ☯☯☯☯☯
+* [Vision Without Execution Is Just Hallucination](https://www.goodreads.com/quotes/155966-vision-without-execution-is-just-hallucination) -- Henry Ford
+* [Vision Without Execution Is Hallucination](https://www.forbes.com/sites/bryanstolle/2014/07/22/vision-without-execution-is-just-hallucination) -- Thomas Edison 
+* Vision without action is a daydream. Action without vision is a nightmare. - Japanese Proverb
+* Good business leaders create a vision, articulate the vision, passionately own the vision, and relentlessly drive it to completion. - Jack Welch
 
->>真实、原始数据。调试方便，跟踪每个设备的利用率、使用周期，成本核算+设备利用
+# Plan -- Focus -- Motivate -- Measure -- Reward 
 
-- android开发 →AF ☯☯☯☯
+Great execution starts with a plan.  The plan sets the stage with strategy (**the why**), then lays out the objectives (**the what**), and then the required steps and actions (**the how**), to be carried out by the respective members (**the who**), and the timeframe in which the actions should be accomplished (**the when**).   
 
->>android测试开发，懂测试，懂开发；懂测试开发；懂android开发。
-
-- Go、Python学习 →GP ☯☯☯
-
->>跟踪新趋势。掌握基本语言，应用到下一步的数学学习中
-
-- 锻炼&打坐 →FM ☯☯
-
->>从0到1的1
-
-- 投资读书&写作 →iRW ☯ 
-
->>阅读记录，写作练习
+{{< fluid_imgs
+  "pure-u-1-1|http://on-img.com/chart_image/5b46cc44e4b0ade3e2787b32.png|负熵前行|http://on-img.com/chart_image/5b46cc44e4b0ade3e2787b32.png"
+>}}
 
 ⣻⣻⣻⣻⣻⣻⣻⣻⣻
 

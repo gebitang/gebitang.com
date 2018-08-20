@@ -740,6 +740,10 @@ This is a footnote.[^2]
 
 ## Maven 
 
+### editor不报错，但执行main方法时提示找不到class
+
+可能的情况是：工程配置中的`sources`的路径配置错误或没有指定对应的文件夹。
+
 ### 无法获取到dependency的jar包
 
 新系统下一阵慌乱：本地仓库无法修改？dependency无法下载？（恢复默认，重新加载……都不好使）
@@ -2505,6 +2509,12 @@ git rebase -i base-commit-hash
 
 
 ## Windows命令
+
+### 修改用户名
+
+[How to Change Your Account Name in Windows 10](https://www.groovypost.com/howto/change-account-name-windows-10/)
+
+Press Windows key + R, type: `netplwiz` or `control userpasswords2` then hit Enter. Select the account then click Properties.
 
 ### win10 鼠标一直显示转圈
 [windows 10 鼠标光标经常出现蓝色转圈](https://answers.microsoft.com/zh-hans/windows/forum/windows_10-performance/windows-10/6f0f590c-997b-4daf-9b7b-7280dcdb080b)

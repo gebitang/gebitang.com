@@ -470,7 +470,7 @@ ftp>rename file.original.name file.renamed.name
 
 ### 提示500 Illegal PORT command. ftp: bind: Address already in use
 
-登录进入FTP后，修改传输模式。执行：`quote paswv`，然后执行 `passive`。
+登录进入FTP后，修改传输模式。执行：`quote pasv`，然后执行 `passive`。
 有可能的影响是，传输时不会再提示传输进度。需要主动结束？
 ```
 ftp> quote pasv

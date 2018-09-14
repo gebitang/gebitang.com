@@ -487,6 +487,7 @@ drwxrwxr-x    5 600      600          4096 Feb 13  2017 yyy
 ```
 
 ## JVM 
+[my question](https://stackoverflow.com/q/52328614/1087122)
 
 ### how to investigate hs_err_pid.log?
 
@@ -500,6 +501,8 @@ drwxrwxr-x    5 600      600          4096 Feb 13  2017 yyy
 [Troubleshooting Guide for HotSpot VM](https://docs.oracle.com/javase/7/docs/webnotes/tsg/TSG-VM/html/crashes.html)</br>
 java应用启动参数使用` -Xcheck:jni`参数
 [Other Command-Line Options](https://docs.oracle.com/javase/8/docs/technotes/guides/troubleshoot/clopts002.html)
+
+[使用jni参数出现大量无效log](https://community.appdynamics.com/t5/Knowledge-Base/How-to-resolve-JNI-Warnings-in-application-logs/ta-p/26728)，[无效log](https://community.oracle.com/thread/3783234)，关闭使用。
 
 ```
 Signal Description

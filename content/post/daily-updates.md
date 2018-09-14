@@ -495,6 +495,21 @@ drwxrwxr-x    5 600      600          4096 Feb 13  2017 yyy
 
 [file format infor](https://docs.oracle.com/javase/8/docs/technotes/guides/troubleshoot/felog003.html)
 
+#### JVM Crash due to SIGSEGV
+[JVM Crash due to SIGSEGV](https://stackoverflow.com/a/28404197/1087122)</br>
+[Troubleshooting Guide for HotSpot VM](https://docs.oracle.com/javase/7/docs/webnotes/tsg/TSG-VM/html/crashes.html)</br>
+java应用启动参数使用` -Xcheck:jni`参数
+[Other Command-Line Options](https://docs.oracle.com/javase/8/docs/technotes/guides/troubleshoot/clopts002.html)
+
+```
+Signal Description
+SIGSEGV, SIGBUS, SIGFPE, SIGPIPE, SIGILL -- Used in the implementation for implicit null check, and so forth.
+SIGQUIT Thread dump support -- To dump Java stack traces at the standard error stream. (Optional.)
+SIGTERM, SIGINT, SIGHUP -- Used to support the shutdown hook mechanism (java.lang.Runtime.addShutdownHook) when the VM is terminated abnormally. (Optional.)
+SIGUSR1 -- Used in the implementation of the java.lang.Thread.interrupt method. (Configurable.) Not used starting with Solaris 10 OS. Reserved on Linux. SIGUSR2 Used internally. (Configurable.) Not used starting with Solaris 10 OS. SIGABRT The HotSpot VM does not handle this signal. Instead it calls the abort function after fatal error handling. If an application uses this signal then it should terminate the process to preserve the expected semantics.
+```
+
+
 #### Registers
 
 ```
@@ -866,6 +881,24 @@ mvn -U clean install
 dependency注意空格格式
 
 ## linux 环境
+
+### 修改core文件配置
+
+[setting the core dump name schema](http://www.linuxhowtos.org/Tips%20and%20Tricks/coredump.htm)</br>
+[specify filename and path for core dumps](https://sigquit.wordpress.com/2009/03/13/the-core-pattern/)</br>
+[to permanently edit the core_pattern file](https://askubuntu.com/a/420628)
+
+修改 `/etc/sysctl.conf`文件；或在`/etc/sysctl.d`文件夹下创建一个以`.conf`结尾的文件。内容为`kernel.core_pattern = core.%e.%p.%h` 也可以在这里直接指定目录
+
+```
+%e is the filename
+%g is the gid the process was running under
+%p is the pid of the process
+%s is the signal that caused the dump
+%t is the time the dump occurred
+%u is the uid the process was running under
+```
+
 
 ### 查找文件中某字符串的个数
 

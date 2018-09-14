@@ -2681,6 +2681,10 @@ netsh wlan set hostednetwork mode=allow ssid=cai key=12345678
 #2. 右键新建 "字符串"" 类型，自定义名字
 #3. 知道该名称的数据值，即要启动应用的全目录，如 F:\Tools\ss\Shadowsocks.exe
 
+# win10环境可以直接启动powershell类型脚本。
+# a). 新建脚本保存为.ps1的后缀; b). 修改默认打开应用，选择 powershell
+#（默认路径在 %SystemRoot%\system32\WindowsPowerShell\v1.0\powershell.exe）
+# 即 %HOMEDRIVE%%HOMEPATH% = C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe
 ```
 
 ### 获取时间戳

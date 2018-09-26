@@ -1963,6 +1963,20 @@ man command
 ``` 
 查看命令详情 
 
+### 收集进程的线程详细信息
+
+```
+#!/bin/bash
+controller=$(ps -aux|grep java |grep -F "$1"|grep -vF grep|awk '{printf $0}' |awk '{print $2}')
+top -b -n 1 -H -p $controller |grep Threads
+
+# -b  :Batch-mode operation
+#            Starts top in 'Batch' mode, which could be useful for sending output from top to other programs or to a file.  In this mode, top  will
+#            not accept input and runs until the iterations limit you've set with the '-n' command-line option or until killed.
+# -n  :Number-of-iterations limit as:  -n number
+
+```
+
 ### 查看进程的线程信息
 ```
 top -H -p <pid>

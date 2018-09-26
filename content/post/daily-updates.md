@@ -249,6 +249,142 @@ grails war
 [official guides](https://gradle.org/guides/)</br>
 下载完整版本安装后，在安装目录下的`docs/userguide/userguide.html`下有完整的手册
 
+#### Gradle via scoop
+window下的包管理工具 [`scoop`](https://github.com/lukesampson/scoop/wiki)：默认安装在用户目录下，然后再将由scoop安装的包安装到自己的apps目录下。达到不需要提供用户权限选项的目的。
+
+例如，使用scoop安装gradle（也是gradle官方推荐的安装方法）。`scoop install gradle`
+
+```
+C:\Users\joechin>scoop install gradle
+Installing 'gradle' (4.9) [64bit]
+gradle-4.9-all.zip (108.2 MB) [===============================================================================] 100%
+Checking hash of gradle-4.9-all.zip ... ok.
+Extracting gradle-4.9-all.zip ... done.
+Linking ~\scoop\apps\gradle\current => ~\scoop\apps\gradle\4.9
+Creating shim for 'gradle'.
+'gradle' (4.9) was installed successfully!
+'gradle' suggests installing 'java/oraclejdk' or 'java/openjdk'.
+
+```
+
+#### Gradle projects 
+
+```
+D:\openSources\VocabHunter>gradle -q projects
+
+------------------------------------------------------------
+Root project
+------------------------------------------------------------
+
+Root project 'vocabhunter'
++--- Project ':command-line'
++--- Project ':core'
++--- Project ':gui'
++--- Project ':osx'
+\--- Project ':package'
+
+To see a list of the tasks of a project, run gradle <project-path>:tasks
+For example, try running gradle :command-line:tasks
+D:\openSources\VocabHunter>gradle :gui:tasks
+
+> Task :gui:tasks
+
+------------------------------------------------------------
+All tasks runnable from project :gui
+------------------------------------------------------------
+
+Application tasks
+-----------------
+run - Runs this project as a JVM application
+
+Build tasks
+-----------
+assemble - Assembles the outputs of this project.
+build - Assembles and tests this project.
+buildDependents - Assembles and tests this project and all projects that depend on it.
+buildNeeded - Assembles and tests this project and all projects it depends on.
+classes - Assembles main classes.
+clean - Deletes the build directory.
+jar - Assembles a jar archive containing the main classes.
+testClasses - Assembles test classes.
+
+Distribution tasks
+------------------
+assembleDist - Assembles the main distributions
+distTar - Bundles the project as a distribution.
+distZip - Bundles the project as a distribution.
+installDist - Installs the project as a distribution as-is.
+
+Documentation tasks
+-------------------
+javadoc - Generates Javadoc API documentation for the main source code.
+
+Help tasks
+----------
+buildEnvironment - Displays all buildscript dependencies declared in project ':gui'.
+components - Displays the components produced by project ':gui'. [incubating]
+dependencies - Displays all dependencies declared in project ':gui'.
+dependencyInsight - Displays the insight into a specific dependency in project ':gui'.
+dependencyUpdates - Displays the dependency updates for the project.
+dependentComponents - Displays the dependent components of components in project ':gui'. [incubating]
+help - Displays a help message.
+model - Displays the configuration model of project ':gui'. [incubating]
+projects - Displays the sub-projects of project ':gui'.
+properties - Displays the properties of project ':gui'.
+tasks - Displays the tasks runnable from project ':gui'.
+
+Verification tasks
+------------------
+check - Runs all checks.
+jacocoTestCoverageVerification - Verifies code coverage metrics based on specified rules for the test task.
+jacocoTestReport - Generates code coverage report for the test task.
+test - Runs the unit tests.
+
+Rules
+-----
+Pattern: clean<TaskName>: Cleans the output files of a task.
+Pattern: build<ConfigurationName>: Assembles the artifacts of a configuration.
+Pattern: upload<ConfigurationName>: Assembles and uploads the artifacts belonging to a configuration.
+
+To see all tasks and more detail, run gradle tasks --all
+
+To see more detail about a task, run gradle help --task <task>
+
+BUILD SUCCESSFUL in 0s
+1 actionable task: 1 executed
+D:\openSources\VocabHunter>
+
+```
+
+#### gradle tasks
+
+```
+D:\openSources\VocabHunter>gradle -q help --task :gui:run
+Detailed task information for :gui:run
+
+Path
+     :gui:run
+
+Type
+     JavaExec (org.gradle.api.tasks.JavaExec)
+
+Options
+     --args     Command line arguments passed to the main class. [INCUBATING]
+
+     --debug-jvm     Enable debugging for the process. The process is started suspended and listening on port 5005. [INCUBATING]
+
+Description
+     Runs this project as a JVM application
+
+Group
+     application
+D:\openSources\VocabHunter>
+
+```
+
+#### idea 不显示gradle工具栏
+
+[gradle tool window missing](https://intellij-support.jetbrains.com/hc/en-us/community/posts/205449130-gradle-tool-window-missing)， 先手动创建一个gradle类型的工程后，gradle工具栏会显示出来，之后再导入gradle工程。
 
 ## Mysql
 
@@ -614,7 +750,7 @@ java -cp XXXX.jar com.smbea.dubbo.bin.Console
 
 ### 用Jstack把java进程中的堆栈信息输出到文件
 ```
-java -l PID >txt.txt
+jstack -l PID >txt.txt
 ```
 
 ### JVM 参数 -Xms -Xmx 
@@ -703,6 +839,28 @@ javap -verbose PointImg.class |findstr "version"
 java -jar "/home/lib/proguard.jar" @/home/project-java8-linux.pro
 ```
 ## Java IDE
+
+### 找不到jar包的异常
+工程A直接依赖jarA，但jarA依赖jarB，此时如果jarB没有正常引入：
+#### jar包依赖
+执行主线程将“跑飞”，但不会有任何提示（期待的报错如：java.lang.ClassNotFoundException:xxx 不会显示）
+如：runner中对jarchivelib的依赖
+
+#### gui依赖
+主线程不会有任何提示。 如果jarA和jarB都没有导入，则会提示java.lang.ClassNotFoundException
+
+如：Gluon Scene Builder打开 引入了`de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView`的fxml文件
+
+需要引入依赖：[Adding a custom component to SceneBuilder 2.0](https://stackoverflow.com/a/30078204/1087122)
+
+PS: 也可以将导入的jar包直接导入GSB的lib目录，通常为 `%HOME_USER%\AppData\Roaming\Scene Builder\Library`
+
+
+### 修改terminal的显示大小
+
+[Terminal Line Buffer increase](https://intellij-support.jetbrains.com/hc/en-us/community/posts/206381169-Terminal-Line-Buffer-increase)
+
+ Help/Find action, type 'registry' (it's IDE's internal registry (hidden settings, if you wish)), search the registry for `terminal.buffer.max.lines.count`.
 
 ### "find usages" not working
 

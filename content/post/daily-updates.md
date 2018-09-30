@@ -625,6 +625,62 @@ drwxrwxr-x    5 600      600          4096 Feb 13  2017 yyy
 ## JVM 
 [my question](https://stackoverflow.com/q/52328614/1087122)
 
+### java.rmi.ConnectException: Connection refused to host 
+
+[java.rmi.ConnectException: Connection refused to host: 127.0.1.1](https://stackoverflow.com/q/15685686/1087122)
+[same question](https://community.oracle.com/thread/1178074)</br>
+[java.rmi.ConnectException: Connection refused to host](https://coderanch.com/t/487650/java/java-rmi-ConnectException-Connection-refused)</br>
+[An Overview of RMI Applications](https://docs.oracle.com/javase/tutorial/rmi/running.html)
+
+```
+root@publicpro:~/vjtop# ./vjtop.sh 24550
+java.rmi.ConnectException: Connection refused to host: 10.32.21.177; nested exception is:
+        java.net.ConnectException: Connection timed out (Connection timed out)
+        at sun.rmi.transport.tcp.TCPEndpoint.newSocket(TCPEndpoint.java:619)
+        at sun.rmi.transport.tcp.TCPChannel.createConnection(TCPChannel.java:216)
+        at sun.rmi.transport.tcp.TCPChannel.newConnection(TCPChannel.java:202)
+        at sun.rmi.server.UnicastRef.invoke(UnicastRef.java:129)
+        at java.rmi.server.RemoteObjectInvocationHandler.invokeRemoteMethod(RemoteObjectInvocationHandler.java:227)
+        at java.rmi.server.RemoteObjectInvocationHandler.invoke(RemoteObjectInvocationHandler.java:179)
+        at com.sun.proxy.$Proxy0.newClient(Unknown Source)
+        at javax.management.remote.rmi.RMIConnector.getConnection(RMIConnector.java:2430)
+        at javax.management.remote.rmi.RMIConnector.connect(RMIConnector.java:308)
+        at javax.management.remote.JMXConnectorFactory.connect(JMXConnectorFactory.java:270)
+        at javax.management.remote.JMXConnectorFactory.connect(JMXConnectorFactory.java:229)
+        at com.vip.vjtools.vjtop.data.jmx.JmxClient.connect(JmxClient.java:106)
+        at com.vip.vjtools.vjtop.VMInfo.processNewVM(VMInfo.java:129)
+        at com.vip.vjtools.vjtop.VJTop.main(VJTop.java:52)
+Caused by: java.net.ConnectException: Connection timed out (Connection timed out)
+        at java.net.PlainSocketImpl.socketConnect(Native Method)
+        at java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:350)
+        at java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:206)
+        at java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:188)
+        at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:392)
+        at java.net.Socket.connect(Socket.java:589)
+        at java.net.Socket.connect(Socket.java:538)
+        at java.net.Socket.<init>(Socket.java:434)
+        at java.net.Socket.<init>(Socket.java:211)
+        at sun.rmi.transport.proxy.RMIDirectSocketFactory.createSocket(RMIDirectSocketFactory.java:40)
+        at sun.rmi.transport.proxy.RMIMasterSocketFactory.createSocket(RMIMasterSocketFactory.java:148)
+        at sun.rmi.transport.tcp.TCPEndpoint.newSocket(TCPEndpoint.java:613)
+        ... 13 more
+```
+
+问题的逻辑搞清楚了： 
+
+1. java应用启动时没有指定 java.rmi.server.hostname ，所以RMI server会使用默认的hostname。 
+2. 启动时，识别到系统的 hostname对应的ip是/etc/hosts中定义的ip
+3. vjtop去连接时，自然找到就是这个“旧的”“错误的”ip
+
+修改了 /etc/hosts会立即生效，但java应用已经在修改前使用了“旧的”ip。所以会报上面的错误。
+
+验证：
+
+- 不重启机器，先修改 /etc/hosts 再启动 java应用。然后再用 vjtop连接就可以正常获取到数据。
+- 即使这时再修改hostname为一个错误的地址，也依然可以正常获取到数据。
+
+关键是java应用启动时jvm使用的hostname对应的是什么值。
+
 ### how to investigate hs_err_pid.log?
 
 [Can anybody tell me details about hs_err_pid.log file generated when Tomcat crashes?](https://stackoverflow.com/a/8121186/1087122)</br>

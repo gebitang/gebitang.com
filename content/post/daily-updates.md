@@ -1143,6 +1143,35 @@ sed如何转义单引号和双引号：如果外面是双引号，里面的双�
 sed -i "s/GRUB_CMDLINE_LINUX=\"\"/GRUB_CMDLINE_LINUX=\"net.ifnames=0 biosdevname=0\"/g" /etc/default/grub
 
 ```
+### 修改18.04的网卡默认名称
+[configure static IP address on Ubuntu 18.04](https://linuxconfig.org/how-to-configure-static-ip-address-on-ubuntu-18-04-bionic-beaver-linux)
+[How to Configure Network Static IP Address in Ubuntu 18.04](https://www.tecmint.com/configure-network-static-ip-address-in-ubuntu/)
+[Ubuntu 18.04 网卡配置IP](https://blog.csdn.net/peyte1/article/details/80509056)
+
+编辑 `/etc/netplan/`文件夹下的 `/etc/netplan/01-network-manager-all.yaml` (最后的文件名可能不同)。然后执行 `netplan apply`命令立即生效
+
+```
+# This file describes the network interfaces available on your system
+# For more information, see netplan(5).
+network:
+  version: 2
+  renderer: networkd
+  ethernets:
+    enp0s3:
+      dhcp4: yes
+    enp0s8:
+      dhcp4: no
+      dhcp6: no
+      # /24意味着掩码为 255.255.255.0
+      addresses: [192.168.56.110/24, ]
+      gateway4:  192.168.56.1
+      nameservers:
+              addresses: [8.8.8.8, 8.8.4.4]
+```
+[ip段/数字，如192.168.0.1/24的意思是什么](https://blog.csdn.net/www3300300/article/details/38680843)
+
+表示掩码用二进制表示时1的位数
+比如/24表示11111111.11111111.11111111.00000000,就是255.255.255.0
 
 ### 修改16.04的网卡默认名称
 

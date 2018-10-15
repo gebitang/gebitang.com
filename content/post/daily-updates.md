@@ -2019,6 +2019,27 @@ man command
 ``` 
 查看命令详情 
 
+### 使用jq格式化json
+
+需要先安装 `sudo apt install -u jq`
+
+```
+cat config/devices.txt |jq . 
+
+{
+    "brand": "360",
+    "displayed": true,
+    "idealName": " 10.35.16.20 [360 1703-M01] _1-5 [864848031310516 23] ",
+    "imei": "864848031310516",
+    "keyID": "10.35.16.20__1-5",
+    "model": "1703-M01",
+    "online": true,
+    "position": {
+      "column": 7,
+      "row": 2
+}
+```
+
 ### 收集进程的线程详细信息
 
 ```

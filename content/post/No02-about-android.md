@@ -11,7 +11,90 @@ topics = [
 toc = true
 +++
 
-### insufficient permissions for device
+
+## Unable to add window. Permission denied for this window type
+
+[Unable to add window. Permission denied for this window type](https://stackoverflow.com/a/35716156/1087122)
+
+If the app targets API level 23 or higher, the app user must explicitly grant this permission to the app through a permission management screen. 
+
+```
+private static final int OVERLAY_PERMISSION_REQ_CODE = 100;
+    private Context context;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        context = MainActivity.this;
+
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.M)
+            @Override
+            public void onClick(View view) {
+                //add the service here
+                //make the button gone
+
+                if ((Build.VERSION.SDK_INT >= 23)) {
+                    if (!Settings.canDrawOverlays(context)) {
+                        Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
+                                Uri.parse("package:" + getPackageName()));
+                        startActivityForResult(intent, OVERLAY_PERMISSION_REQ_CODE);
+                    } else if (Settings.canDrawOverlays(context)) {
+                        startService(new Intent(context, FloatingCircle.class));
+                    }
+                }
+                else
+                {
+                    startService(new Intent(context, FloatingCircle.class));
+                }
+
+            }
+        });
+
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == OVERLAY_PERMISSION_REQ_CODE) {
+            startService(new Intent(context, FloatingCircle.class));
+
+        }
+    }
+```
+
+## Unable to instantiate service
+
+You service needs to have a public no-args constructor. Otherwize, Android will not be able to instantiate it.
+[Unable to instantiate service](https://stackoverflow.com/questions/5027147/android-runtimeexception-unable-to-instantiate-the-service) 
+
+需要一个无参的构造函数
+
+## Android Studio
+
+
+### “cannot resolve symbol R” in Android Studio
+
+[“cannot resolve symbol R” in Android Studio](https://stackoverflow.com/questions/17054000/cannot-resolve-symbol-r-in-android-studio)
+
+1. 确保xml文件没有错误内容；
+2. clean project and build and sync 
+
+* Build -> Clean Project 
+* File -> Sync Project with Gradle Files (tools bar with circle icon)
+
+### Cannot resolve symbol 'xxx'
+
+AS特有的诡异问题。现象为：gradle build成功，但编辑器里总是提示Cannot resolve symbol 'xxx'。
+
+1. invalidate cache and restart 不一定好使；
+2. clean and rebuild project也无效
+3. 这时候，先需要将dependencies里对应的内容先注销（sync一次），再重新打开注释的dependencies内容，再sync一次
+
+## insufficient permissions for device
 
 need to restart adb server. `adb kill-server ； adb start-server`
 

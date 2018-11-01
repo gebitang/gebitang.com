@@ -1546,6 +1546,7 @@ reboot   system boot  4.4.0-62-generic Tue Sep 19 18:50   still running
 # top命令的提示信息中也有
 ```
 
+
 ### 16.04root密码及用户管理
 
 1. 默认root密码是随机的，即每次开机都有一个新的root密码
@@ -1555,6 +1556,36 @@ reboot   system boot  4.4.0-62-generic Tue Sep 19 18:50   still running
 
 #### 用户管理
 [Linux查看和剔除当前登录用户](https://www.cnblogs.com/saptechnique/archive/2012/04/10/2441383.html)
+
+root权限，更多信息，[参考](http://www.cnblogs.com/guangbei/archive/2010/04/26/1721163.html)
+
+/etc/group 的内容包括用户组（Group）、用户组口令、GID及该用户组所包含的用户（User），每个用户组一条记录；格式如下：
+`group_name:passwd:GID:user_list `
+在/etc/group 中的每条记录分四个字段：〔用户组名称〕：〔用户组密码〕：〔GID〕:〔用户列表〕
+
+###useradd 添加用户
+
+[linux下创建用户](http://www.cnblogs.com/ylan2009/articles/2321177.html)
+
+```
+（也可以使用adduser）用来创建新的用户帐号。参数：
+-d 设置新用户的登陆目录
+-e 设置新用户的停止日期，日期格式为MM/DD/YY
+-f 帐户过期几日后永久停权。当值为0时帐号则立刻被停权。而当值为-1时则关闭此功能。预设值为-1
+-g 使新用户加入群组
+-G 使新用户加入一个新组。每个群组使用逗号“，”隔开，不可以夹杂空白字
+-s 指定新用户的登陆Shell
+-u 设定新用户的ID值
+如：useradd getbitang -d /home/gebitang -u 525 -s /bin/bash 默认新用户就在自己同名的组里
+成功创建一个新用户以后，在/etc/passwd文件中就会增加一行该用户的信息，其格式如下：
+〔用户名〕：〔密码〕：〔UID〕：〔GID〕：〔身份描述〕：〔主目录〕：〔登陆Shell〕
+其中个字段被冒号“：”分成7各部分。
+由于小于500的UID和GID一般都是系统自己保留，不用做普通用户和组的标志，
+新增加的用户和组一般都是UID和GID大于500的。
+
+```
+**可以使用`usermod`修改用户的信息，如： `usermod –d/home/user2 –s/bin/bash user2`** 使用`-s /sbin/nologin`表示不用于登录
+
 ```
 #查看当前登录用户，需要root权限 w
 # 第一列是用户名,
@@ -1574,7 +1605,19 @@ root     pts/0        10.35.0.4        Fri Jan 19 15:20   still logged in
 home   pts/0        10.34.18.238     Mon Jan  8 08:08 - 08:28  (00:20)
 root     pts/0        10.35.0.4        Thu Jan  4 15:39 - 15:41  (00:01)
 
+# 新建用户 
 ```
+
+### passwd 修改密码 
+新用户需要制定密码才可以登录。 `passwd gebitang`
+根据系统的提示信息输入两次密码，系统会显示：
+
+> passwd ：:all authentication tokens updated successfully
+
+删除用户： `userdel -r gebitang` -r将用户目录下的文档一并删除。在其他位置上的文档也将一一找出并删除。
+新建群组：`groupadd -g 555 testgroup`
+删除群组： `groupdel testgroup`
+
 
 ### 命令行快捷键
 
@@ -1622,9 +1665,11 @@ sudo chattr +i /etc/resolv.conf
 sudo chattr -i /etc/resolv.conf
 ```
 
-### 查看系统版本 cat /etc/issue
+### 查看系统版本 cat /proc/version 
 
 ```
+cat /proc/version
+
 root@testin-DH:~# lsb_release -a
 No LSB modules are available.
 Distributor ID:	Ubuntu
@@ -2591,7 +2636,7 @@ sh -c "$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/to
 
 ```
 
-###命令行直接打开指定文件目录
+### 命令行直接打开指定文件目录
 ```
 # 安装 
 sudo apt install libgnome2-bin 
@@ -2605,6 +2650,8 @@ gnome-open path/to/destination
 ## Git命令使用
 可配合GUI工具和命令行工具参考。
 
+### ssh variant 'simple' does not support setting port
+update setting for git： `git config --global ssh.variant ssh`
 
 ### Git Bash: Could not open a connection to your authentication agent
 生成公钥添加到对应的网站后，直接clone时，可能提示无法验证。

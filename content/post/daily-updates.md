@@ -388,6 +388,62 @@ D:\openSources\VocabHunter>
 
 ## Mysql
 
+### 重置auto_increment初始值
+
+[TRUNCATE TABLE 语法](https://blog.csdn.net/weixin_36210698/article/details/70176652)
+```
+-- 1. 将数据全部删除，而且重新定位自增的字段
+truncate table 你的表名
+
+-- 2. 直接重置autoIncrement的值
+ALTER TABLE table_name AUTO_INCREMENT = 1;
+```
+
+### 复制表结构
+
+[复制表结构](https://www.cnblogs.com/chenmh/p/5644644.html)
+
+```
+-- like方法能一模一样的将一个表的结果复制生成一个新表，
+-- 包括复制表的备注、索引、主键外键、存储引擎等。
+CREATE TABLE IF NOT EXISTS taskInterveneData LIKE taskRecord;
+
+-- select 方法将复制完整的数据和结构 
+-- 其它表属性都有系统的配置文件决定；包括存储引擎、默认字符集等都是有系统的默认配置所决定
+CREATE TABLE IF NOT EXISTS tb_base_select
+AS
+SELECT *
+FROM tb_base;
+```
+
+
+### 查询数据库大小
+
+[SQL命令查看Mysql数据库大小](https://blog.csdn.net/atec2000/article/details/7041352)
+
+```
+1、进入information_schema 数据库（存放了其他的数据库的信息）
+use information_schema;
+
+2、查询所有数据的大小：
+SELECT concat(round(SUM(data_length / 1024 / 1024), 2), 'MB') AS data
+FROM tables;
+
+3、查看指定数据库的大小：
+比如查看数据库home的大小
+SELECT concat(round(SUM(data_length / 1024 / 1024), 2), 'MB') AS data
+FROM tables
+WHERE table_schema = 'home';
+
+4、查看指定数据库的某个表的大小
+比如查看数据库home中 members 表的大小
+SELECT concat(round(SUM(data_length / 1024 / 1024), 2), 'MB') AS data
+FROM tables
+WHERE table_schema = 'home'
+    AND table_name = 'members';
+```
+ 
+
 ### 查看表结构 
 ```
 desc `tableName`
@@ -510,6 +566,22 @@ alter table test change address address char(40)
 
 --修改表列名
 alter table test change  column address address1 varchar(30)
+
+-- 删除表
+DROP TABLE  tbl_name;
+-- 或者是
+DROP TABLE IF EXISTS tbl_name;
+
+-- 删除表记录
+DELETE [LOW_PRIORITY] [QUICK] [IGNORE] FROM tbl_name 
+
+[WHERE where_definition] 
+
+[ORDER BY ...] 
+
+[LIMIT row_count] 
+
+delete from friends;
 ```
 
 ## iTerm2 ssh登录后无法显示中文

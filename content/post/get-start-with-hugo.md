@@ -19,6 +19,17 @@ toc = true
 
 <!--more-->
 
+
+## build draft
+[generate drafted content ](https://www.codestudies.net/hugo/recipes/generate-draft-content/)
+```
+hugo server --watch --verbose --buildDrafts
+hugo --buildDrafts=false
+hugo -D=false
+hugo -D=F
+```
+
+
 ## Step 1. Install Hugo
 
 Goto [hugo releases](https://github.com/spf13/hugo/releases) and download the

@@ -388,6 +388,15 @@ D:\openSources\VocabHunter>
 
 ## Mysql
 
+### 查看表结构 
+```
+desc `tableName`
+
+desc 表名;
+show columns from 表名;
+describe 表名;
+show create table 表名;
+```
 ### 查询数据库版本号 select @@Version
 
 ### CLIENT_PLUGIN_AUTH is required 报错
@@ -481,6 +490,8 @@ SELECT FROM_UNIXTIME(ii.match_time/1000), ii.* FROM `intervene_info` as ii
 ```
 
 ### 修改表名、列名
+
+[添加列，修改列，删除列](https://blog.csdn.net/ws84643557/article/details/6939846)
 
 ```
 --修改表名 
@@ -1098,6 +1109,52 @@ mvn -U clean install
 dependency注意空格格式
 
 ## linux 环境
+
+### Gtk-Message: 23:27:47.368: Failed to load module "canberra-gtk-module"
+
+1.  先按照对应的lib库；
+2. 依然报错后，使用 cat + more( ` cat  log-20181105232733.txt|more`)的方式可以查看。 会先报错，然后可以恢复正常。 
+
+[Failed to load module “canberra-gtk-module” … but already installed](https://askubuntu.com/q/342202)
+
+```
+# not work
+apt-get install libcanberra-gtk-module:i386
+# not work 
+apt install libcanberra-gtk-module libcanberra-gtk3-module
+
+##whole log
+root@testin-OptiPlex-7050:/home/testin/桌面/xcdir/_logs# apt install libcanberra-gtk
+libcanberra-gtk0            libcanberra-gtk3-dev        libcanberra-gtk-common-dev  libcanberra-gtk-module
+libcanberra-gtk3-0          libcanberra-gtk3-module     libcanberra-gtk-dev
+root@testin-OptiPlex-7050:/home/testin/桌面/xcdir/_logs# apt install libcanberra-gtk
+libcanberra-gtk0            libcanberra-gtk3-dev        libcanberra-gtk-common-dev  libcanberra-gtk-module
+libcanberra-gtk3-0          libcanberra-gtk3-module     libcanberra-gtk-dev
+root@testin-OptiPlex-7050:/home/testin/桌面/xcdir/_logs# apt install libcanberra-gtk-module
+正在读取软件包列表... 完成
+正在分析软件包的依赖关系树
+正在读取状态信息... 完成
+libcanberra-gtk-module 已经是最新版 (0.30-5ubuntu1)。
+升级了 0 个软件包，新安装了 0 个软件包，要卸载 0 个软件包，有 6 个软件包未被升级。
+root@testin-OptiPlex-7050:/home/testin/桌面/xcdir/_logs# sed -n '1,30p' log-20181105232733.txt
+Gtk-Message: 23:27:47.368: Failed to load module "canberra-gtk-module"
+log4j:ERROR setFile(null,true) call failed.
+java.io.FileNotFoundException: /home/testin/桌面/xcdir/logs/debug.log (权限不够)
+        at java.io.FileOutputStream.open0(Native Method)
+        at java.io.FileOutputStream.open(FileOutputStream.java:270)
+        at java.io.FileOutputStream.<init>(FileOutputStream.java:213)
+        at java.io.FileOutputStream.<init>(FileOutputStream.java:133)
+        at org.apache.log4j.FileAppender.setFile(FileAppender.java:294)
+        at org.apache.log4j.FileAppender.activateOptions(FileAppender.java:165)
+        at org.apache.log4j.DailyRollingFileAppender.activateOptions(DailyRollingFileAppender.java:223)
+        at org.apache.log4j.config.PropertySetter.activate(PropertySetter.java:307)
+        at org.apache.log4j.config.PropertySetter.setProperties(PropertySetter.java:172)
+        at org.apache.log4j.config.PropertySetter.setProperties(PropertySetter.java:104)
+        at org.apache.log4j.PropertyConfigurator.parseAppender(PropertyConfigurator.java:842)
+        at org.apache.log4j.PropertyConfigurator.parseCategory(PropertyConfigurator.java:768)
+        at org.apache.log4j.PropertyConfigurator.parseCatsAndRenderers(PropertyConfigurator.java:672)
+
+```
 
 ### 修改core文件配置
 
@@ -3079,6 +3136,8 @@ netsh wlan set hostednetwork mode=allow ssid=cai key=12345678
 
 ### 获取时间戳
 [获取系统日期、时间戳记](http://atgfss.iteye.com/blog/354054)</br>
+[get current time in windows command line](https://stackoverflow.com/questions/203090/how-do-i-get-current-datetime-on-the-windows-command-line-in-a-suitable-format/)
+
 
 格式： %date:~x,y%以及%time:~x,y% </br>
 说明： x是开始位置，y是取得字符数 </br>
@@ -3087,6 +3146,31 @@ netsh wlan set hostednetwork mode=allow ssid=cai key=12345678
 格式： %date:~0,4%%date:~5,2%%date:~8,2%%time:~0,2%%time:~3,2%%time:~6,2% 
 结果： 20180316175313 
 ```
+
+### bat注释 
+[bat 的注释方法](https://blog.csdn.net/zhangmiaoping23/article/details/56839106)
+
+在批处理中，段注释有一种比较常用的方法：
+
+     goto start
+      = 可以是多行文本，可以是命令
+      = 可以包含重定向符号和其他特殊字符
+      = 只要不包含 :start 这一行，就都是注释
+     :start
+
+这样会跳过之间的三行，也就相当于注释
+
+
+另外，还有其他各种注释形式，比如：
+
+1. :: 注释内容（第一个冒号后也可以跟任何一个非字母数字的字符）
+2. rem 注释内容（不能出现重定向符号和管道符号）
+3. echo 注释内容（不能出现重定向符号和管道符号）〉nul
+4. if not exist nul 注释内容（不能出现重定向符号和管道符号）
+5. :注释内容（注释文本不能与已有标签重名）
+6. %注释内容%（可以用作行间注释，不能出现重定向符号和管道符号）
+7. goto 标签 注释内容（可以用作说明goto的条件和执行内容）
+8. :标签 注释内容（可以用作标签下方段的执行内容）
 
 ### CMD重定向
 

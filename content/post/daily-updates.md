@@ -397,6 +397,8 @@ truncate table 你的表名
 
 -- 2. 直接重置autoIncrement的值
 ALTER TABLE table_name AUTO_INCREMENT = 1;
+-- 可以先删除表内容 
+delete from table_name;
 ```
 
 ### 复制表结构

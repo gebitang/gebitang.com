@@ -1042,6 +1042,15 @@ slice2java --output-dir=output/dir/path xxx.ice
 - JDK版本不匹配
 - jar包缺失或冲突 
 
+### 设置背景图片
+
+Ctrl+Shift+A (Help -> Find Action) --> Set background image.
+
+### 全屏模式
+
+Ctrl+Alt+S (in Settings) --> Search "full screen" (Toggle Full Screen mode) --> add new keymap.
+
+for me, it's `Ctrl+Shift+G`
 
 ## Markdown 语法练习
 This is a footnote.[^1]
@@ -1384,6 +1393,8 @@ test
 ### 配置定时任务 crontab
 
 [定时任务Crontab命令详解](https://www.cnblogs.com/intval/p/5763929.html)
+
+查看crontab的log信息： `/var/log/cron`或 `/var/log/syslog`
 
 minute hour day month week command
 

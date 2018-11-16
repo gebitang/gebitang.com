@@ -1193,6 +1193,31 @@ dependency注意空格格式
 
 ## linux 环境
 
+### 16.04 同步时间
+[How To Set Up Time Synchronization on Ubuntu 16.04](https://www.digitalocean.com/community/tutorials/how-to-set-up-time-synchronization-on-ubuntu-16-04)
+时间不同步将导致log文件无法生产。
+```
+
+$>timedatectl
+      Local time: Fri 2018-11-16 10:04:45 CST
+  Universal time: Fri 2018-11-16 02:04:45 UTC
+        RTC time: Fri 2018-11-16 02:04:45
+       Time zone: Asia/Chongqing (CST, +0800)
+ Network time on: yes
+NTP synchronized: yes
+ RTC in local TZ: no
+
+# avaliable time zone 
+timedatectl list-timezones
+
+# set time zone 
+timedatectl set-timezone Asia/Shanghai
+
+# check time 
+date 
+```
+
+
 ### Gtk-Message: 23:27:47.368: Failed to load module "canberra-gtk-module"
 
 1.  先按照对应的lib库；

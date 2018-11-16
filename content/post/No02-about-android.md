@@ -12,6 +12,38 @@ toc = true
 +++
 
 
+## gradle dependencies
+
+[dependencies types](https://developer.android.google.cn/studio/build/dependencies)
+
+```
+// Dependency on a local library module
+implementation project(":mylibrary")
+
+// Dependency on local binaries
+implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+// Dependency on a remote binary
+implementation 'com.example.android:app-magic:12.3'
+```
+
+dependency configurations
+
+```
+implementation
+api
+compileOnly
+runtimeOnly
+annotationProcessor
+```
+
+## proguard 
+proguard not work for test app, [see this](https://github.com/googlesamples/android-testing-templates/issues/27)
+
+## build apk without test app
+
+you need to go to Build > Build APK(s) to have a non testable release apk that you can submit to the store.
+
 ## Unable to add window. Permission denied for this window type
 
 [Unable to add window. Permission denied for this window type](https://stackoverflow.com/a/35716156/1087122)

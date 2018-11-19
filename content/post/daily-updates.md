@@ -1308,6 +1308,20 @@ sed如何转义单引号和双引号：如果外面是双引号，里面的双�
 sed -i "s/GRUB_CMDLINE_LINUX=\"\"/GRUB_CMDLINE_LINUX=\"net.ifnames=0 biosdevname=0\"/g" /etc/default/grub
 
 ```
+
+### Bad: new password is too simple 
+
+使用root用户进行密码修改即可。 `sudo su; passwd username;` or `sudo passwd username`
+
+### 查看本地网关
+
+`netstat -rn`
+
+### Netplan error in network definition expected mapping
+
+[Netplan error in network definition expected mapping](https://askubuntu.com/questions/1088848/netplan-error-in-network-definition-expected-mapping)
+a netplan configuration is base on yaml, when looking your configuration. i think the indentation is error because its have 3 space. 
+
 ### 修改18.04的网卡默认名称
 [configure static IP address on Ubuntu 18.04](https://linuxconfig.org/how-to-configure-static-ip-address-on-ubuntu-18-04-bionic-beaver-linux)
 [How to Configure Network Static IP Address in Ubuntu 18.04](https://www.tecmint.com/configure-network-static-ip-address-in-ubuntu/)

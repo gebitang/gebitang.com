@@ -162,6 +162,27 @@ dpi范围 密度
 
 ## Android problem
 
+### debug on device 
+
+[debug on device](https://developer.android.com/studio/debug/)
+
+You must use a `build variant` that includes `debuggable true` in the build configuration. 
+```
+android {
+    buildTypes {
+        customDebugType {
+            debuggable true
+            ...
+        }
+    }
+}
+```
+
+### Waiting For Debugger
+
+[Android Studio stuck at “Waiting For Debugger” forever](https://stackoverflow.com/questions/27436050/debugging-with-android-studio-stuck-at-waiting-for-debugger-forever)
+> menu -> Run -> Attach debugger to Android process
+
 ### DELETE_FAILED_DEVICE_POLICY_MANAGER 
 
 [应用程序不能卸载](https://blog.csdn.net/the01hierarch/article/details/7313071)是因为在手机的`安全-->设备管理器`中进行了激活，只有取消激活后才能删除。

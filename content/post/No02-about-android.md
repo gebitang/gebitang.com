@@ -162,6 +162,62 @@ dpi范围 密度
 
 ## Android problem
 
+[manifest](https://developer.android.com/guide/topics/manifest/receiver-element)
+
+### Adding JAR files to your testing classpath
+[Adding JAR files to your testing classpath](https://stackoverflow.com/a/32566894/1087122)
+package jar files under testlibs folder. 
+```
+dependencies {
+    ...
+    testCompile fileTree(dir: 'testlibs', include: ['*.jar'])
+}
+```
+
+
+### download built-tools directly
+
+[to install old version of Android build tools from command line](https://stackoverflow.com/questions/26016770/how-to-install-old-version-of-android-build-tools-from-command-line)
+
+manually open the XML file that is shown when during `android sdk list` [xml detail](https://dl.google.com/android/repository/repository-11.xml)
+
+```
+<sdk:archive>
+ <!-- Built on: Mon Jun  4 07:14:07 2018. -->
+<sdk:size>20828006</sdk:size>
+<sdk:checksum type="sha1">cf20720e452b642d5eb59dabe05c0c729b36ec75</sdk:checksum>
+<sdk:url>build-tools_r20-windows.zip</sdk:url>
+<sdk:host-os>windows</sdk:host-os>
+</sdk:archive>
+```
+
+### update UI from background service
+
+[update UI from background service](https://medium.com/@anitaa_1990/how-to-update-an-activity-from-background-service-or-a-broadcastreceiver-6dabdb5cef74)
+
+3 basic implementations:
+
+- Using LocalBroadcastReceivers
+- Using ResultReceiver
+- Using Handlers
+
+[How to update UI in a BroadcastReceiver](https://stackoverflow.com/questions/14643385/how-to-update-ui-in-a-broadcastreceiver)
+
+[Does BroadcastReceiver.onReceive always run in the UI thread?](https://stackoverflow.com/questions/5674518/does-broadcastreceiver-onreceive-always-run-in-the-ui-thread)
+
+[BroadcastReceiver#onReceive](https://developer.android.com/reference/android/content/BroadcastReceiver#onReceive(android.content.Context,%20android.content.Intent))
+
+[Using lists in Android wth ListView - Tutorial](http://www.vogella.com/tutorials/AndroidListView/article.html)
+
+
+### adb reverse
+
+[Network Calls from Android Device to Laptop over USB via ADB](https://handstandsam.com/2016/02/01/network-calls-from-android-device-to-laptop-over-usb-via-adb/)
+Android’s “adb reverse” command is available in Lollipop and higher versions of Android (Platform 21+) 
+
+[cannot run app on Android 4.4 device](https://github.com/facebook/react-native/issues/2885)
+The documentation provided is for Android 5.0 and above as adb reverse works only from Android 5.0 and above.
+
 ### debug on device 
 
 [debug on device](https://developer.android.com/studio/debug/)

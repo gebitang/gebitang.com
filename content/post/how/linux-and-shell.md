@@ -12,12 +12,6 @@ topics = [
 toc = true
 +++
 
-hugo server --watch --verbose --buildDrafts
-
-./barrier &
-
-Shadowsocks
-
 
 ## linux 环境
 
@@ -39,9 +33,17 @@ Root can run commands as other users via the "su" command. I believe if you crea
 sudo apt-get -y instal zsh
 
 # zsh --version to check version
-
-
 ```
+
+### screenshots and screencasts
+
+[screenshots and screencasts](https://help.ubuntu.com/stable/ubuntu-help/screen-shot-record.html)
+
+- Prt Scrn to take a screenshot of the desktop.
+- Alt+Prt Scrn to take a screenshot of a window.
+- Shift+Prt Scrn to take a screenshot of an area you select.
+
+You can also hold down Ctrl with any of the above shortcuts to copy the screenshot image to the clipboard instead of saving it.
 
 ### curl命令调用post方法
 
@@ -416,6 +418,7 @@ exec ./run.sh
 1. 点击 `Manage Installed Language` ，初次进入会安装些字体等相关信息。重启后使之生效。
 2. 点击 + 添加 `Chinese(Intelligent Pinyin)`。重启后使之生效。 
 
+在中文输入情况下，Shift键可以切换简繁体
 
 ### CentOS Another app is currently holding the yum lock; waiting for it to exit...
 

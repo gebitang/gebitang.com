@@ -16,6 +16,25 @@ toc = true
 
 [manifest](https://developer.android.com/guide/topics/manifest/receiver-element)
 
+### app_process command
+
+[app_process command in Android](http://blog.djodjo.org/?p=414)
+
+`am start -n yourpackagename/.activityname` “am” is just a shell script and what stays in the base of the am script is our app_process binary:
+
+```
+root@android:/ # cat /system/bin/am
+cat /system/bin/am
+# Script to start "am" on the device, which has a very rudimentary
+# shell.
+#
+base=/system
+export CLASSPATH=$base/framework/am.jar
+exec app_process $base/bin com.android.commands.am.Am "$@"
+root@android:/ #
+```
+
+
 ### Secure Window
 
 ```

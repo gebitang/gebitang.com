@@ -16,6 +16,32 @@ toc = true
 
 [manifest](https://developer.android.com/guide/topics/manifest/receiver-element)
 
+### adb no permissions
+
+[Android Debug Bridge (adb) device - no permissions](https://stackoverflow.com/questions/14460656/android-debug-bridge-adb-device-no-permissions)
+```
+sudo ./adb kill-server
+sudo ./adb start-server
+adb devices
+
+# or adn new rule https://stackoverflow.com/a/19291975/1087122
+lsusb
+Bus 002 Device 002: ID 8087:8000 Intel Corp. 
+Bus 002 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
+Bus 001 Device 002: ID 8087:8008 Intel Corp. 
+Bus 001 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
+Bus 004 Device 001: ID 1d6b:0003 Linux Foundation 3.0 root hub
+Bus 003 Device 009: ID 18d1:4ee7 Google Inc. 
+
+# Create a file /etc/udev/rules.d/99-adb.rules containing the following line:
+ATTRS{idVendor}=="18d1", ATTRS{idProduct}=="4ee7", ENV{ID_GPHOTO2}="1", ENV{GPHOTO2_DRIVER}="proprietary", ENV{ID_MEDIA_PLAYER}="1", MODE="0666", GROUP="plugdev"
+
+#Restart udev
+$ sudo udevadm control --reload-rules
+$ sudo service udev restart
+
+```
+
 ### app_process command
 
 [app_process command in Android](http://blog.djodjo.org/?p=414)

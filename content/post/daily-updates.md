@@ -1170,9 +1170,11 @@ git commit -a
 4. 如果不进行config的配置，在添加ssh key之后，将统一使用global的设置
 
 
-### ssh config 示例
+### ssh config 示例 多个rsa文件时
 [SSH CONFIG FILE](https://www.ssh.com/ssh/config/)</br>
 [OpenSSH Config File Examples](https://www.cyberciti.biz/faq/create-ssh-config-file-on-linux-unix/)
+
+配置了多个公钥后，需要针对不同的站点进行配置，否则会在git clone等交互操作时依然提示需要输入秘密。
 
 配置了config文件后，idea中会根据这个配置文件使用对应的key[Using Git integration](https://www.jetbrains.com/help/idea/using-git-integration.html#SSH-access)
 

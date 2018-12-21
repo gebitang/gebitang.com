@@ -1472,7 +1472,9 @@ find test/ -name "*.jpg" -exec cp {} train \;
 ```
 
 ### linux修改文件所有者和文件所在组
- 
+
+[give user write access to folder](https://askubuntu.com/questions/402980/give-user-write-access-to-folder)
+
 ```
 # change group
 chgrp -R  用户名    文件名 
@@ -1487,6 +1489,10 @@ chown -R 用户名   文件名  -R
 第一组（user）：rw- = 4+2+0 = 6
 第二组（group）：r-- = 4+0+0 = 4
 第三组（others）：r-- = 4+0+0 = 4
+
+# example: This will make the user & group testuser the owner of the file of /var/www/test/public_html
+sudo chown -R testuser:testuser /var/www/test/public_html
+
 ```
 
 ### zsh 安装使用

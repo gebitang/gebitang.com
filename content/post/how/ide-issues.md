@@ -21,6 +21,15 @@ settings -> keymap -> Main Menu -> Navigate -> File Structure
 
 所有快捷键都可以从这里进行对于的修改
 
+### linux环境下提示 “external changes too low”
+[Inotify Watches Limit](https://confluence.jetbrains.com/display/IDEADEV/Inotify+Watches+Limit)
+
+```
+#1. Add the following line to either /etc/sysctl.conf file or a new *.conf file (e.g. idea.conf) under /etc/sysctl.d/ directory:
+fs.inotify.max_user_watches = 524288
+#2. Then run this command to apply the change:
+sudo sysctl -p --system
+```
 
 ### 找不到jar包的异常
 工程A直接依赖jarA，但jarA依赖jarB，此时如果jarB没有正常引入：

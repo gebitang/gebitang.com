@@ -19,6 +19,16 @@ Root can run commands as other users via the "su" command. I believe if you crea
 
 `su -c /path/to/your/script username`
 
+### 命令行打开目录，设置别名 
+
+```
+nautilus
+
+#设置别名： update profile such as ~/.bashrc file
+alias open="nautilus"
+```
+ 
+
 ### ubuntu 18.04开机启动
 
 [设置开机启动脚本](http://www.cnblogs.com/defifind/p/9285456.html)， 18.04使用了 [SYSTEMD](https://coolshell.cn/articles/17998.html)。

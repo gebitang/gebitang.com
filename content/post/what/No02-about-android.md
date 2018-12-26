@@ -16,6 +16,34 @@ toc = true
 
 [manifest](https://developer.android.com/guide/topics/manifest/receiver-element)
 
+### android-studio as desktop entry
+
+[How to add Android Studio to the launcher?](https://askubuntu.com/questions/298857/how-to-add-android-studio-to-the-launcher)
+
+Configure -> Create Desktop Entry
+
+or
+
+```
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=Android Studio
+Exec="/home/username/Programs/AndroidStudio/bin/studio.sh" %f
+Icon=/home/username/Programs/AndroidStudio/bin/idea.png
+Categories=Development;IDE;
+Terminal=false
+StartupNotify=true
+StartupWMClass=jetbrains-android-studio
+Name[en_GB]=android-studio.desktop
+
+```
+
+### logcat -v time "*:I" 顺序
+此顺序可在各个版本上使用，获取到包含时间戳的log信息。
+
+使用 logcat "*:I" -v time 在低于5.0版本的设备上无法获取到时间戳。 
+
 ### adb no permissions
 
 [Android Debug Bridge (adb) device - no permissions](https://stackoverflow.com/questions/14460656/android-debug-bridge-adb-device-no-permissions)
@@ -393,115 +421,7 @@ Enter key password for <gebitang.keystore>
 # list?
 adb shell dumpsys -l
 Currently running services:
-DockObserver
-OEMExService
-SurfaceFlinger
-accessibility
-account
-activity
-alarm
-android.security.keystore
-appops
-appwidget
-audio
-backup
-battery
-batteryproperties
-batterystats
-bluetooth_manager
-carrier_config
-clipboard
-cneservice
-com.qualcomm.location.izat.IzatService
-commontime_management
-connectivity
-consumer_ir
-content
-country_detector
-cpuinfo
-dbinfo
-device_policy
-deviceidle
-devicestoragemonitor
-diskstats
-display
-display.qservice
-dreams
-drm.drmManager
-dropbox
-ethernet
-extphone
-fingerprint
-gfxinfo
-graphicsstats
-imms
-ims
-input
-input_method
-iphonesubinfo
-isms
-isub
-jobscheduler
-launcherapps
-listen.service
-location
-lock_settings
-media.audio_flinger
-media.audio_policy
-media.camera
-media.camera.proxy
-media.player
-media.radio
-media.resource_manager
-media.sound_trigger_hw
-media_projection
-media_router
-media_session
-meminfo
-midi
-mount
-netpolicy
-netstats
-network_management
-network_score
-nfc
-notification
-package
-permission
-persistent_data_block
-phone
-power
-print
-processinfo
-procstats
-qtitetherservice
-restrictions
-rttmanager
-samplingprofiler
-scheduling_policy
-search
-sensorservice
-serial
-servicediscovery
-simphonebook
-sip
-statusbar
-telecom
-telephony.registry
-textservices
-trust
-uimode
-updatelock
-usagestats
-usb
-user
-vibrator
-voiceinteraction
-wallpaper
-webviewupdate
-wifi
-wifip2p
-wifiscanner
+...
 window
 
 
@@ -513,112 +433,7 @@ Found 111 services:
 1 sip: [android.net.sip.ISipService]
 2 com.qualcomm.location.izat.IzatService: [com.qualcomm.location.izat.IIzatService]
 3 carrier_config: [com.android.internal.telephony.ICarrierConfigLoader]
-4 phone: [com.android.internal.telephony.ITelephony]
-5 telecom: [com.android.internal.telecom.ITelecomService]
-6 extphone: [com.android.internal.telephony.IExtTelephony]
-7 isms: [com.android.internal.telephony.ISms]
-8 iphonesubinfo: [com.android.internal.telephony.IPhoneSubInfo]
-9 simphonebook: [com.android.internal.telephony.IIccPhoneBook]
-10  isub: [com.android.internal.telephony.ISub]
-11  qtitetherservice: [com.qualcomm.qti.tetherstatsextension.ITetherService]
-12  nfc: [android.nfc.INfcAdapter]
-13  cneservice: [com.quicinc.cne.ICNEManager]
-14  imms: [com.android.internal.telephony.IMms]
-15  media_projection: [android.media.projection.IMediaProjectionManager]
-16  launcherapps: [android.content.pm.ILauncherApps]
-17  fingerprint: [android.hardware.fingerprint.IFingerprintService]
-18  trust: [android.app.trust.ITrustManager]
-19  media_router: [android.media.IMediaRouterService]
-20  media_session: [android.media.session.ISessionManager]
-21  restrictions: [android.content.IRestrictionsManager]
-22  print: [android.print.IPrintManager]
-23  OEMExService: [com.oem.os.IOemExService]
-24  graphicsstats: [android.view.IGraphicsStats]
-25  dreams: [android.service.dreams.IDreamManager]
-26  commontime_management: []
-27  samplingprofiler: []
-28  diskstats: []
-29  voiceinteraction: [com.android.internal.app.IVoiceInteractionManagerService]
-30  appwidget: [com.android.internal.appwidget.IAppWidgetService]
-31  backup: [android.app.backup.IBackupManager]
-32  jobscheduler: [android.app.job.IJobScheduler]
-33  serial: [android.hardware.ISerialManager]
-34  usb: [android.hardware.usb.IUsbManager]
-35  midi: [android.media.midi.IMidiManager]
-36  DockObserver: []
-37  audio: [android.media.IAudioService]
-38  listen.service: [com.qualcomm.listen.IListenService]
-39  media.radio: [android.hardware.IRadioService]
-40  media.sound_trigger_hw: [android.hardware.ISoundTriggerHwService]
-41  media.audio_policy: [android.media.IAudioPolicyService]
-42  wallpaper: [android.app.IWallpaperManager]
-43  dropbox: [com.android.internal.os.IDropBoxManagerService]
-44  search: [android.app.ISearchManager]
-45  country_detector: [android.location.ICountryDetector]
-46  location: [android.location.ILocationManager]
-47  devicestoragemonitor: []
-48  media.camera: [android.hardware.ICameraService]
-49  notification: [android.app.INotificationManager]
-50  updatelock: [android.os.IUpdateLock]
-51  servicediscovery: [android.net.nsd.INsdManager]
-52  connectivity: [android.net.IConnectivityManager]
-53  ethernet: [android.net.IEthernetManager]
-54  rttmanager: [android.net.wifi.IRttManager]
-55  wifiscanner: [android.net.wifi.IWifiScanner]
-56  wifi: [android.net.wifi.IWifiManager]
-57  wifip2p: [android.net.wifi.p2p.IWifiP2pManager]
-58  netpolicy: [android.net.INetworkPolicyManager]
-59  netstats: [android.net.INetworkStatsService]
-60  network_score: [android.net.INetworkScoreService]
-61  textservices: [com.android.internal.textservice.ITextServicesManager]
-62  network_management: [android.os.INetworkManagementService]
-63  clipboard: [android.content.IClipboard]
-64  statusbar: [com.android.internal.statusbar.IStatusBarService]
-65  device_policy: [android.app.admin.IDevicePolicyManager]
-66  deviceidle: [android.os.IDeviceIdleController]
-67  persistent_data_block: [android.service.persistentdata.IPersistentDataBlockService]
-68  lock_settings: [com.android.internal.widget.ILockSettings]
-69  uimode: [android.app.IUiModeManager]
-70  mount: [IMountService]
-71  accessibility: [android.view.accessibility.IAccessibilityManager]
-72  input_method: [com.android.internal.view.IInputMethodManager]
-73  bluetooth_manager: [android.bluetooth.IBluetoothManager]
-74  input: [android.hardware.input.IInputManager]
-75  window: [android.view.IWindowManager]
-76  alarm: [android.app.IAlarmManager]
-77  consumer_ir: [android.hardware.IConsumerIrService]
-78  vibrator: [android.os.IVibratorService]
-79  sensorservice: [android.gui.SensorServer]
-80  content: [android.content.IContentService]
-81  account: [android.accounts.IAccountManager]
-82  media.camera.proxy: [android.hardware.ICameraServiceProxy]
-83  telephony.registry: [com.android.internal.telephony.ITelephonyRegistry]
-84  scheduling_policy: [android.os.ISchedulingPolicyService]
-85  webviewupdate: [android.webkit.IWebViewUpdateService]
-86  usagestats: [android.app.usage.IUsageStatsManager]
-87  battery: []
-88  processinfo: [android.os.IProcessInfoService]
-89  permission: [android.os.IPermissionController]
-90  cpuinfo: []
-91  dbinfo: []
-92  gfxinfo: []
-93  meminfo: []
-94  procstats: [com.android.internal.app.IProcessStats]
-95  activity: [android.app.IActivityManager]
-96  user: [android.os.IUserManager]
-97  package: [android.content.pm.IPackageManager]
-98  display: [android.hardware.display.IDisplayManager]
-99  power: [android.os.IPowerManager]
-100 appops: [com.android.internal.app.IAppOpsService]
-101 batterystats: [com.android.internal.app.IBatteryStats]
-102 media.resource_manager: [android.media.IResourceManagerService]
-103 media.player: [android.media.IMediaPlayerService]
-104 media.audio_flinger: [android.media.IAudioFlinger]
-105 batteryproperties: [android.os.IBatteryPropertiesRegistrar]
-106 drm.drmManager: [drm.IDrmManagerService]
-107 SurfaceFlinger: [android.ui.ISurfaceComposer]
-108 display.qservice: [android.display.IQService]
-109 android.service.gatekeeper.IGateKeeperService: []
+...
 110 android.security.keystore: [android.security.IKeystoreService]
 
 ```

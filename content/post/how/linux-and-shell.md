@@ -940,11 +940,20 @@ lsof -p pid
 
 ## Shell commands
 
+[LDP](http://www.tldp.org/LDP/abs/html/abs-guide.html)
+
+[Comparison Operators](http://www.tldp.org/LDP/abs/html/abs-guide.html#COMPARISON-OPS)</br>
+[Special Characters](http://www.tldp.org/LDP/abs/html/abs-guide.html#SPECIAL-CHARS)
+
 任何场景下，使用
 ```
 man command
 ``` 
 查看命令详情 
+
+### LDP
+The Linux Documentation Project [LDP](http://www.tldp.org/LDP/abs/html/abs-guide.html)
+
 
 ### sed 查找替换冒号
 

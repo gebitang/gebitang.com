@@ -23,9 +23,21 @@ XCRun			任务开始、提交
 USF				更新设备信息
 ```
 
+提高效率的尝试：
+一月～三月，驻场短信服务平台搭建，现场讨论实现
+五月～六月，web版本大工位验证；iTestinPlus联动方式；扩大单工位支持32台设备；星辰大海模式——websocket
+八月，星辰大海模式重构http方式
 
+OCR上线支持
+视频记录功能
+自建数据统计功能
+防锁屏设计
+账号信息、动态获取账号信息
+自动化干预支持
+同步真机功能、自动化功能
+海外工位支持
 
-
+OCR微服务、证书代理、数据统计正式使用
 
 [maven in five minutes](https://maven.apache.org/guides/getting-started/maven-in-five-minutes.html)
 

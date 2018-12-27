@@ -1085,6 +1085,12 @@ dependency注意空格格式
 ## Git命令使用
 可配合GUI工具和命令行工具参考。
 
+### 查找rep中特定用户的提交记录
+
+[official doc](https://git-scm.com/docs/git-log), [from Stackoverflow](https://stackoverflow.com/a/2954501 )
+```
+git log --since=2018-01-01  --pretty=oneline --author=uername --author=gebitang |wc -l
+```
 ### ssh variant 'simple' does not support setting port
 update setting for git： `git config --global ssh.variant ssh`
 

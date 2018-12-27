@@ -49,6 +49,13 @@ npm@6.4.1 C:\Program Files\nodejs\node_modules\npm
 npm config get registry
 # View registry info for express
 npm info express
+# default registry
+➜  ~ npm config get registry 
+https://registry.npmjs.org/
+➜  ~ npm config set registry https://registry.npm.taobao.org
+➜  ~ npm config get registry                                
+https://registry.npm.taobao.org/
+➜  ~ npm install --global vue-cli
 ```
 
 ```

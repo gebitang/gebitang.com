@@ -39,6 +39,10 @@ Name[en_GB]=android-studio.desktop
 
 ```
 
+### Graphics Buffer 
+
+[Android's Graphics Buffer Management System (Part II: BufferQueue)](https://www.codeproject.com/Articles/990983/Androids-Graphics-Buffer-Management-System-Part-II)
+
 ### logcat -v time "*:I" 顺序
 此顺序可在各个版本上使用，获取到包含时间戳的log信息。
 

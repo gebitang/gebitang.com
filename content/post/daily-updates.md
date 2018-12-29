@@ -673,6 +673,51 @@ drwxrwxr-x    5 600      600          4096 Feb 13  2017 yyy
 ## JVM 
 [my question](https://stackoverflow.com/q/52328614/1087122)
 
+### classLoader
+
+[Do You Really Get Classloaders](https://zeroturnaround.com/rebellabs/rebel-labs-tutorial-do-you-really-get-classloaders/6/)
+
+```
+# No class found
+Variants
+
+ClassNotFoundException
+NoClassDefFoundError
+
+# Helpful
+IDE class lookup (Ctrl+Shift+T in Eclipse)
+find *.jar -exec jar -tf ‘{}’\; | grep MyClass
+URLClassLoader.getUrls() Container specific logs
+
+
+#Wrong class found
+Variants
+
+IncompatibleClassChangeError
+AbstractMethodError
+NoSuch(Method|Field)Error
+ClassCastException, IllegalAccessError
+
+#Helpful
+-verbose:class
+ClassLoader.getResource() javap -private MyClass
+More than one class found
+Variants
+
+LinkageError (class loading constraints violated)
+ClassCastException, IllegalAccessError
+
+#Helpful
+-verbose:class
+ClassLoader.getResource()
+```
+
+### 使用中的lib库不能直接覆盖更新
+
+复制覆盖更新时，可能导致无法找到对应的class, 
+
+    Caused by: java.lang.ClassNotFoundException: 
+
 ### java.rmi.ConnectException: Connection refused to host 
 
 [java.rmi.ConnectException: Connection refused to host: 127.0.1.1](https://stackoverflow.com/q/15685686/1087122)

@@ -16,6 +16,11 @@ toc = true
 
 [manifest](https://developer.android.com/guide/topics/manifest/receiver-element)
 
+### adb forward 
+
+adb forward tcp:6100 tcp:7100 // PC上所有6100端口通信数据将被重定向到手机端7100端口server上
+adb forward tcp:6100 local:logd // PC上所有6100端口通信数据将被重定向到手机端UNIX类型socket上
+
 ### android-studio as desktop entry
 
 [How to add Android Studio to the launcher?](https://askubuntu.com/questions/298857/how-to-add-android-studio-to-the-launcher)

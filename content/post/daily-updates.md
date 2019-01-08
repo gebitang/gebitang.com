@@ -22,6 +22,38 @@ toc = true
 
 ## Python
 
+### 修改系统默认的python的版本
+
+[更改Ubuntu默认python版本的方法](https://www.cnblogs.com/yifugui/p/8649864.html)
+
+修改当前用户的：编辑当前用户的bash config文件，增加一行 `alias python='/usr/bin/python3'`
+
+使用 update-alternatives 为整个系统更改 Python 版本
+```
+➜  ~ su 
+Password: 
+lee# update-alternatives --list python
+update-alternatives: error: no alternatives for python
+lee# ls /usr/bin/python* 
+/usr/bin/python   /usr/bin/python2.7	     /usr/bin/python2-config  /usr/bin/python3.6	 /usr/bin/python3.6m	     /usr/bin/python3-config  /usr/bin/python3m-config
+/usr/bin/python2  /usr/bin/python2.7-config  /usr/bin/python3	      /usr/bin/python3.6-config  /usr/bin/python3.6m-config  /usr/bin/python3m	      /usr/bin/python-config
+lee# update-alternatives --install /usr/bin/python python /usr/bin/python2.7 1
+update-alternatives: using /usr/bin/python2.7 to provide /usr/bin/python (python) in auto mode
+
+#--install 选项使用了多个参数用于创建符号链接。最后一个参数指定了此选项的优先级
+lee# update-alternatives --install /usr/bin/python python /usr/bin/python3.6 2
+update-alternatives: using /usr/bin/python3.6 to provide /usr/bin/python (python) in auto mode
+lee# python --version
+Python 3.6.7
+
+# cofig 
+update-alternatives --config python
+
+# remove 
+update-alternatives --remove python /usr/bin/python2.7
+```
+
+
 ### python2 & 3
 ```
 root@PublicPro:/data# python --version

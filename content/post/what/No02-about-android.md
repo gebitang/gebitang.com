@@ -16,6 +16,18 @@ toc = true
 
 [manifest](https://developer.android.com/guide/topics/manifest/receiver-element)
 
+### decompile android apk
+
+[How to decompile an APK or DEX file on Android platform](https://stackoverflow.com/questions/21010367/how-to-decompile-an-apk-or-dex-file-on-android-platform)
+
+- unzip apk file to get dex file.
+- d2j-dex2jar.bat classes.dex to get 
+- use java decompiler to open jar file.
+
+[Decompile Android .apk](https://medium.com/@felipegi91_89910/decompile-android-apk-62507a04798d)
+
+use `apktool d android.apk` to unzip file.
+
 ### adb forward 
 
 adb forward tcp:6100 tcp:7100 // PC上所有6100端口通信数据将被重定向到手机端7100端口server上

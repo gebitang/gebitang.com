@@ -381,6 +381,24 @@ D:\openSources\VocabHunter>
 
 [gradle tool window missing](https://intellij-support.jetbrains.com/hc/en-us/community/posts/205449130-gradle-tool-window-missing)， 先手动创建一个gradle类型的工程后，gradle工具栏会显示出来，之后再导入gradle工程。
 
+#### gradle 设置代理
+
+[Gradle proxy configuration](https://stackoverflow.com/questions/5991194/gradle-proxy-configuration)
+
+use gradlew to set or update gradl.properties file directly.
+
+```
+#use gradlew 
+gradlew -Dhttp.proxyHost=127.0.0.1 -Dhttp.proxyPort=9527
+gradlew -Dhttps.proxyHost=127.0.0.1 -Dhttps.proxyPort=9527
+
+#gradl.properties
+systemProp.http.proxyHost=127.0.0.1
+systemProp.http.proxyPort=9527
+systemProp.https.proxyHost=127.0.0.1
+systemProp.https.proxyPort=9527
+```
+
 ## Mysql
 
 ### 重置auto_increment初始值

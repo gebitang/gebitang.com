@@ -57,6 +57,8 @@ You can also hold down Ctrl with any of the above shortcuts to copy the screensh
 
 ### curl命令调用post方法
 
+curl: (7) Failed to receive SOCKS4 connect request ack. 原因为本地网络设置了代理服务；关闭本地代理服务之后，需要新启动一个terminal才会生效。
+
 ```
 curl -i -H "Accept:application/json" -H "Content-Type:application/json" -XPOST "http://sss.com/abc/" -d '{"op":"Device.restartDevice","device":{"imei":"866568023794679"}}'
 ```
@@ -1092,6 +1094,7 @@ ab9a814d0d7f412555c48689d6037050  all.log
 1. 安装 `sudo apt-get install zsh` 
 2. 配置默认的sh `chsh -s /bin/zsh` 或 `chsh -s 'which zsh'`，切换为旧bash `chsh -s /bin/bash`
 3. 安装 oh-my-zsh [github repo](https://github.com/robbyrussell/oh-my-zsh)
+4. 手动更新： `upgrade_oh_my_zsh`
 
 ```
 # curl方式

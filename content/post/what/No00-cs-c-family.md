@@ -14,6 +14,13 @@ toc = true
 +++
 
 
+### 双感叹号
+
+两个!是为了把非0值转换成1,而0值还是0。
+在C语言中，所以非0值都表示真。所以!非0值 = 0，而!0 = 1。
+所以!!非0值 = 1，而!!0 = 0
+
+
 ```
 http://journals.ecs.soton.ac.uk/java/tutorial/native1.1/stepbystep/index.html
 http://www.stat.ucla.edu/~dinov/courses_students.dir/04/Winter/STAT130D.dir/STAT130D_notes.dir/JNI_C_example.html

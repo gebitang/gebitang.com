@@ -56,6 +56,14 @@ apk合并上线
 
 技术线：
 Go Deeper, Not Wilder.
+产品化思维：征途、云途
+Z-Y-X：星途
+
+全自动能否实现：征途；征途操作人员+数据标记
+反馈闭环如何建立：问题解决、验证数据
+应该需要怎样的能力：维护多年项目之技术栈；Go Deeper, Not Wilder.
+
+
 
 [maven in five minutes](https://maven.apache.org/guides/getting-started/maven-in-five-minutes.html)
 

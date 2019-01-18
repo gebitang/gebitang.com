@@ -954,6 +954,15 @@ man command
 ### LDP
 The Linux Documentation Project [LDP](http://www.tldp.org/LDP/abs/html/abs-guide.html)
 
+### 创建大文本文件
+
+[How to create a large file in UNIX?](https://unix.stackexchange.com/questions/269180/how-to-create-a-large-file-in-unix)
+[Quickly create a large file on a Linux system](https://stackoverflow.com/questions/257844/quickly-create-a-large-file-on-a-linux-system)
+[How To Quickly Generate A Large File On The Command Line](https://skorks.com/2010/03/how-to-quickly-generate-a-large-file-on-the-command-line-with-linux/)
+
+```
+yes "Some text" | head -n 100000 > large-file
+```
 
 ### sed 查找替换冒号
 

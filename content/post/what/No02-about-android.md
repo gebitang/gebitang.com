@@ -30,6 +30,7 @@ use `apktool d android.apk` to unzip file.
 
 ### adb forward 
 
+adb forward tcp:6100 localabstract:minicap //PC上所有6100端口通信数据将被重定向到手机端minicap的server上
 adb forward tcp:6100 tcp:7100 // PC上所有6100端口通信数据将被重定向到手机端7100端口server上
 adb forward tcp:6100 local:logd // PC上所有6100端口通信数据将被重定向到手机端UNIX类型socket上
 

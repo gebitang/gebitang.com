@@ -20,6 +20,11 @@ toc = true
 
 <!--more-->
 
+## Java Video
+
+[javacv lib](https://github.com/bytedeco/javacv) and [example](https://github.com/bytedeco/javacv/blob/1.3.2/samples/JavaFxPlayVideoAndAudio.java)
+and usage [Examle to play mp4 in JavaFx](https://github.com/teocci/Streaming-Player-Java)
+
 ## Python
 
 ### 修改系统默认的python的版本
@@ -724,6 +729,8 @@ drwxrwxr-x    5 600      600          4096 Feb 13  2017 yyy
 [my question](https://stackoverflow.com/q/52328614/1087122)
 
 ### classLoader
+
+Class类的getResource方法，GuiCamera.getClass.getResource("/name")，会从GuiCamera类的根目录上去找资源！而GuiCamera.getClass.getResource("name")，会从GuiCamera的类所在路径里去找资源！即 包名+name!
 
 [Do You Really Get Classloaders](https://zeroturnaround.com/rebellabs/rebel-labs-tutorial-do-you-really-get-classloaders/6/)
 

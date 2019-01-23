@@ -956,6 +956,26 @@ man command
 ### LDP
 The Linux Documentation Project [LDP](http://www.tldp.org/LDP/abs/html/abs-guide.html)
 
+### add text to file head
+
+[How to insert a text at the beginning of a file?](https://stackoverflow.com/a/9533736/1087122)
+
+sed can operate on an address:
+```
+$ sed -i '1s/^/<added text> /' file
+```
+What is this magical 1s you see on every answer here? [Line addressing](https://www.gnu.org/software/sed/manual/html_node/Addresses.html)!.
+
+Want to add <added text> on the first 10 lines?
+```
+$ sed -i '1,10s/^/<added text> /' file
+```
+Or you can use [Command Grouping](http://www.gnu.org/software/bash/manual/bash.html#Command-Grouping):
+```
+$ { echo -n '<added text> '; cat file; } >file.new
+$ mv file{.new,}
+```
+
 ### 创建大文本文件
 
 [How to create a large file in UNIX?](https://unix.stackexchange.com/questions/269180/how-to-create-a-large-file-in-unix)

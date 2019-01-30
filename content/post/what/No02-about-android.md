@@ -16,6 +16,22 @@ toc = true
 
 [manifest](https://developer.android.com/guide/topics/manifest/receiver-element)
 
+### download old adt (Eclipse for android)
+[SOF](https://stackoverflow.com/questions/27418096/where-can-i-download-eclipse-android-bundle)
+
+Here you can download adt bundles 2014-07-02:
+
+windows 32 bit: https://dl.google.com/android/adt/adt-bundle-windows-x86-20140702.zip
+
+windows 64 bit: https://dl.google.com/android/adt/adt-bundle-windows-x86_64-20140702.zip
+
+MacOS 64 bit: https://dl.google.com/android/adt/adt-bundle-mac-x86_64-20140702.zip
+
+Linux 32 bit: https://dl.google.com/android/adt/adt-bundle-linux-x86-20140702.zip
+
+Linux 64 bit: https://dl.google.com/android/adt/adt-bundle-linux-x86_64-20140702.zip
+
+
 ### decompile android apk
 
 [How to decompile an APK or DEX file on Android platform](https://stackoverflow.com/questions/21010367/how-to-decompile-an-apk-or-dex-file-on-android-platform)

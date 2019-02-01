@@ -936,8 +936,8 @@ Cannot access memory at address 0x7fa9f0116448
 ```
 //这是自动装箱  (编译器调用的是static Integer valueOf(int i))
 Integer a = 100;             
-//这是自动拆 
-int     b = new Integer(100);箱
+//这是自动拆箱
+int     b = new Integer(100);
 ```
 ### 查看默认参数
 

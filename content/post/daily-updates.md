@@ -925,6 +925,20 @@ Cannot access memory at address 0x7fa9f0116448
 [关键系统的JVM参数推荐(2018仲夏版) wx](https://mp.weixin.qq.com/s/FHY0MelBfmgdRpT4zWF9dQ)</br>
 [关键系统的JVM参数推荐(2018仲夏版) web](http://calvin1978.blogcn.com/articles/jvmoption-7.html)
 
+### java 装箱和拆箱
+
+要理解装箱和拆箱的概念，就要理解Java数据类型—— 对象类型到基本类型相互转换
+
+
+* 装箱：把基本类型用它们相应的引用类型包装起来，使其具有对象的性质。int包装成Integer、float包装成Float
+* 拆箱：和装箱相反，将引用类型的对象简化成值类型的数据
+
+```
+//这是自动装箱  (编译器调用的是static Integer valueOf(int i))
+Integer a = 100;             
+//这是自动拆 
+int     b = new Integer(100);箱
+```
 ### 查看默认参数
 
 [JDK 8: Thread Stack Size Tuning](http://xmlandmore.blogspot.com/2014/09/jdk-8-thread-stack-size-tuning.html)</br>

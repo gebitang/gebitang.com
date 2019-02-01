@@ -13,6 +13,28 @@ toc = true
 
 [Use Dashboard](https://zenhabits.net/dashboard/) to [Go Deeper, Not Wider](http://www.raptitude.com/2017/12/go-deeper-not-wider/) 
 
+## 重学前端
+
+```
+# 7 种基本类型
+Undefined； 
+Null； 
+Boolean； 
+Striing;
+Number;
+Symbol;
+Object
+
+#  7 种语言类型
+Set
+Completion Record
+Reference
+Property Descriptor
+Lexical Environment 
+Environment Record
+Data Block
+```
+
 ## Window env
 安装完成后，自带npm目录，可以在安装目录的`/nodejs/node_modules/npm/html/doc/index.html`查看帮助文档
 

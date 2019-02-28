@@ -23,61 +23,17 @@ XCRun			任务开始、提交
 USF				更新设备信息
 ```
 
-提高效率的尝试：
-一月～三月，驻场短信服务平台搭建，现场讨论实现
-五月～六月，web版本大工位验证；iTestinPlus联动方式；扩大单工位支持32台设备；星辰大海模式——websocket
-八月，星辰大海模式重构http方式
+https://yumichan.net/video-processing/video-compression/introduction-to-h264-nal-unit/
 
-OCR上线支持
-视频记录功能
-自建数据统计功能
-防锁屏设计
-账号信息、动态获取账号信息
-自动化干预支持
-同步真机功能、自动化功能
-海外工位支持
+https://yumichan.net/video-processing/video-compression/free-download-h264-mp4-file-format-standard-specification/
 
-OCR微服务、证书代理、数据统计正式使用
-apk合并上线
+ITU-T: Infrastructure of audiovisual services – Coding of moving video: Advanced video coding for generic audiovisual services
 
-全自动化能否实现？
-反馈闭环如何建立？
-到底需要怎样的能力？
+https://www.itu.int/rec/T-REC-H.264/en
 
+ISO: Information technology — Coding of audio-visual objects — Part 10: Advanced Video Coding
 
-公司文化“团队、目标、专业”：
-一群具有专业能力素质的人组建出一个专业的团队为了同一个目标努力奋斗。 
-
-价值观：以客户为中心，为客户创作价值
-服务好、质量好、运营成本低，优先满足客户需求，提升产品质量和市场竞争力。
-遵循“服务创造价值”的理念，以专业的服务、快速的响应，为客户提供全面的服务方案，竭尽所能协助客户改善产品质量和市场竞争力、降低客户成本。 
-让应用更有价值
-
-公司对于“认可、胸怀、格局、执行、学习”的解释：
-认可----认可公司所作的事情，认可公司文化，认可公司“以客户为中心”的核心价值观，认可自己所在的团队，认可公司其他团队
-胸怀----懂得分享，计较眼前得失，吃苦在前，享受在后，团队利益在前，自己利益在后，处理事情从公司的全局出发，具备良好的跨部门的合作精神，坚决拒绝拉山头和内斗
-格局----渴望做成一件大事，并愿意为这件大事情而付出努力；目光长远，不计较眼前的一得一失
-执行----除自身做事具备良好的执行力外，还需带领的队伍有良好的执行力，确保公司赋予的目标实现
-学习----抛弃经验主义，愿意不断学习，不断提高自己，让自己的知识结构和能力跟上这个时代，跟上公司发展的需要
-
-
-业务线：
-征途客户端全面上线重构版本：提高设备利用率
-自动化脚本格式化重构
-远程真机的流媒体方式图像传输
-
-技术线：
-Go Deeper, Not Wilder.
-产品化思维：征途、云途
-Z-Y-X：星途
-
-全自动能否实现：征途；征途操作人员+数据标记
-反馈闭环如何建立：问题解决、验证数据
-应该需要怎样的能力：维护多年项目之技术栈；Go Deeper, Not Wilder.
-
-
-
-[maven in five minutes](https://maven.apache.org/guides/getting-started/maven-in-five-minutes.html)
+https://www.itu.int/rec/T-REC-H.264/en
 
 [What is H.264?](http://www.streamingmedia.com/Articles/Editorial/What-Is-.../What-is-H.264-74735.aspx)
 [H.264 wiki](https://en.wikipedia.org/wiki/H.264/MPEG-4_AVC)

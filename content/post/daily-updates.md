@@ -1073,6 +1073,8 @@ This is a footnote.[^2]
 
 ## Maven 
 
+[maven in five minutes](https://maven.apache.org/guides/getting-started/maven-in-five-minutes.html)
+
 ### editor不报错，但执行main方法时提示找不到class
 
 可能的情况是：工程配置中的`sources`的路径配置错误或没有指定对应的文件夹。

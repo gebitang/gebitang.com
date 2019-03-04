@@ -40,6 +40,25 @@ https://www.itu.int/rec/T-REC-H.264/en
 [Streaming H264 video from PiCamera to a JavaFX ImageView](https://codereview.stackexchange.com/questions/163042/streaming-h264-video-from-picamera-to-a-javafx-imageview)
 
 
+H.264 / MPEG-4 Part 10, Advanced Video Coding (MPEG-4 AVC) is a common video compression format developed by ITU-T Video Coding Experts Group (VCEG) and ISO/IEC JTC1 Moving Picture Experts Group (MPEG). Network Abstraction Layer (NAL) and Video Coding Layer (VCL) are the two main concepts in H.264. A H.264 file consists of a number of NAL units (NALU) and each NALU can be classified as VCL or non-VCL. Video data is processed by the codec and packed into NAL units.
+
+
+https://phoboslab.org/log/2013/09/html5-live-video-streaming-via-websockets
+HTML5 LIVE VIDEO STREAMING VIA WEBSOCKETS
+
+https://stackoverflow.com/questions/52376060/how-to-use-ffmpeg-in-javascript-to-decode-h-264-frames-into-rgb-frames
+
+https://ek21.com/news/1/23223/ 
+
+https://blog.csdn.net/leixiaohua1020/article/details/15811977
+
+
+https://blog.csdn.net/leixiaohua1020/article/details/47068015
+《基于 FFmpeg + SDL 的视频播放器的制作》课程的视频
+
+-----------------
+
+
 trigger：
 当日数据大小：`du -h --max-depth=1` 得到适配信息，查询对应的步骤报错；定位到具体的步骤信息
 

@@ -50,11 +50,17 @@ https://stackoverflow.com/questions/52376060/how-to-use-ffmpeg-in-javascript-to-
 
 https://ek21.com/news/1/23223/ 
 
-https://blog.csdn.net/leixiaohua1020/article/details/15811977
 
 
-https://blog.csdn.net/leixiaohua1020/article/details/47068015
-《基于 FFmpeg + SDL 的视频播放器的制作》课程的视频
+[一个广院工科生的视音频技术笔记-雷霄骅(leixiaohua1020)的专栏](https://blog.csdn.net/leixiaohua1020)
+
+[[总结]FFMPEG视音频编解码零基础学习方法](https://blog.csdn.net/leixiaohua1020/article/details/15811977)
+
+[[总结]视音频编解码技术零基础学习方法](https://blog.csdn.net/leixiaohua1020/article/details/18893769)
+
+[最简单的基于FFMPEG+SDL的视频播放器 ver2 （采用SDL2.0）](https://blog.csdn.net/leixiaohua1020/article/details/38868499)
+
+[《基于 FFmpeg + SDL 的视频播放器的制作》课程的视频](https://blog.csdn.net/leixiaohua1020/article/details/47068015)
 
 -----------------
 

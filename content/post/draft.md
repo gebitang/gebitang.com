@@ -48,8 +48,15 @@ HTML5 LIVE VIDEO STREAMING VIA WEBSOCKETS
 
 https://stackoverflow.com/questions/52376060/how-to-use-ffmpeg-in-javascript-to-decode-h-264-frames-into-rgb-frames
 
-https://ek21.com/news/1/23223/ 
+[wasm + ffmpeg做到前端截取視頻幀功能](https://ek21.com/news/1/23223/)
 
+[Emscripten Tutorial](https://emscripten.org/docs/getting_started/Tutorial.html#tutorial)
+
+[Webassembly tutorial using emscripten: Hello world example](https://tutorials.technology/tutorials/54-Webassembly-tutorial-using-emscripten-hello-world.html)
+
+[ webrtc.org WebRTC samples](https://webrtc.github.io/samples/)
+
+[Getting Started With WebRTC.](https://www.html5rocks.com/en/tutorials/webrtc/basics/)
 
 
 [一个广院工科生的视音频技术笔记-雷霄骅(leixiaohua1020)的专栏](https://blog.csdn.net/leixiaohua1020)
@@ -62,7 +69,25 @@ https://ek21.com/news/1/23223/
 
 [《基于 FFmpeg + SDL 的视频播放器的制作》课程的视频](https://blog.csdn.net/leixiaohua1020/article/details/47068015)
 
+[「视频直播技术详解」-七牛云@知乎](https://zhuanlan.zhihu.com/p/22902315)
+
+[I-frame、B-frame、P-frame及DTS、PTS的关系（转）](http://www.cnblogs.com/roger-yu/p/5969118.html)
+
+[移动直播技术秒开优化经验](https://mp.weixin.qq.com/s?__biz=MzAwMDU1MTE1OQ==&mid=2653547042&idx=1&sn=26d8728548a6b5b657079eeab121e283)
+
+https://webrtc.org/
+
+https://www.khronos.org/webgl/wiki/Main_Page
+
+[关于直播，所有的技术细节都在这里了 1-4](https://zhuanlan.zhihu.com/p/27304704)
+
+[ucloud 4 关于直播，所有的技术细节都在这里了 ](http://blog.ucloud.cn/archives/796)
+
 -----------------
+
+[Java programming with JNI](https://www.ibm.com/developerworks/java/tutorials/j-jni/j-jni.html)
+
+[Java Programming Tutorial Java Native Interface (JNI)](https://www3.ntu.edu.sg/home/ehchua/programming/java/JavaNativeInterface.html)
 
 
 trigger：

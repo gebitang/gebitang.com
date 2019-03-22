@@ -14,6 +14,8 @@ toc = true
 
 ## IDEA
 
+### 全屏显示 view -> enter full screen
+
 ### 查找类方法快捷键
 
 默认为 Ctrl+F12，可修改：

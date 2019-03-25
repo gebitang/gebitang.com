@@ -14,7 +14,7 @@ hasCJKLanguage = true
 
 [params]
   # Shown in the home page
-  subtitle = "埋头过坎 功不唐捐"
+  subtitle = "三九为午 功不唐捐"
   brand = "Gebitang"
   googleAnalytics = "UA-34303694-1"
   disqus = "gebitang"

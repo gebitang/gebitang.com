@@ -102,6 +102,8 @@ OSError: [WinError 193] %1 不是有效的 Win32 应用程序。
 
 
 ## Mac 相关
+
+### Chrome全屏 Command+Shift +F
 ### brew 安装应用的地址
 
 ```

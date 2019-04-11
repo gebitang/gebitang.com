@@ -19,6 +19,21 @@ Root can run commands as other users via the "su" command. I believe if you crea
 
 `su -c /path/to/your/script username`
 
+### 查看系统调用 strace
+
+`strace ls -al`将打印所有的系统调用，然后再执行后面的 `ls -al` 命令内容
+
+### tar xz file
+xz是绝大数linux默认就带的一个压缩工具。
+
+创建tar.xz文件：
+
+> 先 tar cvf xxx.tar xxx/ 这样创建xxx.tar文件先，然后使用 xz -z xxx.tar 来将 xxx.tar压缩成为 xxx.tar.xz
+
+解压tar.xz文件
+
+> 先 xz -d xxx.tar.xz 将 xxx.tar.xz解压成 xxx.tar 然后，再用 tar xvf xxx.tar来解包。
+
 ### 命令行打开目录，设置别名 
 
 ```
@@ -1096,6 +1111,10 @@ KiB Swap:  2097148 total,  2097148 free,        0 used.  4740208 avail Mem
 标准输入0    从键盘获得输入 /proc/self/fd/0 </br>
 标准输出1    输出到屏幕（即控制台） /proc/self/fd/1 </br>
 错误输出2    输出到屏幕（即控制台） /proc/self/fd/2 </br>
+
+例如：nohup = Run a command immune to hangups
+
+最终命令的一般形式 `nohup command >out.file 2>&1 &` 这里面，“1”表示文件描述符 1，表示标准输出，“2”表示文件描述符 2，意思是标准错误输出，“2>&1”表示标准输出和错误输出合并了。合并到哪里去呢？到 out.file 里。
 
 ### split & cat使用
 

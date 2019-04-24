@@ -1011,6 +1011,13 @@ sed -i "s/GRUB_CMDLINE_LINUX=\"\"/GRUB_CMDLINE_LINUX=\"net.ifnames=0 biosdevname
 
 ```
 
+### 清除“^M”
+
+使用sed命令。和vi的用法相似：
+```
+$ sed -e ‘s/^M/\n/g’ myfile.txt
+```
+注意：这里的“^M”要使用“CTRL-V CTRL-M”生成，而不是直接键入“^M”。
 
 ### 使用jq格式化json
 

@@ -1070,6 +1070,7 @@ This is a footnote.[^1]
 
 [Markdown 语法手册](https://www.zybuluo.com/EncyKe/note/120103)
 
+When you do want to insert a `<br/>` break tag using Markdown, you end a line with two or more spaces, then type return.
 
 This is a footnote.[^2]
 

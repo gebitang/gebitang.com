@@ -1515,6 +1515,17 @@ git push -u origin --all
 git push -u origin --tags
 ```
 
+### 显示分支branch的关系
+[STO](https://stackoverflow.com/questions/5298972/relationship-between-n-git-branches)  
+```
+# branch A B C
+git log --graph --decorate --oneline --simplify-by-decoration A B C
+# all 
+git log --graph --decorate --oneline --simplify-by-decoration --all
+```
+
+
+
 ## Windows命令
 
 ### outlook证书弹出提示

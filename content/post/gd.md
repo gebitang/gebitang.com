@@ -25,7 +25,7 @@ draft = true
 
 最高的效率是不返工，最快的进步是不退步。每天进步一点点，二十年超过所有人，活在他人想象之外！
 
-[四省察](https://m.weibo.cn/1676664091/4313788272319291)
+[四省察](http://www.weibo.com/1676664091/H5MH99JlV)
 
 1. 今天有什么工作成果？
 2. 今天有什么学习进步？
@@ -39,6 +39,8 @@ draft = true
 * 与时相处
 * 与世相处
 
+**The measure of who we are is how we react to something that doesn't go our way.**  
+	—— from [Spurs' fortitude fueled title run](http://www.espn.com/nba/story/_/id/11901128/spurs-2014-title-run-started-game-7-2013-finals):  
 
 
 “私有?公治?共享”的公司治理核心理念。

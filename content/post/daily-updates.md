@@ -1524,6 +1524,17 @@ git log --graph --decorate --oneline --simplify-by-decoration A B C
 git log --graph --decorate --oneline --simplify-by-decoration --all
 ```
 
+### git tag 
+
+tag默认是按照字母顺序排列的。[tag操作](https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000/001376951758572072ce1dc172b4178b910d31bc7521ee4000)  
+```
+# 查看所以tag  -l 注意是字母"L",以列表形式列出所有tag的版本号. -n 显示出每个版本号对应的附加说明.
+git tag -l -n
+# 显示时间
+git log --tags --simplify-by-decoration --pretty="format:%ci %d "
+# 一行显示
+git log --tags --simplify-by-decoration --pretty="format:%ci %d "
+```
 
 
 ## Windows命令

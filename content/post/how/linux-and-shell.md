@@ -19,6 +19,25 @@ Root can run commands as other users via the "su" command. I believe if you crea
 
 `su -c /path/to/your/script username`
 
+### dictionay Artha
+
+`sudo apt-get install artha`
+
+### 输入法无法选词问题处理
+[solution](https://www.cnblogs.com/yiheyue/p/10731905.html)  
+
+```
+#第一步：备份 ibus 拼音输入法的数据库文件
+cp ~/.cache/ibus/libpinyin/user_bigram.db .
+
+第二步：删除 ~/.cache/ibus/libpinyin/ 目录下的所有文件
+rm -r ~/.cache/ibus/libpinyin/*
+#第三步：将之前备份的数据库文件放回到原目录下
+mv user_bigram.db ~/.cache/ibus/libpinyin
+
+第四步：重新启动 ibus 输入法 可以直接继续使用？
+```
+
 ### 查看系统调用 strace
 
 `strace ls -al`将打印所有的系统调用，然后再执行后面的 `ls -al` 命令内容

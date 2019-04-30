@@ -1078,6 +1078,29 @@ This is a footnote.[^2]
 
 [maven in five minutes](https://maven.apache.org/guides/getting-started/maven-in-five-minutes.html)
 
+### maven clean package
+
+[执行逻辑](https://www.cnblogs.com/frankyou/p/6062179.html)  
+
+1、使用清理插件：maven-clean-plugin:2.5执行清理删除已有target目录（版本2.5）；
+
+2、使用资源插件：maven-resources-plugin:2.6执行资源文件的处理（版本2.6）；
+
+3、使用编译插件：maven-compiler-plugin:3.1编译所有源文件生成class文件至target\classes目录下（版本3.1）；
+
+4、使用资源插件：maven-resources-plugin:2.6执行测试资源文件的处理（版本2.6）；
+
+5、使用编译插件：maven-compiler-plugin:3.1编译测试目录下的所有源代码（版本3.1）；
+
+6、使用插件：maven-surefire-plugin:2.12运行测试用例（版本2.12）；
+
+7、使用插件：maven-jar-plugin:2.4对编译后生成的文件进行打包，包名称默认为：artifactId-version，比如本例生成的jar文件：rtp-front-1.0-SNAPSHOT，包文件保存在target目录下（这个生成的包不能在命令行中直接执行，因为我们还没有入口类配置到Manifest资源配置文件中去，后续会阐述）。
+
+备注：
+
+不管是compile、package还是install等前三个步骤都是必不可少的。
+
+
 ### editor不报错，但执行main方法时提示找不到class
 
 可能的情况是：工程配置中的`sources`的路径配置错误或没有指定对应的文件夹。
@@ -1205,6 +1228,20 @@ dependency注意空格格式
 
 ## Git命令使用
 可配合GUI工具和命令行工具参考。
+
+### 修改commit工具 vim
+
+提交说明信息的时候, linux默认是 nano 编辑器  
+nano 这个编辑器使用 ctrl + x 来退出
+
+
+```
+# global
+git config --global core.editor vim
+
+# project update: .git/config add--
+editor=vim
+```
 
 ### 查找rep中特定用户的提交记录
 

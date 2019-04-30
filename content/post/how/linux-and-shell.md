@@ -19,6 +19,20 @@ Root can run commands as other users via the "su" command. I believe if you crea
 
 `su -c /path/to/your/script username`
 
+### json tool jq
+
+```
+# install 
+sudo apt-get install jq
+# manual: https://stedolan.github.io/jq/manual/v1.5/ 
+	jq '.[]'
+Input	[{"name":"JSON", "good":true}, {"name":"XML", "good":false}]
+Output	{"name":"JSON", "good":true}
+{"name":"XML", "good":false}
+
+# usage: https://www.cnblogs.com/bymo/p/7484023.html
+```
+
 ### dictionay Artha
 
 `sudo apt-get install artha`

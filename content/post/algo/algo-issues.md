@@ -11,6 +11,7 @@ topics = [
     "tech"
 ]
 draft = false
+toc = true
 +++
 
 
@@ -77,6 +78,35 @@ draft = false
 中等：https://leetcode.com/problems/contains-duplicate-iii/  
 困难：https://leetcode.com/problems/count-of-range-sum/  
 困难：https://leetcode.com/problems/count-of-smaller-numbers-after-self/  
+
+--- 
+
+## 第三周题目
+### 图
+简单：https://leetcode.com/problems/find-the-town-judge/  
+中等：https://leetcode.com/problems/course-schedule-ii  
+困难：https://leetcode.com/problems/minimize-malware-spread-ii/  
+
+### 堆和排序
+简单：https://leetcode.com/problems/kth-largest-element-in-a-stream/  
+中等：https://leetcode.com/problems/find-k-pairs-with-smallest-sums/  
+困难：https://leetcode.com/problems/find-median-from-data-stream/  
+
+### DFS
+简单：https://leetcode.com/problems/maximum-depth-of-binary-tree/  
+中等：https://leetcode.com/problems/number-of-islands/  
+中等：https://leetcode.com/problems/find-eventual-safe-states/  
+困难：https://leetcode.com/problems/longest-increasing-path-in-a-matrix/  
+困难：https://leetcode.com/problems/making-a-large-island/  
+
+### BFS
+简单：https://leetcode.com/problems/n-ary-tree-level-order-traversal/  
+中等：https://leetcode.com/problems/minesweeper/  
+中等：https://leetcode.com/problems/minimum-height-trees/  
+困难：https://leetcode.com/problems/bus-routes/  
+
+--- 
+
 
 
 4.13~4.14算法训练营反馈：

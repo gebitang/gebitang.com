@@ -1229,6 +1229,10 @@ dependency注意空格格式
 ## Git命令使用
 可配合GUI工具和命令行工具参考。
 
+### fatal: Unable to create '/path/my_project/.git/index.lock': File exists
+
+[sto](https://stackoverflow.com/a/7860765/1087122): `rm -f ./.git/index.lock`
+
 ### 修改commit工具 vim
 
 提交说明信息的时候, linux默认是 nano 编辑器  

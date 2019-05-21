@@ -857,6 +857,18 @@ PING bjmobliis.cn (45.124.113.90) 56(84) bytes of data.
 
 ```
 
+### ssh “permissions are too open” error
+
+[ssh “permissions are too open” error](https://stackoverflow.com/q/9270734/1087122)  
+
+```
+# 使用私钥进行登陆
+ssh -i path_to_rsa_file username@ip.address -p port_number 
+# 提示 0664： permissions 0664 too open.
+chmod 400 path_to_rsa_file
+# or 
+chmod 0600 path_to_rsa_file
+```
 
 ### SSH Server安装
 1. 先创建一个root账号，命令：

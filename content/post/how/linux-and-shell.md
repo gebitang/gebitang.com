@@ -91,7 +91,28 @@ alias open="nautilus"
 
 [设置开机启动脚本](http://www.cnblogs.com/defifind/p/9285456.html)， 18.04使用了 [SYSTEMD](https://coolshell.cn/articles/17998.html)。
 
-[execute shell at start up](https://linuxconfig.org/how-to-automatically-execute-shell-script-at-startup-boot-on-systemd-linux), [开机启动脚本](http://www.cnblogs.com/defifind/p/9285456.html)， 手动创建 `/etc/systemd/system/rc-local.service`和 `/etc/rc.local`文件， 后者需要赋予可执行权限。
+[execute shell at start up](https://linuxconfig.org/how-to-automatically-execute-shell-script-at-startup-boot-on-systemd-linux), 手动创建 `/etc/systemd/system/rc-local.service`和 `/etc/rc.local`文件， 后者需要赋予可执行权限。将服务加入systemctl
+
+```
+# content for /etc/systemd/system/rc-local.service
+[Unit]
+Description=rc.local service by geb
+After=network.target 
+ConditionFileIsExecutable=/ect/rc.local
+
+[Service]
+ExecStart=/etc/rc.local
+
+[Install]
+WantedBy=default.target
+Alias=rc.local.service
+
+# specific bash script for rc.local
+
+chmod 664 /etc/rc.local
+systemctl daemon-reload
+systemctl enable rc.local.service
+```
 
 ### use oh my zsh
 [oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh)

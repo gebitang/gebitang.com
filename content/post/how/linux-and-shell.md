@@ -19,6 +19,16 @@ Root can run commands as other users via the "su" command. I believe if you crea
 
 `su -c /path/to/your/script username`
 
+### 软连接 更新
+
+RTFM: 
+```
+ln [OPTION]... [-T] TARGET LINK_NAME   (1st form)
+In the 1st form, create a link to TARGET with the name LINK_NAME.
+
+#前路径创建test 引向/var/www/test 文件夹 
+ln –s  /var/www/test  test
+```
 ### json tool jq
 
 ```

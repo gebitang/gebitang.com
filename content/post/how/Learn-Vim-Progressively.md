@@ -102,6 +102,13 @@ g/str1/s//str2/g
 
 ```
 
+### 行内操作
+
+w：光标以单词向前移动 nw：光标向前移动n个单词 光标到单词的第一个字母上  
+b：与w相反  
+e: 光标以单词向前移动 ne：光标向前移动n个单词 光标到单词的最后一个字母上  
+ge:与e相反  
+
 ## 练习材料
 [Learn Vim Progressively](http://yannesposito.com/Scratch/en/blog/Learn-Vim-Progressively/)
 

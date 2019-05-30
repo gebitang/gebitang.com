@@ -19,6 +19,12 @@ Root can run commands as other users via the "su" command. I believe if you crea
 
 `su -c /path/to/your/script username`
 
+### grep 过滤多个字符
+
+```
+grep -E 'aaa|bbb|ccc'
+```
+
 ### 软连接 更新
 
 RTFM: 

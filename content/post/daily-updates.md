@@ -20,6 +20,33 @@ toc = true
 
 <!--more-->
 
+## javacv 依赖的 com.googlecode.javacpp.Loader无法找到问题
+这个依赖包实际上依赖了javacpp这个jar包，但可能无法自动导入依赖。
+```
+<dependency>
+    <groupId>opencv</groupId>
+    <artifactId>javacv</artifactId>
+</dependency>
+
+<dependencies>
+    <dependency>
+      <groupId>com.googlecode.javacpp</groupId>
+      <artifactId>javacpp</artifactId>
+      <version>0.5</version>
+    </dependency>
+  </dependencies>
+
+  <repositories>
+    <repository>
+      <id>javacpp</id>
+      <name>JavaCPP</name>
+      <url>http://maven2.javacpp.googlecode.com/git/</url>
+    </repository>
+  </repositories>
+```
+
+可以 [clean后重新 import](https://blog.csdn.net/nmcurd/article/details/80430779)，或者手动将依赖包的依赖添加到第一级依赖中
+
 ## jetty log
 
 [jetty log](https://www.eclipse.org/jetty/documentation/current/default-logging-with-stderrlog.html)

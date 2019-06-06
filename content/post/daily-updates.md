@@ -20,6 +20,25 @@ toc = true
 
 <!--more-->
 
+## jetty log
+
+[jetty log](https://www.eclipse.org/jetty/documentation/current/default-logging-with-stderrlog.html)
+
+Once activated, you can find the properties file at `${jetty.base}/resources/jetty-logging.properties`. By default, the following parameters are defined. To change them, un-comment the line and substitute your naming scheme and configuration choices.
+```
+## Force jetty logging implementation
+#org.eclipse.jetty.util.log.class=org.eclipse.jetty.util.log.StdErrLog
+
+## Set logging levels from: ALL, DEBUG, INFO, WARN, OFF
+#org.eclipse.jetty.LEVEL=INFO
+#com.example.LEVEL=INFO
+
+## Hide stacks traces in logs?
+#com.example.STACKS=false
+
+## Show the source file of a log location?
+#com.example.SOURCE=false
+```
 ## Java Video
 
 [javacv lib](https://github.com/bytedeco/javacv) and [example](https://github.com/bytedeco/javacv/blob/1.3.2/samples/JavaFxPlayVideoAndAudio.java)

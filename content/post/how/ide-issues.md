@@ -14,6 +14,12 @@ toc = true
 
 ## IDEA
 
+### Desktop Entry
+
+在Application列表中展示
+
+`Tools -> Generate Desktop Entry`
+
 ### 全屏显示 view -> enter full screen
 
 ### 查找类方法快捷键

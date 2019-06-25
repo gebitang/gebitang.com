@@ -19,6 +19,14 @@ Root can run commands as other users via the "su" command. I believe if you crea
 
 `su -c /path/to/your/script username`
 
+### chrome on linux 
+
+[guide](https://www.omgubuntu.co.uk/2018/03/how-to-install-google-chrome-on-ubuntu)  
+```
+wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+
+```
+
 ### grep 过滤多个字符
 
 ```

@@ -776,6 +776,42 @@ drwxrwxr-x    5 600      600          4096 Feb 13  2017 yyy
 ## JVM 
 [my question](https://stackoverflow.com/q/52328614/1087122)
 
+### 进程卡死
+
+使用[vjtop]()查看进程使用情况，观察到的现象为老年代占满。
+
+```
+12:22:24 - PID: 5695 JVM: 1.8.0_192 USER: root UPTIME: 1d08h
+ PROCESS: 119.84% cpu(9.99% of 12 core), 433 thread
+ MEMORY: 11g rss, 11g peak, 0m swap | DISK: 406B read, 9kB write
+ THREAD: 407 live, 64 daemon, 520 peak, 0 new | CLASS: 9444 loaded, 975 unloaded, 2 new
+ HEAP: 3276m/3276m eden, 384m/409m sur, 4095m/4096m old
+ NON-HEAP: 63m/66m/512m metaspace, 78m/79m/240m codeCache, 6m/7m/504m ccs
+ OFF-HEAP: 7m/7m direct(max=NaN), 0m/0m map(count=0), 407m threadStack
+ GC: 1/0ms/0ms ygc, 11/629ms fgc | SAFE-POINT: 11 count, 642ms time, 1ms syncTime
+
+    TID NAME                                                      STATE    CPU SYSCPU  TOTAL TOLSYS
+     11 QuantumRenderer-0                                       WAITING  7.73%  4.55%  3.37%  2.11%
+     14 JavaFX Application Thread                              RUNNABLE  1.61%  0.32%  1.29%  0.25%
+  25701 pool-3-thread-3875                                   TIMED_WAIT  1.49%  0.00%  0.42%  0.01%
+  23934 pool-3-thread-3530                                   TIMED_WAIT  1.39%  0.00%  0.48%  0.01%
+  11350 pool-3-thread-1930                                   TIMED_WAIT  1.38%  0.19%  0.73%  0.02%
+   4458 pool-3-thread-811                                    TIMED_WAIT  1.37%  0.18%  1.05%  0.04%
+  31111 pool-3-thread-4898                                   TIMED_WAIT  1.37%  0.18%  0.04%  0.00%
+  11931 pool-3-thread-2108                                   TIMED_WAIT  1.35%  0.06%  0.70%  0.02%
+  26660 pool-3-thread-4122                                   TIMED_WAIT  1.31%  0.02%  0.11%  0.01%
+   2799 pool-3-thread-669                                    TIMED_WAIT  1.29%  0.09%  1.07%  0.04%
+```
+
+参考[文章](https://blog.csdn.net/zfgogo/article/details/81260172)可触发强制GC  
+
+使用jmap工具可触发FullGC 
+
+jmap -dump:live,format=b,file=heap.bin <pid> 将当前的存活对象dump到文件，此时会触发FullGC
+
+jmap -histo:live <pid> 打印每个class的实例数目,内存占用,类全名信息.live子参数加上后,只统计活的对象数量. 此时会触发FullGC
+
+
 ### classLoader
 
 Class类的getResource方法，GuiCamera.getClass.getResource("/name")，会从GuiCamera类的根目录上去找资源！而GuiCamera.getClass.getResource("name")，会从GuiCamera的类所在路径里去找资源！即 包名+name!

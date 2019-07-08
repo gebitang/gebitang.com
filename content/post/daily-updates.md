@@ -1400,8 +1400,12 @@ ssh-add coding_id_rsa
 
 ```
 1. git remote add upstream  https://github.com/url/project.git
-2. git fetch upstream
-3. git merge upstream/master
+2. git fetch upstream //download objects and refs from another repository 
+3. git merge upstream/master //merge upstream/master to current branch
+
+#meaning of merge
+git merge origin master //将origin merge 到 master 上
+git merge origin/master //将origin上的master分支 merge 到当前 branch 上 
 ```
 - 从其他人的Repo中fork分支到自己的Repo下
 - clone当前工程到本地

@@ -118,3 +118,17 @@ PATCH：这个版本号变化了表示修复了bug，并且可以向后兼容。
 
 波浪符号是曾经npm安装时候的默认符号，现在已经变为了插入符号。
 
+## guides
+[Don't Block the Event Loop (or the Worker Pool)](https://nodejs.org/en/docs/guides/dont-block-the-event-loop/)  
+
+Event Loop:  
+the Event Loop executes the JavaScript callbacks registered for events, and is also responsible for fulfilling non-blocking asynchronous requests like network I/O.
+
+Worker Pool:
+
+1. I/O-intensive  
+    1. [DNS](https://nodejs.org/api/dns.html): `dns.lookup()`, `dns.loopupService`.  
+    2. [File System](https://nodejs.org/api/fs.html#fs_threadpool_usage):All file system APIs except `fs.FSWatcher()` and those that are explicitly synchronous use libuv's threadpool.  
+2.  CPU-intensive  
+    1. [Crypto](https://nodejs.org/api/crypto.html): `crypto.pbkdf2()`, `crypto.scrypt()`, `crypto.randomBytes()`, `crypto.randomFill()`, `crypto.generateKeyPair()`.
+    2. [Zlib](https://nodejs.org/api/zlib.html#zlib_threadpool_usage)All zlib APIs except those that are explicitly synchronous use libuv's threadpool.  

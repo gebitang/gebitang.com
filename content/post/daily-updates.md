@@ -201,6 +201,10 @@ You can also generate or edit a c_cpp_properties.json file with the **C/Cpp: Edi
 
 [Visual Studio Code如何编写运行C、C++](https://www.zhihu.com/question/30315894/answer/154979413)
 
+# 查看内存占用
+
+1. 可使用 `"window.titleBarStyle": "native"` 切換为舊式界面。
+2. 電腦卡頓的時候可以用 `Developer: Open Process Explorer` 查看各插件的內存使用。
 
 
 ## RBT工具使用

@@ -207,4 +207,8 @@ npm install module-name -save-dve 自动把模块和版本号添加到devdepende
 - 发布的模块不会包含 package-lock.json 文件  
 - 如果手动修改了 package.json 文件中已有模块的版本，直接执行npm install不会安装新指定的版本，只能通过npm install xxx@yy更新
 
+## install error:  Unexpected end of JSON input 
 
+[issue](https://github.com/facebook/jest/issues/6944)  
+npm install error:  Unexpected end of JSON input while parsing near '...edc4cd","size":396934'
+solution: npm cache clean --force

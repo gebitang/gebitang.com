@@ -191,3 +191,20 @@ NODE_MODULES_PATHS(START)
 ## exports module.exports 
 [node module](https://www.runoob.com/nodejs/nodejs-module-system.html)  
 如果要对外暴露属性或方法，就用 exports 就行，要暴露对象(类似class，包含了很多属性和方法)，就用 module.exports。
+
+## install --save 
+
+-save和save-dev可以省掉你手动修改package.json文件的步骤。  
+npm install module-name -save 自动把模块和版本号添加到dependencies部分  
+npm install module-name -save-dve 自动把模块和版本号添加到devdependencies部分  
+
+## package-lock package.json
+锁定安装时的包的版本号，以保证其他人在npm install时大家的依赖能保证一致。  
+[source](https://blog.csdn.net/aaa333qwe/article/details/78021704)  
+
+- 使用npm install xxx命令安装模块时，不再需要--save选项，会自动将模块依赖信息保存到 package.json 文件；  
+- 安装模块操作（改变 node_modules 文件夹内容）会生成或更新 package-lock.json 文件  
+- 发布的模块不会包含 package-lock.json 文件  
+- 如果手动修改了 package.json 文件中已有模块的版本，直接执行npm install不会安装新指定的版本，只能通过npm install xxx@yy更新
+
+

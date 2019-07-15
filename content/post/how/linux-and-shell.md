@@ -12,6 +12,22 @@ topics = [
 toc = true
 +++
 
+## Mac shell
+
+Mac 环境默认的bash版本为3.2版本。  
+
+[globstar: invalid shell option name on macOS even with bash 4.X](https://apple.stackexchange.com/questions/291287/globstar-invalid-shell-option-name-on-macos-even-with-bash-4-x)  
+```
+$ brew install bash
+$ chsh -s /usr/local/bin/bash
+$ sudo bash -c 'echo /usr/local/bin/bash >> /etc/shells'
+$ ln -s /usr/local/bin/bash /usr/local/bin/bash-terminal-app
+```
+
+升级后目前为5.0.7版本。 执行`bash -O`后会进入bash环境并显示目前的选项。 `shopt -s globstar`设置
+
+[What do double-asterisk wildcards mean?](https://stackoverflow.com/a/28199633 )，设置 `**`为递归匹配模式 
+
 
 ## linux 环境
 

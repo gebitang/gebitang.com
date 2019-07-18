@@ -1701,3 +1701,12 @@ gnome-open path/to/destination
 ```
 
 ### 命令行复制粘贴 Ctrl + Shift + C / V 
+
+### sends a SIGINT signal 
+[Ctrl+C sends a SIGINT signal](https://stackoverflow.com/a/5789674/1087122)
+```
+# Terminates the program (like Ctrl+C)
+kill -INT 888
+# Force kill
+kill -9 888
+```

@@ -101,7 +101,7 @@ server.listen(port, hostname, () => {
 ```
 
 ## Version规则
-
+[SemVer](https://semver.org/lang/zh-CN/)  
 NPM使用语义版本号来管理代码：`MAJOR,MINOR.PATCH`  
 MAJOR：这个版本号变化了表示有了一个不可以和上个版本兼容的大更改。  
 MINOR：这个版本号变化了表示有了增加了新的功能，并且可以向后兼容。  

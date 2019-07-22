@@ -212,3 +212,22 @@ npm install module-name -save-dve 自动把模块和版本号添加到devdepende
 [issue](https://github.com/facebook/jest/issues/6944)  
 npm install error:  Unexpected end of JSON input while parsing near '...edc4cd","size":396934'
 solution: npm cache clean --force
+
+## 多版本管理
+
+[node 多版本控制](https://segmentfault.com/a/1190000010252661)
+
+- 安装nvm
+```
+curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.2/install.sh | bash
+
+或者 Wget:
+
+wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.33.2/install.sh | bash
+```
+- 查看可用版本
+```
+# lts long-time-stable
+nvm ls-remote --lts 
+```
+- 安装指定版本： nvm install v8.12.0

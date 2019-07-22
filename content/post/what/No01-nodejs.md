@@ -231,3 +231,16 @@ wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.33.2/install.sh | 
 nvm ls-remote --lts 
 ```
 - 安装指定版本： nvm install v8.12.0
+
+## nrm 管理镜像
+
+```
+安装nrm
+$ npm install -g nrm
+
+列出可用镜像
+$ nrm ls
+
+使用淘宝镜像
+$ nrm use taobao 
+```

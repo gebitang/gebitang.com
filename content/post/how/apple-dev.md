@@ -15,6 +15,24 @@ draft = false
 toc=true
 +++
 
+### brew install local file
+
+[How to install a local file in Homebrew](http://mygeekdaddy.net/2014/12/05/how-to-install-a-local-file-in-homebrew/)  
+[How to use Homebrew to install local archive](https://apple.stackexchange.com/a/328946)
+
+```
+# download your archive
+wget https://github.com/zeromq/libzmq/releases/download/v4.3.2/zeromq-4.3.2.tar.gz
+
+# move the archive to your brew --cache
+mv zeromq-4.3.2.tar.gz $(brew --cache)
+
+# then install the archive as normal
+brew install zeromq
+```
+
+使用`brew cat zeromq`查看zeromq的下载地址 
+
 ### xip format
 [xip format install](https://ktatsiu.wordpress.com/2016/10/28/how-to-download-xcode-8-x-with-xip-format/)  
 

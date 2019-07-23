@@ -1574,6 +1574,18 @@ git rm --cached file/want/to/be/ignore
 ```
 [参考](http://blog.csdn.net/cyxlzzs/article/details/61422214)
 
+### git rm 
+
+[删除文件](https://www.liaoxuefeng.com/wiki/896043488029600/900002180232448)  
+```
+# 先本地删除
+rm test.txt
+# 在从git删除
+git rm test.txt 
+# 然后commit提交
+git commit "delete test.txt file."
+# 本地需要的话，可以更新到gitignore文件中
+```
 
 ### 更新mac后默认自带的git无法使用
 

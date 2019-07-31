@@ -14,6 +14,31 @@ topics = [
 draft = false
 toc=true
 +++
+### 制作ubuntu启动盘
+
+[使用自带磁盘工具+Etcher](https://cto.eguidedog.net/node/826)  
+- 应用->其它->磁盘工具  
+- 选择U盘，然后擦除
+- 选在格式: MS-DOS (FAT)  
+- 打开[Etcher](https://etcher.io/)
+- 选择Ubuntu镜像文件
+- 选择U盘
+- 点击“Flash”刻录
+
+使用命令行[制作](https://www.cnblogs.com/Primzahl/p/10524679.html), [Mac 制作 Ubuntu 18.04 启动盘](https://www.jianshu.com/p/0abdd301e0d6)    
+```
+cd Downloads/
+# 1. 制作系统.img
+hdiutil convert -format UDRW -o ubuntu.dmg ubuntu-18.04.2-desktop-amd64.iso
+# 找到U盘挂载的目录
+diskutil list
+# 取消 U盘 的挂载（但是不要拔掉）
+diskutil umountDisk /dev/disk5
+# 制作启动盘
+mv ubuntu.dmg ubuntu.iso
+sudo dd if=./ubuntu.iso of=/dev/disk5 bs=1m
+
+```
 
 ### XCode 更新更换账号
 

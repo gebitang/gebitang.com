@@ -15,6 +15,17 @@ draft = false
 toc=true
 +++
 
+### XCode 更新更换账号
+
+[How to update Xcode with a new Apple ID?](https://stackoverflow.com/a/13613340/1087122)  
+XCode安装时使用到时旧ID；后续App Store更换了新ID，XCode更新时提示还是使用到旧ID。
+
+1. Open Finder and navigate to Applications,
+2. Ctrl+Click XCode and choose "Show Package Contents",
+3. Expand the Contents directory and click _MASReceipt to select it,
+4. Type Command+Delete to delete the directory permanently---you will be prompted for your credentials since this is a protected file.
+
+
 ### brew install local file
 
 [How to install a local file in Homebrew](http://mygeekdaddy.net/2014/12/05/how-to-install-a-local-file-in-homebrew/)  

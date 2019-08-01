@@ -1710,3 +1710,19 @@ kill -INT 888
 # Force kill
 kill -9 888
 ```
+
+### ubuntu 18.04启用SSH server
+[How to Enable SSH on Ubuntu 18.04](https://linuxize.com/post/how-to-enable-ssh-on-ubuntu-18-04/)  
+```
+# update and install first
+sudo apt update
+sudo apt install openssh-server
+# check status 
+sudo systemctl status ssh
+# start and stop
+sudo systemctl start ssh
+sudo systemctl stop ssh
+# To enable/disable the SSH service to start during system boot run:
+sudo systemctl enable ssh
+sudo systemctl disable ssh
+```

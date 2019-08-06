@@ -1726,3 +1726,35 @@ sudo systemctl stop ssh
 sudo systemctl enable ssh
 sudo systemctl disable ssh
 ```
+
+### Loop in Shell
+
+[loop](https://www.shellscript.sh/loops.html)  
+
+```
+brewcheck() {
+
+	for i in 1 2 3 4 5
+	do
+  	echo "Looping ... number $i"
+		if brew list $1 >/dev/null ; then
+			echo "$1 installed"
+			break
+		else
+			echo "$1 not installed "
+		fi
+	done
+  if brew list $1 >/dev/null ; then
+		echo  "final check: $1 installed. good \n"
+		echo  " bye."
+		exit 0
+    # the following line will never be executed.
+		echo "**********"
+	else
+		echo "\n\n $1 cannot be installed. make sure your network condition is good enough and try it later... \n\n"
+	fi
+
+}
+
+brewcheck  zeromq
+```

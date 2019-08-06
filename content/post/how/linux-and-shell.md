@@ -1730,6 +1730,7 @@ sudo systemctl disable ssh
 ### Loop in Shell
 
 [loop](https://www.shellscript.sh/loops.html)  
+[bash for loop](https://www.cyberciti.biz/faq/bash-for-loop/)
 
 ```
 brewcheck() {
@@ -1757,4 +1758,50 @@ brewcheck() {
 }
 
 brewcheck  zeromq
+
+
+# Latest bash version 3.0+ has inbuilt support for setting up ranges:
+for i in {1..5}
+do
+   echo "Welcome $i times"
+done
+
+# Bash v4.0+ has inbuilt support for setting up a step value using {START..END..INCREMENT} syntax:
+echo "Bash version ${BASH_VERSION}..."
+for i in {0..10..2}
+  do 
+     echo "Welcome $i times"
+ done
+
+# Three-expression bash for loops syntax
+for (( c=1; c<=5; c++ ))
+do  
+   echo "Welcome $c times"
+done
+
+# break and continue
+for file in /etc/*
+do
+	if [ "${file}" == "/etc/resolv.conf" ]
+	then
+		countNameservers=$(grep -c nameserver /etc/resolv.conf)
+		echo "Total  ${countNameservers} nameservers defined in ${file}"
+		break
+	fi
+done
+
+# continue 
+FILES="$@"
+for f in $FILES
+do
+  # if .bak backup file exists, read next file
+	if [ -f ${f}.bak ]
+	then
+		echo "Skiping $f file..."
+		continue  # read next file and skip the cp command
+	fi
+  # we are here means no backup file exists, just use cp command to copy file
+	/bin/cp $f $f.bak
+done
+
 ```

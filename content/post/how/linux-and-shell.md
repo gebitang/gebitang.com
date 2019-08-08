@@ -14,6 +14,89 @@ toc = true
 
 ## Mac shell
 
+### support sr rz 
+
+use [iterm2-zmodem](https://github.com/luxihk/iterm2-zmodem)  
+[iterm2 trigger](https://www.iterm2.com/documentation-triggers.html)   
+set up two triggers as following:
+```
+  Regular expression: rz waiting to receive.\*\*B0100
+  Action: Run Silent Coprocess
+  Parameters: /usr/local/bin/iterm2-send-zmodem.sh
+  Instant: checked
+
+  Regular expression: \*\*B00000000000000
+  Action: Run Silent Coprocess
+  Parameters: /usr/local/bin/iterm2-recv-zmodem.sh
+  Instant: checked
+```
+
+```
+# send-zmodem
+#!/bin/bash
+# Author: Matt Mastracci (matthew@mastracci.com)
+# AppleScript from http://stackoverflow.com/questions/4309087/cancel-button-on-osascript-in-a-bash-script
+# licensed under cc-wiki with attribution required
+# Remainder of script public domain
+
+
+osascript -e 'tell application "iTerm2" to version' > /dev/null 2>&1 && NAME=iTerm2 || NAME=iTerm
+if [[ $NAME = "iTerm" ]]; then
+	FILE=`osascript -e 'tell application "iTerm" to activate' -e 'tell application "iTerm" to set thefile to choose file with prompt "Choose a file to send"' -e "do shell script (\"echo \"&(quoted form of POSIX path of thefile as Unicode text)&\"\")"`
+else
+	FILE=`osascript -e 'tell application "iTerm2" to activate' -e 'tell application "iTerm2" to set thefile to choose file with prompt "Choose a file to send"' -e "do shell script (\"echo \"&(quoted form of POSIX path of thefile as Unicode text)&\"\")"`
+fi
+if [[ $FILE = "" ]]; then
+	echo Cancelled.
+	# Send ZModem cancel
+	echo -e \\x18\\x18\\x18\\x18\\x18
+	sleep 1
+	echo
+	echo \# Cancelled transfer
+else
+	/usr/local/bin/sz "$FILE" -e -b
+	sleep 1
+	echo
+	echo \# Received $FILE
+fi
+
+```
+```
+# receive content
+#!/bin/bash
+# Author: Matt Mastracci (matthew@mastracci.com)
+# AppleScript from http://stackoverflow.com/questions/4309087/cancel-button-on-osascript-in-a-bash-script
+# licensed under cc-wiki with attribution required
+# Remainder of script public domain
+
+
+osascript -e 'tell application "iTerm2" to version' > /dev/null 2>&1 && NAME=iTerm2 || NAME=iTerm
+if [[ $NAME = "iTerm" ]]; then
+	FILE=$(osascript -e 'tell application "iTerm" to activate' -e 'tell application "iTerm" to set thefile to choose folder with prompt "Choose a folder to place received files in"' -e "do shell script (\"echo \"&(quoted form of POSIX path of thefile as Unicode text)&\"\")")
+else
+	FILE=$(osascript -e 'tell application "iTerm2" to activate' -e 'tell application "iTerm2" to set thefile to choose folder with prompt "Choose a folder to place received files in"' -e "do shell script (\"echo \"&(quoted form of POSIX path of thefile as Unicode text)&\"\")")
+fi
+
+if [[ $FILE = "" ]]; then
+	echo Cancelled.
+	# Send ZModem cancel
+	echo -e \\x18\\x18\\x18\\x18\\x18
+	sleep 1
+	echo
+	echo \# Cancelled transfer
+else
+	cd "$FILE"
+	/usr/local/bin/rz -E -e -b --bufsize 4096
+	sleep 1
+	echo
+	echo
+	echo \# Sent \-\> $FILE
+fi
+```
+
+
+
+### update bash 
 Mac 环境默认的bash版本为3.2版本。  
 
 [globstar: invalid shell option name on macOS even with bash 4.X](https://apple.stackexchange.com/questions/291287/globstar-invalid-shell-option-name-on-macos-even-with-bash-4-x)  

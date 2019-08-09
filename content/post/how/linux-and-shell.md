@@ -255,6 +255,13 @@ curl: (7) Failed to receive SOCKS4 connect request ack. 原因为本地网络设
 curl -i -H "Accept:application/json" -H "Content-Type:application/json" -XPOST "http://sss.com/abc/" -d '{"op":"Device.restartDevice","device":{"imei":"866568023794679"}}'
 ```
 
+### curl 与 bash 联动
+
+-o 参数表示输出到文件，如 `curl -o aa example.com -o bb example.net`   
+curl默认输出到屏幕
+
+
+
 ### wireless adapter
 
 first: [Fix ‘No WiFi Adapter Found’ with Ubuntu 18.04](http://ubuntuhandbook.org/index.php/2018/08/no-wifi-adapter-found-hp-laptops-ubuntu-18-04/), it says ["Required key not avilable"](https://askubuntu.com/questions/762254/why-do-i-get-required-key-not-available-when-install-3rd-party-kernel-modules), need to disable secure boot. and install new package as following: [Linux wireless driver for HP 14-am100na notebook](https://h30434.www3.hp.com/t5/Notebook-Wireless-and-Networking/Linux-wireless-driver-for-HP-14-am100na-notebook/td-p/6091885), finally, it works.

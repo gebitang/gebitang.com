@@ -1895,3 +1895,27 @@ do
 done
 
 ```
+
+### $1 for shell variable $1 for awk
+
+[The shell does not perform any expansions on single-quoted strings.](https://stackoverflow.com/a/47443157/1087122)
+
+```
+#!bin/bash
+
+# show the line with first column value is greater than 20
+# provider file name
+awk '$1 > 20' < "$1"
+```
+
+[another solution](https://stackoverflow.com/questions/9553317/awks-1-conflicts-with-1-in-shell-script)
+
+```
+# close the ' string, insert the shell $1 
+# (inside " in case there are special characters), 
+# then reopen the ' string.
+cat input.csv | awk -F, '$1~/' "$1" '/ {print "is good"}'
+
+# use variable
+awk -F, -v needle="$1" '$1 ~ needle {print "is good"}' < input.csv
+```

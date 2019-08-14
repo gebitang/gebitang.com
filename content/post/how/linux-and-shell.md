@@ -742,6 +742,9 @@ tar -tzvf ycdh.tar.gz
 
 #解压
 tar -zxvf ycdh.tar.gz;
+
+# 解压到指定目录，目录需要已存在
+tar -xf archive.tar -C /target/directory
 ```
 
 ### ubuntu多版本java支持

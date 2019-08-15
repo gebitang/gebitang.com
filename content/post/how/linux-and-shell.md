@@ -735,15 +735,25 @@ Bus 001 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
 
 ```
 #打包
+# -c Create a new archive containing the specified items.
+# -z (c mode only) Compress the resulting archive with gzip(1).
+# -v Produce verbose output.
+# -f Read the archive from or write the archive to the specified file.
 tar -czvf ycdh.tar.gz ycdh.jar ycdh_lib tools config log4j.properties build.properties dh.sh noLog.sh updateself.sh
 
 #查看文件，但不解压
 tar -tzvf ycdh.tar.gz
 
 #解压
+# -x  Extract to disk from the archive.  
+#     If a file with the same name appears more than once in the archive, each copy
+#     will be extracted, with later copies overwriting (replacing) earlier copies.
+# 
 tar -zxvf ycdh.tar.gz;
 
 # 解压到指定目录，目录需要已存在
+# -C In c and r mode, this changes the directory before adding the following files.  In x mode, change directories
+#             after opening the archive but before extracting entries from the archive.
 tar -xf archive.tar -C /target/directory
 ```
 

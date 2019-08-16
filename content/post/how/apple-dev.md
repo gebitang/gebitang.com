@@ -117,3 +117,20 @@ brew link python
 (firstenv) ➜  ~ pip freeze
 (firstenv) ➜  ~ deactivate
 ```
+
+### 查看MacOS版本
+
+```
+# sw_vers -productVersion 
+
+➜ sw_vers -productVersion
+10.14.6
+➜ sw_vers
+ProductName:	Mac OS X
+ProductVersion:	10.14.6
+BuildVersion:	18G87
+
+# Generates a text report with the standard detail level.
+system_profiler SPSoftwareDataType
+
+```

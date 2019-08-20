@@ -188,6 +188,19 @@ String r = request.getParameter("key");
 
 ## VS code
 
+### 快捷键
+[ref](https://segmentfault.com/q/1010000008537247)  
+`cmd + option + [ `折叠鼠标所在代码段
+`cmd + option + ] `展开鼠标所在代码段
+
+全选之后 `cmd + k` 然后 `cmd + num（0, 1， 2， 3， 4）`可以选择折叠级别
+
+windows把cmd换成ctrl
+
+`cmd + shift + p`输入`折叠`查看所有和折叠相关的功能以及快捷键
+
+
+
 类似sublime，`ctrl+alt+P` 打开管理，
 
 ### 支持go语言

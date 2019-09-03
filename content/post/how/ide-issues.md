@@ -14,6 +14,10 @@ toc = true
 
 ## IDEA
 
+### 自动清除import `ctrl+alt+o`
+
+配置方法: settings-general-auto import-java项，勾选optimize imports on the fly，在当前项目下会自动清除无效的import。
+
 ### Desktop Entry
 
 在Application列表中展示

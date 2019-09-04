@@ -71,6 +71,14 @@ Once activated, you can find the properties file at `${jetty.base}/resources/jet
 [javacv lib](https://github.com/bytedeco/javacv) and [example](https://github.com/bytedeco/javacv/blob/1.3.2/samples/JavaFxPlayVideoAndAudio.java)
 and usage [Examle to play mp4 in JavaFx](https://github.com/teocci/Streaming-Player-Java)
 
+## update-alternatives 配置
+
+可以用来管理多个版本的应用，如python、java、javac。
+
+`sudo update-alternatives --config java`
+
+可使用 `man update-alternatives`查看使用方法。
+
 ## Python
 
 ### 修改系统默认的python的版本

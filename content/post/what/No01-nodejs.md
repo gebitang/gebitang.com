@@ -247,3 +247,21 @@ $ nrm ls
 使用淘宝镜像
 $ nrm use taobao 
 ```
+
+## npm ERR! Cannot read property 'match' of undefined 错误处理
+
+[Cannot read property 'match' of undefined](https://blog.csdn.net/Jane_96/article/details/81451759) 
+
+```
+# first just 
+rm package-lock.json
+# if it doesn't work
+rm -rf node_modules
+rm package-lock.json
+npm cache clear --force
+npm install
+```
+
+## Request to https://bower.herokuapp.com/packages/ failed with 502
+
+[bower issue](https://stackoverflow.com/a/51020318/1087122)

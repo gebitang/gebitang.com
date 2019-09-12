@@ -1949,3 +1949,11 @@ If you want to include stderr, do:
 Furthermore, if you want to append to the log file, use tee -a as:
 
 `program [arguments...] 2>&1 | tee -a outfile`
+
+### 显示文件byte大小
+
+```
+ls -l file.name | awk '{print $5}'
+
+wc -c < file.name
+```

@@ -108,6 +108,9 @@ $ sudo service udev restart
 
 ```
 
+or just change connection mode from charge to PPP(Picture Transfer Protocol). [check here](https://stackoverflow.com/a/49216677/1087122)
+
+
 ### app_process command
 
 [app_process command in Android](http://blog.djodjo.org/?p=414)

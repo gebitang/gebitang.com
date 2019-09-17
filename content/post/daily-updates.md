@@ -1393,8 +1393,21 @@ eval `ssh-agent -s`
 ### Permission denied (publickey).
 添加公钥之后，测试验证时会提示“Permission denied (publickey).”。这是因为还没有将生成的对应的key添加到ssh管理中（默认生成的会自动添加，后续生成的多个rsa文件需要手动添加）
 ```
+# step 1 start agent first.  "ssh-agent bash" or " eval `ssh-agent` "
+
+joechin@Gebitang MINGW64 ~/.ssh
+$ ssh-agent bash
+
+
+joechin@Gebitang MINGW64 ~/.ssh
+$ ssh-add xxx_id_rsa
+Identity added: xxx_id_rsa (aaaa@xxx.com)
+
+
 # add the_abs_path_of_the_new_RSA_file, such as ~/.ssh/coding_id_rsa
 ssh-add coding_id_rsa
+
+# " Could not open a connection to your authentication agent" show, go to step 1
 
 # then it could be cloned normaly.
 ```

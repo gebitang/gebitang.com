@@ -14,6 +14,19 @@ topics = [
 draft = false
 toc=true
 +++
+
+### 快捷键 锁屏
+
+[macOS 使用手册](https://support.apple.com/zh-cn/guide/mac-help/welcome/mac)
+
+系统自带锁屏快捷键：Ctrl + Command + Q
+注意：QQ的快捷键和这个有冲突，需要修改QQ的快捷键。
+
+[Mac 键盘快捷键](https://support.apple.com/zh-cn/HT201236)
+
+Control–Shift–电源按钮 将显示器置于睡眠状态。  
+Option–Command–电源按钮 将您的 Mac 置于睡眠状态
+
 ### 制作ubuntu启动盘
 
 [使用自带磁盘工具+Etcher](https://cto.eguidedog.net/node/826)  

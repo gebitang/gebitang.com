@@ -237,6 +237,26 @@ sudo apt-get -y instal zsh
 # zsh --version to check version
 ```
 
+#### update zsh
+修改快捷键后，需要commit修改内容，否则升级时会提示——
+```
+Updating Oh My Zsh
+error: cannot pull with rebase: You have unstaged changes.
+error: please commit or stash them.
+There was an error updating. Try again later?
+```
+
+执行正常的commit操作，然后手动执行 `upgrade_oh_my_zsh`命令升级
+
+```
+> cd ~/.oh-my-zsh
+> git status
+> git stash
+> upgrade_oh_my_zsh
+> git stash pop
+```
+
+
 ### screenshots and screencasts
 
 [screenshots and screencasts](https://help.ubuntu.com/stable/ubuntu-help/screen-shot-record.html)

@@ -15,11 +15,12 @@ draft = false
 toc=true
 +++
 
+
 [苹果开发者账号开启双重认证教程](https://www.jianshu.com/p/20c5e199d47d)
 注册Apple账户且在iOS设备上进行登录（Phone or Pad），在账户信息页面选择 “密码与安全性”，开启双重认证。——目前，不开启双重认证的账户无法注册为开发者账户。
 
 [开发者账户申请](http://www.applicationloader.net/blog/zh/547.html)
-开启账户双重认证后，注册开发者时，可以选择短信方式进行验证。填写完所有必要信息后，会先收到订单确认信息，但需要等等审核通过。9号11:14申请开发者账号
+开启账户双重认证后，注册开发者时，可以选择短信方式进行验证。填写完所有必要信息后，会先收到订单确认信息，但需要等等审核通过。9号11:14申请开发者账号，10号14:00申请通过。
 
 >快的话付款后十几分钟后就能用，一般要审核一两天，有可能会发邮件让补充地址信息或者上传身份证，留意好邮件就行了。
 
@@ -40,6 +41,25 @@ toc=true
 - [app store connect](https://help.apple.com/app-store-connect/)
 - [topic articles](https://developer.apple.com/support/articles/)
 - [documentation](https://developer.apple.com/documentation/)
+
+### Apple disk space issue
+
+System Storage taken too much space   
+存储空间只有3GB可用，频繁提示“空间不足”且这个提示无法禁止。——最终只能暂时打开勿扰模式。
+
+查看系统占用近70GB。根据这个[视频说明](https://www.youtube.com/watch?v=4E-sX1NxW9o)实际是正常的。这个占用实际上包括了：System + Library（system + user）。这样可以查看这三个对应的文件夹到底哪些应用占用了大量空间。例如：删除Android sdk下载的多个platform之后，就释放了7GB左右的空间。
+
+Other volumns，容器中的其他卷：[What is 'Other Volumes'?](https://apple.stackexchange.com/questions/305094/what-is-other-volumes)  
+
+You can list these with `diskutil apfs list`. The standard configuration of such a container is as follows:
+
+- disk1s1, the volume you boot from, mounted at /, shown in Disk Utility as Macintosh HD
+- disk1s2, ‘Preboot’, not mounted, hidden
+- disk1s3, ‘Recovery’, not mounted, hidden
+- disk1s4, ‘VM’, mounted at /private/var/vm, hidden 
+
+The last 3 are grouped as Other Volumes in Disk Utility. They're required by macOS and shouldn't be removed.
+
 
 
 

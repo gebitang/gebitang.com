@@ -108,6 +108,9 @@ $ sudo service udev restart
 
 ```
 
+or just change connection mode from charge to PPP(Picture Transfer Protocol). [check here](https://stackoverflow.com/a/49216677/1087122)
+
+
 ### app_process command
 
 [app_process command in Android](http://blog.djodjo.org/?p=414)
@@ -740,3 +743,16 @@ OUTPUT:
    If the -o option is used, the generated files will be placed in the base output folder, under their package folder
 ```
 
+### Configuration with name 'debugAndroidTestCompile' not found.
+
+[caused by protobuf](https://www.jianshu.com/p/82505b608111)
+
+该问题是gradle 版本和 protobuf 依赖版本不匹配导致的，所以用新的 protobuf 就可以了
+```
+    dependencies {
+        ...
+        classpath 'com.google.protobuf:protobuf-gradle-plugin:0.8.5'
+        ...
+    }
+
+```

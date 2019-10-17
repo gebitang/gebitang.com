@@ -133,11 +133,15 @@ brew install zeromq
 ### xip format
 [xip format install](https://ktatsiu.wordpress.com/2016/10/28/how-to-download-xcode-8-x-with-xip-format/)  
 
+A XIP file is analogous to zip file, but allows for a digital signature to be embedded and be verified on the receiving system, before the archive is expanded.
+
 To verify that a package is signed, execute the following command on a computer with the package:
 ```
 pkgutil –check-signature /path/to/package.pkg
 ```
 If the output is “Status: signed by a certificate trusted by Mac OS X”, the package is signed. If the output is “Status: no signature”, the package is not signed.
+
+Right-Click and open with Archive Utility from Finder.
 
 ### 运行多个Xcode版本
 [from Baidu](https://jingyan.baidu.com/article/f0062228091dd1fbd3f0c8de.html)  
@@ -195,3 +199,29 @@ BuildVersion:	18G87
 system_profiler SPSoftwareDataType
 
 ```
+
+### Mac功能键
+
+设置、键盘、勾选功能键选项
+
+### Chrome全屏 Command+Shift +F
+### brew 安装应用的地址
+
+```
+#don't update brew and 
+HOMEBREW_NO_AUTO_UPDATE=1 brew install -s pkg-config 
+
+#
+
+# brew install hugo
+# https://discourse.gohugo.io/t/hugo-homebrew-update-for-osx/82
+brew update
+brew install hugo
+
+# 安装的路径：/usr/local/Cellar/hugo/
+
+```
+
+### 强制退出程序
+
+使用快捷键：Command+Option+Esc 打开强制退出程序窗口，然后选中你需要退出的程序，再点右下方的“强制退出”即可。

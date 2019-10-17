@@ -479,6 +479,15 @@ systemProp.https.proxyPort=9527
 
 ## Mysql
 
+### install on Ubuntu 18.04
+
+[How to Install MySQL on Ubuntu 18.04
+This tutorial is also available for:](https://linuxize.com/post/how-to-install-mysql-on-ubuntu-18-04/)  
+
+```
+GRANT ALL PRIVILEGES ON *.* TO 'admin'@'localhost' IDENTIFIED BY 'very_strong_password';
+```
+
 ### 重置auto_increment初始值
 
 [TRUNCATE TABLE 语法](https://blog.csdn.net/weixin_36210698/article/details/70176652)
@@ -584,7 +593,7 @@ mysql -u root -p
 GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY 'youpassword' WITH GRANT OPTION;
 FLUSH PRIVILEGES ;
 
-# 需要修改 /etc/mysql/my.cnf的配置
+# 需要修改 /etc/mysql/my.cnf的配置 /etc/mysql/mysql.conf.d
 # 修改bind-address=127.0.0.1为bind-address=0.0.0.0
 
 # 如何查看mysql数据库的端口
@@ -724,7 +733,20 @@ LC_TIME="en_US.UTF-8"
 LC_ALL="en_US.UTF-8"
 ```
 
+## SSH登录Mac后中文乱码
 
+在Mac OS X命令行下输入set,输出中LANG=zh_CN.UTF-8。
+但是SSH登录后，找不到LANG
+
+解决方法：登录后，输入 
+```
+➜  ~ set |grep LANG
+➜  ~ LANG=zh_CN.UTF-8
+➜  ~ export LANG
+➜  ~ set |grep LANG
+LANG=zh_CN.UTF-8
+
+```
 ## VirtualBox 识别网银UKey
 
 - 在启动前插入UKey
@@ -1414,8 +1436,21 @@ eval `ssh-agent -s`
 ### Permission denied (publickey).
 添加公钥之后，测试验证时会提示“Permission denied (publickey).”。这是因为还没有将生成的对应的key添加到ssh管理中（默认生成的会自动添加，后续生成的多个rsa文件需要手动添加）
 ```
+# step 1 start agent first.  "ssh-agent bash" or " eval `ssh-agent` "
+
+joechin@Gebitang MINGW64 ~/.ssh
+$ ssh-agent bash
+
+
+joechin@Gebitang MINGW64 ~/.ssh
+$ ssh-add xxx_id_rsa
+Identity added: xxx_id_rsa (aaaa@xxx.com)
+
+
 # add the_abs_path_of_the_new_RSA_file, such as ~/.ssh/coding_id_rsa
 ssh-add coding_id_rsa
+
+# " Could not open a connection to your authentication agent" show, go to step 1
 
 # then it could be cloned normaly.
 ```

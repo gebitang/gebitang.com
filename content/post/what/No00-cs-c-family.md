@@ -1103,3 +1103,15 @@ C语言本没有逻辑类型，在内部计算中使用整数表达关系运算�
 在C99中，也没有固有的逻辑类型，但是通过一个头文件定义了可以直接使用的true和false这两个值，以及bool这个类型。
 
 逻辑运算则是C语言固有的成分。
+
+
+### box and unbox
+
+[box and unbox](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/types/boxing-and-unboxing)
+
+**Boxing** is the process of converting a `value type` to the type `object` or to any interface type implemented by this value type. 
+
+**Unboxing** is an explicit conversion from the type `object` to a `value type` or from an interface type to a value type that implements the interface. An unboxing operation consists of:
+
+- Checking the object instance to make sure that it is a boxed value of the given value type.  
+- Copying the value from the instance into the value-type variable.  

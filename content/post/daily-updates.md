@@ -154,26 +154,6 @@ OSError: [WinError 193] %1 不是有效的 Win32 应用程序。
 
 ```
 
-
-## Mac 相关
-
-### Chrome全屏 Command+Shift +F
-### brew 安装应用的地址
-
-```
-# brew install hugo
-# https://discourse.gohugo.io/t/hugo-homebrew-update-for-osx/82
-brew update
-brew install hugo
-
-# 安装的路径：/usr/local/Cellar/hugo/
-
-```
-
-### 强制退出程序
-
-使用快捷键：Command+Option+Esc 打开强制退出程序窗口，然后选中你需要退出的程序，再点右下方的“强制退出”即可。
-
 ### 解压jar文件 jar xf xxx.jar
 
 将把xxx.jar解压到当前目录下，可使用 man jar进行查看参数。
@@ -1778,6 +1758,15 @@ git log --tags --simplify-by-decoration --pretty="format:%ci %d "
 
 
 ## Windows命令
+
+### 命令行查看MD5值
+
+```
+certutil -hashfile xxx MD5
+certutil -hashfile xxx SHA1
+certutil -hashfile xxx SHA256
+```
+
 
 ### outlook证书弹出提示
 

@@ -200,6 +200,34 @@ system_profiler SPSoftwareDataType
 
 ```
 
+### Could not locate device support files.
+
+[copy from higher Xcode](https://stackoverflow.com/a/55975906/1087122)
+
+support files address: `/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/DeviceSupport/xxversion`
+
+
+### brew 安装提示Xcode outdated
+
+>Error: Your Xcode (10.1) is too outdated.
+Please update to Xcode 10.2.1 (or delete it).
+Xcode can be updated from the App Store.
+
+[删除brew的版本检查](https://stackoverflow.com/a/56252549/1087122)——
+
+Open the file `/usr/local/Homebrew/Library/Homebrew/extend/os/mac/diagnostic.rb `, then delete this line `check_xcode_minimum_version` in the following function.
+```
+def fatal_build_from_source_checks
+    %w[
+      check_xcode_license_approved
+      check_xcode_minimum_version
+      check_clt_minimum_version
+      check_if_xcode_needs_clt_installed
+    ].freeze
+    end
+
+```
+
 ### Mac功能键
 
 设置、键盘、勾选功能键选项

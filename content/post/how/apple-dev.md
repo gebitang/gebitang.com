@@ -133,11 +133,15 @@ brew install zeromq
 ### xip format
 [xip format install](https://ktatsiu.wordpress.com/2016/10/28/how-to-download-xcode-8-x-with-xip-format/)  
 
+A XIP file is analogous to zip file, but allows for a digital signature to be embedded and be verified on the receiving system, before the archive is expanded.
+
 To verify that a package is signed, execute the following command on a computer with the package:
 ```
 pkgutil –check-signature /path/to/package.pkg
 ```
 If the output is “Status: signed by a certificate trusted by Mac OS X”, the package is signed. If the output is “Status: no signature”, the package is not signed.
+
+Right-Click and open with Archive Utility from Finder.
 
 ### 运行多个Xcode版本
 [from Baidu](https://jingyan.baidu.com/article/f0062228091dd1fbd3f0c8de.html)  
@@ -178,3 +182,74 @@ brew link python
 (firstenv) ➜  ~ pip freeze
 (firstenv) ➜  ~ deactivate
 ```
+
+### 查看MacOS版本
+
+```
+# sw_vers -productVersion 
+
+➜ sw_vers -productVersion
+10.14.6
+➜ sw_vers
+ProductName:	Mac OS X
+ProductVersion:	10.14.6
+BuildVersion:	18G87
+
+# Generates a text report with the standard detail level.
+system_profiler SPSoftwareDataType
+
+```
+
+### Could not locate device support files.
+
+[copy from higher Xcode](https://stackoverflow.com/a/55975906/1087122)
+
+support files address: `/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/DeviceSupport/xxversion`
+
+
+### brew 安装提示Xcode outdated
+
+>Error: Your Xcode (10.1) is too outdated.
+Please update to Xcode 10.2.1 (or delete it).
+Xcode can be updated from the App Store.
+
+[删除brew的版本检查](https://stackoverflow.com/a/56252549/1087122)——
+
+Open the file `/usr/local/Homebrew/Library/Homebrew/extend/os/mac/diagnostic.rb `, then delete this line `check_xcode_minimum_version` in the following function.
+```
+def fatal_build_from_source_checks
+    %w[
+      check_xcode_license_approved
+      check_xcode_minimum_version
+      check_clt_minimum_version
+      check_if_xcode_needs_clt_installed
+    ].freeze
+    end
+
+```
+
+### Mac功能键
+
+设置、键盘、勾选功能键选项
+
+### Chrome全屏 Command+Shift +F
+### brew 安装应用的地址
+
+```
+#don't update brew and 
+HOMEBREW_NO_AUTO_UPDATE=1 brew install -s pkg-config 
+
+#
+
+# brew install hugo
+# https://discourse.gohugo.io/t/hugo-homebrew-update-for-osx/82
+brew update
+brew install hugo
+
+# 安装的路径：/usr/local/Cellar/hugo/
+
+```
+
+### 强制退出程序
+
+使用快捷键：Command+Option+Esc 打开强制退出程序窗口，然后选中你需要退出的程序，再点右下方的“强制退出”即可。

@@ -188,6 +188,15 @@ String r = request.getParameter("key");
 
 ## VS code
 
+### 折叠代码块
+
+-  折叠所有区域代码的快捷  
+  - 先按下  ctrl 和 K，再按下 ctrl 和 0 (0,1,2,3表示不同的折叠级别)
+
+-  展开所有折叠区域代码的快捷  
+  - 先按下  ctrl 和 K，再按下 ctrl 和 J
+
+
 类似sublime，`ctrl+alt+P` 打开管理，
 
 ### 支持go语言

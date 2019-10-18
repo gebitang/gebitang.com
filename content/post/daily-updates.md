@@ -71,6 +71,14 @@ Once activated, you can find the properties file at `${jetty.base}/resources/jet
 [javacv lib](https://github.com/bytedeco/javacv) and [example](https://github.com/bytedeco/javacv/blob/1.3.2/samples/JavaFxPlayVideoAndAudio.java)
 and usage [Examle to play mp4 in JavaFx](https://github.com/teocci/Streaming-Player-Java)
 
+## update-alternatives 配置
+
+可以用来管理多个版本的应用，如python、java、javac。
+
+`sudo update-alternatives --config java`
+
+可使用 `man update-alternatives`查看使用方法。
+
 ## Python
 
 ### 修改系统默认的python的版本
@@ -146,26 +154,6 @@ OSError: [WinError 193] %1 不是有效的 Win32 应用程序。
 
 ```
 
-
-## Mac 相关
-
-### Chrome全屏 Command+Shift +F
-### brew 安装应用的地址
-
-```
-# brew install hugo
-# https://discourse.gohugo.io/t/hugo-homebrew-update-for-osx/82
-brew update
-brew install hugo
-
-# 安装的路径：/usr/local/Cellar/hugo/
-
-```
-
-### 强制退出程序
-
-使用快捷键：Command+Option+Esc 打开强制退出程序窗口，然后选中你需要退出的程序，再点右下方的“强制退出”即可。
-
 ### 解压jar文件 jar xf xxx.jar
 
 将把xxx.jar解压到当前目录下，可使用 man jar进行查看参数。
@@ -188,13 +176,23 @@ String r = request.getParameter("key");
 
 ## VS code
 
-### 折叠代码块
+### 折叠代码块快捷键
 
 -  折叠所有区域代码的快捷  
   - 先按下  ctrl 和 K，再按下 ctrl 和 0 (0,1,2,3表示不同的折叠级别)
 
 -  展开所有折叠区域代码的快捷  
   - 先按下  ctrl 和 K，再按下 ctrl 和 J
+
+[ref](https://segmentfault.com/q/1010000008537247)  
+`cmd + option + [ `折叠鼠标所在代码段
+`cmd + option + ] `展开鼠标所在代码段
+
+全选之后 `cmd + k` 然后 `cmd + num（0, 1， 2， 3， 4）`可以选择折叠级别
+
+windows把cmd换成ctrl
+
+`cmd + shift + p`输入`折叠`查看所有和折叠相关的功能以及快捷键
 
 
 类似sublime，`ctrl+alt+P` 打开管理，
@@ -1766,6 +1764,15 @@ git log --tags --simplify-by-decoration --pretty="format:%ci %d "
 
 
 ## Windows命令
+
+### 命令行查看MD5值
+
+```
+certutil -hashfile xxx MD5
+certutil -hashfile xxx SHA1
+certutil -hashfile xxx SHA256
+```
+
 
 ### outlook证书弹出提示
 

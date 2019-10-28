@@ -61,7 +61,9 @@ You can list these with `diskutil apfs list`. The standard configuration of such
 The last 3 are grouped as Other Volumes in Disk Utility. They're required by macOS and shouldn't be removed.
 
 
+### Mac允许远程登录
 
+系统--共享--远程登录
 
 ### 快捷键 锁屏
 

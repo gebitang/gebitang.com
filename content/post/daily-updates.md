@@ -465,6 +465,17 @@ systemProp.https.proxyPort=9527
 
 ## Mysql
 
+[DDL VS. DML](https://stackoverflow.com/questions/2578194/what-is-ddl-and-dml)
+
+**DDL** is Data Definition Language : it is used to define data structures.
+
+For example, with SQL, it would be instructions such as `create table`, `alter table`, ...
+
+
+**DML** is Data Manipulation Language : it is used to manipulate data itself.
+
+For example, with SQL, it would be instructions such as `insert`,`update`, `delete`, ...
+
 ### install on Ubuntu 18.04
 
 [How to Install MySQL on Ubuntu 18.04
@@ -1764,6 +1775,15 @@ git log --tags --simplify-by-decoration --pretty="format:%ci %d "
 
 
 ## Windows命令
+
+### 设置命令行代理
+
+```
+# 持续到cmd窗口关闭，非 系统环境变量
+set http_proxy=http://127.0.0.1:1189
+set https_proxy=http://127.0.0.1:1189
+```
+
 
 ### 命令行查看MD5值
 

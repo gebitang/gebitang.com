@@ -232,6 +232,8 @@ nvm ls-remote --lts
 ```
 - 安装指定版本： nvm install v8.12.0
 
+- 切换到指定版本 `nvm use v8.12.0`
+
 [删除nvm](https://github.com/nvm-sh/nvm/issues/298)  
 默认会安装到 $HOME/.nvm 文件夹下 + 更新了环境变量。 反向操作即可。
 

@@ -1,6 +1,6 @@
 +++
-title = "IDE issues"
-description = "ide problems"
+title = "IDEA issues"
+description = "ideA problems"
 tags = [
     "ide",
     "work"
@@ -13,6 +13,12 @@ toc = true
 +++
 
 ## IDEA
+
+### 个人正版支持多个设备使用
+
+[Can I use my personal license on multiple machines?](https://sales.jetbrains.com/hc/en-gb/articles/206544319-Can-I-use-my-personal-license-on-multiple-machines-)
+
+趁着[1024节日活动](https://www.jetbrains.com/zh-cn/lp/programmers-day/)，购买了第一份license for IDEA Ultimate
 
 ### 自动清除import `ctrl+alt+o`
 

@@ -20,6 +20,14 @@ toc = true
 
 趁着[1024节日活动](https://www.jetbrains.com/zh-cn/lp/programmers-day/)，购买了第一份license for IDEA Ultimate
 
+### 将IDE以及工程目录添加到信任区
+
+[Antivirus Impact on Build Speed](https://intellij-support.jetbrains.com/hc/en-us/articles/360006298560)，这篇文章里可以链接到：社区版本的源码库、
+
+将对应的文件夹、exe文件添加到信任区。
+
+[Changing IDE default directories used for config, plugins, and caches storage](https://intellij-support.jetbrains.com/hc/en-us/articles/207240985)修改默认的目录地址。
+
 ### 自动清除import `ctrl+alt+o`
 
 配置方法: settings-general-auto import-java项，勾选optimize imports on the fly，在当前项目下会自动清除无效的import。

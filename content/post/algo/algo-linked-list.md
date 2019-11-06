@@ -17,6 +17,8 @@ toc = true
 
 [linked-list](https://leetcode.com/tag/linked-list/)
 
+## Problem 2 Add Two Numbers
+
 [2. Add Two Numbers Medium](https://leetcode.com/problems/add-two-numbers/)
 
 You are given two non-empty linked lists representing two non-negative integers. The digits are stored in **reverse order** and each of their nodes contain a single digit. Add the two numbers and return it as a linked list.
@@ -128,6 +130,7 @@ Memory Usage: 39.7 MB, less than 99.69% of Java online submissions for Add Two N
 
 [更高效的解决方法](https://leetcode.com/problems/add-two-numbers/discuss/1059/My-accepted-Java-solution)
 
+### Refer
 
 ```
 /**
@@ -162,6 +165,8 @@ public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
 看完别人的解法，感觉我对题目理解的有问题。**reverse order**实际上正好满足正确的加法计算规则。`[2->4->5]  +  [3 -> 6 -> 9]` 对应于 542+964，计算时正好是按照顺序从第一位2、3开始计算加法
 
 --- 
+
+## Problem 19 Remove Nth Node From End of List
 
 [19. Remove Nth Node From End of List ](https://leetcode.com/problems/remove-nth-node-from-end-of-list/)
 
@@ -267,6 +272,8 @@ public ListNode removeNthFromEnd(ListNode head, int n) {
 ```
 
 ---
+
+## Problem 21: Merge Two Sorted Lists
 
 [21. Merge Two Sorted Lists](https://leetcode.com/problems/merge-two-sorted-lists/) Easy
 
@@ -378,5 +385,122 @@ public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
             temp.next = l2;
         }
         return n.next;
+    }
+```
+
+## Problem 61: Rotate List
+
+[Rotate List](https://leetcode.com/problems/rotate-list/) Medium
+
+Given a linked list, rotate the list to the right by k places, where `k` is non-negative.
+
+Example 1:
+>Input: 1->2->3->4->5->NULL, k = 2  
+>Output: 4->5->1->2->3->NULL  
+
+Explanation:  
+>rotate 1 steps to the right: 5->1->2->3->4->NULL  
+>rotate 2 steps to the right: 4->5->1->2->3->NULL  
+
+Example 2:
+
+>Input: 0->1->2->NULL, k = 4  
+>Output: 2->0->1->NULL  
+
+Explanation:  
+>rotate 1 steps to the right: 2->0->1->NULL  
+>rotate 2 steps to the right: 1->2->0->NULL  
+>rotate 3 steps to the right: 0->1->2->NULL  
+>rotate 4 steps to the right: 2->0->1->NULL  
+
+对比后可知，k有可能大于整个链表的长度，需要判断出来实际上需要翻转的位置。 所以必须要获取链表的长度。
+获取长度之后，要翻转的位置为 S 个位置（int s = k % size）。
+
+自己写的时候，总是不好控制要移动到哪个位置。——目前看，链表题都需要先手动添加一个 dummy节点，然后将head节点挂在这个dummy节点的下一个位置。
+
+然后操作时，都直接操作dummy这个新链表。这样确保操作的最终目标都是移动之后的 target.next节点。
+
+```
+public ListNode rotateRight(ListNode head, int k) {
+
+        if (head==null||head.next==null) return head;
+
+        ListNode dummy=new ListNode(0);
+        dummy.next=head;
+
+        ListNode fast=dummy,slow=dummy;
+
+        int size= 0; //链表长度
+        while (fast.next != null) {
+            fast = fast.next;
+            size++;
+        }
+
+        int s = k % size; //移动次数
+
+        if(s == 0) return dummy.next; //不需要移动
+
+        for (int i = 0; i < (size - s); i++) { //要移动的位数
+            slow=slow.next;
+        }
+
+        //关键的翻转操作
+        fast.next=dummy.next; //最后一个节点的next需要指向最初的头结点
+        dummy.next=slow.next; // slow.next是目前新的头结点
+        slow.next=null; //将slow.next节点至为null。完成翻转动作
+
+        return dummy.next;
+
+    }
+```
+
+## Problem 83: Remove Duplicates from Sorted List
+
+[Remove Duplicates from Sorted List](https://leetcode.com/problems/remove-duplicates-from-sorted-list/) Easy
+
+Given a sorted linked list, delete all duplicates such that each element appear only once.
+
+Example 1:
+
+> Input: 1->1->2  
+> Output: 1->2
+
+Example 2:
+
+> Input: 1->1->2->3->3  
+> Output: 1->2->3
+
+直接的实现对于最后一个节点的处理不够精细，调试后完成了算法。
+
+Runtime: 2 ms, faster than 6.29% of Java online submissions for Remove Duplicates from Sorted List.  
+Memory Usage: 36.9 MB, less than 100.00% of Java online submissions for Remove Duplicates from Sorted List.
+
+```
+public ListNode deleteDuplicates(ListNode head) {
+
+        if(head == null || head.next == null) return head;
+
+        List<Integer> unique = new ArrayList<>();
+
+        ListNode dummy = new ListNode(0);
+        dummy.next = head;
+
+        ListNode t = dummy;
+        while (head != null) {
+            int v = head.val;
+            if(!unique.contains(v)) {
+                unique.add(v);
+                t.next = head;
+                t = t.next;
+                head = head.next;
+            }else {
+                head = head.next;
+                if(head == null) {
+                    t.next = null; //最后一个节点断开
+                    break;
+                }
+            }
+        }
+        return dummy.next;
     }
 ```

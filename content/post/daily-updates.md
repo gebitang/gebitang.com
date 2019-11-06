@@ -1329,6 +1329,10 @@ M2_HOME=/Users/gebitang/apache-maven-3.5.0
 PATH=$PATH:$JAVA_HOME/bin:/Users/gebitang/libs/:/usr/local/smlnj/bin:$M2_HOME/bin
 ```
 
+### 安装依赖
+
+mvn install 
+
 - 如需要，修改conf文件夹下的settings文件中的localRepository
 
 ### 安装jar包到本地

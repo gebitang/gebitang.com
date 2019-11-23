@@ -131,3 +131,7 @@ for me, it's `Ctrl+Shift+G`
 ### idea 不显示gradle工具栏
 
 [gradle tool window missing](https://intellij-support.jetbrains.com/hc/en-us/community/posts/205449130-gradle-tool-window-missing)， 先手动创建一个gradle类型的工程后，gradle工具栏会显示出来，之后再导入gradle工程。
+
+### lombok 注解不生效
+
+前提需要安装lombok插件：`ctrl+alt+s`（或者`file->settings`）搜索lombok，安装后重启生效

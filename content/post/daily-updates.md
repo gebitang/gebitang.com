@@ -1782,7 +1782,9 @@ git log --tags --simplify-by-decoration --pretty="format:%ci %d "
 
 ### Word里替换换行符 
 
-查找`^p`替换 为空字符串即可。 在线[图片OCR识别](https://www.onlineocr.net/zh_hans/)准确率非常高，保留了图片的宽度，导致文本自动在固定宽度就换行了，
+查找`^p`替换 为空字符串即可。 在线[图片OCR识别](https://www.onlineocr.net/zh_hans/)准确率非常高，保留了图片的宽度，导致文本自动在固定宽度就换行了。 
+
+软回车（垂直向下的箭头）为`^l`。`^p`称为硬回车（向下再左转的箭头）。
 
 ### 设置命令行代理
 

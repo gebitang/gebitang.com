@@ -135,3 +135,16 @@ for me, it's `Ctrl+Shift+G`
 ### lombok 注解不生效
 
 前提需要安装lombok插件：`ctrl+alt+s`（或者`file->settings`）搜索lombok，安装后重启生效
+
+### 其他IDEA时提示端口占用问题 
+
+Start Failed, Internal error: recovering IDE to the working state after the critical [startup error](https://intellij-support.jetbrains.com/hc/en-us/articles/360007568559) 
+
+这里的解决方案并未生效，差点就重装了。重启电脑后可以正常启动，怀疑是上次有server在运行中，强制关机导致的。端口一直没有释放，需要使用 `netstat -ano | findstr 28000` + `taskkill /F /PID 3223(端口号)`配合检查一下是否有端口真正被占用。
+
+```
+Address already in use
+...
+---
+JRE 11.0.4+10-b304.69 amd64 by JetBrains s.r.o C:\Program Files\JetBrains\IntelliJ IDEA 2019.2.3\jbr
+```

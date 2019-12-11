@@ -148,3 +148,12 @@ Address already in use
 ---
 JRE 11.0.4+10-b304.69 amd64 by JetBrains s.r.o C:\Program Files\JetBrains\IntelliJ IDEA 2019.2.3\jbr
 ```
+
+### cannot resolve symbol 
+
+代码中的类明明在，却找不到。看起来是个[普遍问题](https://stackoverflow.com/questions/5905896/intellij-inspection-gives-cannot-resolve-symbol-but-still-compiles-code) 
+
+尝试操作包括：  
+- File -- Settings -- Invalid Cache and Restart 
+- Re-Import all Maven projects
+- manage projects：删除当前有问题的项目，重新导入，导入时选择删除已有的项目重新导入 （work for me this way）

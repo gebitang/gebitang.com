@@ -321,3 +321,9 @@ brew install hugo
 
 大概4小时之后可以收到，官方承诺的为24小时发货。
 ![](https://upload-images.jianshu.io/upload_images/3296949-e942a3d746a96c5e.png)
+
+### 获取app的下载链接 
+
+在Apple store找到对应App，点击更多，选择Share App，有 Copy link选项。可以获取到对应App的下载链接
+
+google paly上可以web端搜索对应的app，获取到[url](https://play.google.com/store/apps/details?id=com.knowroaming.activities)，然后可以到[apkpure](https://apkpure.com/)网站获取下载地址。

@@ -1002,6 +1002,14 @@ Linux version 4.4.0-31-generic (buildd@lgw01-43) (gcc version 4.8.4 (Ubuntu 4.8.
 root@testin-DH:~#
 ```
 
+### 查看CentOS版本
+[centos7与centos6区别](https://www.cnblogs.com/bethal/p/5945026.html)  内核版本  
+
+- [CentOS6] 2.6.x-x  
+- [CentOS7] 3.10.x-x
+
+[Systemd技术](https://www.chenweiliang.com/cwl-692.html): RedHat7，CentOS 7，Ubuntu15
+
 ### 测试I/O数据 dd
 
 ```

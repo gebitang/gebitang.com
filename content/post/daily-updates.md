@@ -1780,6 +1780,56 @@ git log --tags --simplify-by-decoration --pretty="format:%ci %d "
 
 ## Windows命令
 
+### ConEmu 
+在新tab页面批量执行不同的任务。[official doc](https://conemu.github.io/en/LaunchNewTab.html) 
+
+ConEmu默契启动后在 ` C:\Users\userName`目录，可以将不同的执行脚本保存在当前目录下。例如：启动hugo、启动jekyll等
+
+- 启动hugo脚本 `startHugoSite.bat`
+```
+#启动hugo站点
+D:
+cd  D:/openSources/site/hugositefolder
+hugo server --watch --verbose --buildDrafts
+```
+
+- 启动jekyll脚本 `startJekyllSite.bat`
+```
+# 启动jekyll站点
+D:
+cd  D:/openSources/site/jekyllsitefolder
+bundle exec jekyll serve
+```
+
+- 启动桌面应用脚本`startDesktop.bat`
+```
+#启动桌面应用
+D:
+cd D:\openSources\site\desktop-app
+yarn electron:serve
+```
+
+- 其他上述脚本的脚本 `startAll.bat`
+```
+@echo off 
+echo start trio
+# https://superuser.com/a/593648
+start "trio" "D:\tools\conEmu\ConEmu64.exe" /cmdlist ^> cmd /k startHugoSite.bat ^|^|^| cmd /k startJekyllSite.bat ^|^|^| cmd /k startDesktop.bat
+echo finish jobs.
+```
+
+上述命令会新启动一个ConEmu窗口并在其中打开三个tab页面，分别执行三个启动脚本。强迫症如我，就主动退出当前窗口。使用新创建的window了。
+
+bat脚本内容：`start "c" cmd /k call b.bat`中：
+- “trio”是一段字符串，代表新打开的cmd窗口的名字，可以随便起名。
+- /k是表示新打开的cmd窗口在执行完命令后保存打开状态，如果希望执行完就关闭窗口就使用/c
+
+如果在当前脚本环境中执行，可直接使用`call`目录：
+- call b.bat表示call命令，即调用b.bat文件；该命令可以用”“括起来，即：”call b.bat”
+
+
+
+
 ### Word里替换换行符 
 
 查找`^p`替换 为空字符串即可。 在线[图片OCR识别](https://www.onlineocr.net/zh_hans/)准确率非常高，保留了图片的宽度，导致文本自动在固定宽度就换行了。 

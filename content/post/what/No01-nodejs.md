@@ -11,6 +11,59 @@ topics = [
 toc = true
 +++
 
+## Jekyll Usage 
+
+### 图片增加title和link
+[参考1](https://eduardoboucas.com/blog/2014/12/07/including-and-managing-images-in-jekyll.html)、[参考2](https://stackoverflow.com/a/19360305/1087122)
+
+处理为——
+```
+<figure class="image">
+    <figcaption>{{ include.description }}</figcaption>
+    {% if include.link %}
+    <a href="{{ include.link }}" target="_blank"><img src="{{ include.url }}" alt="{{ include.description }}"> </a>
+    {% else %}
+    <img src="{{ include.url }}" alt="{{ include.description }}">    
+    {% endif %}    
+</figure>  
+```
+
+### 文章文件命名规范
+
+Jekyll requires blog post files to be named according to the following format:
+
+>`YEAR-MONTH-DAY-title.MARKUP`
+
+Where `YEAR` is a four-digit number, `MONTH` and `DAY` are both two-digit numbers, and `MARKUP` is the file extension representing the format used in the file. After that, include the necessary front matter. Take a look at the source for this post to get an idea about how it works.
+
+Jekyll also offers powerful support for code snippets:
+
+```
+{% highlight ruby %}
+def print_hi(name)
+  puts "Hi, #{name}"
+end
+print_hi('Tom')
+#=> prints 'Hi, Tom' to STDOUT.
+{% endhighlight %}
+
+{% highlight java %}
+public static void main(String[] args) {
+    System.out.println("Welcome to Mixin 101");
+}
+{% endhighlight %}
+```
+
+### 链接方法
+
+Check out the [Jekyll docs][jekyll-docs] for more info on how to get the most out of Jekyll. File all bugs/feature requests at [Jekyll’s GitHub repo][jekyll-gh]. If you have questions, you can ask them on [Jekyll Talk][jekyll-talk].
+
+[jekyll-docs]: https://jekyllrb.com/docs/home
+[jekyll-gh]:   https://github.com/jekyll/jekyll
+[jekyll-talk]: https://talk.jekyllrb.com/
+
+
+
 [Use Dashboard](https://zenhabits.net/dashboard/) to [Go Deeper, Not Wider](http://www.raptitude.com/2017/12/go-deeper-not-wider/) 
 
 ## 重学前端

@@ -465,6 +465,15 @@ systemProp.https.proxyPort=9527
 
 ## Mysql
 
+### 查看当前数据库都有哪些人在连接
+
+[List of users accessing database](https://stackoverflow.com/questions/5575347/list-of-users-accessing-database) 
+
+`SHOW PROCESSLIST` or `select * from information_schema.processlist` 
+```
+"ID","USER","HOST","DB","COMMAND","TIME","STATE","INFO","TIME_MS","ROWS_SENT","ROWS_EXAMINED"
+```
+
 [DDL VS. DML](https://stackoverflow.com/questions/2578194/what-is-ddl-and-dml)
 
 **DDL** is Data Definition Language : it is used to define data structures.

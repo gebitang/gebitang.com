@@ -320,3 +320,19 @@ npm install
 ## Request to https://bower.herokuapp.com/packages/ failed with 502
 
 [bower issue](https://stackoverflow.com/a/51020318/1087122)
+
+## phantomjs配置
+使用`npm install`的时候，可以看到会进行phantomjs的安装，有类似如下信息——
+![](https://upload-images.jianshu.io/upload_images/3296949-f98fe9c9dbaf7bc3.png)
+
+这个包[phantomjs](https://github.com/Medium/phantomjs/releases/download/v2.1.1/phantomjs-2.1.1-macosx.zip) 实际上是一个“可执行的包”，作用为 `An NPM installer for [PhantomJS](http://phantomjs.org/), headless webkit with JS API`
+
+- 受限于网络环境，下载比较缓慢，可以进行本地安装。然后将bin目录加入\$PATH即可。 `export PATH=/Users/gebitang/phantomjs-2.1.1-macosx/bin:$PATH` 
+
+- 如何有本地的私有源，也可以通过npm进行配置 
+`npm config set phantomjs_cdnurl http://npm.stf.demo.com/mirrors/phantomjs/ -g`
+[phantomjs ](https://github.com/Medium/phantomjs)If github is down, or the Great Firewall is blocking github, you may need to use a different download mirror. To set a mirror, set npm config property phantomjs_cdnurl.
+
+更详细介绍——[README.md ](https://github.com/Medium/phantomjs/blob/master/README.md)
+
+使用 `npm config list`查看配置的默认变量

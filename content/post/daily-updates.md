@@ -465,6 +465,41 @@ systemProp.https.proxyPort=9527
 
 ## Mysql
 
+### 查看数据库大小
+```
+SELECT table_schema AS "Database",
+       ROUND(SUM(data_length + index_length) / 1024 / 1024, 2) AS "Size (MB)"
+FROM information_schema.TABLES
+GROUP BY table_schema;
+
+# 返回结果类似——
+Database  size(MB)
+daxiang	    0.36
+information_schema	0.16
+mysql	2.43
+performance_schema	0.00
+sonar_db	36.00
+stfmonkey	1.86
+sys	0.02
+```
+
+### 查看具体的数据库中的表大小
+
+```
+SELECT table_name AS "Table",
+       ROUND(((data_length + index_length) / 1024 / 1024), 2) AS "Size (MB)"
+FROM information_schema.TABLES
+WHERE table_schema = 'sonar_db' 
+    -- without table name, then all tables will be checked
+    and TABLE_NAME = 'live_measures' 
+ORDER BY (data_length + index_length) DESC;
+
+# 结果
+Table           Size(MB)
+live_measures	17.41
+
+```
+
 ### 查看当前数据库都有哪些人在连接
 
 [List of users accessing database](https://stackoverflow.com/questions/5575347/list-of-users-accessing-database) 

@@ -1510,6 +1510,16 @@ filename1-nt filename2  如果 filename1比 filename2新，则为真
 filename1-ot filename2  如果 filename1比 filename2旧，则为真  
  [ /boot/bzImage -ot arch/i386/boot/bzImage ]
 
+
+# http://www.tldp.org/LDP/abs/html/abs-guide.html
+if [ -n "$1" ]
+# Test whether command-line argument is present (non-empty).
+then
+  lines=$1
+else  
+  lines=$LINES # Default, if not specified on command-line.
+fi  
+
 ```
 
 ### 0x4. 线程控制批量执行

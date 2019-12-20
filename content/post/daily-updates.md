@@ -466,6 +466,13 @@ systemProp.https.proxyPort=9527
 ## Mysql
 
 ### 查看数据库大小
+
+[refer](https://chartio.com/resources/tutorials/how-to-get-the-size-of-a-table-in-mysql/)  
+[official documentation](https://dev.mysql.com/doc/refman/8.0/en/tables-table.html)
+
+- `DATA_LENGTH` is the length (or size) of all data in the table (in `bytes`).
+- `INDEX_LENGTH` is the length (or size) of the index file for the table (also in `bytes`).
+
 ```
 SELECT table_schema AS "Database",
        ROUND(SUM(data_length + index_length) / 1024 / 1024, 2) AS "Size (MB)"

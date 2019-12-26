@@ -931,6 +931,12 @@ root     pts/0        10.35.0.4        Thu Jan  4 15:39 - 15:41  (00:01)
 新建群组：`groupadd -g 555 testgroup`
 删除群组： `groupdel testgroup`
 
+### 增加用户的root权限
+
+- 切换到root用户
+- 添加文件写权限`chmod u+w /etc/sudoers`
+- 编辑，增加新用户到该文件中 `geb     ALL=(ALL:ALL) ALL`
+- 撤销写权限 `chmod u-w /etc/sudoers`
 
 ### 命令行快捷键
 

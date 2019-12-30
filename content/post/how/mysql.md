@@ -282,3 +282,11 @@ DELETE [LOW_PRIORITY] [QUICK] [IGNORE] FROM tbl_name
 
 delete from friends;
 ```
+
+### 拼接字段concat
+
+[参考](https://blog.csdn.net/u012260238/article/details/70245452)
+```
+#将多个字段值拼接为新的值
+select *, CONCAT(git_group ,'/', project_name) as name from ut_block where git_group = 'nr';
+```

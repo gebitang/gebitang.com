@@ -290,3 +290,18 @@ delete from friends;
 #将多个字段值拼接为新的值
 select *, CONCAT(git_group ,'/', project_name) as name from ut_block where git_group = 'nr';
 ```
+
+### 命令行 
+
+#### 登录远程数据库
+
+mysql -P 3306 -h 192.168.1.104 -u root -p
+
+#### 查看表结构
+show columns from customers; 
+
+#### 查看记录
+- select count(1) from table; 忽略所有列
+- select count('') from table;-返回表的记录数
+- select count(0) from table;-返回表的记录数
+- select count(null) from table;-返回0

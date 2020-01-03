@@ -1026,6 +1026,13 @@ This is a footnote.[^2]
 
 [maven in five minutes](https://maven.apache.org/guides/getting-started/maven-in-five-minutes.html)
 
+### 单测失败
+
+[Failed to execute goal org.apache.maven.plugins:maven-surefire-plugin:2.10:test](https://stackoverflow.com/questions/13170860/failed-to-execute-goal-org-apache-maven-pluginsmaven-surefire-plugin2-10test)
+
+
+Locate the dependencies you're missing with `mvn dependency::tree`
+
 ### maven clean package
 
 [执行逻辑](https://www.cnblogs.com/frankyou/p/6062179.html)  

@@ -1169,6 +1169,17 @@ export PATH=${JAVA_HOME}/bin:$PATH
 直接运行export命令定义变量【只对当前shell（BASH）有效（临时的）】  
 在shell的命令行下直接使用[export  变量名=变量值]定义变量，该变量只在当前的shell（BASH）或其子shell（BASH）下是有效的，shell关闭了，变量也就失效了，再打开新shell时就没有这个变量，需要使用的话还需要重新定义。  
 
+### 命令行失效 
+
+修改环境变量时，最后少打了一个H，`export PATH=${JAVA_HOME}/bin:$PATH`变成了`export PATH=${JAVA_HOME}/bin:$PAT`导致所以的命令无法使用。
+
+正常的解决方案：
+
+- 使用绝对路径进行操作；`/usr/bin/vi /home/geb/.zshrc`进行编辑
+- 临时导出新的PATH路径`export PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin:/root/bin`然后继续操作
+
+吓出一身冷汗
+
 ### ulimit用法 
 
 [ulimit 用法](http://man.linuxde.net/ulimit)

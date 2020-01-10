@@ -1821,6 +1821,13 @@ netsh wlan set hostednetwork mode=allow ssid=cai key=12345678
 java -Dshow.debug.info=true -jar ./App.jar >> log-%date:~0,4%%date:~5,2%%date:~8,2%%time:~0,2%%time:~3,2%%time:~6,2%.txt 2>&1
 ```
 
+### PowerShell 执行 mvn -D 参数问题
+
+在Powershell环境下执行类似 `mvn clean package assembly:assembly -Dmaven.test.skip=true`命令时，参数会被截断，导致提示 test.skip不识别的错误。
+
+[参考](https://stackoverflow.com/a/6351739/1087122) 需要把最后的参数使用单引号: `mvn clean package assembly:assembly '-Dmaven.test.skip=true'`
+
+
 ### 杀死进程
 ```
 #命令行杀死进程

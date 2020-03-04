@@ -327,3 +327,9 @@ brew install hugo
 在Apple store找到对应App，点击更多，选择Share App，有 Copy link选项。可以获取到对应App的下载链接
 
 google paly上可以web端搜索对应的app，获取到[url](https://play.google.com/store/apps/details?id=com.knowroaming.activities)，然后可以到[apkpure](https://apkpure.com/)网站获取下载地址。
+
+### Mac多台电脑共享屏幕
+
+原生支持。多台Mac设备在相同的局域网内，系统设置 -- 共享 -- 屏幕共享（也可以选择其他共享的内容）
+
+Finder中选择 网络 -- 找到打开共享的机器，选择“共享屏幕”。 

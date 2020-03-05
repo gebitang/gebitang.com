@@ -14,7 +14,7 @@ toc = true
 
 ## Mac shell
 
-### support sr rz 
+### support sz rz 
 
 use [iterm2-zmodem](https://github.com/luxihk/iterm2-zmodem)  
 [iterm2 trigger](https://www.iterm2.com/documentation-triggers.html)   

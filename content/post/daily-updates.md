@@ -1607,6 +1607,8 @@ fi
 ' --tag-name-filter cat -- --branches --tags
 ```
 
+这样修改后，会导致远端与本地所有替换的内容都认为不同，需要重新先 'git pull' 获取一次，当出现'fatal: refusing to merge unrelated histories'的提示时，需要执行'git pull origin master --allow-unrelated-histories'命令，然后修改可能的冲突即可。
+
 更新修改后的repo
 ```
 git push --force --tags origin 'refs/heads/*'

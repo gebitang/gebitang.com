@@ -1588,6 +1588,7 @@ cd repo.git
 ```
 #!/bin/sh
 
+# -f to force rewrite, such as git filter-branch -f --env-filter
 git filter-branch --env-filter '
 
 OLD_EMAIL="your-old-email@example.com"

@@ -14,7 +14,7 @@ hasCJKLanguage = true
 
 [params]
   # Shown in the home page
-  subtitle = "三九为午 先Run起来再说G&P"
+  subtitle = "Knowledge Is Action"
   brand = "Gebitang"
   googleAnalytics = "UA-34303694-1"
   disqus = "gebitang"

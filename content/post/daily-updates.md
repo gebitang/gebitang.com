@@ -1587,7 +1587,6 @@ cd repo.git
 执行修改动作
 ```
 #!/bin/sh
-
 # -f to force rewrite, such as git filter-branch -f --env-filter
 git filter-branch --env-filter '
 

@@ -69,7 +69,7 @@ toc = true
     ]
   },
   "properties": {
-    "sonar.analysis.git.path": "http://git.guazi-corp.com/groupName/projectName.git",
+    "sonar.analysis.git.path": "http://git.fxxktest.com/groupName/projectName.git",
     "sonar.analysis.suResultId": "45510",
     "sonar.analysis.host": "sonar.test.site.com",
     "sonar.analysis.git.commit": "bd5603509a4cddcbb1c74820769c939de0a7dea7",

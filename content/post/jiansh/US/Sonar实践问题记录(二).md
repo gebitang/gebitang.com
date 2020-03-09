@@ -22,7 +22,7 @@ toc = true
 Issue包括：Bug、Vulnerability、Code_Smell
 
 如：查询包含了Blocker级别的所有Issue：
-http://sonar.guazi-corp.com/api/issues/search?componentKeys=se%3Asearch-frontend-springboot&resolved=false&ps=500&createdAfter=2019-10-22&severities=BLOCKER&types=BUG,VULNERABILITY,CODE_SMELL
+http://sonar.fxxktest.com/api/issues/search?componentKeys=se%3Asearch-frontend-springboot&resolved=false&ps=500&createdAfter=2019-10-22&severities=BLOCKER&types=BUG,VULNERABILITY,CODE_SMELL
 
 返回的内容将包括具体的内容。
 

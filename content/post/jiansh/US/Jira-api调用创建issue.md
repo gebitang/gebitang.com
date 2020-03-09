@@ -16,7 +16,7 @@ toc = true
 [link on JianShu](https://www.jianshu.com/p/ad0561577bb8)
 
 - gitlab api获取触发当前pipeline任务的commit信息的人员
-[http://git.guazi-corp.com/help/api/commits.md#get-a-single-commit](http://git.guazi-corp.com/help/api/commits.md#get-a-single-commit)
+[http://git.fxxktest.com/help/api/commits.md#get-a-single-commit](http://git.fxxktest.com/help/api/commits.md#get-a-single-commit)
 
 - Jira api调用
 创建issue

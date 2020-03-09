@@ -74,7 +74,7 @@ Lettuce
 spring:
   redis:
     # Redis服务器地址
-    host: redis.dns.guazi.com
+    host: redis.dns.fxxk.com
     # 端口号   
     port: 10037
     # Redis数据库索引，默认为0

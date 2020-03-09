@@ -1,49 +1,59 @@
 +++
-title = "持续成长 功不唐捐"
+title = "先Run起来再说"
 date = "1983-03-25"
 sidemenu = "true"
-description = "Keep growing, All efforts are not made for nothing."
+description = "知行合一"
 +++
 
+知行合一 
+
+1. 为什么要“先Run起来再说”
+2. 学习遇到瓶颈怎么办
+3. 如何评价学习效果
+4. 不想学得时候怎么办
+
 ```
-	****************************************************
-	***                                              ***
-	***          Go Deepper, Not Wilder              ***
-	***                                              ***
-	****************************************************
+		*****************************************************
+		***                                               ***
+		***         Knowledge Is Action                   ***
+		***                                               ***
+		*****************************************************
 ```
-[Go Deepper, Not Wilder](https://www.raptitude.com/2017/12/go-deeper-not-wider/)
-三思四省五步走
 
-【三思】
+#### [为什么要“先Run起来再说”](https://weibo.com/1401527553/Hz2wHelol)  
 
-1. From “要我做” To “我要做”
-2. 培养成绩感 “习得性牛逼” 
-3. 成长性思维
+>学校教育的方式是：由浅入深，先理论再实践，多门基础课一起平面推进。这种方式的好处是学得扎实，适合批量培养人。缺点是出活儿慢，没有利用人的内驱力。
+>
+>师傅带徒弟或者自学的情况下就不一定要按批量教学的方式来。
+>
+>我个人的经验是不管会不会，先动手搞起来。而且不搞太入门的，要难度中等，这样才有成就感，能形成正反馈，调动内驱力。过程中会遇到很多不懂的东西，没关系，遇到什么就去学什么。这个阶段不求多求全，以把手头的东西搞起来为目标。搞成了再设定一个更难的新目标。新老目标之间要有继承性。最后等高难度目标也能搞定了，再转过头系统性地去看看相关技术资料，加固一下地基。
 
-最高的效率是不返工，最快的进步是不退步。每天进步一点点，二十年超过所有人，活在他人想象之外！
+--- 
 
-【[四省察](https://m.weibo.cn/1676664091/4313788272319291)】
+#### [学习遇到瓶颈怎么办](https://weibo.com/1401527553/GEUUAeq3Z)  
 
-1. 今天有什么工作成果？
-2. 今天有什么学习进步？
-3. 今天为未来做了什么投资？
-4. 今天为自己死后留下了什么遗产？
+>从事任何方向的技术研究，不知道该干什么的时候，就问自己四个问题：
 
-【五步骤】
+>1. 这个方向上最新进展是什么？ 都知道吗？
+>2. 这个方向上最著名的专家有哪些？他们的研究都看过吗？
+>3. 这个方向上最著名的技术社区有哪些？精华帖都看过一遍吗？
+>4. 这个方向上最重要的文章、工具有哪些？文章都看过吗？工具都分析过吗？
 
-Great execution starts with a plan.  
+---
 
-- The plan sets the stage with strategy (**the why**), 
-- then lays out the objectives (**the what**), 
-- and then the required steps and actions (**the how**), 
-- to be carried out by the respective members (**the who**), 
-- and the timeframe in which the actions should be accomplished (**the when**).   
+#### [如何评价学习效果](http://www.weibo.com/1676664091/H5MH99JlV)  
 
-inspired by [A Guide to Making This Your Best Year Ever](https://zenhabits.net/best-year/)
+>最高的效率是不返工，最快的进步是不退步。每天进步一点点，二十年超过所有人，活在他人想象之外！  
 
-希望做哪些事？--> 为什么做这些事？足够得重要 --> 有哪些rituals？--> 如果完成这些日常任务Structures？
+>1. 今天有什么工作成果？  
+>2. 今天有什么学习进步？  
+>3. 今天为未来做了什么投资？  
+>4. 今天为自己死后留下了什么遗产？  
 
-{{< fluid_imgs
-  "pure-u-1-1|http://on-img.com/chart_image/5b46cc44e4b0ade3e2787b32.png|负熵前行|http://on-img.com/chart_image/5b46cc44e4b0ade3e2787b32.png"
->}}
+---
+
+#### [不想学得时候怎么办](https://weibo.com/1401527553/HvNa1x0IQ?type=comment#_rnd1583717761854)  
+
+>人生其实只有三件事：选择路线，踏上征程，承担后果。很多人因为害怕承担后果而不愿做出选择，又或者因为懒惰、迟疑而踯躅不前。
+>
+>你可以不选择，也可以不行动，但唯独承担后果是躲不掉的。不选择路线，不踏上征程，就必然要承担一直在原地的后果。这个后果是躲不掉的。 ​​​​

@@ -13,7 +13,44 @@ toc = true
 
 [link to JianShu](https://www.jianshu.com/p/f998c57071ec)这篇估计因为提到了VPN，至今依然是“仅自己可见”
 
-使用VPN链接公司内网的环境。本地调试链接Redis时是不是会提示：
+使用VPN链接公司内网的环境。本地调试链接Redis时是不是会提示：完整log
+
+```
+ org.springframework.data.redis.connection.PoolException: Could not get a resource from the pool; nested exception is io.lettuce.core.RedisException: Cannot retrieve initial cluster partitions from initial URIs [RedisURI [host='test-redis.dns.fxxxktest.com', port=3001], RedisURI [host='test-redis.dns.fxxxktest.com', port=3002], RedisURI [host='test-redis.dns.fxxxktest.com', port=3003]]
+	at org.springframework.data.redis.connection.lettuce.LettucePoolingConnectionProvider.getConnection(LettucePoolingConnectionProvider.java:87) ~[spring-data-redis-2.1.10.RELEASE.jar:2.1.10.RELEASE]
+	at org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory$SharedConnection.getNativeConnection(LettuceConnectionFactory.java:1104) ~[spring-data-redis-2.1.10.RELEASE.jar:2.1.10.RELEASE]
+	at org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory$SharedConnection.getConnection(LettuceConnectionFactory.java:1085) ~[spring-data-redis-2.1.10.RELEASE.jar:2.1.10.RELEASE]
+	at org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory.getClusterConnection(LettuceConnectionFactory.java:363) ~[spring-data-redis-2.1.10.RELEASE.jar:2.1.10.RELEASE]
+	at org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory.getConnection(LettuceConnectionFactory.java:333) ~[spring-data-redis-2.1.10.RELEASE.jar:2.1.10.RELEASE]
+	at org.springframework.data.redis.core.RedisConnectionUtils.doGetConnection(RedisConnectionUtils.java:132) ~[spring-data-redis-2.1.10.RELEASE.jar:2.1.10.RELEASE]
+	at org.springframework.data.redis.core.RedisConnectionUtils.getConnection(RedisConnectionUtils.java:95) ~[spring-data-redis-2.1.10.RELEASE.jar:2.1.10.RELEASE]
+	at org.springframework.data.redis.core.RedisConnectionUtils.getConnection(RedisConnectionUtils.java:82) ~[spring-data-redis-2.1.10.RELEASE.jar:2.1.10.RELEASE]
+	at org.springframework.data.redis.core.RedisTemplate.execute(RedisTemplate.java:211) ~[spring-data-redis-2.1.10.RELEASE.jar:2.1.10.RELEASE]
+	at org.springframework.data.redis.core.RedisTemplate.execute(RedisTemplate.java:184) ~[spring-data-redis-2.1.10.RELEASE.jar:2.1.10.RELEASE]
+	at org.springframework.data.redis.core.AbstractOperations.execute(AbstractOperations.java:95) ~[spring-data-redis-2.1.10.RELEASE.jar:2.1.10.RELEASE]
+	at org.springframework.data.redis.core.DefaultValueOperations.get(DefaultValueOperations.java:53) ~[spring-data-redis-2.1.10.RELEASE.jar:2.1.10.RELEASE]
+	at com.fxxxktest.ConsumerProcess.run(ConsumerProcess.java:126) [classes/:?]
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149) [?:1.8.0_181]
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624) [?:1.8.0_181]
+	at java.lang.Thread.run(Thread.java:748) [?:1.8.0_181]
+Caused by: io.lettuce.core.RedisException: Cannot retrieve initial cluster partitions from initial URIs [RedisURI [host='test-redis.dns.fxxxktest.com', port=3001], RedisURI [host='test-redis.dns.fxxxktest.com', port=3002], RedisURI [host='test-redis.dns.fxxxktest.com', port=3003]]
+	at io.lettuce.core.cluster.RedisClusterClient.doLoadPartitions(RedisClusterClient.java:874) ~[lettuce-core-5.1.8.RELEASE.jar:?]
+	at io.lettuce.core.cluster.RedisClusterClient.loadPartitions(RedisClusterClient.java:844) ~[lettuce-core-5.1.8.RELEASE.jar:?]
+	at io.lettuce.core.cluster.RedisClusterClient.initializePartitions(RedisClusterClient.java:819) ~[lettuce-core-5.1.8.RELEASE.jar:?]
+	at io.lettuce.core.cluster.RedisClusterClient.connect(RedisClusterClient.java:345) ~[lettuce-core-5.1.8.RELEASE.jar:?]
+	at org.springframework.data.redis.connection.lettuce.ClusterConnectionProvider.getConnection(ClusterConnectionProvider.java:85) ~[spring-data-redis-2.1.10.RELEASE.jar:2.1.10.RELEASE]
+	at org.springframework.data.redis.connection.lettuce.LettucePoolingConnectionProvider.lambda$null$0(LettucePoolingConnectionProvider.java:75) ~[spring-data-redis-2.1.10.RELEASE.jar:2.1.10.RELEASE]
+	at io.lettuce.core.support.ConnectionPoolSupport$RedisPooledObjectFactory.create(ConnectionPoolSupport.java:209) ~[lettuce-core-5.1.8.RELEASE.jar:?]
+	at io.lettuce.core.support.ConnectionPoolSupport$RedisPooledObjectFactory.create(ConnectionPoolSupport.java:199) ~[lettuce-core-5.1.8.RELEASE.jar:?]
+	at org.apache.commons.pool2.BasePooledObjectFactory.makeObject(BasePooledObjectFactory.java:58) ~[commons-pool2-2.6.2.jar:2.6.2]
+	at org.apache.commons.pool2.impl.GenericObjectPool.create(GenericObjectPool.java:889) ~[commons-pool2-2.6.2.jar:2.6.2]
+	at org.apache.commons.pool2.impl.GenericObjectPool.borrowObject(GenericObjectPool.java:424) ~[commons-pool2-2.6.2.jar:2.6.2]
+	at org.apache.commons.pool2.impl.GenericObjectPool.borrowObject(GenericObjectPool.java:349) ~[commons-pool2-2.6.2.jar:2.6.2]
+	at io.lettuce.core.support.ConnectionPoolSupport$1.borrowObject(ConnectionPoolSupport.java:122) ~[lettuce-core-5.1.8.RELEASE.jar:?]
+	at io.lettuce.core.support.ConnectionPoolSupport$1.borrowObject(ConnectionPoolSupport.java:117) ~[lettuce-core-5.1.8.RELEASE.jar:?]
+	at org.springframework.data.redis.connection.lettuce.LettucePoolingConnectionProvider.getConnection(LettucePoolingConnectionProvider.java:81) ~[spring-data-redis-2.1.10.RELEASE.jar:2.1.10.RELEASE]
+	... 15 more
+```
 
 Cannot retrieve initial cluster partitions from initial URIs
 …………

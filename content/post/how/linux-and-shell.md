@@ -300,6 +300,12 @@ curl: (7) Failed to receive SOCKS4 connect request ack. 原因为本地网络设
 curl -i -H "Accept:application/json" -H "Content-Type:application/json" -XPOST "http://sss.com/abc/" -d '{"op":"Device.restartDevice","device":{"imei":"866568023794679"}}'
 ```
 
+方法中如果需要传递参数，需要使用如下方式——
+```
+para="value of para"
+curl https://xxx.com/api/ -XPOST -H 'Content-Type: application/json' -d '{"category":"PLAIN_TEXT","data":"'"$para"'"}'
+```
+
 ### curl 与 bash 联动
 
 -o 参数表示输出到文件，如 `curl -o aa example.com -o bb example.net`   
@@ -557,6 +563,7 @@ grub-mkconfig -o /boot/grub/grub.cfg
 
 sed -i "s/$oldname/eth0/g" /etc/network/interfaces
 ```
+
 
 
 

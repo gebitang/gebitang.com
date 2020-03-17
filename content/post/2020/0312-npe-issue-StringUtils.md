@@ -56,6 +56,30 @@ Anyway thanks for reporting it.
 report this on Sonar Community: [Commons-lang StringUtils isNotBlank method still raise NPE](https://community.sonarsource.com/t/commons-lang-stringutils-isnotblank-method-still-raise-npe/21517)
 
 
+有人遇到了相同的问题，官方猜测是没有正确的配置`sonar.java.libraries` 
+
+SonarQube上的确提示——
+```
+Bytecode of dependencies was not provided for analysis of source files, you might end up with less precise results. Bytecode can be provided using sonar.java.libraries property.
+```
+
+手动验证，将commons-lang3-3.7.jar添加到`sonar.java.libraries`参数里，问题解决。
+
+---
+
+下一步需要处理的方式——
+
+>added the target “dependency:copy-dependencies” as part of the maven execution. This copied all the dependencies to the right location, then I set the property “-Dsonar.java.libraries=target/dependency” in our case.
+
+将项目的依赖都复制到固定的目录，然后将这个目录传递给`sonar.java.libraries`参数。
+
+[dependency:copy-dependencies](http://maven.apache.org/plugins/maven-dependency-plugin/copy-dependencies-mojo.html)的官方用法。
+
+理论上这样就可以解决这个问题，需要验证的是多模块的项目的依赖是否可以全部正确复制到正确的目录下。
+
+--- 
+
+
 
 没想到我这小破站也被扫描了——
 ```

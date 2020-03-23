@@ -31,6 +31,9 @@ Go环境的配置比较简单，所以就Java的环境上新做一个镜像。
 - 退出docker，使用commit创建新的镜像 `docker commit 96dac7c6b872 javaWithGoEnv:0.1`
 - 添加tag并上传到私有仓库：`docker tag javaWithGoEnv:0.1 hub.mytest.com/gebitang/javaWithGoEnv:0.1; docker push hub.mytest.com/gebitang/javaWithGoEnv:0.1`
 
+验证上传的镜像：
+- 登录 `docker login hub.mytest.com` (windows环境下直接使用 双引号可以识别用户名密码；Mac环境下特殊字符会被截断，可以不直接使用-u -p参数)
+- 执行并验证go环境`docker run -it imageid; go version`
 
 ```
 exit;

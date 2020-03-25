@@ -56,6 +56,90 @@ Anyway thanks for reporting it.
 report this on Sonar Community: [Commons-lang StringUtils isNotBlank method still raise NPE](https://community.sonarsource.com/t/commons-lang-stringutils-isnotblank-method-still-raise-npe/21517)
 
 
+有人遇到了相同的问题，官方猜测是没有正确的配置`sonar.java.libraries` 
+
+SonarQube上的确提示——
+```
+Bytecode of dependencies was not provided for analysis of source files, you might end up with less precise results. Bytecode can be provided using sonar.java.libraries property.
+```
+
+手动验证，将commons-lang3-3.7.jar添加到`sonar.java.libraries`参数里，问题解决。
+
+---
+
+下一步需要处理的方式——
+
+>added the target “dependency:copy-dependencies” as part of the maven execution. This copied all the dependencies to the right location, then I set the property “-Dsonar.java.libraries=target/dependency” in our case.
+
+将项目的依赖都复制到固定的目录，然后将这个目录传递给`sonar.java.libraries`参数。
+
+[dependency:copy-dependencies](http://maven.apache.org/plugins/maven-dependency-plugin/copy-dependencies-mojo.html)的官方用法。
+
+理论上这样就可以解决这个问题，需要验证的是多模块的项目的依赖是否可以全部正确复制到正确的目录下。
+
+--- 
+
+理论依据由别人提出
+
+>added the target “dependency:copy-dependencies” as part of the maven execution. This copied all the dependencies to the right location, then I set the property “-Dsonar.java.libraries=target/dependency” in our case.
+
+我的实践如下——
+
+
+这个插件的官方[maven-dependency-plugin 使用文档](http://maven.apache.org/plugins/maven-dependency-plugin/usage.html)，根据[样例](https://maven.apache.org/plugins/maven-dependency-plugin/examples/copying-project-dependencies.html)如下——
+
+```
+<plugin>
+    <groupId>org.apache.maven.plugins</groupId>
+    <artifactId>maven-dependency-plugin</artifactId>
+    <version>3.1.2</version>
+    <executions>
+        <execution>
+        <id>copy-dependencies</id>
+        <phase>package</phase>
+        <goals>
+            <goal>copy-dependencies</goal>
+        </goals>
+        <configuration>
+            <outputDirectory>${project.build.directory}/alternateLocation</outputDirectory>
+            <overWriteReleases>false</overWriteReleases>
+            <overWriteSnapshots>false</overWriteSnapshots>
+            <overWriteIfNewer>true</overWriteIfNewer>
+        </configuration>
+        </execution>
+    </executions>
+</plugin>
+```
+
+这样有两个问题：  
+- 在多模块下自定义的这个outputDirectory目录是相对目录，会将依赖的jar包复制到子模块对应的目录下；
+- 根据这里的[解决方案](https://stackoverflow.com/a/7676673/1087122)使用变量`${session.executionRootDirectory}/target/`，可以强制将依赖包都复制到固定目录，但只能在执行 `mvn package`阶段才生效
+
+这样导致执行了接近全生命周期的任务。
+
+这里涉及到`phase`、`goal`的概念区别：[What are Maven goals and phases and what is their difference?](https://stackoverflow.com/questions/16205778/what-are-maven-goals-and-phases-and-what-is-their-difference)
+
+>Life cycle is a sequence of named **phases**.  
+>**Phases** executes sequentially. Executing a phase means executes all previous phases.
+
+>**Plugin** is a collection of **goals** also called MOJO (**M**aven **O**ld **J**ava **O**bject).  
+Analogy : Plugin is a class and goals are methods within the class.
+
+[default Maven lifecycle bindings](http://maven.apache.org/guides/introduction/introduction-to-the-lifecycle.html#Built-in_Lifecycle_Bindings)这里定义了在各个“阶段”(phase)都会执行哪些“目标动作”(goals)
+
+`mvn [plugin-name]:[goal-name] ` ，例如`mvn dependency:copy-dependencies`就是执行了插件`maven-dependency-plugin`定义的`copy-dependencies`动作。进一步，对应的configuration可以通过变量进行传参。
+
+经验证，使用绝对路径地址指定outputDirectory的值是，可以将多模块的依赖统一复制到指定目录下。
+
+所以，最终的**解决方案**为：
+
+1. 直接执行goal，`mvn dependency:copy-dependencies -DoutputDirectory=absolute/path/to/lib/dir`将所有的依赖复制到指定目录，
+2. 将上面的目录传递给sonar的`sonar.java.libraries`变量，例如 `-Dsonar.java.libraries=absolute/path/to/lib/dir/*.jar`
+
+
+---
+
+
 
 没想到我这小破站也被扫描了——
 ```

@@ -77,3 +77,7 @@ toc = true
 #### Day10
 
 same as yesterday so far.
+
+#### Day33 0419
+
+今日[谷雨](../0419-grain-rain/)。又是4周左右的时间，在春季的最后一个节气里。不算痊愈，也差不多了。

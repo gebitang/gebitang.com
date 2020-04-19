@@ -1,6 +1,6 @@
 +++
 title = "Sonar实践问题：支持go工程的覆盖率"
-description = "Commons-lang StringUtils isNotBlank method still raise NPE"
+description = "go test for SonarQube"
 tags = [
 ]
 date = "2020-03-19"
@@ -19,6 +19,7 @@ topics = [
 ---
 
 步骤——  
+
 - go build生成可执行程序
 - 执行 `go test -coverprofile=bin/cov.out service-sonar` 生成覆盖率文件
 - 执行`sonar-scanner `

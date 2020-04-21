@@ -157,3 +157,31 @@ JRE 11.0.4+10-b304.69 amd64 by JetBrains s.r.o C:\Program Files\JetBrains\Intell
 - File -- Settings -- Invalid Cache and Restart 
 - Re-Import all Maven projects
 - manage projects：删除当前有问题的项目，重新导入，导入时选择删除已有的项目重新导入 （work for me this way）
+
+###  打开uiautomator类型的源码项目
+
+针对project settings：
+
+- Project
+- Modules
+- Libraries
+- Facets
+- Artifacts
+
+关注前三个——
+
+**Project**： 
+
+配置对应的SDK、语言级别、编译输出的目录
+
+**Modules**：
+
+选择Sources对应的目录（src），否则打开源码时无法识别调用关系
+
+**Libraries**：
+
+依赖的lib通常直接在工程目录下，需要手动新建lib（添加，选择Java类型，选中对应的目录，如libs。）
+
+--- 
+
+关键是对于Modules和Libraries的设置，否则IDE无法识别工程。

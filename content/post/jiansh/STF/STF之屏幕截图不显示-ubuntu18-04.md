@@ -202,7 +202,7 @@ this.screenshot = function() {
     }
 ```
 socket 通信：screen.capture
--->进入websocket：lib.units.websocket.jindex.js
+-->进入websocket：lib.units.websocket.index.js
 ```
 .on('screen.capture', function(channel, responseChannel) {
           joinChannel(responseChannel)

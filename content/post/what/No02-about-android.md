@@ -14,6 +14,30 @@ toc = true
 
 ## Android problem
 
+### android项目打包  
+
+提示报错：
+>error default interface methods are only supported starting with android n (--min-api 24)
+
+[解决方法](https://stackoverflow.com/questions/49512629/default-interface-methods-are-only-supported-starting-with-android-n) 
+
+```
+android {
+...
+  compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+...
+}
+```
+
+android项目打包——  
+
+- 安装包——选择app运行，安装到手机，即可获取到apk
+- 测试包——运行测试代码，即可获取到测试apk
+
+
 [manifest](https://developer.android.com/guide/topics/manifest/receiver-element)
 
 ### download old adt (Eclipse for android)
@@ -420,11 +444,11 @@ dpi范围 密度
 # need java JDK environment
 # keytool --help
 # keytool -genkey -help
- ~ keytool -genkey -alias gebitang.keystore -keyalg RSA -validity 20000 -keystore ./gebitang.keystore
+ ~ keytool -genkey -alias gebitang -keyalg RSA -validity 20000 -keystore ./gebitang.keystore
 Enter keystore password:
 Re-enter new password:
 What is your first and last name?
-  [Unknown]:  JOECHINLEE
+  [Unknown]:  JOECHINLI
 What is the name of your organizational unit?
   [Unknown]:  gebitang
 What is the name of your organization?

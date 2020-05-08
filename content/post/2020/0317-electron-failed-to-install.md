@@ -83,3 +83,61 @@ Failed to fetch extension, trying 0 more times
 Vue Devtools failed to install: Error: net::ERR_CONNECTION_RESET
 
 ```
+
+---
+
+[electron 官方 #20731 ](https://github.com/electron/electron/issues/20731)  
+
+根据yarn.lock中定义的`electron@^v8.2.5`从[这里](https://github.com/electron/electron/releases/tag/v8.2.5)进行[下载](https://github.com/electron/electron/releases/download/v8.2.5/electron-v8.2.5-win32-x64.zip)(vpn需要使用直连模式，转发模式无法下载)后，解压到 `node_modules\electron`目录下，并且手动增加`path.txt`文件。写入绝对路径。
+
+electron可以正常启动。项目也正常编译，但运行失败了——
+
+```
+-  Bundling main process...
+No type errors found
+Version: typescript 3.7.5
+Time: 6574ms
+ DONE  Compiled successfully in 2077ms17:46:29
+
+  File                      Size                     Gzipped
+
+  dist_electron\index.js    1424.07 KiB              277.96 KiB
+
+  Images and other types of assets omitted.
+
+ INFO  Launching Electron...
+�ļ�����Ŀ¼��������﷨����ȷ��
+(node:30396) UnhandledPromiseRejectionWarning: Error: spawn D:\openSources\mixin\desktop-app\node_modules\electron\dist\D:\openSources\mixin\desktop-app\node_modules\electron\electron.exe ENOENT
+    at notFoundError (D:\openSources\mixin\desktop-app\node_modules\vue-cli-plugin-electron-builder\node_modules\cross-spawn\lib\enoent.js:6:26)
+    at verifyENOENT (D:\openSources\mixin\desktop-app\node_modules\vue-cli-plugin-electron-builder\node_modules\cross-spawn\lib\enoent.js:40:16)
+    at ChildProcess.cp.emit (D:\openSources\mixin\desktop-app\node_modules\vue-cli-plugin-electron-builder\node_modules\cross-spawn\lib\enoent.js:27:25)
+    at Process.ChildProcess._handle.onexit (internal/child_process.js:272:12)
+(node:30396) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). (rejection id: 1)
+(node:30396) [DEP0018] DeprecationWarning: Unhandled promise rejections are deprecated. In the future, promise rejections that are not handled will terminate the Node.js process with a non-zero exit code.
+```
+
+看起来是在对应的目录没找到electron.exe，再手动帮助它一波：新建dist目录，将下载的zip文件解压到dist目录下。
+
+启动成功:)
+
+```
+  App running at:
+  - Local:   http://localhost:8080/
+  - Network: http://192.168.1.106:8080/
+
+  Note that the development build is not optimized.
+  To create a production build, run yarn build.
+
+\  Bundling main process...
+
+ DONE  Compiled successfully in 2116ms                                                                                                                                   18:16:43
+
+  File                      Size                     Gzipped
+
+  dist_electron\index.js    1424.07 KiB              277.96 KiB
+
+  Images and other types of assets omitted.
+
+ INFO  Launching Electron...
+(electron) The default value of app.allowRendererProcessReuse is deprecated, it is currently "false".  It will change to be "true" in Electron 9.  For more information please check https://github.com/electron/electron/issues/18397
+```

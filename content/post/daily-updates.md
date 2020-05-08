@@ -1188,6 +1188,29 @@ dependency注意空格格式
 ## Git命令使用
 可配合GUI工具和命令行工具参考。
 
+### change remote url
+
+```
+git remote -v
+# View existing remotes
+
+git remote set-url origin https://github.com/user/repo2.git
+# Change the 'origin' remote's URL
+
+git remote -v
+# Verify new remote URL
+```
+
+### use token from command line
+
+[use token from command line](https://help.github.com/en/github/authenticating-to-github/creating-a-personal-access-token-for-the-command-line)
+
+```
+$ git clone https://github.com/username/repo.git
+Username: your_username
+Password: your_token
+```
+
 ### fatal: Unable to create '/path/my_project/.git/index.lock': File exists
 
 [sto](https://stackoverflow.com/a/7860765/1087122): `rm -f ./.git/index.lock`

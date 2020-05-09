@@ -11,6 +11,24 @@ topics = [
 toc = true
 +++
 
+### 多模块项目包含war类型依赖
+
+[JaCoCo-Multi-Module](../../jiansh/us/jacoco-multi-module/)强调了如果有子模块为pom类型时，需要将type进行明确说明。
+
+但如果子模块为war类型时，如果不明示，会按照默认的jar类型去查找——不符合实际情况。
+
+这个[问题](https://stackoverflow.com/questions/56071617/getting-coverage-from-war-dependency-in-multi-module-project)描述的是这一现象；
+
+这个[官方jacoco issue #991](https://github.com/jacoco/jacoco/issues/991)提示的解决方案也是增加`<type>war</type>`。
+
+增加了`<type>war</type>`之后，在执行`spring-boot:repackage`任务时，提示“找不到主类”——
+
+>Execution default of goal org.springframework.boot:spring-boot-maven-plugin:1.5.4.RELEASE:repackage failed: Unable to find main class
+
+**解决方案**：用来聚合单侧结果的模块打包方式制定为`<packaging>pom</packaging>`。[有效的打包类型包括](https://maven.apache.org/pom.html#packaging) `pom`, `jar`, `maven-plugin`, `ejb`, `war`, `ear`, `rar`
+
+这样在执行`mvn clean install`时聚合模块不做打包处理。pom类型意味着只有`install`和`deploy`两个[阶段动作](https://maven.apache.org/ref/3.6.3/maven-core/default-bindings.html#Plugin_bindings_for_pom_packaging)
+
 ### SonarQube添加自定义规则
 
 [官方文档之CUSTOM_RULES_101](https://github.com/SonarSource/sonar-java/blob/master/docs/CUSTOM_RULES_101.md)

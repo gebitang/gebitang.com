@@ -29,6 +29,76 @@ toc = true
 
 这样在执行`mvn clean install`时聚合模块不做打包处理。pom类型意味着只有`install`和`deploy`两个[阶段动作](https://maven.apache.org/ref/3.6.3/maven-core/default-bindings.html#Plugin_bindings_for_pom_packaging)
 
+### Abstract Syntax Tree
+
+[官方文档之CUSTOM_RULES_101](https://github.com/SonarSource/sonar-java/blob/master/docs/CUSTOM_RULES_101.md)之[Using syntax trees and API basics](https://github.com/SonarSource/sonar-java/blob/master/docs/CUSTOM_RULES_101.md#first-version-using-syntax-trees-and-api-basics)提到——
+
+>Prior to running any rule, the SonarQube Java Analyzer parses a given Java code file and produces an equivalent data structure: the **Syntax Tree**. 
+
+项目依赖的[JDT](https://github.com/SonarSource/sonar-java/blob/master/jdt/pom.xml)模块就来自Eclipse项目[eclipse.jdt.core](https://github.com/eclipse/eclipse.jdt.core)
+
+```
+# JDT module in sonar-java
+<dependency>
+        <groupId>org.eclipse.jdt</groupId>
+        <artifactId>org.eclipse.jdt.core</artifactId>
+        <version>3.20.0</version>
+        ...
+</dependency>
+```
+
+AST(Abstract Syntax Tree)在Eclipse的[入门文章](https://www.eclipse.org/articles/Article-JavaCodeManipulation_AST/) 
+
+![](https://www.eclipse.org/articles/Article-JavaCodeManipulation_AST/images/workflow.png)
+
+- 1. Java源码：可以是源码文件，也可以是一组字符串；
+- 2. 使用 `org.eclipse.jdt.core.dom.ASTParser`类解析Java源码
+- 3. 得到抽象语法树AST
+- 4. 操作AST
+- 5. 保存修改后的AST到源码
+
+---
+
+1.  *Java source*: To start off, you provide some source code to parse. This source code can be supplied as a Java file in your project or directly as a `char[]` that contains Java source
+2.  *Parse*: The source code described at [1](https://www.eclipse.org/articles/Article-JavaCodeManipulation_AST/#workflow-legend-1) is parsed. All you need for this step is provided by the class `org.eclipse.jdt.core.dom.ASTParser`. See [the section called “Parsing source code”](https://www.eclipse.org/articles/Article-JavaCodeManipulation_AST/#sec-parsing-a-source-file "Parsing source code").
+3.  The *Abstract Syntax Tree* is the result of step [2](https://www.eclipse.org/articles/Article-JavaCodeManipulation_AST/#workflow-legend-2). It is a tree model that entirely represents the source you provided in step [1](https://www.eclipse.org/articles/Article-JavaCodeManipulation_AST/#workflow-legend-1). If requested, the parser also computes and includes additional symbol resolved information called "[bindings](https://www.eclipse.org/articles/Article-JavaCodeManipulation_AST/#sec-bindings "Bindings")".
+4.  *Manipulating the AST*: If the AST of point [3](https://www.eclipse.org/articles/Article-JavaCodeManipulation_AST/#workflow-legend-3) needs to be changed, this can be done in two ways:
+
+    1.  By directly modifying the AST.
+    2.  By noting the modifications in a separate protocol. This protocol is handled by an instance of `ASTRewrite`.
+
+    See more in [the section called “How to Apply Changes”](https://www.eclipse.org/articles/Article-JavaCodeManipulation_AST/#sec-how-to-apply-changes "How to Apply Changes").
+5.  *Writing changes back*: If changes have been made, they need to be applied to the source code that was provided by [1](https://www.eclipse.org/articles/Article-JavaCodeManipulation_AST/#workflow-legend-1). This is described in detail in [the section called “Write it down”](https://www.eclipse.org/articles/Article-JavaCodeManipulation_AST/#sec-write-it-down "Write it down").
+6.  *`IDocument`*: Is a wrapper for the source code of step [1](https://www.eclipse.org/articles/Article-JavaCodeManipulation_AST/#workflow-legend-1) and is needed at point [5](https://www.eclipse.org/articles/Article-JavaCodeManipulation_AST/#workflow-legend-5)
+
+AST的背景知识包括了`Java Model`，最新的内容参考[Java Model](https://help.eclipse.org/2020-03/topic/org.eclipse.jdt.doc.isv/guide/jdt_int_model.htm)
+
+![](https://www.eclipse.org/articles/Article-JavaCodeManipulation_AST/images/java-model-overview.png)
+
+![](https://help.eclipse.org/2020-03/topic/org.eclipse.jdt.doc.isv/guide/images/openables.png)
+
+![](https://help.eclipse.org/2020-03/topic/org.eclipse.jdt.doc.isv/guide/images/sourceelements.png)
+
+
+关于JDT最新的[官网内容](https://help.eclipse.org/2020-03/topic/org.eclipse.jdt.doc.isv/guide/jdt_int_core.htm)，包括了
+
+- [Java model](https://help.eclipse.org/2020-03/topic/org.eclipse.jdt.doc.isv/guide/jdt_int_model.htm)
+- [Manipulating Java code](https://help.eclipse.org/2020-03/topic/org.eclipse.jdt.doc.isv/guide/jdt_api_manip.htm)
+- [Eclipse JDT - Abstract Syntax Tree (AST) and the Java Model by Vogella](https://www.vogella.com/tutorials/EclipseJDT/article.html) 
+
+配合Eclipse版本的[ASTView](https://www.eclipse.org/jdt/ui/astview/index.php)，效果类似——
+
+![](https://www.eclipse.org/articles/Article-JavaCodeManipulation_AST/images/md-astview.png)
+
+Idea上也有对应的[插件](https://plugins.jetbrains.com/plugin/9345-jdt-astview)，展示效果当然不如Eclipse官方的酷炫，也足够理解对应的概念。
+
+
+中文资料参考——  
+
+- [Java代码分析器(一): JDT入门](https://segmentfault.com/a/1190000000609246)
+- [Java代码分析器(二): 使用DOM API操作抽象语法树](https://segmentfault.com/a/1190000000638838)
+
+
 ### SonarQube添加自定义规则
 
 [官方文档之CUSTOM_RULES_101](https://github.com/SonarSource/sonar-java/blob/master/docs/CUSTOM_RULES_101.md)

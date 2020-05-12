@@ -86,6 +86,24 @@ AST的背景知识包括了`Java Model`，最新的内容参考[Java Model](http
 - [Manipulating Java code](https://help.eclipse.org/2020-03/topic/org.eclipse.jdt.doc.isv/guide/jdt_api_manip.htm)
 - [Eclipse JDT - Abstract Syntax Tree (AST) and the Java Model by Vogella](https://www.vogella.com/tutorials/EclipseJDT/article.html) 
 
+[Creating CompilationUnit (AST) from file on disk](https://www.vogella.com/tutorials/EclipseJDT/article.html#creating-compilationunit-ast-from-file-on-disk)
+```
+private static void createFromDist() throws Exception {
+    ASTParser parser = ASTParser.newParser(AST.JLS8);
+    parser.setResolveBindings(true);
+    parser.setStatementsRecovery(true);
+    parser.setBindingsRecovery(true);
+    parser.setKind(ASTParser.K_COMPILATION_UNIT);
+    File resource = new File("./tests/resources/Snippet.java");
+    Path sourcePath = Paths.get(resource.toURI());
+    String sourceString = new String(Files.readAllBytes(sourcePath));
+    char[] source = sourceString.toCharArray();
+    parser.setSource(source);
+    parser.setUnitName(sourcePath.toAbsolutePath().toString());
+    CompilationUnit astRoot = (CompilationUnit) parser.createAST(null);
+}
+```
+
 配合Eclipse版本的[ASTView](https://www.eclipse.org/jdt/ui/astview/index.php)，效果类似——
 
 ![](https://www.eclipse.org/articles/Article-JavaCodeManipulation_AST/images/md-astview.png)

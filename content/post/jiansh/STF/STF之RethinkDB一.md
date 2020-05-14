@@ -112,6 +112,9 @@ r.db('stf').table('users').filter(r.row('email').eq('am@gebitang.com')).delete()
 r.db('stf').table('devices').filter(r.row('phone')("imei").eq('355967063870308'))
 
 r.db('stf').table('devices').filter(r.row('serial').eq('4df7db0b52a6114b')).delete()
+
+# 不包含field
+r.db('stf').table("users").filter(r.row.hasFields('privilege').not())
 ```
 
 [api for drop table](https://www.rethinkdb.com/api/javascript/table_drop/)

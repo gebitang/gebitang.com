@@ -218,10 +218,10 @@ JavaCheckVerifier.newVerifier()
                 .onFile("src/test/files/MyFirstCustomCheck.java")
                 .withCheck(new MyFirstCustomCheck())
                 .verifyIssues();
-// 
+ 
 ```
 
-**5.10版本**
+##### 5.10版本
 
 过程式编程，一堆静态方法构造出来需要调用的组件。
 
@@ -317,6 +317,144 @@ public interface JavaFileScanner extends JavaCheck {
 }
 ```
 
+---
+
+##### 6.3版本
+
+6.3版本的`newVerifier()`对应的就是`InternalCheckVerifier`，builder模式，最终进入方法`verifyAll()`
+
+- InternalCheckVerifier 
+   - implements CheckVerifier
+
+CheckVerifier从5.x的抽象类变为6.x的纯接口类
+
+```java
+private void verifyAll() {
+    List<JavaFileScanner> visitors = new ArrayList<>(checks);
+    if (withoutSemantic && expectations.expectNoIssues()) {
+      visitors.add(expectations.noEffectParser());
+    } else {
+      visitors.add(expectations.parser());
+    }
+    SonarComponents sonarComponents = sonarComponents();
+    VisitorsBridgeForTests visitorsBridge;
+    if (withoutSemantic) {
+      visitorsBridge = new VisitorsBridgeForTests(visitors, sonarComponents);
+    } else {
+      List<File> actualClasspath = classpath == null ? DEFAULT_CLASSPATH : classpath;
+      visitorsBridge = new VisitorsBridgeForTests(visitors, actualClasspath, sonarComponents);
+    }
+
+    JavaAstScanner astScanner = new JavaAstScanner(sonarComponents);
+    visitorsBridge.setJavaVersion(javaVersion == null ? DEFAULT_JAVA_VERSION : javaVersion);
+    astScanner.setVisitorBridge(visitorsBridge);
+    astScanner.scan(files);
+
+    VisitorsBridgeForTests.TestJavaFileScannerContext testJavaFileScannerContext = visitorsBridge.lastCreatedTestContext();
+    checkIssues(testJavaFileScannerContext.getIssues());
+  }
+```
+核心方法也没有大的变化 
+
+```java
+private void simpleScan(InputFile inputFile) {
+    ...
+    try {
+      String fileContent = inputFile.contents();
+      final String version;
+      if (visitor.getJavaVersion() == null || visitor.getJavaVersion().asInt() < 0) {
+        version = /* default */ JParser.MAXIMUM_SUPPORTED_JAVA_VERSION;
+      } else {
+        version = Integer.toString(visitor.getJavaVersion().asInt());
+      }
+      //使用jdt的解析服务
+      Tree ast = JParser.parse(
+        version,
+        inputFile.filename(),
+        fileContent,
+        visitor.getClasspath()
+      );
+      visitor.visitFile(ast);
+    }
+    ...
+  }
+```
+
+核心流程都是将文件解析成`Tree` 
+
+5.x的版本使用了 SonarSource自己的`sslr`工程——
+
+- [解析表达式语法(Parsing Expression Grammars)](https://www.cnblogs.com/freeblues/p/8436523.html)  
+- [An introduction to Parsing Expression Grammars with LPeg](https://leafo.net/guides/parsing-expression-grammars.html) 
+- [wiki: Parsing Expression Grammars](https://en.wikipedia.org/wiki/Parsing_expression_grammar)
+- [SonarSource Language Recognizer](https://github.com/SonarSource/sslr)   
+
+>If you want to start working with SSLR, you must be familiar with the following standard concepts : `Lexical Analysis`, `Parsing Expression Grammar` and `AST`(Abstract Syntax Tree). 
+
+```java
+//5.x JavaParser.createParser().parse()
+public static ActionParser<Tree> createParser() {
+    return new JavaParser(JavaLexer.createGrammarBuilder(),
+      JavaGrammar.class,
+      new TreeFactory(),
+      new JavaNodeBuilder(),
+      JavaLexer.COMPILATION_UNIT);
+}
+
+// parser.parse()
+private N parse(Input input) {
+    //this.parseRunner = new ParseRunner(b.build().getRootRule());
+    ParsingResult result = parseRunner.parse(input.input());
+    ...
+    N node = syntaxTreeCreator.create(result.getParseTreeRoot(), input);
+    if (node instanceof AstNode) {
+      astNodeSanitizer.sanitize((AstNode) node);
+    }
+    return node;
+  }
+```
+
+
+6.x版本则使用了Eclipse的[`jdt`项目](https://git.eclipse.org/c/jdt/eclipse.jdt.core.git/) 
+
+```java
+public static CompilationUnitTree parse(
+    String version,
+    String unitName,
+    String source,
+    List<File> classpath
+  ) {
+    //   
+    ASTParser astParser = ASTParser.newParser(AST.JLS13);
+    ...
+    CompilationUnit astNode;
+    try {
+      astNode = (CompilationUnit) astParser.createAST(null);
+    } catch (Exception e) {
+      LOG.error("ECJ: Unable to parse file", e);
+      throw new RecognitionException(-1, "ECJ: Unable to parse file.", e);
+    }
+    ...
+    // 做格式状态？
+    JParser converter = new JParser();
+    converter.sema = new JSema(astNode.getAST());
+    converter.compilationUnit = astNode;
+    converter.tokenManager = new TokenManager(lex(version, unitName, sourceChars), source, new DefaultCodeFormatterOptions(new HashMap<>()));
+
+    JavaTree.CompilationUnitTreeImpl tree = converter.convertCompilationUnit(astNode);
+    tree.sema = converter.sema;
+
+    ASTUtils.mayTolerateMissingType(astNode.getAST());
+
+    setParents(tree);
+    return tree;
+  }
+```
+
+- 5.x版本使用sslr将源码直接解析后识别为sonar-java识别的Tree对象；
+- 6.x版本借用jdt将源码解析为AST，再转化为sonar-java识别的Tree对象；
+
+- 最后大家都调用`visitor.visitFile(Tree parsedTree);`来进行具体的判断
 
 
 

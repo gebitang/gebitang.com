@@ -192,6 +192,134 @@ SonarQube提供了独立的log服务，命令行启动时输出的是sonar.log�
 
 ![](https://upload-images.jianshu.io/upload_images/3296949-de25702c52563d0f.png)
 
+#### 扫描规则源码分析
+
+- 依赖sonar-java项目最新版本(6.3)的示例工程可以进行运行单元测试。
+- 目前使用的sonarqube对应的sonar-java的版本(5.10)
+- 修改后兼容当前使用的sonarqube版本的示例工程分支无法进行单侧
+
+只能人肉分析代码，学习规则是怎样运行起来的。
+
+测试驱动——
+
+- 一个unit测试类提供入库；
+- 一个测试源码作为测试数据
+- 一个规则类（最终自定义并且打包生效的就是这个文件，不同的规则写不同的规则类即可）
+
+测试暴露的接口就是：测试源码+自定义的Check类。其他`注册`内容示例工程已经打好架子，暂时忽略。
+
+调用入口如下： 
+```java
+// 5.x (在6.x版本上这个方法deprecated,等价于下面的6.x的方法)
+JavaCheckVerifier.verify("src/test/files/MyFirstCustomCheck.java",
+                             new MyFirstCustomCheck());
+// 6.x
+JavaCheckVerifier.newVerifier()
+                .onFile("src/test/files/MyFirstCustomCheck.java")
+                .withCheck(new MyFirstCustomCheck())
+                .verifyIssues();
+// 
+```
+
+**5.10版本**
+
+过程式编程，一堆静态方法构造出来需要调用的组件。
+
+进入如下方法——
+
+- check就是自定义的规则类；
+- verifier用来检查最后的结果。例如，如果出现issue时，如何描述。
+
+其他类关系——
+
+- MyFirstCustomCheck   
+  - extends `IssuableSubscriptionVisitor`  
+      - extends `SubscriptionVisitor`  
+          - implements `JavaFileScanner`  Common interface for all checks analyzing a java file.
+             - extends `JavaCheck` (empty interface)
+
+- `ExpectedIssueCollector`
+  - extends `SubscriptionVisitor`
+     - implements `JavaFileScanner`
+
+- `JavaCheckVerifier` extends `CheckVerifier`
+
+```java
+// line 261
+private static void scanFile(String filename, JavaFileScanner check, JavaCheckVerifier javaCheckVerifier, Collection<File> classpath, boolean withSemantic) {
+    //又添加了一个JavaScanner
+    JavaFileScanner expectedIssueCollector = new ExpectedIssueCollector(javaCheckVerifier);
+    VisitorsBridgeForTests visitorsBridge;
+    File file = new File(filename);
+    // 构造上下文关系context，所以放到了检查结果的CheckVerfiler中做静态方法
+    SonarComponents sonarComponents = CheckVerifier.sonarComponents(file);
+    if (withSemantic) {
+        //进入这里初始化Bridge，
+      visitorsBridge = new VisitorsBridgeForTests(Lists.newArrayList(check, expectedIssueCollector), Lists.newArrayList(classpath), sonarComponents);
+    } else {
+      visitorsBridge = new VisitorsBridgeForTests(Lists.newArrayList(check, expectedIssueCollector), sonarComponents);
+    }
+    //终于进入干活的地方，
+    JavaAstScanner.scanSingleFileForTests(file, visitorsBridge, javaCheckVerifier.javaVersion);
+    VisitorsBridgeForTests.TestJavaFileScannerContext testJavaFileScannerContext = visitorsBridge.lastCreatedTestContext();
+    if (testJavaFileScannerContext == null) {
+      Fail.fail("Semantic was required but it was not possible to create it. Please checks the logs to find out the reason.");
+    }
+    javaCheckVerifier.checkIssues(testJavaFileScannerContext.getIssues(), javaCheckVerifier.providedJavaVersion);
+  }
+```
+
+新new一个scanner进行scan动作，对所有的文件进行扫描。其中的Parser用来将文件字符串内容读取为语法树结构AST？（`JavaParser`这块内容有点晕）
+```java
+  @VisibleForTesting
+  public static void scanSingleFileForTests(File file, VisitorsBridge visitorsBridge, JavaVersion javaVersion) {
+    if (!file.isFile()) {
+      throw new IllegalArgumentException("File '" + file + "' not found.");
+    }
+    // 创建的Parser，用来将文件内容
+    JavaAstScanner astScanner = new JavaAstScanner(JavaParser.createParser(), null);
+    visitorsBridge.setJavaVersion(javaVersion);
+    astScanner.setVisitorBridge(visitorsBridge);
+    astScanner.scan(Collections.singleton(file));
+  }
+```
+
+核心方法 
+```java
+private void simpleScan(File file) {
+    //...
+    try {
+      String fileContent = getFileContent(file);
+      Tree ast;
+      if(fileContent.isEmpty()) {
+        ast = parser.parse(file);
+      } else {
+        ast = parser.parse(fileContent);
+      }
+      visitor.visitFile(ast);
+    } 
+  }
+```
+
+```java
+/**
+ * Common interface for all checks analyzing a java file.
+ */
+@Beta
+public interface JavaFileScanner extends JavaCheck {
+
+  /**
+   * Method called after parsing and semantic analysis has been done on file.
+   * @param context Context of analysis containing the parsed tree.
+   */
+  void scanFile(JavaFileScannerContext context);
+
+}
+```
+
+
+
+
 ### 定制规则
 
 [How to deactivate a rule in SonarQube?](https://sqa.stackexchange.com/questions/24734/how-to-deactivate-a-rule-in-sonarqube)

@@ -14,6 +14,10 @@ toc = true
 
 ## IDEA
 
+### 使用本地文件作为依赖的源码
+
+`Project Settings` --> `Libraries` --> 选中对应的jar包，右侧添加`Source`选中本地文件夹(项目的src文件夹)
+
 ### 个人正版支持多个设备使用
 
 [Can I use my personal license on multiple machines?](https://sales.jetbrains.com/hc/en-gb/articles/206544319-Can-I-use-my-personal-license-on-multiple-machines-)

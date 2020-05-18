@@ -456,7 +456,141 @@ public static CompilationUnitTree parse(
 
 - 最后大家都调用`visitor.visitFile(Tree parsedTree);`来进行具体的判断
 
+#### visitFile规则源码分析
 
+VisitorsBridge的构造：
+
+##### 6.3版本
+
+构造函数里初始化这样几个组件： 
+
+- Scanners，可以理解为规则集合
+- classPath，略
+- sonarComponents：上下文关系（作用是什么？）
+- SymbolicExecutionMode：包含三种模式：`DISABLED`,`ENABLED`, `ENABLED_WITHOUT_X_FILE`(影响的范围是？) ;
+
+```java
+public VisitorsBridge(Iterable<? extends JavaCheck> visitors, List<File> projectClasspath,
+                        @Nullable SonarComponents sonarComponents, SymbolicExecutionMode symbolicExecutionMode,
+                        @Nullable JavaFileScanner analysisIssueFilter) {
+    this.allScanners = new ArrayList<>();
+    for (Object visitor : visitors) {
+      if (visitor instanceof JavaFileScanner) {
+        allScanners.add((JavaFileScanner) visitor);
+      }
+    }
+    this.analysisIssueFilter = analysisIssueFilter;
+    this.classpath = projectClasspath;
+    this.executableScanners = allScanners.stream().filter(IS_ISSUABLE_SUBSCRIPTION_VISITOR.negate()).collect(Collectors.toList());
+    this.issuableSubscriptionVisitorsRunner = new IssuableSubsciptionVisitorsRunner(allScanners);
+    this.sonarComponents = sonarComponents;
+    this.classLoader = ClassLoaderBuilder.create(projectClasspath);
+    this.symbolicExecutionEnabled = symbolicExecutionMode.isEnabled();
+    this.behaviorCache = new BehaviorCache(classLoader, symbolicExecutionMode.isCrossFileEnabled());
+  }
+```
+
+根据scanner过滤出来几类`runner`，在最终的`visitor.visitFile(Tree parsedTree);`里分别进行调用，每个runner会传递一个上下文对象`DefaultJavaFileScannerContext`
+
+不同的scanner实现了不同的接口，runner中执行这个接口的实现，`JavaFileScanner`接口的`scanFile`方法
+
+对于自定义的`MyFirstCustomCheck`checker来说，最终执行的是`issuableSubscriptionVisitorsRunner.run(javaFileScannerContext);`即——
+
+```java
+private void visit(Tree tree) throws CheckFailureException {
+    Kind kind = tree.kind();
+    List<SubscriptionVisitor> subscribed = checks.getOrDefault(kind, Collections.emptyList());
+    Consumer<SubscriptionVisitor> callback;
+    boolean isToken = (kind == Tree.Kind.TOKEN);
+    if (isToken) {
+    callback = s -> s.visitToken((SyntaxToken) tree);
+    } else {
+    callback = s -> s.visitNode(tree);
+    }
+    forEach(subscribed, callback);
+    if (isToken) {
+    forEach(checks.getOrDefault(Tree.Kind.TRIVIA, Collections.emptyList()), s -> ((SyntaxToken) tree).trivias().forEach(s::visitTrivia));
+    } else {
+    visitChildren(tree);
+    }
+    if(!isToken) {
+    forEach(subscribed, s -> s.leaveNode(tree));
+    }
+}
+
+// 
+private final void forEach(Collection<SubscriptionVisitor> visitors, Consumer<SubscriptionVisitor> callback) throws CheckFailureException {
+    for (SubscriptionVisitor visitor : visitors) {
+    runScanner(() -> callback.accept(visitor), visitor);
+    }
+}
+```
+
+##### 5.10版本
+
+构造函数——
+
+```java
+public VisitorsBridge(Iterable visitors, List<File> projectClasspath, @Nullable SonarComponents sonarComponents, SymbolicExecutionMode symbolicExecutionMode) {
+    this.allScanners = new ArrayList<>();
+    for (Object visitor : visitors) {
+        if (visitor instanceof JavaFileScanner) {
+        allScanners.add((JavaFileScanner) visitor);
+        }
+    }
+    // private static Predicate<JavaFileScanner> isIssuableSubscriptionVisitor = s -> s instanceof IssuableSubscriptionVisitor;
+    this.executableScanners = allScanners.stream().filter(isIssuableSubscriptionVisitor.negate()).collect(Collectors.toList());
+    this.scannerRunner = new ScannerRunner(allScanners);
+    this.sonarComponents = sonarComponents;
+    this.classLoader = ClassLoaderBuilder.create(projectClasspath);
+    this.symbolicExecutionEnabled = symbolicExecutionMode.isEnabled();
+    this.behaviorCache = new BehaviorCache(classLoader, symbolicExecutionMode.isCrossFileEnabled());
+}
+```
+
+实际的调用方法`visitor.visitFile(Tree parsedTree);`
+
+```java
+public void visitFile(@Nullable Tree parsedTree) {
+    //...
+    JavaFileScannerContext javaFileScannerContext = createScannerContext(tree, semanticModel, sonarComponents, fileParsed);
+    // Symbolic execution checks
+    if (symbolicExecutionEnabled && isNotJavaLangOrSerializable(PackageUtils.packageName(tree.packageDeclaration(), "/"))) {
+      runScanner(javaFileScannerContext, new SymbolicExecutionVisitor(executableScanners, behaviorCache), AnalysisError.Kind.SE_ERROR);
+      behaviorCache.cleanup();
+    }
+    executableScanners.forEach(scanner -> runScanner(javaFileScannerContext, scanner, AnalysisError.Kind.CHECK_ERROR));
+    //
+    scannerRunner.run(javaFileScannerContext);
+    if (semanticModel != null) {
+      classesNotFound.addAll(semanticModel.classesNotFound());
+    }
+  }
+```
+
+同6.3版本相似的逻辑。
+
+#### 使用其他版本
+
+官方版本提供了不同的[release版本](https://github.com/SonarSource/sonar-java/tags?after=5.13.1.18282)，可以下载对应的[5.10.1.16922](https://github.com/SonarSource/sonar-java/archive/5.10.1.16922.tar.gz)版本。
+
+SonarQube强调TDD开发模式，测试代码很齐全，针对单一源码的测试代码可以直接在IDE中运行，例如`org.sonar.java.ast.JavaAstScannerTest`下的`comments`方法。
+
+```java
+@Test
+  public void comments() {
+    File file = new File("src/test/files/metrics/Comments.java");
+    DefaultInputFile resource = new TestInputFileBuilder("", "src/test/files/metrics/Comments.java").build();
+    fs.add(resource);
+    NoSonarFilter noSonarFilter = mock(NoSonarFilter.class);
+    JavaAstScanner.scanSingleFileForTests(file, new VisitorsBridge(new Measurer(fs, context, noSonarFilter)));
+    verify(noSonarFilter).noSonarInFile(resource, ImmutableSet.of(15));
+  }
+```
+
+事实上，对于测试包`org.sonar.java.checks`下的测试类都可以直接执行单元测试。
+
+这样就可以针对使用的版本直接开发自定义规则并进行验证了
 
 ### 定制规则
 

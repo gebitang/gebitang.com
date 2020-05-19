@@ -184,13 +184,44 @@ SonarQube提供了独立的log服务，命令行启动时输出的是sonar.log�
 - [项目issue #38](https://github.com/SonarSource/sonar-custom-rules-examples/issues/38)  
 - [官方社区 create-java-custom-rule](https://community.sonarsource.com/t/create-java-custom-rule/10320/5)
 
-本地测试无法正常运行（环境改的比较多了），但不影响打包操作。`mvn clean install`可以正常生成jar包。
+~~本地测试无法正常运行（环境改的比较多了）~~，但不影响打包操作。`mvn clean install`可以正常生成jar包。
 
 放到对应的位置，重启SonarQube，可以看到这个自定义的plugin——
 
 ![](https://upload-images.jianshu.io/upload_images/3296949-6118488b181b12ff.png)
 
 ![](https://upload-images.jianshu.io/upload_images/3296949-de25702c52563d0f.png)
+
+---
+
+6.3版本与5.10版本最大的不同是对源码解析时使用的Parser类发生变化：
+
+- 5.10版本使用独立的自研项目[sslr](https://github.com/SonarSource/sslr)(SonarSource Language Recognizer)
+- 6.3版本使用Eclipse的[eclipse.jdt.core](https://github.com/eclipse/eclipse.jdt.core)项目
+
+
+[官方示例工程](https://github.com/SonarSource/sonar-custom-rules-examples/tree/master/java-custom-rules)中的测试代码还会用到sslr项目，只在`MyJavaRulesDefinitionTest`这个测试类中使用
+
+```xml
+    <dependency>
+			<groupId>org.sonarsource.sslr</groupId>
+			<artifactId>sslr-testing-harness</artifactId>
+			<version>${sslr.version}</version>
+			<scope>test</scope>
+		</dependency>
+```
+
+>~~本地测试无法正常运行（环境改的比较多了）~~
+
+还是pom环境问题，对比了[5.10.1.16922](https://github.com/SonarSource/sonar-java/archive/5.10.1.16922.tar.gz)版本的Sonar-Java之后，已解决。
+
+- 将ssrl升级到`1.23`版本
+- 保留guava的版本为`26.0-jre`(降低到`19.0`时，会出现解析报错问题`java.lang.NoSuchMethodError: com.google.common.base.Preconditions.checkNotNull(Ljava/lang/Object;Ljava/lang/String;Ljava/lang/Object;)Ljava/lang/Object;`)
+
+
+
+
+
 
 #### 扫描规则源码分析
 
@@ -591,6 +622,44 @@ SonarQube强调TDD开发模式，测试代码很齐全，针对单一源码的�
 事实上，对于测试包`org.sonar.java.checks`下的测试类都可以直接执行单元测试。
 
 这样就可以针对使用的版本直接开发自定义规则并进行验证了
+
+#### 规则开发
+
+[Java custom rule writing without exploring the Syntax Tree](https://community.sonarsource.com/t/java-custom-rule-writing-without-exploring-the-syntax-tree/550/2)
+
+>When implementing a Java custom rule, nothing forces you to use a `BaseTreeVisitor` or `IssuableSubscriptionVisitor`, you can perfectly only implement the `JavaFileScanner` interface, which will give you access to the content of the file:
+
+```java
+package org.sonar.samples.java.checks;
+
+import org.sonar.check.Rule;
+import org.sonar.plugins.java.api.JavaFileScanner;
+import org.sonar.plugins.java.api.JavaFileScannerContext;
+
+@Rule(key = "MyCheck")
+public class MyCheck implements JavaFileScanner {
+
+  @Override
+  public void scanFile(JavaFileScannerContext context) {
+    context.getFileContent(); // to retrieve the full content of the file as a String
+    context.getFileLines();   // to retrieve the content of each lines of the file, as a String
+  }
+}
+```
+
+`DefaultJavaFileScannerContext`传递出去后，上报issue时，
+
+```java
+  context.reportIssue(this, idf, String.format("Avoid using annotation @%s", name));
+
+  @Override
+  public void reportIssue(JavaCheck javaCheck, Tree tree, String message) {
+    //这个方法如何调用到了——VisitorsBridgeForTests的对应方法？
+    reportIssue(javaCheck, tree, message, ImmutableList.of(), null);
+  }
+```
+
+
 
 ### 定制规则
 

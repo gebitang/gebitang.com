@@ -219,10 +219,6 @@ SonarQube提供了独立的log服务，命令行启动时输出的是sonar.log�
 - 保留guava的版本为`26.0-jre`(降低到`19.0`时，会出现解析报错问题`java.lang.NoSuchMethodError: com.google.common.base.Preconditions.checkNotNull(Ljava/lang/Object;Ljava/lang/String;Ljava/lang/Object;)Ljava/lang/Object;`)
 
 
-
-
-
-
 #### 扫描规则源码分析
 
 - 依赖sonar-java项目最新版本(6.3)的示例工程可以进行运行单元测试。
@@ -659,7 +655,102 @@ public class MyCheck implements JavaFileScanner {
   }
 ```
 
+- 编译自定义规则，将产出物放到`\extensions\plugins`目录下
+- 本地启动SonarQube（生成登录的token）
+- 准备好测试工程（包含源码+编译后的class文件内容）
+- 执行SonarScanner。`path\to\sonar-scanner.bat  -Dsonar.host.url=http://127.0.0.1:9000  -Dsonar.login=generated_token_value -Dsonar.projectKey=local-loop-prj  -Dsonar.sourceEncoding=UTF-8 -Dsonar.sources=src -Dsonar.java.binaries=target/classes`
+- 在SonarQube上查看执行结果 
 
+** sonar-scanner执行的最小参数：url、login、projectKey、sources、binaries。
+
+写了一个**最基础**版本的自定义规则：`不允许在循环中对容器进行赋值`。忽略算法实现- -||
+
+```java
+package org.sonar.samples.java.checks;
+
+import org.sonar.check.Priority;
+import org.sonar.check.Rule;
+import org.sonar.plugins.java.api.JavaFileScanner;
+import org.sonar.plugins.java.api.JavaFileScannerContext;
+import org.sonar.plugins.java.api.semantic.Type;
+import org.sonar.plugins.java.api.tree.BaseTreeVisitor;
+import org.sonar.plugins.java.api.tree.BlockTree;
+import org.sonar.plugins.java.api.tree.ExpressionStatementTree;
+import org.sonar.plugins.java.api.tree.ForStatementTree;
+import org.sonar.plugins.java.api.tree.MethodTree;
+import org.sonar.plugins.java.api.tree.StatementTree;
+import org.sonar.plugins.java.api.tree.Tree;
+import org.sonar.plugins.java.api.tree.VariableTree;
+import org.sonar.samples.java.RulesList;
+
+import java.util.List;
+
+@Rule(
+        key = "ForLoopAssignCheck",
+        name = "assign container value in for loop",
+        description = "don't try to assign or update container value in any loop operation.",
+        priority = Priority.MAJOR,
+        tags = {"custom"})
+public class ForLoopAssignCheck extends BaseTreeVisitor implements JavaFileScanner {
+
+
+    private JavaFileScannerContext context;
+
+
+    @Override
+    public void scanFile(JavaFileScannerContext context) {
+        this.context = context;
+        scan(context.getTree());
+    }
+
+    @Override
+    public void visitMethod(MethodTree tree) {
+        BlockTree block = tree.block();
+        if(block != null) {
+            boolean containerFound = false;
+            String containerVar = "";
+            List<StatementTree> statements = block.body();
+            for(StatementTree s : statements) {
+                if(s.is(Tree.Kind.VARIABLE)) {
+                    VariableTree vt = ((VariableTree)s);
+                    Type type = vt.type().symbolType();
+                    if(isSubTypeOfSetOrMap(type)) {
+                        containerFound = true;
+                        containerVar = vt.simpleName().name();
+                    }
+                }
+
+                if(s.is(Tree.Kind.FOR_STATEMENT)) {
+                    ForStatementTree ft = (ForStatementTree)s;
+                    if(ft.statement().is(Tree.Kind.BLOCK)) {
+                        List<StatementTree> body = ((BlockTree)ft.statement()).body();
+
+                        for(StatementTree state : body) {
+                            if(state.is(Tree.Kind.EXPRESSION_STATEMENT)) {
+                                ExpressionStatementTree et = (ExpressionStatementTree)state;
+
+                                String var = et.expression().firstToken().text();
+                                if(var.length() > 0 && var.equals(containerVar)) {
+                                    context.reportIssue(this, et, String.format("avoid assigning container %s in loop.", var));
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+        }
+        super.visitMethod(tree);
+    }
+
+    private boolean isSubTypeOfSetOrMap(Type type) {
+        return type.isSubtypeOf("java.util.Set") || type.isSubtypeOf("java.util.Map");
+    }
+}
+
+```
+
+![](https://upload-images.jianshu.io/upload_images/3296949-9bc1bd3092103c77.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
 ### 定制规则
 

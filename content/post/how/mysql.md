@@ -12,6 +12,18 @@ topics = [
 toc = true
 +++
 
+### 常用函数
+
+[mysql resources](https://www.w3resource.com/mysql/mysql-functions-and-operators.php)，五星推荐：gif演示 && 视频演示。
+
+- 拼接字段：`CONCAT`,例如`select CONCAT(git_group ,'/', project_name) as name , ut_block.* from ut_block ;`
+- 计算平均值：`avg`，例如`select avg(total_time) from su_result where id > 9000;`
+- 时间戳转换：`unix_timestamp`将时间格式转换为秒/毫秒，例如`unix_timestamp('2020-05-20 13:14:00') * 1000`
+- 时间戳转换：`FROM_UNIXTIME`将秒转换为时间格式，例如`FROM_UNIXTIME(start_time / 1000) AS start`，start_time为毫秒值
+- 计算TimeStamp之间的耗时：`TIMESTAMPDIFF`，例如`TIMESTAMPDIFF(c,created_at,updated_at) as DT`。creatte_at, updated_at为`timestamp`格式，计算两个时间戳之间多少秒(MICROSECOND)、毫秒(MICROSECOND) 
+
+- 设置变量： `set @start = '2020-05-06 00:00:00'`，使用时使用`start_time < unix_timestamp(@start) * 1000`方式
+
 ### 查看数据库大小
 
 [refer](https://chartio.com/resources/tutorials/how-to-get-the-size-of-a-table-in-mysql/)  

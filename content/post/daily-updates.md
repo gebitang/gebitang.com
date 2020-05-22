@@ -1026,6 +1026,57 @@ This is a footnote.[^2]
 
 [maven in five minutes](https://maven.apache.org/guides/getting-started/maven-in-five-minutes.html)
 
+### 单测中使用的几个插件
+
+- [`maven-site-plugin`](https://maven.apache.org/plugins/maven-site-plugin/) 
+
+用来生成静态web站点   
+
+>The Site Plugin is used to generate a site for the project. The generated site also includes the project's reports that were configured in the POM.
+
+
+- [`maven-project-info-reports-plugin`]()
+
+生成项目信息
+
+>The Maven Project Info Reports plugin is used to generate reports information about the project.
+
+
+- [maven-surefire-plugin](https://maven.apache.org/surefire/maven-surefire-plugin/)
+
+> The Surefire Plugin has only one goal: `surefire:test` runs the unit tests of an application.
+
+- [`maven-surefire-report-plugin`](https://maven.apache.org/surefire/maven-surefire-report-plugin/)
+
+将测试结果生成HTML格式的报告
+
+>Generate the Report as Part of Project Reports
+
+*   [surefire-report:report](https://maven.apache.org/surefire/maven-surefire-report-plugin/report-mojo.html) Generates the test results report into HTML format.
+*   [surefire-report:report-only](https://maven.apache.org/surefire/maven-surefire-report-plugin/report-only-mojo.html) This goal does not run the tests, it only builds the reports. It is provided as a work around for [SUREFIRE-257](https://issues.apache.org/jira/browse/SUREFIRE-257)
+*   [surefire-report:failsafe-report-only](https://maven.apache.org/surefire/maven-surefire-report-plugin/failsafe-report-only-mojo.html) This goal does not run the tests, it only builds the IT reports. See [SUREFIRE-257](https://issues.apache.org/jira/browse/SUREFIRE-257)
+
+### mvn clean install 
+
+[a short guide to Maven](https://www.marcobehler.com/guides/mvn-clean-install-a-short-guide-to-maven)  
+
+1.  You are calling the `mvn` executable, which means you need Maven installed on your machine. 
+
+2.  You are using the `clean` command, which will delete all previously compiled Java sources and resources (like .properties) in your project. Your build will start from a clean slate.
+
+3.  `Install` will then compile, test & package your Java project and even `install`/`copy` your built .jar/.war file into your local Maven repository.
+
+核心作用就是：通常说的“编译、打包”。clean是为了先清除原有的产出物，最终的阶段是：
+
+- 打包(package) 
+- 验证(verify) 通常没有[集成测试](https://www.baeldung.com/maven-integration-test)
+- 安装(install)到本地
+- 部署(deploy)到配置的远程仓库
+
+参理解生命周期。[Maven-build-lifesycle](../jiansh/spring/maven-build-lifesycle)
+
+![](https://www.marcobehler.com/images/mavenphasesv3.png)
+
 ### 单测失败
 
 [Failed to execute goal org.apache.maven.plugins:maven-surefire-plugin:2.10:test](https://stackoverflow.com/questions/13170860/failed-to-execute-goal-org-apache-maven-pluginsmaven-surefire-plugin2-10test)

@@ -292,7 +292,24 @@ There was an error updating. Try again later?
 
 You can also hold down Ctrl with any of the above shortcuts to copy the screenshot image to the clipboard instead of saving it.
 
-### curl命令调用post方法
+### curl form 
+
+`curl --help`查看文档 
+
+>-F, --form <name=content> Specify HTTP multipart POST data  
+>    --form-string <name=string> Specify HTTP multipart POST data
+
+[What is the right way to POST multipart/form-data using curl?](https://stackoverflow.com/questions/19116016/what-is-the-right-way-to-post-multipart-form-data-using-curl)
+
+Window环境下可能有空格问题，需要转义 `curl -v -F 'upload=@\"C:/myfile.txt\"' URL`
+
+### curl Authorization: Basic
+
+```
+curl -H "Authorization: Basic ZnJlZDpmcmVk" -X GET -H "Content-Type: application/json" http://localhost:8080/rest/api/2/issue/createmeta
+```
+
+### curl post json
 
 curl: (7) Failed to receive SOCKS4 connect request ack. 原因为本地网络设置了代理服务；关闭本地代理服务之后，需要新启动一个terminal才会生效。
 

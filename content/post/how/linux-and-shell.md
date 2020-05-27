@@ -323,6 +323,43 @@ para="value of para"
 curl https://xxx.com/api/ -XPOST -H 'Content-Type: application/json' -d '{"category":"PLAIN_TEXT","data":"'"$para"'"}'
 ```
 
+### curl post json with parameter 
+传递参数： 
+
+[Using curl POST with variables defined in bash script functions](https://stackoverflow.com/questions/17029902/using-curl-post-with-variables-defined-in-bash-script-functions)
+
+write a function that generates the post data of your script. This saves you from all sort of headaches concerning shell quoting.
+
+- 利用函数生成需要的数据
+- 函数中可以正常使用各种参数
+- curl post data由函数返回
+- 注意函数中第二个`EOF`要位于行首
+
+```
+commit=$1
+branch=$2
+project=$3
+group=$4
+user=$5
+
+username=`echo $user |awk -F@ '{print $1}'`
+
+function createData() {
+    content="【单测报错】\n项目组:\t$group \n项目:\t$project \n分支:\t$branch \ncommit：$commit \n请到gitlab查看对应的pipeline"
+    cat <<EOF
+    {
+      "to":"$username",
+      "content":"$content",
+      "otherKey":"value"
+    }
+EOF
+}
+
+function SendNote() {
+    curl -i -H "Content-Type:application/json" -XPOST "http://sss.com/abc/" -d "$(createData)"
+}
+```
+
 ### curl 与 bash 联动
 
 -o 参数表示输出到文件，如 `curl -o aa example.com -o bb example.net`   
@@ -1270,6 +1307,34 @@ lsof -p pid
 man command
 ``` 
 查看命令详情 
+
+### 忽略命令行错误信息
+
+[Bash ignoring error for a particular command](https://stackoverflow.com/questions/11231937/bash-ignoring-error-for-a-particular-command) 
+
+Just add `|| true` after the command where you want to ignore the error. 
+
+[How to Ignore Failures in a Shell Step?](https://support.cloudbees.com/hc/en-us/articles/218517228-How-to-Ignore-Failures-in-a-Shell-Step-)
+```
+#Do something that might fail but we don't care. Loop is completed.
+while ...
+do
+    command || true
+done
+
+# Do something that might fail but we care. Loop is completed. If there was an error, the variable error is created and set to true
+while ...
+do
+    command || error=true
+done
+
+#Fail the build if there was an error
+if [ $error ]
+then 
+    exit -1
+fi
+
+```
 
 ### LDP
 The Linux Documentation Project [LDP](http://www.tldp.org/LDP/abs/html/abs-guide.html)

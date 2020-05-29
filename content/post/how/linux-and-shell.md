@@ -292,6 +292,22 @@ There was an error updating. Try again later?
 
 You can also hold down Ctrl with any of the above shortcuts to copy the screenshot image to the clipboard instead of saving it.
 
+### 计算字符串长度
+
+`cat /etc/passwd | wc -L`
+
+-L参数  
+- 1) 对多行文件来说，表示打印最长行的长度！ 82，表示/etc/passwd文件最长行的长度为82
+- 2) 对单行字符串而言，表示当前行字符串的长度！
+
+```shell
+# 发送空文件？
+curl  -F "file_1=@files.zip" -F "file_2=@/dev/null;filename=" -F "file_3=@/dev/null;filename="
+# 计算字符串长度 -l line; -L 字符长度
+md5sum test.file |awk -F\  '{print $1}' | wc -L 
+```
+
+
 ### curl form 
 
 `curl --help`查看文档 

@@ -70,3 +70,62 @@ String credential = Credentials.basic("token-value-generated", "");
 - 没有上传图片则采用正常编码方式`application/x-www-form-urlencoded`
 
 [https://open.weibo.com/wiki/FAQ](https://open.weibo.com/wiki/FAQ)
+
+## XAUTH fanfou
+
+官方示例代码为[python实现](https://github.com/FanfouAPI/FanFouAPIDoc/wiki/Xauth)，本地调试时需要做一点调整`oauth`调整为`from oauth import oauth`
+
+提供了对应的参数后，可以获取到用户数据。
+
+搜索Java的实现，[一款简洁的饭否Android客户端](https://github.com/betroy/xifan)这个工程下对XAuth的[实现XAuthUtils](https://github.com/betroy/xifan/blob/33a61f3e963378ba39404d143dc556d5ca629660/app/src/main/java/com/troy/xifan/util/XAuthUtils.java)可以借鉴。
+
+下列代码相对于官方示例的Java版本：
+
+- 利用XAuth方式获取Access_Token
+- 使用Token的方式[验证用户信息](https://github.com/FanfouAPI/FanFouAPIDoc/wiki/account.verify-credentials)
+
+```java
+String url = "http://fanfou.com/oauth/access_token";
+Request request = new Request.Builder().url(url).build();
+String code = getAuthorization(request);
+
+request = new Request.Builder().url(url).addHeader("Authorization", code).build();
+
+Response response = new OkHttpClient().newCall(request).execute();
+System.out.println( response.code() + "------------" + response.body().string());
+//oauth_token=xxxxxxxx&oauth_token_secret=yyyyyyyyyyyy
+
+//获取到上述两个值之后，后续的签名需要用到
+url = "http://api.fanfou.com/account/verify_credentials.xml";
+request = new Request.Builder().url(url).build();
+code = getAuthorization(request);
+
+//
+request = new Request.Builder().url(url).addHeader("Authorization", code).build();
+response = new OkHttpClient().newCall(request).execute();
+System.out.println(response.code());
+System.out.println(response.body().string());
+```
+
+[访问饭否API](https://github.com/FanfouAPI/FanFouAPIDoc/wiki/Oauth#%E4%BD%BF%E7%94%A8access-token%E8%AE%BF%E9%97%AE%E9%A5%AD%E5%90%A6api)
+
+每次API请求需要包含如下参数——
+
+| 参数 | 意义 |
+| ---|--- |
+| oauth_consumer_key | 饭否应用的API Key |
+| oauth_token | **Access Token** |
+| oauth_signature_method | 签名方法，目前只支持HMAC-SHA1 |
+| oauth_signature | 签名值，签名方法见[OAuthSignature](https://github.com/FanfouAPI/FanFouAPIDoc/wiki/Oauthsignature) |
+| oauth_timestamp | 时间戳，取当前时间 |
+| oauth_nonce | 单次值，随机的字符串，防止重复请求 |
+
+
+[OAuthSignature](https://github.com/FanfouAPI/FanFouAPIDoc/wiki/Oauthsignature) 需要注意——
+
+- 如果请求存在Authorization的Header并且以OAuth开头，则其随后的参数, 所有的名字以oauth_　和xauth_(用于XAuth)开头的参数都参与签名
+- 如果请求是GET, 则QueryString中所有的参数都参与签名
+- 如果请求是POST并且，Content-Type是application/x-www-form-urlencoded, 则所有的POST参数需要参加签名
+- 其他的POST请求，参数都不参加签名，包括multipart/form-data
+
+也别担心，如果签名签错了，返回值会告诉你期望的签名内容是怎样的。`Invalid signature. Expected basestring is xxx`，通常都是encode出现了问题。可以利用这个[OAuthEncoder](https://github.com/betroy/xifan/blob/33a61f3e963378ba39404d143dc556d5ca629660/app/src/main/java/com/troy/xifan/util/OAuthEncoder.java)编码一下。

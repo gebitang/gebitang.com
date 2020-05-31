@@ -44,3 +44,29 @@ String credential = Credentials.basic("token-value-generated", "");
     return "Basic " + encoded;
   }
 ```
+
+## 微博分享
+
+- 注册开发者
+- 申请一个[网站应用](https://open.weibo.com/connect)
+- 获取到测试的token
+
+[开发文档首页](https://open.weibo.com/wiki/API%E6%96%87%E6%A1%A3_V2)
+[微博API](https://open.weibo.com/wiki/%E5%BE%AE%E5%8D%9AAPI)
+
+[第三方分享到微博](https://open.weibo.com/wiki/2/statuses/share)
+
+[授权机制说明](https://open.weibo.com/wiki/%E6%8E%88%E6%9D%83%E6%9C%BA%E5%88%B6%E8%AF%B4%E6%98%8E)
+
+>为了方便开发者编程、调试接口，针对开发者自身，可以使用开发者授权，这样开发者自己就不用通过频繁授权自己的应用，来获取授权token才能调接口。而且开发者的授权token有效期为**`5`**年。
+>
+>开发者自身授权有一定的限制要求，即只有应用的所有者账号授权自己名下的应用时，才享有这个特性。
+>
+>开发者自身授权可以通过接口测试工具快速获得，前提是需要用开发者的账号登录到微博开放平台，接口测试工具下才会列出这个账号下的应用，进而也只能获取到开发者名下所列出应用的授权token。
+
+[获取测试token](https://open.weibo.com/tools/console)
+
+- 上传图片时需要采用`multipart/form-data`编码方式，
+- 没有上传图片则采用正常编码方式`application/x-www-form-urlencoded`
+
+[https://open.weibo.com/wiki/FAQ](https://open.weibo.com/wiki/FAQ)

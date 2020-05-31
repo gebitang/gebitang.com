@@ -889,6 +889,26 @@ Integer a = 100;
 //这是自动拆箱
 int     b = new Integer(100);
 ```
+
+### Java线程池：ThreadPoolExecutor
+
+- [Java线程池实现原理及其在美团业务中的实践](https://tech.meituan.com/2020/04/02/java-pooling-pratice-in-meituan.html) 包含详细的运行流程图
+
+- [更好的使用Java线程池](https://my.oschina.net/andylucc/blog/648127) 同一个作者，顺藤摸瓜，[扒一扒ReentrantLock以及AQS实现原理](https://my.oschina.net/andylucc/blog/651982)以及`并发编程`下的系列文章
+
+- [深入理解Java线程池：ThreadPoolExecutor](http://www.ideabuffer.cn/2017/04/04/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Java%E7%BA%BF%E7%A8%8B%E6%B1%A0%EF%BC%9AThreadPoolExecutor/) 包括详细的源码注释说明。
+
+- 结合IDE阅读源码的注释内容。IDEA的`Documentation View`可以查看final字段的值，小惊喜——
+
+>COUNT_BITS 就是29，CAPACITY就是1左移29位减1（29个1），这个常量表示workerCount的上限值，大约是5亿。
+
+![](https://upload-images.jianshu.io/upload_images/3296949-2a47c9f118e696c7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+
+- [https://docs.oracle.com/javase/8/docs/](https://docs.oracle.com/javase/8/docs/)配合官方文档[Java SE
+API](https://docs.oracle.com/javase/8/docs/api/index.html)
+
+
 ### 查看默认参数
 
 [JDK 8: Thread Stack Size Tuning](http://xmlandmore.blogspot.com/2014/09/jdk-8-thread-stack-size-tuning.html)</br>

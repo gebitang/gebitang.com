@@ -88,7 +88,7 @@ toc=true
 - 上半场维持在5分40秒，下半场直接蹦到了6分半左右。
 - 工地封路，回来这一段以后可以直接在路上跑了。
 
-![](https://s3-img.meituan.net/v1/mss_3d027b52ec5a4d589e68050845611e68/ff/n0/0k/fj/gk_160467.jpg)
+![](https://s3-img.meituan.net/v1/mss_3d027b52ec5a4d589e68050845611e68/ff/n0/0k/fj/gk_160467.jpg@596w_1l.jpg)
 
 **20-06-02** 周二 6.71 + 4.23
 
@@ -100,7 +100,17 @@ toc=true
 - 后面路线看起来只能原路返回了
 
 6.71
-![](https://s3-img.meituan.net/v1/mss_3d027b52ec5a4d589e68050845611e68/ff/n0/0k/fq/eh_154641.jpg)
+![](https://s3-img.meituan.net/v1/mss_3d027b52ec5a4d589e68050845611e68/ff/n0/0k/fq/eh_154641.jpg@596w_1l.jpg)
 
 4.23
-![](https://s3-img.meituan.net/v1/mss_3d027b52ec5a4d589e68050845611e68/ff/n0/0k/fq/en_154637.jpg)
+![](https://s3-img.meituan.net/v1/mss_3d027b52ec5a4d589e68050845611e68/ff/n0/0k/fq/en_154637.jpg@596w_1l.jpg)
+
+**20-06-03** 周二 6.68 (3.63 + 3.05)
+
+- 昨天可能跑+走(一共有17KN)得有点多。今天实在没多少劲跑
+- 抢到了接力棒，还是跑起来
+- 中场休息器械区两位老大爷把仰卧起坐凳坐着聊天了，还好我练完双杠回来他们走了
+- 返程开发新路线，跑下来发现倒是不远。就是路上车不少
+
+![](https://s3-img.meituan.net/v1/mss_3d027b52ec5a4d589e68050845611e68/ff/n0/0k/ft/t9_168361.jpg@596w_1l.jpg)
+

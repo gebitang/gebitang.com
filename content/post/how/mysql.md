@@ -24,6 +24,10 @@ toc = true
 
 - 设置变量： `set @start = '2020-05-06 00:00:00'`，使用时使用`start_time < unix_timestamp(@start) * 1000`方式
 
+### 实现主从备份
+
+[MySQL主从备份配置](https://www.cnblogs.com/eric-fang/p/9285093.html)、 [mysql实现主从备份](https://www.cnblogs.com/baoyi/p/mysql_master_slave.html)
+
 ### 查看数据库大小
 
 [refer](https://chartio.com/resources/tutorials/how-to-get-the-size-of-a-table-in-mysql/)  

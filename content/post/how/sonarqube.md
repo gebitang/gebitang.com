@@ -11,6 +11,131 @@ topics = [
 toc = true
 +++
 
+### 单module和多module下的Jacoco插件最小配置以及执行
+
+实践检验，亲测有效:) 
+
+插播一下**Phase VS. goal**
+
+Phase(阶段)包含了有一组goals(目标动作)。phase执行有依赖关系。比如执行 `mvn package`， 包含了`validate`, `compile`, `test`, and `package`动作。
+
+goal就是maven用来管理项目的具体的task，可以属于某一个phase，也可以独立存在。比如`mvn dependency:tree`就不属于任何phase。
+
+参考：[maven lifecycle-reference](https://maven.apache.org/guides/introduction/introduction-to-the-lifecycle.html#lifecycle-reference)
+
+
+goal在两种情况下触发：   
+
+- 自动执行（如果plugin的goal默认绑定到了对应的phase，或手动定义了goal在哪个phase执行）
+- 通过命令明确执行 `mvn <plugin name>:<goal>`
+
+参考：[Maven plugin execution ID](https://stackoverflow.com/a/33279426/1087122)
+
+
+
+插播结束。
+
+
+#### 单module
+
+比较简单，添加类似下面的配置即可。下面的配置将report重新绑定到了test阶段而已。
+
+`report`默认绑定的阶段是在`verify`阶段。Binds by default to the [lifecycle phase](http://maven.apache.org/ref/current/maven-core/lifecycles.html): `verify`(run any checks to verify the package is valid and meets quality criteria.)
+
+绑定的意思是在对应的phase下才会执行这一goal。
+
+```
+<plugin>
+    <groupId>org.jacoco</groupId>
+    <artifactId>jacoco-maven-plugin</artifactId>
+    <version>0.8.5</version>
+    <executions>
+        <execution>
+            <goals>
+                <goal>prepare-agent</goal>
+            </goals>
+        </execution>
+        <execution>
+            <id>report</id>
+            <phase>test</phase>
+            <goals>
+                <goal>report</goal>
+            </goals>
+        </execution>
+    </executions>
+</plugin>
+```
+执行`mvn clean jacoco:prepare-agent install jacoco:report`执行成功则可以获取到单测文件`target/site/jacoco/jacoco.xml`  
+（依次执行了多个动作，既包括maven自带的动作，也包括插件jacoco定义的goal）
+
+#### 多module 
+
+- 首先要在项目的pom文件下添加一个用来聚合的module，例如`utm`
+- 项目pom文件依然需要添加jacoco插件（执行时需要在项目的根目录下，没有jacoco插件则无法执行对应的插件动作）依然使用 `report`动作
+- 聚合module下需要：
+  - a) 聚合所有的依赖模块，参考[JaCoCo-Multi-Module](../../jiansh/us/jacoco-multi-module/)； 
+  - b) 定义jacoco的聚合动作，使用`report-aggregate`动作
+
+```
+<build>
+  <plugins>
+      <plugin>
+        <groupId>org.jacoco</groupId>
+        <artifactId>jacoco-maven-plugin</artifactId>
+        <version>0.8.5</version>
+        <executions>
+          <execution>
+            <id>self-define-report-aggregate</id>
+            <phase>verify</phase>
+            <goals>
+                <goal>report-aggregate</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+  </plugins>
+</build>
+```
+
+依然在项目根目录下执行`mvn clean jacoco:prepare-agent install jacoco:report` 执行成功则可以获取到聚合后的单测文件`utm/target/site/jacoco-aggregate/jacoco.xml`  
+
+### Jacoco Maven Plugin goals
+
+[Jacoco Maven Plugin](https://www.jacoco.org/jacoco/trunk/doc/maven.html)
+
+对应的github项目工程：[github jacoco-maven-plugin](https://github.com/jacoco/jacoco/tree/master/jacoco-maven-plugin)
+
+
+The JaCoCo Maven plug-in provides the JaCoCo runtime agent to your tests and allows basic report creation.
+
+与surefire插件配合使用时需要注意，surefire插件的`forkCount`参数不能为0。 
+
+>When using the <tt>maven-surefire-plugin</tt> or <tt>maven-failsafe-plugin</tt> you **must not** use a [<tt>forkCount</tt>](http://maven.apache.org/surefire/maven-surefire-plugin/test-mojo.html#forkCount) of <tt>0</tt> or set the [<tt>forkMode</tt>](http://maven.apache.org/surefire/maven-surefire-plugin/test-mojo.html#forkMode) to <tt>never</tt> as this would prevent the execution of the tests with the <tt>javaagent</tt> set and no coverage would be recorded.
+
+**forkCount**
+
+>Option to specify the number of VMs to fork in parallel in order to execute the tests. When terminated with "C", the number part is multiplied with the number of CPU cores. Floating point value are only accepted together with "C". If set to "0", no VM is forked and all tests are executed within the main process.
+
+---
+
+一共定义了11个goals：可以通过配置了`jacoco-maven-plugin`的项目下执行 `mvn help:describe -Dplugin=org.jacoco:jacoco-maven-plugin -Ddetail`获取到详细的说明。或者参考下面的链接说明——
+
+The JaCoCo Maven plug-in defines the following goals:
+
+*   [help](https://www.jacoco.org/jacoco/trunk/doc/help-mojo.html)
+*   [prepare-agent](https://www.jacoco.org/jacoco/trunk/doc/prepare-agent-mojo.html)
+*   [prepare-agent-integration](https://www.jacoco.org/jacoco/trunk/doc/prepare-agent-integration-mojo.html)
+*   [merge](https://www.jacoco.org/jacoco/trunk/doc/merge-mojo.html)
+*   [report](https://www.jacoco.org/jacoco/trunk/doc/report-mojo.html)
+*   [report-integration](https://www.jacoco.org/jacoco/trunk/doc/report-integration-mojo.html)
+*   [report-aggregate](https://www.jacoco.org/jacoco/trunk/doc/report-aggregate-mojo.html)
+*   [check](https://www.jacoco.org/jacoco/trunk/doc/check-mojo.html)
+*   [dump](https://www.jacoco.org/jacoco/trunk/doc/dump-mojo.html)
+*   [instrument](https://www.jacoco.org/jacoco/trunk/doc/instrument-mojo.html)
+*   [restore-instrumented-classes](https://www.jacoco.org/jacoco/trunk/doc/restore-instrumented-classes-mojo.html)
+
+
+
 ### 多模块项目包含war类型依赖
 
 [JaCoCo-Multi-Module](../../jiansh/us/jacoco-multi-module/)强调了如果有子模块为pom类型时，需要将type进行明确说明。

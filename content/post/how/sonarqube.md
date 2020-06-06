@@ -99,6 +99,12 @@ goal在两种情况下触发：
 
 依然在项目根目录下执行`mvn clean jacoco:prepare-agent install jacoco:report` 执行成功则可以获取到聚合后的单测文件`utm/target/site/jacoco-aggregate/jacoco.xml`  
 
+插件顺序：  
+
+- 子module如果定义，使用子module的定义
+- 子module没有定义的情况下，使用父module的定义，依次类推到根module
+- 同一个module下的重复定义会被告警，但以后定义的作为最终生效的定义
+
 ### Jacoco Maven Plugin goals
 
 [Jacoco Maven Plugin](https://www.jacoco.org/jacoco/trunk/doc/maven.html)

@@ -151,3 +151,16 @@ toc=true
 执行力还有点差。计划着周末可以把跑步记录合成视频，最终也没搞。
 
 [VideoScribe](https://www.videoscribe.co/en)这个工具不错。The Art of Improvement频道应该都是使用的这个工具。比如这个[Today’s Most Important Skill](https://www.youtube.com/watch?v=qtAVCo7-Wrw)(注意力管理代替时间管理成为最重要的技能)
+
+--- 
+
+## Week34 
+
+**20-06-08** 周一 6.42
+
+- 昨儿晚上溜达的有点多。早上没啥力气跑的感觉。
+- 好像6月的线上马有点频繁。同一天有重复的。
+- 回来喝了两杯水+一碗汤。
+
+
+![](https://s3-img.meituan.net/v1/mss_3d027b52ec5a4d589e68050845611e68/ff/n0/0k/gf/bg_342962.jpg@596w_1l.jpg)

@@ -26,6 +26,88 @@ toc = true
 
 [FROM_UNIXTIME() Examples](https://database.guide/from_unixtime-examples-mysql/) Available Specifiers
 
+[MySQL: grouping continuous ranges](https://explainextended.com/2009/07/24/mysql-grouping-continuous-ranges/)  
+
+[Group by price range](https://snipplr.com/view/41322) [Group by range](https://stackoverflow.com/questions/6687534/group-by-range-in-mysql)
+
+```sql
+set @start = '2020-06-12 00:00:00';
+set @end = '2020-06-13 00:00:00';
+
+-- 语言分布
+SELECT count(1) as num , lang_type
+FROM su_result
+WHERE (id > 150000
+    AND start_time > unix_timestamp(@start) * 1000 and start_time < unix_timestamp(@end) * 1000)
+
+group by lang_type;
+
+-- ut result
+SELECT  count(1) as num,  ut_result
+FROM su_result
+WHERE (id > 150000 and ut_block = 1
+    AND start_time > unix_timestamp(@start) * 1000 and start_time < unix_timestamp(@end) * 1000)
+
+group by ut_result;
+
+
+-- 等待分布
+select case when wait_duration > 1800000 then '1 30m以上'
+            when wait_duration <= 1800000 and wait_duration > 600000 then '2 10~30m'
+            when wait_duration <= 600000 and wait_duration > 60000 then '3 1~10m'
+            else '4 1m以下'
+    end as wsec, count(*) AS num
+from su_result
+WHERE (id > 150000
+    AND start_time > unix_timestamp(@start) * 1000 and start_time < unix_timestamp(@end) * 1000)
+group by wsec;
+
+
+-- sonar耗时分布
+select case when sonar_duration > 600000 then '1 10m以上'
+            when sonar_duration <= 600000 and sonar_duration > 60000 then '2 1~10m'
+            when sonar_duration <= 60000 and sonar_duration > 30000 then '3 30~60s'
+            when sonar_duration <= 30000 and sonar_duration > 10000 then '4 10~30s'
+            else '5 10s以下'
+           end as wsec, count(*) AS num
+from su_result
+WHERE (id > 150000
+    AND start_time > unix_timestamp(@start) * 1000 and start_time < unix_timestamp(@end) * 1000)
+group by wsec;
+
+
+-- week
+SELECT CASE
+           WHEN num > 100 THEN '1 100次以上'
+           WHEN num <= 100
+               AND num > 50 THEN '2 50~100次'
+           WHEN num <= 50
+               AND num > 10 THEN '3 10~50次'
+           ELSE '4 10次以下'
+           END AS Number, COUNT(*) AS num
+FROM (
+         SELECT project_name, group_name, COUNT(1) AS num
+         FROM su_result
+         WHERE (id > 100000
+             AND start_time > unix_timestamp('2020-06-01 00:00:00') * 1000
+             AND start_time < unix_timestamp('2020-06-08 00:00:00') * 1000)
+         GROUP BY project_name
+         ORDER BY num DESC
+     ) week
+GROUP BY Number;
+
+-- times
+SELECT group_name, project_name, COUNT(1) AS num
+FROM su_result
+WHERE (id > 100000
+    AND start_time > unix_timestamp('2020-06-01 00:00:00') * 1000
+    AND start_time < unix_timestamp('2020-06-08 00:00:00') * 1000)
+GROUP BY project_name
+ORDER BY num DESC;
+
+
+```
+
 ### 实现主从备份
 
 [MySQL主从备份配置](https://www.cnblogs.com/eric-fang/p/9285093.html)、 [mysql实现主从备份](https://www.cnblogs.com/baoyi/p/mysql_master_slave.html)

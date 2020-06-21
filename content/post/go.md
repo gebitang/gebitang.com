@@ -1,33 +1,62 @@
 +++
-title = "Go Tech"
-description = "study go and python and etc."
+title = "Go"
+description = "Go Go Go"
 tags = [
-    "go",
-    "python"
+    "go"
 ]
-date = "2018-01-03"
+date = "2020-06-21"
 topics = [
-    "go",
-    "python"
+    "go"
 ]
 toc = true
 +++
 
-Go release 1.9 version on 24 August 2017. I'm the [31,365](https://github.com/golang/go/stargazers) people to start it on github and just get started to learn it :). 
+尴尬了，这篇的日期写的是`2018-01-03`，实际上是近三年前的帖子了。Go 1.9发布的时候就信誓旦旦的要进行学习。结果到今天还是无疾而终的样子，半途而废了好久。捞上来，看看这次可以坚持多久。
 
-Let's Go. 
-
-    go tool tour
-
-[Go 1.9 is released](https://blog.golang.org/go1.9). [**Here**](https://blog.golang.org/index) are all the blogs about go.
-
-[Go: Ten years and climbing](https://commandcenter.blogspot.co.uk/2017/09/go-ten-years-and-climbing.html)
-[Go十年](http://tonybai.com/2017/09/24/go-ten-years-and-climbing/)
-[BIG: Blockchain In Go](https://jeiwan.cc/tags/blockchain/)
+[Mixin 大群部署完全教程](https://dbarobin.com/2019/05/19/mixin-super-group/) 拿这个练习，前后端一起端。
 
 <!--more-->
 
+## week 26 
+
+重新更新了环境，使用`go1.14.4`开始，即使在window环境上，[安装](https://golang.org/doc/install)也只需要解压、更新环境变量（如果使用cgo的话，还需要gcc环境，机器上已经有了，但目前以我这水平应该还用不到）就可以立即上手了。
+
+[How to write Go code](https://golang.org/doc/code.html)实践——
+
+- 创建工作目录，后续在工作目录进行操作
+- 使用`go mod init example.com/user/hello`进行初始化，生成`go.mod`文件，包含了包名和使用的版本名
+- 使用`go install`进行安装，三种等价操作。`go install .`, `go install example.com/user/hello`
+- 在本地定义引用的包信息：目录名作为引入的内容，其中的方法使用大写字母开头自动`exported`，使用`go build`就可以将引用包安装到本地。之后就可以在应用中使用
+- 引入remote的包会自动去下载远程的包。通过`go install`、`go build`、`go run`都可以触发下载动作，并会更新`go.mod`文件
+- 使用 `go test`进行测试
+
+注意事项：   
+
+1. 可以使用`go env -w GOBIN=/path/to/bin`和`go env -u GOBIN`进行变量声明和修改
+2. 在cmd环境下可以临时设置代理，持续到窗口关闭，前提是本地已经有了proxy`set http_proxy=http://127.0.0.1:7890`, `set https_proxy=http://127.0.0.1:7890`
+3. 使用`go test ./...`可以自动遍历当前工程所有文件夹下的test文件
+
+
+
+要用到`go module`，参考这两篇——[Go Modules 终极入门](https://mp.weixin.qq.com/s/6gJkSyGAFR0v6kow2uVklA)，[干货满满的 Go Modules 和 goproxy.cn](https://mp.weixin.qq.com/s/jpp7vs3Fdg4m15P1SHt1yA)。
+
+
+
+--- 
+
+## archive
+
+>Go release 1.9 version on 24 August 2017. I'm the [31,365](https://github.com/golang/go/stargazers) people to start it on github and just get started to learn it :). 
+>
+>[Go 1.9 is released](https://blog.golang.org/go1.9). [**Here**](https://blog.golang.org/index) are all the blogs about go.
+>
+>[Go: Ten years and climbing](https://commandcenter.blogspot.co.uk/2017/09/go-ten-years-and-climbing.html)
+>[Go十年](http://tonybai.com/2017/09/24/go-ten-years-and-climbing/)
+>[BIG: Blockchain In Go](https://jeiwan.cc/tags/blockchain/)
+
+
 VS环境设置：
+
 [Go tools that the Go extension depends on](https://github.com/Microsoft/vscode-go/wiki/Go-tools-that-the-Go-extension-depends-on)
 
 Ctrl + b: 显示/隐藏侧边栏

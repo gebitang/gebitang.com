@@ -11,7 +11,39 @@ topics = [
 toc = true
 +++
 
+### SonarQube 升级
+
+现在的版本为7.6，使用中遇到类似`Objects.nonnull`方法无法支撑的问题， [Not validating Objects.nonNull](https://community.sonarsource.com/t/not-validating-objects-nonnull/12942)，官方建议升级到至少7.9版本。
+
+升级的问题：
+- 依赖Java 11
+- 不再支撑MYSQL
+- 数据库迁移必须确保在相同版本下的SonarQube进行 [https://github.com/SonarSource/mysql-migrator](https://github.com/SonarSource/mysql-migrator)
+
+
+这意味着：先做低版本下的数据库迁移；再做升级动作。
+
+[end-of-life-of-mysql-support](https://community.sonarsource.com/t/end-of-life-of-mysql-support/8667)
+
+配合postgresql设置sonarqube
+[https://dunterov.github.io/sq-psql/](https://dunterov.github.io/sq-psql/)
+
+
+PostgreSQL
+
+下载：
+[https://www.enterprisedb.com/download-postgresql-binaries](https://www.enterprisedb.com/download-postgresql-binaries)
+
+[https://www.enterprisedb.com/downloads/postgres-postgresql-downloads](https://www.enterprisedb.com/downloads/postgres-postgresql-downloads)
+
+简易教程：  
+[https://www.runoob.com/postgresql/postgresql-create-database.html](https://www.runoob.com/postgresql/postgresql-create-database.html)
+
+
+
 ### 单module和多module下的Jacoco插件最小配置以及执行
+
+[[Coverage & Test Data] Importing JaCoCo coverage report in XML format](https://community.sonarsource.com/t/coverage-test-data-importing-jacoco-coverage-report-in-xml-format/12151)
 
 实践检验，亲测有效:) 
 

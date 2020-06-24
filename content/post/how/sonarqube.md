@@ -45,6 +45,8 @@ PostgreSQL
 
 [[Coverage & Test Data] Importing JaCoCo coverage report in XML format](https://community.sonarsource.com/t/coverage-test-data-importing-jacoco-coverage-report-in-xml-format/12151)
 
+[Multi-module Apache Maven example](https://github.com/SonarSource/sonar-scanning-examples/tree/master/sonarqube-scanner-maven/maven-multimodule)
+
 实践检验，亲测有效:) 
 
 插播一下**Phase VS. goal**

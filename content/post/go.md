@@ -41,6 +41,14 @@ toc = true
 要用到`go module`，参考这两篇——[Go Modules 终极入门](https://mp.weixin.qq.com/s/6gJkSyGAFR0v6kow2uVklA)，[干货满满的 Go Modules 和 goproxy.cn](https://mp.weixin.qq.com/s/jpp7vs3Fdg4m15P1SHt1yA)。
 
 
+### go vendor 依赖
+
+低版本下对于vendor目录的查找逻辑：
+
+- 需要将项目建立在`$GOPATH`目录下的`src`目录（前提）
+- 查找当前工程下的vendor目录(vendor tree) （如果项目没有在`$GOPATH`目录下，这一步将会被忽略）[go issue #14566](https://github.com/golang/go/issues/14566)
+- 在`$GOROOT`目录下查找(from $GOROOT)
+- 在`$GOPATH`目录下查找(from $GOPATH)
 
 --- 
 

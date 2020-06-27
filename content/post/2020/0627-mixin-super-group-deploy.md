@@ -46,8 +46,7 @@ toc = true
 
 ## SSL 问题
 
-[Let's Encrypt ](https://letsencrypt.org/getting-started/)介绍，有Shell能力的，
-使用[Certbot](https://certbot.eff.org/ "Certbot")客户端，实现了 [ACME protocol](https://tools.ietf.org/html/rfc8555) Automatic Certificate Management Environment (ACME)。
+[Let's Encrypt ](https://letsencrypt.org/getting-started/)介绍，有Shell能力的，使用[Certbot](https://certbot.eff.org/ "Certbot")客户端，实现了 [ACME protocol](https://tools.ietf.org/html/rfc8555) Automatic Certificate Management Environment (ACME)。
 
 Ubuntu 18.04 + Nignx 环境 [ubuntu bionic nginx](https://certbot.eff.org/lets-encrypt/ubuntubionic-nginx) 
 

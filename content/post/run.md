@@ -350,3 +350,15 @@ toc=true
 
 
 ![](https://s3-img.meituan.net/v1/mss_3d027b52ec5a4d589e68050845611e68/ff/n0/0k/jq/0e_253160.jpg@596w_1l.jpg)
+
+**20-06-28** 周日 10.88 (5.29 + 5.59)
+
+- 破五成功。第一公里很关键，听到5.21的配速之后后面就有信心了
+- “好的开始是成功的一半”在这个场景下有点道理，一开始就要幸福起来
+- 希望周末可以在奥森与"南北新干线"的最后一场虚实重合，赶场又跑了一个挑战赛。蠕动回来
+
+
+{{< fluid_imgs
+  "pure-u-1-2|https://s3-img.meituan.net/v1/mss_3d027b52ec5a4d589e68050845611e68/ff/n0/0k/jt/j4_266910.jpg@596w_1l.jpg|5.29"
+  "pure-u-1-2|https://s3-img.meituan.net/v1/mss_3d027b52ec5a4d589e68050845611e68/ff/n0/0k/jt/ja_266924.jpg@596w_1l.jpg|5.59"
+>}}

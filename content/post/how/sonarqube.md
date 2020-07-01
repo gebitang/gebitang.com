@@ -131,7 +131,9 @@ wrapper.java.command=/usr/lib/jvm/java-11-openjdk-amd64/bin/java
 
 最后在bin目录下启动sonar：`./sonar.sh start` 默认的用户名密码为`admin:admin`
 
-最好将SonarQube放在当前用户(非root)用户有权限的目录下，
+最好将SonarQube放在当前用户(非root)用户有权限的目录下。
+
+另外，可以根据[这个说明](https://docs.sonarqube.org/latest/setup/operate-server/)将Sonarqube设置为service、配置到Nginx后面等操作——暂未实操验证。目前这个环境仅作手动验证。
 
 #### 可能遇到问题
 

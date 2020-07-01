@@ -11,6 +11,145 @@ topics = [
 toc = true
 +++
 
+### 搭建8.3版本SonarQube服务
+
+现有服务使用Java8版本，需要新安装Java 11并保留Java8
+
+#### 安装Open JDK 11
+
+` sudo apt-get install -y openjdk-11-jdk`
+
+安装成功后使用`update-java-alternatives -l`查看已经安装版本——
+
+```
+java-1.11.0-openjdk-amd64      1111       /usr/lib/jvm/java-1.11.0-openjdk-amd64
+java-1.8.0-openjdk-amd64       1081       /usr/lib/jvm/java-1.8.0-openjdk-amd64
+```
+
+本地设置的环境变量会覆盖默认设置，例如 `/etc/profile`和 `~/.zshrc`文件中的`JAVA_HOME`值。直接使用 `update-java-alternatives -s java-1.11.0-openjdk-amd64`时甚至会报错——"update-alternatives error no alternatives for mozilla-javaplugin.so"
+
+使用` sudo update-alternatives --config java`进行手动选择来设置
+
+```
+➜  ~ java -version
+openjdk version "1.8.0_252"
+OpenJDK Runtime Environment (build 1.8.0_252-8u252-b09-1~18.04-b09)
+OpenJDK 64-Bit Server VM (build 25.252-b09, mixed mode)
+➜  ~
+➜  ~
+➜  ~ sudo update-alternatives --config java
+There are 2 choices for the alternative java (providing /usr/bin/java).
+
+  Selection    Path                                            Priority   Status
+------------------------------------------------------------
+  0            /usr/lib/jvm/java-11-openjdk-amd64/bin/java      1111      auto mode
+  1            /usr/lib/jvm/java-11-openjdk-amd64/bin/java      1111      manual mode
+* 2            /usr/lib/jvm/java-8-openjdk-amd64/jre/bin/java   1081      manual mode
+
+Press <enter> to keep the current choice[*], or type selection number: 1
+update-alternatives: using /usr/lib/jvm/java-11-openjdk-amd64/bin/java to provide /usr/bin/java (java) in manual mode
+➜  ~
+➜  ~ java -version
+openjdk version "11.0.7" 2020-04-14
+OpenJDK Runtime Environment (build 11.0.7+10-post-Ubuntu-2ubuntu218.04)
+OpenJDK 64-Bit Server VM (build 11.0.7+10-post-Ubuntu-2ubuntu218.04, mixed mode, sharing)
+➜  ~
+
+```
+
+**注：** 如果不想修改系统默认使用的Java版本，可以在安装SonarQube之后，在` $SONARQUBE-HOME/conf/wrapper.conf `配置选项里指定所用的JVM路径，例如——
+```
+#当前环境下
+wrapper.java.command=/usr/lib/jvm/java-11-openjdk-amd64/bin/java
+```
+
+#### 安装PostgreSQL
+
+```
+# 安装
+$ apt -y install postgresql postgresql-contrib
+#查看版本
+$ /usr/lib/postgresql/10/bin/postgres -V
+postgres (PostgreSQL) 10.12 (Ubuntu 10.12-0ubuntu0.18.04.1)
+
+```
+
+安装完成后，默认会增加一个postgres用户，需要对该用户设置密码，并利用这个用户创建新的数据库用户提供给sonar使用——
+
+```
+#为postgres用户设置密码
+passwd postgres
+# 切换到postgres用户
+su - postgres
+# 新建postgres数据库用户 sonar
+createuser sonar
+# 登录数据库
+psql
+# 执行数据库操作：设置用户密码
+ALTER USER sonar WITH ENCRYPTED password 'sonar';
+# 创建数据库sonar
+CREATE DATABASE sonar WITH ENCODING 'UTF8' OWNER sonar TEMPLATE=template0;
+# 退出数据库连接
+\q
+```
+
+#### 安装8.3.1版本的SonarQube
+
+[官方教程](https://docs.sonarqube.org/latest/setup/install-server/)
+
+下载 [SonarQube downloads](https://www.sonarqube.org/downloads/)，解压后将bin目录添加到环境变量。
+
+注意事项：  
+- 不用解压在以数字开头的目录里
+- 不要使用root用户运行sonar，可以创建一个用户只用来启动sonar服务
+
+```
+postgres:x:125:129:PostgreSQL administrator,,,:/var/lib/postgresql:/bin/bash
+sonarqube:x:1001:1001::/home/sonarqube:/bin/sh
+```
+
+配置`/conf/sonar.properties `：  
+```
+# Example for PostgreSQL
+sonar.jdbc.username=sonarqube
+sonar.jdbc.password=mypassword
+sonar.jdbc.url=jdbc:postgresql://localhost/sonardb
+
+# 配置Elasticsearch 数据地址，默认在  $SONARQUBE-HOME/data 
+sonar.path.data=/var/sonarqube/data
+sonar.path.temp=/var/sonarqube/temp
+
+# 配置web端信息
+sonar.web.host=192.0.0.1
+sonar.web.port=80
+# 起始路径
+sonar.web.context=/sonarqube
+
+# 指定Java路径
+wrapper.java.command=/usr/lib/jvm/java-11-openjdk-amd64/bin/java
+```
+
+最后在bin目录下启动sonar：`./sonar.sh start` 默认的用户名密码为`admin:admin`
+
+最好将SonarQube放在当前用户(非root)用户有权限的目录下，
+
+#### 可能遇到问题
+
+- 启动失败，提示`ERROR: [1] bootstrap checks failed [1]: max virtual memory areas vm.max_map_count [65530] is too low, increase to at least [262144]`
+
+[issue fix：](https://github.com/docker-library/elasticsearch/issues/111#issuecomment-268511769) `sudo sysctl -w vm.max_map_count=262144`
+
+- 提示` Failed to create table schema_migrations`，类似下面的内容
+
+```
+2020.07.01 16:21:53 ERROR web[][o.s.s.p.PlatformImpl] Web server startup failed
+java.lang.IllegalStateException: Failed to create table schema_migrations
+
+```
+
+数据库连接指定了`?currentSchema=my_schema`，删除即可，使用默认的public schema。
+
+
 ### SonarQube 升级
 
 现在的版本为7.6，使用中遇到类似`Objects.nonnull`方法无法支撑的问题， [Not validating Objects.nonNull](https://community.sonarsource.com/t/not-validating-objects-nonnull/12942)，官方建议升级到至少7.9版本。

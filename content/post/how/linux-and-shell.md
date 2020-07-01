@@ -978,7 +978,7 @@ root权限，更多信息，[参考](http://www.cnblogs.com/guangbei/archive/201
 `group_name:passwd:GID:user_list `
 在/etc/group 中的每条记录分四个字段：〔用户组名称〕：〔用户组密码〕：〔GID〕:〔用户列表〕
 
-###useradd 添加用户
+### useradd 添加用户 
 
 [linux下创建用户](http://www.cnblogs.com/ylan2009/articles/2321177.html)
 
@@ -1022,6 +1022,9 @@ root     pts/0        10.35.0.4        Thu Jan  4 15:39 - 15:41  (00:01)
 
 # 新建用户 
 ```
+
+**注**新建用户时需要确保对应的用户目录已经存在。删除用户可以在root用户下执行 `userdel username`
+
 
 ### passwd 修改密码 
 新用户需要制定密码才可以登录。 `passwd gebitang`

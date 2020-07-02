@@ -41,6 +41,24 @@ toc = true
 要用到`go module`，参考这两篇——[Go Modules 终极入门](https://mp.weixin.qq.com/s/6gJkSyGAFR0v6kow2uVklA)，[干货满满的 Go Modules 和 goproxy.cn](https://mp.weixin.qq.com/s/jpp7vs3Fdg4m15P1SHt1yA)。
 
 
+## week 27
+
+### Gocker Docker
+
+[用 Go 从头实现一个迷你 Docker — Gocker](https://mp.weixin.qq.com/s/P9bVFtXeduZ8Lv-0vFaXAg)   
+[原文: Containers the hard way: Gocker: A mini Docker written in Go](https://unixism.net/2020/06/containers-the-hard-way-gocker-a-mini-docker-written-in-go/)  
+[源码：Gocker](https://github.com/shuveb/containers-the-hard-way)  
+
+这个看起来有点帅啊，而且代码不是很多的样子，结合耗子叔的这几篇一起理解更有帮助——
+
+[DOCKER基础技术：LINUX NAMESPACE（上）](https://coolshell.cn/articles/17010.html)  
+[DOCKER基础技术：LINUX NAMESPACE（下）](https://coolshell.cn/articles/17029.html)  
+[DOCKER基础技术：LINUX CGROUP](https://coolshell.cn/articles/17049.html)  
+[DOCKER基础技术：AUFS](https://coolshell.cn/articles/17061.html)  
+[DOCKER基础技术：DEVICEMAPPER](https://coolshell.cn/articles/17200.html)  
+
+
+
 ### go vendor 依赖
 
 低版本下对于vendor目录的查找逻辑：

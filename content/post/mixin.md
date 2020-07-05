@@ -75,8 +75,36 @@ go loopPendingSuccessMessages(ctx)
 
 包引用关系：`main→A→B→C`，那么初始化顺序为`C.init→B.init→A.init→main`，编译时，匿名导入的包依然会编译到可执行文件中。
 
+### 第二天
 
+[Mixin Messenger 机器人接入指南](https://w3c.group/c/1567337919309762)
 
+>APP_BUTTON 的 action 支持 `input:SOMETHING` 。例如当前的 App Button 的 action 是 “input:subscribe” ，当用户点击这个按钮时客户端会自动发送一条 “subscribe” 的消息给机器人，开发者可以任意指定 input 后面的文字。
 
+根据大群的代码以及[API说明](https://developers.mixin.one/api/beta-mixin-message/websocket-messages/)，action也可以为url地址，作为认证首页使用
+
+```
+  {
+    "id": "UUID",
+    "action": "CREATE_MESSAGE",
+    "params": {
+      "conversation_id": "UUID",
+      "category": "APP_BUTTON_GROUP",
+      "status": "SENT",
+      "message_id": "UUID",
+      "data": "Base64 encoded data"
+    }
+  }
+
+# data format
+[{"label": "Mixin Website", "color": "#46B8DA", "action": "https://mixin.one"}, ...]
+```
+
+记得签到[答题机器人](https://github.com/yiplee/blockquiz)有对话式式的交互。下载下来读了下源码，一直没搞清楚的关键点是：“提供给用户选项，用户选择后，可以知道用户的选择是什么？”
+
+- 定位到了如何提供用户选项
+- 后面用户选择，以及用户选择了什么一直没搞清楚
+
+搜索之后，还是长老的教程里说得明白。参见如上
 
 

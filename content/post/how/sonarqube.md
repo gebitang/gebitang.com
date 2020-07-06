@@ -11,6 +11,39 @@ topics = [
 toc = true
 +++
 
+### 使用sonar-maven-plugin插件执行sonar扫描
+
+理论上，只需要配置`sonar-maven-plugin`插件就可以执行sonar扫描过程，需要有SonarQube服务可供访问。
+
+需要如果不从命令行传递参数，可以在pom文件中指定对应的参数，在`properties`字段提供`sonar.host.url`和`sonar.login`字段的值，登录可使用token方式。示例如下——
+
+
+```
+<properties>
+	<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+	<java.version>1.8</java.version>
+
+	<sonar.host.url>http://127.0.0.1:9000</sonar.host.url>
+	<sonar.login>eef68547ea46d48aaefc472170ec87b833db182f</sonar.login>
+
+</properties>
+
+<plugin>
+	<groupId>org.sonarsource.scanner.maven</groupId>
+	<artifactId>sonar-maven-plugin</artifactId>
+	<version>3.7.0.1746</version>
+</plugin>
+```
+
+[SonarScanner for Maven](https://docs.sonarqube.org/latest/analysis/scan/sonarscanner-for-maven/)最新版本已经是8.4版本的SonarQube和3.7.0.1746版本的maven插件。
+
+执行`mvn sonar:sonar`默认使用最新版本的sonar插件，可以使用`mvn org.sonarsource.scanner.maven:sonar-maven-plugin:3.7.0.1746:sonar`指定配置的插件版本
+
+实测，即使没有配置jacoco插件，插件可以自动分析单测的测试结果(mvn test?)，可以看到覆盖率。目前我还清楚依赖的最小环境是怎样的？
+
+
+
 ### 搭建8.3版本SonarQube服务
 
 现有服务使用Java8版本，需要新安装Java 11并保留Java8

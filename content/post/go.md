@@ -57,6 +57,29 @@ toc = true
 [DOCKER基础技术：AUFS](https://coolshell.cn/articles/17061.html)  
 [DOCKER基础技术：DEVICEMAPPER](https://coolshell.cn/articles/17200.html)  
 
+## week 28
+
+[Go Echo: get started](https://mp.weixin.qq.com/s/DuEGITdOYHYOXk-v-u2V5A), [Go Echo: basic features](https://mp.weixin.qq.com/s/vg9OSO4g0KG7iDQ7GXoUSQ)跟着这个例子写一个简单的登录demo。
+
+趁热打铁，第三篇新鲜出炉[Go Echo: custom Binder](https://mp.weixin.qq.com/s/2wARcsszax6GFbZcjJPoig) 
+
+- param tag 对应路径参数；
+- query tag 对应 URL 参数；
+- json tag 对应 application/json 方式参数；
+- form tag 对应 POST 表单数据；
+- xml tag 对应 application/xml 或 text/xml；
+
+```go
+// 表述结构体对应数据绑定时，对应的tag和字段。 如，json类型的name字段；form类型的name字段
+type User struct {
+ Name string `query:"name" form:"name" json:"name" xml:"name"`
+ Sex  string `query:"sex" form:"sex" json:"sex" xml:"sex"`
+}
+```
+
+顺带安装一下很好用的http调试工具[httpie](https://httpie.org/docs#installation)，python写得，依赖python3.6以上版本（本地的环境已经很混乱得啥都有， 使用`py --version`可以调用python3版本），直接使用 `pip install  --upgrade httpie`安装成功了。
+
+没有进行数据绑定时，传递xml类型数据时，被认为是`Content-Type: text/plain;`；指定了绑定规则后可以识别并转换为`Content-Type: application/json; charset=UTF-8`
 
 
 ### go vendor 依赖

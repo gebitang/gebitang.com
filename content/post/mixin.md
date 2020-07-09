@@ -105,6 +105,92 @@ go loopPendingSuccessMessages(ctx)
 - 定位到了如何提供用户选项
 - 后面用户选择，以及用户选择了什么一直没搞清楚
 
-搜索之后，还是长老的教程里说得明白。参见如上
+搜索之后，还是长老的教程里说得明白。参见如上。长老的另外一篇文章[Mixin 公链](https://w3c.group/c/1573118879471104)，传说中的一篇文章搞懂系列——这篇全部理解透彻，算得上Mixin专家了。
 
+## 第二周 
+
+执行数据库事务。这种实现可以理解业务逻辑。
+
+### func closure 
+
+models目录下的`property.go`中包含以下方法——将函数作为参数传递给函数。这里对bool变量b的赋值操作有点秀？（为什么可以这样操作？）
+
+```go
+func ReadProhibitedProperty(ctx context.Context) (bool, error) {
+  var b bool
+  //传递匿名函数
+	err := session.Database(ctx).RunInTransaction(ctx, nil, func(ctx context.Context, tx *sql.Tx) error {
+		var err error
+		b, err = readPropertyAsBool(ctx, tx, ProhibitedMessage)
+		return err
+	})
+	if err != nil {
+		return false, session.TransactionError(ctx, err)
+	}
+	return b, nil
+}
+
+// 实际执行的函数
+func readPropertyAsBool(ctx context.Context, tx *sql.Tx, name string) (bool, error) {
+	query := fmt.Sprintf("SELECT %s FROM properties WHERE name=$1", strings.Join(propertiesColumns, ","))
+	row := tx.QueryRowContext(ctx, query, name)
+	property, err := propertyFromRow(row)
+	if err != nil || property == nil {
+		return false, err
+	}
+	return property.Value == "true", nil
+}
+```
+
+被调用的函数定义在durable目录下的`database.go`文件中——
+
+```go
+func (d *Database) RunInTransaction(ctx context.Context, opts *sql.TxOptions, fn func(ctx context.Context, tx *sql.Tx) error) error {
+	tx, err := d.BeginTx(ctx, opts)
+	if err != nil {
+		return err
+	}
+	if err := fn(ctx, tx); err != nil {
+		if err := tx.Rollback(); err != nil {
+			return err
+		}
+		return err
+	}
+	return tx.Commit()
+}
+```
+
+上面的代码，原理上理解还有点困难，这些资料需要参考一下：
+
+[Can functions be passed as parameters?](https://stackoverflow.com/questions/12655464/can-functions-be-passed-as-parameters)  
+
+[go tour: Function closures](https://tour.golang.org/moretypes/25) 完整的的[go tour](https://tour.golang.org/list) （现在居然对有些国家不提供服务？）
+
+Go functions may be `closures`. A closure is a function value that references variables from outside its body. The function may access and assign to the referenced variables; in this sense the function is "bound" to the variables.
+
+For example, the adder function returns a closure. Each closure is bound to its own `sum` variable.
+
+```go
+package main
+
+import "fmt"
+
+func adder() func(int) int {
+	sum := 0
+	return func(x int) int {
+		sum += x
+		return sum
+	}
+}
+
+func main() {
+	pos, neg := adder(), adder()
+	for i := 0; i < 10; i++ {
+		fmt.Println(
+			pos(i),
+			neg(-2*i),
+		)
+	}
+}
+```
 

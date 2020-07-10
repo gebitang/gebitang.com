@@ -43,8 +43,152 @@ toc = true
 实测，即使没有配置jacoco插件，插件可以自动分析单测的测试结果(mvn test?)，可以看到覆盖率。目前我还清楚依赖的最小环境是怎样的？
 
 
+### 搭建8.3版本SonarQube服务 on CentOS7
 
-### 搭建8.3版本SonarQube服务
+[install-java-on-centos](https://phoenixnap.com/kb/install-java-on-centos)
+
+系统环境：
+
+`Linux version 3.10.0-693.el7.x86_64 (builder@kbuilder.dev.centos.org) (gcc version 4.8.5 20150623 (Red Hat 4.8.5-16) (GCC) ) #1 SMP Tue Aug 22 21:09:27 UTC 2017`
+
+#### 安装Open JDK 11
+
+`sudo yum install java-11-openjdk-devel`
+
+```
+# install Java
+>sudo yum install java-11-openjdk-devel
+Installed:
+  java-11-openjdk-devel.x86_64 1:11.0.7.10-4.el7_8
+
+Dependency Installed:
+  copy-jdk-configs.noarch 0:3.3-10.el7_5      giflib.x86_64 0:4.1.6-9.el7        java-11-openjdk.x86_64 1:11.0.7.10-4.el7_8   java-11-openjdk-headless.x86_64 1:11.0.7.10-4.el7_8
+  javapackages-tools.noarch 0:3.4.1-11.el7    libXtst.x86_64 0:1.2.3-1.el7       lksctp-tools.x86_64 0:1.0.17-2.el7           pcsc-lite-libs.x86_64 0:1.8.8-8.el7
+  python-javapackages.noarch 0:3.4.1-11.el7   python-lxml.x86_64 0:3.2.1-4.el7   ttmkfdir.x86_64 0:3.0.9-42.el7               tzdata-java.noarch 0:2020a-1.el7
+  xorg-x11-fonts-Type1.noarch 0:7.5-9.el7
+
+Complete!
+
+```
+不需要进行默认配置，机器已安装Java8环境。Sonar服务在 `conf/wrapper.conf`中指定Java11的地址即可 `wrapper.java.command=/usr/lib/jvm/java-11-openjdk/bin/java`
+
+
+#### 安装PostgreSQL
+
+[官方手册](https://www.postgresql.org/download/linux/redhat/) 根据环境选择对应的配置，会自动提示对应的脚本——
+
+```
+# Install the repository RPM:
+sudo yum install -y https://download.postgresql.org/pub/repos/yum/reporpms/EL-7-x86_64/pgdg-redhat-repo-latest.noarch.rpm
+
+# Install PostgreSQL:
+sudo yum install -y postgresql10-server
+
+# Optionally initialize the database and enable automatic start:
+/usr/pgsql-10/bin/postgresql-10-setup initdb
+systemctl enable postgresql-10
+systemctl start postgresql-10
+```
+
+执行到 初始化时出现权限问题——(切换到root用户执行初始化以及systemctl命令)
+
+```
+ /usr/pgsql-10/bin/postgresql-10-setup initdb
+Initializing database ... mkdir: cannot create directory ‘/var/lib/pgsql’: Permission denied
+failed, see /var/lib/pgsql/10/initdb.log
+
+#log 显示
+runuser: may not be used by non-root users
+```
+
+剩下的部分就都一样了——
+
+安装完成后，默认会增加一个postgres用户，需要对该用户设置密码，并利用这个用户创建新的数据库用户提供给sonar使用——
+
+```
+#为postgres用户设置密码
+passwd postgres
+# 切换到postgres用户
+su - postgres
+# 新建postgres数据库用户 sonar
+createuser sonar
+# 登录数据库
+psql
+# 执行数据库操作：设置用户密码
+ALTER USER sonar WITH ENCRYPTED password 'xxx';
+# 创建数据库sonar
+CREATE DATABASE sonar WITH ENCODING 'UTF8' OWNER sonar TEMPLATE=template0;
+# 退出数据库连接
+\q
+```
+
+遇到的问题：
+
+- ES端口被占有 -->  修改sonar.conf的`sonar.search.port`的值，更换一个端口
+- bootstrap checks failed。
+
+```
+ERROR: [2] bootstrap checks failed
+[1]: max file descriptors [65500] for elasticsearch process is too low, increase to at least [65535]
+[2]: max virtual memory areas vm.max_map_count [65530] is too low, increase to at least [262144]
+
+```
+
+第二个问题可以直接执行命令`sudo sysctl -w vm.max_map_count=262144`生效。
+
+第一个问题`max file descriptor`的限制稍微麻烦点。 按照网上的介绍，修改了 `/etc/security/limits.conf` 增大用户限制，并不生效。
+
+- [increasing-file-descriptors-and-open-files-limit-in-centos-7](https://www.99ideas.in/blog-post/increasing-file-descriptors-and-open-files-limit-in-centos-7/)
+- 社区也遇到了同样的问题：[Error max file descriptors [4096] for elasticsearch process is too low, increase to at least [65535] installing SonarQube 8.1 on CentOS](https://community.sonarsource.com/t/error-max-file-descriptors-4096-for-elasticsearch-process-is-too-low-increase-to-at-least-65535-installing-sonarqube-8-1-on-centos/20029)
+
+使用`ulimit -a`查看时，`open files `的值依然是65000，执行 `sudo ulimit -n 65536`会提示`sudo ulimit command not found`
+
+[解决这个问题](https://stackoverflow.com/a/17483998/1087122) 执行 `sudo sh -c "ulimit -n 65535 && exec su $LOGNAME"` 
+
+`ulimit` is a shell builtin like `cd`, not a separate program. `sudo` looks for a **binary** to run, but there is no ulimit binary, which is why you get the error message. You need to run it in a shell.
+
+However, while you do need to be root to raise the limit to 65535, you probably don’t want to run your program as root. So after you raise the limit you should switch back to the current user.
+
+To do this, run:
+
+`sudo sh -c "ulimit -n 65535 && exec su $LOGNAME"`
+
+and you will get a **new shell**, without root privileges, but with the raised limit. The exec causes the new shell to replace the process with sudo privileges, so after you exit that shell, you won’t accidentally end up as root again.
+
+---
+
+使用正确的用户名、密码却一直无法登陆。[因为——]((https://confluence.atlassian.com/bitbucketserverkb/fatal-ident-authentication-failed-for-user-unable-to-connect-to-postgresql-779171564.html))
+
+>By default PostgreSQL uses IDENT-based authentication and this will never allow you to login via -U and -W options.
+
+命令行链接psql之后，执行`show hba_file ;`显示权限控制文件的位置。
+
+- 按照下面的方式对文件做对应的修改
+- 重启数据库`sudo systemctl restart postgresql-10.service`
+
+```
+# Database administrative login by Unix domain socket
+local   all             postgres                                peer
+
+# TYPE  DATABASE        USER            ADDRESS                 METHOD
+
+# "local" is for Unix domain socket connections only
+local   all             all                                     peer
+# IPv4 local connections:
+host    all             all             127.0.0.1/32            md5
+# IPv6 local connections:
+host    all             all             ::1/128                 md5
+# Allow replication connections from localhost, by a user with the
+# replication privilege.
+local   replication     all                                     peer
+host    replication     all             127.0.0.1/32            md5
+host    replication     all             ::1/128                 md5
+```
+
+
+
+
+### 搭建8.3版本SonarQube服务 on Ubuntu
 
 现有服务使用Java8版本，需要新安装Java 11并保留Java8
 

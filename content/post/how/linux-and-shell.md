@@ -1001,6 +1001,17 @@ root权限，更多信息，[参考](http://www.cnblogs.com/guangbei/archive/201
 ```
 **可以使用`usermod`修改用户的信息，如： `usermod –d/home/user2 –s/bin/bash user2`** 使用`-s /sbin/nologin`表示不用于登录
 
+
+[用户组操作](https://www.howtogeek.com/50787/add-a-user-to-a-group-or-second-group-on-linux/)，to add the user geek to the group sudo , use the following command:
+
+```
+usermod -a -G sudo geek
+
+#查看用户所属的组
+groups
+```
+
+
 ```
 #查看当前登录用户，需要root权限 w
 # 第一列是用户名,
@@ -1114,7 +1125,12 @@ root@testin-DH:~#
 ```
 
 ### 查看CentOS版本
-[centos7与centos6区别](https://www.cnblogs.com/bethal/p/5945026.html)  内核版本  
+
+```
+cat /proc/version
+Linux version 3.10.0-693.el7.x86_64 (builder@kbuilder.dev.centos.org) (gcc version 4.8.5 20150623 (Red Hat 4.8.5-16) (GCC) ) #1 SMP Tue Aug 22 21:09:27 UTC 2017
+```
+[centos7与centos8区别](https://www.cnblogs.com/zhoulujun/p/12095574.html)  内核版本  
 
 - [CentOS6] 2.6.x-x  
 - [CentOS7] 3.10.x-x

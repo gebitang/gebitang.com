@@ -85,7 +85,7 @@ PS: 也可以将导入的jar包直接导入GSB的lib目录，通常为 `%HOME_US
 
 ### "find usages" not working
 
-方法、变量的调用不再有效，所有方法认为“never used”。 原因：异常关闭导致的工程的index错乱
+import异常"cannot resolve symbol"；方法、变量的调用不再有效；所有方法认为“never used”。 原因：异常关闭导致的工程的index错乱
 
 `File --> Invalidate Caches and restart` 重启后会重新建立index，比较耗时。
 

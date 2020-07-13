@@ -19,6 +19,24 @@ toc = true
 
 <!-- more -->
 
+## 禁止升级
+
+[禁止Win 10自动更新](https://mp.weixin.qq.com/s/qoZu2Jo3gZ7ppjZayqDO7Q)   
+
+[Disable Windows 10 Update in Every Way](https://www.easeus.com/todo-backup-resource/how-to-stop-windows-10-from-automatically-update.html#part4) 
+
+[stop automatic updates on Windows 10](https://www.windowscentral.com/how-stop-updates-installing-automatically-windows-10)
+
+- HKEY_LOCAL_MACHINE/SOFTWARE/Policies/Microsoft/Windows/WindowsUpdate "WindowsUpdate"可以手动创建
+- 在WindowsUpdate下新建Key `AU`
+- 新建一个` DWORD (32-bit)`类型的值，名称为`AUOptions`，选择16进制值，设置为`2`
+
+```
+2 — Notify for download and auto install.
+3 — Auto download and notify for install.
+4 — Auto download and schedule the install.
+5 — Allow local admin to choose settings.
+```
 
 ## 多桌面+分屏
 

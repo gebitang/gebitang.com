@@ -11,13 +11,120 @@ topics = [
 toc = true
 +++
 
+[Maven](https://maven.apache.org/what-is-maven.html)最初是为了更好地为[Jakarta Turbine项目](http://jakarta.apache.org/)(已于2011年12月11日退役)打包而开发的工具。
+
+>Maven, a Yiddish word meaning *accumulator of knowledge*, began as an attempt to simplify the build processes in the Jakarta Turbine project. There were several projects, each with their own Ant build files, that were all slightly different. JARs were checked into CVS. We wanted a standard way to build the projects, a clear definition of what the project consisted of, an easy way to publish project information, and a way to share JARs across several projects.
+
+>"Maven" is really just a core framework for a collection of Maven Plugins.
+
+[Maven in five minutes](https://maven.apache.org/guides/getting-started/maven-in-five-minutes.html)
 
 
+<!--more-->
+
+## Maven Plugin Dev
+
+[官方文档](https://maven.apache.org/guides/plugin/guide-java-plugin-development.html)，[baeldung demo](https://www.baeldung.com/maven-plugin)
+
+官方最简单的一个Plugin: [Maven clean plugin](https://github.com/apache/maven-clean-plugin)， 核心代码[CleanMojo](https://github.com/apache/maven-clean-plugin/blob/master/src/main/java/org/apache/maven/plugins/clean/CleanMojo.java)——用来“删除各种文件夹”。
+
+- 护身符**Mojo**? A mojo is a **M**aven **O**ld **J**ava **O**bject. Each mojo is an executable **goal** in Maven, and a plugin is a distribution of one or more related mojos.
+- 借用POJO(Plain Old Java Object)的概念，用Maven替代了Plain。
+- [POJO](https://www.martinfowler.com/bliki/POJO.html)是由ThoughsWork的[Martin Fowler](https://www.martinfowler.com/)，Rebecca Parsons和Josh MacKenzie为2000年9月的一场演讲“杜撰”的新词，用来取代[Entity Bean](https://en.wikipedia.org/wiki/Entity_Bean)的概念。然后就流行起来了。——有个好名字很重要啊
 
 
+demo代码如下就算一个完整的plugin了。
 
+```java
+package sample.plugin;
+ 
+import org.apache.maven.plugin.AbstractMojo;
+import org.apache.maven.plugin.MojoExecutionException;
+import org.apache.maven.plugins.annotations.Mojo;
+ 
+/**
+ * Says "Hi" to the user.
+ * 
+ */
+@Mojo( name = "sayhi")
+public class GreetingMojo extends AbstractMojo {
 
-[maven in five minutes](https://maven.apache.org/guides/getting-started/maven-in-five-minutes.html)
+    /**
+     * The greeting to display.
+     * 传递参数
+     */
+    @Parameter( property = "sayhi.greeting", defaultValue = "Hello World!" )
+    private String greeting;
+
+    public void execute() throws MojoExecutionException {
+        getLog().info(greeting);
+    }
+}
+
+```
+
+注意事项： 
+
+- 需要添加必要的依赖
+
+```xml
+<dependencies>
+    <!-- core framwork api -->
+    <dependency>
+        <groupId>org.apache.maven</groupId>
+        <artifactId>maven-plugin-api</artifactId>
+        <version>3.6.3</version>
+    </dependency>
+    <!-- 注解 -->
+    <dependency>
+        <groupId>org.apache.maven.plugin-tools</groupId>
+        <artifactId>maven-plugin-annotations</artifactId>
+        <version>3.6.0</version>
+        <scope>provided</scope>
+    </dependency>
+    <!-- 获取maven项目本身的信息 -->
+    <dependency>
+        <groupId>org.apache.maven</groupId>
+        <artifactId>maven-project</artifactId>
+        <version>2.2.1</version>
+    </dependency>
+</dependencies>
+```
+
+- 执行plugin时的3种默认规则
+
+一、可以使用完整的`groupID:projectID:goalName`的方式，默认使用最新版本。指定版本使用[`mvn org.sonarsource.scanner.maven:sonar-maven-plugin:3.8-SNAPSHOT:sonar`](https://github.com/SonarSource/sonar-scanner-maven/blob/master/pom.xml#L11)指定配置的插件版本。  
+
+二、如果符合规范的命名，例如 `${prefix}-maven-plugin`，则可以使用默认的 `mvn prefix:goalName`方式执行。可以在插件中自定义`mvn somePrefix:goalName`，类似——
+
+```xml
+<project>
+  ...
+  <build>
+    ...
+    <plugins>
+      ...
+      <plugin>
+        <artifactId>maven-plugin-plugin</artifactId>
+        <version>2.3</version>
+        <configuration>
+          ...
+          <goalPrefix>somePrefix</goalPrefix>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+</project>
+```
+
+三、使用配置文件`settings.xml`进行[预定义插件](https://maven.apache.org/guides/introduction/introduction-to-plugin-prefix-mapping.html)——
+
+```xml
+<pluginGroups>
+  <pluginGroup>org.codehaus.modello</pluginGroup>
+</pluginGroups>
+```
+
 
 ## 单测中使用的几个插件
 

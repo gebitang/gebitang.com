@@ -1054,6 +1054,17 @@ root     pts/0        10.35.0.4        Thu Jan  4 15:39 - 15:41  (00:01)
 - 编辑，增加新用户到该文件中 `geb     ALL=(ALL:ALL) ALL`
 - 撤销写权限 `chmod u-w /etc/sudoers`
 
+### 权限755 644说明
+
+[权限755 644](https://www.quora.com/Why-is-the-default-file-and-directory-permission-644-and-755-in-Linux)
+
+使用3x3方式表示权限；第一组3位表示当前用户；第二组3位表示用户所在的组；第三组3位表示其他人；   
+
+每组的3位使用二进制表示对应**R**(read)，**W**(write)，**X**(execute)权限
+
+- **644** : **110 (rw-)** for user; **100 (r--)** for group while **100 (r--)** for others
+- **755** : **111 (rwx)** for user; **101 (r-x)** for group while **101 (r-x)** for others
+
 ### 命令行快捷键
 
 ```

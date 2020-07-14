@@ -40,7 +40,80 @@ toc = true
 
 执行`mvn sonar:sonar`默认使用最新版本的sonar插件，可以使用`mvn org.sonarsource.scanner.maven:sonar-maven-plugin:3.7.0.1746:sonar`指定配置的插件版本
 
-实测，即使没有配置jacoco插件，插件可以自动分析单测的测试结果(mvn test?)，可以看到覆盖率。目前我还清楚依赖的最小环境是怎样的？
+~~实测，即使没有配置jacoco插件，插件可以自动分析单测的测试结果(mvn test?)~~，可以看到覆盖率。目前我还清楚依赖的最小环境是怎样的？
+
+不包含Jacoco插件的场景——
+
+- 1. `mvn clean`清理环境
+- 2.  执行`mvn test` 确保完成编译并执行了测试`maven-surefire-plugin:2.22.2:test` 
+
+```
+#target 目录下的文件目录
+classes
+generated-sources
+generated-test-sources
+maven-status
+surefire-reports
+test-classes
+```
+
+- 3. 执行 `sonar:sonar`结果将不包含覆盖率信息
+
+
+包含Jacoco插件的场景(Jacoco插件于`test`阶段绑定)——
+
+```xml
+<plugin>
+	<groupId>org.jacoco</groupId>
+	<artifactId>jacoco-maven-plugin</artifactId>
+	<version>0.8.5</version>
+	<executions>
+		<execution>
+			<goals>
+				<goal>prepare-agent</goal>
+			</goals>
+		</execution>
+		<!-- attached to Maven test phase -->
+		<execution>
+			<id>report</id>
+			<phase>test</phase>
+			<goals>
+				<goal>report</goal>
+			</goals>
+		</execution>
+	</executions>
+</plugin>
+```
+
+执行上述相同的三个步骤，则包含了覆盖率。
+
+第二步结束时可以看到target文件夹下多出`site` 文件夹和 `jacoco.exec`文件。
+
+```
+#target 目录下的文件目录
+classes
+generated-sources
+generated-test-sources
+maven-status
+site
+surefire-reports
+test-classes
+jacoco.exec
+```
+
+**结论：**
+
+SonarQube上展示的覆盖率依赖Jacoco插件的配合。
+
+
+附录：
+
+- 使用 `mvn help:effective-pom`可以看到当前项目完整的pom相关配置
+- 使用`mvn dependency:treee`可以看到当前项目的依赖关系
+- `pluginManagement`用来配置管理所有的plugin信息，用来提供给其他集成当前项目的项目使用，当前项目使用的plugin依然需要配置到`plugins`节点中。[官方解释Plugin_Management](http://maven.apache.org/pom.html#Plugin_Management)，对应的[提问](https://stackoverflow.com/questions/26736876/difference-between-plugins-and-pluginmanagement-tag-in-maven-pom-xml)
+- `dependencyManagement`于此类似。[dependency-management](http://maven.apache.org/pom.html#dependency-management)
+
+
 
 
 ### 搭建8.3版本SonarQube服务 on CentOS7

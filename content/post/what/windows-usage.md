@@ -485,3 +485,43 @@ Windows Registry Editor Version 5.00
 
 通常用的三个插件：compare、JSON Viewer、XML tools。通过PM安装、重启即可。
 
+## 经纬度查询告别百度
+
+基本告别百度了。搜索“经纬度查询”，第一页没看到可用的信息。
+
+搜索 `search map by`， 自动提示选择有 ` latitude and longitude` 然后第一个答案就是官方的支持内容。
+
+更简单的是直接在map的搜索框里输入经纬度值即可。支持三种数值格式。
+
+手机自带的指南针应用提供的正好是第一种格式，类似`39°57'26"N 116°30'19"E`
+
+---
+
+[18539](https://support.google.com/maps/answer/18539)
+
+### Enter coordinates to find a place
+
+1.  On your computer, open [Google Maps](https://www.google.com/maps).
+2.  In the search box at the top, type your coordinates. Here are examples of formats that work:
+    *   Degrees, minutes, and seconds (DMS): 41°24'12.2"N 2°10'26.5"E
+    *   Degrees and decimal minutes (DMM): 41 24.2028, 2 10.4418
+    *   Decimal degrees (DD): 41.40338, 2.17403
+3.  You'll see a pin show up at your coordinates.
+
+### Get the coordinates of a place
+
+1.  On your computer, open [Google Maps](https://www.google.com/maps). If you're using Maps in [Lite mode](https://support.google.com/maps/answer/3031966), you’ll see a lightning bolt at the bottom and you won't be able to get the coordinates of a place.
+2.  Right-click the place or area on the map.
+3.  Select **What's here?**
+4.  At the bottom, you’ll see a card with the coordinates.
+
+### Tips for formatting your coordinates
+
+Here are some tips for formatting your coordinates so they work on Google Maps:
+
+*   Use the degree symbol instead of "d".
+*   Use periods as decimals, not commas. Incorrect: `41,40338, 2,17403`. Correct: `41.40338, 2.17403`. 
+*   List your latitude coordinates before longitude coordinates.
+*   Check that the first number in your latitude coordinate is between -90 and 90.
+*   Check that the first number in your longitude coordinate is between -180 and 180.
+

@@ -182,7 +182,7 @@ public class GreetingMojo extends AbstractMojo {
 [Failed to execute goal org.apache.maven.plugins:maven-surefire-plugin:2.10:test](https://stackoverflow.com/questions/13170860/failed-to-execute-goal-org-apache-maven-pluginsmaven-surefire-plugin2-10test)
 
 
-Locate the dependencies you're missing with `mvn dependency::tree`
+Locate the dependencies you're missing with `mvn dependency:tree`
 
 ## maven clean package
 

@@ -339,6 +339,12 @@ dependency注意空格格式
 
 ## jacoco maven plugin
 
+[jacoco Development Environment](https://www.eclemma.org/jacoco/trunk/doc/environment.html)   
+
+- Continuous Integration 持续集成， 如Travis CI [Travis CI](https://travis-ci.org/github/jacoco/jacoco/builds), [AppVeyor](https://ci.appveyor.com/project/JaCoCo/jacoco)
+- Continuous Inspection 持续检查，如SonarQube   [jacoco on SonarQube](https://sonarcloud.io/dashboard?id=org.jacoco:org.jacoco.build)
+
+
 >surefire用来执行单测测试；
 jacoco用来记录覆盖结果；
 sonar分析结果并展示。

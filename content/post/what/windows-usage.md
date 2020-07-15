@@ -19,6 +19,85 @@ toc = true
 
 <!-- more -->
 
+## Eclipse报错SWTError: No more handles
+
+调研Jacoco，尝试用Eclipse打开源码——平时使用IDEA——Eclipse启动失败，log中提示`Caused by: org.eclipse.swt.SWTError: No more handles` 
+
+```
+!ENTRY org.eclipse.osgi 4 0 2020-07-15 16:12:47.033
+!MESSAGE Application error
+!STACK 1
+org.eclipse.swt.SWTException: Failed to execute runnable (org.eclipse.swt.SWTError: No more handles)
+	at org.eclipse.swt.SWT.error(SWT.java:4723)
+	at org.eclipse.swt.SWT.error(SWT.java:4638)
+	at org.eclipse.swt.widgets.Synchronizer.runAsyncMessages(Synchronizer.java:188)
+	at org.eclipse.swt.widgets.Display.runAsyncMessages(Display.java:3897)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3527)
+	at org.eclipse.swt.widgets.Display.release(Display.java:3579)
+	at org.eclipse.swt.graphics.Device.dispose(Device.java:276)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:166)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:203)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:137)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:107)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:401)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:255)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:657)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:594)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1447)
+Caused by: org.eclipse.swt.SWTError: No more handles
+	at org.eclipse.swt.SWT.error(SWT.java:4749)
+	at org.eclipse.swt.SWT.error(SWT.java:4638)
+	at org.eclipse.swt.SWT.error(SWT.java:4609)
+	at org.eclipse.swt.widgets.Widget.error(Widget.java:432)
+	at org.eclipse.swt.widgets.Control.internal_new_GC(Control.java:1771)
+	at org.eclipse.swt.graphics.GC.<init>(GC.java:171)
+	at org.eclipse.swt.graphics.GC.<init>(GC.java:135)
+	at org.eclipse.swt.custom.CTabFolder.updateTabHeight(CTabFolder.java:3838)
+	at org.eclipse.swt.custom.CTabFolder.runUpdate(CTabFolder.java:3871)
+	at org.eclipse.swt.custom.CTabFolder.lambda$3(CTabFolder.java:3861)
+	at org.eclipse.swt.widgets.RunnableLock.run(RunnableLock.java:40)
+	at org.eclipse.swt.widgets.Synchronizer.runAsyncMessages(Synchronizer.java:185)
+	... 17 more
+
+```
+
+[You may be creating resources (such as Font, Image or GC objects) that you aren't correctly disposing.](https://stackoverflow.com/a/2020777/1087122)——这个解释看起来靠谱。
+
+
+[官方这个issue的comment](https://bugs.eclipse.org/bugs/show_bug.cgi?id=292464#c13)有建议修改注册表：
+
+>I was able to workaround it temporarily until they fix this blocker with setting registry entry `HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Windows\GDIProcessHandleQuota`  to some huge number like 50000 on Windows10
+
+准备按照这个提示操作。本机默认值为  2710
+
+![](https://upload-images.jianshu.io/upload_images/3296949-0d00a44b0f15a851.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+[What is the cause of the "org.eclipse.swt.SWTError: No more handles" occurring in Process Designer](https://www.ibm.com/mysupport/s/question/0D50z000062kpwiCAA/what-is-the-cause-of-the-orgeclipseswtswterror-no-more-handles-occurring-in-process-designer?language=en_US)
+
+这里提到出现问题的原因可能是GDI对象过多。[https://blogs.solidworks.com/tech/2017/05/warning-solidworks-resources-running-low.html](https://blogs.solidworks.com/tech/2017/05/warning-solidworks-resources-running-low.html)
+
+
+>Windows 8 and later, the system wide GDI Objects are limited to max out at 65,536; and the maximum  single process is 16,384.  
+>最多的GDI对象为65536个（2的16次方），单个进程最多16384个  
+>The default limit set by Windows for any single process is 10,000 GDI objects. If your application GDI Objects exceeds this amount, that process is likely to crash.  
+>默认的单进程GDI对象为10000个，如果超出，则可能崩溃  
+
+打开任务管理器，在`详细信息`栏的表头右键进行`选择列`，在弹出窗口里可以看到`GDI对象`、`用户对象`的列名。
+
+- Open Task Manager (right click on start bar > Task Manager OR through CTRL+ALT+DEL)
+- Click on ‘Details’ Tab
+- Right click on one of the columns and click on ‘Select Columns’
+- Tick the GDI objects
+
+![](https://upload-images.jianshu.io/upload_images/3296949-07d978121f154106.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+注意Eclipse中打开的项目的报错信息，即使处理错误信息。我只是清理了错误日志，重新打开Eclipse又OK了。另外，重启大法也好使。
+
+
 ## 禁止升级
 
 [禁止Win 10自动更新](https://mp.weixin.qq.com/s/qoZu2Jo3gZ7ppjZayqDO7Q)   

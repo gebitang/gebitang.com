@@ -11,6 +11,76 @@ topics = [
 toc = true
 +++
 
+### SonarQube的测试覆盖和测试执行
+
+[sonarqube coverage/](https://docs.sonarqube.org/latest/analysis/coverage/)
+
+8.4版本包括两个概念：
+
+- Test Coverage 测试覆盖 ——测试结果有多少覆盖率
+- Test Execution 测试执行 ——具体包含多少个测试用例
+
+低版本上，如7.6似乎没有“测试执行”的说法，从7.7版本有对应的文档：[https://docs.sonarqube.org/`7.7`/analysis/coverage/](https://docs.sonarqube.org/7.7/analysis/coverage/)后续的7.8, 7.9直到最新的8.4版本。
+
+`mvn test`默认绑定的goal是`surefire:test`，用来执行单元测试——run tests using a suitable unit testing framework. These tests should not require the code be packaged or deployed.
+
+所以默认的 `mvn test`只会生成`Test Execution`的结果；
+
+添加了jacoco插件并与test阶段绑定后——
+`mvn test`会同时产生（surefire插件生成）单测结果，和（jacoco插件生成）单测覆盖率结果。
+
+此时再执行`sonar:sonar`后，单测结果就展示为 “Test Execution 测试执行”；单测覆盖率展示为“Test Coverage 测试覆盖”
+
+
+
+完成的生命周期可以[参考官方说明lifecycle reference](https://maven.apache.org/guides/introduction/introduction-to-the-lifecycle.html#lifecycle-reference)
+
+最常用的打包`jar`阶段对应的plugin和goal如下表——
+
+|Phase|plugin:goal|
+|---------|---------|
+|process-resources|resources:resources|
+|compile|compiler:compile|
+|process-test-resources|resources:testResources|
+|test-compile|compiler:testCompile|
+|test|surefire:test|
+|package|jar:jar|
+|install|install:install|
+|deploy|deploy:deploy|
+
+对应的具体plugin信息为[具体plugin信息](https://maven.apache.org/ref/3.6.3/maven-core/default-bindings.html) ——
+```
+<phases>
+  <process-resources>
+    org.apache.maven.plugins:maven-resources-plugin:2.6:resources
+  </process-resources>
+  <compile>
+    org.apache.maven.plugins:maven-compiler-plugin:3.1:compile
+  </compile>
+  <process-test-resources>
+    org.apache.maven.plugins:maven-resources-plugin:2.6:testResources
+  </process-test-resources>
+  <test-compile>
+    org.apache.maven.plugins:maven-compiler-plugin:3.1:testCompile
+  </test-compile>
+  <test>
+    org.apache.maven.plugins:maven-surefire-plugin:2.12.4:test
+  </test>
+  <package>
+    org.apache.maven.plugins:maven-jar-plugin:2.4:jar
+  </package>
+  <install>
+    org.apache.maven.plugins:maven-install-plugin:2.4:install
+  </install>
+  <deploy>
+    org.apache.maven.plugins:maven-deploy-plugin:2.7:deploy
+  </deploy>
+</phases>
+```
+
+从上述信息也可以看出来plugin的命名规范和使用中的快捷方式。
+
+
 ### 使用sonar-maven-plugin插件执行sonar扫描
 
 理论上，只需要配置`sonar-maven-plugin`插件就可以执行sonar扫描过程，需要有SonarQube服务可供访问。

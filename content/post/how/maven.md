@@ -336,3 +336,82 @@ mvn -U clean install
 ## pom文件报错
 
 dependency注意空格格式
+
+## jacoco maven plugin
+
+>surefire用来执行单测测试；
+jacoco用来记录覆盖结果；
+sonar分析结果并展示。
+>
+>是否不依赖surefire，有jacoco直接执行——这个需要再研究一下
+
+判断正确。`mvn test`默认就是使用`surefire:test`插件任务执行的 [Setting Up Your Project to Use the Build Lifecycle](https://maven.apache.org/guides/introduction/introduction-to-the-lifecycle.html#Setting_Up_Your_Project_to_Use_the_Build_Lifecycle)
+
+[实际上——](https://maven.apache.org/plugins/index.html)
+
+>Maven is - at its heart - a plugin execution framework; all work is done by plugins.   
+>Maven从根本上讲，就是插件执行框架，所有的任务都是由插件完成的。
+
+---
+
+大概过了一遍jacoco的文档内容。
+
+jacoco最新版本snapshot为0.8.6版本。从[github jacoco](https://github.com/jacoco/jacoco)的release里下载的是0.8.5版本。可以自己进行源码编译。
+
+关注jacoco的maven插件jacoco-maven-plugin。从Eclipse打开的时候遇到 [SWTError: No more handles](../../what/windows-usage/#eclipse%E6%8A%A5%E9%94%99swterror-no-more-handles)问题，使用IDEA打开。
+
+[文档说](https://www.eclemma.org/jacoco/trunk/doc/build.html)编译大概3分钟就能完成。
+
+>Total build time is typically around 3 minutes, however first build might take more time, because Maven should download plugins and dependencies. The download ZIP will be created at the following location:
+>
+>  `./jacoco/target/jacoco-x.y.z.qualifier.zip`
+
+先编译试试：
+
+- 第一次因为idea给项目`jacoco-maven-plugin`自动生成的.idea目录下的xml文件被自动检查不符合规范，失败
+
+![](https://upload-images.jianshu.io/upload_images/3296949-1e09f9ef9d73a5ce.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+- 删除无用的文件夹内容，恢复原状重新编译一次。`jacoco-maven-plugin.test`编译过程中报错
+
+![](https://upload-images.jianshu.io/upload_images/3296949-26f8a6ca1613d4bc.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+- 好像就动过这两个模块的代码，重新`mvn clean`之后，再次编译，成功
+
+![](https://upload-images.jianshu.io/upload_images/3296949-695b7ffd00129735.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+--- 
+
+- 在线站点所有内容     0.8.6.202007100135
+- 下载包解压后的内容  0.8.5.201910111838
+- 编译成功后的zip包解压内容 0.8.6.202007150909
+
+以上三者内容一脉相承，甚至自己编译生成的是最新的信息。这太酷了。
+
+如此大型开源项目，你只需要执行`mvn clean insall`就获取到了最新信息。
+
+折腾一般开源项目，自己编译——尤其是在windows环境下——时，总是会遇到各种问题。
+
+然后google了一下`Mountainminds GmbH & Co. KG and Contributors`全部定位到jacoco站点，查询`Mountainminds GmbH `
+
+>Software company in Munich, Germany 
+
+![](https://upload-images.jianshu.io/upload_images/3296949-e133fcb696c16c31.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+德国公司出品，果然严谨。
+
+[What is a GmbH & Co. KG](https://www.firma.de/en/company-formation/what-is-a-gmbh-co-kg-limited-liability-company-limited-partnership/)
+
+> GmbH & Co. KG 
+>In German, that’s Gesellschaft mit beschränkter Haftung & Compagnie Kommanditgesellschaft, or 
+>In English, ‘limited liability company & limited partnership’.
+
+看到飞行路线，想起来之前看[byvoid](https://byvoid.com)站点时提到有个网站可以规划路线——以前尝试过，相当强大。
+
+忘记了关键词，使用站内搜索 `travel site:byvoid.com`也看不出来有效信息。
+
+google了一下`tool site to make travel`，首页向下翻就可以看到`rome2rio`——这个关键词有印象。
+
+![](https://upload-images.jianshu.io/upload_images/3296949-1fbbd91d105ff90e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+再搜索 `rome2rio site:byvoid.com`就可以找到想要的内容了。

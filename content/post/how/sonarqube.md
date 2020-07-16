@@ -11,6 +11,61 @@ topics = [
 toc = true
 +++
 
+### SonarQube Build Breaker
+
+有需求希望在Sonar的静态代码扫描之后，直接判断是否终止打包流程。
+
+按照现在的架构——
+
+>好像有点麻烦。 因为 sonar分析完毕后将结果传递给sonarqube，SonarQube有个分析器分析结果（CE版本一次只能处理一个）。
+>得到结果是异步的。
+
+还是需要调研一下：
+
+在5.2版本之前的SonarQube上是有这个功能的，作为Jenkins的插件使用，但后来SonarQube自身架构调整，分析器本身是不知道最终结果的，Server端聚合数据。
+
+实际上，官方已经建议[不应该打破打包流程](https://blog.sonarsource.com/why-you-shouldnt-use-build-breaker/)，后来的实现(6.2版本开始)是[提供jenkins的webhook](https://blog.sonarsource.com/breaking-the-sonarqube-analysis-with-jenkins-pipelines/)。目前最新版本也是提供webhook方式。
+
+
+但直接在pipeline中实现break的需求依然存在，于是[Breaking your build on SonarQube quality gate failure](http://qaware.blogspot.com/2020/02/breaking-your-build-on-sonarqube.html)出现。github对应代码[sonarqube-build-breaker](https://github.com/qaware/sonarqube-build-breaker)
+
+插件实现逻辑——轮询SonarQube，查找结果，根据返回的结果判断是否应该终止pipeline（报错）。同时依赖SonarQube上的Quality Gate的设置。
+
+```java
+public void breakBuildIfNeeded(ProjectKey projectKey, BranchMode branchMode) throws IOException, SonarQubeException, InterruptedException, BreakBuildException {
+        LOGGER.info("Fetching analysis tasks ...");
+        AnalysisTasks analysisTasks = sonarQubeConnector.fetchAnalysisTasks(projectKey, branchMode);
+        while (!analysisTasks.getQueue().isEmpty()) {
+            LOGGER.info("Analysis task still running, checking again in {} second(s) ...", waitTime.toMillis() / 1000);
+            Thread.sleep(waitTime.toMillis());
+            analysisTasks = sonarQubeConnector.fetchAnalysisTasks(projectKey, branchMode);
+        }
+
+        if (analysisTasks.getLastFinished() == null) {
+            LOGGER.error("Analysis queue is empty and there is no finished task. Make sure that you run SonarQube analysis before the build breaker!");
+            throw new BreakBuildException("Analysis queue is empty and there is no finished task. Make sure that you run SonarQube analysis before the build breaker!");
+        }
+
+        if (analysisTasks.getLastFinished().getStatus() != AnalysisTasks.Status.SUCCESS) {
+            LOGGER.error("Last analysis task failed, breaking build!");
+            throw new BreakBuildException("Last analysis task failed, breaking build!");
+        }
+
+        LOGGER.info("Last analysis was successful, fetching quality gate status ...");
+        QualityGateStatus qualityGateStatus = sonarQubeConnector.fetchQualityGateStatus(projectKey, branchMode);
+
+        if (qualityGateStatus == QualityGateStatus.ERROR) {
+            LOGGER.error("Quality gate failed, breaking build!");
+            throw new BreakBuildException("Quality gate failed, breaking build!");
+        }
+
+        LOGGER.info("Great success, everything looks alright!");
+    }
+```
+
+这看起来我们目前的做法更优雅乜。使用webhook，项目的质量阀采用自定义规则。
+
+
 ### SonarQube的测试覆盖和测试执行
 
 [sonarqube coverage/](https://docs.sonarqube.org/latest/analysis/coverage/)

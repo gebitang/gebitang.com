@@ -1045,6 +1045,14 @@ This is a footnote.[^2]
 ## Git命令使用
 可配合GUI工具和命令行工具参考。
 
+### git http clone方式报错：
+
+[error: RPC failed; curl transfer closed with outstanding read data remaining](https://stackoverflow.com/questions/38618885/error-rpc-failed-curl-transfer-closed-with-outstanding-read-data-remaining)
+
+- `$ git clone http://github.com/large-repository --depth 1`
+- `cd large-repository`
+- `git fetch --unshallow`
+
 ### change remote url
 
 ```

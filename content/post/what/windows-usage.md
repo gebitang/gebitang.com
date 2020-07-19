@@ -19,6 +19,23 @@ toc = true
 
 <!-- more -->
 
+## Mac PC远程访问Window PC
+
+- 同一个局域网
+- Mac上下载安装[Microsoft Remote Desktop](https://apps.apple.com/us/app/microsoft-remote-desktop/id1295203466) 需要非大陆账号的App Store才可以。参考[Apple美区账号注册之路](https://www.jianshu.com/p/7d00f6cef828)
+- Window PC上开启允许远程访问权限[Remote Desktop - Allow access to your PC](https://docs.microsoft.com/en-us/windows-server/remote/remote-desktop-services/clients/remote-desktop-allow-access) 开始菜单--设置--系统--远程桌面
+
+## Bose耳机蓝牙连接Mac电脑
+
+[bose qc35 如何连接](https://www.zhihu.com/question/49721590/answer/154711284)
+
+- 1. 手机上下载APP"Bose Connect"  
+- 2. 打开耳机，用APP连接手机和耳机  
+- 3. 打开APP，点里面左下角那个蓝牙符号，然后选择"连接新设备"  
+- 4. 在Mac的偏好设置的蓝牙里，就可以找到耳机了，连接即可用
+
+
+
 ## Eclipse报错SWTError: No more handles
 
 调研Jacoco，尝试用Eclipse打开源码——平时使用IDEA——Eclipse启动失败，log中提示`Caused by: org.eclipse.swt.SWTError: No more handles` 

@@ -21,10 +21,15 @@ toc = true
 
 ## youtube-dl 
 
+[github ytdl-org/youtube-dl](https://github.com/ytdl-org/youtube-dl/blob/master/README.md#readme), [usage ](https://askubuntu.com/a/486298) 
+
 - 安装` pip install --upgrade youtube-dl`
 - 下载`youtube-dl -F https://www.youtube.com/watch?v=x0uinJvhNxI` 列出所有可选择的格式
 - 实际执行下载`youtube-dl -f 136 https://www.youtube.com/watch?v=x0uinJvhNxI`下载选择的对应文件到本地(执行命令的目录)
 - 默认支持断点续传
+
+Flutter Crash Course for Beginners 2020 - Build a Flutter App with Google's Flutter & Dart
+
 
 ## Mac PC远程访问Window PC
 

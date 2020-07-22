@@ -320,7 +320,37 @@ CREATE DATABASE sonar WITH ENCODING 'UTF8' OWNER sonar TEMPLATE=template0;
 \q
 ```
 
-遇到的问题：
+
+使用正确的用户名、密码却一直无法登陆。[因为——]((https://confluence.atlassian.com/bitbucketserverkb/fatal-ident-authentication-failed-for-user-unable-to-connect-to-postgresql-779171564.html))
+
+>By default PostgreSQL uses IDENT-based authentication and this will never allow you to login via -U and -W options.
+
+命令行链接psql之后，执行`show hba_file ;`显示权限控制文件的位置。
+
+- 按照下面的方式对文件做对应的修改
+- 重启数据库`sudo systemctl restart postgresql-10.service`
+
+```
+# Database administrative login by Unix domain socket
+local   all             postgres                                peer
+
+# TYPE  DATABASE        USER            ADDRESS                 METHOD
+
+# "local" is for Unix domain socket connections only
+local   all             all                                     peer
+# IPv4 local connections:
+host    all             all             127.0.0.1/32            md5
+# IPv6 local connections:
+host    all             all             ::1/128                 md5
+# Allow replication connections from localhost, by a user with the
+# replication privilege.
+local   replication     all                                     peer
+host    replication     all             127.0.0.1/32            md5
+host    replication     all             ::1/128                 md5
+```
+
+
+#### 遇到的问题
 
 - ES端口被占有 -->  修改sonar.conf的`sonar.search.port`的值，更换一个端口
 - bootstrap checks failed。
@@ -371,37 +401,36 @@ $ ulimit -n
 
 ```
 
----
+#### 注意事项
 
-使用正确的用户名、密码却一直无法登陆。[因为——]((https://confluence.atlassian.com/bitbucketserverkb/fatal-ident-authentication-failed-for-user-unable-to-connect-to-postgresql-779171564.html))
+[官方要求](https://docs.sonarqube.org/latest/requirements/requirements/#header-5)
 
->By default PostgreSQL uses IDENT-based authentication and this will never allow you to login via -U and -W options.
+If you're running on Linux, you must ensure that:
 
-命令行链接psql之后，执行`show hba_file ;`显示权限控制文件的位置。
+- `vm.max_map_count` is greater than or equal to `524288`. check with `sysctl vm.max_map_count`
+- `fs.file-max` is greater than or equal to `131072`. check with `sysctl fs.file-max`
+- the user running SonarQube can open at least `131072` file descriptors. check with `ulimit -u`
+- the user running SonarQube can open at least `8192` threads. check with `ulimit -n`
 
-- 按照下面的方式对文件做对应的修改
-- 重启数据库`sudo systemctl restart postgresql-10.service`
+
+To set these values more permanently, you must update either `/etc/sysctl.d/99-sonarqube.conf` (or `/etc/sysctl.conf` as you wish) to reflect these values.
+
+If the user running SonarQube (sonarqube in this example) does not have the permission to have at least 131072 open descriptors, you must insert this line in `/etc/security/limits.d/99-sonarqube.conf` (or `/etc/security/limits.conf` as you wish):
 
 ```
-# Database administrative login by Unix domain socket
-local   all             postgres                                peer
-
-# TYPE  DATABASE        USER            ADDRESS                 METHOD
-
-# "local" is for Unix domain socket connections only
-local   all             all                                     peer
-# IPv4 local connections:
-host    all             all             127.0.0.1/32            md5
-# IPv6 local connections:
-host    all             all             ::1/128                 md5
-# Allow replication connections from localhost, by a user with the
-# replication privilege.
-local   replication     all                                     peer
-host    replication     all             127.0.0.1/32            md5
-host    replication     all             ::1/128                 md5
+sonarqube   -   nofile   131072
+sonarqube   -   nproc    8192
 ```
 
+If you are using systemd to start SonarQube, you must specify those limits inside your unit file in the section [service] :
 
+```
+[Service]
+...
+LimitNOFILE=131072
+LimitNPROC=8192
+...
+```
 
 
 ### 搭建8.3版本SonarQube服务 on Ubuntu

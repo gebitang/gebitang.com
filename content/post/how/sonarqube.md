@@ -353,6 +353,24 @@ To do this, run:
 
 and you will get a **new shell**, without root privileges, but with the raised limit. The exec causes the new shell to replace the process with sudo privileges, so after you exit that shell, you won’t accidentally end up as root again.
 
+如果上面的操作还是不生效， 实测下列操作可生效—— 这里有针对 [ubuntu的环境的做法](https://superuser.com/questions/1200539/cannot-increase-open-file-limit-past-4096-ubuntu)
+
+[centos/redhat: change open files ulimit without reboot?](https://serverfault.com/a/389121)
+```shell
+$ ulimit -n  
+4096
+$ ulimit -n 8192
+bash: ulimit: open files: cannot modify limit: Operation not permitted
+$ sudo bash                    
+# ulimit -n                    
+4096
+# ulimit -n 8192                  
+# su - normaluser                 
+$ ulimit -n                       
+8192
+
+```
+
 ---
 
 使用正确的用户名、密码却一直无法登陆。[因为——]((https://confluence.atlassian.com/bitbucketserverkb/fatal-ident-authentication-failed-for-user-unable-to-connect-to-postgresql-779171564.html))

@@ -251,11 +251,11 @@ SonarQube上展示的覆盖率依赖Jacoco插件的配合。
 
 #### 安装Open JDK 11
 
-`sudo yum install java-11-openjdk-devel`
+`sudo yum install -y java-11-openjdk-devel`
 
 ```
 # install Java
->sudo yum install java-11-openjdk-devel
+>sudo yum install -y java-11-openjdk-devel
 Installed:
   java-11-openjdk-devel.x86_64 1:11.0.7.10-4.el7_8
 

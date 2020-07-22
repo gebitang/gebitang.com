@@ -719,6 +719,13 @@ ClassCastException, IllegalAccessError
 ClassLoader.getResource()
 ```
 
+### NoClassDefFoundError: Could not initialize class XXX
+
+ [java.lang.NoClassDefFoundError: Could not initialize class XXX](https://stackoverflow.com/questions/7325579/java-lang-noclassdeffounderror-could-not-initialize-class-xxx)
+
+有可能是静态方法加载时报错，导致其他Class无法初始化
+
+
 ### 使用中的lib库不能直接覆盖更新
 
 复制覆盖更新时，可能导致无法找到对应的class, 

@@ -401,6 +401,64 @@ $ ulimit -n
 
 ```
 
+上面的设置依然没有生效，需要组合使用——
+
+- 编辑`sudo vi /etc/security/limits.conf`，将对应的设置修改为需要的值65536
+
+```
+ * soft nproc 65536
+ * hard nproc 65536
+ * soft nofile 65536
+ * hard nofile 65536
+```
+
+- 执行`sudo sysctl -p`使得设置生效
+- 切换到root`sudo bash`
+- 再切换回当前用户`su - username`
+
+```
+[vip@test ~]$ sudo vi /etc/security/limits.conf
+[vip@test ~]$ sudo sysctl -p
+net.core.rmem_max = 25165824
+net.core.wmem_max = 25165824
+net.ipv4.tcp_rmem = 4096 87380 16777216
+net.ipv4.tcp_wmem = 4096 87380 16777216
+net.core.netdev_max_backlog = 2500
+net.ipv4.ip_local_port_range = 12000 65535
+net.ipv4.conf.all.promote_secondaries = 1
+vm.min_free_kbytes = 524288
+vm.swappiness = 1
+net.ipv4.tcp_tw_reuse = 1
+[vip@test ~]$
+[vip@test ~]$
+[vip@test ~]$ ulimit -n
+65500
+[vip@test ~]$ sudo bash
+[root@test /home/vip]# ulimit -a
+core file size          (blocks, -c) 0
+data seg size           (kbytes, -d) unlimited
+scheduling priority             (-e) 0
+file size               (blocks, -f) unlimited
+pending signals                 (-i) 126546
+max locked memory       (kbytes, -l) 64
+max memory size         (kbytes, -m) unlimited
+open files                      (-n) 65536
+pipe size            (512 bytes, -p) 8
+POSIX message queues     (bytes, -q) 819200
+real-time priority              (-r) 0
+stack size              (kbytes, -s) 8192
+cpu time               (seconds, -t) unlimited
+max user processes              (-u) 65536
+virtual memory          (kbytes, -v) unlimited
+file locks                      (-x) unlimited
+[root@test /home/vip]# su - vip
+Last login: Thu Jul 23 10:49:22 CST 2020 on pts/0
+[vip@test ~]$ ulimit -n
+65536
+[vip@test ~]$
+```
+
+
 #### 注意事项
 
 [官方要求](https://docs.sonarqube.org/latest/requirements/requirements/#header-5)

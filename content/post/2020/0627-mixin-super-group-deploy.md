@@ -188,9 +188,11 @@ postgres (PostgreSQL) 10.12 (Ubuntu 10.12-0ubuntu0.18.04.1)
 4. 使用`createdb dbname`创建数据库
 5. `\conninfo`查看连接信息
 6. `\i paht\to\schema.sql` 执行sql语句
-7. `\dt`查看当前数据库下的表
+7. `\l`查看当前数据库下的表
 8. `\c dbname`连接到数据库
 9. `\dt`显示当前数据的表
+10. `SELECT pg_size_pretty( pg_database_size('dbname') );` 查看数据库大小，或者使用 `\l+ dbname`， 使用 `\l`默认[显示所有数据库](https://stackoverflow.com/a/23990410/1087122)
+11. `SELECT pg_size_pretty(pg_relation_size('table_name'));` 查看当前连接的数据库里的表的大小
 
 ```
 ➜  ~ sudo -i -u postgres

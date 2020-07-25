@@ -19,6 +19,14 @@ toc = true
 
 <!-- more -->
 
+## python命令打开了windows store
+
+[CMD opens window store when I type python](https://stackoverflow.com/questions/58754860/cmd-opens-window-store-when-i-type-python)
+
+在 系统 --> 应用 -- 应用别名里关闭 对应的“启动快捷键” `python.exe` 和 `python3.exe` for App Installler
+
+python2 和python3 同时存在的情况下，将对应的目录添加到环境变量，然后修改其中一个exe启动文件的名称即可。 
+
 ## youtube-dl 
 
 [github ytdl-org/youtube-dl](https://github.com/ytdl-org/youtube-dl/blob/master/README.md#readme), [usage ](https://askubuntu.com/a/486298) 

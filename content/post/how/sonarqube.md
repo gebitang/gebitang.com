@@ -349,6 +349,38 @@ host    replication     all             127.0.0.1/32            md5
 host    replication     all             ::1/128                 md5
 ```
 
+#### PostgreSQL远程登录
+
+[Connecting to a Remote PostgreSQL Database](https://www.netiq.com/documentation/identity-manager-47/setup_windows/data/connecting-to-a-remote-postgresql-database.html)
+
+默认，PostgreSQL只监听本地连接，不允许远程通过TCP/IP链接，运行远程连接需要在Server端修改两个配置文件；` postgresql.conf `和` pg_hba.conf `文件。
+
+- ` postgresql.conf `中修改监听配置，修改为 `listen_addresses = '*'` 
+- ` pg_hba.conf `修改权限配置，`host all all 0.0.0.0/0 md5`
+- 修改完成后，需要重启数据库才能生效。 `sudo systemctl restart postgresql-10.service`
+
+这两个配置文件的位置可以在数据库中使用postgres用户通过以下sql进行查询：
+
+- `show config_file; `显示 ` postgresql.conf `文件的具体位置
+- `show hba_file; `显示 ` pg_hba.conf  `文件的具体位置
+
+```
+postgres=# show config_file;
+              config_file
+----------------------------------------
+ /var/lib/pgsql/10/data/postgresql.conf
+(1 row)
+
+postgres=# show hba_file;
+              hba_file
+------------------------------------
+ /var/lib/pgsql/10/data/pg_hba.conf
+(1 row)
+
+postgres=#
+
+```
+
 
 #### 遇到的问题
 

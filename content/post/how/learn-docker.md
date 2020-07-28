@@ -145,11 +145,12 @@ GOENV="/root/.config/go/env"
 
 [Compose file version 3 reference](https://docs.docker.com/compose/compose-file)
 
-- 执行`docker compose up`，启动一个服务 [Get started with Docker Compose](https://docs.docker.com/compose/gettingstarted/)
+- 执行`docker-compose up`，启动一个服务 [Get started with Docker Compose](https://docs.docker.com/compose/gettingstarted/)
 - 服务由当前目录下的 `docker-compose.yml`文件进行定义
 - 服务定义中的`build`阶段可以定义`DOCKERFILE`文件
 - 可以使用当前目录下的 `.env` 文件作为参数定义环境变量 [Environment variables in Compose](https://docs.docker.com/compose/environment-variables/)
 
+- 使用`docker-compose up --build `重新构建镜像，然后再启动（这一步让项目可以正常运行起来）
 
 ```yml
 version: '3'

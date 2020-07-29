@@ -87,6 +87,7 @@ toc = true
 
 [中国车牌号码规则-民用、警队、军队等](https://my.oschina.net/chenyoca/blog/1571062)
 
+[wiki: Vehicle identification number](https://en.wikipedia.org/wiki/Vehicle_identification_number)
 
 #### 传统车牌
 

@@ -161,6 +161,9 @@ services:
       dockerfile: "${DOCKERFILE}"
     ports:
       - "5000:5000"
+    # bind mount. dymaticly change code
+    volumes:
+      - .:/code
   redis:
     image: "redis:alpine"
 

@@ -1465,6 +1465,10 @@ git log --tags --simplify-by-decoration --pretty="format:%ci %d "
 
 [https://www.git-tower.com/learn/git/faq/change-author-name-email](https://www.git-tower.com/learn/git/faq/change-author-name-email)
 
+更新最近一次commit的committer：  
+
+`git commit --amend --author="John Doe <john@doe.org>"`
+
 
 [https://blog.tinned-software.net/rewrite-author-of-entire-git-repository/](https://blog.tinned-software.net/rewrite-author-of-entire-git-repository/)
 

@@ -141,7 +141,7 @@ GOENV="/root/.config/go/env"
 
 [How to enter in a Docker container already running with a new TTY](https://stackoverflow.com/a/26496854/1087122)
 
-### Docker Compose
+### Docker Compose with example
 
 [Compose file version 3 reference](https://docs.docker.com/compose/compose-file)
 
@@ -179,3 +179,75 @@ db:
 
 - 使用`-e`参数，例如 `docker compose run -e VARIABLE=VALUE `
 
+强制重新编译生效： 
+
+- 执行`docker-compose build --no-cache` 重新进行编译
+- 启动服务`docker-compose up --build`
+
+#### ElasticSearch 
+
+[ElasticSearch API：](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-search.html)
+
+```
+GET /<index>/_search
+
+GET /_search
+
+POST /<index>/_search
+
+POST /_search
+```
+- 发送数据 ` curl -H "Content-Type: application/json" -XPOST "http://localhost:9200/filebeat-6.4.3-2020.07.31/doc" -d $info` 
+- 查询数据 `curl http://localhost:9200/filebeat-6.4.3-2020.07.31/_search`
+
+#### 调用链
+```
+//调用链
+main.go --> init() --> newServerCmd() *cobra.Command
+//异步执行，进入实际业务逻辑
+// confPath路径固定？ /etc/esproxy/config.toml
+// server.go
+serveProxy() --> 
+    InitProxyMux() ——初始化内容过多:(
+    wrapperMiddleware 添加http请求的中间件
+
+decode -> processor chains -> encode -> dispatchToES
+
+cmd/inject/log_pipeline_inject.go
+
+pre Chain： 
+    alerterPipeline
+    routePipeline
+    ratelimitePipeline
+
+pos Chain:
+    courierPipeline
+
+//依赖的组件包括：组件工作的关系？应用的场景
+grafana
+kafka
+mysql
+prometheus
+etcd
+elasticsearch
+filebeat
+redis
+```
+
+
+### 删除container
+
+[docker rm](https://docs.docker.com/engine/reference/commandline/rm/) 
+
+[Remove Docker Containers, Images, Volumes, and Networks](https://linuxize.com/post/how-to-remove-docker-images-containers-volumes-and-networks)
+
+```
+# list all containers 
+docker container ls -a
+
+# remove container id
+docker container rm cc3f2ff51cab cd20b396a061
+
+# remove all stopped containers 
+docker container prune
+```

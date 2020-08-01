@@ -60,6 +60,53 @@ You can list these with `diskutil apfs list`. The standard configuration of such
 
 The last 3 are grouped as Other Volumes in Disk Utility. They're required by macOS and shouldn't be removed.
 
+### 128G SSD的痛
+
+看起来过一段时间就得做一下类似的动作了。
+
+- 赋予命令行程序iTerm全局访问磁盘的权限，否则sudo 提示 operation not permitted。"System Preferences --> Security & Privacy --> Full Disck Access" 
+- 查看各个目录占据的大小排行，在根目录下：`sudo du -sh * | sort -hr` 
+
+然后发现下面的情况。反正已经重启了，先任性把Caches都干掉了（还是先看了一眼里面的内容，初步判断没有问题）。
+
+```
+➜  ~ sudo du -sh * | sort -hr
+Password:
+ 51G	Library
+2.9G	projects
+574M	GoProjects
+
+// User's Library
+➜  Library sudo du -sh * | sort -hr
+ 20G	Containers
+9.9G	Developer
+9.1G	Caches
+
+//System Library
+➜  /Library sudo du -h -d 1 | sort -hr
+Password:
+7.7G	.
+5.0G	./Developer
+662M	./Desktop Pictures
+```
+
+然后发现Containers里的内容就一个Docker的Disk image location就占据了19.8GB的大小。搜索了一圈，很多128GB的Mac用户都深受其苦。
+
+- 删除了不用的容器`docker container prune`
+- 删除了不用的镜像 `docker image prune`
+- 净化了docker对象 `docker system prune`，宣告了`Total reclaimed space: 4.36GB`，但实际还是没有变小。
+
+按照[官方指导](https://docs.docker.com/docker-for-mac/space/)操作一遍，还是没啥效果。[官方 #issue 371](https://github.com/docker/for-mac/issues/371)下讨论了很长篇幅。采用[高票意见](https://github.com/docker/for-mac/issues/371#issuecomment-248404423)
+
+
+```
+docker rm $(docker ps -a -q)
+docker rmi $(docker images -q)
+docker volume rm $(docker volume ls |awk '{print $2}')
+rm -rf ~/Library/Containers/com.docker.docker/Data/*
+```
+
+其实最后一步还是直接将原始的Disk image删除了。运行中的Docker直接报错，只好选择“恢复出厂值”——出厂值大小目前为`2.3GB`
 
 ### Mac允许远程登录
 

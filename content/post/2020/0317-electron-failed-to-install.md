@@ -12,6 +12,59 @@ topics = [
 toc = true
 +++
 
+### 8.4.0版本 Mac
+
+删除Cache还是升级了Mixin。 0.10.2版本Mac上需要electron的8.4版本 `cat yarn.lock | grep electron`
+
+Mac上出现跟Windows上类似的情况。需要手动下载`https://github.com/electron/electron/releases/tag/v8.4.0`的`electron-v8.4.0-darwin-x64.zip`，然后解压到项目的 `node_modules/electron/disk`目录下。 
+
+手动创建`path.txt`文件，内容添加未 `Electron.app/Contents/MacOS/Electron`，第一开始只写了`Electron.app`是无效的。后面安装了一个全局的Electron参考了对应的`path.txt`里的写法。
+
+但依然报错——
+
+```
+INFO  Launching Electron...
+(node:55762) UnhandledPromiseRejectionWarning: Error: spawn /Users/gebitang/projects/github/desktop-app/node_modules/electron/dist/Electron.app/Contents/MacOS/Electron
+ ENOENT
+    at Process.ChildProcess._handle.onexit (internal/child_process.js:264:19)
+    at onErrorNT (internal/child_process.js:456:16)
+    at processTicksAndRejections (internal/process/task_queues.js:80:21)
+(node:55762) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). (rejection id: 2)
+(node:55762) [DEP0018] DeprecationWarning: Unhandled promise rejections are deprecated. In the future, promise rejections that are not handled will terminate the Node.js process with a non-zero exit code.
+```
+
+[有说是$PATH问题](https://stackoverflow.com/a/45152755/1087122) 添加了PATH路径后，问题依旧；
+
+[官方#39](https://github.com/electron/electron-rebuild/issues/39)针对的是windows环境下的问题。
+
+直接启动安装的Electron，验证是否正确安装。应用正常启动，到包含了类似的报错——
+
+```
+Reading /Users/gebitang/projects/project-desktop/uitest-desktop/node_modules/devtron/manifest.json failed.
+Error: ENOENT: no such file or directory, open '/Users/gebitang/projects/project-desktop/uitest-desktop/node_modules/devtron/manifest.json'
+    at Object.openSync (fs.js:440:3)
+    at Object.func [as openSync] (electron/js2c/asar.js:140:31)
+    at Object.readFileSync (fs.js:342:35)
+    at Object.fs.readFileSync (electron/js2c/asar.js:542:40)
+    at getManifestFromPath (electron/js2c/browser_init.js:4124:26)
+    at Function.BrowserWindow.addExtension (electron/js2c/browser_init.js:4546:22)
+    at Function.BrowserWindow.addDevToolsExtension (electron/js2c/browser_init.js:4578:40)
+    at App.<anonymous> (electron/js2c/browser_init.js:4607:23)
+    at Object.onceWrapper (events.js:300:26)
+    at App.emit (events.js:215:7)
+```
+
+[有类似的问题](https://stackoverflow.com/a/54819116/1087122)，删除`~/Library/Application Support/Electron/DevTools Extensions`文件之后，上述问题消失。但使用 `yarn electron:serve`时依然复现相同的问题。
+
+按照`index.js`的要求，导出`ELECTRON_OVERRIDE_DIST_PATH` 的值，还是不行。
+
+先卸载，再手动使用npm安装`npm install electron@^v8.4.0`。实际上安装的为`8.4.1`版本，内网和淘宝的registry都没有速度，挂上代理，使用`npm --registry https://registry.npm.taobao.org install `安装成功。
+
+应用可以成功启动，但提示编译的版本不对。重新执行 `yarn install`之后，再启动应用。成功。 
+
+还是没看出来哪里导致的问题。难不成是8.4.0版本有bug乜:(
+
+
 ### 8.3.0版本
 
 哈哈，我这个应该叫做跟着Mixin学Node乜。今天升级到0.9.6版本后启动遇到点小问题。`node-gyp`和`electron`安装问题

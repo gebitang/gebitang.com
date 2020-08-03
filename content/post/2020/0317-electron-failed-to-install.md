@@ -56,7 +56,7 @@ Error: ENOENT: no such file or directory, open '/Users/gebitang/projects/project
 
 [有类似的问题](https://stackoverflow.com/a/54819116/1087122)，删除`~/Library/Application Support/Electron/DevTools Extensions`文件之后，上述问题消失。但使用 `yarn electron:serve`时依然复现相同的问题。
 
-按照`index.js`的要求，导出`ELECTRON_OVERRIDE_DIST_PATH` 的值，还是不行。
+按照`index.js`的要求，导出`ELECTRON_OVERRIDE_DIST_PATH` 的值([官方教程：变量使用](https://www.electronjs.org/docs/api/environment-variables))，还是不行。
 
 先卸载，再手动使用npm安装`npm install electron@^v8.4.0`。实际上安装的为`8.4.1`版本，内网和淘宝的registry都没有速度，挂上代理，使用`npm --registry https://registry.npm.taobao.org install `安装成功。
 

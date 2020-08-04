@@ -12,6 +12,16 @@ topics = [
 toc = true
 +++
 
+### 创建index
+
+[mysql index](https://www.tutorialspoint.com/mysql/mysql-indexes.htm)   
+
+ A unique index means that two rows cannot have the same index value. Here is the syntax to create an Index on a table.
+
+`CREATE UNIQUE INDEX index_name ON table_name ( column1, column2,...);`
+
+ omit the UNIQUE keyword from the query to create a simple index. A Simple index allows duplicate values in a table.
+
 ### 常用函数
 
 [mysql resources](https://www.w3resource.com/mysql/mysql-functions-and-operators.php)，五星推荐：gif演示 && 视频演示。

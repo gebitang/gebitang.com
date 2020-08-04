@@ -17,7 +17,7 @@ toc = true
 
 <!--more-->
 
-## week 26 
+### How to write Go code
 
 重新更新了环境，使用`go1.14.4`开始，即使在window环境上，[安装](https://golang.org/doc/install)也只需要解压、更新环境变量（如果使用cgo的话，还需要gcc环境，机器上已经有了，但目前以我这水平应该还用不到）就可以立即上手了。
 
@@ -41,8 +41,6 @@ toc = true
 要用到`go module`，参考这两篇——[Go Modules 终极入门](https://mp.weixin.qq.com/s/6gJkSyGAFR0v6kow2uVklA)，[干货满满的 Go Modules 和 goproxy.cn](https://mp.weixin.qq.com/s/jpp7vs3Fdg4m15P1SHt1yA)。
 
 
-## week 27
-
 ### Gocker Docker
 
 [用 Go 从头实现一个迷你 Docker — Gocker](https://mp.weixin.qq.com/s/P9bVFtXeduZ8Lv-0vFaXAg)   
@@ -57,7 +55,7 @@ toc = true
 [DOCKER基础技术：AUFS](https://coolshell.cn/articles/17061.html)  
 [DOCKER基础技术：DEVICEMAPPER](https://coolshell.cn/articles/17200.html)  
 
-## week 28
+### 结构体对应数据绑定
 
 [Go Echo: get started](https://mp.weixin.qq.com/s/DuEGITdOYHYOXk-v-u2V5A), [Go Echo: basic features](https://mp.weixin.qq.com/s/vg9OSO4g0KG7iDQ7GXoUSQ)跟着这个例子写一个简单的登录demo。
 
@@ -80,6 +78,30 @@ type User struct {
 顺带安装一下很好用的http调试工具[httpie](https://httpie.org/docs#installation)，python写得，依赖python3.6以上版本（本地的环境已经很混乱得啥都有， 使用`py --version`可以调用python3版本），直接使用 `pip install  --upgrade httpie`安装成功了。
 
 没有进行数据绑定时，传递xml类型数据时，被认为是`Content-Type: text/plain;`；指定了绑定规则后可以识别并转换为`Content-Type: application/json; charset=UTF-8`
+
+### 正则限制 
+
+[https://groups.google.com/forum/#!topic/golang-nuts/7qgSDWPIh_E](https://groups.google.com/forum/#!topic/golang-nuts/7qgSDWPIh_E)
+
+> that (?!re) regular expression is not supported neither in re2 nor in Google Go. Is there any chance that its support will be implemented in future releases? (it is supported at least in Ruby, Python, Java, Perl)
+
+[https://www.reddit.com/r/programmingcirclejerk/comments/5ml6yj/golangs_standard_regex_library_doesnt_have/](https://www.reddit.com/r/programmingcirclejerk/comments/5ml6yj/golangs_standard_regex_library_doesnt_have/)
+
+[go-issues:18868 regexp: support lookaheads and lookbehinds](https://github.com/golang/go/issues/18868) 
+
+
+[Golang doesn't support positive lookbehind assertion?](https://github.com/StefanSchroeder/Golang-Regex-Tutorial/issues/11)
+
+支持的场景： [https://github.com/google/re2/wiki/Syntax](https://github.com/google/re2/wiki/Syntax)要求[`makes a single scan over the input and runs in O(n) time`](https://groups.google.com/d/msg/golang-nuts/7qgSDWPIh_E/OHTAm4wRZL0J)
+
+>The lack of generalized assertions, like the lack of backreferences, is not a statement on our part about regular expression style.  It is a consequence of not knowing how to implement them efficiently.  If you can implement them while preserving the guarantees made by the current package regexp, namely that it makes a single scan over the input and runs in O(n) time, then I would be happy to review and approve that CL.  However, I have pondered how to do this for five years, off and on, and gotten nowhere.
+
+包含在一传字符串中的手机号，类似`abcd13566778888xyz`这样的手机号码前后`不包含数字`的正则在Go语言里是不支持的。因为无法`一次扫描并在O(n)的时间`里完成。
+
+`(?=re)`	before text matching `re` (NOT SUPPORTED)
+`(?!re)`	before text not matching `re` (NOT SUPPORTED)
+`(?<=re)`	after text matching `re` (NOT SUPPORTED)
+`(?<!re)`	after text not matching `re` (NOT SUPPORTED)
 
 
 ### go vendor 依赖

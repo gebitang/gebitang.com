@@ -17,6 +17,138 @@ toc = true
 
 <!--more-->
 
+### fmt string 
+
+[Go by Example: String Formatting](https://gobyexample.com/string-formatting)
+
+```go
+package main
+
+import (
+	"fmt"
+	"os"
+)
+
+type point struct {
+	x, y int
+}
+
+func main() {
+
+	p := point{1, 2}
+
+	// v for verbs? value?
+	// {1 2}
+	fmt.Printf("%v\n", p)
+
+	// include the struct’s field names.
+	// {x:1 y:2}
+	fmt.Printf("%+v\n", p)
+
+	//  prints a Go syntax representation of the value
+	//  main.point{x:1, y:2}
+	fmt.Printf("%#v\n", p)
+
+	// print the type of a value
+	// main.point
+	fmt.Printf("%T\n", p)
+
+	// Formatting booleans
+	// false
+	fmt.Printf("%t\n", false)
+
+	//  base-10 formatting.
+	// 123
+	fmt.Printf("%d\n", 123)
+
+	// binary formatting
+	// 1110
+	fmt.Printf("%b\n", 14)
+
+	// prints the character corresponding to the given integer.
+	// !
+	fmt.Printf("%c\n", 33)
+
+	// provides hex encoding.
+	// 1c8
+	fmt.Printf("%x\n", 456)
+
+	//  formatting options for floats. For basic decimal formatting use %f.
+	// 78.900000
+	fmt.Printf("%f\n", 78.9)
+
+	// format the float in (slightly different versions of) scientific notation
+	// 1.234000e+08
+	fmt.Printf("%e\n", 123400000.0)
+	// 1.234000E+08
+	fmt.Printf("%E\n", 123400000.0)
+
+	// print basic string
+	// "string"
+	fmt.Printf("%s\n", "\"string\"")
+
+	// double-quote strings
+	// "\"string\""
+	fmt.Printf("%q\n", "\"string\"")
+
+	// renders the string in base-16, with two output characters per byte of input
+	// 6865782074686973
+	fmt.Printf("%x\n", "hex this")
+
+	// print a representation of a pointer
+	// 0xc00000a210 (address)
+	fmt.Printf("%p\n", &p)
+
+	// specify the width of an integer, use a number after the % in the verb. By default the result will be right-justified and padded with spaces.
+	// |    12|   345|
+	fmt.Printf("|%6d|%6d|\n", 12, 345)
+
+	// restrict the decimal precision at the same time with the width.precision syntax
+	// |  1.20|  3.45|
+	fmt.Printf("|%6.2f|%6.2f|\n", 1.2, 3.45)
+
+	// left-justify, use the - flag
+	// |1.20  |3.45  |
+	fmt.Printf("|%-6.2f|%-6.2f|\n", 1.2, 3.45)
+
+	// format string
+	// |   foo|     b|
+	fmt.Printf("|%6s|%6s|\n", "foo", "b")
+
+	// |foo   |b     |
+	fmt.Printf("|%-6s|%-6s|\n", "foo", "b")
+
+	// return string
+	s := fmt.Sprintf("a %s", "string")
+	fmt.Println(s)
+
+	// format+print to io.Writers other than os.Stdout using Fprintf.
+	fmt.Fprintf(os.Stderr, "an %s\n", "error")
+
+}
+
+```
+
+### 闭包函数传参： 
+
+[Passing parameters to function closure](https://stackoverflow.com/a/30183893/1087122)，[Using goroutines on loop iterator variables](https://github.com/golang/go/wiki/CommonMistakes#using-goroutines-on-loop-iterator-variables)
+
+```go
+for i := 0; i < 3; i++ {
+    go func() {
+        fmt.Println(i)
+    }()
+}
+//result: 3 3 3
+
+for i := 0; i < 3; i++ {
+    go func(v int) {
+        fmt.Println(v)
+    }(i)
+}
+// result: 0, 1, 2
+```
+
 ### How to write Go code
 
 重新更新了环境，使用`go1.14.4`开始，即使在window环境上，[安装](https://golang.org/doc/install)也只需要解压、更新环境变量（如果使用cgo的话，还需要gcc环境，机器上已经有了，但目前以我这水平应该还用不到）就可以立即上手了。

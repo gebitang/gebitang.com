@@ -14,22 +14,23 @@ toc = true
 
 ### 银行卡号编码规则
 
-[校验银行卡号的正则表达式](http://www.qilin668.com/a/5e20394c5aed1cb.html)
-
 [银行卡号编码规则及其应用](https://zhuanlan.zhihu.com/p/21399490)
 
+详细介绍[银行卡号的编码规则及校验](https://www.jianshu.com/p/13fb9e3556da)
 
->银行卡号一般是13位或者19位。由如下三部分构成
->  　　
->前六位是：发行者标识代码(Issuer Identification Number)  　　　　
->  
->中间的位数是：个人账号标识（从卡号第七位开始）  　　
->  
->中间位数由发卡行自定义，一般由6－12位数字组成。最多可以使用12位数字
->  
->最后一位位数是校验位  
+[Payment card number](https://en.wikipedia.org/wiki/Payment_card_number) [Luhn algorithm](https://en.wikipedia.org/wiki/Luhn_algorithm)
+
+
+卡号最长19位，包括：
+
+- 6位发行者识别号码（IIN, Issuer Identification Number）
+- 最长12位的账户号码（Primary Account Number, PAN）
+- 1位校验码，以Luhn算法计算
 
 <!--more-->
+
+[发卡行识别码](https://zh.wikipedia.org/wiki/%E5%8F%91%E5%8D%A1%E8%A1%8C%E8%AF%86%E5%88%AB%E7%A0%81)
+
 
 ```
 [1-9]\d{12,18}

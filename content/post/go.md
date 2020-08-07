@@ -17,6 +17,45 @@ toc = true
 
 <!--more-->
 
+### Wire 
+
+[go wire](https://github.com/google/wire) 
+
+前提：已经将`$GOPATH/bin`目录添加到环境变量`$PATH`
+安装`go get github.com/google/wire/cmd/wire`
+
+[wire tutorial](https://github.com/google/wire/blob/master/_tutorial/README.md)
+
+- Goland 提示 `wire.go doesn't match to garget system. File will be ignored by build tool` 
+
+在设置--> Go --> Build Tags & Vendoring中的Custom tags里指定要用的编译tag，例如 `wireinject`。参考[指定编译tag](https://studygolang.com/topics/10193)，[编译go build -tags](https://www.jianshu.com/p/858a0791f618)，[编译官方手册](https://pkg.go.dev/go/build?tab=doc)
+
+- 执行wire命令时提示`go list stderr <<go: finding module for package pattern=. >>` 
+
+```
+go list stderr <<go: finding module for package pattern=. >>
+wire: packages not found
+wire: generate failed
+```
+
+[官方issue #125](https://github.com/google/wire/issues/125#issuecomment-462505979)中的解决方案——
+
+```
+# 先升级 go/packages，可以添加 -v参数看到升级了哪些packages
+go get -u golang.org/x/tools/go/packages
+# 再重新安装 wire
+go get github.com/google/wire/cmd/wire
+```
+
+[解释](https://github.com/google/wire/issues/125#issuecomment-462516570)是这样的——
+
+>So Wire uses [golang.org/x/tools/go/packages](https://godoc.org/golang.org/x/tools/go/packages) behind the scenes in order to gather all of the files to parse. go/packages is specifically designed to be agnostic to source code layout (e.g. modules versus GOPATH workspaces), so it shells out to the go tool to obtain the information that it needs. Since this requires cooperation from both your installed go tool and the go/packages version, an outdated go/packages library can mess up the communication and report bad results to Wire (which is what happened here).
+>
+>In the Go modules future, your built version of Wire would have used a known-tested version of go/packages and this issue would not have occurred.
+
+执行完之后，可以正常生成`wire_gen.go`文件。可以先执行`wire check`检查是否符合编译条件
+
+
 ### fmt string 
 
 [Go by Example: String Formatting](https://gobyexample.com/string-formatting)

@@ -19,7 +19,7 @@ toc = true
 
 ### Wire 
 
-[go wire](https://github.com/google/wire) 
+[go wire](https://github.com/google/wire) and [wire blog](https://blog.golang.org/wire)
 
 前提：已经将`$GOPATH/bin`目录添加到环境变量`$PATH`
 安装`go get github.com/google/wire/cmd/wire`
@@ -53,8 +53,13 @@ go get github.com/google/wire/cmd/wire
 >
 >In the Go modules future, your built version of Wire would have used a known-tested version of go/packages and this issue would not have occurred.
 
-执行完之后，可以正常生成`wire_gen.go`文件。可以先执行`wire check`检查是否符合编译条件
+执行完之后，可以正常生成`wire_gen.go`文件。可以先执行`wire check`检查是否符合编译条件。
 
+执行完一次`wire`命令之后，再次需要更新`wire_gen.go`文件时，执行`go generate`命令即可
+
+[undefined: InitializeEvent](https://github.com/google/wire/issues/224#issuecomment-558819174)， 使用wire生成注入代码之后，编译时需要带上对应的代码。
+
+执行 `go build`默认使用了上次的配置? `go build main.go wire_gen.go`可生成可执行文件
 
 ### fmt string 
 

@@ -61,6 +61,101 @@ go get github.com/google/wire/cmd/wire
 
 执行 `go build`默认使用了上次的配置? `go build main.go wire_gen.go`可生成可执行文件
 
+
+### go ldflags
+
+[Using `ldflags` with `go build`](https://www.digitalocean.com/community/tutorials/using-ldflags-to-set-version-information-for-go-applications)
+
+`ld` stands for linker, the program that links together the different pieces of the compiled source code into the final binary. 
+
+`ldflags`, stands for linker flags. It passes a flag to the underlying Go toolchain linker, [cmd/link](https://golang.org/cmd/link), that allows you to change the values of imported packages at build time from the command line.
+
+使用方式为：
+
+```
+# 格式
+go build -ldflags="-flag"
+# 示例
+go build -ldflags="-X 'package_path.variable_name=new_value'"
+# 实例
+go build -ldflags="-X 'main.Version=v1.0.0'"
+#复杂实例
+go build -v -ldflags="-X 'main.Version=v1.0.0' -X 'app/build.User=$(id -u -n)' -X 'app/build.Time=$(date)'"
+```
+
+- 外层使用双引号，确保传递的flag中的内容即使包含空格也不截断命令；
+- key-value值使用单引号
+- 要改变的变量需要是包级别的string类型变量。不能是const类型
+- 变量是否export都可以（大小写开头的变量都支持）
+
+进一步可以使用`nm`工具查找编译文件中的`symbols`。（包名中不能包含非ASCII码，引号`"`和百分号`%`）
+
+在make文件中使用——[](https://gist.github.com/marz619/e91796afa5a951c0aa4595d7e73d78d0)
+
+`main.go` 
+
+```
+package main
+
+var (
+	version string
+	date    string
+)
+
+func init() {
+	if version == "" {
+		version = "no version"
+	}
+	if date == "" {
+		date = "(Mon YYYY)"
+	}
+}
+
+func main() {
+	println(version, date)
+}
+```
+
+`makefile:`
+
+```
+version=0.0.1
+date=$(shell date -j "+(%b %Y)")
+exec=a.out
+
+.PHONY: all
+
+all:
+	@echo " make <cmd>"
+	@echo ""
+	@echo "commands:"
+	@echo " build          - runs go build"
+	@echo " build_version  - runs go build with ldflags version=${version} & date=${date}"
+	@echo ""
+
+build: clean
+	@go build -v -o ${exec}
+
+build_version: check_version
+	@go build -v -ldflags '-X "main.version=${version}" -X "main.date=${date}"' -o ${exec}_${version}
+
+clean:
+	@rm -f ${exec}
+
+check_version:
+	@if [ -a "${exec}_${version}" ]; then \
+		echo "${exec}_${version} already exists"; \
+		exit 1; \
+	fi;
+```
+
+[Setting Go variables from the outside](https://blog.cloudflare.com/setting-go-variables-at-compile-time/)
+
+在`go run`命令中也可以直接使用（因为会默认先执行`go build`)  
+
+`go run -ldflags="-X main.who CloudFlare" hello.go` 
+
+
 ### fmt string 
 
 [Go by Example: String Formatting](https://gobyexample.com/string-formatting)

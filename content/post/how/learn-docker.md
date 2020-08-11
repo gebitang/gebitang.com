@@ -251,3 +251,13 @@ docker container rm cc3f2ff51cab cd20b396a061
 # remove all stopped containers 
 docker container prune
 ```
+
+### Cannot create container for service filebeat: Drive has not been shared
+
+windows环境下使用`docker-compose up`时报错，提示类似`Cannot create container for service filebeat: Drive has not been shared`的错误。
+
+[解决方案](https://github.com/Cyb3rWard0g/HELK/issues/79#issuecomment-397637262) ，包含[官方issue #4303](https://github.com/docker/compose/issues/4303)
+
+- 环境变量设置正确，`.env`文件中设置环境变量`COMPOSE_CONVERT_WINDOWS_PATHS=1`，或者在命令行执行 `set COMPOSE_CONVERT_WINDOWS_PATHS=1`\
+- 设置settings的Shared Dreives选项` Windows settings > Shared Drives > Reset credentials > select drive > Apply`
+- 正确配置了windows下docker的share volumns，参考[微软的说明](https://docs.microsoft.com/en-us/archive/blogs/stevelasker/configuring-docker-for-windows-volumes)

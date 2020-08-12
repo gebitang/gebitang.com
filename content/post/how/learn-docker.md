@@ -199,6 +199,7 @@ POST /_search
 ```
 - 发送数据 ` curl -H "Content-Type: application/json" -XPOST "http://localhost:9200/filebeat-6.4.3-2020.07.31/doc" -d $info` 
 - 查询数据 `curl http://localhost:9200/filebeat-6.4.3-2020.07.31/_search`
+- 通过proxy发送数据 `curl -H "Content-Type: application/x-ndjson" -XPOST "http://192.168.1.105:9200/_bulk" -d $info`
 
 #### 调用链
 ```
@@ -261,3 +262,23 @@ windows环境下使用`docker-compose up`时报错，提示类似`Cannot create 
 - 环境变量设置正确，`.env`文件中设置环境变量`COMPOSE_CONVERT_WINDOWS_PATHS=1`，或者在命令行执行 `set COMPOSE_CONVERT_WINDOWS_PATHS=1`\
 - 设置settings的Shared Dreives选项` Windows settings > Shared Drives > Reset credentials > select drive > Apply`
 - 正确配置了windows下docker的share volumns，参考[微软的说明](https://docs.microsoft.com/en-us/archive/blogs/stevelasker/configuring-docker-for-windows-volumes)
+
+### slow on Windows
+
+相同版本，相同docker配置（2核2G）。Windows上宿主机更强（Intel Core i7-8700 3.2GHz / 32GB Memory），Mac（Intel Core i5/ 8GB Memory）
+
+跑相同的compose工程。启动速度Windows上差一大截，[官方issue](https://github.com/docker/for-win/issues/1936)吐槽，有人[建议](https://github.com/docker/for-win/issues/1936#issuecomment-380257581)——
+
+Here are directories to exclude 
+
+- development project directories that contain .git repos or node_modules, etc
+- docker image directories
+- anything with thousdands of files
+
+What services to configure exclusions on 
+
+- add directory to Windows Defender Exclusion list [https://support.microsoft.com/en-us/help/4028485/windows-10-add-an-exclusion-to-windows-defender-antivirus](https://support.microsoft.com/en-us/help/4028485/windows-10-add-an-exclusion-to-windows-defender-antivirus)
+- add directory to Windows Indexing exclusion list-- Control Panel -> Indexing Options -> Add all of your development directories
+
+我的建议，别瞎折腾了，迁移到Mac上跑不香吗~ 
+

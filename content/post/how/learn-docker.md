@@ -182,7 +182,9 @@ db:
 强制重新编译生效： 
 
 - 执行`docker-compose build --no-cache` 重新进行编译
-- 启动服务`docker-compose up --build`
+- 启动服务`docker-compose up --build` 相当于重新先执行编译，再启动服务
+
+WARNING: Image for service xxx was built because it did not already exist. To rebuild this image you must use `docker-compose build` or `docker-compose up --build`.
 
 #### ElasticSearch 
 
@@ -199,7 +201,58 @@ POST /_search
 ```
 - 发送数据 ` curl -H "Content-Type: application/json" -XPOST "http://localhost:9200/filebeat-6.4.3-2020.07.31/doc" -d $info` 
 - 查询数据 `curl http://localhost:9200/filebeat-6.4.3-2020.07.31/_search`
-- 通过proxy发送数据 `curl -H "Content-Type: application/x-ndjson" -XPOST "http://192.168.1.105:9200/_bulk" -d $info`
+- 通过proxy发送数据 `curl -H "Content-Type: application/x-ndjson" -XPOST "http://localhost:9200/_bulk" -d $info` 
+
+先将`ndjson`类型的数据读入到变量info中，`info=$(cat data.info)`。
+
+>[NDJSON - Newline delimited JSON](https://github.com/ndjson/ndjson-spec)  
+> Consists of individual lines where each individual line is any valid JSON text and each line is delimited with a newline character.
+
+ES中调用`_bulk`接口时，默认使用这种类型。[https://github.com/elastic/elasticsearch-py/issues/609](https://github.com/elastic/elasticsearch-py/issues/609)
+
+#### etcd
+
+>[etcd:](https://github.com/etcd-io/etcd) Distributed reliable key-value store for the most critical data of a distributed system
+
+
+从[https://github.com/etcd-io/etcd/releases/latest](https://github.com/etcd-io/etcd/releases/latest)下载对应操作系统的最新版本，目前(2020-08-12)为`3.4.10`版本。
+
+解压后将对应的目录添加到环境变量，或直接到对应目录下使用。
+
+（go编译打包的服务优势：windows下也只需要一个exe文件就可以直接使用——永远的“绿色免安装”版本）
+
+- 解压安装
+- `etcd.exe --version`查看版本
+- 启动etcd，`etcd.exe`执行起来。
+- 检查`etcdctl.exe member list`
+
+添加key，查找key对应的值。可以使用endpoints参数指定连接的server地址
+
+```
+D:\tools\etcd-v3.4.10-windows-amd64>etcd.exe --version
+etcd Version: 3.4.10
+Git SHA: 18dfb9cca
+Go Version: go1.12.17
+Go OS/Arch: windows/amd64
+
+D:\tools\etcd-v3.4.10-windows-amd64>etcdctl.exe --endpoints=127.0.0.1:2379 put testKey "value of testKey"
+OK
+
+D:\tools\etcd-v3.4.10-windows-amd64>etcdctl.exe --endpoints=127.0.0.1:2379 get testKey
+testKey
+value of testKey
+
+```
+
+Watcher功能可用来实现动态控制功能。
+
+[A concise tutorial of golang etcd](https://programmer.help/blogs/a-concise-tutorial-of-golang-etcd.html)
+
+[etcd架构介绍](https://segmentfault.com/a/1190000020742981)  
+
+[etcd常用操作介绍](https://segmentfault.com/a/1190000020787391)
+
+
 
 #### 调用链
 ```
@@ -267,18 +320,24 @@ windows环境下使用`docker-compose up`时报错，提示类似`Cannot create 
 
 相同版本，相同docker配置（2核2G）。Windows上宿主机更强（Intel Core i7-8700 3.2GHz / 32GB Memory），Mac（Intel Core i5/ 8GB Memory）
 
+Docker Community Edition 
+
+- Version 17.06.2-ce-win27 (13194) Channel: stable 428bd6c
+- Version 17.06.0-ce-mac18 (18433) Channel: stable d9b66511e0
+
+
 跑相同的compose工程。启动速度Windows上差一大截，[官方issue](https://github.com/docker/for-win/issues/1936)吐槽，有人[建议](https://github.com/docker/for-win/issues/1936#issuecomment-380257581)——
 
-Here are directories to exclude 
+**Here are directories to exclude**
 
 - development project directories that contain .git repos or node_modules, etc
 - docker image directories
 - anything with thousdands of files
 
-What services to configure exclusions on 
+**What services to configure exclusions on**
 
 - add directory to Windows Defender Exclusion list [https://support.microsoft.com/en-us/help/4028485/windows-10-add-an-exclusion-to-windows-defender-antivirus](https://support.microsoft.com/en-us/help/4028485/windows-10-add-an-exclusion-to-windows-defender-antivirus)
 - add directory to Windows Indexing exclusion list-- Control Panel -> Indexing Options -> Add all of your development directories
 
-我的建议，别瞎折腾了，迁移到Mac上跑不香吗~ 
+别瞎折腾了，迁移到Mac/Linux上跑不香吗~ 
 

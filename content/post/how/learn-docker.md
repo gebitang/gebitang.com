@@ -181,8 +181,8 @@ db:
 
 强制重新编译生效： 
 
-- 执行`docker-compose build --no-cache` 重新进行编译
-- 启动服务`docker-compose up --build` 相当于重新先执行编译，再启动服务
+- 执行`docker-compose build --no-cache` 重新编译主程序
+- 启动服务`docker-compose up --build` 先执行编译，再启动服务。（会自动判断与cache相比是否有更新？）
 
 WARNING: Image for service xxx was built because it did not already exist. To rebuild this image you must use `docker-compose build` or `docker-compose up --build`.
 
@@ -252,7 +252,7 @@ Watcher功能可用来实现动态控制功能。
 
 [etcd常用操作介绍](https://segmentfault.com/a/1190000020787391)
 
-
+[etcd demo](https://etcd.io/docs/v3.4.0/demo/)
 
 #### 调用链
 ```

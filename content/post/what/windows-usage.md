@@ -19,6 +19,55 @@ toc = true
 
 <!-- more -->
 
+## an attempt was made to access a socket in a way forbidden by its access permissions
+
+>看起来docker-for-win的副作用太大了
+
+开发时监控2020端口时，应用提示试图打开一个禁止的socket端口。
+
+[相同问题](https://stackoverflow.com/a/59165435/1087122)，(解决方案](https://github.com/docker/for-win/issues/3171#issuecomment-459205576)
+
+- `netstat -ano`检查此端口没有被使用
+- `Get-NetTCPConnection |findstr`在powershell中也没发现此端口没占用
+- Even if I disconnect from the internet and disable both windows firewall and my antivirus, and run everything as admin, I still get the errors.
+
+还好我先google而不是先执行第三步操作。原因是windows默认排除了这些端口范围—— 
+
+执行`netsh interface ipv4 show excludedportrange protocol=tcp` 
+
+```
+D:\>netsh interface ipv4 show excludedportrange protocol=tcp
+
+协议 tcp 端口排除范围
+
+开始端口    结束端口
+----------    --------
+      1615        1714
+      1715        1814
+      1915        2014
+      2015        2114
+      7275        7374
+     50000       50059     *
+
+* - 管理的端口排除。
+```
+
+所以快捷解决方式就是不使用以上范围内的端口。
+
+根本的解决方法如下。原因是` Docker for Windows and Hyper-V are responsible for all of those excluded port ranges above.`
+
+- Disable hyper-v (which will required a couple of restarts)
+
+`dism.exe /Online /Disable-Feature:Microsoft-Hyper-V`
+
+- When you finish all the required restarts, reserve the port you want so hyper-v doesn't reserve it back
+
+`netsh int ipv4 add excludedportrange protocol=tcp startport=50051 numberofports=1`
+
+- Re-Enable hyper-V (which will require a couple of restart)
+
+`dism.exe /Online /Enable-Feature:Microsoft-Hyper-V /All`
+
 ## python命令打开了windows store
 
 [CMD opens window store when I type python](https://stackoverflow.com/questions/58754860/cmd-opens-window-store-when-i-type-python)

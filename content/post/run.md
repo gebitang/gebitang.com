@@ -646,3 +646,11 @@ toc=true
 
 ![](https://s3-img.meituan.net/v1/mss_3d027b52ec5a4d589e68050845611e68/ff/n0/0k/r2/mq_78671.jpg@596w_1l.jpg)
 
+
+### 小结
+
+- 跑步8次，52.60公里，平均配速551
+- 8月15周六，农历六月二十六，以最快配速创五公里个人最好成绩
+- [​一精英跑者反思跑步太拼违背健康，本人却不幸晨跑猝死令人唏嘘……](https://mp.weixin.qq.com/s/Kuid4nDkvnHzMWXKHQ2PeA)给自己也提个醒，不追求全马、半马，就这样健康地跑下去
+
+![](https://s3-img.meituan.net/v1/mss_3d027b52ec5a4d589e68050845611e68/ff/n0/0k/r2/p5_78621.jpg@596w_1l.jpg)

@@ -221,6 +221,8 @@ postgres=#
 go: cloud.google.com/go@v0.41.0: Get "https://proxy.golang.org/cloud.google.com/go/@v/v0.41.0.mod": dial tcp 34.64.4.113:443: i/o timeout
 ```
 
+### 二级代理实现： ss/v2ray + cow 
+
 再次推荐[AgentNEO](https://agneo.co/?rc=8d50vj3e)。[一枝红杏出墙来](../../jiansh/fgw/一枝红杏出墙来/)
 
 V2ray + COW实现go build编译。前者提供Sock5代理，后者提供http代理，并使用Sock5做二级代理
@@ -294,6 +296,101 @@ proxy = socks5://127.0.0.1:1080
 
 然后export代理之后，就可以继续使用 `go build`进行编译
 
+### 二级代理实现： ss + haproxy
+
+[试用haproxy中继ss二级代理](https://mojun.me/2019/02/13/7a667856e9d40e5d2e3f8f4ddfb70bb7/)
+
+[The Four Essential Sections of an HAProxy Configuration](https://www.haproxy.com/blog/the-four-essential-sections-of-an-haproxy-configuration/)
+
+看上面这两个就可以理解基本思路：类似nginx的反向代理。
+
+[official 2.3 version doc](https://www.haproxy.org/download/2.3/doc/configuration.txt)
+
+[HAProxy Load Balancer's development branch (mirror of git.haproxy.org)](https://github.com/haproxy/haproxy)
+
+服务是由端口定义，IP用来寻址到当前机器。
+
+只定义了一个前端服务（名称只是用来区分不同的服务而已）监听6666端口，转发给后端处理。
+
+实测以下配置生效，意味着HAProxy可以直接转发shadowsocks的服务器密码。
+
+```
+global
+
+defaults
+    log global
+    mode    tcp
+    option  dontlognull
+        timeout connect 5000
+        timeout client  50000
+        timeout server  50000
+
+frontend ss-in
+    bind *:6666
+    default_backend ss-out
+
+backend ss-out
+    server server1 233.233.233.233:5315 maxconn 20480
+```
+
+按照相同的思路，也可以使用 haproxy + v2ray实现[二级代理](https://www.jianshu.com/p/124f098ed702)
+
+```
+global
+
+defaults
+    log global
+    mode tcp
+    balance source
+
+    option redispatch      #当serverId对应的服务器挂掉后，强制定向到其他健康的服务器
+    option abortonclose
+    timeout connect 3s
+    timeout client 1m
+    timeout server 1m
+
+listen status
+    bind 0.0.0.0:2008
+    mode http
+    log global
+    stats refresh 2s
+    stats uri /
+    stats auth admin:123456 #认证方式
+
+frontend main
+    bind 0.0.0.0:15555
+    default_backend v2ray-server
+
+backend v2ray-server
+    mode tcp
+    balance roundrobin
+    server anaf007 192.168.1.102:10808 check inter 1000 rise 3 fall 2 weight 2
+    server ip23 192.168.1.154:10808 check inter 1000 rise 3 fall 2 weight 1
+~
+
+```
+
+docker-compse 方式：[V2Ray 多协议多服务器情况使用 HAProxy 负载均衡](https://xzos.net/load-balancing-v2ray-with-haproxy-and-docker/)
+
+[Vmess + TCP + TLS 方式的 HTTP 分流和网站伪装](https://gist.github.com/liberal-boy/f3db4e413a96fa80719db1414f011325)的关键配置——
+
+```
+frontend tls-in
+    # 监听 443 tls，tfo 根据自身情况决定是否开启，证书放置于 /etc/ssl/private/example.com.pem
+    bind *:443 tfo ssl crt /etc/ssl/private/example.com.pem
+    tcp-request inspect-delay 5s
+    tcp-request content accept if HTTP
+    # 将 HTTP 流量发给 web 后端
+    use_backend web if HTTP
+    # 将其他流量发给 vmess 后端
+    default_backend vmess
+
+backend web
+    server server1 127.0.0.1:8080
+  
+backend vmess
+    server server1 127.0.0.1:40001
+```
 
 ## yaml文件配置
 

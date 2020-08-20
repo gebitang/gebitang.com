@@ -126,3 +126,17 @@ API提供接口进行任务初始化：
 |---------|---------|---------|---------|---------|---------|
 |15|10.19.3.130|25|2560|1005|1|
 
+
+[How to retrieve repository size through REST API](https://forum.gitlab.com/t/how-to-retrieve-repository-size-through-rest-api/28088/2)
+
+```
+"statistics": {
+      "commit_count": 5914,
+      "storage_size": 1727206,
+      "repository_size": 0,
+      "wiki_size": 52428,
+      "lfs_objects_size": 0,
+      "job_artifacts_size": 1674778
+    },
+```
+The size is listed in Bytes. To convert to KB, divide by 1,000. To convert to MB, divide by 1,000,000.

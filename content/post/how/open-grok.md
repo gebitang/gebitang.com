@@ -7,6 +7,7 @@ date = "2020-08-16"
 topics = [
     "opengrok"
 ]
+toc=true
 +++
 
 [How to setup OpenGrok](https://github.com/oracle/opengrok/wiki/How-to-setup-OpenGrok)
@@ -89,6 +90,27 @@ java \
 </context-param>
 ```
 
+
+#### 搜索方法
+
+[OpenGrok 搜索用法](https://www.jianshu.com/p/d41d1ca66a2f)
+
+- 主页的`Help`按钮包含了基础的使用方法
+- 官方API调用说明文档:[opengrop API on apiary](https://opengrok.docs.apiary.io/)(Powerful API Design Stack. Built for Developers)
+- openGrok底层使用lucene，支持的正则表达式参考[Lucene regexp page](http://lucene.apache.org/core/8_5_2/core/org/apache/lucene/util/automaton/RegExp.html)
+
+- Full Search	(**full**) Search through all text tokens (words,strings,identifiers,numbers) in index.
+- Definition	(**defs**) Only finds symbol definitions (where e.g. a variable (function, ...) is defined).
+- Symbol	(**refs**)  Only finds symbols (e.g. methods, classes, functions, variables).
+- File Path (**path**)	path of the source file (no need to use dividers, or if, then use "/" - Windows users, "\" is an escape key in Lucene query syntax!   
+Please don't use "\", or replace it with "/").    
+Also note that if you want just exact path, enclose it in "", e.g. "src/mypath", otherwise dividers will be removed and you get more hits.  
+- History	(**hist**) History log comments.
+
+[23 Google Search Tips You'll Want to Learn](https://www.pcmag.com/how-to/23-google-search-tips-youll-want-to-learn)  
+[https://www.google.com/advanced_search](https://www.google.com/advanced_search)  
+[https://www.google.com/advanced_image_search](https://www.google.com/advanced_image_search)  
+搜索操作符支持，类似的google支持的[Search operators](https://support.google.com/websearch/answer/2466433)
 
 --- 
 

@@ -74,6 +74,13 @@ java \
 
 - 复制opengrok/dist/lib/目录下的source.war文件到tomcat服务器的webapps目录
 
+#### 安装管理工具(可选)
+
+python包包括了一下封装后的命令，包括indexer等。在release版本的tar包解压后的`tools`文件夹下包含`opengrok-tools.tar.gz`文件，使用pip命令安装此文件即可。
+
+- 先确保有python3环境
+- 安装python3环境下的pip `sudo apt install python3-pip`(查看帮助`pip3 --help`，或者`pip3 install --help`)， 检查版本`pip3 --version` pip 9.0.1 from /usr/lib/python3/dist-packages (python 3.6)
+- 到tool目录下执行`pip3 install opengrok-tools.tar.gz`
 
 #### 安装web服务器
 

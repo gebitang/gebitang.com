@@ -4,7 +4,7 @@ description = "Longmen Run"
 tags = [
     "run"
 ]
-date = "2020-08-05"
+date = "2020-08-25"
 topics = [
     "run"
 ]
@@ -730,3 +730,14 @@ toc=true
   "pure-u-1-2|https://s3-img.meituan.net/v1/mss_3d027b52ec5a4d589e68050845611e68/ff/n0/0k/rq/xm_56942.jpg@596w_1l.jpg|大圣归来"
   "pure-u-1-2|https://s3-img.meituan.net/v1/mss_3d027b52ec5a4d589e68050845611e68/ff/n0/0k/rq/xn_56941.jpg@596w_1l.jpg|Hero Is Back"
 >}}
+
+--- 
+
+## Week45
+
+**20-08-24** 周一 0.0 
+
+- 昨天早上睡醒已经比较晚了，流鼻涕现象还没控制好，早晚都进行了艾灸。目前只能处于守势，控制住别加重症状阿弥陀佛。
+- 地铁达人跑泡汤反正已经很久没做地铁了，七夕线上跑明天到期，跑团还差两次
+- 幸好到晚上恢复的不错，泡脚完睡前又艾灸了20分钟，但愿明天可以恢复跑步
+

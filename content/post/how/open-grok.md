@@ -169,3 +169,14 @@ API提供接口进行任务初始化：
     },
 ```
 The size is listed in Bytes. To convert to KB, divide by 1,000. To convert to MB, divide by 1,000,000.
+
+[How can I see the size of a GitHub repository before cloning it?](https://stackoverflow.com/questions/8646517/how-can-i-see-the-size-of-a-github-repository-before-cloning-it)
+
+There's a way to access this information through the [GitHub API](https://docs.github.com/en/rest/reference/repos).
+
+*   Syntax: `GET /repos/:user/:repo`
+*   Example: [https://api.github.com/repos/git/git](https://api.github.com/repos/git/git)
+
+When retrieving information about a repository, a property named `size` is valued with the size of the whole repository (including all of its history), in kilobytes.
+
+For instance, the Git repository weights around 124 MB. The `size` property of the returned JSON payload is valued to `124283`.

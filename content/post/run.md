@@ -759,6 +759,10 @@ toc=true
 - 剩下的就是顺利返回起点，已经接近14公里。收工完成，发现不停提示勋章完成——昨天没跑，今天算第45周完成；昨天报名的处女座12.34公里挑战也顺势完成。
 - 平均配速552，~~步频174，总步数14279，~~用时01:21:58，消耗969大卡
 
-![](https://s3-img.meituan.net/v1/mss_3d027b52ec5a4d589e68050845611e68/ff/n0/0k/rx/8k_62419.jpg@596w_1l.jpg)
+{{< fluid_imgs
+  "pure-u-1-2|https://s3-img.meituan.net/v1/mss_3d027b52ec5a4d589e68050845611e68/ff/n0/0k/rx/8k_62419.jpg@596w_1l.jpg|Pao"
+  "pure-u-1-2|https://s3-img.meituan.net/v1/mss_3d027b52ec5a4d589e68050845611e68/ff/n0/0k/s2/3k_110771.jpg@596w_1l.jpg|Peach"
+>}}
 
+- 朋友圈好像时间戳以倒计时相对时间表示，不显示具体时间（岂不是要每天都需要更新这个值？）
 

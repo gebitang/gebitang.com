@@ -19,6 +19,17 @@ toc = true
 
 <!-- more -->
 
+## win 10 锁屏不断网
+
+[Windows 10 如何在锁屏状态下保持网络连接？](https://answers.microsoft.com/zh-hans/windows/forum/all/windows-10/f4edfb17-08c2-416e-bb30-58845e3b5c30)
+
+[怎么设置win10锁屏 不断网](http://ask.zol.com.cn/x/1651245.html)
+
+关键是将网卡的对应设置：“允许计算机关闭此设备以节约电源” 取消勾选。无线/有线网卡找到对应的网卡驱动——
+
+- 无线网卡: 右击-属性-电源管理  
+- 有线网卡：右击-属性-配置-电源管理
+
 ## an attempt was made to access a socket in a way forbidden by its access permissions
 
 >看起来docker-for-win的副作用太大了

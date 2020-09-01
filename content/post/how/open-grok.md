@@ -37,6 +37,7 @@ toc=true
 [官方教程](https://github.com/universal-ctags/ctags/blob/master/docs/autotools.rst)
 
 - 安装依赖环境 
+
 ```
 sudo apt install \
     gcc make \
@@ -180,3 +181,36 @@ There's a way to access this information through the [GitHub API](https://docs.
 When retrieving information about a repository, a property named `size` is valued with the size of the whole repository (including all of its history), in kilobytes.
 
 For instance, the Git repository weights around 124 MB. The `size` property of the returned JSON payload is valued to `124283`.
+
+[403 Access Denied on Tomcat 8 Manager App without prompting for user/password](https://stackoverflow.com/questions/38551166/403-access-denied-on-tomcat-8-manager-app-without-prompting-for-user-password)
+
+[Manager App HOW-TO](http://tomcat.apache.org/tomcat-8.0-doc/manager-howto.html#Configuring_Manager_Application_Access)
+
+### centOS 上可能遇到的问题
+
+- 依赖环境的参数不同
+
+```
+# on Centos： diff with Fedora on python3-docutils vs. python3-docutils-doc
+sudo yum install -y \
+    gcc make \
+    pkgconfig autoconf automake \
+    python3-docutils-doc \
+    libseccomp-devel \
+    jansson-devel \
+    libyaml-devel \
+    libxml2-devel  
+```
+
+- centOS上默认的git版本检查`git --version`为`git version 1.8.3.1`，使用opengrok创建indexer的时候回报错——[官方issue #131：seeing lots of warning messages for unknown date format with older Git](https://github.com/oracle/opengrok/issues/1331)
+
+>17:23:31 WARNING: GitRepository not working (missing binaries?): xxx  
+>17:23:31 WARNING: Failed to determineCurrentVersion for xxx: java.io.IOException: fatal: unknown date format iso8601-strict
+
+
+[Install Latest Git ( Git 2.x ) on CentOS 7](https://computingforgeeks.com/how-to-install-latest-version-of-git-git-2-x-on-centos-7/)
+
+> 1. 卸载旧git `sudo yum remove git*`  
+> 2. 添加endpoint源`sudo yum -y install https://packages.endpoint.com/rhel/7/os/x86_64/endpoint-repo-1.7-1.x86_64.rpm`    
+> 3. 安装新git `sudo yum install git`  
+> 4. 检查版本： `git version 2.24.1`

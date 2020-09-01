@@ -1065,6 +1065,37 @@ root     pts/0        10.35.0.4        Thu Jan  4 15:39 - 15:41  (00:01)
 - **644** : **110 (rw-)** for user; **100 (r--)** for group while **100 (r--)** for others
 - **755** : **111 (rwx)** for user; **101 (r-x)** for group while **101 (r-x)** for others
 
+[assigning read/write privileges for a folder to a user in CentOS 7](https://unix.stackexchange.com/questions/174787/assigning-read-write-privileges-for-a-folder-to-a-user-in-centos-7)
+
+The User class - a.k.a. UGO
+The Mode class - a.k.a. RWX
+
+- User (u): The owner of file
+- Group (g): Other user who are in group (to access files)
+- Other (o): Everyone else
+
+```
+ UGO    UGO    UGO    UGO
+ ------------------------
+ 111    110    101    100
+  7      6      5      4
+
+# ls -al 
+# 0777
+ U  G  O
+-----------  
+-rwxrwxrwx   owner  group  file-count  date  filename
+
+# 0644
+ U  G  O
+-----------   
+-rw-r--r--   owner  group  file-count  date  filename
+```
+
+通常来说，owner拥有文件目录的所有权限（rwx），所以最简单的就是修改目录的owner `chown someusername /somefolder`
+
+[Birth of Unix Circa 1969 -1974(The Evolution of the Unix Time-sharing System)](https://www.bell-labs.com/usr/dmr/www/hist.html) on a [discarded DEC PDP-7(The Strange Birth and Long Life of Unix)](http://spectrum.ieee.org/computing/software/the-strange-birth-and-long-life-of-unix/) (see [photo and history](http://www.soemtron.org/pdp7.html))
+
 ### 命令行快捷键
 
 ```

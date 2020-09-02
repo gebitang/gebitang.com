@@ -83,6 +83,65 @@ python包包括了一下封装后的命令，包括indexer等。在release版本
 - 安装python3环境下的pip `sudo apt install python3-pip`(查看帮助`pip3 --help`，或者`pip3 install --help`)， 检查版本`pip3 --version` pip 9.0.1 from /usr/lib/python3/dist-packages (python 3.6)
 - 到tool目录下执行`pip3 install opengrok-tools.tar.gz`
 
+
+[OpenGrok tools](https://github.com/oracle/opengrok/tree/master/opengrok-tools)
+
+- 确保有python3环境，最好使用独立的虚拟环境。创建虚拟环境`python3 -m venv opengroktools` （ubuntu环境下需要先安装 `apt-get install python3-venv`）
+- 将虚拟环境中的pip升级到最新版本`opengroktools/bin/python -m pip install --upgrage pip` (否则在安装opengrok-tools.tar.gz时可能会报错)
+- 安装工具包`opengroktools/bin/python -m pip install /tools/opengrok-tools.tar.gz`
+
+在单位虚拟环境目录下可以使用这些tools，例如`opengroktools/bin/opengrok-indexer`
+
+激活与失效展示：
+
+```
+#使用当前虚拟环境
+➜  ~ . opengroktools/bin/activate
+(opengroktools) ➜  ~ opengrok-indexer --help
+usage: opengrok-indexer [-h] [-l LOGLEVEL] [-v] [-j JAVA] [-J JAVA_OPTS]
+                        [-e ENVIRONMENT] [--doprint boolean]
+                        (-a JAR | -c CLASSPATH) [-C]
+                        options [options ...]
+
+OpenGrok indexer wrapper
+
+positional arguments:
+  options               options
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -l LOGLEVEL, --loglevel LOGLEVEL
+                        Set log level (e.g. "ERROR")
+  -v, --version         Version of the tool
+  -j JAVA, --java JAVA  path to java binary
+  -J JAVA_OPTS, --java_opts JAVA_OPTS
+                        java options. Use one for every java option, e.g.
+                        -J=-server -J=-Xmx16g
+  -e ENVIRONMENT, --environment ENVIRONMENT
+                        Environment variables in the form of name=value
+  --doprint boolean     Enable/disable printing of messages from the
+                        application as they are produced.
+  -a JAR, --jar JAR     Path to jar archive to run
+  -c CLASSPATH, --classpath CLASSPATH
+                        Class path
+  -C, --no_ctags_check  Suppress checking for ctags
+# 退出虚拟环境
+(opengroktools) ➜  ~ deactivate
+➜  ~
+# 使用命令
+➜  ~ opengrok-index --help
+zsh: command not found: opengrok-index
+# 使用绝对路径
+➜  ~ opengroktools/bin/opengrok-indexer --help
+usage: opengrok-indexer [-h] [-l LOGLEVEL] [-v] [-j JAVA] [-J JAVA_OPTS]
+                        [-e ENVIRONMENT] [--doprint boolean]
+                        (-a JAR | -c CLASSPATH) [-C]
+                        options [options ...]
+...
+```
+
+暴力删除虚拟环境： `rm -r opengroktools`
+
 #### 安装web服务器
 
 [Setup Apache Tomcat 8 | 8.5 on Ubuntu 16.04 | 18.04 LTS](https://websiteforstudents.com/setup-apache-tomcat-8-8-5-on-ubuntu-16-04-18-04-lts/)

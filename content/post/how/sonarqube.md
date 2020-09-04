@@ -1640,3 +1640,28 @@ Administration（配置）--> Configuration（配置）--> Analysis Scope (排�
 [https://github.com/jacoco/jacoco/issues/193](https://github.com/jacoco/jacoco/issues/193)  
 [https://github.com/mockito/mockito/issues/757](https://github.com/mockito/mockito/issues/757)  
 [https://github.com/jacoco/jacoco/issues/51](https://github.com/jacoco/jacoco/issues/51)  
+
+###  测试代码被误认为是源码
+
+原因：`sonar.source`参数值未正确设置。
+
+[Coverage info displayed on Test code](https://community.sonarsource.com/t/coverage-info-displayed-on-test-code/30452)
+
+使用sonar-scanner执行扫描动作，Java项目工程指定项目目录作为`sonar.source`参数的值。`sonar.source=.`一直执行的挺好。
+
+最近有项目组反馈“测试目录里*INT的代码”被识别为了源码——导致覆盖率降低。类似在`src/test/java`目录下创建了类似`ServiceXXXINT.java`类型的文件。
+
+看起来是如果测试目录下的文件如果以Test结尾，即使使用之前的设定，也会被识别为测试代码；否则会被认为是源码文件。
+
+官方人员建议：使用 `mvn sonar:sonar`执行，会默认识别出项目结构。
+[文档](https://docs.sonarqube.org/latest/analysis/analysis-parameters/)中也做了说明——
+
+
+`sonar.source` Comma-separated paths to directories containing main source files.  
+>Read from build system for Maven, Gradle, MSBuild projects. Defaults to project base directory when neither sonar.sources nor sonar.tests is provided.
+
+将此参数指定到`src/main/java`目录即可解决此问题。 
+
+`mvn sonar:sonar`会自动识别项目结构：[Introduction to the Standard Directory Layout](https://maven.apache.org/guides/introduction/introduction-to-the-standard-directory-layout.html)
+
+![](https://upload-images.jianshu.io/upload_images/3296949-265e8fe314e1edf1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)

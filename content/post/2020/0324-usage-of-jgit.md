@@ -140,4 +140,77 @@ You can also set different pull and push URLs for every remote separately, by ch
 [2]: https://help.github.com/articles/set-up-git#password-caching
 [3]: https://help.github.com/articles/creating-an-access-token-for-command-line-use
 
+### JGit 拉取代码逻辑
+
+默认clone方法，将默认的远端分支clone到本地。假设远端默认分支为master。则本地跟踪的最新分支为`HEAD -> master, origin/master`
+
+这几个概念要理解清楚——
+
+- `master` is a local branch
+- `origin/master` is a remote branch (which is a local copy of the branch named "master" on the remote named "origin")
+One remote:
+- `origin` is a remote
+
+>`HEAD`: the current commit your repo is on. Most of the time HEAD points to the latest commit in your current branch, but that doesn't have to be the case. HEAD really just means "what is my repo currently pointing at".
+
+```
+git = Git.cloneRepository()
+                        .setURI(urlPath)
+                        .setBranch(branch)
+                        .setDirectory(localFile)
+                        .setCredentialsProvider(credentialsProvider)
+                        .call();
+```
+相当于本地clone远端分支`origin/master`到本地`master`分支，当前最新`HEAD`执行`master`分支
+
+拉取代码是使用类似如下代码——
+
+```
+PullResult result = git.pull()
+    .setCredentialsProvider(user)
+    .setRemote("origin")
+    .setRemoteBranchName("dev")
+    .call();
+```
+
+这样操作的结果比较“诡异”——`HEAD -> master, origin/dev`。相当于本地master分支重新跟踪了远端的`origin/dev`分支。
+
+命令行操作可以使用`git checkout -B master origin/master`重置。主要`-b|-B`的区别。
+
+> -B <new_branch> is created if it doesn’t exist; otherwise, it is reset.
+
+拉取前配合stash操作——`git.stashCreate().call();` 倒是可以满足“拉取指定分支最新代码”的需求。
+
+
+[JGit使用示例](https://github.com/centic9/jgit-cookbook), Please make sure to take a look at the nicely written [introduction](http://www.codeaffine.com/2015/12/15/getting-started-with-jgit/) and also use the existing [JavaDoc](http://download.eclipse.org/jgit/site/5.5.0.201909110433-r/apidocs/) and the [User Guide](http://wiki.eclipse.org/JGit/User_Guide) as well.
+
+
+[What are the git concepts of HEAD, master, origin?](https://stackoverflow.com/questions/8196544/what-are-the-git-concepts-of-head-master-origin)
+
+>I highly recommend the book ["Pro Git" by Scott Chacon](http://git-scm.com/book). Take time and really read it, while exploring an actual git repo as you do.
+
+>**HEAD**: the current commit your repo is on. Most of the time `HEAD` points to the latest commit in your current branch, but that doesn't have to be the case. `HEAD` really just means "what is my repo currently pointing at".
+
+>In the event that the commit `HEAD` refers to is not the tip of any branch, this is called a "detached head".
+
+>**master**: the name of the default branch that git creates for you when first creating a repo. In most cases, "master" means "the main branch". Most shops have everyone pushing to master, and master is considered the definitive view of the repo. But it's also common for release branches to be made off of master for releasing. Your local repo has its own master branch, that almost always follows the master of a remote repo.
+
+>**origin**: the default name that git gives to your main remote repo. Your box has its own repo, and you most likely push out to some remote repo that you and all your coworkers push to. That remote repo is almost always called origin, but it doesn't have to be.
+
+>`HEAD` is an official notion in git. `HEAD` always has a well-defined meaning. `master` and `origin` are common names usually used in git, but they don't have to be.
+
+查看`.git/config`文件可以看到具体对应的分支，类似——
+
+```
+[remote "origin"]
+        url = git@github.com:gebitang/gebitang.com.git
+        fetch = +refs/heads/*:refs/remotes/origin/*
+[branch "master"]
+        remote = origin
+        merge = refs/heads/master
+```
+
+“refs/heads/master” and “refs/remotes/origin/master”  are two different symbolic names that can point to different things. `refs/heads/master` is a branch in your working copy named `master`. Frequently that is a tracking branch of `refs/remotes/origin/master` because `origin` is the default name for the remote created by git clone and its primary branch is usually also named `master`.
+
+You can see the difference between them with `git rev-list refs/heads/master..refs/remotes/origin/master` which will be empty if they are the same and will otherwise list the commits between them.
 

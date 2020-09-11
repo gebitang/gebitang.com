@@ -179,7 +179,8 @@ Also note that if you want just exact path, enclose it in "", e.g. "src/mypath",
 [https://www.google.com/advanced_image_search](https://www.google.com/advanced_image_search)  
 搜索操作符支持，类似的google支持的[Search operators](https://support.google.com/websearch/answer/2466433)
 
---- 
+
+### gitlab API 获取project
 
 [Gitlab : List all the projects and all the groups](https://stackoverflow.com/a/45087988/1087122)
 
@@ -190,31 +191,6 @@ Also note that if you want just exact path, enclose it in "", e.g. "src/mypath",
 只返回head部分，其中包括`X-Total`和`X-Total-Pages`的值。默认page从1开始计算，默认每页返回[20条](https://docs.gitlab.com/ce/api/#pagination)，最大返回[100个条目](https://docs.gitlab.com/11.11/ee/api/README.html#pagination)
 
 官方推荐的[gitlab api客户端实现](https://about.gitlab.com/partners/#api-clients)
-
----
-
-**任务：**将所有的项目平均分配给四个相同的服务实例分别处理。任务异步处理，时效要求不高，要所有的项目都完成后再统一发送结果
-
-- API调用无法实现（对外提供服务是统一的出口，处理只会分配给任意的其中一台）
-- 只能通过主动分别请求“任务分发”服务。使用数据库做中介
-- “结果需要统一发送”
-- 服务实例有可能被kill，分配给自己的任务部分还没全部完成
-
----
-
-API提供接口进行任务初始化：
-
-- 查询总量，分配任务
-- 实例启动时，上报状态，
-- 执行器空闲状态下轮询任务表
-- 如果有任务：如果有自己：开始执行；如果没有，查询每个机器是否存活，然后更新任务表，自己接力已经被killed的机器任务
-- 执行完一个任务后，更新自己所属的任务完成的数目
-
-
-|id|ip|startPage|total|finish|status|
-|---------|---------|---------|---------|---------|---------|
-|15|10.19.3.130|25|2560|1005|1|
-
 
 [How to retrieve repository size through REST API](https://forum.gitlab.com/t/how-to-retrieve-repository-size-through-rest-api/28088/2)
 
@@ -273,3 +249,62 @@ sudo yum install -y \
 > 2. 添加endpoint源`sudo yum -y install https://packages.endpoint.com/rhel/7/os/x86_64/endpoint-repo-1.7-1.x86_64.rpm`    
 > 3. 安装新git `sudo yum install git`  
 > 4. 检查版本： `git version 2.24.1`
+
+
+### opengrok tools使用 
+
+[Per project management and workflow](https://github.com/oracle/opengrok/wiki/Per-project-management-and-workflow)
+
+[OpenGrok项目管理](https://www.jianshu.com/p/63c88743b880) 最后使用 `opengrok-indexer`时认为最后两个参数被忽略了——
+
+```
+opengroktools/bin/opengrok-indexer -a opengrok/dist/lib/opengrok.jar -- \
+    -c /usr/local/bin/ctags \
+    -U 'http://localhost:8080/source' \
+    -s /data1/data/groups -d opengrok/data0907 \
+    -R fresh_config.xml
+    -H 234_sale \
+    234_sale
+```
+
+事实上，`opengrok-indexer`执行当个项目的index动作时，不需要指定源码、数据目录。这些值在配置文件`-R fresh_config.xml`中已经定义。使用官方的方法即可，效果如下——
+
+```
+opengroktools/bin/opengrok-indexer -a opengrok/dist/lib/opengrok.jar -- \
+>     -c /usr/local/bin/ctags \
+>     -U 'http://localhost:8080/source' \
+>     -R fresh_config.xml
+    -H sub1 \
+    sub1 Sep 11, 2020 3:59:44 PM org.opengrok.indexer.configuration.Configuration read
+INFO: Reading configuration from /home/vip/fresh_config.xml
+Sep 11, 2020 3:59:45 PM org.opengrok.indexer.index.Indexer parseOptions
+...
+..
+.
+INFO: Starting traversal of directory /t24_2650_ai-cv-ocr
+Sep 11, 2020 4:20:11 PM org.opengrok.indexer.util.Statistics report
+INFO: Done traversal of directory /t24_2650_ai-cv-ocr (took 33.529 seconds)
+Sep 11, 2020 4:20:11 PM org.opengrok.indexer.index.IndexDatabase update
+INFO: Starting indexing of directory /t24_2650_ai-cv-ocr
+Sep 11, 2020 4:20:11 PM org.opengrok.indexer.util.Statistics report
+INFO: Done indexing of directory /t24_2650_ai-cv-ocr (took 0 ms)
+Sep 11, 2020 4:20:12 PM org.opengrok.indexer.index.IndexDatabase update
+INFO: Starting traversal of directory /t34_69_public_service
+
+```
+
+`-H`参数实际是由opengrok.jar包提供的，详见下。这样默认会将log输出到控制台，等待结果中，看起来新添加项目后，还需要对已有项目“巡视”一番？
+
+`opengroktools/bin/opengrok-projadm -b opengrok -d 342_znkf`删除效果——
+
+```
+$ opengroktools/bin/opengrok-projadm -b opengrok -d 342_znkf
+Deleting project 342_znkf and its index data
+Removing source code under /data1/data/groups/342_znkf
+Refreshing configuration
+```
+将删除索引文件、源码文件、刷新配置文件。
+
+使用`curl -s -X GET http://localhost:8080/source/api/v1/configuration -o fresh_config.xml` 可以下载更新后的配置文件。可以看到已不再包含刚删除的项目。
+
+

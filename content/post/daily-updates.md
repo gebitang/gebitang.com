@@ -1060,6 +1060,12 @@ This is a footnote.[^2]
 - `cd large-repository`
 - `git fetch --unshallow`
 
+### git clone with token in command line 
+
+work for gitlab at list: 
+
+`git clone https://oauth2:ACCESS_TOKEN@somegitlab.com/vendor/package.git`
+
 ### change remote url
 
 ```

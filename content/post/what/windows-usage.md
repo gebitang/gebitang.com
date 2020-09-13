@@ -481,6 +481,12 @@ netsh wlan set hostednetwork mode=allow ssid=cai key=12345678
 # 即 %HOMEDRIVE%%HOMEPATH% = C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe
 ```
 
+## 关闭skype自启动
+
+[How to stop Skype from starting automatically when booting Windows 10?](https://superuser.com/questions/1288235/how-to-stop-skype-from-starting-automatically-when-booting-windows-10)
+
+不是普通的win32应用，在上面的启动注册表中看不到，需要到`主页-->应用-->启动`中进行关闭
+
 ## 获取时间戳
 [获取系统日期、时间戳记](http://atgfss.iteye.com/blog/354054)</br>
 [get current time in windows command line](https://stackoverflow.com/questions/203090/how-do-i-get-current-datetime-on-the-windows-command-line-in-a-suitable-format/)

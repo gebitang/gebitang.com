@@ -307,6 +307,16 @@ curl  -F "file_1=@files.zip" -F "file_2=@/dev/null;filename=" -F "file_3=@/dev/n
 md5sum test.file |awk -F\  '{print $1}' | wc -L 
 ```
 
+### Base64 
+
+openssl can also encode and decode base64
+
+```
+$ openssl enc -base64 <<< 'Hello, World!'
+SGVsbG8sIFdvcmxkIQo=
+$ openssl enc -base64 -d <<< SGVsbG8sIFdvcmxkIQo=
+Hello, World!
+```
 
 ### curl form 
 

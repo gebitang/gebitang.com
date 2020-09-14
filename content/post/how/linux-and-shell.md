@@ -281,6 +281,16 @@ There was an error updating. Try again later?
 > git stash pop
 ```
 
+### 查找指定深度的文件目录
+
+`find . -mindepth 2 -maxdepth 2 -type d` 参数顺序如果为` find . -type d -maxdepth 2 -mindepth 2`将提示——
+
+```
+find: warning: you have specified the -maxdepth option after a non-option argument -type, but options are not positional (-maxdepth affects tests specified before it as well as those specified after it).  Please specify options before other arguments.
+
+find: warning: you have specified the -mindepth option after a non-option argument -type, but options are not positional (-mindepth affects tests specified before it as well as those specified after it).  Please specify options before other arguments.
+
+```
 
 ### screenshots and screencasts
 

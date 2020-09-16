@@ -216,8 +216,7 @@ You can see the difference between them with `git rev-list refs/heads/master..re
 
 ### Git.open(new File(localPath)) 报错
 
-先说结论：最大支持**5**个对象同时处理`Git git = Git.open(new File(localPath));` 的逻辑。提交的代码可以参考这里: [fixed threadpool up to 5 threads with LinkedBlockingQueue of unlimited
-queue size](https://git.eclipse.org/c/jgit/jgit.git/commit/?id=097f01bfb65dd8f7b3d562bbd1713ecf4be5675e)
+先说结论：最大支持**5**个对象同时处理`Git git = Git.open(new File(localPath));` 的逻辑。提交的代码可以参考这里: [fixed threadpool up to 5 threads with LinkedBlockingQueue of unlimited queue size](https://git.eclipse.org/c/jgit/jgit.git/commit/?id=097f01bfb65dd8f7b3d562bbd1713ecf4be5675e)
 
 
 JGit工具可以使用类型如下代码创建`Git git = Git.open(new File(localPath));` 

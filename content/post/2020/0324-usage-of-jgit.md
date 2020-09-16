@@ -239,7 +239,7 @@ java.util.concurrent.RejectedExecutionException: Task java.util.concurrent.Compl
         at org.eclipse.jgit.lib.BaseRepositoryBuilder.build(BaseRepositoryBuilder.java:583) ~[org.eclipse.jgit-5.7.0.202003090808-r.jar:5.7.0.202003090808-r]
         at org.eclipse.jgit.api.Git.open(Git.java:91) ~[org.eclipse.jgit-5.7.0.202003090808-r.jar:5.7.0.202003090808-r]
         at org.eclipse.jgit.api.Git.open(Git.java:71) ~[org.eclipse.jgit-5.7.0.202003090808-r.jar:5.7.0.202003090808-r]
-        at com.guazi.stf.web.service.GitService.openGitPull(GitService.java:124) [sharestf.20200916162334.jar:?]
+        at com.stf.web.service.GitService.openGitPull(GitService.java:124) [sharestf.20200916162334.jar:?]
 
 ```
 

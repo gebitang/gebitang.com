@@ -214,3 +214,58 @@ PullResult result = git.pull()
 
 You can see the difference between them with `git rev-list refs/heads/master..refs/remotes/origin/master` which will be empty if they are the same and will otherwise list the commits between them.
 
+### Git.open(new File(localPath)) 报错
+
+先说结论：最大支持**5**个对象同时处理`Git git = Git.open(new File(localPath));` 的逻辑。
+
+JGit工具可以使用类型如下代码创建`Git git = Git.open(new File(localPath));` 
+
+实际使用中遇到多个项目并行更新时报错，详情如下——
+
+```
+java.util.concurrent.RejectedExecutionException: Task java.util.concurrent.CompletableFuture$AsyncSupply@46cc6ff9 rejected from java.util.concurrent.ThreadPoolExecutor@5c820ea8[Running, pool size = 5, active threads = 5, queued tasks = 0, completed tasks = 0]
+        at java.util.concurrent.ThreadPoolExecutor$AbortPolicy.rejectedExecution(ThreadPoolExecutor.java:2063) ~[?:1.8.0_231]
+        at java.util.concurrent.ThreadPoolExecutor.reject(ThreadPoolExecutor.java:830) ~[?:1.8.0_231]
+        at java.util.concurrent.ThreadPoolExecutor.execute(ThreadPoolExecutor.java:1379) ~[?:1.8.0_231]
+        at java.util.concurrent.CompletableFuture.asyncSupplyStage(CompletableFuture.java:1604) ~[?:1.8.0_231]
+        at java.util.concurrent.CompletableFuture.supplyAsync(CompletableFuture.java:1830) ~[?:1.8.0_231]
+        at org.eclipse.jgit.util.FS$FileStoreAttributes.getFileStoreAttributes(FS.java:329) ~[org.eclipse.jgit-5.7.0.202003090808-r.jar:5.7.0.202003090808-r]
+        at org.eclipse.jgit.util.FS$FileStoreAttributes.get(FS.java:296) ~[org.eclipse.jgit-5.7.0.202003090808-r.jar:5.7.0.202003090808-r]
+        at org.eclipse.jgit.util.FS.getFileStoreAttributes(FS.java:767) ~[org.eclipse.jgit-5.7.0.202003090808-r.jar:5.7.0.202003090808-r]
+        at org.eclipse.jgit.internal.storage.file.FileSnapshot.<init>(FileSnapshot.java:224) ~[org.eclipse.jgit-5.7.0.202003090808-r.jar:5.7.0.202003090808-r]
+        at org.eclipse.jgit.internal.storage.file.FileSnapshot.<init>(FileSnapshot.java:205) ~[org.eclipse.jgit-5.7.0.202003090808-r.jar:5.7.0.202003090808-r]
+        at org.eclipse.jgit.internal.storage.file.FileSnapshot.save(FileSnapshot.java:102) ~[org.eclipse.jgit-5.7.0.202003090808-r.jar:5.7.0.202003090808-r]
+        at org.eclipse.jgit.internal.storage.file.FileRepository.<init>(FileRepository.java:209) ~[org.eclipse.jgit-5.7.0.202003090808-r.jar:5.7.0.202003090808-r]
+        at org.eclipse.jgit.lib.BaseRepositoryBuilder.build(BaseRepositoryBuilder.java:583) ~[org.eclipse.jgit-5.7.0.202003090808-r.jar:5.7.0.202003090808-r]
+        at org.eclipse.jgit.api.Git.open(Git.java:91) ~[org.eclipse.jgit-5.7.0.202003090808-r.jar:5.7.0.202003090808-r]
+        at org.eclipse.jgit.api.Git.open(Git.java:71) ~[org.eclipse.jgit-5.7.0.202003090808-r.jar:5.7.0.202003090808-r]
+        at com.guazi.stf.web.service.GitService.openGitPull(GitService.java:124) [sharestf.20200916162334.jar:?]
+
+```
+
+按图索骥即可，在`BaseRepositoryBuilder`的`build`方法中会新建`R repo = (R) new FileRepository(setup());`在`FileRepository`的构造方法中会进入` FileSnapshot.save(getIndexFile());`的逻辑——对于已存在的git仓库来说，代码——
+
+```
+if (!isBare()) {
+			snapshot = FileSnapshot.save(getIndexFile());
+		}
+```
+
+最终在读取FileStoreAttributes的方法`getFileStoreAttributes(Path dir) `中有异步调用——只有默认定义的Executor `FUTURE_RUNNER`进行执行操作。这个执行器的配置如下——
+
+```
+private static final Executor FUTURE_RUNNER = new ThreadPoolExecutor(0,
+	5, 30L, TimeUnit.SECONDS, new SynchronousQueue<Runnable>(),
+	runnable -> {
+		Thread t = new Thread(runnable, "FileStoreAttributeReader-" //$NON-NLS-1$
+				+ threadNumber.getAndIncrement());
+		// Make sure these threads don't prevent application/JVM
+		// shutdown.
+		t.setDaemon(true);
+		return t;
+	});
+```
+
+这也是报错的原因：线程池中只有5个线程，都已经被占有`Running, pool size = 5, active threads = 5, queued tasks = 0, completed tasks = 0` 
+
+JGit中对Git的抽象需要研究下，为什么这里需要做一个` FileSnapshot.save`的动作？`FileStore`和`FileStoreAttributes`都代表什么含义？

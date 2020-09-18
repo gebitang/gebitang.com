@@ -146,6 +146,23 @@ Deleting original file Flutter Crash Course for Beginners 2020 - Build a Flutter
 Deleting original file Flutter Crash Course for Beginners 2020 - Build a Flutter App with Google's Flutter & Dart-x0uinJvhNxI.f140.m4a (pass -k to keep)
 ```
 
+## ffmpeg create video 
+
+>七年前在饭否记录了一颗树的四季
+
+一行[命令](https://unix.stackexchange.com/a/81097/430879)`>ffmpeg -r 5 -i E:\00D\qishimg\%3d.jpg -c:v libx264   E:\00D\images.mp4` [命令说明wiki](https://trac.ffmpeg.org/wiki/Slideshow)  
+
+效果[展示](http://t.cn/A64RQsI3)
+
+- 当时打了tag\#气树\#，搜索"我的"，点击更多，直到全部加载完成（可以使用GoFullPage插件将此时的页面截取下来，见最后）
+- 使用Selenium写脚本(配合自动等待+手动执行上一步）将数据获取回来
+- 解析，获取到格式化数据，将所有的图片下载下来并按照顺序保存为 `001.jpg`,`002.jpg`,`003.jpg`…… 
+- 执行`ffmpeg -f image2 -i E:\00D\%3d.jpg E:\00E\imagestovideo.mp4` 使用默认的配置生成视频。
+
+[工具推荐youtube-dl](https://www.jianshu.com/p/63db8f1a5e93)里提到安装`ffmpeg`工具。
+
+GoFullPage截取的图片为浏览器宽度的图片，使用`BufferedImage croppedImage = originalImage.getSubimage(x, y, width, height);`截取保存需要的图片。
+
 ## Mac PC远程访问Window PC
 
 - 同一个局域网

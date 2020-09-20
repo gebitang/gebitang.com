@@ -341,3 +341,8 @@ Docker Community Edition
 
 别瞎折腾了，迁移到Mac/Linux上跑不香吗~ 
 
+## 由浅入深吃透 Docker
+
+[1元课程：](https://kaiwu.lagou.com/course/courseInfo.htm?courseId=455)
+
+Docker 是利用 Linux 的 Namespace 、Cgroups 和联合文件系统三大机制来保证实现的：使用 Namespace 做主机名、网络、PID 等资源的隔离，使用 Cgroups 对进程或者进程组做资源（例如：CPU、内存等）的限制，联合文件系统用于镜像构建和容器运行环境。

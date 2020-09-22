@@ -26,8 +26,23 @@ toc = true
 
 - `gebitang.com`
 - `9x9.in`
-- `geb.im`
+- ~~`geb.im`~~ 
 - `mixin.lol`
-- `longmen.run`
+- ~~`longmen.run`~~
 
-“拓词+跑步+日更”的这段坚持算是实践了`先Run起来再说`的motto，下一步是**`知行合一`**的目标**`Knonledge Is Action`**
+“拓词+跑步+日更”的这段坚持算是实践了`先Run起来再说`的motto，
+
+**`知行合一`** AKA **`Knowledge Is Action`**
+
+--- 
+
+**update** 
+
+~~`geb.im`~~ 去年9月9注册的im([Ilse of Man](https://en.wikipedia.org/wiki/Isle_of_Man))域名，头像也是此IM的[变种](https://thenounproject.com/search/?q=triskelion&i=2069917)。  
+~~`longmen.run`~~ 注册于2020年1月13日，寓意长期主义跑下去。
+
+gem.im域名已经到期，计划longmen.run这个域名到期后也不再续费。
+
+**知行合一**通常的英文翻译为The Unity of Knowledge and Action. 但我认为华衫老师的翻译意见**Knowledge Is Action**更恰当准确。强调行动，有动作感。
+
+**`知行合一`** = **`Knowledge Is Action`**

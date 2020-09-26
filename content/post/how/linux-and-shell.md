@@ -118,6 +118,25 @@ Root can run commands as other users via the "su" command. I believe if you crea
 
 `su -c /path/to/your/script username`
 
+### && in Shell
+
+[Boolean operators ( &&, -a, ||, -o ) in Bash](https://stackoverflow.com/a/20449742/1087122)
+
+Rule of thumb: Use `-a` and `-o` inside square brackets, `&&` and `||` outside.
+
+It's important to understand the difference between shell syntax and the syntax of the [ command.
+
+`&&` and `||` are shell operators. They are used to combine the results of two commands. Because they are shell syntax, they have special syntactical significance and cannot be used as arguments to commands.
+
+`[` is not special syntax. It's actually a command with the name `[`, also known as `test`. Since `[` is just a regular command, it uses `-a` and `-o` for its and and or operators. It can't use `&&` and `||` because those are shell syntax that commands don't get to see.
+
+```
+[ "$1" = 'yes' ] && [ -r $2.txt ]
+#效果相同
+[[ "$1" = 'yes'  &&  -r $2.txt ]]
+```
+
+
 ### change swap size
 
 [Ref](https://bogdancornianu.com/change-swap-size-in-ubuntu/) or [refer here](https://linuxize.com/post/how-to-add-swap-space-on-ubuntu-18-04/)

@@ -307,4 +307,60 @@ Refreshing configuration
 
 使用`curl -s -X GET http://localhost:8080/source/api/v1/configuration -o fresh_config.xml` 可以下载更新后的配置文件。可以看到已不再包含刚删除的项目。
 
+### OpenGrok 认证
 
+将gitlab上的项目作为OpenGrok的输入，直接可以搜索全量代码。需要做基本的认证。
+
+- 申请内部域名，支持域名访问
+- 禁止IP+port+path的访问方式：使用nginx作为代理，利用iptables关闭端口的incoming流量
+- 先直接在nginx上做基本的认证
+
+这样可以确保本地的同步服务可以继续使用，但外部访问需要使用用户名+密码的方式。
+
+#### 关闭8080端口incoming流量
+
+[CentOS / RHEL : How to block incoming and outgoing ports using iptables](https://www.thegeekdiary.com/centos-rhel-how-to-block-incoming-and-outgoing-ports-using-iptables/)
+
+`iptables -A INPUT -p tcp --destination-port 8080 -j DROP`关闭8080端口incoming流量
+
+[iptables 删除rule](https://www.digitalocean.com/community/tutorials/how-to-list-and-delete-iptables-firewall-rules)
+
+- 按照具体的规则删除：`iptables -D INPUT -p tcp --destination-port 8080 -j DROP`
+- 按行删除：`sudo iptables -L --line-numbers`列出行，执行`sudo iptables -D INPUT 1`
+
+
+#### 配置nginx认证
+
+- 安装httpd-tools以生产密码文件 `yum  -y install httpd-tools` 
+
+`htpasswd -2 -c /usr/local/src/passwd.db username` 为username生成密码，并使用SHA-256进行密码加密。保持在-c的参数文件中。
+
+这个文件每行保持一组用户名密码信息。nginx的[` auth_basic_user_file`](http://nginx.org/en/docs/http/ngx_http_auth_basic_module.html)模块支持[配置多个用户](https://serverfault.com/a/896901)
+
+可以使用`htpasswd -h`查看其它参数
+
+- 配置nginx
+
+```
+server {
+    listen      80;
+    server_name  opengrok.domain.com;
+    auth_basic  "not ready, only master can go";   #添加此配置
+    auth_basic_user_file  /usr/local/src/passwd.db; #加载生成的密码文件
+
+    if ($host != "opengrok.domain.com") {
+      return 404;
+    }
+
+    location / {
+            proxy_pass http://localhost:8080/;
+    }
+}
+```
+
+- 重启nginx即生效，`nginx -s reload`(需要root用户配置nginx服务，先执行`nginx -t`进行验证test)
+
+
+下一步再研究接入SSO的方式如何实现。
+
+[Opengrok SSO configuration: issue #3189](https://github.com/oracle/opengrok/issues/3189)

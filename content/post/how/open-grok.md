@@ -307,6 +307,21 @@ Refreshing configuration
 
 使用`curl -s -X GET http://localhost:8080/source/api/v1/configuration -o fresh_config.xml` 可以下载更新后的配置文件。可以看到已不再包含刚删除的项目。
 
+### 新增项目
+
+- 拉取newPrj项目
+- 获取最新配置信息
+- 添加newPrj项目
+
+以上三步对应以下三条命令
+
+```
+opengroktools/bin/opengrok-projadm -b opengrok -a newPrj
+curl -s -X GET http://localhost:8080/source/api/v1/configuration -o fresh_config.xml
+opengroktools/bin/opengrok-indexer -a opengrok/dist/lib/opengrok.jar -- -c /usr/local/bin/ctags -U 'http://localhost:8080/source' -R fresh_config.xml -H newPrj newPrj 
+
+```
+
 ### OpenGrok 认证
 
 将gitlab上的项目作为OpenGrok的输入，直接可以搜索全量代码。需要做基本的认证。
@@ -321,7 +336,14 @@ Refreshing configuration
 
 [CentOS / RHEL : How to block incoming and outgoing ports using iptables](https://www.thegeekdiary.com/centos-rhel-how-to-block-incoming-and-outgoing-ports-using-iptables/)
 
-`iptables -A INPUT -p tcp --destination-port 8080 -j DROP`关闭8080端口incoming流量
+~~`iptables -A INPUT -p tcp --destination-port 8080 -j DROP`关闭8080端口incoming流量~~
+这样把本地请求也给关闭了，使用下面的方式运行本地连接，拒绝外部访问，[参考](https://serverfault.com/a/247180)
+
+```
+iptables -A INPUT -p tcp -s localhost --dport 8080 -j ACCEPT
+iptables -A INPUT -p tcp --dport 8080 -j DROP
+
+```
 
 [iptables 删除rule](https://www.digitalocean.com/community/tutorials/how-to-list-and-delete-iptables-firewall-rules)
 

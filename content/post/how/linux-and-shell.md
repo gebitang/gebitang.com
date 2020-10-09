@@ -170,6 +170,16 @@ wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
 
 ```
 
+### refresh favicon for chrome
+
+[How to refresh bookmark favicons in chrome](https://superuser.com/questions/375321/how-to-refresh-bookmark-favicons-in-chrome) 
+
+1.  Close Chrome
+2.  Open your [User Data Directory](https://chromium.googlesource.com/chromium/src/+/master/docs/user_data_dir.md) folder
+3.  Delete the `Favicons` file
+4.  Run Chrome
+5.  Visit sites to force the icons to be re-downloaded
+
 ### grep 过滤多个字符
 
 ```

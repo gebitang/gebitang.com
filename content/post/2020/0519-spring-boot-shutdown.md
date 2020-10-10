@@ -359,3 +359,45 @@ public class AllStrategiesExampleBean implements InitializingBean {
 [main] INFO o.b.startup.AllStrategiesExampleBean - InitializingBean
 [main] INFO o.b.startup.AllStrategiesExampleBean - init-method
 ```
+
+### Nginx: connect() failed (111: Connection refused) while connecting to upstream
+
+
+```
+2020/10/07 21:39:38 [error] 26881#26881: *2013 connect() failed (111: Connection refused) while connecting to upstream, client: 196.52.43.110,     server: xxxx.com, request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:9999/", host: "123.57.140.21:80"
+```
+
+一直运行的好好的小破站出现类似上面的提示。一开始一直认为是环境的问题，搜了一顿类似的问题——
+
+[nginx: connect() failed (111: Connection refused) while connecting to upstream](https://serverfault.com/questions/529394/nginx-connect-failed-111-connection-refused-while-connecting-to-upstream)
+
+[connect() failed (111: Connection refused) while connecting to upstream](https://serverfault.com/questions/317393/connect-failed-111-connection-refused-while-connecting-to-upstream)
+
+[What causes the 'Connection Refused' message?](https://serverfault.com/questions/725262/what-causes-the-connection-refused-message)
+
+通过`netstat -ano | grep 9999` 查看端口正常。本地的另外一个服务也正常，只有这个Spring启动的端口报错。
+
+查看nginx的error.log发现还有另外的一个域名也绑定到了相同的ip上，在aliyun上提工单，一直秀智障AI机器人，放弃。
+
+更新了最新的站点代码，直接从本地调用这个端口的服务，也提示`Connection refused`——这说明跟nginx没有任何关系
+
+跟踪了一下log，意识到问题所在——还是基础知识没掌握住。
+
+[SpringBoot启动逻辑](https://www.jianshu.com/p/433af14980a7)利用这里的`@PostConstruct`注解的`init`方法执行了几个定时任务。后来发现定时任务失效，所以补了一个定时任务的“硬核”监控。导致这个方法一直没有结束返回。
+
+这造成Spring没有完全启动成功。定义的[commandLineRunner](https://www.baeldung.com/running-setup-logic-on-startup-in-spring#6-spring-boot-commandlinerunner)没有执行。
+
+
+所以上面说的没错，链接被拒绝，只有两种情况：.
+
+- 1. 说明这个端口服务没有正常启动(Nothing is listening on the IP:Port you are trying to connect to.)
+- 2. 端口被防火墙阻拦(The port is blocked by a firewall.)
+
+log中的`Tomcat initialized with port(s)`并不意味着这个端口上的服务启动成功。
+
+```
+2020-10-10 10:36:18.629  INFO 19165 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 9999 (http)
+2020-10-10 10:36:18.734  INFO 19165 --- [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2020-10-10 10:36:18.735  INFO 19165 --- [           main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.21]
+
+```

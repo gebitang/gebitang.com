@@ -190,3 +190,172 @@ Throws:
 - IllegalStateException – If the virtual machine is already in the process of shutting down
 - SecurityException – If a security manager is present and it denies RuntimePermission("shutdownHooks")
 
+### Spring启动逻辑
+
+[启动逻辑，如何启动自定义的服务](https://www.baeldung.com/running-setup-logic-on-startup-in-spring)
+
+有些一次性启动的服务，同时又想使用`autowired`的对象。
+
+- 不能在`component`的构造函数里直接调用`autowired`的对象——因为还没初始化完成。所以，推论就是可以在构造完成之后进行这个动作。使用注解`@PostConstruct`可以达到这个效果
+
+```
+@PostConstruct
+public void init() {
+    LOG.info(Arrays.asList(environment.getDefaultProfiles()));
+}
+```
+
+- 使用`InitializingBean`接口和`afterPropertiesSet() `方法
+
+```
+@Component
+public class InitializingBeanExampleBean implements InitializingBean {
+ 
+    private static final Logger LOG 
+      = Logger.getLogger(InitializingBeanExampleBean.class);
+ 
+    @Autowired
+    private Environment environment;
+ 
+    @Override
+    public void afterPropertiesSet() throws Exception {
+        LOG.info(Arrays.asList(environment.getDefaultProfiles()));
+    }
+}
+
+```
+
+- 使用`ApplicationListener`接口 或 `@EventListener `注解 完全启动完成之后执行
+
+```
+@Component
+public class StartupApplicationListenerExample implements
+  ApplicationListener<ContextRefreshedEvent> {
+ 
+    private static final Logger LOG 
+      = Logger.getLogger(StartupApplicationListenerExample.class);
+ 
+    public static int counter;
+ 
+    @Override public void onApplicationEvent(ContextRefreshedEvent event) {
+        LOG.info("Increment counter");
+        counter++;
+    }
+}
+```
+效果等同于——
+
+```
+@Component
+public class EventListenerExampleBean {
+ 
+    private static final Logger LOG 
+      = Logger.getLogger(EventListenerExampleBean.class);
+ 
+    public static int counter;
+ 
+    @EventListener
+    public void onApplicationEvent(ContextRefreshedEvent event) {
+        LOG.info("Increment counter");
+        counter++;
+    }
+}
+```
+
+...
+基本上这些就够用了，另外还有——
+
+- The @Bean Initmethod Attribute
+- Constructor Injection
+- Spring Boot CommandLineRunner
+-  Spring Boot ApplicationRunner
+
+对应的介绍可以参考原文。
+
+对于 `CommandLineRunner`方式——
+```
+@Component
+public class CommandLineAppStartupRunner implements CommandLineRunner {
+    private static final Logger LOG =
+      LoggerFactory.getLogger(CommandLineAppStartupRunner.class);
+ 
+    public static int counter;
+ 
+    @Override
+    public void run(String...args) throws Exception {
+        LOG.info("Increment counter");
+        counter++;
+    }
+}
+```
+实际使用中可以写成类似这样——
+
+```
+@Bean
+public CommandLineRunner commandLineRunner(ApplicationContext ctx) {
+    return args -> {
+
+        System.out.println("\nLet's inspect the beans provided by Spring Boot:\n");
+
+        String[] beanNames = ctx.getBeanDefinitionNames();
+
+        Arrays.sort(beanNames);
+        for (String beanName : beanNames) {
+            System.out.println(beanName);
+        }
+
+        System.out.println("total: "+ beanNames.length);
+        System.out.println("\nDone:)\n");
+
+
+    };
+}
+```
+
+总结：实际的启动顺序——
+
+The order of execution is as follows:
+
+- The constructor
+- the @PostConstruct annotated methods
+- the InitializingBean's afterPropertiesSet() method
+- the initialization method specified as init-method in XML
+
+完整示例——
+
+```
+@Component
+@Scope(value = "prototype")
+public class AllStrategiesExampleBean implements InitializingBean {
+ 
+    private static final Logger LOG 
+      = Logger.getLogger(AllStrategiesExampleBean.class);
+ 
+    public AllStrategiesExampleBean() {
+        LOG.info("Constructor");
+    }
+ 
+    @Override
+    public void afterPropertiesSet() throws Exception {
+        LOG.info("InitializingBean");
+    }
+ 
+    @PostConstruct
+    public void postConstruct() {
+        LOG.info("PostConstruct");
+    }
+ 
+    public void init() {
+        LOG.info("init-method");
+    }
+}
+```
+
+输出内容——
+
+```
+[main] INFO o.b.startup.AllStrategiesExampleBean - Constructor
+[main] INFO o.b.startup.AllStrategiesExampleBean - PostConstruct
+[main] INFO o.b.startup.AllStrategiesExampleBean - InitializingBean
+[main] INFO o.b.startup.AllStrategiesExampleBean - init-method
+```

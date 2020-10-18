@@ -587,15 +587,7 @@ A*博:
 - 这几天常常遇到一位提着音响跟着唱歌的大爷，我出院子，他进院子。今天好像改“朗诵了”
 - 正式的线上马的活动，一次跑步只能选择一项进行达标，选择“厦门马拉松线上跑”的任务
 
-
-{{< fluid_imgs
-  "pure-u-1-2|https://s3-img.meituan.net/v1/mss_3d027b52ec5a4d589e68050845611e68/ff/n0/0k/xm/qe_219976.jpg@596w_1l.jpg|8.92"
-  "pure-u-1-2|https://s3-img.meituan.net/v1/mss_3d027b52ec5a4d589e68050845611e68/ff/n0/0k/xr/r4_231902.jpg@596w_1l.jpg|2020"
->}}
-
 ![](https://s3-img.meituan.net/v1/mss_3d027b52ec5a4d589e68050845611e68/ff/n0/0k/xm/qe_219976.jpg@596w_1l.jpg)
-
-![](https://s3-img.meituan.net/v1/mss_3d027b52ec5a4d589e68050845611e68/ff/n0/0k/xr/r4_231902.jpg@596w_1l.jpg)
 
 **20-10-18** 周日 8.52 (6.33 + 2.18)
 
@@ -606,3 +598,11 @@ A*博:
 
 ![](https://s3-img.meituan.net/v1/mss_3d027b52ec5a4d589e68050845611e68/ff/n0/0k/xq/bg_220082.jpg@596w_1l.jpg)
 
+
+### 总结
+
+周年最后一周完成年度勋章，提前七十五天，排名悦跑一万四千零一位
+
+![](https://s3-img.meituan.net/v1/mss_3d027b52ec5a4d589e68050845611e68/ff/n0/0k/xq/bh_220081.jpg@596w_1l.jpg)
+
+![](https://s3-img.meituan.net/v1/mss_3d027b52ec5a4d589e68050845611e68/ff/n0/0k/xr/r4_231902.jpg@596w_1l.jpg)

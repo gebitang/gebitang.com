@@ -4,7 +4,7 @@ Blackburn is a clear and responsive theme for [Hugo](//gohugo.io).
 
 ## Overview
 
-* Based on Yahoo's [Pure CSS] (http://purecss.io/) (v1.0.0)
+* Based on Yahoo's [Pure CSS](http://purecss.io/) (v1.0.0)
 * Fixed sidebar with social links:
   * Twitter
   * GNU social
@@ -37,7 +37,7 @@ Blackburn is a clear and responsive theme for [Hugo](//gohugo.io).
 * Client-side syntax highlighting by [Highlight.js](//highlightjs.org) (v9.12.0)
 * Web analytics by Google Analytics
 * Comments by Disqus
-* Icons by Font Awesome (v4.7.0)
+* Icons by Font Awesome (v5.9.0)
 
 ## Demo
 
@@ -94,6 +94,9 @@ paginate = 10
   custom_css = ["css/my.css"]
   custom_js = ["js/my.js"]
 
+  [params.piwikAnalytics]
+    siteid = 2
+    piwikroot = "//analytics.example.com/"
 [menu]
   # Shown in the side menu.
   [[menu.main]]

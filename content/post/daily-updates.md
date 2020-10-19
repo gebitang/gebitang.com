@@ -309,6 +309,7 @@ grails war
 下载完整版本安装后，在安装目录下的`docs/userguide/userguide.html`下有完整的手册
 
 #### Gradle via scoop
+
 window下的包管理工具 [`scoop`](https://github.com/lukesampson/scoop/wiki)：默认安装在用户目录下，然后再将由scoop安装的包安装到自己的apps目录下。达到不需要提供用户权限选项的目的。
 
 例如，使用scoop安装gradle（也是gradle官方推荐的安装方法）。`scoop install gradle`
@@ -404,6 +405,24 @@ OS:           Windows 10 10.0 amd64
 
 
 ```
+
+scoop安装的应用默认下载到cache目录，
+
+### gradle每次下载问题
+
+在项目的`gradle/wrapper/gradle-wrapper.properties`中指定本地目录即可，[参考](https://stackoverflow.com/a/22898473/1087122)
+
+```
+#Wed Feb 13 09:43:26 CET 2019
+distributionBase=GRADLE_USER_HOME
+distributionPath=wrapper/dists
+zipStoreBase=GRADLE_USER_HOME
+zipStorePath=wrapper/dists
+#distributionUrl=https\://services.gradle.org/distributions/gradle-6.3-all.zip
+distributionUrl=gradle-6.3-all.zip
+
+```
+
 
 #### Gradle projects 
 
@@ -1130,6 +1149,7 @@ This is a footnote.[^2]
 
 ## Git命令使用
 可配合GUI工具和命令行工具参考。
+
 
 ### git http clone方式报错：
 

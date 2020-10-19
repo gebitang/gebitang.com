@@ -1150,6 +1150,24 @@ This is a footnote.[^2]
 ## Git命令使用
 可配合GUI工具和命令行工具参考。
 
+### Filename too long in Git for Windows
+
+[Filename too long in Git for Windows](https://stackoverflow.com/questions/22575662/filename-too-long-in-git-for-windows)
+
+使用管理员权限执行`git config --system core.longpaths true`修复此问题。
+
+error: could not lock config file C:/Program Files/Git/mingw64/etc/gitconfig: Permission denied
+
+
+git clone sonarqube源码时，提示
+
+>Resolving deltas: 100% (498459/498459), done.
+fatal: cannot create directory at 'server/sonar-db-migration/src/test/resources/org/sonar/server/platform/db/migration/version/v84/permissiontemplates/fk/permtplcharacteristics/AddUniqueIndexOnTemplateUuidAndPermissionKeyColumnsOfPermTplCharacteristicsTableTest': Filename too long
+warning: Clone succeeded, but checkout failed.
+You can inspect what was checked out with 'git status'
+and retry the checkout with 'git checkout -f HEAD'
+
+然后再执行`git checkout -f HEAD`。今天我守着不完整的代码找半天webhook相关的内容
 
 ### git http clone方式报错：
 

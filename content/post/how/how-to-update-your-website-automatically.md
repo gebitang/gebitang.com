@@ -27,6 +27,69 @@ toc = true
 - Hugo安装和基础操作：完成站点创建
 - Wrecker配置
 
+## update config
+
+写的时候Hugo版本还是0.34，现在最新版本已经是0.76。升级后生成的静态站点主页一直未空，log提示下面两个问题——
+
+
+- Page.Hugo is deprecated and will be removed in a future release. Use the global hugo function. 
+
+- Page.RSSLink is deprecated and will be removed in a future release. Use the Output Format's link, e.g. something like: `{{ with .OutputFormats.Get "RSS" }}{{ .RelPermalink }}{{ end }}`
+
+在论坛和github issue里都可以查到对应的问题。
+
+第一个问题：[issues #1017](https://github.com/wowchemy/wowchemy-hugo-modules/issues/1017)，[Page’s .Hugo is deprecated as of 0.55.0](https://discourse.gohugo.io/t/pages-hugo-is-deprecated-as-of-0-55-0/17991) 
+
+第二个问题：[issue #4427](https://github.com/gohugoio/hugo/issues/4427)，[Page.Hugo is deprecated / Page.RSSLink is deprecated](https://discourse.gohugo.io/t/page-hugo-is-deprecated-page-rsslink-is-deprecated/27037)
+
+都指向同一个文件：`head.huml`
+
+删除`{{.Hugo.Generator}}`，或修改为`  {{hugo.Generator}}`以解决第一个问题；
+
+第二个问题针对`RSSLink`的定义，例如——
+
+```
+  {{ if .RSSLink }}
+  <link rel="alternate" type="application/rss+xml" title="{{ .Site.Title }}" href="{{ .RSSLink }}" />
+  {{ end }}
+```
+
+修改为——
+
+```
+  {{ if .OutputFormats.Get "RSS" }}
+  <link rel="alternate" type="application/rss+xml" title="{{ .Site.Title }}"
+    href='{{ with .OutputFormats.Get "RSS" }}{{ .RelPermalink }}{{ end }}' />
+  {{ end }}
+```
+
+`social.html`文件中也涉及到第二个问题的处理——
+
+```
+{{ if .RSSLink }}
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="{{ .RSSLink }}"><i class="fa fa-rss fa-fw"></i>RSS</a>
+    </li>
+    {{ end }}
+```
+
+修改为——
+
+```
+    {{ if .OutputFormats.Get "RSS" }}
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href='{{ with .OutputFormats.Get "RSS" }}{{ .RelPermalink }}{{ end }}'><i
+          class="fas fa-rss"></i>RSS</a>
+    </li>
+    {{ end }}
+```
+
+另外一个更简单的版本就是：升级使用的主题（例如我使用的这个blackburn主题的最新版本已经针对新版hugo做了优化处理）
+
+升级后对应的CI文件`wrecker.yml`中使用的版本也需要做对应的更新，最新版本为[`0.74.3`](https://app.wercker.com/steps/arjen/hugo-build)
+
+处理完还能继续支持一段时间，Github Action再议:(
+
 ## Git安装、使用
 
 [官网下载](https://git-scm.com/downloads)安装对应平台的应用程序。

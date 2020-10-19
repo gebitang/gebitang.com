@@ -5,7 +5,7 @@ tags = [
     "shell",
     "work"
 ]
-date = "2017-08-24"
+date = "2020-08-24"
 topics = [
     "work"
 ]
@@ -323,6 +323,85 @@ Linking ~\scoop\apps\gradle\current => ~\scoop\apps\gradle\4.9
 Creating shim for 'gradle'.
 'gradle' (4.9) was installed successfully!
 'gradle' suggests installing 'java/oraclejdk' or 'java/openjdk'.
+
+```
+
+一直使用maven比较多，gradle用得少一点。今天准备本地编译sonarqube需要使用gradle 6.3版本，查了一下，本地版本为4.9。但环境变量里也没配置，“这个版本是从哪里来的呢？”一时还有点诧异。
+
+在个人文件夹下看的scoop才想起来应该是使用这个工具安装的。
+
+- 升级gradle `scoop update gradle@6.3`
+- 卸载gradle `scoop uninstall gradle`
+- 安装gradle `scoop install gradle@6.3`
+
+```
+>gradle -v
+
+------------------------------------------------------------
+Gradle 4.9
+------------------------------------------------------------
+
+Build time:   2018-07-16 08:14:03 UTC
+Revision:     efcf8c1cf533b03c70f394f270f46a174c738efc
+
+Kotlin DSL:   0.18.4
+Kotlin:       1.2.41
+Groovy:       2.4.12
+Ant:          Apache Ant(TM) version 1.9.11 compiled on March 23 2018
+JVM:          1.8.0_181 (Oracle Corporation 25.181-b13)
+OS:           Windows 10 10.0 amd64
+
+# uninstall 
+scoop uninstall gradle
+Uninstalling 'gradle' (4.9).
+Removing shim for 'gradle'.
+Unlinking ~\scoop\apps\gradle\current
+'gradle' was uninstalled.
+
+# install directly
+scoop install gradle@6.3
+Updating Scoop...
+Updating 'main' bucket...
+ * c714ae58 yq: Update to version 3.4.1                                  58 minutes ago
+ * 43dead4a vim-nightly: Update to version 8.2.1862                      58 minutes ago
+ * 47b9b892 minio: Update to version 2020-10-18T21-54-12Z                58 minutes ago
+ * f30f5794 helmfile: Update to version 0.132.0                          58 minutes ago
+ * e30936bb gobuster: Update to version 3.1.0                            58 minutes ago
+ * deb6225d chisel: Update to version 1.7.2                              58 minutes ago
+ * ea1793c9 ccache: Update to version 4.0                                58 minutes ago
+Scoop was updated successfully!
+WARN  Given version (6.3) does not match manifest (6.7)
+WARN  Attempting to generate manifest for 'gradle' (6.3)
+Autoupdating gradle
+Searching hash for gradle-6.3-all.zip in https://services.gradle.org/distributions/gradle-6.3-all.zip.sha256
+Found: 0f316a67b971b7b571dac7215dcf2591a30994b3450e0629925ffcfe2c68cc5c using Extract Mode
+Writing updated gradle manifest
+Installing 'gradle' (6.3) [64bit]
+gradle-6.3-all.zip (138.4 MB) [===============================================================================] 100%
+Checking hash of gradle-6.3-all.zip ... ok.
+Extracting gradle-6.3-all.zip ... done.
+Linking ~\scoop\apps\gradle\current => ~\scoop\apps\gradle\6.3
+Creating shim for 'gradle'.
+'gradle' (6.3) was installed successfully!
+'gradle' suggests installing 'java/oraclejdk' or 'java/openjdk'.
+
+# check result
+
+>gradle -v
+
+------------------------------------------------------------
+Gradle 6.3
+------------------------------------------------------------
+
+Build time:   2020-03-24 19:52:07 UTC
+Revision:     bacd40b727b0130eeac8855ae3f9fd9a0b207c60
+
+Kotlin:       1.3.70
+Groovy:       2.5.10
+Ant:          Apache Ant(TM) version 1.10.7 compiled on September 1 2019
+JVM:          1.8.0_181 (Oracle Corporation 25.181-b13)
+OS:           Windows 10 10.0 amd64
+
 
 ```
 

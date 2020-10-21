@@ -51,6 +51,31 @@ window环境下编译成功，但生成的sh脚本默认的回车格式为`Windo
 
 使用相同的SQ，可正常启动——备份恢复成功。
 
+### 版本升级
+
+官方指导[upgrade guide](https://redirect.sonarsource.com/doc/upgrading.html).
+
+- 下载、解压
+- 根据[兼容性列表](https://docs.sonarqube.org/display/PLUG/Plugin+Version+Matrix)复制对应的插件到插件目录`extensions/plugins`
+- 更新对应的配置文件`sonar.properties` 和 `wrapper.conf`
+- 停止旧版本、启动新版本
+- 访问`http://yourSonarQubeServerURL/setup`目录根据提示进行升级操作
+
+使用SQ8.5版本时，启动后首页提示：
+
+>### SonarQube is under maintenance
+>
+>While waiting, you might want to investigate [new plugins](https://redirect.sonarsource.com/doc/plugin-library.html) to extend the current functionality.
+>
+>If you are an administrator and have no idea why this message is being shown, you should read the [upgrade guide](https://redirect.sonarsource.com/doc/upgrading.html).
+
+
+后台log提示需要升级数据库：
+
+>2020.10.21 14:10:07 WARN  app[][startup] ################################################################################
+>2020.10.21 14:10:07 WARN  app[][startup] The database must be manually upgraded. Please backup the database and browse /setup. For more information: https://docs.sonarqube.org/latest/setup/upgrading
+>2020.10.21 14:10:07 WARN  app[][startup] ################################################################################
+
 
 ### webhook: Server Unreachable
 

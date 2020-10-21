@@ -423,6 +423,12 @@ distributionUrl=gradle-6.3-all.zip
 
 ```
 
+### skip test in gradle
+
+[Gradle build without tests](https://stackoverflow.com/a/4714118/1087122), [Skipping Tests With Gradle](https://www.baeldung.com/gradle-skip-tests)
+
+`gradle build -x test `
+
 
 #### Gradle projects 
 

@@ -28,6 +28,30 @@ window环境下编译成功，但生成的sh脚本默认的回车格式为`Windo
 
 使用脚本启动时提示报错，修改后启动log提示`permission denied`，添加权限后提示`no such file`，对比了下载的官方版本，这两个文件`elasticsearch-env`和`elasticsearch-env`都是shell脚本。windows下编译时格式问题(每行结尾包含`^M `字符样式，实际是windows下的换行符在unix环境下的展示问题)
 
+### postgresql数据库备份恢复
+
+使用默认管理员账号`postgres`
+
+备份：  
+- dump数据库：`pg_dump -F c -b -v -f backup/sonar.backup sonar` 
+
+另外一台机器：  
+- 删除旧数据库，新建同名数据库： `dropdb sonar; createdb sonar`
+- 恢复数据库: `pg_restore -d sonar sonar.backup` 
+
+```
+...
+2020.10.21 11:14:27 ERROR web[][o.s.s.p.PlatformImpl] Web server startup failed: Database was upgraded to a more recent version of SonarQube. A backup must probably be restored or the DB settings are incorrect.
+2020.10.21 11:14:27 INFO  web[][o.s.s.a.EmbeddedTomcat] HTTP connector enabled on port 9000
+2020.10.21 11:14:27 INFO  web[][o.s.p.ProcessEntryPoint] Hard stopping process
+...
+
+```
+备份数据库在SQ8.4版本，恢复在8.3版本时报错：` Database was upgraded to a more recent version of SonarQube. A backup must probably be restored or the DB settings are incorrect.`
+
+使用相同的SQ，可正常启动——备份恢复成功。
+
+
 ### webhook: Server Unreachable
 
 现象：使用内网域名顶一顶webhook url，一直工作正常，但最近提示Server Unreachable。使用内网域名对应的服务ip:port的方式可以正常调用。

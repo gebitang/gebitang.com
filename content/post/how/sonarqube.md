@@ -13,6 +13,21 @@ toc = true
 
 ## SonarQube Source
 
+使用SQ代替SonarQube
+
+### 源码编译问题
+
+window环境下编译成功，但生成的sh脚本默认的回车格式为`Windows(CR LF)`，在linux环境下可以使用`cat -v sonar.sh`进行查看验证。
+
+- window下可以利用`dos2unix`应用进行转换，[下载站点](http://dos2unix.sourceforge.net/)
+- linux下使用脚本`sed -i 's/\r$//g' input`进行替换，参考[sed Delete / Remove ^M Carriage Return (Line Feed / CRLF) on Linux or Unix](https://www.cyberciti.biz/faq/sed-remove-m-and-line-feeds-under-unix-linux-bsd-appleosx/)
+
+涉及到的脚本包括：
+- `/bin/linux-x86-64`目录下的启动脚本`sonar.sh`
+- `/elasticsearch/bin`目录下的两个脚本`elasticsearch-env`和`elasticsearch-env`
+
+使用脚本启动时提示报错，修改后启动log提示`permission denied`，添加权限后提示`no such file`，对比了下载的官方版本，这两个文件`elasticsearch-env`和`elasticsearch-env`都是shell脚本。windows下编译时格式问题(每行结尾包含`^M `字符样式，实际是windows下的换行符在unix环境下的展示问题)
+
 ### webhook: Server Unreachable
 
 现象：使用内网域名顶一顶webhook url，一直工作正常，但最近提示Server Unreachable。使用内网域名对应的服务ip:port的方式可以正常调用。

@@ -11,6 +11,24 @@ topics = [
 toc = true
 +++
 
+## SonarQube Source
+
+### webhook: Server Unreachable
+
+现象：使用内网域名顶一顶webhook url，一直工作正常，但最近提示Server Unreachable。使用内网域名对应的服务ip:port的方式可以正常调用。
+
+临时方案：尝试打开`sonar.log.level.app=DEBUG`然后重启SQ服务。域名对应的回调地址恢复正常。[How to check the details of webhook call?](https://community.sonarsource.com/t/how-to-check-the-details-of-webhook-call/)
+
+webhook对应的log为Compute Engine，应该打开`sonar.log.level.ce=DEBUG`，对应的log类似——
+
+>2020.10.21 10:30:15 DEBUG ce[AXVI_gynQqxgVa12m-LG][o.s.s.w.WebHooksImpl] Sent webhook 'wh-name' | url=http://su.mycallback.com/api/callback/url | time=655ms | status=200
+
+这样可以跟踪到源码位置`WebHooksImpl`，属于`server:sonar-server-common`模块下的`org.sonar.server.webhook`包。回调请求使用的是okhttp的类库，还不清楚为什么会出现服务不可用的问题。可以以此为入口跟踪一下源码逻辑。
+
+目前源码可以成功打包，修改对应代码增加log信息（慢慢使用自己编译的版本替换现有的发布版本？）
+
+## SonarQube Usage
+
 ### SonarQube Build Breaker
 
 有需求希望在Sonar的静态代码扫描之后，直接判断是否终止打包流程。

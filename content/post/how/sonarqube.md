@@ -93,6 +93,61 @@ webhook对应的log为Compute Engine，应该打开`sonar.log.level.ce=DEBUG`，
 
 ## SonarQube Usage
 
+环境准备以及使用中的问题
+
+### SonarQube in Docker 
+
+[Installing SonarQube from the Docker Image](https://docs.sonarqube.org/latest/setup/install-server/#header-4)
+
+[sonarqube on hub docker](https://hub.docker.com/_/sonarqube/)， [dockerfile for sonarqube](https://github.com/SonarSource/docker-sonarqube) 
+
+[about docker volume](https://docs.docker.com/storage/volumes/)
+
+- 拉取镜像 `docker pull sonarqube:8.2-community`
+- 启动前创建volumes `docker volume create --name sonarqube_data`，包括`sonarqube_data`，`sonarqube_logs`，`sonarqube_extensions`
+- 启动容器
+
+```
+# 使用docker run --help查看
+docker run --stop-timeout 3600 -d --name sonarqube \
+-p 9000:9000 \
+-e SONAR_JDBC_URL=jdbc:postgresql://host:port/dbname \
+-e SONAR_JDBC_USERNAME=sonar \
+-e SONAR_JDBC_PASSWORD=sonarpassword \
+-v sonarqube_data:/opt/sonarqube/data \
+-v sonarqube_extensions:/opt/sonarqube/extensions \
+-v sonarqube_logs:/opt/sonarqube/logs \
+sonarqube:8.4.2-community
+```
+
+**注意事项：**  
+
+- 环境要求 
+
+因为SQ包含嵌入的ES，所以docker宿主机需要满足[Elasticsearch production mode requirements](https://www.elastic.co/guide/en/elasticsearch/reference/current/docker.html#docker-cli-run-prod-mode)和[File Descriptors configuration](https://www.elastic.co/guide/en/elasticsearch/reference/current/file-descriptors.html)的要求
+
+```
+sysctl -w vm.max_map_count=262144
+sysctl -w fs.file-max=65536
+ulimit -n 65536
+ulimit -u 4096
+
+```
+
+- 关闭参数
+
+为保证SQ正常关闭，将关闭容器的默认时间10秒变为3600秒 `docker run --stop-timeout 3600 `
+
+- Mac上查看volume的内容
+
+[Host path of volume Docker Desktop for Mac](https://forums.docker.com/t/host-path-of-volume/12277)， [Screen Commands for Docker for Mac](https://gist.github.com/joacim-boive/569b66c3be673a3f3e802939fe8edd56)
+
+`docker inspect sonarqube_logs`查看对应volume的挂载点  
+
+执行`screen ~/Library/Containers/com.docker.docker/Data/com.docker.driver.amd64-linux/tty` 登录到docker虚拟机  
+
+到对应的目录，例如`cd /var/lib/docker/volumes/sonarqube_logs/_data`下可以看到对应的log。执行 `Ctrl + a k`退出虚拟机
+
 ### SonarQube Build Breaker
 
 有需求希望在Sonar的静态代码扫描之后，直接判断是否终止打包流程。

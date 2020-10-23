@@ -193,6 +193,17 @@ postgres (PostgreSQL) 10.12 (Ubuntu 10.12-0ubuntu0.18.04.1)
 9. `\dt`显示当前数据的表
 10. `SELECT pg_size_pretty( pg_database_size('dbname') );` 查看数据库大小，或者使用 `\l+ dbname`， 使用 `\l`默认[显示所有数据库](https://stackoverflow.com/a/23990410/1087122)
 11. `SELECT pg_size_pretty(pg_relation_size('table_name'));` 查看当前连接的数据库里的表的大小
+12. `\d+` 显示当前数据库的表的大小
+13. 按照大小排列当前数据库的表大小
+
+```
+# https://stackoverflow.com/a/21738505/1087122
+#  the size of all tables in the schema public 
+select table_name, pg_relation_size(quote_ident(table_name))
+from information_schema.tables
+where table_schema = 'public'
+order by 2 desc
+```
 
 ```
 ➜  ~ sudo -i -u postgres

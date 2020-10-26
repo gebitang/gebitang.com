@@ -43,6 +43,40 @@ window环境下编译成功，但生成的sh脚本默认的回车格式为`Windo
 - 删除旧数据库，新建同名数据库： `dropdb sonar; createdb sonar`
 - 恢复数据库: `pg_restore -d sonar sonar.backup` 
 
+恢复时提示`could not execute query: ERROR:  must be owner of extension plpgsql`，log信息类似如下——
+
+```
+sonar@stf:~$ pg_restore -d sonar sonarmain.backup
+pg_restore: [archiver (db)] Error while PROCESSING TOC:
+pg_restore: [archiver (db)] Error from TOC entry 4332; 0 0 COMMENT EXTENSION plpgsql
+pg_restore: [archiver (db)] could not execute query: ERROR:  must be owner of extension plpgsql
+    Command was: COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
+
+WARNING: errors ignored on restore: 1
+
+```
+
+参考[Seeing error "Must be owner of extension plpgsql" during a Postgres database restore.](https://knowledge.broadcom.com/external/article/4307/seeing-error-must-be-owner-of-extension.html)，大部分场景下可以忽略这个错误（实测上述报错不影响导入结果，包含1213个项目的数据库重新连接后ES基于数据库重建索引成功）。因为尝试导入自身无权限的数据，可以使用`-n public`参数忽略。参考[PostgreSQL 9.1 pg_restore error regarding PLPGSQL](https://stackoverflow.com/a/11776053/1087122)
+
+```
+# pg_restroe --help查看参数含义： -c 对应的数据库如果存在内容，先删除内容； -n 只导入指定的schema；
+pg_restore -U username -c -n public -d database_name
+
+```
+
+提示这个错误的原因是因为执行`pg_dump`导出时，创建了schema`plpgsql`，参考[How to solve privileges issues when restore PostgreSQL Database
+](https://stackoverflow.com/questions/13410631/how-to-solve-privileges-issues-when-restore-postgresql-database/15452741)
+
+```
+# actual content of pg_dump
+CREATE SCHEMA public;
+COMMENT ON SCHEMA public IS 'standard public schema';
+CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
+COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
+```
+
+
+如果版本不一致，可能涉及到升级问题，查看sonar.log即可
 ```
 ...
 2020.10.21 11:14:27 ERROR web[][o.s.s.p.PlatformImpl] Web server startup failed: Database was upgraded to a more recent version of SonarQube. A backup must probably be restored or the DB settings are incorrect.

@@ -15,10 +15,6 @@ toc = true
 
 使用SQ代替SonarQube
 
-[加解密tar文件](https://www.tecmint.com/encrypt-decrypt-files-tar-openssl-linux/)
-
-[How to Create an Encrypted (Password Protected) Tar or Zip Archive in Linux](https://www.putorius.net/how-to-create-enrcypted-password.html)
-
 ### 源码编译问题
 
 window环境下编译成功，但生成的sh脚本默认的回车格式为`Windows(CR LF)`，在linux环境下可以使用`cat -v sonar.sh`进行查看验证。

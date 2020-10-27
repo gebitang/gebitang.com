@@ -118,6 +118,32 @@ Root can run commands as other users via the "su" command. I believe if you crea
 
 `su -c /path/to/your/script username`
 
+### 使用opensll加解密压缩文件
+
+[加解密tar文件](https://www.tecmint.com/encrypt-decrypt-files-tar-openssl-linux/)，通过命令行传递密码[How to use password argument in via command line to openssl for decryption](https://superuser.com/questions/724986/how-to-use-password-argument-in-via-command-line-to-openssl-for-decryption)
+
+将当前目录下所有文件进行压缩，然后传递给openssl进行加密(`-e` encrypt, `-d` decrypt)，使用`aes256`加密算法，输出到`mainsonar.tar.gz`文件，加密密码`-pass pass:password`
+```
+tar -czf - * | openssl enc -e -aes256 -pass pass:password -out mainsonar.tar.gz
+```
+
+加密后的tar包直接使用`tar -xzf mainsonar.tar.gz`解压时报错——
+
+>gzip: stdin: not in gzip format  
+>tar: Child returned status 1  
+>tar: Error is not recoverable: exiting now  
+
+使用openssl先进行解密—— `openssl enc -d -aes256 -in mainsonar.tar.gz -pass pass:password |tar xz`，如果传递的密码不正确，报错——
+
+>gzip: stdin: not in gzip format  
+>tar: Child died with signal 13  
+>tar: Error is not recoverable: exiting now  
+
+- 其他加密方式，参考[How to Create an Encrypted (Password Protected) Tar or Zip Archive in Linux](https://www.putorius.net/how-to-create-enrcypted-password.html)
+- [openssl ciphers](https://www.openssl.org/docs/man1.0.2/man1/ciphers.html)
+- 加密原理解释[Cipher Suites: Ciphers, Algorithms and Negotiating Security Settings](https://www.thesslstore.com/blog/cipher-suites-algorithms-security-settings/)
+
+
 ### && in Shell
 
 [Boolean operators ( &&, -a, ||, -o ) in Bash](https://stackoverflow.com/a/20449742/1087122)

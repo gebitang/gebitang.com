@@ -574,6 +574,44 @@ host    replication     all             127.0.0.1/32            md5
 host    replication     all             ::1/128                 md5
 ```
 
+#### 卸载PostgreSQL
+
+[How To Completely Uninstall PostgreSQL](https://kb.objectrocket.com/postgresql/how-to-completely-uninstall-postgresql-757)
+
+- Debian Linux, 例如Ubuntu
+
+卸载主程序——
+```
+sudo apt-get --purge remove postgresql
+sudo apt-get purge postgresql*
+sudo apt-get --purge remove postgresql postgresql-doc postgresql-common
+```
+查找其他相关包：`dpkg -l | grep postgres`，然后再进行删除 `sudo apt-get --purge remove related-pkg-name`
+
+删除对应的数据库、log文件夹：
+
+```
+sudo rm -rf /var/lib/postgresql/
+sudo rm -rf /var/log/postgresql/
+sudo rm -rf /etc/postgresql/
+```
+
+- Fedora Linux，例如 CentOS
+
+直接删除：`yum remove postgresql`  
+删除相关：`yum remove postgres\* `  
+删除数据目录：`rm /var/lib/pgsql`
+
+查找安装的其他相关包： `yum list installed | grep postgres`（也可以使用`rpm -qa | grep postgres`进行查找）然后进行删除 `yum remove -p related-pkg-name`
+
+
+应用包的卸载操作都是类似的——，例如卸载java11 
+
+```
+# 卸载java11 
+sudo yum remove -y java-11-openjdk-devel 
+```
+
 #### PostgreSQL远程登录
 
 [Connecting to a Remote PostgreSQL Database](https://www.netiq.com/documentation/identity-manager-47/setup_windows/data/connecting-to-a-remote-postgresql-database.html)

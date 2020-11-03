@@ -461,7 +461,7 @@ systemctl enable postgresql-10
 systemctl start postgresql-10
 ```
 
-执行到 初始化时出现权限问题——(切换到root用户执行初始化以及systemctl命令)
+执行到 初始化时出现权限问题——( ~~切换到root用户执行初始化以及systemctl命令~~ )这种方式有效，但不推荐。
 
 ```
  /usr/pgsql-10/bin/postgresql-10-setup initdb
@@ -470,6 +470,58 @@ failed, see /var/lib/pgsql/10/initdb.log
 
 #log 显示
 runuser: may not be used by non-root users
+
+# 初始化成功后，查看initdb.log可以看到以下内容
+
+Success. You can now start the database server using:
+    /usr/pgsql-10/bin/pg_ctl -D /var/lib/pgsql/10/data/ -l logfile start
+
+```
+
+正确的做法，根据官方文档[initdb](https://www.postgresql.org/docs/10/app-initdb.html)说明:
+
+>Although `initdb` will attempt to create the specified data directory, it might not have permission if the parent directory of the desired data directory is root-owned. To initialize in such a setup, create an empty data directory as root, then use `chown` to assign ownership of that directory to the database user account, then `su` to become the database user to run initdb.
+
+>initdb must be run as the user that will own the server process, because the server needs to have access to the files and directories that initdb creates. Since the server cannot be run as root, you must not run initdb as root either. (It will in fact refuse to do so.)
+
+默认的数据库目录为`/var/lib/pgsql/10/data/`可以先使用root用户创建一个空的文件夹，再使用`chown`将此文件夹权限赋值给`postgres`用户，然后再执行initdb目录指定`-D `参数值为上述目录
+
+[Custom PGDATA with systemd](https://pgstef.github.io/2018/02/28/custom_pgdata_with_systemd.html)
+
+```
+# mkdir -p /pgdata/10/data
+# chown -R postgres:postgres /pgdata
+```
+
+Then, customize the systemd service: `systemctl edit postgresql-10.service` Add the following content:
+```
+[Service]
+Environment=PGDATA=/pgdata/10/data
+```
+
+This will create a
+`/etc/systemd/system/postgresql-10.service.d/override.conf ` file which will be merged with the original service file.
+
+To check its content:
+```
+# cat /etc/systemd/system/postgresql-10.service.d/override.conf
+[Service]
+Environment=PGDATA=/pgdata/10/data
+```
+
+Reload systemd:
+```
+# systemctl daemon-reload
+```
+
+Initialize the PostgreSQL data directory:
+```
+# /usr/pgsql-10/bin/postgresql-10-setup initdb
+```
+Start and enable the service:
+```
+# systemctl enable postgresql-10
+# systemctl start postgresql-10
 ```
 
 剩下的部分就都一样了——

@@ -1217,45 +1217,107 @@ sudo chattr +i /etc/resolv.conf
 sudo chattr -i /etc/resolv.conf
 ```
 
-### 查看系统版本 cat /proc/version 
+### 查看系统版本 
+
+通用方式：  
+- `uname -a`
+- `cat /proc/version `
+- `cat /etc/os-release`
+- 通过 [dmesg](http://www.linfo.org/dmesg.html)进行过滤，不建议直接使用。常用的linux命令[Index of Linux Commands](http://www.linfo.org/command_index.html)
+
+`uname`支持不同的参数打印不同的值；`uname -a`打印所有信息，以下列顺序进行打印，也可以分别指向下列参数获取各自的值
+
+- `-s`内核名称，例如`Linux`
+- `-n`本机名称，例如`my-geb`
+- `-r`内核release版本，例如`3.10.0-1127.19.1.el7.x86_64`， `5.4.0-48-generic`，具体版本可以查看[kernel.org](https://www.kernel.org/)
+- `-v`内核version，相当于发行日期？例如`#1 SMP Wed Sep 26 15:12:11 UTC 2018`
+- `-m`机器硬件名称，例如`x86_64`
+- `-p`处理器类型，例如`x86_64`或 `unknown`
+- `-i`硬件平台，例如`x86_64`或 `unknown`
+
 
 ```
-cat /proc/version
+#---------------on CentOS
+$ uname -a
+Linux g1-qa-biggrok-01 3.10.0-1127.19.1.el7.x86_64 #1 SMP Tue Aug 25 17:23:54 UTC 2020 x86_64 x86_64 x86_64 GNU/Linux
 
-root@testin-DH:~# lsb_release -a
-No LSB modules are available.
-Distributor ID:	Ubuntu
-Description:	Ubuntu 14.04.5 LTS
-Release:	14.04
-Codename:	trusty
-root@testin-DH:~# cat /etc/lsb-release
-DISTRIB_ID=Ubuntu
-DISTRIB_RELEASE=14.04
-DISTRIB_CODENAME=trusty
-DISTRIB_DESCRIPTION="Ubuntu 14.04.5 LTS"
-root@testin-DH:~# cat /etc/issue
-Ubuntu 14.04.5 LTS \n \l
+$ cat /proc/version
+Linux version 3.10.0-1127.19.1.el7.x86_64 (mockbuild@kbuilder.bsys.centos.org) (gcc version 4.8.5 20150623 (Red Hat 4.8.5-39) (GCC) ) #1 SMP Tue Aug 25 17:23:54 UTC 2020
 
-root@testin-DH:~# cat /proc/version
-Linux version 4.4.0-31-generic (buildd@lgw01-43) (gcc version 4.8.4 (Ubuntu 4.8.4-2ubuntu1~14.04.3) ) #50~14.04.1-Ubuntu SMP Wed Jul 13 01:07:32 UTC 2016
-root@testin-DH:~#
+$ cat /etc/os-release
+NAME="CentOS Linux"
+VERSION="7 (Core)"
+ID="centos"
+ID_LIKE="rhel fedora"
+VERSION_ID="7"
+PRETTY_NAME="CentOS Linux 7 (Core)"
+ANSI_COLOR="0;31"
+CPE_NAME="cpe:/o:centos:centos:7"
+HOME_URL="https://www.centos.org/"
+BUG_REPORT_URL="https://bugs.centos.org/"
+
+CENTOS_MANTISBT_PROJECT="CentOS-7"
+CENTOS_MANTISBT_PROJECT_VERSION="7"
+REDHAT_SUPPORT_PRODUCT="centos"
+REDHAT_SUPPORT_PRODUCT_VERSION="7"
+
+#---------------on Ubuntu
+
+~ uname -a
+Linux guazistf 5.4.0-48-generic #52~18.04.1-Ubuntu SMP Thu Sep 10 12:50:22 UTC 2020 x86_64 x86_64 x86_64 GNU/Linux
+
+~ cat /proc/version
+Linux version 5.4.0-48-generic (buildd@lcy01-amd64-023) (gcc version 7.5.0 (Ubuntu 7.5.0-3ubuntu1~18.04)) #52~18.04.1-Ubuntu SMP Thu Sep 10 12:50:22 UTC 2020
+
+~ cat /etc/os-release
+NAME="Ubuntu"
+VERSION="18.04.3 LTS (Bionic Beaver)"
+ID=ubuntu
+ID_LIKE=debian
+PRETTY_NAME="Ubuntu 18.04.3 LTS"
+VERSION_ID="18.04"
+HOME_URL="https://www.ubuntu.com/"
+SUPPORT_URL="https://help.ubuntu.com/"
+BUG_REPORT_URL="https://bugs.launchpad.net/ubuntu/"
+PRIVACY_POLICY_URL="https://www.ubuntu.com/legal/terms-and-policies/privacy-policy"
+VERSION_CODENAME=bionic
+UBUNTU_CODENAME=bionic
+
 ```
 
-### 查看CentOS版本
+个性方式：  
+ubuntu：`lsb_release -a`  
+centOS： `hostnamectl`
 
 ```
-cat /proc/version
-Linux version 3.10.0-693.el7.x86_64 (builder@kbuilder.dev.centos.org) (gcc version 4.8.5 20150623 (Red Hat 4.8.5-16) (GCC) ) #1 SMP Tue Aug 22 21:09:27 UTC 2017
+# on Ubuntu 
+> lsb_release -a
+LSB Version:    core-9.20170808ubuntu1-noarch:security-9.20170808ubuntu1-noarch
+Distributor ID: Ubuntu
+Description:    Ubuntu 18.04.3 LTS
+Release:        18.04
+Codename:       bionic
+
+# on CentOS 
+> hostnamectl
+   Static hostname: g1-qa-biggrok-01
+         Icon name: computer-server
+           Chassis: server
+        Machine ID: e5783e20f48c4e709dc17d6065f51055
+           Boot ID: ec31320477044fc1b8d19aa1883ff3e3
+  Operating System: CentOS Linux 7 (Core)
+       CPE OS Name: cpe:/o:centos:centos:7
+            Kernel: Linux 3.10.0-1127.19.1.el7.x86_64
+      Architecture: x86-64
+
 ```
-[centos7与centos8区别](https://www.cnblogs.com/zhoulujun/p/12095574.html)    
+
 [CentOS 7 vs CentOS 8 – Feature Comparison](https://computingforgeeks.com/centos-7-vs-centos-8-feature-comparison/)
 
 内核版本(Kernel Version:)
 - [CentOS6] 2.6.x-x  
 - [CentOS7] 3.10.x-x
 - [CentOS8] 4.18.0-x
-
-[Systemd技术](https://www.chenweiliang.com/cwl-692.html): RedHat7，CentOS 7，Ubuntu15
 
 ### 测试I/O数据 dd
 

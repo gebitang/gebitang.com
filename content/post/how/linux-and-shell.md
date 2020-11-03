@@ -1247,10 +1247,13 @@ root@testin-DH:~#
 cat /proc/version
 Linux version 3.10.0-693.el7.x86_64 (builder@kbuilder.dev.centos.org) (gcc version 4.8.5 20150623 (Red Hat 4.8.5-16) (GCC) ) #1 SMP Tue Aug 22 21:09:27 UTC 2017
 ```
-[centos7与centos8区别](https://www.cnblogs.com/zhoulujun/p/12095574.html)  内核版本  
+[centos7与centos8区别](https://www.cnblogs.com/zhoulujun/p/12095574.html)    
+[CentOS 7 vs CentOS 8 – Feature Comparison](https://computingforgeeks.com/centos-7-vs-centos-8-feature-comparison/)
 
+内核版本(Kernel Version:)
 - [CentOS6] 2.6.x-x  
 - [CentOS7] 3.10.x-x
+- [CentOS8] 4.18.0-x
 
 [Systemd技术](https://www.chenweiliang.com/cwl-692.html): RedHat7，CentOS 7，Ubuntu15
 

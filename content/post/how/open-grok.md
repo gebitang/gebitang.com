@@ -237,7 +237,7 @@ sudo yum install -y \
     libxml2-devel  
 ```
 
-- centOS上默认的git版本检查`git --version`为`git version 1.8.3.1`，使用opengrok创建indexer的时候回报错——[官方issue #131：seeing lots of warning messages for unknown date format with older Git](https://github.com/oracle/opengrok/issues/1331)
+- centOS7上默认的git版本检查`git --version`为`git version 1.8.3.1`，使用opengrok创建indexer的时候回报错——[官方issue #131：seeing lots of warning messages for unknown date format with older Git](https://github.com/oracle/opengrok/issues/1331)
 
 >17:23:31 WARNING: GitRepository not working (missing binaries?): xxx  
 >17:23:31 WARNING: Failed to determineCurrentVersion for xxx: java.io.IOException: fatal: unknown date format iso8601-strict

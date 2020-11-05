@@ -152,6 +152,23 @@ tar -czf - * | openssl enc -e -aes256 -pass pass:password -out mainsonar.tar.gz
 - [openssl ciphers](https://www.openssl.org/docs/man1.0.2/man1/ciphers.html)
 - 加密原理解释[Cipher Suites: Ciphers, Algorithms and Negotiating Security Settings](https://www.thesslstore.com/blog/cipher-suites-algorithms-security-settings/)
 
+不同版本的openssl不兼容，CentOS7上的1.0.2k版本的openssl `# OpenSSL 1.0.2k-fips  26 Jan 2017`加密的文件ubuntu的1.1.1 `# not compatible with OpenSSL 1.1.1  11 Sep 2018`版本下无法解密。报错类似——
+
+```
+*** WARNING : deprecated key derivation used.
+Using -iter or -pbkdf2 would be better.
+bad decrypt
+139932932575680:error:06065064:digital envelope routines:EVP_DecryptFinal_ex:bad decrypt:../crypto/evp/evp_enc.c:537:
+```
+
+[参考](https://unix.stackexchange.com/a/344586/430879)——
+>The default hash used by openssl enc for password-based key derivation changed in 1.1.0 to SHA256 versus MD5 in lower versions. This produces a different key from the same password (and salt if used as it usually is), and trying to encrypt and decrypt with different keys produces garbage, an error, or both.
+
+原因是高版本加密时对密码使用sha256进行加密；低版本使用md5方式。如果需要兼容，则需要指定参数 `-md`的值。所以在高版本上对上述文件进行解密时，命令为——
+
+`openssl enc -d -aes256 -md md5 -in mainsonar.tar.gz -pass pass:password |tar xz`
+
+
 
 ### && in Shell
 

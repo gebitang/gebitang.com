@@ -393,6 +393,14 @@ Type a new name in the Computer Name field. You may need to click the lock icon 
 
 [Delete a user or group on Mac](https://support.apple.com/en-nz/guide/mac-help/mchlp1557/mac)
 
- Apple menu  > System Preferences, then click Users & Groups
+Apple menu  > System Preferences, then click Users & Groups
 
- 新建管理员账号，使用新建管理员账号删除另外一个管理员账号
+新建管理员账号，使用新建管理员账号删除另外一个管理员账号
+
+### 升级15版本后，XCODE无法打开
+
+提示类似：`Error Domain=PKInstallErrorDomain Code=102 "The package “XcodeSystemResources.pkg” is untrusted."`的错误。
+
+[Edit and set the date of your Mac as October 1st, 2019.](https://stackoverflow.com/questions/58550284/mobiledevice-pkg-untrusted-cannot-open-xcode-after-os-x-update)
+
+提示其他package的untrusted问题也使用修改日期的方式来解决。

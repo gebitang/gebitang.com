@@ -85,12 +85,12 @@ COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
 
 使用相同的SQ，可正常启动——备份恢复成功。
 
-### 版本升级
+### 版本升级过程
 
 官方指导[upgrade guide](https://redirect.sonarsource.com/doc/upgrading.html).
 
 - 下载、解压
-- 根据[兼容性列表](https://docs.sonarqube.org/display/PLUG/Plugin+Version+Matrix)复制对应的插件到插件目录`extensions/plugins`
+- 根据[兼容性列表](https://docs.sonarqube.org/display/PLUG/Plugin+Version+Matrix)复制对应的插件到插件目录`extensions/plugins` [兼容性列表详情](https://update.sonarsource.org/plugins/compatibility-matrix.html)
 - 更新对应的配置文件`sonar.properties` 和 `wrapper.conf`
 - 停止旧版本、启动新版本
 - 访问`http://yourSonarQubeServerURL/setup`目录根据提示进行升级操作
@@ -456,9 +456,9 @@ sudo yum install -y https://download.postgresql.org/pub/repos/yum/reporpms/EL-7-
 sudo yum install -y postgresql10-server
 
 # Optionally initialize the database and enable automatic start:
-/usr/pgsql-10/bin/postgresql-10-setup initdb
-systemctl enable postgresql-10
-systemctl start postgresql-10
+sudo /usr/pgsql-10/bin/postgresql-10-setup initdb
+sudo systemctl enable postgresql-10
+sudo systemctl start postgresql-10
 ```
 
 执行到 初始化时出现权限问题——( ~~切换到root用户执行初始化以及systemctl命令~~ )这种方式有效，但不推荐。
@@ -545,6 +545,15 @@ CREATE DATABASE sonar WITH ENCODING 'UTF8' OWNER sonar TEMPLATE=template0;
 \q
 ```
 
+[修改postgres用户密码：](https://stackoverflow.com/a/12721095/1087122) 
+
+```
+# switch to user to login
+sudo -u user_name psql db_name
+
+#change password
+ALTER USER user_name WITH PASSWORD 'new_password';
+```
 
 使用正确的用户名、密码却一直无法登陆。[因为——]((https://confluence.atlassian.com/bitbucketserverkb/fatal-ident-authentication-failed-for-user-unable-to-connect-to-postgresql-779171564.html))
 
@@ -927,7 +936,7 @@ java.lang.IllegalStateException: Failed to create table schema_migrations
 数据库连接指定了`?currentSchema=my_schema`，删除即可，使用默认的public schema。
 
 
-### SonarQube 升级
+### SonarQube 升级原因
 
 现在的版本为7.6，使用中遇到类似`Objects.nonnull`方法无法支撑的问题， [Not validating Objects.nonNull](https://community.sonarsource.com/t/not-validating-objects-nonnull/12942)，官方建议升级到至少7.9版本。
 

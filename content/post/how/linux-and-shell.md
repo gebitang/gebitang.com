@@ -118,6 +118,15 @@ Root can run commands as other users via the "su" command. I believe if you crea
 
 `su -c /path/to/your/script username`
 
+### 新用户添加sudo权限
+
+[ubuntu：](https://phoenixnap.com/kb/how-to-create-sudo-user-on-ubuntu) `sudo adduser newuser; sudo usermod -aG sudo newuser`，验证 `groups newuser`  
+
+[CentOS7:](https://phoenixnap.com/kb/how-to-create-add-sudo-user-centos) By default, CentOS 7 has a user group called the “wheel” group. Members of the wheel group are automatically granted sudo privileges. Adding a user to this group is a quick and easy way to grant sudo privileges to a user.
+
+两种方式：一是打开wheel组设置，将用户添加到wheel组；二是编辑`/etc/sudoers`文件，为新用户添加权限`UserName ALL=(ALL) ALL`
+
+
 ### 使用opensll加解密压缩文件
 
 [加解密tar文件](https://www.tecmint.com/encrypt-decrypt-files-tar-openssl-linux/)，通过命令行传递密码[How to use password argument in via command line to openssl for decryption](https://superuser.com/questions/724986/how-to-use-password-argument-in-via-command-line-to-openssl-for-decryption)

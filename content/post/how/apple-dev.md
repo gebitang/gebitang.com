@@ -380,3 +380,19 @@ google paly上可以web端搜索对应的app，获取到[url](https://play.googl
 原生支持。多台Mac设备在相同的局域网内，系统设置 -- 共享 -- 屏幕共享（也可以选择其他共享的内容）
 
 Finder中选择 网络 -- 找到打开共享的机器，选择“共享屏幕”。 
+
+### 更改主机名，新建删除账户
+
+[menu->preferences->sharing](https://support.apple.com/en-gb/guide/mac-help/mchlp2322/mac)
+
+Change your computer's name or local hostname on Mac 
+
+On your Mac, choose Apple menu > System Preferences, then click Sharing. Open Sharing preferences for me.  
+Type a new name in the Computer Name field. You may need to click the lock icon and provide an administrator name and password before you can change the name.
+
+
+[Delete a user or group on Mac](https://support.apple.com/en-nz/guide/mac-help/mchlp1557/mac)
+
+ Apple menu  > System Preferences, then click Users & Groups
+
+ 新建管理员账号，使用新建管理员账号删除另外一个管理员账号

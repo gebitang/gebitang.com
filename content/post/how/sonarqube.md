@@ -11,6 +11,80 @@ topics = [
 toc = true
 +++
 
+## SonarQube alike
+
+[SonarQube History](https://www.sonarsource.com/company/history/) 
+
+Freddy Mallet  
+Simon Brandhof  
+Olivier Gaudin  
+
+
+最早在2007年，使用Sonar这个名称，后来由于商标问题，[更名](http://sonar.15.x6.nabble.com/SONAR-is-becoming-SONARQUBE-td5010134.html) 为SonarQube。到2008年，三人创建SonarSource公司进入ToB领域。
+
+目前SQ更像是一个平台，通过支持自己开发的分析工具，以及支持的第三方工具结果。例如——
+
+- Conventions (Checkstyle)
+- Bad practices (PMD)
+- Potential bugs (FindBugs)
+
+SQ可以从多个维度衡量代码质量——
+
+- bugs
+- code smells
+- security vulnerabilities 
+- duplicated code
+- coding standards 
+- unit tests
+- code coverage
+- code complexity 
+
+
+
+[Is SonarQube Replacement for Checkstyle, PMD, FindBugs?](https://stackoverflow.com/questions/5479019/is-sonarqube-replacement-for-checkstyle-pmd-findbugs)  
+
+>[Yes and No.](https://stackoverflow.com/a/24597073/1087122) In addition to the other answers.
+>
+>SonarQube is currently on the way to deprecate PMD, Checkstyle and Findbugs and use their own technology to analyze Java code (called [SonarJava](https://redirect.sonarsource.com/plugins/java.html)). They do it, because they don't want to spend their time fixing, upgrading (or waiting on it) those libraries (e.g. for Java 8), which for example uses outdated libraries.
+>
+>They also got a new set of plugins for your personal IDE called [SonarLint](http://www.sonarlint.org/index.html).
+
+
+- [SonarQube vs FindBugs, CheckStyle, PMD](https://groups.google.com/g/sonarqube/c/9M0iZ4OILVM)   
+- [Sonarqube, PMD, findbugs and checkstyle](https://community.sonarsource.com/t/sonarqube-pmd-findbugs-and-checkstyle/2919)
+
+
+从上面的讨论组以及目前SQ支持的插件来看，上述三个工具依然以插件形式支持。但对PMD和FindBugs的替换是成功的。
+
+| Tool| Source | Sonar-Plugin|
+| --- | --- | --- |
+| [SpotBugs](https://spotbugs.github.io/)| [github](https://github.com/spotbugs/spotbugs) | [sonar-findbugs](https://github.com/spotbugs/sonar-findbugs) |
+| [PMD](https://pmd.github.io/)| [github](https://github.com/pmd/pmd) | [sonar-pmd](https://github.com/jensgerdes/sonar-pmd)  |
+| [Checkstyle](https://checkstyle.org/)|[github](https://github.com/checkstyle/checkstyle) | [sonar-checkstyle](https://github.com/checkstyle/sonar-checkstyle) |
+
+
+[Importing Third-Party Issues](https://docs.sonarqube.org/latest/analysis/external-issues/)
+
+| Language | Property | Remarks |
+| --- | --- | --- |
+| Java | `sonar.java.spotbugs.reportPaths` | Comma-delimited list of paths to reports from [SpotBugs](https://spotbugs.github.io/), FindSecBugs, or FindBugs |
+| Java | `sonar.java.pmd.reportPaths` | Comma-delimited list of paths to reports from [PMD](http://maven.apache.org/plugins/maven-pmd-plugin/usage.html) |
+| Java | `sonar.java.checkstyle.reportPaths` | Comma-delimited list of paths to reports from [Checkstyle](http://maven.apache.org/plugins/maven-checkstyle-plugin/checkstyle-mojo) |
+
+[Tools to Improve Java Code Quality](https://www.romexsoft.com/blog/improve-java-code-quality/)   
+>Sonar uses FindBugs, Checkstyle and PMD to collect and analyze source code for bugs, bad code, and possible violation of code style policies. 
+
+[Alibaba P3C](https://github.com/alibaba/p3c) ——包含以下三个部分
+
+*   [PMD implementations](https://github.com/alibaba/p3c/blob/master/p3c-pmd) 基于PMD规则，实现了54条Alibaba开发规约中的规则，[详见](https://github.com/alibaba/p3c/tree/master/p3c-pmd)
+
+*   [IntelliJ IDEA plugin](https://github.com/alibaba/p3c/blob/master/idea-plugin)， 使用方法[说明](https://github.com/alibaba/p3c/blob/master/idea-plugin/README_cn.md)
+>实现了开发手册中的的53条规则，大部分基于PMD实现，其中有4条规则基于IDEA实现，并且基于IDEA [Inspection](https://www.jetbrains.com/help/idea/code-inspection.html)实现了实时检测功能。
+
+
+*   [Eclipse plugin](https://github.com/alibaba/p3c/blob/master/eclipse-plugin)，使用方法[说明](https://github.com/alibaba/p3c/blob/master/eclipse-plugin/README_cn.md)
+>插件实现了开发手册中的53条规则，大部分基于PMD实现，其中有4条规则基于Eclipse实现，支持4条规则的QuickFix功能。
+
 ## SonarQube Source
 
 使用SQ代替SonarQube

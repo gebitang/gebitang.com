@@ -85,6 +85,37 @@ SQ可以从多个维度衡量代码质量——
 *   [Eclipse plugin](https://github.com/alibaba/p3c/blob/master/eclipse-plugin)，使用方法[说明](https://github.com/alibaba/p3c/blob/master/eclipse-plugin/README_cn.md)
 >插件实现了开发手册中的53条规则，大部分基于PMD实现，其中有4条规则基于Eclipse实现，支持4条规则的QuickFix功能。
 
+能否在8.4版本的SonarQube上使用P3C定义的规则？
+
+**No and Yes**不能直接使用，需要做定制开发：将P3C-pmd集成或新创建一个类似`sonar-pmd`的插件使用。
+
+### pmd、pmd的sonar插件问题
+
+SQ对于PMD规则的采用插件的方式。根据[兼容矩阵Plugin Version Matrix](https://update.sonarsource.org/plugins/compatibility-matrix.html)，目前支持的PMD的插件版本为3.2.1
+
+从[sonar-pmd](https://github.com/jensgerdes/sonar-pmd)插件的[对应关系](https://github.com/jensgerdes/sonar-pmd#description--features)可以看到，3.2.1版本的插件对应的pmd版本为6.10.0 (目前PMD的最新版本为[6.29](https://github.com/pmd/pmd/releases/tag/pmd_releases%2F6.29.0))
+
+|name|version|version|version|version|version|
+|---------|---------|---------|---------|---------|---------|
+|PMD Plugin|2.5|2.6|3.0.0|3.1.x|3.2.x|
+|PMD|5.4.0|5.4.2|5.4.2|6.9.0|6.10.0|
+|Max. supported Java Version|1.7|1.8|1.8|11||
+|Min. SonarQube Version|4.5.4|4.5.4|6.6|6.6||
+
+###  p3c-pmd、p3c-pmd的插件问题
+
+[p3c-pmd](https://github.com/alibaba/p3c/tree/master/p3c-pmd)是基于pmd 6.15版本 `net.sourceforge.pmd:pmd-java:jar:6.15.0:compile`，这意味着SQ支持的pmd插件版本可以集成这个规则。
+
+目前没有现成的插件，目前开源的插件——
+
+- [sonarqube中添加p3c-pmd整合阿里java开发规范](https://www.jianshu.com/p/a3a58ac368be)使用的是1.3.6版本
+- [sonar-p3c-pmd](https://github.com/mrprince/sonar-p3c-pmd)基于5.4版本，对应的插件版本为`2.6`，应用方式[示例](http://duwanjiang.com/%E4%BB%A3%E7%A0%81%E8%B4%A8%E9%87%8F/2019/04/03/%E5%A6%82%E4%BD%95%E5%9C%A8sonarQube%E7%9A%84pmd%E6%8F%92%E4%BB%B6%E4%B8%AD%E6%95%B4%E5%90%88%E9%98%BF%E9%87%8C%E5%BC%80%E5%8F%91%E8%A7%84%E8%8C%83/) 
+- [**sonar-p3c-pmd fork **](https://github.com/rhinoceros/sonar-p3c-pmd)，应用方式[示例](https://my.oschina.net/u/4327212/blog/3209285)
+- [**sonar-p3c-pmd fork**](https://github.com/sqgzy/sonar-p3c-pmd)官方的sonar-pmd插件。 可以借鉴这个版本查看如何进行集成
+
+
+结论：改造SonarQube支持的sonar-pmd插件，使用p3c-pmd的插件规则，生成插件，提供给SonarQube使用。
+
 ## SonarQube Source
 
 使用SQ代替SonarQube
@@ -481,7 +512,7 @@ SonarQube上展示的覆盖率依赖Jacoco插件的配合。
 附录：
 
 - 使用 `mvn help:effective-pom`可以看到当前项目完整的pom相关配置
-- 使用`mvn dependency:treee`可以看到当前项目的依赖关系
+- 使用`mvn dependency:tree`可以看到当前项目的依赖关系
 - `pluginManagement`用来配置管理所有的plugin信息，用来提供给其他集成当前项目的项目使用，当前项目使用的plugin依然需要配置到`plugins`节点中。[官方解释Plugin_Management](http://maven.apache.org/pom.html#Plugin_Management)，对应的[提问](https://stackoverflow.com/questions/26736876/difference-between-plugins-and-pluginmanagement-tag-in-maven-pom-xml)
 - `dependencyManagement`于此类似。[dependency-management](http://maven.apache.org/pom.html#dependency-management)
 

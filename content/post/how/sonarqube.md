@@ -85,7 +85,7 @@ SQ可以从多个维度衡量代码质量——
 *   [Eclipse plugin](https://github.com/alibaba/p3c/blob/master/eclipse-plugin)，使用方法[说明](https://github.com/alibaba/p3c/blob/master/eclipse-plugin/README_cn.md)
 >插件实现了开发手册中的53条规则，大部分基于PMD实现，其中有4条规则基于Eclipse实现，支持4条规则的QuickFix功能。
 
-能否在8.4版本的SonarQube上使用P3C定义的规则？
+### 能否在8.4版本的SonarQube上使用P3C定义的规则？
 
 **No and Yes**不能直接使用，需要做定制开发：将P3C-pmd集成或新创建一个类似`sonar-pmd`的插件使用。
 
@@ -115,6 +115,88 @@ SQ对于PMD规则的采用插件的方式。根据[兼容矩阵Plugin Version Ma
 
 
 结论：改造SonarQube支持的sonar-pmd插件，使用p3c-pmd的插件规则，生成插件，提供给SonarQube使用。
+
+基于官方插件项目[sonar-pmd](https://github.com/jensgerdes/sonar-pmd)进行改造，[这篇文章](http://duwanjiang.com/%E4%BB%A3%E7%A0%81%E8%B4%A8%E9%87%8F/2019/04/03/%E5%A6%82%E4%BD%95%E5%9C%A8sonarQube%E7%9A%84pmd%E6%8F%92%E4%BB%B6%E4%B8%AD%E6%95%B4%E5%90%88%E9%98%BF%E9%87%8C%E5%BC%80%E5%8F%91%E8%A7%84%E8%8C%83/#21sonar-p3c-pmd%E5%B7%A5%E7%A8%8B%E4%BB%8B%E7%BB%8D)有详细说明，[这个工程](https://github.com/sqgzy/sonar-p3c-pmd)有低版本的实现。
+
+每条规则对应的3个配置文件：
+
+- `src\main\resources\org\sonar\l10n\pmd.properties`
+- `src\main\resources\org\sonar\plugins\pmd\rules.xml`
+- `src\main\resources\com\sonar\sqale\pmd-model.xml`
+
+注意：
+
+1. properties文件[编码问题](https://stackoverflow.com/a/30815935/1087122) 
+
+>The problem is that the Java properties files are/must/should been encoded in ´ISO-8859-1´ (Latin-1) by default. Thats an Java requirement.
+
+可以利用JDK自动的工具`native2ascii`进行转换，例如： `native2ascii -encoding utf8 zh.properties  .normal.properties` 
+
+不进行转换的情况下：第一，页面展示将是乱码；第二，有可能导致数据库报错`ERROR: value too long for type character varying(200)`，类似——
+
+```
+### Error updating database.  Cause: org.postgresql.util.PSQLException: ERROR: value too long for type character varying(200)
+### The error may exist in org.sonar.db.rule.RuleMapper
+### The error may involve org.sonar.db.rule.RuleMapper.updateDefinition-Inline
+### The error occurred while setting parameters
+### Cause: org.postgresql.util.PSQLException: ERROR: value too long for type character varying(200)
+        at org.apache.ibatis.exceptions.ExceptionFactory.wrapException(ExceptionFactory.java:30)
+        at org.apache.ibatis.session.defaults.DefaultSqlSession.update(DefaultSqlSession.java:199)
+        at org.apache.ibatis.binding.MapperMethod.execute(MapperMethod.java:67)
+        at org.apache.ibatis.binding.MapperProxy$PlainMethodInvoker.invoke(MapperProxy.java:144)
+        at org.apache.ibatis.binding.MapperProxy.invoke(MapperProxy.java:85)
+        at com.sun.proxy.$Proxy53.updateDefinition(Unknown Source)
+        at org.sonar.db.rule.RuleDao.update(RuleDao.java:181)
+        at org.sonar.server.rule.RegisterRules.update(RegisterRules.java:782)
+        at org.sonar.server.rule.RegisterRules.registerRule(RegisterRules.java:384)
+        at org.sonar.server.rule.RegisterRules.start(RegisterRules.java:133)
+        at org.sonar.core.platform.StartableCloseableSafeLifecyleStrategy.start(StartableCloseableSafeLifecyleStrategy.java:40)
+        at org.picocontainer.injectors.AbstractInjectionFactory$LifecycleAdapter.start(AbstractInjectionFactory.java:84)
+        at org.picocontainer.behaviors.AbstractBehavior.start(AbstractBehavior.java:169)
+        at org.picocontainer.behaviors.Stored$RealComponentLifecycle.start(Stored.java:132)
+        at org.picocontainer.behaviors.Stored.start(Stored.java:110)
+        at org.picocontainer.DefaultPicoContainer.potentiallyStartAdapter(DefaultPicoContainer.java:1016)
+        at org.picocontainer.DefaultPicoContainer.startAdapters(DefaultPicoContainer.java:1009)
+        at org.picocontainer.DefaultPicoContainer.start(DefaultPicoContainer.java:767)
+        at org.sonar.core.platform.ComponentContainer.startComponents(ComponentContainer.java:136)
+        at org.sonar.server.platform.platformlevel.PlatformLevel.start(PlatformLevel.java:90)
+        at org.sonar.server.platform.platformlevel.PlatformLevelStartup.access$001(PlatformLevelStartup.java:48)
+        at org.sonar.server.platform.platformlevel.PlatformLevelStartup$1.doPrivileged(PlatformLevelStartup.java:85)
+        at org.sonar.server.user.DoPrivileged.execute(DoPrivileged.java:46)
+        at org.sonar.server.platform.platformlevel.PlatformLevelStartup.start(PlatformLevelStartup.java:82)
+        at org.sonar.server.platform.PlatformImpl.executeStartupTasks(PlatformImpl.java:198)
+        at org.sonar.server.platform.PlatformImpl.access$400(PlatformImpl.java:46)
+        at org.sonar.server.platform.PlatformImpl$1.lambda$doRun$1(PlatformImpl.java:122)
+        at org.sonar.server.platform.PlatformImpl$AutoStarterRunnable.runIfNotAborted(PlatformImpl.java:370)
+        at org.sonar.server.platform.PlatformImpl$1.doRun(PlatformImpl.java:122)
+        at org.sonar.server.platform.PlatformImpl$AutoStarterRunnable.run(PlatformImpl.java:354)
+        at java.base/java.lang.Thread.run(Thread.java:834)
+Caused by: org.postgresql.util.PSQLException: ERROR: value too long for type character varying(200)
+        at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2532)
+        at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2267)
+        at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:312)
+        at org.postgresql.jdbc.PgStatement.executeInternal(PgStatement.java:448)
+        at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:369)
+        at org.postgresql.jdbc.PgPreparedStatement.executeWithFlags(PgPreparedStatement.java:153)
+        at org.postgresql.jdbc.PgPreparedStatement.execute(PgPreparedStatement.java:142)
+        at org.apache.commons.dbcp2.DelegatingPreparedStatement.execute(DelegatingPreparedStatement.java:94)
+        at org.apache.commons.dbcp2.DelegatingPreparedStatement.execute(DelegatingPreparedStatement.java:94)
+        at org.apache.ibatis.executor.statement.PreparedStatementHandler.update(PreparedStatementHandler.java:47)
+        at org.apache.ibatis.executor.statement.RoutingStatementHandler.update(RoutingStatementHandler.java:74)
+        at org.apache.ibatis.executor.ReuseExecutor.doUpdate(ReuseExecutor.java:52)
+        at org.apache.ibatis.executor.BaseExecutor.update(BaseExecutor.java:117)
+        at org.apache.ibatis.executor.CachingExecutor.update(CachingExecutor.java:76)
+        at org.apache.ibatis.session.defaults.DefaultSqlSession.update(DefaultSqlSession.java:197)
+        ... 29 common frames omitted
+```
+
+2. 默认sonar-pmd插件的分类是**异味**
+
+在rules.xml文件中对应的rule属性里添加`<tag>bug<tag>`， [官方说明](https://stackoverflow.com/a/44281775/1087122)
+
+最终效果——
+
+![](https://upload-images.jianshu.io/upload_images/3296949-92dbeb3da90bf452.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
 ## SonarQube Source
 

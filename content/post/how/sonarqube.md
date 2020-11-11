@@ -198,6 +198,84 @@ Caused by: org.postgresql.util.PSQLException: ERROR: value too long for type cha
 
 ![](https://upload-images.jianshu.io/upload_images/3296949-92dbeb3da90bf452.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
+### sonar-pmd插件使用问题
+
+在SonarQube中的Quality Profile中复制一份内置的`Sonar way`；增加新集成的插件p3c-pmd中的rules；然后将这个新的profile设置为默认。——完成激活并使用插件的前提
+
+使用SonarScanner执行代码扫描——实测不需要另外添加任何依赖，会启用新集成的插件中的规则。使用中遇到以下三个问题。
+
+第一，报错空指针问题。——从下面的调用栈可以看出插件起效的逻辑关系
+
+**结论：** 这是因为集成时使用了最新的p3c-pmd代码，版本`2.1.1`；但pom依赖还是使用的低版本`1.3.6`。
+
+```
+ERROR: Error during SonarQube Scanner execution
+java.lang.NullPointerException
+        at java.base/java.util.concurrent.ConcurrentHashMap.get(Unknown Source)
+        at java.base/java.util.Properties.getProperty(Unknown Source)
+        at com.alibaba.p3c.pmd.I18nResources$XmlResourceBundle.handleGetObject(I18nResources.java:90)
+        at java.base/java.util.ResourceBundle.getObject(Unknown Source)
+        at java.base/java.util.ResourceBundle.getString(Unknown Source)
+        at com.alibaba.p3c.pmd.I18nResources.getMessageWithExceptionHandled(I18nResources.java:74)
+        at com.alibaba.p3c.pmd.lang.AbstractXpathRule.setDescription(AbstractXpathRule.java:30)
+        at net.sourceforge.pmd.rules.RuleBuilder.build(RuleBuilder.java:194)
+        at net.sourceforge.pmd.rules.RuleFactory.buildRule(RuleFactory.java:189)
+        at net.sourceforge.pmd.RuleSetFactory.parseSingleRuleNode(RuleSetFactory.java:551)
+        at net.sourceforge.pmd.RuleSetFactory.parseRuleNode(RuleSetFactory.java:450)
+        at net.sourceforge.pmd.RuleSetFactory.parseRuleSetNode(RuleSetFactory.java:367)
+        at net.sourceforge.pmd.RuleSetFactory.createRuleSet(RuleSetFactory.java:214)
+        at net.sourceforge.pmd.RuleSetFactory.createRule(RuleSetFactory.java:313)
+        at net.sourceforge.pmd.RuleSetFactory.parseRuleReferenceNode(RuleSetFactory.java:598)
+        at net.sourceforge.pmd.RuleSetFactory.parseRuleNode(RuleSetFactory.java:452)
+        at net.sourceforge.pmd.RuleSetFactory.parseRuleSetNode(RuleSetFactory.java:367)
+        at net.sourceforge.pmd.RuleSetFactory.createRuleSet(RuleSetFactory.java:214)
+        at net.sourceforge.pmd.RuleSetFactory.createRuleSet(RuleSetFactory.java:209)
+        at net.sourceforge.pmd.RuleSetFactory.createRuleSet(RuleSetFactory.java:195)
+        at org.sonar.plugins.pmd.PmdExecutor.createRuleSets(PmdExecutor.java:143)
+        at org.sonar.plugins.pmd.PmdExecutor.executeRules(PmdExecutor.java:122)
+        at org.sonar.plugins.pmd.PmdExecutor.executePmd(PmdExecutor.java:98)
+        at org.sonar.plugins.pmd.PmdExecutor.execute(PmdExecutor.java:80)
+        at org.sonar.plugins.pmd.PmdSensor.execute(PmdSensor.java:71)
+        at org.sonar.scanner.sensor.AbstractSensorWrapper.analyse(AbstractSensorWrapper.java:48)
+        at org.sonar.scanner.sensor.ModuleSensorsExecutor.execute(ModuleSensorsExecutor.java:85)
+        at org.sonar.scanner.sensor.ModuleSensorsExecutor.lambda$execute$1(ModuleSensorsExecutor.java:59)
+        at org.sonar.scanner.sensor.ModuleSensorsExecutor.withModuleStrategy(ModuleSensorsExecutor.java:77)
+        at org.sonar.scanner.sensor.ModuleSensorsExecutor.execute(ModuleSensorsExecutor.java:59)
+        at org.sonar.scanner.scan.ModuleScanContainer.doAfterStart(ModuleScanContainer.java:82)
+        at org.sonar.core.platform.ComponentContainer.startComponents(ComponentContainer.java:137)
+        at org.sonar.core.platform.ComponentContainer.execute(ComponentContainer.java:123)
+        at org.sonar.scanner.scan.ProjectScanContainer.scan(ProjectScanContainer.java:388)
+        at org.sonar.scanner.scan.ProjectScanContainer.scanRecursively(ProjectScanContainer.java:384)
+        at org.sonar.scanner.scan.ProjectScanContainer.doAfterStart(ProjectScanContainer.java:353)
+        at org.sonar.core.platform.ComponentContainer.startComponents(ComponentContainer.java:137)
+        at org.sonar.core.platform.ComponentContainer.execute(ComponentContainer.java:123)
+        at org.sonar.scanner.bootstrap.GlobalContainer.doAfterStart(GlobalContainer.java:144)
+        at org.sonar.core.platform.ComponentContainer.startComponents(ComponentContainer.java:137)
+        at org.sonar.core.platform.ComponentContainer.execute(ComponentContainer.java:123)
+        at org.sonar.batch.bootstrapper.Batch.doExecute(Batch.java:72)
+        at org.sonar.batch.bootstrapper.Batch.execute(Batch.java:66)
+        at org.sonarsource.scanner.api.internal.batch.BatchIsolatedLauncher.execute(BatchIsolatedLauncher.java:46)
+        at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+        at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+        at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+        at java.base/java.lang.reflect.Method.invoke(Unknown Source)
+        at org.sonarsource.scanner.api.internal.IsolatedLauncherProxy.invoke(IsolatedLauncherProxy.java:60)
+        at com.sun.proxy.$Proxy0.execute(Unknown Source)
+        at org.sonarsource.scanner.api.EmbeddedScanner.doExecute(EmbeddedScanner.java:189)
+        at org.sonarsource.scanner.api.EmbeddedScanner.execute(EmbeddedScanner.java:138)
+        at org.sonarsource.scanner.cli.Main.execute(Main.java:112)
+        at org.sonarsource.scanner.cli.Main.execute(Main.java:75)
+        at org.sonarsource.scanner.cli.Main.main(Main.java:61)
+```
+
+第二，提示找不到类`java.lang.NoClassDefFoundError: com/google/gson/Gson` 
+
+**结论：** p3c-pmd项目的代码使用到gson包，需要在插件的依赖中添加。
+
+第三， 被扫描的源码中的lambda表达式不支持导致对应源码被忽略。`Caused by: net.sourceforge.pmd.lang.java.ast.ParseException: Line 48, Column 74: Cannot use lambda expressions when running in JDK inferior to 1.8 mode! `
+
+**结论：** PMD使用的默认JDK版本为1.6，[官方说明](https://github.com/jensgerdes/sonar-pmd#troubleshooting) `PMD uses the default Java version - which is 1.6` ，[论坛讨论](https://community.sonarsource.com/t/cannot-use-lambda-expressions-when-running-in-jdk-inferior-to-1-8-mode/14237) 。扫描时指定参数`-Dsonar.java.source=1.8`即可
+
 ## SonarQube Source
 
 使用SQ代替SonarQube

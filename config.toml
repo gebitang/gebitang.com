@@ -68,3 +68,9 @@ hasCJKLanguage = true
 
 [social]
     # weibo=2446212465 
+
+[markup]
+  [markup.tableOfContents]
+    endLevel = 5
+    ordered = false
+    startLevel = 2

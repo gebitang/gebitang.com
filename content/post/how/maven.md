@@ -22,6 +22,19 @@ toc = true
 
 <!--more-->
 
+[set specific java version to Maven](https://stackoverflow.com/a/19654699/1087122), You could also go into your mvn(non-windows)/mvn.bat/mvn.cmd(windows) and set your java version explicitly there.
+
+[set proxy for maven](https://medium.com/@petehouston/execute-maven-behind-a-corporate-proxy-network-5e08d075f744)
+
+```
+mvn [COMMAND] -Dhttp.proxyHost=[PROXY_SERVER] -Dhttp.proxyPort=[PROXY_PORT] -Dhttp.nonProxyHosts=[PROXY_BYPASS_IP] 
+# example 
+mvn install -Dhttp.proxyHost=10.10.0.100 -Dhttp.proxyPort=8080 -Dhttp.nonProxyHosts=localhost|127.0.0.1
+mvn clean package -Dmaven.test.skip=true -Dhttp.proxyHost=127.0.0.1 -Dhttp.proxyPort=7890 -Dhttps.proxyHost=127.0.0.1 -Dhttps.proxyPort=7890 
+```
+
+[maven plugins stored where](https://stackoverflow.com/a/2342391/1087122) `~/.m2/repository/org/apache/maven/plugins`
+
 ## Maven Plugin Dev
 
 [官方文档](https://maven.apache.org/guides/plugin/guide-java-plugin-development.html)，[baeldung demo](https://www.baeldung.com/maven-plugin)

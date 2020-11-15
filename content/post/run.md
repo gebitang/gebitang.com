@@ -167,3 +167,32 @@ toc=true
 - 完成跑完拉伸之后，在小区的仰卧起坐架上坐到二十几个之后，右侧胸口咔一下，有点扯？注意休息
 
 ![](https://s3-img.meituan.net/v1/mss_3d027b52ec5a4d589e68050845611e68/ff/n0/0k/zv/tz_167319.jpg@596w_1l.jpg)
+
+**20-11-14** 周六 5.91
+
+- 差点断线？早上睡懒觉没来跑步，快天黑了——天越来越短——奉旨补卡
+- 右侧胸口的确还有点痛，倒是不影响跑步呼吸。很少这个点跑步，或者是躺太多的原因？跑起来很重的样子，配速提不起来。起跑就没选择继续跑上马半马剩下的任务
+- 很久没跑这个线路，这个点园子里人不少，大都是周末来逛公园的，跑步的人不多——这个跑场本身跑步的人也比较少，还大都在早上，下午四点这个时间段应该没什么人跑
+- 虽然有两公里配速过600，最后的平均配速还在600之内，跑完收工
+
+![](https://s3-img.meituan.net/v1/mss_3d027b52ec5a4d589e68050845611e68/ff/n0/0k/zz/tb_163243.jpg@596w_1l.jpg)
+
+
+**20-11-15** 周日 8.01 (6.17 + 1.84)
+
+- 还是早上跑比较好。习惯了，规律自由。悦跑又开了新的虚拟赛道，先跑“岳麓山”试试——上马的任务剩下：半马的一个10.55和全马的四个10.55，估计要荒废了
+- 这样看起来，早晚跑步，平均配速有40秒的差距？而且今天510比昨天554还感觉更轻松？一天之计在于晨是真的乜？
+- 今天寒衣节，昨晚跟老婆一起到小区边的河路口跟去世的亲人焚纸送衣，早上看河边遗留有密密的一排灰烬堆。跑步的十字路口也有。挺好
+- 早上园子里没人，放松锻炼时偶尔听到身后树叶掉落地上的声音，像脚步声。还有一些树叶坚持在枝头，但仰卧起坐架上看天时已经空旷了许多
+
+![](https://s3-img.meituan.net/v1/mss_3d027b52ec5a4d589e68050845611e68/ff/n0/0m/01/hv_337659.jpg@596w_1l.jpg)
+
+### 总结
+
+- 总结也不一定非得写跑步相关的……对吧？正愁本周总结怎么写，晃荡一会儿遇白衣~ 
+- 最近一直在搞[SonarQube相关的内容](https://www.jianshu.com/c/c29c7dfdbad2)，微博偶遇白衣大大的[超级程序员与架构师的2020书单-Java篇](https://card.weibo.com/article/m/show/id/2309404569682178080877)里提到[《唯品会Java开发手册》－与阿里手册的比较文学](https://mp.weixin.qq.com/s/cdmzMmE9j31P1Bak0PyXTg) ，这篇有介绍到Sonar在唯品会Java编程规范中的应用。附赠一篇[白衣飘飘的江南](https://mp.weixin.qq.com/s/f2HPyqlW9JF_mCCKbsjeOg)，原来“春天的旁边”来自[springside](https://github.com/springside)项目，八年前开始的一个项目，酷
+- [新时代JDK版本的选择](https://mp.weixin.qq.com/s/GN23pHezUh4yhNAwbNcWkw)推荐使用[已加入Eclipse基金会](https://blog.adoptopenjdk.net/2020/06/adoptopenjdk-to-join-the-eclipse-foundation/)的[AdoptOpenJDK](https://adoptopenjdk.net/)提供的JDK安装版本
+- 周五升级到Mac Big Sur之后git无法正常使用，按照[惯例](https://stackoverflow.com/questions/52522565/git-is-not-working-after-macos-update-xcrun-error-invalid-active-developer-pa)估计还是xcode相关的问题，下班前xcode没升级完。升级成功后，按照提示查看[License](/Applications/Xcode.app/Contents/Resources/English.lproj/License.rtf)并同意之后就会恢复正常。Big Sur更圆滑一些
+- [#嗯，好好跑步#](https://s.weibo.com/weibo?q=%23%E5%97%AF%EF%BC%8C%E5%A5%BD%E5%A5%BD%E8%B7%91%E6%AD%A5%23)
+
+![](https://s3-img.meituan.net/v1/mss_3d027b52ec5a4d589e68050845611e68/ff/n0/0m/01/hx_337653.jpg@596w_1l.jpg)

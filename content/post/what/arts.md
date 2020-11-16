@@ -94,3 +94,37 @@ toc = true
 既然如此什么学习这件事不能也以阶段性目标来完成呢。从递纸条这种简单的事开始。
 
 以上是我学习的一些经验之谈。
+
+
+---
+
+## C10K问题之IO复用
+
+>java 1.8 的 nio 在windows、linux、macosx、solaris上的实现分别用的是select、epoll、kqueue、poll。 ​​​​
+>
+>为什么netty又整了两个跟epoll、kqueue相关的子模块? netty觉得java标准库里的nio对linux epoll api的应用与封装做得不够好，然后自己重新整了一个。
+>
+>懂了nio的这些实现原理，再从设计层面看懂netty如何整出一套事件驱动的架构，最后再找个你感兴趣的协议（比如http）看看netty是怎么在它那套框架里把这个协议实现的。把这三样看懂了，网络框架应用与实现这一大块也就一通百通了。再想往下走，就只能去玩os层面的代码了，绝大多数人都不需要再往下走。
+
+- [服务端经典的C10k问题](https://juejin.im/post/6844903815137722376) ，译自[The C10K problem](http://www.kegel.com/c10k.html)
+- [select poll epoll之间该如何决择](http://cxd2014.github.io/2018/01/10/epoll/) ，译自[select / poll / epoll: practical difference for system architects](https://www.ulduzsoft.com/2014/01/select-poll-epoll-practical-difference-for-system-architects/)
+- [深入理解IO复用之epoll](https://zhuanlan.zhihu.com/p/87843750) 
+- [理解同步、异步、阻塞和非阻塞](https://wenchao.ren/posts/%E7%90%86%E8%A7%A3%E5%90%8C%E6%AD%A5%E5%BC%82%E6%AD%A5%E9%98%BB%E5%A1%9E%E5%92%8C%E9%9D%9E%E9%98%BB%E5%A1%9E/)、[unix IO模型](https://wenchao.ren/posts/unix-io%E6%A8%A1%E5%9E%8B/)、[Select、poll、Epoll、KQueue区别](https://wenchao.ren/posts/selectepollkqueue%E5%8C%BA%E5%88%AB/)
+- [Linux利器：epoll的前世今生](https://time.geekbang.org/column/article/143245)
+
+- [LINUX – IO MULTIPLEXING – SELECT VS POLL VS EPOLL](https://devarea.com/linux-io-multiplexing-select-vs-poll-vs-epoll/) 
+- [Async IO on Linux: select, poll, and epoll](https://jvns.ca/blog/2017/06/03/async-io-on-linux--select--poll--and-epoll/)
+- The author of CURL wrote an amazing article on **[poll vs select vs event libraries](https://daniel.haxx.se/docs/poll-vs-select.html)**.
+
+[11月15日 09:07](https://weibo.com/1773116334/JtYME9d65) 
+>技术要学到什么程度？我对自己的要求是这样的：os层面的要懂原理但是不用深入去看os的代码（os相对比较稳定问题少）；jvm/javac/标准库，这种跟程序语言实现相关的基础知识，要懂原理并且在需要时能立刻深入到代码层面；其他的开源数据库和各类开源框架都是要既懂原理又懂代码实现的。
+
+[11月15日 19:55](https://weibo.com/1773116334/Ju31B5Oyy) 
+
+>我判断一门新的语言能不能火依据3点：
+>
+>1\. 语言的定位是啥？越偏应用学起来越容易的语言受众群更大，像rust这种不但难学定位又是底层开发的语言，就注定是小众语言；
+>
+>2\. 语言有什么独到之处，并且使用这个优点做出的常见框架是否能在某个小方向引领潮流？比如当年用ruby搞元编程很魔幻，使用ruby做出的rails框架在web框架这个领域独领风骚了几年，只不过因为ruby的runtime性能一直被诟病，加上前后端分离和微服务出现后把传统后端web框架的重要性降低了，ruby也冷清了不少。
+>
+>3\. 去看看这个语言对应的技术社区是否活跃，发明的轮子是否多，精品率是否高。比如现在微服务大火，你去比较java、php、go这三个技术社区造的一切与微服务相关的框架，就会明显发现java的更丰富更活跃大厂参与的也多。

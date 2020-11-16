@@ -288,6 +288,69 @@ java.lang.NullPointerException
 
 目前的版本8.4只能从UI上进行创建和分配
 
+### 编译sonar-java 
+
+计划将SonarQube自带的一些code_smell级别的规则升级为bug级别。前端没法直接操作。社区的官方[答复](https://community.sonarsource.com/t/how-to-change-the-type-of-a-rule-e-g-from-bug-to-code-smell/1472/4?u=gebitang)——
+
+**the type of a rule cannot be modified in SonarQube**
+
+>there’s no easy way to change the rule type, and that’s on purpose. You could fork the plugin of interest, edit the code and re-package, but then you have to do that for each new plugin version, rather than being able to just benefit from the work of others. In all, this is really not a recommended solution.
+>
+>Far better, to tell your architect that rule types are immutable - because within the UI they are.
+
+所以只能重新编译官方的[soanr-java](https://github.com/SonarSource/sonar-java)项目。
+
+官方不推荐直接编辑 java-checks模块下`src\main\resources\org\sonar\l10n\java\rules\java`目录的内容，因为所有文件是根据[RSPEC](https://jira.sonarsource.com/browse/RSPEC)自动生成的
+
+>The files from this folder are **generated** directly from our rules descriptions repository: [RSPEC](https://jira.sonarsource.com/browse/RSPEC).
+
+修改对应rule的json描述文件即可，例如将type从`CODE_SMELL`更改为`BUG`。
+
+执行`mvn package -Dmaven.test.skip=ture`即可重新打包。
+
+- 项目打包需要Java11版本，否则报错类版本不兼容，类似` bad class file: xxx class file has wrong version 55.0, should be 52.0` 
+我遇到的是针对`org.apache.wicket:wicket-core:jar:9.1.0`这个包中的类
+
+安装jdk11之后，可以手动修改mvn对应的启动脚本中的JAVA_HOME对应的目录。 [set specific java version to Maven](https://stackoverflow.com/a/19654699/1087122), You could also go into your mvn(non-windows)/mvn.bat/mvn.cmd(windows) and set your java version explicitly there.
+
+- 指定mvn使用代理 [set proxy for maven](https://medium.com/@petehouston/execute-maven-behind-a-corporate-proxy-network-5e08d075f744)
+
+```
+mvn [COMMAND] -Dhttp.proxyHost=[PROXY_SERVER] -Dhttp.proxyPort=[PROXY_PORT] -Dhttp.nonProxyHosts=[PROXY_BYPASS_IP] 
+# example 
+mvn install -Dhttp.proxyHost=10.10.0.100 -Dhttp.proxyPort=8080 -Dhttp.nonProxyHosts=localhost|127.0.0.1
+mvn clean package -Dmaven.test.skip=true -Dhttp.proxyHost=127.0.0.1 -Dhttp.proxyPort=7890 -Dhttps.proxyHost=127.0.0.1 -Dhttps.proxyPort=7890 
+```
+
+
+需要下载指定的plugin
+
+```
+<plugin>
+            <groupId>com.googlecode.maven-download-plugin</groupId>
+            <artifactId>download-maven-plugin</artifactId>
+            <executions>
+              <execution>
+                <id>unpack-jre-windows</id>
+                <phase>generate-test-resources</phase>
+                <goals>
+                  <goal>wget</goal>
+                </goals>
+                <configuration>
+                  <url>https://github.com/AdoptOpenJDK/openjdk8-binaries/releases/download/jdk8u265-b01/OpenJDK8U-jre_x86-32_windows_hotspot_8u265b01.zip</url>
+                  <unpack>true</unpack>
+                  <outputDirectory>${project.build.directory}/jre</outputDirectory>
+                  <sha256>1d1624afe2aaa811e2bf09fb1c432f3f0ad4b8a7b6243db2245390f1b59a17cf</sha256>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+```
+
+编译打包通过
+
+![](https://upload-images.jianshu.io/upload_images/3296949-02c92af04532ed36.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
 
 ### 源码编译问题
 

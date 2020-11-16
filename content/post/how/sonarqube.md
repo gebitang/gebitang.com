@@ -280,6 +280,15 @@ java.lang.NullPointerException
 
 使用SQ代替SonarQube
 
+### 指定profile
+
+[sonar.profile](https://docs.sonarqube.org/7.6/analysis/analysis-parameters/)参数已经被废弃，[社区里的官方回应](https://community.sonarsource.com/t/quality-profiles-are-getting-changed-automatically-with-each-run-of-sonar-analysis/14650/3)——
+
+>In fact, the `sonar.profile` has been removed in recent versions partly because of exactly what you’re experiencing. When you specify sonar.profile in your analysis, you override the profile that would normally be used. It is expected that you still see the other profile in the UI. Analysis parameters provide a temporary override; they do not re-assign.
+
+目前的版本8.4只能从UI上进行创建和分配
+
+
 ### 源码编译问题
 
 window环境下编译成功，但生成的sh脚本默认的回车格式为`Windows(CR LF)`，在linux环境下可以使用`cat -v sonar.sh`进行查看验证。

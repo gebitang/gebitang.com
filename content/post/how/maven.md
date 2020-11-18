@@ -22,6 +22,8 @@ toc = true
 
 <!--more-->
 
+查看本地仓库位置： `mvn help:evaluate -Dexpression=settings.localRepository`
+
 [set specific java version to Maven](https://stackoverflow.com/a/19654699/1087122), You could also go into your mvn(non-windows)/mvn.bat/mvn.cmd(windows) and set your java version explicitly there.
 
 [set proxy for maven](https://medium.com/@petehouston/execute-maven-behind-a-corporate-proxy-network-5e08d075f744)
@@ -34,6 +36,90 @@ mvn clean package -Dmaven.test.skip=true -Dhttp.proxyHost=127.0.0.1 -Dhttp.proxy
 ```
 
 [maven plugins stored where](https://stackoverflow.com/a/2342391/1087122) `~/.m2/repository/org/apache/maven/plugins`
+
+## 隐式声明导致的问题NoClassDefFoundError: org/hamcrest/SelfDescribing
+
+先说结论：依赖包的隐式声明（pom文件中是否定义了其他依赖包）。
+
+本地执行单测没有问题；线上自动跑的时候报如下错误——
+
+>java.lang.NoClassDefFoundError: org/hamcrest/SelfDescribing
+>Caused by: java.lang.ClassNotFoundException: org.hamcrest.SelfDescribing
+
+在线上环境手动复现时，依然报相同的问题。最终定位到是因为`junit`包的隐式依赖导致的问题。
+
+本地环境查看依赖树`mvn dependency:tree`时，可以看到类似下面的结构——
+```
+[INFO] \- junit:junit:jar:4.12:test
+[INFO]    \- org.hamcrest:hamcrest-core:jar:1.3:test
+```
+但线上环境只有第一行，没有第二行。
+
+原因是——
+- 本地的junit包来自maven.org环境，对应pom管理中声明了对`hamcrest-core`的依赖，[junit-4.12.pom on maven.org](https://repo1.maven.org/maven2/junit/junit/4.12/junit-4.12.pom)
+- 线上环境使用的内网仓库，对应的`junit-4.12.pom`没有声明此依赖
+
+这种情况，或者更新内网仓库依赖声明；或者进行显示的声明，在项目中明确声明对`hamcrest-core`的依赖，添加之后，查看依赖树结果——
+
+```
+[INFO] +- junit:junit:jar:4.12:test
+[INFO] \- org.hamcrest:hamcrest-core:jar:1.3:test
+```
+
+如果使用了包含依赖的junit包，又要去除此隐式依赖（比如，希望引用不同的版本），可以引入时做显示的排除声明，类似——
+```
+<dependencies>
+	<dependency>
+		<groupId>junit</groupId>
+		<artifactId>junit</artifactId>
+		<version>4.12</version>
+		<scope>test</scope>
+		<exclusions>
+			<exclusion>
+				<groupId>org.hamcrest</groupId>
+				<artifactId>hamcrest-core</artifactId>
+			</exclusion>
+		</exclusions>
+	</dependency>
+	<!-- This will get hamcrest-core automatically -->
+	<dependency>
+		<groupId>org.hamcrest</groupId>
+		<artifactId>hamcrest-library</artifactId>
+		<version>1.3</version>
+		<scope>test</scope>
+	</dependency>
+</dependencies>
+```
+
+或者，利用maven的特性：“按自上而下的顺序引入依赖，已存在的依赖再次出现时直接忽略”。参考：[What's up with the JUnit and Hamcrest Dependencies?](https://dzone.com/articles/whats-junit-and-hamcrest) 
+
+>Maven's dependencies in pom is **order sensitive** when it comes to auto resolving conflicting versions dependencies. Actually it would just pick the first one found and ignore the rest. 
+
+可以进行这样的引入——
+
+```
+<dependency>
+    <groupId>org.hamcrest</groupId>
+    <artifactId>hamcrest-library</artifactId>
+    <version>1.2.1</version>
+    <scope>test</scope>
+</dependency>
+<dependency>
+    <groupId>junit</groupId>
+    <artifactId>junit-dep</artifactId>
+    <version>4.10</version>
+    <scope>test</scope>
+</dependency>
+```
+
+获取的依赖关系成为——
+
+```
++- org.hamcrest:hamcrest-library:jar:1.2.1:test
+|  \- org.hamcrest:hamcrest-core:jar:1.2.1:test
++- junit:junit-dep:jar:4.10:test
+```
+
 
 ## Maven Plugin Dev
 

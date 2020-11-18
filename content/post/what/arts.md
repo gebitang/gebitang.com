@@ -114,7 +114,8 @@ toc = true
 
 - [LINUX – IO MULTIPLEXING – SELECT VS POLL VS EPOLL](https://devarea.com/linux-io-multiplexing-select-vs-poll-vs-epoll/) 
 - [Async IO on Linux: select, poll, and epoll](https://jvns.ca/blog/2017/06/03/async-io-on-linux--select--poll--and-epoll/)
-- The author of CURL wrote an amazing article on **[poll vs select vs event libraries](https://daniel.haxx.se/docs/poll-vs-select.html)**.
+- The author of CURL wrote an amazing article on **[poll vs select vs event libraries](https://daniel.haxx.se/docs/poll-vs-select.html)**
+- [Scalable Event Multiplexing: epoll vs. kqueue](https://juejin.im/entry/6844903735517249544)
 
 [11月15日 09:07](https://weibo.com/1773116334/JtYME9d65) 
 >技术要学到什么程度？我对自己的要求是这样的：os层面的要懂原理但是不用深入去看os的代码（os相对比较稳定问题少）；jvm/javac/标准库，这种跟程序语言实现相关的基础知识，要懂原理并且在需要时能立刻深入到代码层面；其他的开源数据库和各类开源框架都是要既懂原理又懂代码实现的。

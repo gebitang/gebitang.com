@@ -1524,7 +1524,7 @@ virtual memory          (kbytes, -v) unlimited   #没有限制进程的最大地
 file locks                      (-x) unlimited   #所能锁住的文件的最大个数没有限制。
 ```
 
-### lsof 打开文件过多
+### lsof 打开的文件过多 / too many open files
 
 [检查以及处理](https://blog.csdn.net/roy_70/article/details/78423880)
 
@@ -1537,6 +1537,93 @@ lsof -p pid
 
 #3. 修改ulimit条件
 ```
+
+打开Synchrony插件之后，wiki再次出现卡死现象。
+
+对应的配置以及场景问题——
+- [Configuring Synchrony](https://confluence.atlassian.com/doc/configuring-synchrony-858772125.html)
+- [Possible Confluence and Synchrony Configurations](https://confluence.atlassian.com/doc/possible-confluence-and-synchrony-configurations-958779064.html) 
+- [Troubleshooting Collaborative Editing](https://confluence.atlassian.com/doc/troubleshooting-collaborative-editing-858772087.html)
+
+
+第一次，确认Nginx配置了对websocket的支持，参考[How to Configure NGINX to Proxy WebSockets](https://www.serverlab.ca/tutorials/linux/web-servers-linux/how-to-configure-nginx-for-websockets/)
+
+今天再次出现卡死问题，保留的log中可以看到已经支持websocket链接，但报错`too many open files` 
+
+```
+24-Nov-2020 14:31:19.461 Info [http-nio-8090-exec-283] org.springframework.web.socket.client.WebSocketConnectionManager.openConnection Connecting to WebSocket at ws://127.0.0.1:8091/synchrony/v1/bayeux-sync1
+24-Nov-2020 14:31:19.464 Info [SimpleAsyncTaskExecutor-1] org.springframework.web.socket.client.WebSocketConnectionManager.onSuccess Successfully connected
+24-Nov-2020 14:31:19.466 Info [http-nio-8090-exec-283] org.springframework.web.socket.client.WebSocketConnectionManager.stop Stopping WebSocketConnectionManager
+24-Nov-2020 14:31:19.524 Info [http-nio-8090-exec-250] org.springframework.web.socket.client.WebSocketConnectionManager.startInternal Starting WebSocketConnectionManager
+24-Nov-2020 14:31:19.525 Info [http-nio-8090-exec-250] org.springframework.web.socket.client.WebSocketConnectionManager.openConnection Connecting to WebSocket at ws://127.0.0.1:8091/synchrony/v1/bayeux-sync1
+24-Nov-2020 14:31:19.527 Info [SimpleAsyncTaskExecutor-1] org.springframework.web.socket.client.WebSocketConnectionManager.onSuccess Successfully connected
+24-Nov-2020 14:31:19.527 Info [http-nio-8090-exec-250] org.springframework.web.socket.client.WebSocketConnectionManager.stop Stopping WebSocketConnectionManager
+24-Nov-2020 14:31:19.556 Info [http-nio-8090-exec-262] org.springframework.web.socket.client.WebSocketConnectionManager.startInternal Starting WebSocketConnectionManager
+24-Nov-2020 14:31:19.557 Info [http-nio-8090-exec-262] org.springframework.web.socket.client.WebSocketConnectionManager.openConnection Connecting to WebSocket at ws://127.0.0.1:8091/synchrony/v1/bayeux-sync1
+24-Nov-2020 14:31:19.558 Info [SimpleAsyncTaskExecutor-1] org.springframework.web.socket.client.WebSocketConnectionManager.onSuccess Successfully connected
+24-Nov-2020 14:31:19.559 Info [http-nio-8090-exec-262] org.springframework.web.socket.client.WebSocketConnectionManager.stop Stopping WebSocketConnectionManager
+24-Nov-2020 14:31:19.607 Error [http-nio-8090-Acceptor-0] org.apache.tomcat.util.net.Acceptor.run Socket accept failed
+ java.io.IOException: too many open files
+	at sun.nio.ch.ServerSocketChannelImpl.accept0(Native Method)
+	at sun.nio.ch.ServerSocketChannelImpl.accept(ServerSocketChannelImpl.java:422)
+	at sun.nio.ch.ServerSocketChannelImpl.accept(ServerSocketChannelImpl.java:250)
+	at org.apache.tomcat.util.net.NioEndpoint.serverSocketAccept(NioEndpoint.java:446)
+	at org.apache.tomcat.util.net.NioEndpoint.serverSocketAccept(NioEndpoint.java:70)
+	at org.apache.tomcat.util.net.Acceptor.run(Acceptor.java:95)
+	at java.lang.Thread.run(Thread.java:748)
+```
+
+检查`ulimit -n`，还是默认的设置1024；先设置大一点再说`ulimit -n 65535`；查看tomcat进程打开的文件数目： `lsof -p pid |wc -l`，已经有2000+；
+
+系统运行打开的文件数足够大，`cat /proc/sys/fs/file-max`；在文件`/etc/security/limits.conf`中先增加以下内容——
+
+```
+#
+#<domain>        <type>  <item>  <value>
+#
+#Where:
+#<domain> can be:
+#        - a user name
+#        - a group name, with @group syntax
+#        - the wildcard *, for default entry
+#        - the wildcard %, can be also used with %group syntax,
+#                 for maxlogin limit
+#
+#<type> can have the two values:
+#        - "soft" for enforcing the soft limits
+#        - "hard" for enforcing hard limits
+#
+#<item> can be one of the following:
+#        - core - limits the core file size (KB)
+#        - data - max data size (KB)
+#        - fsize - maximum filesize (KB)
+#        - memlock - max locked-in-memory address space (KB)
+#        - nofile - max number of open file descriptors
+#        - rss - max resident set size (KB)
+#        - stack - max stack size (KB)
+#        - cpu - max CPU time (MIN)
+#        - nproc - max number of processes
+#        - as - address space limit (KB)
+#        - maxlogins - max number of logins for this user
+#        - maxsyslogins - max number of logins on the system
+#        - priority - the priority to run user process with
+#        - locks - max number of file locks the user can hold
+#        - sigpending - max number of pending signals
+#        - msgqueue - max memory used by POSIX message queues (bytes)
+#        - nice - max nice priority allowed to raise to values: [-20, 19]
+#        - rtprio - max realtime priority
+
+* soft nofile 65535 
+* hard nofile 65535
+```
+
+观察一段时间再说。
+
+传说在CentOS上修改`/etc/security/limits.conf`[不生效](https://support.imply.io/hc/en-us/articles/360013273774-If-you-re-having-a-too-many-open-files-problem-I-feel-bad-for-you-son-but-I-got-99-problems-and-a-ulimit-setting-ain-t-one-)? 但官方似乎也是这样建议的[How to set ulimit values](https://access.redhat.com/solutions/61334)，如果还是不行，试试 [Changing Limits for Services with CentOS 7 / RHEL 7 / Systemd ](https://www.grumpyland.com/blog/231/changing-limits-for-services-with-centos-7-rhel-7-systemd/)
+
+针对service，可以在配置里直接进行设置，参考[RHEL/CentOS 7 & systemD not honoring ulimits](https://community.splunk.com/t5/Archive/RHEL-CentOS-7-systemD-not-honoring-ulimits/m-p/362940)，类似——
+
+首先，使用`service status serviceName` 或 `systemctl status serviceName` 确认对应服务的启动方式，是init.d还是systemd，如果是后者，在对应的服务配置的service字段中增加`LimitNOFILE=65535`即可生效
 
 
 ## Shell commands

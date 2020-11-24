@@ -313,7 +313,7 @@ sudo /etc/init.d/mysql restart
 
 ### 备份数据库表结构
 
-命令行下具体用法如下：  mysqldump -u用戶名 -p密码 -d 數據库名 表名 脚本名;
+命令行下具体用法如下：  mysqldump -u用戶名 -p密码 -d 数据库名 表名 脚本名;
 
 ```
 	# 1.导出整个数据库  
@@ -322,8 +322,8 @@ sudo /etc/init.d/mysql restart
 
 　　# 2.导出一个表，包括表结构和数据 
 
-　　# mysqldump -u用户名 -p 密码  数据库名 表名> 导出的文件名 
-　　mysqldump -uroot -pmysql sva_rec date_rec_drv> e:\date_rec_drv.sql 
+　　# mysqldump -u用户名 -p 密码  数据库名 表名> 导出的文件名  http://zetcode.com/mysql/exportimport/
+　　mysqldump -uroot -pmysql --no-create-info sva_rec date_rec_drv > e:\date_rec_drv.sql 
 
 　　# 3.导出一个数据库结构 增加 -d 参数
 　　mysqldump -uroot -pmysql -d sva_rec > e:\sva_rec.sql 

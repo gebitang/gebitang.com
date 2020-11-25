@@ -349,10 +349,22 @@ bat脚本内容：`start "c" cmd /k call b.bat`中：
 
 ## 设置命令行代理
 
+[Command line to remove an environment variable from the OS level configuration](https://stackoverflow.com/a/13222794/1087122)
+
+[Echo a blank (empty) line to the console from a Windows batch file](https://stackoverflow.com/a/20696885/1087122)
+
 ```
 # 持续到cmd窗口关闭，非 系统环境变量
 set http_proxy=http://127.0.0.1:1189
 set https_proxy=http://127.0.0.1:1189
+
+# 删除此变量的值。只需要在等号后不设置值即可。
+set http_proxy=
+
+# echo a new empty line
+echo[
+echo(
+echo. 
 ```
 
 

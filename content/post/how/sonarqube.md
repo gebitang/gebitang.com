@@ -1543,6 +1543,13 @@ Idea上也有对应的[插件](https://plugins.jetbrains.com/plugin/9345-jdt-ast
 - [Java代码分析器(一): JDT入门](https://segmentfault.com/a/1190000000609246)
 - [Java代码分析器(二): 使用DOM API操作抽象语法树](https://segmentfault.com/a/1190000000638838)
 
+[ASTs - What are they and how to use them](https://www.twilio.com/blog/abstract-syntax-trees) 
+
+[astexplorer：在线查看ast](https://astexplorer.net/)，[站点源码](https://github.com/fkling/astexplorer)
+
+- Lexical Analysis 词法分析，转变为Token流
+- Syntax Analysis 句法分析，转变为AST
+- Code Generation 基于AST进行操作：读，写，改，打印等
 
 ### SonarQube添加自定义规则
 

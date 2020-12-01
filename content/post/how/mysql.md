@@ -14,7 +14,7 @@ toc = true
 
 ### 设置serverTimeZone
 
-Q：遗留问题一直没处理。测试环境mysql的默认timestamp值总是跟北京时间相差了10+小时，没定位清楚原因是什么。
+Q：遗留问题一直没处理。测试环境mysql的默认timestamp值总是跟北京时间相差了10+小时，没定位清楚原因是什么。  
 A： 系统默认的时区为`CST`（utc-6），使用北京时间(utc+8)插入时，默认会进行转换。可通过jdbc的url链接参数进行指定`serverTimezone=Asia/Shanghai`
 
 [MySQL TIMESTAMP](https://www.mysqltutorial.org/mysql-timestamp.aspx) 
@@ -26,7 +26,7 @@ A： 系统默认的时区为`CST`（utc-6），使用北京时间(utc+8)插入�
 
 官方文档[11.2.2 The DATE, DATETIME, and TIMESTAMP Types](https://dev.mysql.com/doc/refman/8.0/en/datetime.html) 
 
-查看系统/当前session的时区：`SELECT @@GLOBAL.time_zone, @@SESSION.time_zone;`值为`system`；
+查看系统/当前session的时区：`SELECT @@GLOBAL.time_zone, @@SESSION.time_zone;`值为`system`；  
 查看system对应的时区：`SELECT @@system_time_zone;` 
 
 [5.1.15 MySQL Server Time Zone Support](https://dev.mysql.com/doc/refman/8.0/en/time-zone-support.html)

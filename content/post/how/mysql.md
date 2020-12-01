@@ -12,6 +12,43 @@ topics = [
 toc = true
 +++
 
+### 设置serverTimeZone
+
+Q：遗留问题一直没处理。测试环境mysql的默认timestamp值总是跟北京时间相差了10+小时，没定位清楚原因是什么。
+A： 系统默认的时区为`CST`（utc-6），使用北京时间(utc+8)插入时，默认会进行转换。可通过jdbc的url链接参数进行指定`serverTimezone=Asia/Shanghai`
+
+[MySQL TIMESTAMP](https://www.mysqltutorial.org/mysql-timestamp.aspx) 
+>The MySQL `TIMESTAMP` is a temporal [data type](https://www.mysqltutorial.org/mysql-data-types.aspx "MySQL Data Types") that holds the combination of [date](https://www.mysqltutorial.org/mysql-date/) and [time](https://www.mysqltutorial.org/mysql-time/). The [format ](https://www.mysqltutorial.org/mysql-date_format/ "MySQL DATE_FORMAT function")of a `TIMESTAMP` is `YYYY-MM-DD HH:MM:SS` which is fixed at 19 characters.
+>
+>The `TIMESTAMP` value has a range from `'1970-01-01 00:00:01' UTC` to `'2038-01-19 03:14:07' UTC`.
+>
+>When you [insert ](https://www.mysqltutorial.org/mysql-insert-statement.aspx "MySQL INSERT statement")a `TIMESTAMP` value into a table, MySQL converts it from your connection’s time zone to UTC for storing.
+
+官方文档[11.2.2 The DATE, DATETIME, and TIMESTAMP Types](https://dev.mysql.com/doc/refman/8.0/en/datetime.html) 
+
+查看系统/当前session的时区：`SELECT @@GLOBAL.time_zone, @@SESSION.time_zone;`值为`system`；
+查看system对应的时区：`SELECT @@system_time_zone;` 
+
+[5.1.15 MySQL Server Time Zone Support](https://dev.mysql.com/doc/refman/8.0/en/time-zone-support.html)
+
+>`timezone` values can be given in several formats, none of which are case-sensitive:
+>
+>- As the value 'SYSTEM', indicating that the server time zone is the same as the system time zone.
+>
+>- As a string indicating an offset from UTC of the form [H]H:MM, prefixed with a + or -, such as '+10:00', '-6:00', or '+05:30'. 
+>- As a named time zone, such as 'Europe/Helsinki', 'US/Eastern', 'MET', or 'UTC'.
+
+系统设置可参考 [How do I set the time zone of MySQL?](https://stackoverflow.com/questions/930900/how-do-i-set-the-time-zone-of-mysql) 
+
+建立mysql的url链接时可以指定serverTimeZone——`jdbc:mysql://localhost:3306/test?serverTimezone=Asia/Shanghai&useLegacyDatetimeCode=false`
+
+参考[Setting the MySQL JDBC Timezone Using Spring Boot Configuration](https://www.baeldung.com/mysql-jdbc-timezone-spring-boot)，或[这里](https://stackoverflow.com/a/7610174/1087122)，[更详细的问题说明](https://stackoverflow.com/a/19075291/1087122) 
+
+[Time Zone Map](https://www.timeanddate.com/time/map/) 
+
+![](https://upload-images.jianshu.io/upload_images/3296949-3f4652dff8c7eba0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+
 ### 创建index
 
 [mysql index](https://www.tutorialspoint.com/mysql/mysql-indexes.htm)   

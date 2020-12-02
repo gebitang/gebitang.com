@@ -391,7 +391,7 @@ SELECT FROM_UNIXTIME(ii.match_time/1000), ii.* FROM `intervene_info` as ii
 	where ii.adapt_id in('xxx') and ii.tindex>0 and ii.swj_email='intervene.109@xxx.cn';
 ```
 
-### 修改表名、列名
+### 新增/修改表名、列名
 
 [添加列，修改列，删除列](https://blog.csdn.net/ws84643557/article/details/6939846)
 

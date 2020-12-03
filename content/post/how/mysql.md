@@ -402,6 +402,13 @@ alter table test rename test1;
 --添加表列 
 alter table test add  column name varchar(10); 
 
+-- 多个columns
+ALTER TABLE su_result
+	ADD COLUMN committer_email varchar(100) NOT NULL DEFAULT '' COMMENT '提交人email',
+	ADD COLUMN bug int(4) NOT NULL DEFAULT 0 COMMENT '新增bug数',
+	ADD COLUMN code_smell int(4) NOT NULL DEFAULT 0 COMMENT '新增异味数',
+	ADD COLUMN vulnerability int(4) NOT NULL DEFAULT 0 COMMENT '新增漏洞数';
+
 --删除表列 
 alter table test drop  column name; 
 

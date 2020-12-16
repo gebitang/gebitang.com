@@ -10,6 +10,8 @@ topics = [
 toc=true
 +++
 
+### 环境搭建和基础使用
+
 [How to setup OpenGrok](https://github.com/oracle/opengrok/wiki/How-to-setup-OpenGrok)
 
 *   [opengrok site](https://oracle.github.io/opengrok/)
@@ -169,8 +171,7 @@ usage: opengrok-indexer [-h] [-l LOGLEVEL] [-v] [-j JAVA] [-J JAVA_OPTS]
 - Full Search	(**full**) Search through all text tokens (words,strings,identifiers,numbers) in index.
 - Definition	(**defs**) Only finds symbol definitions (where e.g. a variable (function, ...) is defined).
 - Symbol	(**refs**)  Only finds symbols (e.g. methods, classes, functions, variables).
-- File Path (**path**)	path of the source file (no need to use dividers, or if, then use "/" - Windows users, "\" is an escape key in Lucene query syntax!   
-Please don't use "\", or replace it with "/").    
+- File Path (**path**)	path of the source file (no need to use dividers, or if, then use "/" - Windows users, "\\" is an escape key in Lucene query syntax! Please don't use "\\", or replace it with "/").    
 Also note that if you want just exact path, enclose it in "", e.g. "src/mypath", otherwise dividers will be removed and you get more hits.  
 - History	(**hist**) History log comments.
 
@@ -386,3 +387,21 @@ server {
 下一步再研究接入SSO的方式如何实现。
 
 [Opengrok SSO configuration: issue #3189](https://github.com/oracle/opengrok/issues/3189)
+
+### 使用API搜索
+
+- 配置了nginx的basic认证时，可以通过url传递认证参数调用实际的search请求
+- 除了`/metrics`之外，其他的api目录在`/api/v1/`路径下
+- 除了`/metrics`,`/suggester`,`/search`之前，其他的api都需要在本地进行调用
+
+search参数如果没有指定，则默认为空值（不做对应的限制）
+
+full参数表示全文本搜索，如果搜索的值包括分隔符，例如`.`，需要将完整的文本使用双引号引起来。例如"test.abc.com"，双引号在url中要做转义，此参数值为 `full=%22abc.test.com%22`
+
+上述参数定义可以在[官方api站点](https://opengrok.docs.apiary.io/#reference/0/search/return-search-results?console=1)进行定义使用
+
+加上服务部署在8080端口的`/source`目录，查找所以`upload.js`文件中包含`abc.test.com`的项目。
+
+最终的查询url为：`http://127.0.0.1:8080/source/api/v1/search?full=%22guazi01.kss.ksyun.com%22&path=%22upload.js%22`
+
+在服务器上使用wget执行查询结果，需要再将url使用双引号引起来，否则`&`符号之后的值将被忽略。执行 `wget "http://127.0.0.1:8080/source/api/v1/search?full=%22guazi01.kss.ksyun.com%22&path=%22upload.js%22" -O result.txt`将查询结果保持到当前目录的result.txt文件中

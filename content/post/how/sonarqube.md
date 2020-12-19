@@ -2281,3 +2281,288 @@ Administration（配置）--> Configuration（配置）--> Analysis Scope (排�
 `mvn sonar:sonar`会自动识别项目结构：[Introduction to the Standard Directory Layout](https://maven.apache.org/guides/introduction/introduction-to-the-standard-directory-layout.html)
 
 ![](https://upload-images.jianshu.io/upload_images/3296949-265e8fe314e1edf1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+## 验证环境 
+
+从[7.7版本](https://docs.sonarqube.org/7.7/analysis/coverage/)开始，覆盖(Coverage)包括两个概念： 
+
+1.  Test Coverage 测试覆盖 ——测试结果有多少覆盖率  
+2.  Test Execution 测试执行 ——具体包含多少个测试用例
+
+此演示用来说明Java Maven项目
+
+1). 如何执行单元测试；  
+
+2). 如何利用sonar插件完成静态代码扫描。
+
+### 项目内容
+
+项目地址： [https://gitee.com/gebitang/mojo](https://gitee.com/gebitang/mojo) 
+
+只包含三个文件：
+
+*   一个class， https://gitee.com/gebitang/mojo/blob/master/src/main/java/very/basic/demo/mutation/Palindrome.java 
+*   一个对应的测试class， https://gitee.com/gebitang/mojo/blob/master/src/test/java/very/basic/demo/mutation/PalindromeUnitTest.java 
+*   pom文件(只有一个junit依赖)  https://gitee.com/gebitang/mojo/blob/master/pom.xml 
+
+### 测试环境
+
+本地搭建的8.3版本的SonarQube服务
+
+使用maven自带的maven-surefire-plugin执行单测
+
+使用jacoco插件jacoco-maven-plugin收集单测覆盖结果
+
+使用Sonar-maven-plugin插件执行扫描
+
+## 执行验证
+
+`mvn test`默认绑定的goal是`surefire:test`，使用默认自带的"maven-surefire-plugin"插件执行单元测试(run tests using a suitable unit testing framework. These tests should not require the code be packaged or deployed.)
+
+项目所有依赖的插件列表可以通过执行"mvn help:effective-pom"命令获取到，可以看到默认的插件包括——
+
+1.  maven-clean-plugin   
+2. maven-resources-plugin
+3.  maven-jar-plugin
+4.  maven-compiler-plugin
+5.  maven-surefire-plugin
+6.  maven-install-plugin
+7.  maven-deploy-plugin
+8.  maven-site-plugin
+
+### 无jacoco插件执行结果
+
+#### mvn test执行信息
+
+```
+[INFO] Scanning for projects...
+[INFO]
+[INFO] ------------------------< very.basic.demo:mojo >------------------------
+[INFO] Building mojo 1.0-SNAPSHOT
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO]
+[INFO] --- maven-resources-plugin:2.6:resources (default-resources) @ mojo ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] Copying 0 resource
+[INFO]
+[INFO] --- maven-compiler-plugin:3.1:compile (default-compile) @ mojo ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 1 source file to D:\gprojects\us\mojo\target\classes
+[INFO]
+[INFO] --- maven-resources-plugin:2.6:testResources (default-testResources) @ mojo ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] skip non existing resourceDirectory D:\gprojects\us\mojo\src\test\resources
+[INFO]
+[INFO] --- maven-compiler-plugin:3.1:testCompile (default-testCompile) @ mojo ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 1 source file to D:\gprojects\us\mojo\target\test-classes
+[INFO]
+[INFO] --- maven-surefire-plugin:2.12.4:test (default-test) @ mojo ---
+[INFO] Surefire report directory: D:\gprojects\us\mojo\target\surefire-reports
+
+-------------------------------------------------------
+T E S T S
+-------------------------------------------------------
+Running very.basic.demo.mutation.PalindromeUnitTest
+Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.045 sec
+
+Results :
+
+Tests run: 4, Failures: 0, Errors: 0, Skipped: 0
+
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time: 1.524 s
+[INFO] Finished at: 2020-07-16T11:44:50+08:00
+[INFO] ------------------------------------------------------------------------
+```
+
+####  SonarQube结果 
+
+在SonarQube的展示上，此时只有 Test Execution的结果，没有覆盖率的结果
+
+![](https://upload-images.jianshu.io/upload_images/3296949-7f5259b4d0ca6860.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+
+###  有jacoco插件执行结果
+
+mvn test执行结果
+
+```
+[INFO] Scanning for projects...
+[INFO]
+[INFO] ------------------------< very.basic.demo:mojo >------------------------
+[INFO] Building mojo 1.0-SNAPSHOT
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO]
+[INFO] --- maven-resources-plugin:2.6:resources (default-resources) @ mojo ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] Copying 0 resource
+[INFO]
+[INFO] --- maven-compiler-plugin:3.1:compile (default-compile) @ mojo ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 1 source file to D:\gprojects\us\mojo\target\classes
+[INFO]
+[INFO] --- maven-resources-plugin:2.6:testResources (default-testResources) @ mojo ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] skip non existing resourceDirectory D:\gprojects\us\mojo\src\test\resources
+[INFO]
+[INFO] --- maven-compiler-plugin:3.1:testCompile (default-testCompile) @ mojo ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 1 source file to D:\gprojects\us\mojo\target\test-classes
+[INFO]
+[INFO] --- maven-surefire-plugin:2.12.4:test (default-test) @ mojo ---
+[INFO] Surefire report directory: D:\gprojects\us\mojo\target\surefire-reports
+
+-------------------------------------------------------
+T E S T S
+-------------------------------------------------------
+Running very.basic.demo.mutation.PalindromeUnitTest
+Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.045 sec
+
+Results :
+
+Tests run: 4, Failures: 0, Errors: 0, Skipped: 0
+
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time: 1.524 s
+[INFO] Finished at: 2020-07-16T11:44:50+08:00
+[INFO] ------------------------------------------------------------------------
+```
+
+#### SonarQube结果
+
+
+添加了jacoco插件并与test阶段绑定后，`mvn test`会同时产生
+
+- （surefire插件生成的）单测结果(Test Execution)
+- （jacoco插件生成）单测覆盖率结果(Test Coverage)
+
+
+此时再执行`sonar:sonar`后，单测结果包括了——
+
+-  “Test Execution 测试执行”；
+-  “Test Coverage 测试覆盖”
+
+Sonar插件执行log `sonar:sonar`
+
+```
+[INFO] Scanning for projects...
+[INFO]
+[INFO] ------------------------< very.basic.demo:mojo >------------------------
+[INFO] Building mojo 1.0-SNAPSHOT
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO]
+[INFO] --- sonar-maven-plugin:3.3.0.603:sonar (default-cli) @ mojo ---
+[INFO] User cache: C:\Users\joechin\.sonar\cache
+[INFO] SonarQube version: 8.3.1
+[INFO] Default locale: "zh_CN", source code encoding: "UTF-8"
+[WARNING] SonarScanner will require Java 11 to run starting in SonarQube 8.x
+[INFO] Load global settings
+[INFO] Load global settings (done) | time=51ms
+[INFO] Server id: 86E1FA4D-AXLG8ocC0I8Fk3NXo4jb
+[INFO] User cache: C:\Users\joechin\.sonar\cache
+[INFO] Load/download plugins
+[INFO] Load plugins index
+[INFO] Load plugins index (done) | time=31ms
+[INFO] Load/download plugins (done) | time=54ms
+[INFO] Process project properties
+[INFO] Process project properties (done) | time=7ms
+[INFO] Execute project builders
+[INFO] Execute project builders (done) | time=2ms
+[INFO] Project key: very.basic.demo:mojo
+[INFO] Base dir: D:\gprojects\us\mojo
+[INFO] Working dir: D:\gprojects\us\mojo\target\sonar
+[INFO] Load project settings for component key: 'very.basic.demo:mojo'
+[INFO] Load quality profiles
+[INFO] Load quality profiles (done) | time=38ms
+[INFO] Load active rules
+[INFO] Load active rules (done) | time=314ms
+[INFO] Indexing files...
+[INFO] Project configuration:
+[INFO] 3 files indexed
+[INFO] 0 files ignored because of scm ignore settings
+[INFO] Quality profile for java: Sonar way
+[INFO] Quality profile for xml: Sonar way
+[INFO] ------------- Run sensors on module mojo
+[INFO] Load metrics repository
+[INFO] Load metrics repository (done) | time=17ms
+[INFO] Sensor JavaSquidSensor [java]
+[INFO] Configured Java source version (sonar.java.source): 8
+[INFO] JavaClasspath initialization
+[WARNING] Bytecode of dependencies was not provided for analysis of source files, you might end up with less precise results. Bytecode can be provided using sonar.java.libraries property.
+[INFO] JavaClasspath initialization (done) | time=8ms
+[INFO] JavaTestClasspath initialization
+[INFO] JavaTestClasspath initialization (done) | time=1ms
+[INFO] Java Main Files AST scan
+[INFO] 1 source files to be analyzed
+[INFO] Load project repositories
+[INFO] Load project repositories (done) | time=3ms
+[INFO] 1/1 source files have been analyzed
+[INFO] Java Main Files AST scan (done) | time=731ms
+[INFO] Java Test Files AST scan
+[INFO] 1 source files to be analyzed
+[INFO] Java Test Files AST scan (done) | time=46ms
+[INFO] 1/1 source files have been analyzed
+[INFO] Java Generated Files AST scan
+[INFO] 0 source files to be analyzed
+[INFO] Java Generated Files AST scan (done) | time=1ms
+[INFO] 0/0 source files have been analyzed
+[INFO] Sensor JavaSquidSensor [java] (done) | time=917ms
+[INFO] Sensor SonarCSS Rules [cssfamily]
+[INFO] No CSS, PHP, HTML or VueJS files are found in the project. CSS analysis is skipped.
+[INFO] Sensor SonarCSS Rules [cssfamily] (done) | time=1ms
+[INFO] Sensor JaCoCo XML Report Importer [jacoco]
+[INFO] 'sonar.coverage.jacoco.xmlReportPaths' is not defined. Using default locations: target/site/jacoco/jacoco.xml,target/site/jacoco-it/jacoco.xml,build/reports/jacoco/test/jacocoTestReport.xml
+[INFO] Importing 1 report(s). Turn your logs in debug mode in order to see the exhaustive list.
+[INFO] Sensor JaCoCo XML Report Importer [jacoco] (done) | time=13ms
+[INFO] Sensor SurefireSensor [java]
+[INFO] parsing [D:\gprojects\us\mojo\target\surefire-reports]
+[INFO] Sensor SurefireSensor [java] (done) | time=18ms
+[INFO] Sensor JavaXmlSensor [java]
+[INFO] 1 source files to be analyzed
+[INFO] Sensor JavaXmlSensor [java] (done) | time=93ms
+[INFO] 1/1 source files have been analyzed
+[INFO] Sensor HTML [web]
+[INFO] Sensor HTML [web] (done) | time=2ms
+[INFO] Sensor XML Sensor [xml]
+[INFO] 1 source files to be analyzed
+[INFO] Sensor XML Sensor [xml] (done) | time=78ms
+[INFO] 1/1 source files have been analyzed
+[INFO] ------------- Run sensors on project
+[INFO] Sensor Zero Coverage Sensor
+[INFO] Sensor Zero Coverage Sensor (done) | time=0ms
+[INFO] Sensor Java CPD Block Indexer
+[INFO] Sensor Java CPD Block Indexer (done) | time=8ms
+[INFO] SCM Publisher SCM provider for this project is: git
+[INFO] SCM Publisher 3 source files to be analyzed
+[INFO] SCM Publisher 2/3 source files have been analyzed (done) | time=72ms
+[WARNING] Missing blame information for the following files:
+[WARNING] * pom.xml
+[WARNING] This may lead to missing/broken features in SonarQube
+[INFO] CPD Executor 1 file had no CPD blocks
+[INFO] CPD Executor Calculating CPD for 0 files
+[INFO] CPD Executor CPD calculation finished (done) | time=0ms
+[INFO] Analysis report generated in 612ms, dir size=85 KB
+[INFO] Analysis report compressed in 90ms, zip size=15 KB
+[WARNING] locking FileBasedConfig[C:\Users\joechin\.config\jgit\config] failed after 5 retries
+[INFO] Analysis report uploaded in 794ms
+[INFO] ANALYSIS SUCCESSFUL, you can browse [http://127.0.0.1:9000/dashboard?id=very.basic.demo%3Amojo](http://127.0.0.1:9000/dashboard?id=very.basic.demo%3Amojo)
+[INFO] Note that you will be able to access the updated dashboard once the server has processed the submitted analysis report
+[INFO] More about the report processing at [http://127.0.0.1:9000/api/ce/task?id=AXNWNqQPI0wKADe8C9RC](http://127.0.0.1:9000/api/ce/task?id=AXNWNqQPI0wKADe8C9RC)
+[INFO] Analysis total time: 9.434 s
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time: 10.902 s
+[INFO] Finished at: 2020-07-16T14:01:28+08:00
+[INFO] ------------------------------------------------------------------------
+
+```
+
+####  SonarQube web展示
+
+![](https://upload-images.jianshu.io/upload_images/3296949-6b4df882f5ae2b7e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)

@@ -111,3 +111,53 @@ OLTP则强调“事务”（transaction）本身，关注在“业务”进行�
 
 >Presto 采用 SPI（Service Provider Interface）服务提供发现机制，来插件化地支持多种数据源，以实现联邦查询（Federation Query，指能够通过一条 SQL 查询，对处于完全不同的系统中的不同的数据库和模式，进行引用和使用）
 
+### data function
+
+官方文档：[8.13. Date and Time Functions and Operators](https://prestodb.io/docs/current/functions/datetime.html) 
+
+The `date_trunc` function supports the following units:
+
+|Unit|Example Truncated Value|
+|---------|---------|
+|second|2001-08-22 03:04:05.000|
+|minute|2001-08-22 03:04:00.000|
+|hour|2001-08-22 03:00:00.000|
+|day|2001-08-22 00:00:00.000|
+|week|2001-08-20 00:00:00.000|
+|month|2001-08-01 00:00:00.000|
+|quarter|2001-07-01 00:00:00.000|
+|year|2001-01-01 00:00:00.000|
+
+The above examples use the timestamp `2001-08-22 03:04:05.321` as the input.
+
+使用实例：[DATE_TRUNC: A SQL Timestamp Function You Can Count On](https://mode.com/blog/date-trunc-sql-timestamp-function-count-on/) 
+
+`date_format(timestamp, format)` → `varchar`. Formats timestamp as a string using format. 
+`from_unixtime(unixtime)` → timestamp. Returns the UNIX timestamp unixtime as a timestamp. 
+
+上面两个方法组合使用，得到——
+[How to convert milliseconds or seconds into date format in Presto?](http://evafengeva.blogspot.com/2017/09/how-to-convert-milliseconds-or-seconds.html)
+
+Milliseconds:  
+`DATE_FORMAT(FROM_UNIXTIME(column_name /1000),'%Y-%m-%d')`
+Seconds:  
+`DATE_FORMAT(FROM_UNIXTIME(column_name),'%Y-%m-%d')`
+
+Please note that '/1000' should be added when it converts milliseconds to human-readable format.
+
+```sql
+select case when wait_duration > 1800000 then '30m以上'
+            when wait_duration <= 1800000 and wait_duration > 600000 then '10~30m'
+            when wait_duration <= 600000 and wait_duration > 60000 then '1~10m'
+            else '1m以下'
+           end as wsec, count(1) AS num, substr(created_at,1,10) as date
+FROM
+  service_su_result_day
+WHERE dt = '${date_y_m_d}'
+-- https://dba.stackexchange.com/a/106798
+GROUP BY substr(created_at,1,10),case when wait_duration > 1800000 then '30m以上'
+            when wait_duration <= 1800000 and wait_duration > 600000 then '10~30m'
+            when wait_duration <= 600000 and wait_duration > 60000 then '1~10m'
+            else '1m以下'
+           end
+```

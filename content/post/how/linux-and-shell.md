@@ -1625,6 +1625,11 @@ lsof -p pid
 
 首先，使用`service status serviceName` 或 `systemctl status serviceName` 确认对应服务的启动方式，是init.d还是systemd，如果是后者，在对应的服务配置的service字段中增加`LimitNOFILE=65535`即可生效
 
+- 系统级：当前系统可打开的最大数量，通过fs.file-max参数可修改  
+- 用户级：指定用户可打开的最大数量，修改/etc/security/limits.conf  
+- 进程级：单个进程可打开的最大数量，通过fs.nr_open参数可修改  
+
+
 
 ## Shell commands
 
@@ -1638,6 +1643,19 @@ lsof -p pid
 man command
 ``` 
 查看命令详情 
+
+### escape spaces in scp 
+
+[refe to](https://stackoverflow.com/questions/19858176/how-do-i-escape-spaces-in-path-for-scp-copy-in-linux)
+
+```
+scp user@example.com:"'web/tmp/Master File 18 10 13.xls'" .
+scp user@example.com:"web/tmp/Master\ File\ 18\ 10\ 13.xls" .
+scp user@example.com:web/tmp/Master\\\ File\\\ 18\\\ 10\\\ 13.xls .
+
+# 使用反斜杠转义单引号
+scp user@example.com:4:"/home/vip/Carl\ Sagan\'s\ Pale\ Blue\ Dot.mp4" .
+```
 
 ### 忽略命令行错误信息
 

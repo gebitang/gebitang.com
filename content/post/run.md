@@ -590,6 +590,16 @@ toc=true
 
 ![](https://s3-img.meituan.net/v1/mss_3d027b52ec5a4d589e68050845611e68/ff/n0/0m/31/rt_304604.jpg@596w_1l.jpg)
 
+[The Great Conjunction of Jupiter and Saturn](https://nasa.tumblr.com/post/637859420873818112/the-great-conjunction-of-jupiter-and-saturn) 
+
+![](https://upload-images.jianshu.io/upload_images/3296949-3fc37621ba12582c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+![](https://upload-images.jianshu.io/upload_images/3296949-0fb60a00b6397b77.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+[Jupiter & Saturn are doing a planetary dance that will result in the Great Conjunction on Dec 21](https://twitter.com/NASA/status/1340750321879015425)
+
+![](https://upload-images.jianshu.io/upload_images/3296949-cece2c1d6294a106.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+最左侧是太阳，向右依序为[水星](https://zh.wikipedia.org/wiki/%E6%B0%B4%E6%98%9F "水星")、[金星](https://zh.wikipedia.org/wiki/%E9%87%91%E6%98%9F "金星")、[地球](https://zh.wikipedia.org/wiki/%E5%9C%B0%E7%90%83 "地球")、[火星](https://zh.wikipedia.org/wiki/%E7%81%AB%E6%98%9F "火星")、[木星](https://zh.wikipedia.org/wiki/%E6%9C%A8%E6%98%9F "木星")、[土星](https://zh.wikipedia.org/wiki/%E5%9C%9F%E6%98%9F "土星")、[天王星](https://zh.wikipedia.org/wiki/%E5%A4%A9%E7%8E%8B%E6%98%9F "天王星")与[海王星](https://zh.wikipedia.org/wiki/%E6%B5%B7%E7%8E%8B%E6%98%9F "海王星")
 
 
 >没有什么是理所应当，一切都是难得可贵；没有什么是一劳永逸，一切都需要不断获取。】住院期间，我又对这句话“熟玩焉”。肠道手术，禁食禁水，吃饭喝水也不是理所应当，是不可得了。所以，不能对我们拥有的一切习以为常，要认识到每一分收获，还有亲人的亲情、朋友的友情，都不是理所应当，而是难得可贵。今年一切都太好了，我总觉得该出点啥坏事，才能平衡。住一次医院，真是很便宜了，活该！——[华衫2009](https://weibo.com/1676664091/Jz1ff898s)

@@ -108,3 +108,97 @@ com.meituan.dorado.common.exception.TimeoutException: GetRequest timeout, timeou
 2020/12/21 14:46:20.485 main-EventThread [INFO] ClientCnxn (ClientCnxn.java:521) EventThread shut down for session: 0x1001fd7146f0001
 2020/12/21 14:46:20.485 main [INFO] ZooKeeper (ZooKeeper.java:687) Session: 0x1001fd7146f0001 closed
 ```
+
+组件的默认实现已经[扩展](https://github.com/Meituan-Dianping/octo-rpc/blob/master/dorado/dorado-doc/manual-developer/Extension.md)
+
+### 打包Dorado
+
+根据[Dorado打包说明](https://github.com/Meituan-Dianping/octo-rpc/blob/master/dorado/dorado-doc/manual-developer/Compile.md)
+
+直接打包，执行后在octo-rpc/dorado/dorado-build/target/ 下可以找到dorado的jar
+
+在octo-rpc/dorado 目录下执行`mvn clean package -Dmaven.test.skip=true`，提示—— 找不到 `com.meituan.octo:mns-invoker:jar:1.0.0`组件
+
+```
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  15.915 s
+[INFO] Finished at: 2020-12-22T10:28:13+08:00
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal on project dorado: Could not resolve dependencies for project com.meituan.octo:dorado:jar:1.0.0: Failure to find com.meituan.octo:mns-invoker:jar:1.0.0 in https://repo.maven.apache.org/maven2 was cached in the local r
+epository, resolution will not be reattempted until the update interval of central has elapsed or updates are forced -> [Help 1]
+[ERROR]
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+```
+
+>请到[OCTO-NS](https://github.com/Meituan-Dianping/octo-ns/blob/master/mns-invoker/README.md)获取依赖mns-invoker依赖
+
+文档错误，上面的模块`mns-invoker`目录现在已更改到`https://github.com/Meituan-Dianping/octo-ns/tree/master/sdk/mns-invoker` 下载octo-ns模块后，编译 `mns-invoker`模块，提示缺少 `com.meituan.octo:idl-common:jar:1.0.0 `
+
+```
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  6.412 s
+[INFO] Finished at: 2020-12-22T10:37:34+08:00
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal on project mns-invoker: Could not resolve dependencies for project com.meituan.octo:mns-invoker:jar:1.0.0: Could not find artifact com.meituan.octo:idl-common:jar:1.0.0 in central (https://repo.maven.apache.org/maven2) -> [Help 1]
+```
+
+先编译 `idl-comman`模块：需要本地有thrift执行环境，并在pom文件中指定执行文件的目录。
+
+安装thrift参考 [官方安装说明](https://thrift.apache.org/docs/install/)，
+```
+<dependencies>
+	<dependency>
+		<groupId>org.apache.thrift</groupId>
+		<artifactId>libthrift</artifactId>
+		<!-- 建议与你生成源码的Thrift版本保持一致! -->
+		<version>0.9.3</version>
+	</dependency>
+</dependencies>
+...
+...
+
+<plugin>
+	<groupId>org.apache.thrift.tools</groupId>
+	<artifactId>maven-thrift-plugin</artifactId>
+	<version>0.1.11</version>
+	<configuration>
+		<!-- your thrift path -->
+		<thriftExecutable>D:/tools/thrift/thrift-0.9.3.exe</thriftExecutable>
+	</configuration>
+	<executions>
+		<execution>
+			<id>thrift-sources</id>
+			<phase>generate-sources</phase>
+			<goals>
+				<goal>compile</goal>
+			</goals>
+		</execution>
+	</executions>
+</plugin>
+```
+目前thrift的最新版本为 `0.13.0`，直接使用这个版本，会提示错误——`unknown option java:hashcode` 似乎是个[兼容性问题](https://github.com/pauldeschacht/impala-java-client/issues/6)，降级之后编译成功
+
+```
+[ERROR] thrift failed output: [WARNING:D:/openSources/gitee/octo-ns/common/idl-mns/idl-common/src/main/thrift/unified_protocol.thrift:35] The "byte" type is a compatibility alias for "i8". Use "i8" to emphasize the signedness of this type.
+[ERROR] thrift failed error: [FAILURE:generation:1] Error: unknown option java:hashcode
+```
+
+到[存档地址](http://archive.apache.org/dist/thrift/)下载`0.9.3`版本，编译成功。
+
+- 编译安装 `idl-common`模块
+- 编译安装 `mns-invoder`模块
+- 编译打包`Dorado`工程， 在`dorado-build`模块的target目录下生成dorado的jar包
+
+```
+[INFO] dorado-registry-mns 1.0.0 .......................... SUCCESS [  0.295 s]
+[INFO] dorado-trace 1.0.0 ................................. SUCCESS [  0.030 s]
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  19.953 s
+[INFO] Finished at: 2020-12-22T11:25:26+08:00
+[INFO] ------------------------------------------------------------------------
+```

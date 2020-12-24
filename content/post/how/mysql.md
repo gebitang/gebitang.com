@@ -12,6 +12,30 @@ topics = [
 toc = true
 +++
 
+### SQL Joins
+
+[What's the difference between INNER JOIN, LEFT JOIN, RIGHT JOIN and FULL JOIN? ](https://stackoverflow.com/questions/5706437/whats-the-difference-between-inner-join-left-join-right-join-and-full-join)
+
+An SQL JOIN clause is used to combine rows from two or more tables, based on a common field between them.
+
+There are different types of joins available in SQL:
+
+INNER JOIN: returns rows when there is a match in both tables.
+
+LEFT JOIN: returns all rows from the left table, even if there are no matches in the right table.
+
+RIGHT JOIN: returns all rows from the right table, even if there are no matches in the left table.
+
+FULL JOIN: It combines the results of both left and right outer joins.
+
+The joined table will contain all records from both the tables and fill in NULLs for missing matches on either side.
+
+SELF JOIN: is used to join a table to itself as if the table were two tables, temporarily renaming at least one table in the SQL statement.
+
+CARTESIAN JOIN: returns the Cartesian product of the sets of records from the two or more joined tables.
+
+![](https://i.stack.imgur.com/VQ5XP.png)
+
 ### 设置serverTimeZone
 
 Q：遗留问题一直没处理。测试环境mysql的默认timestamp值总是跟北京时间相差了10+小时，没定位清楚原因是什么。  

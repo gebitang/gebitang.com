@@ -28,3 +28,30 @@ DH for [Diffie–Hellman key exchange](https://en.wikipedia.org/wiki/Diffie%E2%8
 - [常见加密算法分类,用途,原理以及比较](https://blog.csdn.net/qq_21794823/article/details/53114819)
 - [离散对数加密算法](https://blog.csdn.net/chen77716/article/details/7106485)
 - [证明与计算(2): 离散对数问题(Discrete logarithm Problem, DLP)](https://www.cnblogs.com/math/p/discrete-log.html)
+
+[Signal protocol 开源协议理解](https://blog.csdn.net/andylau00j/article/details/82870841)  
+[【翻译】WhatsApp 加密概述（技术白皮书）](https://www.cnblogs.com/over140/p/8683171.html)  
+[Signal协议与系统分析一：需求与特性篇](https://zhuanlan.zhihu.com/p/85366605)  
+[Signal协议与系统分析二：三方密钥协商协议X3DH](https://zhuanlan.zhihu.com/p/85454061)  
+[理解椭圆函数加密（初等内容介绍）](https://zhuanlan.zhihu.com/p/42983540)
+[理解零知识证明和协议](https://zhuanlan.zhihu.com/p/43575662)
+
+--- 
+
+[official doc](https://signal.org/docs/)
+
+[XEdDSA and VXEdDSA](https://signal.org/docs/specifications/xeddsa/)
+
+This document describes how to create and verify EdDSA-compatible signatures using public key and private key formats initially defined for the X25519 and X448 elliptic curve Diffie-Hellman functions. This document also describes "VXEdDSA" which extends XEdDSA to make it a verifiable random function, or VRF.
+
+[X3DH](https://signal.org/docs/specifications/x3dh/)
+
+This document describes the "X3DH" (or "Extended Triple Diffie-Hellman") key agreement protocol. X3DH establishes a shared secret key between two parties who mutually authenticate each other based on public keys. X3DH provides forward secrecy and cryptographic deniability.
+
+[Double Ratchet](https://signal.org/docs/specifications/doubleratchet/)
+
+This document describes the Double Ratchet algorithm, which is used by two parties to exchange encrypted messages based on a shared secret key. The parties derive new keys for every Double Ratchet message so that earlier keys cannot be calculated from later ones. The parties also send Diffie-Hellman public values attached to their messages. The results of Diffie-Hellman calculations are mixed into the derived keys so that later keys cannot be calculated from earlier ones. These properties give some protection to earlier or later encrypted messages in case of a compromise of a party's keys.
+
+[Sesame](https://signal.org/docs/specifications/sesame/)
+
+This document describes the Sesame algorithm for managing message encryption sessions in an asynchronous and multi-device setting.

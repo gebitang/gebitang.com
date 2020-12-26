@@ -89,3 +89,28 @@ There are 2244080 references in the queue
 ![](https://upload-images.jianshu.io/upload_images/3296949-72130351f7ab647c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
 ![](https://upload-images.jianshu.io/upload_images/3296949-584408e67e6e1b98.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+### item 9: Prefer try-with-resources to try-finally
+
+今天这个item只有两页，说的内容也简单
+
+在Java 7 中引入的 [14.20.3. try-with-resources](https://docs.oracle.com/javase/specs/jls/se7/html/jls-14.html#jls-14.20.3)，通常会被简写为 `JSL 14.20.3` 
+
+JSL: [Java Language Specification](https://docs.oracle.com/javase/specs/jls/se7/html/index.html)
+
+>A try-with-resources statement is parameterized with variables (known as resources) that are initialized before execution of the try block and closed automatically, in the reverse order from which they were initialized, after execution of the try block. catch clauses and a finally clause are often unnecessary when resources are closed automatically.
+
+- 不再需要手动进行关闭操作。会自动进行“倒序”关闭。所以catch和finally语句都不是必须的了
+
+```
+// try-with-resources - the the best way to close resources!
+static String firstLineOfFile(String path) throws IOException {
+    try (BufferedReader br = new BufferedReader(
+            new FileReader(path))) {
+        return br.readLine();
+    }
+}
+```
+
+- 使用try-with-resources，不要使用try-finally。后者看起来更难看，而且抛出的异常可能不准确（因为try语句快和finally语句块中都可能抛出异常）。前者是目前的最佳实践
+

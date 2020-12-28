@@ -165,3 +165,53 @@ equals的实现不需要先判断nul，根据[JLS, 15.20.2](https://docs.oracle.
 最后灵魂三性问：是否满足对称性、传递性、一致性？
 
 建议使用[google's AutoValue](https://github.com/google/auto/tree/master/value)，[使用方式](https://github.com/google/auto/blob/master/value/userguide/index.md)， [Introduction to AutoValue](https://www.baeldung.com/introduction-to-autovalue)
+
+### item 10: Obey the general contract when overriding `equals`
+
+不重写——  
+
+- 最简单的方法是不重新此方法
+- 如果类的每个实例都是唯一的时也不需要，例如每个`Thread`实例
+- 或者说不需要进行“逻辑相等”（logical equality）的测试，例如`java.util.regex.Pattern`的类实例也不需要重新`equals`方法
+- 父类已经重新了此方法并且适用子类的场景，例如大部分`Set`类的实现继承自`AbstractSet`， `List`继承自`AbstractList`
+- 类是私有或包内私有并且equals方法不会被调用
+
+要重写——
+
+- 值类型的类，例如`Integer`,`String`，或者用户启动两个实例"逻辑地相等"(logically equivalent)，而不是指“同一个对象”
+
+所谓`equals`的“一般格式/通用合同”(general contract)包括——
+
+- 反射性(Reflexive)， 对于非null引用， x.equals(x)总为true
+- 对称性(Symmetric)，如果 x.equals(y)为真，那么y.equals(x)必为true
+- 传递性(Transitive)， 如果x等于y，y等于z，那么x也等于z
+- 一致性(Consistent)，无论调用多少次，结果都一样
+- ~~分空性~~(Non-nullity)任何非null引用都不等于null， x.equals(null)结果false
+
+
+>To paraphrase John Donne, no class is an island. 
+[meaning](https://www.phrases.org.uk/meanings/no-man-is-an-island.html)  human beings do badly when isolated from others and need to be part of a community in order to thrive.
+
+传递性很容易被违反。尤其是实例化一个类并且增加了一个组件的情况下
+> There is no way to extend an instantiable class and add a value component while preserving the equals contract
+
+The [Liskov substitution principle](https://stackoverflow.com/questions/56860/what-is-an-example-of-the-liskov-substitution-principle) says that any important property of a type should also hold for all its subtypes so that any method written for the type should work equally well on its subtypes.
+
+JDK中的 `java.util.Timestamp`扩展了`java.util.Date`并且增加了一个组件`nanoseconds`，Timestamp的`equals`方法就违背了对称性原则。
+
+> The Timestamp.equals(Object) method never returns true when passed an object that isn't an instance of java.sql.Timestamp, because the nanos component of a date is unknown. As a result, the Timestamp.equals(Object) method is not symmetric with respect to the java.util.Date.equals(Object) method.
+
+equals的实现不需要先判断nul，根据[JLS, 15.20.2](https://docs.oracle.com/javase/specs/jls/se7/html/jls-15.html#jls-15.20.2)定义，null进行`instanceof`调用时始终返回false
+
+`equals`方法实现——
+
+- 使用`==`检查是否是同一类引用；(考虑性能情况下的简化操作)
+- 使用`instanceof`判断
+- 进行类型转换cast 
+- 对关键field进行对比
+- 同时重写 `hashCode`方法
+...
+
+最后灵魂三性问：是否满足对称性、传递性、一致性？
+
+建议使用[google's AutoValue](https://github.com/google/auto/tree/master/value)，[使用方式](https://github.com/google/auto/blob/master/value/userguide/index.md)， [Introduction to AutoValue](https://www.baeldung.com/introduction-to-autovalue)

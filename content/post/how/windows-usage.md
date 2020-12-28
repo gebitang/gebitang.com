@@ -19,6 +19,23 @@ toc = true
 
 <!-- more -->
 
+## Goland 试用 
+
+[恢复试用IntelliJ IDEA](https://mp.weixin.qq.com/s/NStUocPCaCUzWCa90SfavQ)介绍了idea的恢复，Goland作为同一家产品适用相同的逻辑
+
+`reg.exe query "HKCU\SOFTWARE\JavaSoft\Prefs\jetbrains\goland\99999999\evlsprt3" /v "202"` 通过regedit查到当前goland的注册版本。
+
+关键的三步：(在目录`%APPDATA%\JetBrains`下操作）  
+- 删除过期后产生的注册键`evlsprt`, `evlsprt2`
+- 依次删除对应的目录和文件，包括 `GoLand2020.3/eval`目录；`PermanentDeviceId`, `PermanentDeviceId`，`bl`和`crl`（后两个文件如果存在）
+- 编辑`GoLand2020.3/options`下的`other.xml`文件，删除第一步中注册表中对应键的记录
+
+注意事项：   
+第一，如果使用过多个版本，找对注册表对应的值；或者删除goland注册表  
+第二，重新生效后记录`other.xml`的信息，对比试用过期后的变化  
+第三，猜测逻辑：第一次启动时，获取生成`PermanentDeviceId`, `PermanentDeviceId`（确保唯一性）；过期后通过other.xml中记录的参数进行检查
+
+
 ## win 10 锁屏不断网
 
 [Windows 10 如何在锁屏状态下保持网络连接？](https://answers.microsoft.com/zh-hans/windows/forum/all/windows-10/f4edfb17-08c2-416e-bb30-58845e3b5c30)

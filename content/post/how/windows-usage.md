@@ -19,6 +19,13 @@ toc = true
 
 <!-- more -->
 
+## 回收站 
+
+不通过快捷图标，两种直接进入回收站方式
+
+- 可以“win+e”，地址栏输入“回收站”回车即可
+- “WIN+R”打开运行窗口，执行`explorer.exe ::{645FF040-5081-101B-9F08-00AA002F954E}`
+
 ## Goland 试用 
 
 [恢复试用IntelliJ IDEA](https://mp.weixin.qq.com/s/NStUocPCaCUzWCa90SfavQ)介绍了idea的恢复，Goland作为同一家产品适用相同的逻辑

@@ -215,3 +215,41 @@ equals的实现不需要先判断nul，根据[JLS, 15.20.2](https://docs.oracle.
 最后灵魂三性问：是否满足对称性、传递性、一致性？
 
 建议使用[google's AutoValue](https://github.com/google/auto/tree/master/value)，[使用方式](https://github.com/google/auto/blob/master/value/userguide/index.md)， [Introduction to AutoValue](https://www.baeldung.com/introduction-to-autovalue)
+
+
+### item 11: Always override `hashCode` when you override `equals`
+
+- 重写了`equals`方法时必须也要重写`hashCode`方法
+- 需要满足一致性
+- 如果两个对象的equals，调用hashCode也不许返回相同的值
+- 如果两个对象不equals，不强调调用各自的hashcode方法时也必须不同——所以“极限”操作，hashCode总返回42
+
+一般做法——：  
+- 定义一个result值；可以进行lazy初始化
+- 计算关键属性的hash值：
+- 返回result值
+- 非关键属性可以忽略
+
+需要考虑性能影响；懒初始化；使用“奇质数”`odd prime`
+
+```
+// hashCode method with lazily initialized cached hash code
+private int hashCode; // Automatically initialized to 0
+@Override public int hashCode() {
+    int result = hashCode;
+    if (result == 0) {
+        result = Short.hashCode(areaCode);
+        result = 31 * result + Short.hashCode(prefix);
+        result = 31 * result + Short.hashCode(lineNum);
+        hashCode = result;
+    }
+    return result;
+}
+```
+可以利用IDE的自动处理功能：
+
+- 选择一个模板，例如 Guava’s`com.google.common.hash.Hashing`
+- 选择关键属性
+- 生成对应的equals或hashCode方法
+
+例如： `return Objects.hashCode(pcId, emailAddress, reporterId, numberInfo, idNum);`

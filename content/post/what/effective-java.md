@@ -253,3 +253,16 @@ private int hashCode; // Automatically initialized to 0
 - 生成对应的equals或hashCode方法
 
 例如： `return Objects.hashCode(pcId, emailAddress, reporterId, numberInfo, idNum);`
+
+### item 12: Always override `toString`
+
+这条大概日常用得最多了，“一致，有效”
+
+- 默认的实现是`类名@十六进制`hashCode的十六进制表示
+- 这个实现不“强制”，只是从实际使用角度更“方便”
+- 最好返回类中所有的“有效”信息
+- 返回格式“不一定”需要固定：不固定可能造成测试问题（输出顺序），但保持灵活性；固定可以提高确定性，可读性，但丧失灵活性，提供给第三方使用时，对方可能已写了对应的parser，如果后续有变更……
+- 无论哪一种情况，最好做文档说明
+- 无论是否采取固定方式，都需要提供访问“有效”信息的方法
+
+对于值类型，最好重写此方法；静态工具类、枚举类不需要；再次推荐AutoValue

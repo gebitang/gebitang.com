@@ -266,3 +266,106 @@ private int hashCode; // Automatically initialized to 0
 - 无论是否采取固定方式，都需要提供访问“有效”信息的方法
 
 对于值类型，最好重写此方法；静态工具类、枚举类不需要；再次推荐AutoValue
+
+### item 13: Override `clone` judiciously
+
+一句话总结，绝大数情况下，不需要重写`clone`方法；需要复制的话，提供一个copy方法更好，类似于——
+
+```
+// Copy constructor
+public Yum(Yum yum) { ... };
+// Copy factory
+public static Yum newInstance(Yum yum) { ... };
+```
+
+- 如果不实现空接口`Cloneable`，调用`clone`方法时会抛出`CloneNotSupportedException`异常（Object的clone方法是protected级别）
+- clone方法的“general contract”：x.clone() != x 为真；x.clone().getClass() == x.getClass() 为真；x.clone().equals(x)为真(不强求？)
+- 重写方式：先调用`super.clone`；然后对必要的组件进行处理；最后转换为需要的对象
+- 如果需要确保线程安全，clone方法需要加锁
+- “必要的组件”如果不处理，clone后的新对象中的组件“可能”与原始对象的组件指向了相同的引用，然后就……
+
+```
+    //Clone method for class with references to mutable state
+    @Override public Stack clone() {
+        try {
+            Stack result = (Stack) super.clone();
+            // 必要的组件进行clone
+            result.elements = elements.clone();
+            return result;
+        } catch (CloneNotSupportedException e) {
+            throw new AssertionError();
+        }
+    }
+```
+
+示例—— 包含了私有静态Entry类的HashTable类 
+
+
+```
+public class HashTable implements Cloneable {
+        private Entry[] buckets = ...;
+        private static class Entry {
+            final Object key;
+            Object value;
+            Entry next;
+            Entry(Object key, Object value, Entry next) {
+                this.key = key;
+                this.value = value;
+                this.next = next;
+            }
+        }
+    // Remainder omitted
+    }
+```
+直接进行clone无效——
+
+```
+    // Broken clone method - results in shared mutable state!
+    @Override public HashTable clone() {
+        try {
+            HashTable result = (HashTable) super.clone();
+            result.buckets = buckets.clone();
+            return result;
+        } catch (CloneNotSupportedException e) {
+            throw new AssertionError();
+        }
+    }
+```
+
+需要先为Entry对象提供deepCopy方法——
+```
+    // Recursively copy the linked list headed by this Entry
+    Entry deepCopy() {
+        return new Entry(key, value,
+                next == null ? null : next.deepCopy());
+    }
+```
+
+再进行clone操作——
+
+```
+    public HashTable clone() {
+        try {
+            HashTable result = (HashTable) super.clone();
+            result.buckets = new Entry[buckets.length];
+            for (int i = 0; i < buckets.length; i++)
+                if (buckets[i] != null)
+                    result.buckets[i] = buckets[i].deepCopy();
+            return result;
+        } catch (CloneNotSupportedException e) {
+            throw new AssertionError();
+        }
+    }
+```
+
+如果buckeys很大，上面的clone方法将很容易导致SOO；因为进行deepCopy时每一次调用都占据了一个栈frame。改进版本——
+
+```
+    // Iteratively copy the linked list headed by this Entry
+    Entry deepCopy() {
+        Entry result = new Entry(key, value, next);
+        for (Entry p = result; p.next != null; p = p.next)
+            p.next = new Entry(p.next.key, p.next.value, p.next.next);
+        return result;
+    }
+```

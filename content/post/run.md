@@ -723,3 +723,23 @@ Mixin Message的“极端”做法也算一种。
 
 ![](https://s3-img.meituan.net/v1/mss_3d027b52ec5a4d589e68050845611e68/ff/n0/0m/3y/w6_295520.jpg@596w_1l.jpg)
 
+**20-12-31** 周四 5.66
+
+- 最后一跑
+- 顺利达标
+- 2020完成
+- 2021开始
+
+月度平均配速448，历史最佳；第三次完成30天30次跑场任务。
+
+全年有效公里最多不到2000，上半年除了1月份正常外，七月之前的大部分时间都算“为了完成挑战”，室内晃荡，室外步行……都算上了。
+
+国事家事，诸事不顺的2020总算要过去了，争取明年的2021挑战健康好好跑一年。
+
+
+![](https://s3-img.meituan.net/v1/mss_3d027b52ec5a4d589e68050845611e68/ff/n0/0m/3y/nx_295797.jpg@596w_1l.jpg)
+
+{{< fluid_imgs
+  "pure-u-1-2|https://s3-img.meituan.net/v1/mss_3d027b52ec5a4d589e68050845611e68/ff/n0/0m/3y/xd_295557.jpg@596w_1l.jpg|月卡"
+  "pure-u-1-2|https://s3-img.meituan.net/v1/mss_3d027b52ec5a4d589e68050845611e68/ff/n0/0m/3y/xe_295560.jpg@596w_1l.jpg|年卡"
+>}}

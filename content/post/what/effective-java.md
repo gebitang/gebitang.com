@@ -369,3 +369,51 @@ public class HashTable implements Cloneable {
         return result;
     }
 ```
+
+### item 14: Consider implementing `Comparable`
+
+- `compareTo`不是Object对象中声明的方法，是`Comparable`接口中的唯一方法
+- 实现了此方法的对象数列，可以直接通过`Arrays.sort(a)`进行排序
+- 只有相同的对象之间才能进行对比，否则跑出`ClassCastException`异常
+- 接口方法返回int类型，通常选择返回`-1, 0, 1`，对于相同类型对象x, y来说，`x.compareTo(y)`返回-1表示x小于y；0表示相等；1表示x大于y。参考Integer的实现——
+
+```
+    public int compareTo(Integer anotherInteger) {
+        return compare(this.value, anotherInteger.value);
+    }
+
+    public static int compare(int x, int y) {
+        return (x < y) ? -1 : ((x == y) ? 0 : 1);
+    }
+```
+
+- 同equals方法一样，此接口方法也有传递性，反射性，对称性
+- 此方法返回0时并不要求两个对象相等，但推荐做相等的实现。区别在于，基于equals方法时（例如HashSet中），`new BigDecimal("1.0") `, `new BigDecimal("1.0") `被认为时两个对象；如果基于compareTo方法（例如TreeSet），则被认为只添加了一个对象
+- Java库中多个类依赖这个接口，包括 `TreeSet`, `TreeMap`, `Collections`以及`Arrays`
+- 需要对类中的多个关键属性进行对比时，不建议使用`>, = , <`的符号，而使用静态方法或Comparator。例如——
+
+```
+// Comparator based on static compare method
+static Comparator<Object> hashCodeOrder = new Comparator<>() {
+    public int compare(Object o1, Object o2) {
+        return Integer.compare(o1.hashCode(), o2.hashCode());
+    }
+};
+
+// Comparator based on Comparator construction method
+static Comparator<Object> hashCodeOrder =
+        Comparator.comparingInt(o -> o.hashCode());
+```
+
+对于`PhoneNumber`对象来说，使用Comparator时需要注意，第一次需要进行明确的类型指定`(PhoneNumber pn) -> pn.areaCode`
+
+```
+// Comparable with comparator construction methods
+private static final Comparator<PhoneNumber> COMPARATOR =
+        comparingInt((PhoneNumber pn) -> pn.areaCode)
+            .thenComparingInt(pn -> pn.prefix)
+            .thenComparingInt(pn -> pn.lineNum);
+public int compareTo(PhoneNumber pn) {
+    return COMPARATOR.compare(this, pn);
+}
+```

@@ -445,3 +445,33 @@ public static final Thing[] values() {
 
 - Java 9中引入了`module`模块（一组package构成一个module；一组class构成一个package），可以通过`module-info.java`声明当前module中哪些包和类可以被访问，其它不在声明之列的package即使是public的或protected的，都无法在module之外被访问到
 - 如果把module都jar包放到类class path下而不是module path下；则module中都上面都限制失效。回退到正常到访问限制
+
+Item16: In public classes, use accessor methods, not public fields
+
+直接暴露属性违反了上一条的“封装”原则。所以要定义 访问者(accessor)方法和修改者(mutator)，即通常所说的getter和setter。
+
+例外说明—— 
+
+- 如果类本身是package private的或者是内部类，暴露属性也可以——代码更少不是～ 
+
+- 实际上Java平台组建中的一些类，例如`java.awt`包下的`Point`, `Dimension`直接暴露类field——主要是基于性能考虑
+
+- 如果暴露的field是不可修改的，也问题不大，例如——
+
+```
+// Public class with exposed immutable fields - questionable
+public final class Time {
+    private static final int HOURS_PER_DAY    = 24;
+    private static final int MINUTES_PER_HOUR = 60;
+    public final int hour;
+    public final int minute;
+    public Time(int hour, int minute) {
+        if (hour < 0 || hour >= HOURS_PER_DAY)
+            throw new IllegalArgumentException("Hour: " + hour);
+        if (minute < 0 || minute >= MINUTES_PER_HOUR)
+            throw new IllegalArgumentException("Min: " + minute); this.hour = hour;
+        this.minute = minute;
+    }
+ // Remainder omitted
+}
+```

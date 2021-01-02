@@ -417,3 +417,31 @@ public int compareTo(PhoneNumber pn) {
     return COMPARATOR.compare(this, pn);
 }
 ```
+
+## 3 Classes and Interfaces
+
+### item 15 Minimize the accessibility of classes and members
+
+访问控制是开始写代码时接触最早，应用最多都。控制限制好处一大堆，但似乎实际使用中用得都很随意？
+
+第一原则：越严格越好。理论上，定义好要暴露到API之后，其它所有到属性和方法都变成private的；除了静态常量（大写、下划线）
+
+对于类似`public static final Thing[] VALUES =  { ... };`都对象，可以处理为——
+
+```
+private static final Thing[] PRIVATE_VALUES = { ... };
+public static final List<Thing> VALUES =
+    Collections.unmodifiableList(Arrays.asList(PRIVATE_VALUES));
+
+# 或者
+private static final Thing[] PRIVATE_VALUES = { ... };
+public static final Thing[] values() {
+    return PRIVATE_VALUES.clone();
+}
+
+```
+
+关于Module：(还没实际使用过)
+
+- Java 9中引入了`module`模块（一组package构成一个module；一组class构成一个package），可以通过`module-info.java`声明当前module中哪些包和类可以被访问，其它不在声明之列的package即使是public的或protected的，都无法在module之外被访问到
+- 如果把module都jar包放到类class path下而不是module path下；则module中都上面都限制失效。回退到正常到访问限制

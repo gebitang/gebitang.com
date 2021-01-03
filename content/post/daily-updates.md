@@ -20,6 +20,29 @@ toc = true
 
 <!--more-->
 
+## Mac录屏：含声音
+
+搜索到这里[mac如何在录制屏幕时只录制系统内音频](https://discussionschinese.apple.com/thread/251515508)里面提到录制屏幕的方法
+[如何在Mac上录制屏幕](https://support.apple.com/zh-cn/HT208721)
+
+基于自带的QuickTime播放器，使用快捷键`Shift、Command 和 5` 打开录制设置（使用QuickTime Player打开录制屏幕时也是相同的界面）
+
+这种方式默认只能录制不含有声音的视频。尝试按照上面问答中的操作，在`音频MIDI设置 `中添加了新的`聚集设备`并中录制中选择这个设备，也无法录制到系统到声音。
+
+[MAC如何用QuickTime屏录，同时保留声音？](https://zhuanlan.zhihu.com/p/37365718)这里到说明是正确的。总结一下——
+
+- 安装`soundflower`软件，[官方下载](https://soundflower.en.softonic.com/mac)，目前最新版本`Soundflower-2-0b2`，双击打开dmg文件后，右键选择打开pkg文件，同意安装
+- 安装过程中允许配置系统权限，需要重启电脑生效（在这一过程中可能提示安装失败，忽略即可，重启后中下一步可以看得soundflower即可）
+- 重启后中`音频MIDI设置 `中增加一个新的**聚集设备**：包含内建麦克风”和“Soundflower（64ch）”；一个新的**多输出设备**：包含“内建输出”和“Soundflower（64ch）”
+- 然后中系统设置的`声音`中配置：“输出”配置为“多输出设备”；“输入”配置为“聚集设备”
+
+此时再使用上面的录屏操作时，可以看得“选项”的“麦克风”项目下多了上面配置的选项。根据需要选择对应的选项即可——只录制系统声音，选择“Soundflower（64ch）”；“聚集设备”顾名思义包含了系统声音和内置麦克风。
+
+![](https://upload-images.jianshu.io/upload_images/3296949-e519f46b91e16f77.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+
+录制的视频为Mac格式的`.mov`文件；[mov在线转换为mp4](https://www.freeconvert.com/mov-to-mp4)
+
 ## javacv 依赖的 com.googlecode.javacpp.Loader无法找到问题
 这个依赖包实际上依赖了javacpp这个jar包，但可能无法自动导入依赖。
 ```

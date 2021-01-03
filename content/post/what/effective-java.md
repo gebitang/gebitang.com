@@ -475,3 +475,81 @@ public final class Time {
  // Remainder omitted
 }
 ```
+
+### Item 17: Minimize mutability
+
+imutable class：整个生命周期内无法进行任何修改操作的类。Java平台类库中的String、出箱后的基础类、BigInteger和BigDecimal都是
+
+实现imutable类的五个原则：
+
+- 不提供可以修改类状态的方法
+- 确保类不会被扩展，定义为final级别的类(历史原因，BigInteger和BigDecimal实现时还没有这个共识？所以不是final级别的，所以在使用时需要进行必要的检查)
+
+```
+public static BigInteger safeInstance(BigInteger val) {
+       return val.getClass() == BigInteger.class ?
+               val : new BigInteger(val.toByteArray());
+}
+
+```
+
+- 所有属性为final类型
+- 所有属性为私有
+- 确保对任何可变组建的访问为独有/排他的
+
+满足上述规则的示例——一个简单的`复数`类 
+
+```
+// Immutable complex number class public final class Complex { private final double re; private final double im;
+    public Complex(double re, double im) {
+        this.re = re;
+        this.im = im;
+    }
+    public double realPart()      { return re; }
+    public double imaginaryPart() { return im; }
+    public Complex plus(Complex c) {
+        return new Complex(re + c.re, im + c.im);
+    }
+    public Complex minus(Complex c) {
+        return new Complex(re - c.re, im - c.im);
+    }
+    public Complex times(Complex c) {
+        return new Complex(re * c.re - im * c.im,
+                re * c.im + im * c.re);
+    }
+    public Complex dividedBy(Complex c) {
+        double tmp = c.re * c.re + c.im * c.im;
+        return new Complex((re * c.re + im * c.im) / tmp,
+                (im * c.re - re * c.im) / tmp);
+    }
+    @Override public boolean equals(Object o) {
+        if (o == this)
+            return true;
+        if (!(o instanceof Complex))
+            return false;
+        Complex c = (Complex) o;
+            //double 类型的对比使用compare，不用 == 
+           && Double.compare(c.im, im) == 0;
+    }
+    @Override public int hashCode() {
+        return 31 * Double.hashCode(re) + Double.hashCode(im);
+    }
+    @Override public String toString() {
+        return "(" + re + " + " + im + "i)";
+    } }
+```
+
+优点说明：  
+- 基础的四则运算方法称为“函数式”方法：调用一个函数进行操作，而不是执行一个“过程”或“命令”——对应的称呼为“过程式”(procedural)/“命令式” (imperative）
+- 使用介词plus而不是动词add
+- 函数式确保了类的不可变，默认就是线程安全的，不需要在多线程场景下进行加锁操作——因为对象本身就是不可变，这几乎是实现线程安全的最简单方式 
+- 不需要提供“防御性复制(defensive copy)”和clone方法
+- 不可变类可以为一些高频使用的场景提供静态实例（相当于提供cache），可以降低GC和内存占用
+
+缺点： 
+- 需要为每一个值提供独立的对象，创建这些对象是昂贵的，可能在特定场景下出现性能问题
+
+序列化说明——  
+如果不可变类中包含类可变属性，并且实现类`Serializable`。则必须显示地提供`readObject`, `readResolve`方法，或使用`ObjectOutputStream.writeUnshared`，`ObjectInputStream.readUnshared`方法
+
+所以，能不可变就不可变；非变不可时，能少变就少变。样例参考`CountDownLatch`类的实现

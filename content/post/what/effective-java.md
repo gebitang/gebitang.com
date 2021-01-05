@@ -553,3 +553,24 @@ public static BigInteger safeInstance(BigInteger val) {
 如果不可变类中包含类可变属性，并且实现类`Serializable`。则必须显示地提供`readObject`, `readResolve`方法，或使用`ObjectOutputStream.writeUnshared`，`ObjectInputStream.readUnshared`方法
 
 所以，能不可变就不可变；非变不可时，能少变就少变。样例参考`CountDownLatch`类的实现
+
+### Item 18: Favor composition over inheritance
+
+注：这里讨论的继承仅指对类的继承，不包括对接口的继承。
+
+继承可能出现的问题：  
+
+- 子类的表现依赖父类的实现，有可能由于父类的实现导致子类的意图出现偏差。（举例HashSet的子类意图获取从开始到现在一共有多少元素被添加到Set中——但现在的HashSet似乎已经没有了addAll方法？——不影响这种可能的场景出现）而为了解决可能出现的问题所做的“妥协”可能又引入新的问题：不易使用、耗时、易错、还可能影响性能
+- 新发布版本中的父类可能“新”引入了方法：a.) 子类重新了现有的方法，调用前都做了前置检查，但父类的新方法可能破坏这种检查；b.) 子类原来的方法正好与父类新引入的方法同名，导致1)返回类型不一致，编译失败；2)出现a中的问题
+
+所以，建议使用组合。新建一个类，将原父类作为一个私有属性引入，然后组合想要的功能。想要调用原父类，在这个新建的类中做转发(forwarding)处理即可，对于的方法称为"转发方法"(forwarding methods)。
+
+新建的类称为包装类(wrapper)，这也是所谓的"装饰模式"(Decorator pattern)，或者通常所谓的“委托” (delegation)。
+
+唯一的确定大概是在回调框架中，对象传递自身的引用到其他对象中，然后等待回调。由于对象不知道自己的wrapper是谁，只传递了自己(不包括wrapper)到调用对象里去。——这就是所谓的“SELF problem”
+
+对性能和内存占用的担心在实际使用中被证明是可以忽略的。只是写wrapper比较无聊，仅此而已。
+
+当且仅当Class B与Class A确实是同一种对象时才使用继承。（is-a）尽管Java平台类库里有很多违反了这一原则。例如Stack不是Vector，不应该扩展Vector；Property列表不是Hash表，所以Properties不应该扩展Hashtable。——一个太晚发现的问题。
+
+继承违反了封装，所以尽管强大，却也容易出错。尤其是在跨包进行继承使用时尤其如此

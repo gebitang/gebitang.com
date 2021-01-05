@@ -574,3 +574,28 @@ public static BigInteger safeInstance(BigInteger val) {
 当且仅当Class B与Class A确实是同一种对象时才使用继承。（is-a）尽管Java平台类库里有很多违反了这一原则。例如Stack不是Vector，不应该扩展Vector；Property列表不是Hash表，所以Properties不应该扩展Hashtable。——一个太晚发现的问题。
 
 继承违反了封装，所以尽管强大，却也容易出错。尤其是在跨包进行继承使用时尤其如此
+
+### Item 19: Design and document for inheritance or else prohibit it
+
+要使用继承，先做好“设计”和“文档”说明。否则就禁止使用继承。
+
+如何做说明？需要说明实现是“如何”(how)工作的，会有哪些可能的影响。参考`java.util.AbstractCollection`类中的`public boolean remove(Object 0)`的说明。
+
+尽管这违反了原则：好的API应该描述当前方法**做**什么而不是**如何做**。——这就是继承违反封装之后的**后果**。LOL
+
+  在文档中启用`@implSpec`进行说明，以生产javadoc。这个tag在Java 8 中引入，Java 9中广泛使用，但默认是被javadoc忽略，需要在编译时通过`-tag apiNote:a:API Note:`，[用法参考](https://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/javadoc.html#tag)
+
+有时候为了内部使用，设计protected级别的方法。如何考虑让哪些方法称为protected的呢？没有魔法，仔细思考。自己写子类进行测试验证。一旦公开，就称为“永久承诺”。
+
+另外一个要求：构造方法中不能调用可重写的方法。因为此时父类中调用重写的方法，但此时子类构造方法还没执行，但子类重写的方法却被调用，结果无法预期。
+
+可以调用其他的私有方法，final方法，静态方法——因为这些方法无法重写。
+
+如果实现了`Cloneable`或`Serializable`接口，注意`clone`和`readObject`方法中也不能调用重写的方法。
+
+如果实现了`Serializable`接口的类包含`readResolve`或`writeReplace`方法，将这两个方法设置为protected，如果是private的讲被忽略执行。
+
+普通类避免被继承：声明为final类型；或者将构造方法设置为private或默认的package-private级别。
+
+如果需要继承，父类中至少确保自己不调用重写的方法。需要的话：可以将重写方法的实现重写包装到helper方法中。
+

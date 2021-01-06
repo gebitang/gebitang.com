@@ -599,3 +599,40 @@ public static BigInteger safeInstance(BigInteger val) {
 
 如果需要继承，父类中至少确保自己不调用重写的方法。需要的话：可以将重写方法的实现重写包装到helper方法中。
 
+### item 20:  Prefer interfaces to abstract classes
+
+接口优于抽象类。尽管两者都可以用来定制允许多重实现的实例
+
+- 显然接口更灵活。任何现有的类都可以很容易扩展实现新的接口，而不需要调整层级；采用抽象类却可能导致层级混乱（代码组织形式）
+- 对于混合来说`mixins`，接口是理想的方式。所谓混合，指允许其他可选方法混入现有的原始方法
+- 无层级关系类型的类框架可以使用接口实现。例如“歌手”和“写歌手”
+- 接口可以做安全，有力的扩展——通过item 18中提到过的包装类`wrapper classs`
+
+可以利用“骨架实现类”(`skeletal implementation classs`)同时结合接口和抽象类的有点：由接口提供默认方法，同时这个类实现基本的非原始方法`non-primitive interface method`。这也被称为 “模板方式”(Template Method Pattern)
+
+通常这种类称为`AbstractInterface`，这里的interface只要实现的接口。例如集合框架中的`AbstractCollection`、`AbstractSet`、`AbstractList`、`AbstractMap`
+
+```
+    // Concrete implementation built atop skeletal implementation
+    static List<Integer> intArrayAsList(int[] a) {
+        Objects.requireNonNull(a);
+        // The diamond operator is only legal here in Java 9 and later
+        // If you're using an earlier release, specify <Integer>
+        return new AbstractList<>() {
+            @Override public Integer get(int i) {
+                return a[i]; // Autoboxing (Item 6)
+            }
+            @Override public Integer set(int i, Integer val) {
+                int oldVal = a[i];
+                a[i] = val; // Auto-unboxing
+                return oldVal; // Autoboxing
+            }
+            @Override public int size() {
+                return a.length;
+            }
+        };
+    }
+```
+
+设计好哪些属于"原始"(primitive)类型方法；哪些不是，然后就可以组合出所谓的`AbstractInterface`。参考guava包中`com.google.common.collect`包下的`AbstractMapEntry<K,V>`的设计
+

@@ -636,3 +636,34 @@ public static BigInteger safeInstance(BigInteger val) {
 
 设计好哪些属于"原始"(primitive)类型方法；哪些不是，然后就可以组合出所谓的`AbstractInterface`。参考guava包中`com.google.common.collect`包下的`AbstractMapEntry<K,V>`的设计
 
+### item 21: Design interfaces for posterity
+
+本节强调接口设计时的稳定性。因为在Java 8之后，接口可以增加方法，同时完成默认的实现`default method`。这样，实现此方法的类即使没有实现新增方法，也可以编译通过
+
+显然，默认方法的实现可能导致运行时的问题。举例——
+
+`Collection`接口中的`removeIf`方法提供了默认实现
+
+```
+// Default method added to the Collection interface in Java 8
+default boolean removeIf(Predicate<? super E> filter) {
+    Objects.requireNonNull(filter);
+    boolean result = false;
+    for (Iterator<E> it = iterator(); it.hasNext(); ) {
+        if (filter.test(it.next())) {
+            it.remove();
+            result = true;
+        }
+    }
+    return result;
+}
+```
+
+Apache的common包下的`org.apache.commons.collections4.collection.SynchronizedCollection`采用wrapper的方式实现了Collection接口，内部提供了一个锁完成同步操作，直到今天依然没有实现新增的`removeIf`接口，依赖默认实现
+
+那么，如果多个线程操作这个类对象并且调用`removeIf`方法，必然会抛出`ConcurrentModificationException`异常
+
+所以，这种依赖default实现的接口方法应该尽力避免——尽管这让子类的实现更容易。
+
+>While it may be possible to correct some interface flaws after aninterface is released, you cannot count on it.
+

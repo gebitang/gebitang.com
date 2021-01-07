@@ -11,6 +11,56 @@ topics = [
 toc = true
 +++
 
+## Git Pro
+
+### 复现commit id
+
+[How does Git create unique commit hashes, mainly the first few characters?](https://stackoverflow.com/questions/34764195/how-does-git-create-unique-commit-hashes-mainly-the-first-few-characters)
+
+Git uses the following information to generate the sha-1:
+
+- The source tree of the commit (which unravels to all the subtrees and blobs)
+- The parent commit sha1
+- The author info (with timestamp)
+- The committer info (right, those are different!, also with timestamp)
+- The commit message
+
+[完整说明](https://gist.github.com/masak/2415865)，另外可参考[The anatomy of a Git commit](https://blog.thoughtram.io/git/2014/11/18/the-anatomy-of-a-git-commit.html)，和 [10.1 Git 内部原理 - 底层命令与上层命令](https://git-scm.com/book/zh/v2/Git-%E5%86%85%E9%83%A8%E5%8E%9F%E7%90%86-%E5%BA%95%E5%B1%82%E5%91%BD%E4%BB%A4%E4%B8%8E%E4%B8%8A%E5%B1%82%E5%91%BD%E4%BB%A4)对应的英文版本——[10.1 Git Internals - Plumbing and Porcelain](https://git-scm.com/book/en/v2/Git-Internals-Plumbing-and-Porcelain)
+
+
+执行以下步骤可以复现commit id——
+
+- `git show` 获得当前最新的commit信息
+- `git cat-file commit HEAD` 
+- `printf "commit %s\0" $(git cat-file commit HEAD | wc -c)` 在开头增加`commit len\0` 文本，长度，NUL-terminated header
+- `(printf "commit %s\0" $(git cat-file commit HEAD | wc -c); git cat-file commit HEAD) | sha1sum`组合上面两步的内容作为SHA1算法的输入，计算获得的40个字符长度文本就是commitid信息——复现成功
+
+
+第二步的结构化信息——
+```
+sha1(
+    tree            => 9c435a86e664be00db0d973e981425e4a3ef3f8d （对所有tree对象的递归计算到root节点）
+    parents         => [0d973e9c4353ef3f8ddb98a86e664be001425e4a]
+    author(with timestamp)          => Christoph Burgdorf <christoph.burgdorf@gmail.com> Sat Nov 8 11:13:49 2014 +0100
+    committer(with timestamp)        => Christoph Burgdorf <christoph.burgdorf@gmail.com> Sat Nov 8 11:13:49 2014 +0100
+    commit message  => "second commit"
+)
+```
+
+理解Git中的对象概念：Tree Object（对目录、或目录和文件的SHA-1描述。如何获取的？）
+
+```
+.
+├── .git (contents left out)
+├── assets
+|   ├── logo.png
+|   └── app.css
+└── app.js
+```
+
+{{< fluid_imgs
+  "pure-u-1-|https://upload-images.jianshu.io/upload_images/3296949-8bdd5ebafaecf4c1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240|demo|https://upload-images.jianshu.io/upload_images/3296949-8bdd5ebafaecf4c1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"
+>}}
 
 ## Git命令使用
 

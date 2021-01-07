@@ -62,54 +62,6 @@ sha1(
   "pure-u-1-|https://upload-images.jianshu.io/upload_images/3296949-8bdd5ebafaecf4c1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240|demo|https://upload-images.jianshu.io/upload_images/3296949-8bdd5ebafaecf4c1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"
 >}}
 
-### git tree objects
-
-- [The Git Object Model](http://shafiul.github.io/gitbook/1_the_git_object_model.html)  
-- [tree object格式](https://stackoverflow.com/questions/14790681/what-is-the-internal-format-of-a-git-tree-object)  
-- [Git Internals - Git Objects](https://git-scm.com/book/en/v2/Git-Internals-Git-Objects) 
-- [Git 内部原理 - Git 对象](https://git-scm.com/book/zh/v2/Git-%E5%86%85%E9%83%A8%E5%8E%9F%E7%90%86-Git-%E5%AF%B9%E8%B1%A1)
-
-键值数据库文件系统；使用zlib进行压缩存储对象；SHA1摘要算法
-
-Every object consists of three things - a `type`, a `size` and `content`. The size is simply the size of the contents, the contents depend on what type of object it is, and there are four different types of objects: "blob", "tree", "commit", and "tag".
-
-`git write-tree` Create a tree object from the current index. returns the hash of the top level tree. 
-
-`git ls-tree` List the contents of a tree object. 可以使用 `git cat-file -p treehash`起到同样的作用
-
-`git cat-file` Provide content or type and size information for repository objects
-
-
-```
-joechin@Gebitang MINGW64 /e/0daywork/gitinit (master)
-$ git status
-On branch master
-
-No commits yet
-
-Changes to be committed:
-  (use "git rm --cached <file>..." to unstage)
-
-        new file:   h.txt
-        new file:   lib/lealone.png
-
-
-joechin@Gebitang MINGW64 /e/0daywork/gitinit (master)
-$ git write-tree
-f6da736647be31514378f51704936fcf40171a07
-
-joechin@Gebitang MINGW64 /e/0daywork/gitinit (master)
-$ git ls-tree f6da73
-100644 blob ce013625030ba8dba906f756967f9e9ca394464a    h.txt
-040000 tree 5de66da52a71d943871ac3753fbed006ee0688f4    lib
-
-joechin@Gebitang MINGW64 /e/0daywork/gitinit (master)
-$ git cat-file tree f6da736647be31514378f51704936fcf40171a07
-100644 h.txt▒6%
-               ▒۩▒V▒▒▒▒▒FJ40000 lib]▒m▒*q▒C▒▒u?▒▒▒▒▒
-
-```
-
 ## Git命令使用
 
 可配合GUI工具和命令行工具参考。

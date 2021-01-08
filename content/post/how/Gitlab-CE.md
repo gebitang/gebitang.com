@@ -1,19 +1,15 @@
 +++
 title = "Gitlab-CE"
 tags = [
-    "jiansh"
+    "gitlab"
 ]
-date = "2020-03-07"
+date = "2020-11-09"
 topics = [
     "jiansh",
-    "Spring"
+    "gitlab"
 ]
 toc = true
 +++
-
-
-
-[link on JianShu](https://www.jianshu.com/p/a9c8b9fc61aa)
 
 [官方快速入门文档](https://docs.gitlab.com/ce/ci/quick_start/README.html)  
 `.gitlab-ci.yml`文件[官方示例](https://gitlab.com/gitlab-org/gitlab-foss/blob/master/.gitlab-ci.yml)   
@@ -24,7 +20,8 @@ toc = true
 
 配置完成后，需要对应的`Gitlab Runner`配合执行`.gitlab-ci.yml`文件中对应的任务。[runner 官方文档](https://docs.gitlab.com/runner/)。
 
----
+## 安装Gitlab CE
+
 [安装一个CE版本](https://about.gitlab.com/install/?version=ce#ubuntu)，自己实践一下——
 ```
 #依赖
@@ -105,3 +102,39 @@ sudo gitlab-ctl restart
 # check log 
 sudo gitlab-ctl tail
 ```
+
+## 安装gitlab runner
+
+[官方安装文档](https://docs.gitlab.com/runner/install/)，在已经启动的gitlab实例目录`/admin/runners`下可以看到安装步骤，需要管理员权限
+
+Set up a shared Runner manually
+
+1.  [Install GitLab Runner](https://docs.gitlab.com/runner/install/)
+2.  Specify the following URL during the Runner setup: `http://xxx.com:port/` 
+3.  Use the following registration token during setup: `token-value` 
+4.  Start the Runner!
+
+[官方Runner文档](https://docs.gitlab.com/runner/)——
+
+>GitLab Runner should be the same version as GitLab. Older runners may still work with newer GitLab versions, and vice versa. However, features may be not available or work properly if a version difference exists.
+
+Go语言编写，二进制发布，多平台支持。
+
+
+[历史版本](https://docs.gitlab.com/runner/install/bleeding-edge.html#download-any-other-tagged-release)下载页面，根据 [官方仓库](https://gitlab.com/gitlab-org/gitlab-runner)的[tag列表](https://gitlab.com/gitlab-org/gitlab-runner/-/tags)的不同分支，选择对应的版本——
+
+例如，v12.6版本，分支对应为`v12.6.0`，则二进制版本下载地址为`https://s3.amazonaws.com/gitlab-runner-downloads/**v12.6.0**/binaries/gitlab-runner-linux-386` 
+
+1.  添加可执行权限：`sudo chmod +x  gitlab-runner`
+2.  创建执行用户：`sudo useradd --comment 'GitLab Runner' --create-home gitlab-runner --shell /bin/bash`
+3.  安装为服务：
+```
+sudo gitlab-runner install --user=gitlab-runner --working-directory=/home/gitlab-runner
+sudo gitlab-runner start
+```
+
+4.  注册runner，即将runner与gitlab绑定。[Register a runner](https://docs.gitlab.com/runner/register/index.html)
+
+建议是Gitlab和Gitlab Runner分离，但不考虑安全、性能的情况下，同时在一台机器上跑没有问题。参考 [CI runner on same server of GitLab?](https://softwareengineering.stackexchange.com/questions/237238/ci-runner-on-same-server-of-gitlab)，或者 [Setting up GitLab CI on server with GitLab already installed](https://stackoverflow.com/questions/26466692/setting-up-gitlab-ci-on-server-with-gitlab-already-installed)
+
+

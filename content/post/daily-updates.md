@@ -20,6 +20,43 @@ toc = true
 
 <!--more-->
 
+## 视频分离 音频分离
+
+临危受命：在线视频 --> 下载视频 --> 视频音频分离 --> 人声背景乐分离
+
+--- 
+
+- 在线视频： https://www.ixigua.com/6726870751569248775
+
+- 下载视频：https://www.bilibili.com/read/cv8211246/
+
+  - 固桥视频助手下载，[0.48版本](https://dl.softmgr.qq.com/original/Office/gqvideo_48.0.zip)，安装后自动升级后可用。下载速度比较慢，~~难道是直接抓流然后转换保存的？~~(最终验证是因为我开了科学上网，关闭之后，迅速完成下载)
+
+
+- 在线音频提取： https://beecut.cn/extract-audio-online  或  https://audio-extractor.net/cn/ 
+  - [3款简单又好用的视频提取音频工具](https://www.apowersoft.cn/extract-audio.html)   
+
+- 在线分离人声： https://dango.ai/  
+  - [AI 黑科技！这个在线网站免费帮你消除人声+提取伴奏](https://www.uisdc.com/ai-extract-accompaniment)
+  - https://app.moises.ai/tasks 
+  - https://melody.ml/
+  - 人声提取工具介绍： https://www.jianshu.com/p/fe9d130ce900
+
+---
+
+分离出了人声背景。但最后又确认了一下：需求是保留视频和背景乐，只去除人声 - -|| 一定要先理解好需求啊
+
+
+[使用FFmpeg合并音视频](https://www.jianshu.com/p/2a824f13b2af) 
+
+先把原视频去除音频：`ffmpeg -i input.mp4 -an output.mp4`
+
+再合成视频+分离后的音频： `ffmpeg -i video.mp4 -i audio.wav -c:v copy -c:a aac -strict experimental output.mp4`
+
+ffmpeg是万能的~ 
+
+
+
 ## Mac录屏：含声音
 
 搜索到这里[mac如何在录制屏幕时只录制系统内音频](https://discussionschinese.apple.com/thread/251515508)里面提到录制屏幕的方法

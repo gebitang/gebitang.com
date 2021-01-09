@@ -667,3 +667,66 @@ Apache的common包下的`org.apache.commons.collections4.collection.Synchronized
 
 >While it may be possible to correct some interface flaws after aninterface is released, you cannot count on it.
 
+### item 22: Use interfaces only to define types
+
+这一章好像主要是用来吐槽：“利用接口提供静态变量”的操作？
+
+当“类”实现了某个“接口”时，这里的“接口”应该理解为是一种“类型”(type)，这一“类型”代表了“类”的实例
+
+区别： `java.lang.Class`实现了`java.lang.reflect.Type`接口 
+
+```
+package java.lang.reflect;
+
+/**
+ * Type is the common superinterface for all types in the Java
+ * programming language. These include raw types, parameterized types,
+ * array types, type variables and primitive types.
+ *
+ * @since 1.5
+ */
+public interface Type {
+    /**
+     * Returns a string describing this type, including information
+     * about any type parameters.
+     *
+     * @implSpec The default implementation calls {@code toString}.
+     *
+     * @return a string describing this type
+     * @since 1.8
+     */
+    default String getTypeName() {
+        return toString();
+    }
+}
+```
+一种错误的使用场景是所谓的“常量接口”(constant interface)，不包含任何方法，只有静态final属性，作为常量提供。
+
+```
+// Constant interface antipattern - do not use!
+public interface PhysicalConstants {
+    // Avogadro's number (1/mol)
+    static final double AVOGADROS_NUMBER = 6.022_140_857e23;
+    // Boltzmann constant (J/K)
+    static final double BOLTZMANN_CONSTANT = 1.380_648_52e-23;
+    // Mass of the electron (kg)
+    static final double ELECTRON_MASS = 9.109_383_56e-31;
+}
+```
+
+想要使用这些常量，就的实现此接口——这容易引起误解和混乱。如果将来不需要这些常量时，依然需要保留对接口的实现以确保兼容性。Java平台库中的`java.io.ObjectStreamConstants`就是这样的错误。
+
+这一场景应当使用枚举类型或公共类(utility class)的方式提供服务，上面的例子应该修改为——
+
+```
+// Constant utility class
+package com.effectivejava.science;
+public class PhysicalConstants {
+    private PhysicalConstants() { } // Prevents instantiation
+    public static final double AVOGADROS_NUMBER = 6.022_140_857e23;
+    public static final double BOLTZMANN_CONST = 1.380_648_52e-23;
+    public static final double ELECTRON_MASS = 9.109_383_56e-31;
+}
+```
+注意`_`下划线的使用，Java 7引入，在数值表达中没有实际含义，用来方便区分。以三位一组进行划分。
+

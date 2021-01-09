@@ -30,7 +30,7 @@ toc = true
 
 - 下载视频：https://www.bilibili.com/read/cv8211246/
 
-  - 固桥视频助手下载，[0.48版本](https://dl.softmgr.qq.com/original/Office/gqvideo_48.0.zip)，安装后自动升级后可用。下载速度比较慢，~~难道是直接抓流然后转换保存的？~~(最终验证是因为我开了科学上网，关闭之后，迅速完成下载)
+  - 固桥视频助手下载，[官网下载](http://www.xmgq68.com/content-168.html)，安装后自动升级后可用。下载速度比较慢，~~难道是直接抓流然后转换保存的？~~(最终验证是因为我开了科学上网，关闭之后，迅速完成下载)
 
 
 - 在线音频提取： https://beecut.cn/extract-audio-online  或  https://audio-extractor.net/cn/ 

@@ -730,3 +730,79 @@ public class PhysicalConstants {
 ```
 注意`_`下划线的使用，Java 7引入，在数值表达中没有实际含义，用来方便区分。以三位一组进行划分。
 
+### Item 23: Prefer class hierarchies to tagged classes
+
+类中包含了一个标签用来区分不同实例的形状。下例中的`final Shape shape`就是所谓的TAG——“我觉得还挺好”——包含很多问题： 样板代码，枚举声明，switch语句……一顿花样操作。
+
+无论是阅读，还是GC都增加了负担。如果TAG不能在构造函数时确定，还不能声明为final级别，更琐碎。总之：冗长、易错、低效(verbose，error-prone，inefficient)
+
+```
+// Tagged class - vastly inferior to a class hierarchy!
+class Figure {
+    enum Shape { RECTANGLE, CIRCLE };
+    // Tag field - the shape of this figure
+    final Shape shape;
+    // These fields are used only if shape is RECTANGLE
+    double length;
+    double width;
+    // This field is used only if shape is CIRCLE
+    double radius;
+    // Constructor for circle
+    Figure(double radius) {
+        shape = Shape.CIRCLE;
+        this.radius = radius;
+    }
+    // Constructor for rectangle
+    Figure(double length, double width) {
+        shape = Shape.RECTANGLE;
+        this.length = length;
+        this.width = width;
+    }
+    double area() {
+        switch(shape) {
+            case RECTANGLE:
+                return length * width;
+            case CIRCLE:
+                return Math.PI * (radius * radius);
+            default:
+                throw new AssertionError(shape);
+        }
+    }
+}
+```
+
+前面吐槽继承，现在是继承显身手的时候了。定义抽象类，抽象出相同的方法或属性；基于TAG的实现抽象为抽象方法，子类做实现，如果子类还有自己的偏好，自由处理。
+
+处理之后，是不是感觉“心理负担”都轻了——没有样板代码(boilerplate)，没有switch，没有枚举声明，所有属性都是final级别，需要定制时，不需要访问父类就可以直接添加子类的特性
+
+```
+// Class hierarchy replacement for a tagged class
+abstract class Figure {
+    abstract double area();
+}
+class Circle extends Figure {
+    final double radius;
+    Circle(double radius) { this.radius = radius; }
+    @Override double area() { return Math.PI * (radius * radius); }
+}
+
+class Rectangle extends Figure {
+    final double length;
+    final double width;
+    Rectangle(double length, double width) {
+        this.length = length;
+        this.width = width;
+    }
+    @Override double area() { return length * width; }
+}
+```
+
+如果有需要定义Squre，还可以直接使用——
+
+```
+class Square extends Rectangle {
+    Square(double side) {
+        super(side, side);
+    }
+}
+```

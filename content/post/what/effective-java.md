@@ -806,3 +806,148 @@ class Square extends Rectangle {
     }
 }
 ```
+
+### Item 24: Favor static member classes over nonstatic
+
+四种嵌套类(nested classed)：静态成员类(static member classes)、非静态成员类(nonstatic member classes)、匿名类(anonymous classes)、局部类(local classes)
+
+注意静态成员类和非静态成员类的区别：
+
+- 任何一个非静态类的实例都隐含包含在起所在类的某个实例中。如果非静态类实例想要单独存在，必须声明为静态类
+- 这种联合关系会更占有内存空间并且更耗时（加入外部类对象已经不需要存在了，但由于有非静态类实例的存在，导致无法进行GC）非静态类通常会用来作为适配器，例如——
+
+```
+//Typical use of a nonstatic member class
+public class MySet<E> extends AbstractSet<E> {
+        // Bulk of the class omitted
+    @Override public Iterator<E> iterator() {
+        return new MyIterator();
+    }
+    private class MyIterator implements Iterator<E> {
+    }
+}
+```
+
+匿名类的限制：无法实例，声明立即使用；不能做`instanceof`检查；不能实现接口或扩展其他类；
+
+在lambda引入Java之前，常用匿名类；但现在大部分场景都可以使用lambda代替匿名类；
+
+局部类使用的场景更少，相当于局部变量，收到的限制跟局部变量相同。
+
+
+[示例参考](https://www.cis.upenn.edu/~matuszek/General/JavaSyntax/inner-classes.html) 
+
+静态成员类(static member classes)
+
+```
+public class OuterClass {
+    int outerVariable = 100;
+    static int staticOuterVariable = 200;
+ 
+    static class StaticMemberClass {
+        int innerVariable = 20;
+         
+        int getSum(int parameter) {
+            // Cannot access outerVariable here
+            return innerVariable + staticOuterVariable + parameter;
+        }       
+    }
+     
+    public static void main(String[] args) {
+        OuterClass outer = new OuterClass();
+        StaticMemberClass inner = new StaticMemberClass(); 
+        System.out.println(inner.getSum(3));
+        outer.run();
+    }
+     
+    void run() {
+        StaticMemberClass localInner = new StaticMemberClass();
+        System.out.println(localInner.getSum(5));
+    }
+}
+
+```
+
+非静态成员类(nonstatic member classes)
+```
+// member class 
+public class OuterClass {
+    int outerVariable = 100;
+ 
+    class MemberClass {
+        int innerVariable = 20;
+         
+        int getSum(int parameter) {
+            return innerVariable +  outerVariable + parameter;
+        }       
+    }
+     
+    public static void main(String[] args) {
+        OuterClass outer = new OuterClass();
+        MemberClass inner = outer.new MemberClass(); 
+        System.out.println(inner.getSum(3));
+        outer.run();
+    }
+     
+    void run() {
+        MemberClass localInner = new MemberClass();
+        System.out.println(localInner.getSum(5));
+    }
+}
+```
+
+匿名类(anonymous classes) 匿名类就是在使用时直接使用new关键字创建，作为方法参数或对象直接使用(不赋值给任何变量)。例如`new Thread(){...}.start()`
+
+```
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.*;
+ 
+public class OuterClass extends JFrame {
+     
+    public static void main(String[] args) {
+        OuterClass outer = new OuterClass();
+        JButton button = new JButton("Don't click me!");
+        button.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent event) {
+                System.out.println("Ouch!");
+            }
+        });
+        outer.add(button);
+        outer.pack();
+        outer.setVisible(true);
+    }
+}
+```
+
+局部类(local classes)
+
+```
+public class OuterClass {
+    int outerVariable = 10000;
+    static int staticOuterVariable = 2000;
+     
+    public static void main(String[] args) {
+        OuterClass outer = new OuterClass();
+        System.out.println(outer.run());
+    }
+     
+    Object run() {
+        int localVariable = 666;
+        final int finalLocalVariable = 300;
+         
+        class LocalClass {
+            int innerVariable = 40;
+             
+            int getSum(int parameter) {
+                // Cannot access localVariable here
+                return outerVariable + staticOuterVariable + 
+                       finalLocalVariable + innerVariable + parameter;
+            }       
+        }
+        LocalClass local = new LocalClass();
+        System.out.println(local.getSum(5));
+        return local;
+    }
+}
+```

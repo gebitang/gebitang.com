@@ -951,3 +951,47 @@ public class OuterClass {
     }
 }
 ```
+
+### Item 25: Limit source files to a single top-level class
+
+这条比较好理解。一个源码文件尽量只对应一个类。如果有嵌套类的需求，参考上一条说明。
+
+如果违反这一个原则，有可能导致：因编译的顺序导致出现不同的运行结果。举例——
+
+`Main.java`中的内容如下——
+
+```
+public class Main {
+    public static void main(String[] args) {
+        System.out.println(Utensil.NAME + Dessert.NAME);
+    }
+}
+```
+
+`Utensil.java`中的内容如下——
+
+```
+// Two classes defined in one file. Don't ever do this!
+class Utensil {
+    static final String NAME = "pan";
+}
+class Dessert {
+    static final String NAME = "cake";
+}
+```
+
+这时候没有问题。如何还有另外一个`Dessert.java`的内容如下——
+
+```
+// Two classes defined in one file. Don't ever do this!
+class Utensil {
+    static final String NAME = "pot";
+}
+class Dessert {
+    static final String NAME = "pie";
+}
+```
+
+此时如果使用`javac Main.java Dessert.java`进行编译，可能会提示报错（也可能不报错）。因为先编译Main.java时，已经加装了Utensil和Dessert类对象；再编译Dessert.java时，会发现有多重定义。
+
+如果只选`javac Dessert.java Main.java`，可能输出的就是`potpie`结果了。由于不同的编译顺序导致运行结果有差异，这显然不能接受。——这也是这一原则的意义所在了

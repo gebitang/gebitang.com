@@ -125,6 +125,51 @@ INFO: EXECUTION FAILURE
 
 这样还是不能倒推到报错的堆栈信息上啊？-_-|| 看起来还得加上 `https://github.com/SonarSource/sonarqube/`这里的代码才能梳理出来完整逻辑。先缓缓~ 
 
+### How to get the value of the arguments of the sonar tree
+
+获取某个节点的变量，`tree.arguments()`，返回Arguments， `public interface Arguments extends ListTree<ExpressionTree> ` ，所以每个变量对应一个`ExprssionTree`，根据不同的类型解析表达式即可。
+
+sonar中将语法树重新解析为 `public interface Tree `，枚举出`enum Kind implements GrammarRuleKey `(目前)119中不同的`Kind`。
+
+原则上，针对不同的类型(可以作为变量的Kind)，做不同的处理即可。
+
+例如，基础类型可以直接转换为`LiteralTree `， 获取value方法的值即可。
+
+
+[How to get the value of the arguments of the sonar tree](https://stackoverflow.com/questions/38862873/how-to-get-the-value-of-the-arguments-of-the-sonar-tree) relative
+
+[Custom Rule for Sonar Java](https://community.sonarsource.com/t/custom-rule-for-sonar-java/521) similar 
+
+```
+public class YourRule extends IssuableSubscriptionVisitor {
+
+  @Override
+  public List<Tree.Kind> nodesToVisit() {
+    // Register to the kind of nodes you want to be called upon visit.
+    return ImmutableList.of(
+        Tree.Kind.MEMBER_SELECT,
+        Tree.Kind.METHOD_INVOCATION);
+  }
+
+  @Override
+  public void visitNode(Tree tree) {
+    if (tree.is(Tree.Kind.MEMBER_SELECT)) {
+      MemberSelectExpressionTree mset = (MemberSelectExpressionTree) tree;
+      System.out.println(mset);
+    } else if (tree.is(Tree.Kind.METHOD_INVOCATION)) {
+      MethodInvocationTree mit = (MethodInvocationTree) tree;
+      System.out.println(mit);
+    }
+  }
+}
+```
+
+[Get parent of method invocation - Java](https://community.sonarsource.com/t/get-parent-of-method-invocation-java/10073) similar scenario 
+
+[How to get value of a variable in SonarQube (custom-rules )?](https://stackoverflow.com/questions/50039501/how-to-get-value-of-a-variable-in-sonarqube-custom-rules) not relative
+
+[Writing a new custom Java Rule to find a method invocation](https://community.sonarsource.com/t/writing-a-new-custom-java-rule-to-find-a-method-invocation/1878) no result
+
 
 ## SonarQube alike
 

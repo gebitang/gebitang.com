@@ -125,6 +125,10 @@ INFO: EXECUTION FAILURE
 
 这样还是不能倒推到报错的堆栈信息上啊？-_-|| 看起来还得加上 `https://github.com/SonarSource/sonarqube/`这里的代码才能梳理出来完整逻辑。先缓缓~ 
 
+看起来只要安装了对应的插件，即使没有启用对应的规则，也会触发一下检查操作。根据上面问题的官方答复建议，删除`checkStyle`插件后，问题消失。
+
+但这是个好问题，可以借机调研一下整个sonarqube的插件的执行逻辑。**跟踪堆栈信息对应的源码**
+
 ### How to get the value of the arguments of the sonar tree
 
 获取某个节点的变量，`tree.arguments()`，返回Arguments， `public interface Arguments extends ListTree<ExpressionTree> ` ，所以每个变量对应一个`ExprssionTree`，根据不同的类型解析表达式即可。

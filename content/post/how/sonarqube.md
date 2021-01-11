@@ -11,6 +11,121 @@ topics = [
 toc = true
 +++
 
+## SonarQube debug
+
+### SonarScanner是如何执行的
+
+
+{{< fluid_imgs
+  "pure-u-1-1|https://upload-images.jianshu.io/upload_images/3296949-c45ace8ed9378837.png|stack info|https://upload-images.jianshu.io/upload_images/3296949-c45ace8ed9378837.png"
+>}}
+
+本地复现  [Can not execute Checkstyle](https://community.sonarsource.com/t/all-files-are-still-parsed-by-check-style-parser-even-if-there-is-none-of-any-activated-checkstyle-rule/36801)
+
+```
+ERROR: Error during SonarQube Scanner execution
+java.lang.IllegalStateException: Can not execute Checkstyle
+        at org.sonar.plugins.checkstyle.CheckstyleExecutor.executeWithClassLoader(CheckstyleExecutor.java:110)
+        at org.sonar.plugins.checkstyle.CheckstyleExecutor.execute(CheckstyleExecutor.java:78)
+        at org.sonar.plugins.checkstyle.CheckstyleSensor.execute(CheckstyleSensor.java:42)
+        at org.sonar.scanner.sensor.AbstractSensorWrapper.analyse(AbstractSensorWrapper.java:48)
+        at org.sonar.scanner.sensor.ModuleSensorsExecutor.execute(ModuleSensorsExecutor.java:85)
+        at org.sonar.scanner.sensor.ModuleSensorsExecutor.lambda$execute$1(ModuleSensorsExecutor.java:59)
+        at org.sonar.scanner.sensor.ModuleSensorsExecutor.withModuleStrategy(ModuleSensorsExecutor.java:77)
+        at org.sonar.scanner.sensor.ModuleSensorsExecutor.execute(ModuleSensorsExecutor.java:59)
+        at org.sonar.scanner.scan.ModuleScanContainer.doAfterStart(ModuleScanContainer.java:82)
+        at org.sonar.core.platform.ComponentContainer.startComponents(ComponentContainer.java:137)
+        at org.sonar.core.platform.ComponentContainer.execute(ComponentContainer.java:123)
+        at org.sonar.scanner.scan.ProjectScanContainer.scan(ProjectScanContainer.java:388)
+        at org.sonar.scanner.scan.ProjectScanContainer.scanRecursively(ProjectScanContainer.java:384)
+        at org.sonar.scanner.scan.ProjectScanContainer.doAfterStart(ProjectScanContainer.java:353)
+        at org.sonar.core.platform.ComponentContainer.startComponents(ComponentContainer.java:137)
+        at org.sonar.core.platform.ComponentContainer.execute(ComponentContainer.java:123)
+        at org.sonar.scanner.bootstrap.GlobalContainer.doAfterStart(GlobalContainer.java:144)
+        at org.sonar.core.platform.ComponentContainer.startComponents(ComponentContainer.java:137)
+        at org.sonar.core.platform.ComponentContainer.execute(ComponentContainer.java:123)
+        at org.sonar.batch.bootstrapper.Batch.doExecute(Batch.java:72)
+        at org.sonar.batch.bootstrapper.Batch.execute(Batch.java:66)
+        at org.sonarsource.scanner.api.internal.batch.BatchIsolatedLauncher.execute(BatchIsolatedLauncher.java:46)
+        at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+        at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+        at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+        at java.base/java.lang.reflect.Method.invoke(Unknown Source)
+        at org.sonarsource.scanner.api.internal.IsolatedLauncherProxy.invoke(IsolatedLauncherProxy.java:60)
+        at com.sun.proxy.$Proxy0.execute(Unknown Source)
+        at org.sonarsource.scanner.api.EmbeddedScanner.doExecute(EmbeddedScanner.java:189)
+        at org.sonarsource.scanner.api.EmbeddedScanner.execute(EmbeddedScanner.java:138)
+        at org.sonarsource.scanner.cli.Main.execute(Main.java:112)
+        at org.sonarsource.scanner.cli.Main.execute(Main.java:75)
+        at org.sonarsource.scanner.cli.Main.main(Main.java:61)
+Caused by: com.puppycrawl.tools.checkstyle.api.CheckstyleException: Exception was thrown while processing E:\download\1216\eipis-user\service\src\main\java\com\democom\finance\eipis\user\service\impl\UserServiceImpl.java
+        at com.puppycrawl.tools.checkstyle.Checker.processFiles(Checker.java:311)
+        at com.puppycrawl.tools.checkstyle.Checker.process(Checker.java:221)
+        at org.sonar.plugins.checkstyle.CheckstyleExecutor.executeWithClassLoader(CheckstyleExecutor.java:103)
+        ... 32 more
+Caused by: com.puppycrawl.tools.checkstyle.api.CheckstyleException: IllegalStateException occurred while parsing file E:\download\1216\eipis-user\service\src\main\java\com\democom\finance\eipis\user\service\impl\UserServiceImpl.java.
+        at com.puppycrawl.tools.checkstyle.JavaParser.parse(JavaParser.java:120)
+        at com.puppycrawl.tools.checkstyle.TreeWalker.processFiltered(TreeWalker.java:149)
+        at com.puppycrawl.tools.checkstyle.api.AbstractFileSetCheck.process(AbstractFileSetCheck.java:87)
+        at com.puppycrawl.tools.checkstyle.Checker.processFile(Checker.java:337)
+        at com.puppycrawl.tools.checkstyle.Checker.processFiles(Checker.java:298)
+        ... 34 more
+Caused by: java.lang.IllegalStateException: E:\download\1216\eipis-user\service\src\main\java\com\democom\finance\eipis\user\service\impl\UserServiceImpl.java:790:1: expecting RCURLY, found 'null'
+        at com.puppycrawl.tools.checkstyle.JavaParser$1.reportError(JavaParser.java:108)
+        at com.puppycrawl.tools.checkstyle.grammar.GeneratedJavaRecognizer.typeDefinition(GeneratedJavaRecognizer.java:424)
+        at com.puppycrawl.tools.checkstyle.grammar.GeneratedJavaRecognizer.compilationUnit(GeneratedJavaRecognizer.java:212)
+        at com.puppycrawl.tools.checkstyle.JavaParser.parse(JavaParser.java:114)
+        ... 38 more
+Caused by: E:\download\1216\eipis-user\service\src\main\java\com\democom\finance\eipis\user\service\impl\UserServiceImpl.java:790:1: expecting RCURLY, found 'null'
+        at antlr.Parser.match(Parser.java:211)
+        at com.puppycrawl.tools.checkstyle.grammar.GeneratedJavaRecognizer.compoundStatement(GeneratedJavaRecognizer.java:4555)
+        at com.puppycrawl.tools.checkstyle.grammar.GeneratedJavaRecognizer.field(GeneratedJavaRecognizer.java:3158)
+        at com.puppycrawl.tools.checkstyle.grammar.GeneratedJavaRecognizer.classBlock(GeneratedJavaRecognizer.java:3415)
+        at com.puppycrawl.tools.checkstyle.grammar.GeneratedJavaRecognizer.classDefinition(GeneratedJavaRecognizer.java:646)
+        at com.puppycrawl.tools.checkstyle.grammar.GeneratedJavaRecognizer.typeDefinitionInternal(GeneratedJavaRecognizer.java:561)
+        at com.puppycrawl.tools.checkstyle.grammar.GeneratedJavaRecognizer.typeDefinition(GeneratedJavaRecognizer.java:402)
+        ... 40 more
+```
+
+默认插件sonar-java中注册了` ExternalReportExtensions.define(context);`针对三大插件的Sensor——
+
+```
+context.addExtension(CheckstyleSensor.class);
+context.addExtension(PmdSensor.class);
+context.addExtension(SpotBugsSensor.class);
+```
+
+默认执行阶段是在对文件本地的扫描扫描之后调用执行——
+
+```
+INFO: 26/26 source files have been analyzed
+INFO: Sensor SonarCSS Rules [cssfamily] (done) | time=4249ms
+INFO: Sensor PmdSensor [pmd]
+INFO: Sensor PmdSensor [pmd] (done) | time=0ms
+INFO: Sensor EndSensor [javacustom]
+INFO: Sensor EndSensor [javacustom] (done) | time=1ms
+INFO: Sensor JaCoCo XML Report Importer [jacoco]
+WARN: No coverage report can be found with sonar.coverage.jacoco.xmlReportPaths='ut/target/site/jacoco-aggregate/jacoco.xml'. Using default locations: target/site/jacoco/jacoco.xml,target/site/jacoco-it/jacoco.xml,build/reports/jacoco/test/jacocoTestReport.xml
+INFO: No report imported, no coverage information will be imported by JaCoCo XML Report Importer
+INFO: Sensor JaCoCo XML Report Importer [jacoco] (done) | time=5ms
+INFO: Sensor SurefireSensor [java]
+INFO: parsing [E:\download\1216\eipis-user\target\surefire-reports]
+INFO: Sensor SurefireSensor [java] (done) | time=1ms
+INFO: Sensor JavaXmlSensor [java]
+INFO: Sensor JavaXmlSensor [java] (done) | time=3ms
+INFO: Sensor HTML [web]
+INFO: Sensor HTML [web] (done) | time=237ms
+INFO: Sensor CheckstyleSensor [checkstyle]
+INFO: Checkstyle output report: E:\download\1216\eipis-user\.scannerwork\checkstyle-result.xml
+INFO: Checkstyle configuration: E:\download\1216\eipis-user\.scannerwork\checkstyle.xml
+INFO: Checkstyle charset: UTF-8
+INFO: ------------------------------------------------------------------------
+INFO: EXECUTION FAILURE
+```
+
+这样还是不能倒推到报错的堆栈信息上啊？-_-|| 看起来还得加上 `https://github.com/SonarSource/sonarqube/`这里的代码才能梳理出来完整逻辑。先缓缓~ 
+
+
 ## SonarQube alike
 
 [SonarQube History](https://www.sonarsource.com/company/history/) 

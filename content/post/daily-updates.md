@@ -488,6 +488,30 @@ distributionUrl=gradle-6.3-all.zip
 
 ```
 
+### proxy for gradle
+
+[Gradle proxy configuration](https://stackoverflow.com/a/22666646/1087122)  
+[How to set proxy server for gradle?](https://stackoverflow.com/questions/41507037/how-to-set-proxy-server-for-gradle/41507323)  
+[Execute Gradle behind a corporate proxy network](https://medium.com/@petehouston/execute-gradle-behind-a-corporate-proxy-network-509260961813)
+
+在项目的更目录下创建`gradle.properties`文件，指定代理参数；全局设置，将此文件放到 `$HOME/.gradle`目录下；也可以直接通过命令行参数传递`gradlew -Dhttp.proxyHost=127.0.0.1 -Dhttp.proxyPort=3128 " -Dhttps.proxyPort=3129 "-Dhttp.nonProxyHosts=*.nonproxyrepos.com|localhost`
+
+```
+#http proxy setup
+systemProp.http.proxyHost=www.somehost.org
+systemProp.http.proxyPort=8080
+systemProp.http.proxyUser=userid
+systemProp.http.proxyPassword=password
+systemProp.http.nonProxyHosts=*.nonproxyrepos.com|localhost
+
+#https proxy setup
+systemProp.https.proxyHost=www.somehost.org
+systemProp.https.proxyPort=8080
+systemProp.https.proxyUser=userid
+systemProp.https.proxyPassword=password
+systemProp.https.nonProxyHosts=*.nonproxyrepos.com|localhost
+```
+
 ### skip test in gradle
 
 [Gradle build without tests](https://stackoverflow.com/a/4714118/1087122), [Skipping Tests With Gradle](https://www.baeldung.com/gradle-skip-tests)

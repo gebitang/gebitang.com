@@ -520,6 +520,15 @@ systemProp.https.nonProxyHosts=*.nonproxyrepos.com|localhost
 - 解压后，将bin目录添加到环境变量即可
 - 执行`gradle -v`验证安装
 
+### 多模块示例
+
+[Gradle多模块项目 jianshu](https://www.jianshu.com/p/fabfb23274e6)  
+[Gradle构建多模块项目 aliyun](https://developer.aliyun.com/article/25589)  
+[Gradle多模块(项目)的构建 segmentfault](https://segmentfault.com/a/1190000018028996) 哈，这明显是对标 `StackOverflow` VS. `SegmentFault`
+
+[official: Executing Multi-Project Builds](https://docs.gradle.org/current/userguide/intro_multi_project_builds.html)  
+[officail: Structuring and Building a Software Component with Gradle](https://docs.gradle.org/current/userguide/multi_project_builds.html)
+
 ### skip test in gradle
 
 [Gradle build without tests](https://stackoverflow.com/a/4714118/1087122), [Skipping Tests With Gradle](https://www.baeldung.com/gradle-skip-tests)

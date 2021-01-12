@@ -1017,8 +1017,7 @@ Java 5引入泛型，在此之前，从集合中读取对象时，每次都需�
 ```
 //Legitimate use of raw type - instanceof operator
 if (o instanceof Set) { // Raw type
-Set<?> s = (Set<?>) o; // Wildcard type
-...
+    Set<?> s = (Set<?>) o; // Wildcard type
 }
 ```
 
@@ -1027,15 +1026,16 @@ Set<?> s = (Set<?>) o; // Wildcard type
 
 |Term|Example|Item|
 |---------|---------|---------|
-|Parameterized type|List<String>|Item 26|
+|Parameterized type|List\<String\>|Item 26|
 |Actual type parameter|String|Item 26|
-|Generic type|List<E>|Items26,29|
+|Generic type|List\<E\>|Items26,29|
 |Formal type parameter|E|Item 26|
 |Unbounded wildcard type|List<?>|Item 26|
 |Raw type|List|Item 26|
 |Bounded type parameter|<E extends extends Number>|Item 29|
-|Recursive type bound|<T extends extends Comparable<T>>|Item 30|
+|Recursive type bound|<T extends extends Comparable\<T\>\>|Item 30|
 |Bounded wildcard type|List<? extends extends Number>|Item 31|
-|Generic method|static <E> List<E> List<E> asList(E[] a)|Item 30|
+|Generic method|static \<E\> List\<E\> asList(E[] a)|Item 30|
 |Type token|String.class|Item 33|
 
+![](https://upload-images.jianshu.io/upload_images/3296949-679e354e043ebfad.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)

@@ -174,6 +174,101 @@ public class YourRule extends IssuableSubscriptionVisitor {
 
 [Writing a new custom Java Rule to find a method invocation](https://community.sonarsource.com/t/writing-a-new-custom-java-rule-to-find-a-method-invocation/1878) no result
 
+### 编译SonarQube 
+
+同样需要JDK11+环境；注意gradle的本地zip包指定；设置gradle的代理
+
+[sonarqube](https://github.com/SonarSource/sonarqube)使用gradle进行编译
+
+为导入ide进行代码查看，可执行`./gradlew ide`，耗时45分钟以上之后，终于提示build success。有些task提示使用过时的API
+
+```
+注: 某些输入文件使用或覆盖了已过时的 API。
+注: 有关详细信息, 请使用 -Xlint:deprecation 重新编译。
+注: 某些输入文件使用了未经检查或不安全的操作。
+...
+BUILD SUCCESSFUL in 45m 26s
+87 actionable tasks: 87 executed
+```
+
+执行编译`./gradlew build`，编译成功后，压缩包在`sonar-application/build/distributions/`目录下
+
+执行build则会先使用yarn编译站点`Task :server:sonar-web:yarn`，下载依赖时有时网络问题，代理稳定的情况下，多执行几次即可，本地执行时，缓存效果生效，相当于“断点续编译”。
+
+windows环境下测试模块失败，重新编译，忽略测试`gradlew build -x test`，成功。
+
+```
+...
+> Task :server:sonar-db-dao:dumpSchema
+...
+15:57:44.599 INFO  org.sonar.db.SQDatabase - #4201 'Move default quality gate to global properties': success | time=1ms
+...
+..
+.
+BUILD SUCCESSFUL in 26m 42s
+209 actionable tasks: 15 executed, 194 up-to-date
+```
+
+window环境下启动时，提示链接失败，很久之前的hosts配置影响，关闭后OK。
+
+新版本(8.7-snapshot版本)启动后强制要求修改默认的密码。
+
+```
+jvm 1    | 2021.01.12 16:20:49 WARN  app[][startup] ####################################################################################################################
+jvm 1    | 2021.01.12 16:20:49 WARN  app[][startup] Default Administrator credentials are still being used. Make sure to change the password or deactivate the account.
+jvm 1    | 2021.01.12 16:20:49 WARN  app[][startup] ####################################################################################################################
+```
+
+sonarqube包含的模块——
+
+```
+./sonar-shutdowner/build.gradle
+./sonar-core/build.gradle
+./server/sonar-process/build.gradle
+./server/sonar-webserver-core/build.gradle
+./server/sonar-webserver/build.gradle
+./server/sonar-docs/build.gradle
+./server/sonar-ce-task/build.gradle
+./server/sonar-ce-common/build.gradle
+./server/sonar-db-migration/build.gradle
+./server/sonar-db-core/build.gradle
+./server/sonar-auth-ldap/build.gradle
+./server/sonar-webserver-es/build.gradle
+./server/sonar-main/build.gradle
+./server/sonar-webserver-ws/build.gradle
+./server/sonar-ce/build.gradle
+./server/sonar-auth-github/build.gradle
+./server/sonar-server-common/build.gradle
+./server/build.gradle
+./server/sonar-ce-task-projectanalysis/build.gradle
+./server/sonar-auth-saml/build.gradle
+./server/sonar-webserver-webapi/build.gradle
+./server/sonar-auth-common/build.gradle
+./server/sonar-auth-gitlab/build.gradle
+./server/sonar-webserver-api/build.gradle
+./server/sonar-webserver-auth/build.gradle
+./server/sonar-web/build.gradle
+./server/sonar-db-dao/build.gradle
+./sonar-scanner-engine/build.gradle
+./sonar-scanner-engine-shaded/build.gradle
+./sonar-plugin-api/build.gradle
+./sonar-ws-generator/build.gradle
+./sonar-plugin-api-impl/build.gradle
+./sonar-application/build.gradle
+./sonar-application/bundled_plugins.gradle
+./sonar-ws/build.gradle
+./sonar-testing-ldap/build.gradle
+./sonar-markdown/build.gradle
+./build.gradle
+./.gradle
+./sonar-testing-harness/build.gradle
+./plugins/build.gradle
+./plugins/sonar-xoo-plugin/build.gradle
+./sonar-check-api/build.gradle
+./sonar-scanner-protocol/build.gradle
+./sonar-duplications/build.gradle
+./settings.gradle
+```
 
 ## SonarQube alike
 
@@ -516,7 +611,7 @@ mvn clean package -Dmaven.test.skip=true -Dhttp.proxyHost=127.0.0.1 -Dhttp.proxy
 ![](https://upload-images.jianshu.io/upload_images/3296949-02c92af04532ed36.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
 
-### 源码编译问题
+### 源码编译sonar-java问题
 
 window环境下编译成功，但生成的sh脚本默认的回车格式为`Windows(CR LF)`，在linux环境下可以使用`cat -v sonar.sh`进行查看验证。
 

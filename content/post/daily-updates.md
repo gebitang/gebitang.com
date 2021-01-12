@@ -481,6 +481,11 @@ zipStorePath=wrapper/dists
 #distributionUrl=https\://services.gradle.org/distributions/gradle-6.3-all.zip
 distributionUrl=gradle-6.3-all.zip
 
+# linux
+#distributionUrl=file\:/tmp/gradle-2.2.1-all.zip
+# windows
+#distributionUrl=file\:/D:/tools/gradleAll/6.3/gradle-6.3-all.zip
+
 ```
 
 ### skip test in gradle

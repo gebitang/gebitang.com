@@ -995,3 +995,47 @@ class Dessert {
 此时如果使用`javac Main.java Dessert.java`进行编译，可能会提示报错（也可能不报错）。因为先编译Main.java时，已经加装了Utensil和Dessert类对象；再编译Dessert.java时，会发现有多重定义。
 
 如果只选`javac Dessert.java Main.java`，可能输出的就是`potpie`结果了。由于不同的编译顺序导致运行结果有差异，这显然不能接受。——这也是这一原则的意义所在了
+
+## 4 Generics
+
+Java 5引入泛型，在此之前，从集合中读取对象时，每次都需要做强制转换。有泛型之后，编译器会自动做转换的动作，如果插入的类型错误，会编译报错。
+
+### Item 26: Don't use raw types
+
+类或接口声明中包含了一个或多个类型参数时，被称为泛型(generic class, generic interface)。`List<E>`读作`List of E`。
+
+每个泛型也定义了“原始类型”(raw type)，不包含任何类型参数——主要为了兼容性。
+
+声明了类型的泛型才会被进行编译检查；原始类型(不属于泛型系统)无法执行编译检查，只有在执行时抛出转换异常(ClassCastException)
+
+当类型无法事先知道时，可以使用`Set<?>`无限通配类型(unbounded wildcard types)，依然是泛型的一种，保留了灵活性，类似`static int numElementsInCommon(Set<?> s1, Set<?> s2) { ... }`
+
+两种例外场景(使用原始类型)：  
+- 使用字面类(class literal)时，使用原始类型，不使用泛型。例如`List.class`, `String[].class`,`int.class`是合法表达；`List<String>.class`, `List<?>.class`不合法
+- 使用`instanceof`检查时，例如下面的例子，注意检查之后使用时做通配处理
+
+```
+//Legitimate use of raw type - instanceof operator
+if (o instanceof Set) { // Raw type
+Set<?> s = (Set<?>) o; // Wildcard type
+...
+}
+```
+
+总结一下： `Set<Object>`可以包含任意对象类型的Set；`Set<?>`包含任意特定类型的set；`Set`原始类型。前两种都是泛型，确保安全；后一种不属于泛型系统，不安全
+
+
+|Term|Example|Item|
+|---------|---------|---------|
+|Parameterized type|List<String>|Item 26|
+|Actual type parameter|String|Item 26|
+|Generic type|List<E>|Items26,29|
+|Formal type parameter|E|Item 26|
+|Unbounded wildcard type|List<?>|Item 26|
+|Raw type|List|Item 26|
+|Bounded type parameter|<E extends extends Number>|Item 29|
+|Recursive type bound|<T extends extends Comparable<T>>|Item 30|
+|Bounded wildcard type|List<? extends extends Number>|Item 31|
+|Generic method|static <E> List<E> List<E> asList(E[] a)|Item 30|
+|Type token|String.class|Item 33|
+

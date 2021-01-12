@@ -494,7 +494,7 @@ distributionUrl=gradle-6.3-all.zip
 [How to set proxy server for gradle?](https://stackoverflow.com/questions/41507037/how-to-set-proxy-server-for-gradle/41507323)  
 [Execute Gradle behind a corporate proxy network](https://medium.com/@petehouston/execute-gradle-behind-a-corporate-proxy-network-509260961813)
 
-在项目的更目录下创建`gradle.properties`文件，指定代理参数；全局设置，将此文件放到 `$HOME/.gradle`目录下；也可以直接通过命令行参数传递`gradlew -Dhttp.proxyHost=127.0.0.1 -Dhttp.proxyPort=3128 " -Dhttps.proxyPort=3129 "-Dhttp.nonProxyHosts=*.nonproxyrepos.com|localhost`
+在项目的更目录下创建`gradle.properties`文件，指定代理参数；全局设置，将此文件放到 `$HOME/.gradle`目录下；也可以直接通过命令行参数传递`gradlew -Dhttp.proxyHost=127.0.0.1 -Dhttp.proxyPort=3128  -Dhttps.proxyPort=3129 -Dhttp.nonProxyHosts=*.nonproxyrepos.com|localhost`
 
 ```
 #http proxy setup
@@ -511,6 +511,14 @@ systemProp.https.proxyUser=userid
 systemProp.https.proxyPassword=password
 systemProp.https.nonProxyHosts=*.nonproxyrepos.com|localhost
 ```
+
+### 安装gradle
+
+[官方教程](https://gradle.org/install/)，简单概况：
+
+- 现在对于版本完整zip包；可选检查sha256值
+- 解压后，将bin目录添加到环境变量即可
+- 执行`gradle -v`验证安装
 
 ### skip test in gradle
 
@@ -637,24 +645,6 @@ D:\openSources\VocabHunter>
 #### idea 不显示gradle工具栏
 
 [gradle tool window missing](https://intellij-support.jetbrains.com/hc/en-us/community/posts/205449130-gradle-tool-window-missing)， 先手动创建一个gradle类型的工程后，gradle工具栏会显示出来，之后再导入gradle工程。
-
-#### gradle 设置代理
-
-[Gradle proxy configuration](https://stackoverflow.com/questions/5991194/gradle-proxy-configuration)
-
-use gradlew to set or update gradl.properties file directly.
-
-```
-#use gradlew 
-gradlew -Dhttp.proxyHost=127.0.0.1 -Dhttp.proxyPort=9527
-gradlew -Dhttps.proxyHost=127.0.0.1 -Dhttps.proxyPort=9527
-
-#gradl.properties
-systemProp.http.proxyHost=127.0.0.1
-systemProp.http.proxyPort=9527
-systemProp.https.proxyHost=127.0.0.1
-systemProp.https.proxyPort=9527
-```
 
 
 ## iTerm2 ssh登录后无法显示中文

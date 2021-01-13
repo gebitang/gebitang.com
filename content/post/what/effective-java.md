@@ -1039,3 +1039,46 @@ if (o instanceof Set) { // Raw type
 |Type token|String.class|Item 33|
 
 ![](https://upload-images.jianshu.io/upload_images/3296949-679e354e043ebfad.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+### Item 27: Eliminate unchecked warnings
+
+消除未检查的警告。每一个未检查的告警都是可能导致运行时抛出类型转换的异常。
+
+最简单的例子： `Set<Lark> exaltation = new HashSet();`没有声明类型，会提示未检查的转换，变更为`Set<Lark> exaltation = new HashSet<>();` 即可。添加Java 7中引入的`<>`钻石符号即可，不需要显式什么Lark类型。
+
+- 尽力消除每一处的告警
+- 如果无法消除，但可以确保对应的代码是类型安全的，可以使用`@SuppressWarning("uncheck")`注解进行消除。(类型安全时忽略了注解，那么类型不安全的场景也可能被忽略掉)
+- 注解需要添加对应的注释
+- 注解的范围确保为最小化，能注解到变量声明上的不注解到方法应用上；避免注解到整个类上
+
+`ArrayList`的`toArray(T[] a)`的实现上的注解就有范围过大的问题。
+```
+@SuppressWarnings("unchecked")
+public <T> T[] toArray(T[] a) {
+    if (a.length < size)
+        // Make a new array of a's runtime type, but my contents:
+        return (T[]) Arrays.copyOf(elementData, size, a.getClass());
+    System.arraycopy(elementData, 0, a, 0, size);
+    if (a.length > size)
+        a[size] = null;
+    return a;
+}
+```
+
+更合适的方式—— 
+
+```
+public <T> T[] toArray(T[] a) {
+    if (a.length < size) {
+        // This cast is correct because the array we're creating
+        // is of the same type as the one passed in, which is T[].
+        @SuppressWarnings("unchecked") T[] result =
+                (T[]) Arrays.copyOf(elements, size, a.getClass());
+        return result;
+    }
+    System.arraycopy(elementData, 0, a, 0, size);
+    if (a.length > size)
+        a[size] = null;
+    return a;
+}
+```

@@ -1082,3 +1082,81 @@ public <T> T[] toArray(T[] a) {
     return a;
 }
 ```
+
+### Item 28: Prefer lists to arrays
+
+数组与泛型之间有两点不同。
+
+第一，数组是协变型的(covariant)，如果`Sub`是`Super`的子类，则数组`Sub[]`是数组`Super[]`的子类型；而泛型是不变型的(invariant)，对应不同的类型`Type1`和`Type2`，List对应的类型之间没有父子关系[JLS 4.10. Subtyping](https://docs.oracle.com/javase/specs/jls/se8/html/jls-4.html#jls-4.10) 
+
+这意味着，前者只能在运行时报错；后者可以在编译期检查。例如——
+
+```
+// Fails at runtime!
+Object[] objectArray = new Long[1];
+objectArray[0] = "I don't fit in"; // Throws ArrayStoreException
+
+// Won't compile!
+List<Object> ol = new ArrayList<Long>(); // Incompatible types
+ol.add("I don't fit in");
+```
+
+第二，数组是“具象的”([reified](https://docs.oracle.com/javase/specs/jls/se8/html/jls-4.html#jls-4.7))，这意味着数组在运行期间会强制检查对象的类型；例如上面的例子例子里，运行时不能将字符类型添加到Long数组中；而泛型是“擦除的”([erasure](https://docs.oracle.com/javase/specs/jls/se8/html/jls-4.html#jls-4.6))，意味着类型检查发生在编译期，运行时类型被“擦除”——这也是为了兼容泛型在引入Java 5之前的代码。
+
+所以，类似`new List<E>[]`，`new List<String>[]`，`new E[]`的声明都是非法的。否则，下面的代码就变成“合理的”，在String数组里获取出了一个Integer对象
+
+```
+// Why generic array creation is illegal - won't compile!
+List<String>[] stringLists = new List<String>[1]; // (1)
+List<Integer> intList = List.of(42); // (2)
+Object[] objects = stringLists; // (3)
+objects[0] = intList; // (4)
+String s = stringLists[0].get(0); // (5)
+```
+
+两种类型各擅胜场，数组性能更好，但泛型更安全，通用。对比——
+
+使用时，需要每次都对Object进行强制类型转换
+```
+public class Chooser {
+    private final Object[] choiceArray;
+    public Chooser(Collection choices) {
+        choiceArray = choices.toArray();
+    }
+    public Object choose() {
+        Random rnd = ThreadLocalRandom.current();
+        return choiceArray[rnd.nextInt(choiceArray.length)];
+    }
+}
+```
+
+使用泛型，注意类似`incompatible types`的报错，
+
+```
+public class Chooser<T> {
+    private final T[] choiceArray;
+    public Chooser(Collection<T> choices) {
+        //编译错误，where T is a type-variable:
+        choiceArray = choices.toArray();
+
+        //使用下面的方式，需要注意消除warning: [unchecked] unchecked cast
+        choiceArray = (T[]) choices.toArray();
+    }
+}
+```
+
+通用正确的方式—— 
+
+```
+// List-based Chooser - typesafe
+public class Chooser<T> {
+    private final List<T> choiceList;
+    public Chooser(Collection<T> choices) {
+        choiceList = new ArrayList<>(choices);
+    }
+    public T choose() {
+        Random rnd = ThreadLocalRandom.current();
+        return choiceList.get(rnd.nextInt(choiceList.size()));
+    }
+}
+```

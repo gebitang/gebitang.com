@@ -1160,3 +1160,105 @@ public class Chooser<T> {
     }
 }
 ```
+
+### 29: Favor generic types
+
+上一条标题鼓励使用List代替Array，这一条鼓励使用Array。不过两条都是鼓励使用“泛型”，不同的场景使用不同的“泛型”方式。数组方式的“泛型”性能更好。
+
+参考下面的例子——泛型的“候选”，使用`Object`的方式实现`Stack`栈。每次使用时，用户需要手动进行类型转换
+
+```
+// Object-based collection - a prime candidate for generics
+public class Stack {
+    private Object[] elements;
+    private int size = 0;
+    private static final int DEFAULT_INITIAL_CAPACITY = 16;
+    public Stack() {
+        elements = new Object[DEFAULT_INITIAL_CAPACITY];
+    }
+    public void push(Object e) {
+        ensureCapacity();
+        elements[size++] = e;
+    }
+    public Object pop() {
+        if (size == 0)
+            throw new EmptyStackException();
+        Object result = elements[--size];
+        elements[size] = null; // Eliminate obsolete reference
+        return result;
+    }
+    public boolean isEmpty() {
+        return size == 0;
+    }
+    private void ensureCapacity() {
+        if (elements.length == size)
+            elements = Arrays.copyOf(elements, 2 * size + 1);
+    }
+}
+```
+
+第一步是直接使用类型参数E代替Object对象，
+
+```
+// Initial attempt to generify Stack - won't compile!
+public class Stack<E> {
+    private E[] elements;
+    private int size = 0;
+    private static final int DEFAULT_INITIAL_CAPACITY = 16;
+    public Stack() {
+        elements = new E[DEFAULT_INITIAL_CAPACITY];
+    }
+    public void push(E e) {
+        ensureCapacity();
+        elements[size++] = e;
+    }
+    public E pop() {
+        if (size == 0)
+            throw new EmptyStackException();
+        E result = elements[--size];
+        elements[size] = null; // Eliminate obsolete reference
+        return result;
+    }
+   // no changes in isEmpty or ensureCapacity
+}
+```
+
+但如同上一条说说，数组是“具象的”，不能直接声明类型参数，`elements = new E[DEFAULT_INITIAL_CAPACITY];`这样声明将无法通过编译。
+
+两种解决办法——
+
+第一，在构造函数中进行强制类型转换—— `elements = (E[]) new Object[DEFAULT_INITIAL_CAPACITY];`，对应编译器的告警，可以使用注解+注释的方式一次解决——
+
+
+```
+// The elements array will contain only E instances from push(E).
+// This is sufficient to ensure type safety, but the runtime
+// type of the array won't be E[]; it will always be Object[]!
+@SuppressWarnings("unchecked")
+public Stack() {
+    elements = (E[]) new Object[DEFAULT_INITIAL_CAPACITY];
+}
+```
+
+第二，将elements声明`Object`类型，保留构造函数的`elements = new Object[DEFAULT_INITIAL_CAPACITY];`，此时`E result = elements[--size];`将无法编译，需要进行强制转换`E result = (E) elements[--size];`，这会导致一个告警。根据注解最小化原则，最终的pop方法变更为——
+
+```
+// Appropriate suppression of unchecked warning
+public E pop() {
+    if (size == 0)
+        throw new EmptyStackException();
+    // push requires elements to be of type E, so cast is correct
+    @SuppressWarnings("unchecked") E result =
+            (E) elements[--size];
+    elements[size] = null; // Eliminate obsolete reference
+    return result;
+}
+```
+
+显然第一种方式更具有可读性，更简便——只在声明时做了一次类型转换；实践中也更常用。唯一的问题是造成了没有伤害的“堆污染”(heap pollution)：编译时的类型和运行时类型不一致，运行时数组类型将总是为`Object[]`
+
+Java并不是原生支持List的，所以尽管鼓励使用List代替Array，但在泛型实践中不一定总是可以使用List。例如Java中的`ArrayList`就是在数组上实现的；其他类型例如HashMap，基于性能考虑，也会基于数组实现。
+
+泛型的好处是对于类型参数不做具体限制，所以各种类型都声明，例如`Stack<Object>`，`Stack<int[]>`，`Stack<List<String>>`都是有效的。
+
+如果想限制参数的类型，可以声明为类似`class DelayQueue<E extends Delayed> implements BlockingQueue<E>`，确保类型都是一个已知父类的子类即可。这样就可以声明`DelayQueue<Delayed>`进行使用了

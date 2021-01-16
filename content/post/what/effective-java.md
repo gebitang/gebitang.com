@@ -15,7 +15,7 @@ toc=true
 
 ## 1 Creating and Destroying Objects
 
-### item 8: Avoid finalizers and cleaners 
+### item 08: Avoid finalizers and cleaners 
 
 参考[A Guide to the finalize Method in Java](baeldung.com/java-finalize)
 
@@ -90,7 +90,7 @@ There are 2244080 references in the queue
 
 ![](https://upload-images.jianshu.io/upload_images/3296949-584408e67e6e1b98.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
-### item 9: Prefer try-with-resources to try-finally
+### item 09: Prefer try-with-resources to try-finally
 
 今天这个item只有两页，说的内容也简单
 
@@ -1161,7 +1161,7 @@ public class Chooser<T> {
 }
 ```
 
-### 29: Favor generic types
+### item 29: Favor generic types
 
 上一条标题鼓励使用List代替Array，这一条鼓励使用Array。不过两条都是鼓励使用“泛型”，不同的场景使用不同的“泛型”方式。数组方式的“泛型”性能更好。
 

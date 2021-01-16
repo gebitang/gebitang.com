@@ -1262,3 +1262,119 @@ Java并不是原生支持List的，所以尽管鼓励使用List代替Array，但
 泛型的好处是对于类型参数不做具体限制，所以各种类型都声明，例如`Stack<Object>`，`Stack<int[]>`，`Stack<List<String>>`都是有效的。
 
 如果想限制参数的类型，可以声明为类似`class DelayQueue<E extends Delayed> implements BlockingQueue<E>`，确保类型都是一个已知父类的子类即可。这样就可以声明`DelayQueue<Delayed>`进行使用了
+
+### Item 30: Favor generic methods
+
+有泛型类，也有泛型方法。静态实用类通常为泛型方法，例如`Collections`中的算法方法都是泛型方法。
+
+原始类型——
+
+```
+public static Set union(Set s1, Set s2) {
+    Set result = new HashSet(S1);
+    result.addAll(s2);
+    return result;
+}
+```
+编译可以通过，但会提示两个告警，修改为泛型方法——
+
+```
+public static <E> Set<E> union(Set<E> s1, Set<E> s2) {
+    Set<E> result = new HashSet<>(S1);
+    result.addAll(s2);
+    return result;
+}
+```
+
+注意对类型参数的声明`<E>`，位于方法修饰符`staic`和返回值`Set<E>`之间。如果想更通用，可以使用“有界通配符”(`bounded wildcard types`)(在item 31中具体讨论)
+
+有时你需要创建一个不可变对象，但又要应用给不同的类型。这是可以使用“泛型单例工厂”模式(`generic singleton factory`)(在item 42中讨论)，例如 `Collections.reverseOrder`——
+
+```
+@SuppressWarnings("unchecked")
+public static <T> Comparator<T> reverseOrder() {
+    return (Comparator<T>) ReverseComparator.REVERSE_ORDER;
+}
+```
+
+例如写一个“恒等函数分发器”(identity function dispenser)，库函数`Function.identity`(输入什么，输出什么)提供了这样的方法，但重写也是有意义的——
+
+```
+// Generic singleton factory pattern
+private static UnaryOperator<Object> IDENTITY_FN = (t) -> t;
+@SuppressWarnings("unchecked")
+public static <T> UnaryOperator<T> identityFunction() {
+    return (UnaryOperator<T>) IDENTITY_FN;
+}
+
+//调用示例
+public static void main(String[] args) {
+    String[] strings = { "jute", "hemp", "nylon" };
+    UnaryOperator<String> sameString = identityFunction();
+    for (String s : strings)
+        System.out.println(sameString.apply(s));
+    Number[] numbers = { 1, 2.0, 3L };
+    UnaryOperator<Number> sameNumber = identityFunction();
+    for (Number n : numbers)
+        System.out.println(sameNumber.apply(n));
+}
+// 依次输出 jute hemp nylon 1 2.0 3
+```
+
+类型参数被调用此类型的表达式绑定。这称为“递归类型绑定”(`recursive type bound`) ，例如对比接口——表示对比的对象只能是已经被绑定的类型`T`
+
+```
+public interface Comparable<T> {
+    int compareTo(T 0)
+}
+```
+如果一组元素都实现了`Comparabel`接口，然后在这一组元素中搜索、计算最大值最小值之类的计算。这要求这些元素直接是可以相互对比的`mutually comparable`，使用递归类型绑定来表达这种相互可比性——
+
+ `public static <E extends Comparable<E>> E max(Collection<E> c)`
+
+这里的`<E extends Comparable<E>>` 读作“任何可以与自己比较的类型E”(any type E that can be compared to itesel)
+
+实现查找最大值的操作——
+
+```
+// Returns max value in a collection - uses recursive type bound
+public static <E extends Comparable<E>> E max(Collection<E> c) {
+    if (c.isEmpty())
+        throw new IllegalArgumentException("Empty collection");
+    E result = null;
+    for (E e : c)
+        if (result == null || e.compareTo(result) > 0)
+            result = Objects.requireNonNull(e);
+    return result;
+}
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

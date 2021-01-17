@@ -434,6 +434,17 @@ xcode-select: note: install requested for command line developer tools
 ➜  gebitang.com git:(master) ✗
 ```
 
+### 升级到Big Sur之后git无法使用
+
+到git仓库下执行`git status`检查时提示找不到git，not a developer tool or in PATH。 搜索了一圈，只有这个[比较靠谱](https://timemachine.icu/posts/9894dc13/)
+
+检查了一下`/Applications/Xcode.app/Contents/Developer/usr/bin`这个目录下有git，暂时将这个目录手动添加到环境变量后，问题解决。
+
+```
+sh: line 1:  3799 Bus error: 10           /Applications/Xcode.app/Contents/Developer/usr/bin/xcodebuild -sdk /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk -find git 2> /dev/null
+git: error: unable to find utility "git", not a developer tool or in PATH
+```
+
 ### git log历史
 
 ```

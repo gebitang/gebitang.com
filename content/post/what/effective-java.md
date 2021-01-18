@@ -1349,6 +1349,118 @@ public static <E extends Comparable<E>> E max(Collection<E> c) {
 }
 ```
 
+### Item 31: Use bounded wildcards to increase API flexibility
+
+使用“有界通配符”(`bounded wildcard`)让API更灵活。听起来很“显然”，实现时稍微有点复杂，记住一个“胸大肌”原则- -|| `PECS`(producer-extends, consumer-spuer)，作为生成者时，使用`extends`关键字；作为消费者时，使用`spuer`关键字。
+
+例如，对于前面举例的Stack类——
+
+```
+public class Stack<E> {
+    public Stack();
+    public void push(E e);
+    public E pop();
+    public boolean isEmpty();
+}
+```
+
+如果增加一个`pushAll`方法，尝试以下实现——
+
+```
+// pushAll method without wildcard type - deficient!
+public void pushAll(Iterable<E> src) {
+    for (E e : src)
+        push(e);
+}
+```
+
+编译没有问题，但使用时可能报错，例如——
+```
+Stack<Number> numberStack = new Stack<>();
+Iterable<Integer> integers = ... ;
+numberStack.pushAll(integers);
+```
+
+此时可以将参数声明为`Iterable<? extends E> src`，表示“E的子类的迭代器”(`Iterable of some subtype of E`)，而不是之前的“E类的迭代器”(`Iterable of E`)，这里参数src针对当前类Stack来说属于“生产者”，用来给Stack类提供“原料”
+
+同样的，如果增加一个`popAll`方法，应该实现为——
+
+```
+// Wildcard type for parameter that serves as an E consumer
+public void popAll(Collection<? super E> dst) {
+    while (!isEmpty())
+        dst.add(pop());
+}
+```
+
+这里参数dst针对当前类Stack来说属于“消费者”，消费类Stack中的“原料”。
+
+其实就是类型转换时的“层级”思路，向类型E进行转换时，至少是类型E的子类；使用类型E装填时，至少是类型E的父类——只有这样才能确保默认的类型转换成功。
+
+对应前面提到的unio方法也需要做类似的修改：`public static <E> Set<E> union(Set<? extends E> s1, Set<? extends> s2)`，注意返回值不需要包含通配符，否则将给使用方增加负担。
+
+使用场景——
+
+```
+Set<Integer> integers = Set.of(1, 3, 5);
+Set<Double> doubles = Set.of(2.0, 4.0, 6.0);
+Set<Number> numbers = union(integers, doubles);
+```
+
+注意，这种方式在Java 8之前会报错，最后一步需要声明为`Set<Number> numbers = Union.<Number>union(integers, doubles);`
+
+另外两点需要讨论的——
+
+第一，对于max函数——
+
+`public static <T extends Comparable<T>> T max(List<T> list)`
+
+现在需要重新声明为——
+
+`public static <T extends Comparable<? super T>> T max(List<? extends T> list)`
+
+参数list作为生产者，所以声明为`? extends T`；
+对于类型参数T，这是第一次对类型参数添加通配符。Comparable接口是参数T的消费者（用来对比T并返回int值用于排序），所以需要先声明为`Comparable<? super T>`
+
+这大概是最复杂的声明了- -||
+
+第二，对于类型参数和通配符的二元对立，通常二者只能取其一。假如对于List提供一个swap函数，交换对于位置上的值——
+
+```
+// Two possible declarations for the swap method
+public static <E> void swap(List<E> list, int i, int j);
+public static void swap(List<?> list, int i, int j);
+```
+
+显然第二种方式更简单（如果类型参数在方法声明中只出现一次，使用通配符代替）。但对于第二种方法的实现却提示无法编译——
+
+```
+public static void swap(List<?> list, int i, int j) {
+    list.set(i, list.set(j, list.get(i)));
+}
+
+## 
+error: incompatible types: Object cannot be
+converted to CAP#1
+list.set(i, list.set(j, list.get(i)));
+                                ^
+where CAP#1 is a fresh type-variable:
+  CAP#1 extends Object from capture of ?
+```
+因为参数list的类型是`List<?>`，除了null值，任何值都无法添加到`List<?>`中，此时需要提供一个帮助函数——
+
+```
+public static void swap(List<?> list, int i, int j) {
+    swapHelper(list, i, j);
+}
+// Private helper method for wildcard capture
+private static <E> void swapHelper(List<E> list, int i, int j) {
+    list.set(i, list.set(j, list.get(i)));
+}
+```
+此函数指定参数list的类型为E，所以从list中取出的元素类型依然是E，也就可以重新添加到list中了。
+
+
 
 
 

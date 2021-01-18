@@ -1460,8 +1460,91 @@ private static <E> void swapHelper(List<E> list, int i, int j) {
 ```
 此函数指定参数list的类型为E，所以从list中取出的元素类型依然是E，也就可以重新添加到list中了。
 
+### Item 32: Combine generics and varargs judiciously
 
+尽管“可变参数方法”(varargs methods)和“泛型”(generics)都是在Java 5引入的，但两者之间的交互并不好。
 
+可变参数的引入是为了允许客户端调用方法是传递不定量的参数，但这是一种“抽象泄露”(leaky abstraction)
+
+>a leaky abstraction is an abstraction that exposes to its users details and limitations of its underlying implementation that should ideally be hidden away. 
+
+当可变参数是泛型类型时，将会出现编译告警。类似—— 
+```
+warning: [unchecked] Possible heap pollution from parameterized vararg type List<String>
+```
+
+因为泛型属于非具象化类型，编译期的信息比运行期更多。由于出现堆污染而导致类型转换失败，例如——
+
+```
+// Mixing generics and varargs can violate type safety!
+static void dangerous(List<String>... stringLists) {
+    List<Integer> intList = List.of(42);
+    Object[] objects = stringLists;
+    objects[0] = intList; // Heap pollution
+    String s = stringLists[0].get(0); // ClassCastException
+}
+```
+
+所以，为什么声明一个包含了泛型的可变参数方法是合法的？而显示地创建一个泛型数组反而属于非法？前者为了方便(可以确保类型安全时就可以使用)- -|| 后者会导致类型不安全（因为数组属于具象类型，泛型属于非具象- -||）
+
+库函数中包含很多“泛型可变参数”——  
+- `Arrays.asList(T... a)`
+- `Collections.addAll(Collection<? super T> c, T... elements)` 
+- `EnumSet.of(E first, E... rest)`
+
+Java 7 引入的注解`@SafeVarargs`确保对这些方法的调用不会被编译器告警。
+
+如何确保包含了这些泛型可变参数的方法是类型安全的？ 
+
+- 1. 方法中不会在可变参数数组中存储任何对象（这样做相当于重写了这些参数）
+- 2. 数组对象的引用不会被逃逸(确保数组在方法外不可见)
+
+例如以下方法——
+
+```
+# 类型不安全，违反第二条原则，暴露了数组对象的引用
+static <T> T[] toArray(T... args) {
+    return args;
+}
+```
+
+使用以下方式调用上述方法——
+
+```
+static <T> T[] pickTwo(T a, T b, T c) {
+    switch(ThreadLocalRandom.current().nextInt(3)) {
+        case 0: return toArray(a, b);
+        case 1: return toArray(a, c);
+        case 2: return toArray(b, c);
+    }
+    throw new AssertionError(); // Can't get here
+}
+```
+
+编译器创建一个可变参数的数组，然后传递两天类型T的实例给`toArray`方法，此时被分配的是显然是对象数组`Object[]`，无论传递给`pickTwo`方法的是什么对象。`toArray`方法直接返回了此对象数组，然后再返回给原始的调用方。类型转换错误就显而易见了——
+
+```
+public static void main(String[] args) {
+    String[] attributes = pickTwo("Good", "Fast", "Cheap");
+}
+```
+
+所以上面的第二点就很明确了，将引用暴露到方法之外导致了类型不安全，引起堆污染，导致类型转换错误。正确的例子——
+
+```
+// Safe method with a generic varargs parameter
+@SafeVarargs
+static <T> List<T> flatten(List<? extends T>... lists) {
+    List<T> result = new ArrayList<>();
+    for (List<? extends T> list : lists)
+        result.addAll(list);
+    return result;
+}
+```
+
+在确保类型安全的情况下，任何包含泛型可变参数的方法都应该使用注解`@SafeVarargs`，以避免调用法的编译告警。
+
+确保方法不能被重写。Java 8中，此注解只能适用于静态方法或final实例的方法；Java 9中，私有方法也可以使用
 
 
 

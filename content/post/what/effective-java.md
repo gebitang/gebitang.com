@@ -1546,30 +1546,100 @@ static <T> List<T> flatten(List<? extends T>... lists) {
 
 确保方法不能被重写。Java 8中，此注解只能适用于静态方法或final实例的方法；Java 9中，私有方法也可以使用
 
+### Item 33: Consider typesafe heterogeneous containers
 
+类型安全的混合型容器。一般的容器使用普通的泛型，类型参数觉得了容器中只能包含特定类型的对象。
 
+可以通过对容器中的Key做类型参数处理，以达到让容器可以包含不同类型对象的目的。使用`Class`对象作为容器的Key，因为`Class`本身是一种泛型`Class<T>`，`String.class`的类型为`Class<String>`，`Integer.class`的类型为`Class<Integer>`，使用字面类做为方法的参数被称为“类型标记”(type token)
 
+```
+// Typesafe heterogeneous container pattern
+public class Favorites {
 
+    private Map<Class<?>, Object> favorites = new HashMap<>();
+    
+    public <T> void putFavorite(Class<T> type, T instance) {
+        favorites.put(Objects.requireNonNull(type), instance);
+    }
 
+    public <T> T getFavorite(Class<T> type) {
+        return type.cast(favorites.get(type));
+    }
+}
 
+// Typesafe heterogeneous container pattern - client
+public static void main(String[] args) {
+    Favorites f = new Favorites();
+    f.putFavorite(String.class, "Java");
+    f.putFavorite(Integer.class, 0xcafebabe);
+    f.putFavorite(Class.class, Favorites.class);
+    String favoriteString = f.getFavorite(String.class);
+    int favoriteInteger = f.getFavorite(Integer.class);
+    Class<?> favoriteClass = f.getFavorite(Class.class);
+    System.out.printf("%s %x %s%n", favoriteString,
+            favoriteInteger, favoriteClass.getName());
+}
+```
 
+注意：
 
+- 类中的Map对象的通配符并不是限制map自己，而是限制Key的类型，所以正好可以包含不同类型的Key，从而实现“混合”容器的效果
+- Map中的值是Object类型，Map自身并不保证key和value之间的关系(value正好是key的类型，实际上Java的类型系统做不到这一点)，但没有关系，当从map中取数据时，可以重新建立这种关系：使用`Class`类的`cast`方法进行动态类型转换
 
+```
+# method in Class 
+@SuppressWarnings("unchecked")
+public T cast(Object obj) {
+    if (obj != null && !isInstance(obj))
+        throw new ClassCastException(cannotCastMsg(obj));
+    return (T) obj;
+}
+```
 
+客户端可能“恶意地”添加了“原始类型”的key，可以对put方法进行优化——在添加前就做动态转换
 
+```
+// Achieving runtime type safety with a dynamic cast
+public <T> void putFavorite(Class<T> type, T instance) {
+    favorites.put(type, type.cast(instance));
+}
+```
 
+不能添加“非具象化”的类型，例如`List<String>`，因为`List<String>.class`是错误的语法，实际上，`List<String>`和`List<Integer>`共享同一个Class类型——`List.class`
 
+现在方法可以接受任意类型的`Class`，如果想限制为特定的类型，可以使用`bounded type token`：指定了type token可以表示的类型。
 
+Java中的注解大量使用了这种方式。读取注解的方法—— `public <T extends Annotation> T getAnnotation(Class<T> annotationType);` 这里的参数 `annotationType`被限定为必须为注解类型
 
+如果要将`Class<?>`类型的对象传递给“限制类型token”的方法中，使用`Class<? extends Annotation`将导致编译告警。此时可以使用`asSubclass`方法——
 
+```
+// Use of asSubclass to safely cast to a bounded type token
+static Annotation getAnnotation(AnnotatedElement element,
+                                String annotationTypeName) {
+    Class<?> annotationType = null; // Unbounded type token
+    try {
+        annotationType = Class.forName(annotationTypeName);
+    } catch (Exception ex) {
+        throw new IllegalArgumentException(ex);
+    }
+    return element.getAnnotation(
+            annotationType.asSubclass(Annotation.class));
+}
 
+# Class中的getAnnotation和 asSubclass方法——
+@SuppressWarnings("unchecked")
+public <A extends Annotation> A getAnnotation(Class<A> annotationClass) {
+    Objects.requireNonNull(annotationClass);
 
+    return (A) annotationData().annotations.get(annotationClass);
+}
 
-
-
-
-
-
-
-
-
+@SuppressWarnings("unchecked")
+public <U> Class<? extends U> asSubclass(Class<U> clazz) {
+    if (clazz.isAssignableFrom(this))
+        return (Class<? extends U>) this;
+    else
+        throw new ClassCastException(this.toString());
+}
+```

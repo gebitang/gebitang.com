@@ -14,6 +14,22 @@ toc = true
 
 ## IDEA
 
+### 相对路径问题
+
+默认的工作路径不同导致相同代码在Eclipse上通过，但IDEA下执行失败。 找不到路径
+
+查看当前路径—— 
+```
+File file = new File(".");
+for(String fileNames : file.list())
+    System.out.println(fileNames);
+```
+
+对应多模块项目来说—— 
+
+- Eclipse默认是当前模块所在的路径
+- idea默认的是当前项目所在的路径。可以在`run -> edit configurations -> working directory`配置下修改工作目录
+
 ### 使用本地文件作为依赖的源码
 
 `Project Settings` --> `Libraries` --> 选中对应的jar包，右侧添加`Source`选中本地文件夹(项目的src文件夹)

@@ -13,9 +13,11 @@ toc=true
 
 90个条目，每天读一篇，3个月完成。从今天的第8条开始。
 
+找到一位[法国人](https://github.com/Ahdak/blog)学习[Effective-Java的笔记](https://ahdak.github.io/blog/tags/#Effective-Java)
+
 ## 1 Creating and Destroying Objects
 
-### item 08: Avoid finalizers and cleaners 
+### Item 08: Avoid finalizers and cleaners 
 
 参考[A Guide to the finalize Method in Java](baeldung.com/java-finalize)
 
@@ -90,7 +92,7 @@ There are 2244080 references in the queue
 
 ![](https://upload-images.jianshu.io/upload_images/3296949-584408e67e6e1b98.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
-### item 09: Prefer try-with-resources to try-finally
+### Item 09: Prefer try-with-resources to try-finally
 
 今天这个item只有两页，说的内容也简单
 
@@ -116,7 +118,7 @@ static String firstLineOfFile(String path) throws IOException {
 
 ## 2 Methods Common to All Objects
 
-### item 10: Obey the general contract when overriding `equals`
+### Item 10: Obey the general contract when overriding `equals`
 
 不重写——  
 
@@ -166,7 +168,7 @@ equals的实现不需要先判断nul，根据[JLS, 15.20.2](https://docs.oracle.
 
 建议使用[google's AutoValue](https://github.com/google/auto/tree/master/value)，[使用方式](https://github.com/google/auto/blob/master/value/userguide/index.md)， [Introduction to AutoValue](https://www.baeldung.com/introduction-to-autovalue)
 
-### item 10: Obey the general contract when overriding `equals`
+### Item 10: Obey the general contract when overriding `equals`
 
 不重写——  
 
@@ -217,7 +219,7 @@ equals的实现不需要先判断nul，根据[JLS, 15.20.2](https://docs.oracle.
 建议使用[google's AutoValue](https://github.com/google/auto/tree/master/value)，[使用方式](https://github.com/google/auto/blob/master/value/userguide/index.md)， [Introduction to AutoValue](https://www.baeldung.com/introduction-to-autovalue)
 
 
-### item 11: Always override `hashCode` when you override `equals`
+### Item 11: Always override `hashCode` when you override `equals`
 
 - 重写了`equals`方法时必须也要重写`hashCode`方法
 - 需要满足一致性
@@ -254,7 +256,7 @@ private int hashCode; // Automatically initialized to 0
 
 例如： `return Objects.hashCode(pcId, emailAddress, reporterId, numberInfo, idNum);`
 
-### item 12: Always override `toString`
+### Item 12: Always override `toString`
 
 这条大概日常用得最多了，“一致，有效”
 
@@ -267,7 +269,7 @@ private int hashCode; // Automatically initialized to 0
 
 对于值类型，最好重写此方法；静态工具类、枚举类不需要；再次推荐AutoValue
 
-### item 13: Override `clone` judiciously
+### Item 13: Override `clone` judiciously
 
 一句话总结，绝大数情况下，不需要重写`clone`方法；需要复制的话，提供一个copy方法更好，类似于——
 
@@ -370,7 +372,7 @@ public class HashTable implements Cloneable {
     }
 ```
 
-### item 14: Consider implementing `Comparable`
+### Item 14: Consider implementing `Comparable`
 
 - `compareTo`不是Object对象中声明的方法，是`Comparable`接口中的唯一方法
 - 实现了此方法的对象数列，可以直接通过`Arrays.sort(a)`进行排序
@@ -420,7 +422,7 @@ public int compareTo(PhoneNumber pn) {
 
 ## 3 Classes and Interfaces
 
-### item 15 Minimize the accessibility of classes and members
+### Item 15 Minimize the accessibility of classes and members
 
 访问控制是开始写代码时接触最早，应用最多都。控制限制好处一大堆，但似乎实际使用中用得都很随意？
 
@@ -599,7 +601,7 @@ public static BigInteger safeInstance(BigInteger val) {
 
 如果需要继承，父类中至少确保自己不调用重写的方法。需要的话：可以将重写方法的实现重写包装到helper方法中。
 
-### item 20:  Prefer interfaces to abstract classes
+### Item 20:  Prefer interfaces to abstract classes
 
 接口优于抽象类。尽管两者都可以用来定制允许多重实现的实例
 
@@ -636,7 +638,7 @@ public static BigInteger safeInstance(BigInteger val) {
 
 设计好哪些属于"原始"(primitive)类型方法；哪些不是，然后就可以组合出所谓的`AbstractInterface`。参考guava包中`com.google.common.collect`包下的`AbstractMapEntry<K,V>`的设计
 
-### item 21: Design interfaces for posterity
+### Item 21: Design interfaces for posterity
 
 本节强调接口设计时的稳定性。因为在Java 8之后，接口可以增加方法，同时完成默认的实现`default method`。这样，实现此方法的类即使没有实现新增方法，也可以编译通过
 
@@ -667,7 +669,7 @@ Apache的common包下的`org.apache.commons.collections4.collection.Synchronized
 
 >While it may be possible to correct some interface flaws after aninterface is released, you cannot count on it.
 
-### item 22: Use interfaces only to define types
+### Item 22: Use interfaces only to define types
 
 这一章好像主要是用来吐槽：“利用接口提供静态变量”的操作？
 
@@ -1161,7 +1163,7 @@ public class Chooser<T> {
 }
 ```
 
-### item 29: Favor generic types
+### Item 29: Favor generic types
 
 上一条标题鼓励使用List代替Array，这一条鼓励使用Array。不过两条都是鼓励使用“泛型”，不同的场景使用不同的“泛型”方式。数组方式的“泛型”性能更好。
 
@@ -1643,3 +1645,195 @@ public <U> Class<? extends U> asSubclass(Class<U> clazz) {
         throw new ClassCastException(this.toString());
 }
 ```
+
+## 5 Enums and Annotations
+
+枚举和注解是Java支持的两种特殊的引用类型
+
+### Item 34: Use enums instead of int constants
+
+引入枚举之前，Java使用的是“整数枚举模式”(`int enum pattern`)或者“整数枚举模式”(`String enum pattern`)，类似下面的方式——
+
+```
+// The int enum pattern - severely deficient!
+public static final int APPLE_FUJI = 0;
+public static final int APPLE_PIPPIN = 1;
+public static final int APPLE_GRANNY_SMITH = 2;
+public static final int ORANGE_NAVEL = 0;
+public static final int ORANGE_TEMPLE = 1;
+public static final int ORANGE_BLOOD = 2;
+```
+
+整数枚举属于“不变变量”(constant variables)。值变化时，必须重新编译才会生效；不方便调试（只是打印出对应的数字）；无法可靠地获得变量组的长度。整数枚举就更不方便，甚至出现硬编码情况。
+
+枚举类型正式为了解决这类问题——跟其他语言的枚举(只是int的变形)不同，Java的枚举类是完整的Class类型。每一个枚举实例都是一个`public static final`的对象，并且外部无法访问构造函数
+
+```
+public enum Apple { FUJI, PIPPIN, GRANNY_SMITH }
+public enum Orange { NAVEL, TEMPLE, BLOOD }
+```
+
+编译类型安全，任何非空值都必然是定义的枚举类型之一，否则将抛出错误。增加枚举常量或调整枚举类中的常量位置不需要重新编译。打印时可以调用`toString`方法。所以即使“冥王星”从“太阳系”被除名，下面的程序也运行良好——
+
+```
+// Enum type with data and behavior
+public enum Planet {
+    MERCURY(3.302e+23, 2.439e6),
+    VENUS(4.869e+24, 6.052e6),
+    EARTH(5.975e+24, 6.378e6),
+    MARS(6.419e+23, 3.393e6),
+    JUPITER(1.899e+27, 7.149e7),
+    SATURN(5.685e+26, 6.027e7),
+    URANUS(8.683e+25, 2.556e7),
+    NEPTUNE(1.024e+26, 2.477e7);
+    private final double mass; // In kilograms
+    private final double radius; // In meters
+    private final double surfaceGravity; // In m / s^2
+
+    // Universal gravitational constant in m^3 / kg s^2
+    private static final double G = 6.67300E-11;
+    // Constructor
+    Planet(double mass, double radius) {
+        this.mass = mass;
+        this.radius = radius;
+        surfaceGravity = G * mass / (radius * radius);
+    }
+    public double mass() { return mass; }
+    public double radius() { return radius; }
+    public double surfaceGravity() { return surfaceGravity; }
+    public double surfaceWeight(double mass) {
+        return mass * surfaceGravity; // F = ma
+    }
+}
+```
+
+枚举类中实现抽象方法，被称为“特定常量方法实现”(`constant-specific method implementations`)
+
+```
+// Enum type with constant-specific method implementations
+public enum Operation {
+    PLUS {public double apply(double x, double y){return x + y;}},
+    MINUS {public double apply(double x, double y){return x - y;}},
+    TIMES {public double apply(double x, double y){return x * y;}},
+    DIVIDE{public double apply(double x, double y){return x / y;}};
+
+public abstract double apply(double x, double y);
+}
+```
+
+还可以有进一步升级版本——
+
+```
+// Enum type with constant-specific class bodies and data
+public enum Operation {
+    PLUS("+") {
+        public double apply(double x, double y) { return x + y; }
+    },
+    MINUS("-") {
+        public double apply(double x, double y) { return x - y; }
+    },
+    TIMES("*") {
+        public double apply(double x, double y) { return x * y; }
+    },
+    DIVIDE("/") {
+        public double apply(double x, double y) { return x / y; }
+    };
+    
+    private final String symbol;
+
+    Operation(String symbol) { this.symbol = symbol; }
+    
+    @Override 
+    public String toString() { return symbol; }
+    
+    public abstract double apply(double x, double y);
+
+    // Implementing a fromString method on an enum type
+    private static final Map<String, Operation> stringToEnum =
+            Stream.of(values()).collect(Collectors.toMap(Object::toString, e -> e));
+    
+    // Returns Operation for string, if any
+    public static Optional<Operation> fromString(String symbol) {
+        return Optional.ofNullable(stringToEnum.get(symbol));
+    }
+}
+```
+
+枚举类自动包含一个`valueOf(String)`的方法，类似`Operation.valueOf("PLUS")`将返回`PLUS`枚举常量。如果想上面那样重写了`toString`方法，需要考虑增加一个`fromString`方法。
+
+简洁 VS. 安全&灵活 
+
+简洁版本(能写出来也不错了~)，但不易维护，如果有新增的特殊日，需要**记得**处理switch场景——
+```
+// Enum that switches on its value to share code - questionable
+enum PayrollDay {
+    MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY,
+    SATURDAY, SUNDAY;
+    
+    private static final int MINS_PER_SHIFT = 8 * 60;
+
+    int pay(int minutesWorked, int payRate) {
+        int basePay = minutesWorked * payRate;
+        int overtimePay;
+
+        switch(this) {
+            case SATURDAY: case SUNDAY: // Weekend
+                overtimePay = basePay / 2;
+                break;
+            default: // Weekday
+                overtimePay = minutesWorked <= MINS_PER_SHIFT ?
+                        0 : (minutesWorked - MINS_PER_SHIFT) * payRate / 2;
+        }
+        return basePay + overtimePay;
+    }
+}
+```
+
+安全，灵活版本(可以读出优雅的美感)
+
+```
+// The strategy enum pattern
+enum PayrollDay {
+    MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY,
+    SATURDAY(PayType.WEEKEND), SUNDAY(PayType.WEEKEND);
+
+    private final PayType payType;
+
+    PayrollDay(PayType payType) { this.payType = payType; }
+
+    PayrollDay() { this(PayType.WEEKDAY); } // Default
+
+    int pay(int minutesWorked, int payRate) {
+        return payType.pay(minutesWorked, payRate);
+    }
+
+    // The strategy enum type
+    private enum PayType {
+        WEEKDAY {
+            int overtimePay(int minsWorked, int payRate) {
+                return minsWorked <= MINS_PER_SHIFT ? 0 :
+                        (minsWorked - MINS_PER_SHIFT) * payRate / 2;
+            }
+        },
+        WEEKEND {
+            int overtimePay(int minsWorked, int payRate) {
+                return minsWorked * payRate / 2;
+            }
+        };
+
+        abstract int overtimePay(int mins, int payRate);
+
+        private static final int MINS_PER_SHIFT = 8 * 60;
+
+        int pay(int minsWorked, int payRate) {
+
+            int basePay = minsWorked * payRate;
+
+            return basePay + overtimePay(minsWorked, payRate);
+        }
+    }
+}
+```
+
+枚举类性能表现类似整数常量，只是初始化时需要一些更多的时间和内存。当一组常量的内容在编译期间就已知时，总是使用枚举类
+

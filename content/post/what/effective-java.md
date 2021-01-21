@@ -1869,6 +1869,42 @@ public enum Ensemble {
 }
 ```
 
->Returns the ordinal of this enumeration constant (its position in its enum declaration, where the initial constant is assigned an ordinal of zero). Most programmers will have no use for this method. It is designed for use by sophisticated enum-based data structures, such as java.util.EnumSet and java.util.EnumMap.
+>Returns the ordinal of this enumeration constant (its position in its enum declaration, where the initial constant is assigned an ordinal of zero). Most programmers will have no use for this method. It is designed for use by sophisticated enum-based data structures, such as `java.util.EnumSet` and `java.util.EnumMap`.
 >Returns: the ordinal of this enumeration constant
+
+### Item 36: Use EnumSet instead of bit fields
+
+使用EnumSet代替“位字段”(`bit field`)。后者通常称为“整数枚举模式”(`int enum pattern`)，即使用2的不同幂赋值给不同的整数。例如——
+
+```
+// Bit field enumeration constants - OBSOLETE!
+public class Text {s
+    public static final int STYLE_BOLD = 1 << 0; // 1
+    public static final int STYLE_ITALIC = 1 << 1; // 2
+    public static final int STYLE_UNDERLINE = 1 << 2; // 4
+    public static final int STYLE_STRIKETHROUGH = 1 << 3; // 8
+    // Parameter is bitwise OR of zero or more STYLE_ constants
+    public void applyStyles(int styles) { ... }
+}
+
+# usage
+text.applyStyles(STYLE_BOLD | STYLE_ITALIC);
+```
+
+性能最佳，还可以利用位运算算法；缺点是不易debug，交互性差？（无法遍历），需要在提供API之前就确定“最大的位”，无法更改大小
+
+使用EnumSet代替。属于Set，提供完整的Set相关API，内部是一个位Vector。如果总大小少于64，EnumSet使用一个Long值表达——性能解决位字段方式。目前惟一的确定是无法创建不可变的EnumSet（如果使用`Collections.unmodifiableSet`包装为不可变Set，会有性能损失）
+
+所以上面的例子可以代替为——
+
+```
+// EnumSet - a modern replacement for bit fields
+public class Text {
+    public enum Style { BOLD, ITALIC, UNDERLINE, STRIKETHROUGH }
+    // Any Set could be passed in, but EnumSet is clearly best
+    public void applyStyles(Set<Style> styles) { ... }
+}
+```
+
+调用方式变更为`text.applyStyles(EnumSet.of(Style.BOLD, Style.ITALIC));`
 

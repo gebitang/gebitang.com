@@ -1837,3 +1837,38 @@ enum PayrollDay {
 
 枚举类性能表现类似整数常量，只是初始化时需要一些更多的时间和内存。当一组常量的内容在编译期间就已知时，总是使用枚举类
 
+### Item 35: Use instance fields instead of ordinals
+
+枚举类自带方法`ordinal()`，返回枚举常量声明时的“顺序”，从0开始。但不建议使用这个方法，依赖这个值表示枚举常量的位置时，丧失很多灵活性。已经使用中的枚举类再增加、减少新的枚举常量后，原始的“顺序”位置将变化，可能导致使用的混乱。
+
+错误使用方式——
+```
+// Abuse of ordinal to derive an associated value - DON'T DO THIS
+public enum Ensemble {
+    SOLO, DUET, TRIO, QUARTET, QUINTET,
+    SEXTET, SEPTET, OCTET, NONET, DECTET;
+
+    public int numberOfMusicians() { return ordinal() + 1; }
+}
+```
+
+正确使用方式：使用类属性提供要暴露的API——
+
+```
+public enum Ensemble {
+
+    SOLO(1), DUET(2), TRIO(3), QUARTET(4), QUINTET(5),
+    SEXTET(6), SEPTET(7), OCTET(8), DOUBLE_QUARTET(8),
+    NONET(9), DECTET(10), TRIPLE_QUARTET(12);
+
+    private final int numberOfMusicians;
+    
+    Ensemble(int size) { this.numberOfMusicians = size; }
+    
+    public int numberOfMusicians() { return numberOfMusicians; }
+}
+```
+
+>Returns the ordinal of this enumeration constant (its position in its enum declaration, where the initial constant is assigned an ordinal of zero). Most programmers will have no use for this method. It is designed for use by sophisticated enum-based data structures, such as java.util.EnumSet and java.util.EnumMap.
+>Returns: the ordinal of this enumeration constant
+

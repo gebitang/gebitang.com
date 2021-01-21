@@ -468,7 +468,7 @@ OS:           Windows 10 10.0 amd64
 
 scoop安装的应用默认下载到cache目录，
 
-### gradle每次下载问题
+### gradle 每次下载问题
 
 在项目的`gradle/wrapper/gradle-wrapper.properties`中指定本地目录即可，[参考](https://stackoverflow.com/a/22898473/1087122)
 

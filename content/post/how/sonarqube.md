@@ -1390,6 +1390,22 @@ LimitNPROC=8192
 ...
 ```
 
+### 搭建SonarQube CS on MacOS
+
+轻车熟路了这次。 
+
+Server端
+
+- 安装JDK 11： [openJDK 11](http://jdk.java.net/archive/) for [MacOS](https://download.java.net/java/GA/jdk11/9/GPL/openjdk-11.0.2_osx-x64_bin.tar.gz)，下载解压即生效（可以不添加环境变量）
+- 现在SonarQube完整的zip包，解压后，在conf目录下的wrapper.properties文件中指定上一步的JDK中java所在的目录，类似`~/jdk-11.0.2.jdk/Contents/Home/bin`
+- 使用指定的数据库，或原生自动的H2数据库
+
+Scanner端
+
+- 下载[sonarscanner](https://docs.sonarqube.org/latest/analysis/scan/sonarscanner/)对应的[mac版本](https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.5.0.2216-macosx.zip)
+- 解压并将bin目录添加到环境变量
+
+可以进行完整的验证使用
 
 ### 搭建8.3版本SonarQube服务 on Ubuntu
 

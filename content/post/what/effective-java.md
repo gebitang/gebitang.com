@@ -1908,3 +1908,198 @@ public class Text {
 
 调用方式变更为`text.applyStyles(EnumSet.of(Style.BOLD, Style.ITALIC));`
 
+### Item 37: Use EnumMap instead of ordinal indexing
+
+有时会在数组或集合内使用枚举类的ordinal值做为index，对于不同年限的“植物”`Plant`类对象（一年生、两年生、多年生）——
+
+```
+class Plant {
+    enum LifeCycle { ANNUAL, PERENNIAL, BIENNIAL }
+    final String name;
+    final LifeCycle lifeCycle;
+    Plant(String name, LifeCycle lifeCycle) {
+        this.name = name;
+        this.lifeCycle = lifeCycle;
+    }
+    @Override public String toString() {
+        return name;
+    }
+}
+```
+
+如果想根据`LifeCycle`列出对于的植物列表，可以这样操作——创建三个Set对应三种周期，遍历所有的植物将不同的植物添加到对应的Set中，最后从打印出三个Set中的植物对象——
+
+
+```
+// Using ordinal() to index into an array - DON'T DO THIS!
+Set<Plant>[] plantsByLifeCycle =
+        (Set<Plant>[]) new Set[Plant.LifeCycle.values().length];
+for (int i = 0; i < plantsByLifeCycle.length; i++)
+    plantsByLifeCycle[i] = new HashSet<>();
+for (Plant p : garden)
+    plantsByLifeCycle[p.lifeCycle.ordinal()].add(p);
+// Print the results
+for (int i = 0; i < plantsByLifeCycle.length; i++) {
+    System.out.printf("%s: %s%n",
+            Plant.LifeCycle.values()[i], plantsByLifeCycle[i]);
+}
+
+```
+
+可以工作、编译不友好（进行了强制转换）、打印不友好（需要标记index代表的含义）。最严重的问题是使用`ordinal`作为数组下标时，需要确保下标正确，避免数组越界问题
+
+Java平台的`EnumMap`使用枚举类型作为key值，性能足够（因为内部使用数组实现）。实现上述相同的功能（没有强制转换，不需要担心数组越界，性能相当。结合了数组的性能+Map的便捷）——
+
+```
+// Using an EnumMap to associate data with an enum
+Map<Plant.LifeCycle, Set<Plant>> plantsByLifeCycle =
+        new EnumMap<>(Plant.LifeCycle.class);
+for (Plant.LifeCycle lc : Plant.LifeCycle.values())
+    plantsByLifeCycle.put(lc, new HashSet<>());
+for (Plant p : garden)
+    plantsByLifeCycle.get(p.lifeCycle).add(p);
+System.out.println(plantsByLifeCycle);
+```
+
+构建`EnumMap`时，使用类对象(Class Object)作为Map的key类型，`public EnumMap(Class<K> keyType){...}`。
+
+
+打印语句可以使用`System.out.println(garden.stream().collect(groupingBy(p -> p.lifeCycle)));` (花园garden声明为List对象) 
+
+或`System.out.println(Arrays.stream(garden).collect(groupingBy(p -> p.lifeCycle)));` (花园garden声明为数组对象)
+
+stream方式会使用自己的map实现，不太可能是`EnumMap`类型，可以明确声明使用的map工厂的实现——
+
+```
+System.out.println(garden.stream().collect(Collectors
+        .groupingBy(p -> p.lifeCycle, 
+        () -> new EnumMap<>(Plant.LifeCycle.class),
+         Collectors.toSet())));
+
+# 打印区别—— garden中只包含了ANNUAL类型的P1
+{ANNUAL=[p1], PERENNIAL=[], BIENNIAL=[]}
+{ANNUAL=[p1]}
+
+
+
+# groupingBy方法——
+public static <T, K, D, A, M extends Map<K, D>>
+    Collector<T, ?, M> groupingBy(Function<? super T, ? extends K> classifier,
+                                  Supplier<M> mapFactory,
+                                  Collector<? super T, A, D> downstream) {...}   
+      
+```
+
+区别在于，直接使用`EnumMap`时，会为每一个Enum类型创建Map，即使garden中没有Enum对应的实例；使用`stream`的方法时，只对有对应enum的实例创建map。
+
+更复杂的场景，使用数组的数组来表示两个Enum实例之间的映射关系。`TRANSITIONS`二维数组表示三种不同物质状态()两两直接装换时的动作。例如："固体"(SOLID)变为“液体”(LIQUID)被称为“融化”（MELT）
+
+```
+// Using ordinal() to index array of arrays - DON'T DO THIS!
+enum Phase {
+    SOLID, LIQUID, GAS;
+
+    public enum Transition {
+        MELT, FREEZE, BOIL, CONDENSE, SUBLIME, DEPOSIT;
+
+        // Rows indexed by from-ordinal, cols by to-ordinal
+        private static final Transition[][] TRANSITIONS = {
+                { null, MELT, SUBLIME }, // 位置映射：
+                { FREEZE, null, BOIL },  // 
+                { DEPOSIT, CONDENSE, null }
+        };
+
+        // Returns the phase transition from one phase to another
+        public static Transition from(Phase from, Phase to) {
+            return TRANSITIONS[from.ordinal()][to.ordinal()];
+        }
+    }
+}
+```
+
+构造精巧也就智力负担严重，依赖对二维数组的“维护”。稍有不慎，可能跑场数组越界，空指针异常，甚至有错误，但无报错
+
+使用上面类似的思路变更后——
+
+需要对Map的API使用比较熟练，构造一个map，key值为枚举变量，值是另外一个map。初始化操作比较烧脑(我还没掌握)——
+
+- a cascaded sequence of two collectors，两个collector的级联顺序
+- 第一个collector将source phase的状态transitions进行分组（参考上面提到的`Collectors.groupingBy`方法）
+- 第二个collector创建一个EnumMap，映射了目的phase到transition（即`Collectors.toMap`方法）
+- 第二个collector中的 mergeFunction 函数`((x,y)->y)`没有使用，是为了明确指定Map工厂使用`EnumMap`
+
+
+```
+
+import java.util.EnumMap;
+import java.util.Map;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+// Using a nested EnumMap to associate data with enum pairs
+public enum Phase {
+    SOLID, LIQUID, GAS;
+    public enum Transition {
+        MELT(SOLID, LIQUID), FREEZE(LIQUID, SOLID),
+        BOIL(LIQUID, GAS), CONDENSE(GAS, LIQUID),
+        SUBLIME(SOLID, GAS), DEPOSIT(GAS, SOLID);
+
+        private final Phase from;
+        private final Phase to;
+
+        Transition(Phase from, Phase to) {
+            this.from = from;
+            this.to = to;
+        }
+
+        // Initialize the phase transition map
+        private static final Map<Phase, Map<Phase, Transition>>
+                m = Stream.of(values()).collect(Collectors.groupingBy(t -> t.from,
+                () -> new EnumMap<>(Phase.class),
+                Collectors.toMap(t -> t.to, t -> t,
+                        (x, y) -> y, () -> new EnumMap<>(Phase.class))));
+
+        public static Transition from(Phase from, Phase to) {
+            return m.get(from).get(to);
+        }
+    }
+}
+
+#  toMap method
+public static <T, K, U, M extends Map<K, U>>
+    Collector<T, ?, M> toMap(Function<? super T, ? extends K> keyMapper,
+                                Function<? super T, ? extends U> valueMapper,
+                                BinaryOperator<U> mergeFunction,
+                                Supplier<M> mapSupplier) {}
+```
+
+对m的初始化操作看不清楚可以使用更直白的方式——
+
+```
+// Initialize the phase transition map
+private static final Map<Phase, Map<Phase,Transition>> m =
+        new EnumMap<Phase, Map<Phase,Transition>>(Phase.class);
+static {
+    for (Phase p : Phase.values())
+        m.put(p,new EnumMap<Phase,Transition>(Phase.class));
+    for (Transition trans : Transition.values())
+        m.get(trans.from).put(trans.to, trans);
+}
+```
+
+这时候如果需要增加一种类型，有必要学习一下四种物理态直接转换的动词表达了——
+
+```
+// Adding a new phase using the nested EnumMap implementation
+public enum Phase {
+    SOLID, LIQUID, GAS, PLASMA; // 固体，液体，气体，等离子体
+    public enum Transition {
+        MELT(SOLID, LIQUID), FREEZE(LIQUID, SOLID), // 融化，凝固，
+        BOIL(LIQUID, GAS), CONDENSE(GAS, LIQUID), // 沸腾，凝结
+        SUBLIME(SOLID, GAS), DEPOSIT(GAS, SOLID), // 升华(气化)，沉积
+        IONIZE(GAS, PLASMA), DEIONIZE(PLASMA, GAS); // 离子化，去离子化
+        ... // Remainder unchanged
+    }
+}
+```
+

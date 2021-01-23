@@ -2103,3 +2103,132 @@ public enum Phase {
 }
 ```
 
+### Item 38: Emulate extensible enums with interfaces
+
+在所有层面上，枚举类型都比本书第一版提到的“类型安全的枚举模式”(typesafe enum pattern)要好。表面来看，“可扩展性”是唯一的例外。
+
+第一版提到的`typesafe enum pattern`示例——(第一版的item 21)
+```
+// The typesafe enum pattern
+public class Suit {
+    private final String name;
+
+    private Suit(String name) { this.name = name; }
+    
+    public String toString() { return name; }
+    
+    public static final Suit CLUBS = new Suit("clubs");
+    public static final Suit DIAMONDS = new Suit("diamonds");
+    public static final Suit HEARTS = new Suit("hearts");
+    public static final Suit SPADES = new Suit("spades");
+
+}
+```
+
+但的确有场景需要扩展枚举性质的类型：操作码(operation codes，常被称为opcodes)。实现逻辑——
+
+- 为操作码定义接口
+- 枚举类型实现此接口
+- 以接口的形式提供API
+
+item 34中提到的四则运算的枚举以上述逻辑重新实现——
+
+```
+// Emulated extensible enum using an interface
+public interface Operation {
+    double apply(double x, double y);
+}
+public enum BasicOperation implements Operation {
+
+    PLUS("+") {
+        public double apply(double x, double y) { return x + y; }
+    },
+    MINUS("-") {
+        public double apply(double x, double y) { return x - y; }
+    },
+    TIMES("*") {
+        public double apply(double x, double y) { return x * y; }
+    },
+    DIVIDE("/") {
+        public double apply(double x, double y) { return x / y; }
+    };
+
+    private final String symbol;
+
+    BasicOperation(String symbol) {
+        this.symbol = symbol;
+    }
+
+    @Override public String toString() {
+        return symbol;
+    }
+}
+```
+
+尽管枚举类型`BasicOperation`本身是不支持扩展的，但接口可以。如果需要支持“求幂”(exponentiation)和“求余”(remainder)，可以使用新的枚举类实现Operation接口——
+
+```
+// Emulated extension enum
+public enum ExtendedOperation implements Operation {
+    EXP("^") {
+        public double apply(double x, double y) {
+            return Math.pow(x, y);
+        }
+    },
+    REMAINDER("%") {
+        public double apply(double x, double y) {
+            return x % y;
+        }
+    };
+    private final String symbol;
+
+    ExtendedOperation(String symbol) {
+        this.symbol = symbol;
+    }
+    @Override public String toString() {
+        return symbol;
+    }
+}
+```
+
+使用时甚至可以直接传递整个扩展后的枚举类型。
+
+注意main方法中传递的实参`ExtendedOperation.class`
+
+test方法使用了“有界类型token”`bounded type token`限制了参数`Class<T> opEnumType`的类型，要求形参`<T extends Enum<T> & Operation>` 参数`Class<T> opEnumType`既是枚举类型`Enum<T>`又是接口`Operation`的子类
+
+```
+public static void main(String[] args) {
+    double x = Double.parseDouble(args[0]);
+    double y = Double.parseDouble(args[1]);
+
+    test(ExtendedOperation.class, x, y);
+}
+private static <T extends Enum<T> & Operation> void test(
+        Class<T> opEnumType, double x, double y) {
+
+    for (Operation op : opEnumType.getEnumConstants())
+        System.out.printf("%f %s %f = %f%n",
+                x, op, y, op.apply(x, y));
+}
+```
+
+也可以使用“有界通配类型”`bounded wildcard type`，参数定义为`Collection<? extends Operation>`，此时传递的就是Class对象——
+
+```
+public static void main(String[] args) {
+    double x = Double.parseDouble(args[0]);
+    double y = Double.parseDouble(args[1]);
+    test(Arrays.asList(ExtendedOperation.values()), x, y);
+}
+private static void test(Collection<? extends Operation> opSet,
+                            double x, double y) {
+    for (Operation op : opSet)
+        System.out.printf("%f %s %f = %f%n",
+                x, op, y, op.apply(x, y));
+}
+```
+
+这种扩展方式唯一的缺点是两个枚举类之间无法继承。Java系统库使用这种模式的类包括`java.nio.file.LinkOption`枚举类实现了接口`CopyOption`和`OpenOption`
+
+

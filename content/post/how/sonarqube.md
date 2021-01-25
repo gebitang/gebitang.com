@@ -13,6 +13,20 @@ toc = true
 
 ## 插件开发 plugin develop
 
+### SonarQube Kotlin插件
+
+SQ的社区版本也支持[kotlin语言的扫描](https://www.sonarsource.com/kotlin/)。目前包含[43条规则](https://rules.sonarsource.com/kotlin)，通过插件方式实现，同时也支持[第三方](https://docs.sonarqube.org/latest/analysis/languages/kotlin/)的执行结果，包括AndroidLint(`sonar.androidLint.reportPaths`)或Detekt(`sonar.kotlin.detekt.reportPaths`)的报告结果。
+
+官方针对Kotlin的扫描插件库[slang](https://github.com/SonarSource/slang/)项目下的`sonar-kotlin-plugin`
+
+>SLang (SonarSource Language) is a framework to quickly develop code analyzers for SonarQube. SLang defines language agnostic AST. Using this AST we can develop simple syntax based rules. Then we use parser for real language to create this AST. Currently Kotlin, Ruby and Scala analyzers use this approach.
+
+Kotlin官方在更早之前[计划开发Sonar插件](https://discuss.kotlinlang.org/t/sonarqube-support/3657/28)，但似乎一直没有进行？目前Kotlin的静态代码扫描由[detekt](https://github.com/detekt)提供，同时也提供了对应的sanar插件[sonar-kotlin](https://github.com/detekt/sonar-kotlin) 
+
+实际上这两个都做为插件提供，前者为官方版本，后者为第三方版本。类似于针对Java语言的`sonar-java` VS. `sonar-pmd`。
+
+使用开发针对Kotlin的自定义插件，可以从这两个项目入手调研。
+
 ### 获取自定义变量
 
 例如sonarscanner执行扫描时传递的参数`-Dsonar.projectKey`可以在插件中使用`context.getProject().key()`获取到。

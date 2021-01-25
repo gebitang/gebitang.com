@@ -2412,4 +2412,42 @@ public static void doublyBad() { ... }
 
 ```
 
+### Item 40: Consistently use the Override annotation
+
+一句话总结：总是使用`Override`注解，如果你的方法重写了父类的相同方法声明。除非，父类中对应的方法声明为抽象方法。即使如此，添加上`Override`也没什么损失。
+
+否则，下例中的错误我一开始也忽略了——
+
+```
+// Can you spot the bug?
+public class Bigram {
+    private final char first;
+    private final char second;
+    public Bigram(char first, char second) {
+        this.first = first;
+        this.second = second;
+    }
+    public boolean equals(Bigram b) {
+        return b.first == first && b.second == second;
+    }
+    public int hashCode() {
+        return 31 * first + second;
+    }
+    public static void main(String[] args) {
+        Set<Bigram> s = new HashSet<>();
+        for (int i = 0; i < 10; i++)
+            for (char ch = 'a'; ch <= 'z'; ch++)
+                s.add(new Bigram(ch, ch));
+        System.out.println(s.size());
+    }
+}
+```
+
+实际上，需要重新的`equals`方法的参数必须为Object对象`equals(Object object)`，上面的例子传递的参数是当前对象，所以equals方法并没有被重写。如果添加了`Override`的声明，编译期会检查出对应的错误。
+
+当重新父类的方法时，许多编译期目前支持自动插入`Override`注解。如果没有添加此注解，还可以进行告警。
+
+此注解支持针对接口或类中的方法。加入接口没有默认的方法，可以忽略使用此注解（此时应该也没有方法可以写这个注解吧？）
+
+例如`Set`接口尽管扩展了`Collection`接口——`public interface Set<E> extends Collection<E> `，但没有添加任何新的接口。这种情况下，应该给所有的方法声明都添加上`Override`注解。
 

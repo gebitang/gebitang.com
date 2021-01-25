@@ -2232,3 +2232,184 @@ private static void test(Collection<? extends Operation> opSet,
 这种扩展方式唯一的缺点是两个枚举类之间无法继承。Java系统库使用这种模式的类包括`java.nio.file.LinkOption`枚举类实现了接口`CopyOption`和`OpenOption`
 
 
+### Item 39: Prefer annotations to naming patterns
+
+历史上，使用“命名模式”(naming patterns)来定义要求特定元素，例如在JUnit 4之前，要求测试方法必须以`test`开头。
+
+这种模式的缺陷：  
+- 笔误导致的问题不可避免却无法事先检查
+- 无法确保对应的要求只在被要求的场景下使用，例如Juni 3支持者对方法名的判断，如果在类名上使用`TestSomeClass`是无效的
+- 没有好的方式使用参数化。如果测试中跑场特定异常时判断为通过，Junit 3框架支持起来就比较麻烦
+
+注解可以很好解决以上问题。Junit 4框架采用注解方式代替之前的命名方式。通过一个玩具级别的测试框架说明——
+
+注解声明——
+
+```
+// Marker annotation type declaration
+import java.lang.annotation.*;
+
+/**
+* Indicates that the annotated method is a test method.
+* Use only on parameterless static methods.
+*/
+@Retention(RetentionPolicy.RUNTIME)
+@Target(ElementType.METHOD)
+public @interface Test {
+}
+```
+注解上的注解被称为“元注解”(`meta-annotations`)，其中`@Retention(RetentionPolicy.RUNTIME)`表示此注解在运行时保留(三种方式`SOURCE`编译忽略, `CLASS`默认级别，编译期识别，但运行时忽略,`RUNTIME`编译+运行期)，即编译识别，虚拟机运行时也识别
+
+`@Target(ElementType.METHOD)`表示只对方法生效，对类，变量声明等无效。注释中强调的只适用于静态方法，无法由编译期默认强制实现，触发定制自己的注解解析器`annotation processor`实现（参考`javax.annotation.processing`）
+
+这种没有参数的注解方式被称为“标记式注解”(marker annotation)，可以使用以下方式执行——
+
+```
+// Program to process marker annotations
+import java.lang.reflect.*;
+public class RunTests {
+    public static void main(String[] args) throws Exception {
+        int tests = 0;
+        int passed = 0;
+        Class<?> testClass = Class.forName(args[0]);
+        for (Method m : testClass.getDeclaredMethods()) {
+            if (m.isAnnotationPresent(Test.class)) {
+                tests++;
+                try {
+                    m.invoke(null);
+                    passed++;
+                } catch (InvocationTargetException wrappedExc) {
+                    Throwable exc = wrappedExc.getCause();
+                    System.out.println(m + " failed: " + exc);
+                } catch (Exception exc) {
+                    System.out.println("Invalid @Test: " + m);
+                }
+            }
+        }
+        System.out.printf("Passed: %d, Failed: %d%n",
+                passed, tests - passed);
+    }
+}
+```
+
+支持抛出特定异常的注解声明——
+
+```
+// Annotation type with a parameter
+import java.lang.annotation.*;
+/**
+* Indicates that the annotated method is a test method that
+* must throw the designated exception to succeed.
+*/
+@Retention(RetentionPolicy.RUNTIME)
+@Target(ElementType.METHOD)
+public @interface ExceptionTest {
+Class<? extends Throwable> value();
+}
+```
+
+value的返回值`Class<? extends Throwable> `表示“扩展了Throwable对象的某种类对象”。使用示例——
+
+```
+// Program containing annotations with a parameter
+public class Sample2 {
+@ExceptionTest(ArithmeticException.class)
+public static void m1() { // Test should pass
+    int i = 0;
+    i = i / i;
+}
+@ExceptionTest(ArithmeticException.class)
+public static void m2() { // Should fail (wrong exception)
+    int[] a = new int[0];
+    int i = a[1];
+}
+@ExceptionTest(ArithmeticException.class)
+public static void m3() { } // Should fail (no exception)
+}
+
+```
+
+此时在判断运行结果时，需要对抛出的异常进行进一步判断，类似——
+```
+catch (InvocationTargetException wrappedEx) {
+    Throwable exc = wrappedEx.getCause();
+    Class<? extends Throwable> excType =
+    m.getAnnotation(ExceptionTest.class).value();
+    if (excType.isInstance(exc)) {
+        passed++;
+    } else {
+        System.out.printf(
+        "Test %s failed: expected %s, got %s%n",
+        m, excType.getName(), exc);
+    }
+} 
+```
+
+进一步，可以支持抛出多种异常，只需要将声明中的value值定义为数组即可：`Class<? extends Throwable>[] value();`，使用时，将指定的多个异常类定义如下——
+
+```
+// Code containing an annotation with an array parameter
+@ExceptionTest({ IndexOutOfBoundsException.class,
+    NullPointerException.class })
+public static void doublyBad() {
+    List<String> list = new ArrayList<>();
+    // The spec permits this method to throw either
+    // IndexOutOfBoundsException or NullPointerException
+    list.addAll(5, null);
+}
+```
+
+上述catch中的代码针对异常的解析判断需要进一步修改为——
+
+```
+catch (InvocationTargetException wrappedEx) {
+    Throwable exc = wrappedExc.getCause();
+    int oldPassed = passed;
+    Class<? extends Exception>[] excTypes =
+    m.getAnnotation(ExceptionTest.class).value();
+    for (Class<? extends Exception> excType : excTypes) {
+        if (excType.isInstance(exc)) {
+            passed++;
+            break;
+        }
+    }
+    if (passed == oldPassed)
+        System.out.printf("Test %s failed: %s %n", m, exc);
+} 
+```
+
+Java 8支持注解`@Repeatable`代替上面类似的数组式声明，但使用时也有不方便的地方，类似——
+
+```
+// Repeatable annotation type
+@Retention(RetentionPolicy.RUNTIME)
+@Target(ElementType.METHOD)
+@Repeatable(ExceptionTestContainer.class)
+public @interface ExceptionTest {
+    Class<? extends Exception> value();
+}
+@Retention(RetentionPolicy.RUNTIME)
+@Target(ElementType.METHOD)
+public @interface ExceptionTestContainer {
+    ExceptionTest[] value();
+}
+
+# 使用场景
+// Code containing a repeated annotation
+@ExceptionTest(IndexOutOfBoundsException.class)
+@ExceptionTest(NullPointerException.class)
+public static void doublyBad() { ... }
+
+```
+
+使用场景需要多次声明—— 
+
+```
+// Code containing a repeated annotation
+@ExceptionTest(IndexOutOfBoundsException.class)
+@ExceptionTest(NullPointerException.class)
+public static void doublyBad() { ... }
+
+```
+
+

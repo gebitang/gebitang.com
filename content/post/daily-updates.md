@@ -1228,6 +1228,17 @@ javap -verbose PointImg.class |findstr "version"
 java -jar "/home/lib/proguard.jar" @/home/project-java8-linux.pro
 ```
 
+### package-info.java usage
+
+- [What’s package-info.java for?](https://www.intertech.com/whats-package-info-java-for/) 
+- [Why is package-info.java useful?](https://stackoverflow.com/questions/22095487/why-is-package-info-java-useful)
+
+简单说三个作用：
+
+- 可以放到任何一个包下，内容必须包含的内容是当前包名的声明。相当于对包级别的说明
+- 例如在JavaDoc下，这个文件的注释将生成对当前package的文档描述
+- 添加的注解，将针对当前包下的所有内容生效。例如findbugs的`@javax.annotation.ParametersAreNonnullByDefault`在包级别上声明后，针对包下所有的方法参数都生效
+
 ## Markdown 语法练习
 This is a footnote.[^1]
 

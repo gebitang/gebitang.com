@@ -2451,3 +2451,22 @@ public class Bigram {
 
 例如`Set`接口尽管扩展了`Collection`接口——`public interface Set<E> extends Collection<E> `，但没有添加任何新的接口。这种情况下，应该给所有的方法声明都添加上`Override`注解。
 
+
+### Item 41: Use marker interfaces to define types
+
+“标记接口”(marker interface)是指接口不包含任何方法，只用来声明某种属性。例如`Serializable`接口，实现此接口表示当前实例可以进行序列化即可以写入到`ObjectOutputStream`
+
+相比于注解，标记接口有两个优势：
+- 接口定义了一种类型，可以包含实现类，注解不行。前者可以在编译期检查错误，后者只能到运行时发现
+- 接口可以更精确地定位。`ElementType.TYPE`类型的注解可以被任何类或接口使用；标记接口只能由类实现
+
+但由于`ObjectOutputStream.write`的API设计原因——参数定位为Object——导致对`Serializable`接口类的检查只能在运行时才能被发现。
+
+注解优于标记接口的地方在于它属于整个注解设施的一部分。
+
+所以，如果标记的对象不只是类或接口，自然要使用注解方式；如果只针对类和接口，并且你希望提供以实现了标记接口的类作为参数的方法，那么应该使用标记接口。
+
+如果使用了重度使用注解的框架，当然更偏好注解。
+
+总之，是一个平衡的选择。item 22中说“如果不想定义一个类型，不要使用接口”；这里表达的意思正好相反。
+

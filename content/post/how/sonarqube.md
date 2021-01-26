@@ -881,11 +881,27 @@ INFO: ------------------------------------------------------------------------
 INFO: EXECUTION FAILURE
 ```
 
-这样还是不能倒推到报错的堆栈信息上啊？-_-|| 看起来还得加上 `https://github.com/SonarSource/sonarqube/`这里的代码才能梳理出来完整逻辑。先缓缓~ 
+~~这样还是不能倒推到报错的堆栈信息上啊？-_-|| 看起来还得加上 `https://github.com/SonarSource/sonarqube/`这里的代码才能梳理出来完整逻辑。先缓缓~~ 
 
 看起来只要安装了对应的插件，即使没有启用对应的规则，也会触发一下检查操作。根据上面问题的官方答复建议，删除`checkStyle`插件后，问题消失。
 
 但这是个好问题，可以借机调研一下整个sonarqube的插件的执行逻辑。**跟踪堆栈信息对应的源码**
+
+重新读了一下执行逻辑，不需要sonarqube端的代码。`sonar-scanner-cli`只是简单做了一个壳，执行的逻辑依赖`sonar-scanner-api`。跟踪以下调用链路即可，包含了这两个工程的代码。
+
+核心是通过proxy的方式，调用了`org.sonarsource.scanner.api.internal.batch.BatchIsolatedLauncher`类的execute方法。`IsolatedLauncherProxy`是代理执行的`InvocationHandler`
+
+```
+at org.sonarsource.scanner.api.internal.IsolatedLauncherProxy.invoke(IsolatedLauncherProxy.java:60)
+at com.sun.proxy.$Proxy0.execute(Unknown Source)
+at org.sonarsource.scanner.api.EmbeddedScanner.doExecute(EmbeddedScanner.java:189)
+at org.sonarsource.scanner.api.EmbeddedScanner.execute(EmbeddedScanner.java:138)
+at org.sonarsource.scanner.cli.Main.execute(Main.java:112)
+at org.sonarsource.scanner.cli.Main.execute(Main.java:75)
+at org.sonarsource.scanner.cli.Main.main(Main.java:61)
+```
+
+根据使用scanner执行一次正常的操作，结合log输出更方便理解。`sonar-scanner-cli`工程就是发布的sonar-scanner工具的源码，只是在发布时，根据不同的平台增加了一个`jre`的执行环境。
 
 ### How to get the value of the arguments of the sonar tree
 

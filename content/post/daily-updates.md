@@ -20,6 +20,30 @@ toc = true
 
 <!--more-->
 
+## cloc Count Lines of Code
+
+[cloc](https://github.com/AlDanial/cloc) 计算代码行数的命令行工具
+
+支持单个文件，指定目录，zip包，commit等参数。window环境下的执行程序不需要安装任何依赖，直接使用。
+
+不同环境的安装方式—— 
+
+```
+npm install -g cloc              # https://www.npmjs.com/package/cloc
+sudo apt install cloc            # Debian, Ubuntu
+sudo yum install cloc            # Red Hat, Fedora
+sudo dnf install cloc            # Fedora 22 or later
+sudo pacman -S cloc              # Arch
+sudo emerge -av dev-util/cloc    # Gentoo https://packages.gentoo.org/packages/dev-util/cloc
+sudo apk add cloc                # Alpine Linux
+doas pkg_add cloc                # OpenBSD
+sudo pkg install cloc            # FreeBSD
+sudo port install cloc           # Mac OS X with MacPorts
+brew install cloc                # Mac OS X with Homebrew
+choco install cloc               # Windows with Chocolatey
+scoop install cloc               # Windows with Scoop
+```
+
 ## 视频分离 音频分离
 
 临危受命：在线视频 --> 下载视频 --> 视频音频分离 --> 人声背景乐分离

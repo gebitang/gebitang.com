@@ -2470,3 +2470,100 @@ public class Bigram {
 
 总之，是一个平衡的选择。item 22中说“如果不想定义一个类型，不要使用接口”；这里表达的意思正好相反。
 
+## 5 Lambdas and Streams
+
+Java 8 引入了“函数接口”(functional interfaces)，Lambdas和“方法引用”(method reference)。同时提供了Streams相关的API
+
+### Item 42: Prefer lambdas to anonymous classes
+
+只有一个抽象方法的接口在历史上一直作为“函数类型”(function types)使用。对应的实例称为函数对象(function objects)，表示某种方法或行为。自1997年Java 1.1发布以来，创建函数对象的方式都采用“匿名类”(anonymous class)。
+
+例如，将一组字符串按照长度进行排序的实现——
+```
+// Anonymous class instance as a function object - obsolete!
+Collections.sort(words, new Comparator<String>() {
+    public int compare(String s1, String s2) {
+        return Integer.compare(s1.length(), s2.length());
+    }
+});
+```
+
+Java 8中决定对这种场景(只有一个抽象方法的接口)使用lambda表达式进行特殊处理，被称为"lambdas"，上面的例子可以精简为——
+
+```
+// Lambda expression as function object (replaces anonymous class)
+Collections.sort(words,
+        (s1, s2) -> Integer.compare(s1.length(), s2.length()));
+```
+
+省略的内容由编译期依赖“类型引用”(type inference)根据上下文进行推断。类型引用的规则比较复杂，参考 [JLS, 18](https://docs.oracle.com/javase/specs/jls/se8/html/jls-18.html)。
+
+省略所有lambda参数的类型除非加上类型可以让程序更清晰。如果编译期报错——无法推断出类型，再进行明确声明。
+
+上述例子进一步省略，使用“对比器构造方法”(comparator construction methods)`Collections.sort(words, comparingInt(String::length));`
+
+终极简化方式：`words.sort(comparingInt(String::length));`
+
+对于 item 34中的枚举列子，可以使用lambdas进行如下简化——为每个枚举常量传递一个lambda表达式，构造方法将lambda保存在字段op中，然后在apply方法中调用这个表达式
+
+```
+// Enum with function object fields & constant-specific behavior
+public enum Operation {
+    PLUS ("+", (x, y) -> x + y),
+    MINUS ("-", (x, y) -> x - y),
+    TIMES ("*", (x, y) -> x * y),
+    DIVIDE("/", (x, y) -> x / y);
+
+    private final String symbol;
+    private final DoubleBinaryOperator op;
+
+    Operation(String symbol, DoubleBinaryOperator op) {
+        this.symbol = symbol;
+        this.op = op;
+    }
+
+    @Override public String toString() { return symbol; }
+
+    public double apply(double x, double y) {
+        return op.applyAsDouble(x, y);
+    }
+}
+```
+
+`DoubleBinaryOperator`是Java 8中引入的函数接口——
+
+```
+
+/**
+ * Represents an operation upon two {@code double}-valued operands and producing a
+ * {@code double}-valued result.   This is the primitive type specialization of
+ * {@link BinaryOperator} for {@code double}.
+ *
+ * <p>This is a <a href="package-summary.html">functional interface</a>
+ * whose functional method is {@link #applyAsDouble(double, double)}.
+ *
+ * @see BinaryOperator
+ * @see DoubleUnaryOperator
+ * @since 1.8
+ */
+@FunctionalInterface
+public interface DoubleBinaryOperator {
+    /**
+     * Applies this operator to the given operands.
+     *
+     * @param left the first operand
+     * @param right the second operand
+     * @return the operator result
+     */
+    double applyAsDouble(double left, double right);
+}
+```
+
+PS: 
+- lambdas缺少声明和注释，如果计算无法自解释，或需要较多行数，不要使用lambdas。
+- 传递给枚举构造函数的参数是在静态上下文中推断的，所以lamdbas无法访问枚举实例。
+
+
+
+
+

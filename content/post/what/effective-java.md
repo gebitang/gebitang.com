@@ -2564,6 +2564,29 @@ PS:
 - 传递给枚举构造函数的参数是在静态上下文中推断的，所以lamdbas无法访问枚举实例。
 
 
+### Item 43: Prefer method references to lambdas
+
+通常lambdas都很短，足够简洁。Java提供了比lambdas更简洁的函数对象：“方法应用”(method references)。例如，Map的merge方法——
+
+- 使用lambdas方式：`map.merge(key, 1, (count, incr) -> count + incr);`
+- 使用方法应用方式：`map.merge(key, 1, Integer::sum);`因为sum方法提供了lambda表达式相同的功能实现
+
+但lambda可以利用参数描述提供相当于注释说明的作用，代码更易读和维护，即使表达式稍长一些。另外极限情况下，如果方法应用时所在的类名过长的话，lambdas反而代码更短。对比`service.execute(GoshThisClassNameIsHumongous::action);` 和 `service.execute(() -> action());`
+
+需要注意的是，尽管lambda可以替换绝大多数方法应用的场景，但[JLS, 9.9-2](https://docs.oracle.com/javase/specs/jls/se9/html/jls-9.html#jls-9.9)中描述的场景无法做到——
+
+>A generic function type for a functional interface may be implemented by a method reference expression ([§15.13](https://docs.oracle.com/javase/specs/jls/se9/html/jls-15.html#jls-15.13 "15.13. Method Reference Expressions")), but not by a lambda expression ([§15.27](https://docs.oracle.com/javase/specs/jls/se9/html/jls-15.html#jls-15.27 "15.27. Lambda Expressions")) as there is no syntax for generic lambda expressions.
+
+泛型类型的函数接口可以由方法引用实现，但不能被lambda表达式实现，因为没有针对语法支持泛型lambda表达式。
+
+方法引用大部分是静态方法，但也有其他类型，一共五种，详情如下—— 
 
 
+|Method Ref Type|Example|Lambda Equivalent|
+|---------|---------|---------|
+|Static|Integer::parseInt|str -> Integer.parseInt(str)|
+|Bound|Instant.now()::isAfter|Instant then = Instant.now();t -> then.isAfter(t)|
+|Unbound|String::toLowerCase|str -> str.toLowerCase()|
+|Class Constructor|TreeMap<K,V>::new|() -> new TreeMap<K,V>|
+|Array Constructor|int[]::new|len -> new int[len]|
 

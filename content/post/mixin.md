@@ -1,6 +1,6 @@
 +++
 title = "Go Mixin Go"
-description = "supergroup.mixin.one"
+description = "mixin kernel"
 tags = [
     "mixin",
     "go"
@@ -191,6 +191,78 @@ func main() {
 			neg(-2*i),
 		)
 	}
+}
+```
+
+## Kernel 
+
+代码只有15K就完成了白皮书的技术实现。可以读文档，结合代码学习一下。
+
+```
+140 text files.
+140 unique files.
+43 files ignored.
+--------------------------------------------------------------------------------
+Language                      files          blank        comment           code
+--------------------------------------------------------------------------------
+Go                              113           1839             89          15140
+Markdown                          9            327              0           1249
+JSON                              2              0              0            196
+XML                               4              0              0             81
+TOML                              1              4             14             16
+Bourne Again Shell                1              4              0             12
+Bourne Shell                      1              1              0              4
+--------------------------------------------------------------------------------
+SUM:                            131           2175            103          16698
+--------------------------------------------------------------------------------
+```
+
+第一步编译，Mac上没有问题，Windows下提示`exec: “gcc”: executable file not found in %PATH%`，需要安装一下gcc的环境，[参考](https://stackoverflow.com/questions/43580131)——
+
+- 从[mingw-w64](https://sourceforge.net/projects/mingw-w64/files/)这里下载编译好的MinGW-W64 GCC-8.1.0，选择`x86_64`版本的
+- 解压后将目前下的bin文件夹添加到环境变量
+
+重新编译后生成mixin.exe文件。可以直接使用——这一点go语言的确有优势，直接打包出来的产出物就可以使用
+
+创建运行测试网络`mixin setuptestnet`会直接在exe所在目录创建对应的目录……一系列逻辑参考源码吧：生成七个地址，创建七个目录。为下一步启动主网做准备。
+
+依次执行`mixin kernel -dir /tmp/mixin-7001 -port 7001` 启动七个节点。可以根据log输出结合代码看看运行逻辑。运行了一会，产生了28G的数据。
+
+主网代币转账的说明应该无法在测试环境下实现。因为没有实际的Domain将资产接入到主网。
+
+昨天的RPC调用一直不成功，今天阅读源码之后，就知道正确的姿势了——本地返回大概是这样滴，线上环境类似，只是数据更多一些。
+
+```
+{
+    "epoch":"2021-01-28T16:41:41+08:00",
+    "graph":{
+        "cache":Object{...},
+        "consensus":[
+            Object{...},
+            Object{...},
+            Object{...},
+            Object{...},
+            Object{...},
+            Object{...},
+            Object{...}
+        ],
+        "final":Object{...},
+        "sps":0,
+        "topology":7
+    },
+    "mint":{
+        "batch":0,
+        "pool":"500000.00000000"
+    },
+    "network":"28f297fa972963a7dde67c02dc5169bb7f5d2227d22b71ab458560c7fd70b8ed",
+    "node":"4fd6038742ef3f3c4b8a3a08567e11ba5921171b2e7638b520b8e75f707a04c8",
+    "queue":{
+        "caches":0,
+        "finals":0
+    },
+    "timestamp":"2021-01-28T16:41:41.000000001+08:00",
+    "uptime":"57.732462s",
+    "version":"v0.9.9-BUILD_VERSION"
 }
 ```
 

@@ -2590,3 +2590,57 @@ PS:
 |Class Constructor|TreeMap<K,V>::new|() -> new TreeMap<K,V>|
 |Array Constructor|int[]::new|len -> new int[len]|
 
+### Item 44: Favor the use of standard functional interfaces
+
+如果Java库提供了标准的函数接口，优先使用。尽管`java.util.Function`包下的**43**个函数接口不可能都记得住。但记住下面六个基础的接口，其他部分可以推到出来——
+
+- 基础的`Operator`函数接口表示：参数类型和返回类型一致，包括一元操作`UnaryOperator<T>`和二元操作`BinaryOperator<T>`
+- `Predicate`函数接口表示：接受一个参数，返回boolean结果
+- `Function`表示：参数和返回值类型不同
+- `Supplier`表示：没有参数，返回(“提供”)一个结果
+- `Consumer`表示：接受参数，不返回结果
+
+列表总结下——
+
+|Interface|Function Signature|Example|
+|---------|---------|---------|
+|UnaryOperator<T>|T apply(T t)|String::toLowerCase|
+|BinaryOperator<T>|T apply(T t1, T t2)|BigInteger::add|
+|Predicate<T>|boolean test(T t)|Collection::isEmpty|
+|Function<T,R>|R apply(T t)|Arrays::asList|
+|Supplier<T>|T get()|Instant::now|
+|Consumer<T>|void accept(T t)|System.out::println|
+
+针对原始类型int, long和double，以上六个基础函数接口都可以演化出对应的变种，在方法名前加上前缀即可，例如，`IntPredicate`，接受int值为参数；`LongBinaryOperator`，接受两个long参数，返回long值。除了Function类型的变种，其他类型变种都不需要指定参数类型。Function类型的变种需要指定参数类型，例如`LongFunction<int[]>`接收long类型参数，返回int数组。这样多出来**18**个。
+
+针对原始类型，另外还有**9**个Function接口的变种。因为Function接受的参数和返回值不同——否则就是`UnaryOperator`函数接口了
+
+- 当参数和返回值都是原始类型时，添加`SrcToResult`的前缀即可，例如`LongToIntFunction`(三个基础类型两两转换，共6个)
+- 但返回值不是基础类型时，添加`SrcToObj`前缀，例如`DoubleToObjFunction`，包含3个
+
+"双参数"类型的变体一共还有**9**个——
+
+3个“双参数”类型的函数接口版本，即`BiPredicate<T, U>`，`BiFunction<T, U , R>`，`BiConsumer<T, U>`
+
+3个返回原始类型的`BiFunction`变体，即`ToIntBiFunction<T, U>`， `ToLongBiFunction<T,U>`，`ToDoubleBiFunction<T,U>`
+
+3个Consumer的“双参数”版本，参数一个为对象，一个为原始类型，即`ObjDoubleConsumer<T>`，`ObjIntConsumer<T>`，`ObjLongConsumer<T>`
+
+以上一共42个函数接口，最后一个是`BooleanSupplier`属于`Supplier`的变体返回boolen类型，这是唯一显示声明boolean类型的标准函数接口。当然`Predicate`类型的总是返回boolean类型
+
+大部分函数接口都是用来处理原始类型的，不要试图使用这些函数处理基本包装类型，尽管可以生效，但违反了item 61的原则“原始基础类型优于基础包装类型”`prefer primitive types to boxed primitives`
+
+那么什么情况下需要写自定义的函数接口呢？如果上面提供的无法满足时，当然要自定义；但有些时候即使上面的可用，也需要自定义一个新的。
+
+例如`Comparator<T>`。本质上它与`ToIntBiFunction<T,T>`是等价的。并且引入前者的时候，后者已经存在。
+
+- 如果广泛使用并且名称描述了更准确的含义
+- 有强约束条件(strong contract)
+- 默认方法可以被广泛应用
+
+满足以上条件时就可以创建自定义的函数接口。同时使用注解`@FunctionalInterface`进行声明。
+
+最后需要强调一点：不要提供可以在相同位置调用不同函数接口的重载方法。例如`ExecutorService`的`submit`方法，可以同时支持`Callable<T>`或`Runnable`——不是一个好设计。
+
+
+

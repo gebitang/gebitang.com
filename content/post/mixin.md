@@ -286,6 +286,11 @@ badger 2021/01/29 20:58:18 WARNING: Truncate Needed. File /tmp/mixin-7001/snapsh
 During db.vlog.open: Value log truncate required to run DB. This might result in data loss
 ```
 
-[badger issue 744](https://github.com/dgraph-io/badger/issues/744) `Win7 will be prompted, Mac can start normally`开起来是正常现象。move on
+[badger issue 744](https://github.com/dgraph-io/badger/issues/744) `Win7 will be prompted, Mac can start normally`开起来是正常现象。启动参数添加`opt.Truncate=true`可解决，[参考](https://github.com/dgraph-io/badger/issues/1353)
 
+### kernel components
 
+可以梳理一些kernel都用到了哪些开源组件。查看项目的[`go.mod`](https://github.com/MixinNetwork/mixin/blob/master/go.mod)文件可以有获取全部信息。
+
+- [Badger](https://github.com/dgraph-io/badger) `Fast key-value DB in Go.` 存储数据，所以需要使用SSD
+- [edwards25519](https://github.com/FiloSottile/edwards25519) google内Go团队负责密码和安全的大牛实现的edwards25519椭圆曲线实现，创建地址的基础

@@ -232,6 +232,9 @@ SUM:                            131           2175            103          16698
 
 昨天的RPC调用一直不成功，今天阅读源码之后，就知道正确的姿势了——本地返回大概是这样滴，线上环境类似，只是数据更多一些。
 
+### getInfo
+
+`mixin -n http://127.0.0.1:8001 getinfo` 端口默认+1000；返回值最后的`node`字段代表自己
 ```
 {
     "epoch":"2021-01-28T16:41:41+08:00",
@@ -265,4 +268,24 @@ SUM:                            131           2175            103          16698
     "version":"v0.9.9-BUILD_VERSION"
 }
 ```
+
+如何知道主网地址对应的node？
+
+跟踪了一些——CV了一些代码，获取到`IdForNetwork`的值。不知道私钥的情况下是无法将`genesis.json`中的地址跟config中的host对应起来的。这样也启动隐私保护的作用。根据`IdForNetwork`来对应host即可。获取不同host的`getinfo`即可
+
+JSON解析：`cannot unmarshal string into go struct field` 需要让对应的struct实现`MarshalJSON(b []byte) error`和`UnmarshalJSON(b []byte) error`方法，就可以完成自定义的解析，[官方示例](https://golang.org/pkg/encoding/json/)，详细介绍[blog golang json](https://blog.golang.org/json) 
+
+
+
+测试网络如何正常关闭？否则重启—— 
+
+```
+badger 2021/01/29 20:58:18 INFO: All 0 tables opened in 0s
+badger 2021/01/29 20:58:18 INFO: Replaying file id: 0 at offset: 0
+badger 2021/01/29 20:58:18 WARNING: Truncate Needed. File /tmp/mixin-7001/snapshots\000000.vlog size: 2147483646 Endoffset: 19566
+During db.vlog.open: Value log truncate required to run DB. This might result in data loss
+```
+
+[badger issue 744](https://github.com/dgraph-io/badger/issues/744) `Win7 will be prompted, Mac can start normally`开起来是正常现象。move on
+
 

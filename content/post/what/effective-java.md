@@ -2643,4 +2643,162 @@ PS:
 最后需要强调一点：不要提供可以在相同位置调用不同函数接口的重载方法。例如`ExecutorService`的`submit`方法，可以同时支持`Callable<T>`或`Runnable`——不是一个好设计。
 
 
+### Item 45: Use streams judiciously
+
+谨慎使用流处理。流处理API在Java 8中引入以更好地进行批处理（串行或并行地）。这些API提供了两个关键的抽象：
+
+- 流，`stream`表示有序的一组数据元素（可以是无限的，也可以是有限的）
+- 流操作`stream pipeline`表示对这些元素的多重计算
+
+流可以来这集合，数组，正则表达式等。流中的元素可以是引用类型也可以是基础类型（支持int， long， double）
+
+流操作包含留个或多个中间操作（intermediate operations）和一个最终操作（terminal operation）。每个中间操作都对元素做某种变形，类似映射到某个函数；或进行符合某种条件过滤中间操作总是将流装换到另外一个流中，后一个流的元素可能跟原始流中的相同（进行过滤操作），也可能不同（进行重新映射）。最终操作获得最后的结果，利润存到集合中或返回某个元素，或进行打印。
+
+流处理是“懒式”操作：直到最终操作调用前不会进行处理，同时与最终结果无关的元素都不会参与计算。这也是流可以是无效流的原因。没有最终操作的流处理是空指令(no-op)，相当于没有执行。
+
+同时流处理也是“流畅”的。允许多个操作合并到一个表达式中进行链式操作。通常流处理是串行的，出发调用了并行操作的方法。
+
+实际使用时要谨慎。正确使用可以使程序更短更清晰；使用不当讲让程序更难懂更难维护。没有强制的规则，以实际场景为准。
+
+例如下来程序，从文件中读取单词，并将所有的单词按照“同字异序”（anagrams）规则添加到map中。例如“staple”和“petals”就是同字异序字，因为都由“aelpst”(按照字母顺序排列，成为"alphagram"）组成。
+
+```
+// Prints all large anagram groups in a dictionary iteratively
+public class Anagrams {
+    public static void main(String[] args) throws IOException {
+        File dictionary = new File(args[0]);
+        int minGroupSize = Integer.parseInt(args[1]);
+        Map<String, Set<String>> groups = new HashMap<>();
+        try (Scanner s = new Scanner(dictionary)) {
+            while (s.hasNext()) {
+                String word = s.next(); 
+                groups.computeIfAbsent(alphabetize(word),
+                    (unused) -> new TreeSet<>()).add(word);
+            } 
+        }
+        for (Set<String> group : groups.values())
+            if (group.size() >= minGroupSize)
+                System.out.println(group.size() + ": " + group);
+    }
+    private static String alphabetize(String s) {
+        char[] a = s.toCharArray();
+        Arrays.sort(a);
+        return new String(a);
+    } 
+}
+```
+
+其中的`computeIfAbsent`方法是Java 8中引入的流处理方法：在map中寻找当前原始对应的key，如果已经有，返回当前key对应的value值；如果没找到，用当前元素作为参数执行给定的函数以计算出新的key值，再返回key值对应的value。
+
+如果使用下面的流处理方式完成相同的功能——(不要担心如果你觉得很难懂，需要流处理专家才能理解- -)
+
+```
+// Overuse of streams - don't do this!
+public class Anagrams {
+    public static void main(String[] args) throws IOException {
+        Path dictionary = Paths.get(args[0]);
+        int minGroupSize = Integer.parseInt(args[1]);
+        try (Stream<String> words = Files.lines(dictionary)) {
+            words.collect(
+                    groupingBy(word -> word.chars().sorted()
+                            .collect(StringBuilder::new,
+                                    (sb, c) -> sb.append((char) c),
+                                    StringBuilder::append).toString()))
+                    .values().stream()
+                    .filter(group -> group.size() >= minGroupSize)
+                    .map(group -> group.size() + ": " + group)
+                    .forEach(System.out::println);
+        } 
+    }
+}
+```
+
+正常版本应该类似这样——需要对参数进行有意义的命名；同时提取有意义的函数名
+
+```
+// Tasteful use of streams enhances clarity and conciseness
+public class Anagrams {
+    public static void main(String[] args) throws IOException {
+        Path dictionary = Paths.get(args[0]);
+        int minGroupSize = Integer.parseInt(args[1]);
+        try (Stream<String> words = Files.lines(dictionary)) {
+            words.collect(groupingBy(word -> alphabetize(word)))
+                    .values().stream()
+                    .filter(group -> group.size() >= minGroupSize) .forEach(g -> System.out.println(g.size() + ": " + g));
+        } 
+    }
+    // alphabetize method is the same as in original version
+}
+```
+
+其中的`alphabetize`本身也可以进行流式操作，但由于Java缺少针对char类型的原始char流。如果执行`"Hello world!".chars().forEach(System.out::print);`打印出来的将是一组数字，需要进行强制转换`"Hello world!".chars().forEach(x -> System.out.print((char) x));`。通常不应该使用流式操作处理char类型值。
+
+尽管理论上所有的循环操作都可以转换为流式操作，但不要着急那么重构。`code block`和`stream`各擅胜场。
+
+- 在块操作中，你可以读取或修改任意一个局部变量；但在lambda里，只能获取到最后一个变量的信息并且不能操作任何局部变量
+- 块操作中，可以在方法中任意位置结束，中断，继续或抛出任意想检查的异常。lambda中无法实现
+
+下列场景更适合流处理——
+
+- 对顺序的元素做统一的转换
+- 过滤一组元素
+- 对一组元素应用单一的操作（例如添加，计算最小值，连接操作等）
+- 对元素进行分组
+- 搜索满足某种标准的元素
+
+另外一个流处理的不足之处是：stream无法在不同的pipeline阶段获得中间状态的对应元素。一旦你将某个值映射到字典，原始的值就不在了。
+
+写程序打印最小的二十个“梅森素数”(Mersenne primes)：如果`2^p-1`格式的正整数，其中p是素数，同时`2^p-1`也是素数，那么这个数就被成为“梅森素数”。
+
+
+```
+static Stream<BigInteger> primes() {
+    return Stream.iterate(TWO, BigInteger::nextProbablePrime);
+}
+
+public static void main(String[] args) {
+    primes().map(p -> TWO.pow(p.intValueExact()).subtract(ONE))
+            .filter(mersenne -> mersenne.isProbablePrime(50))
+            .limit(20)
+            .forEach(System.out::println);
+}
+```
+
+- 首先，获取到所有的素数（无限）流。
+- 假设已经静态导入了TWO`import static org.bouncycastle.math.ec.ECConstants.TWO;`
+- 其中的魔数50用来控制“概率素性检测”（Probabilistic Primality Test）
+- 限制获取20个原始
+- 最后进行打印
+
+假设我们需要获取每个梅森素数的幂数值`P`，这个值只在最初的stream中存在，所以在最终的stream中是无法获取到的。尽管这个例子中可以很幸运地在最终元素中获取到`.forEach(mp -> System.out.println(mp.bitLength() + ": " + mp));`
+
+假设要构造一组牌，假设牌（Card）是封装了大小（Rank）和花色（Suit）的一组实例对象。大小和花色是枚举类型。数学上，这被称为“笛卡尔积”（Cartesian product），通常的做法——
+
+```
+// Iterative Cartesian product computation
+private static List<Card> newDeck() {
+    List<Card> result = new ArrayList<>();
+    for (Suit suit : Suit.values())
+        for (Rank rank : Rank.values())
+            result.add(new Card(suit, rank));
+    return result;
+}
+```
+
+采用流处理方式的做法——
+
+```
+// Stream-based Cartesian product computation
+private static List<Card> newDeck() {
+    return Stream.of(Suit.values())
+            .flatMap(suit ->
+                    Stream.of(Rank.values())
+                    .map(rank -> new Card(suit, rank)))
+            .collect(toList());
+}
+```
+
+根据实际情况选择你所要采用的方式。
+
+
 

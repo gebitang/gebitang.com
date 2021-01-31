@@ -2800,5 +2800,72 @@ private static List<Card> newDeck() {
 
 根据实际情况选择你所要采用的方式。
 
+### Item 46: Prefer side-effect-free functions in streams
+
+Steams不只是一组API，更是基于函数式编程的一种范式。
+
+构造你的流处理器时最重要的是：对每一阶段的计算处理转换都尽可能地成为下一阶段的“纯函数”（pure function）。
+
+纯函数的意思是：结果只取决于输入，不依赖任何可更改的状态，不进行任何状态更新。
+
+**没有副作用**
+
+已这个标准来看，下面的代码就违反了这一范式——只是采用了流式表达的迭代方式
+
+```
+// Uses the streams API but not the paradigm--Don't do this!
+Map<String, Long> freq = new HashMap<>();
+try (Stream<String> words = new Scanner(file).tokens()) {
+    words.forEach(word -> {
+        freq.merge(word.toLowerCase(), 1L, Long::sum);
+    }); 
+}
+```
+
+实际上，`forEach`方法是最终操作方法中能力最低的一个，显示进行迭代，无法并行。通常只应该用来报告流计算的结果（打印，或者添加到集合中），不应该进行计算动作。
+
+正确的写法为——
+
+```
+// Proper use of streams to initialize a frequency table
+Map<String, Long> freq;
+try (Stream<String> words = new Scanner(file).tokens()) {
+    freq = words
+            .collect(groupingBy(String::toLowerCase, counting()));
+}
+```
+
+为了使用流计算，必须要掌握`Collector`，尽管对应的API有点吓人——包含了39个方法，有些方法甚至包含5个参数。
+
+好消息是不需要探究内部的复杂性，就可以推断出大部分API的作用。我们可以将Collector看做封装了“消减策略”（reduction strategy）的不透明对象。
+
+消减的意思用集合器完成是将stream中的对象集合到一个单一的对象，这个对象称为“Collection”集合。
+
+有三种集合方式：`toList()`，`toSet()`，`toCollection(collectionFactory`。
+
+例如收集频率表中的前十集合——
+
+```
+// Pipeline to get a top-ten list of words from a frequency table
+List<String> topTen = freq.keySet().stream() 
+        .sorted(comparing(freq::get).reversed()) 
+        .limit(10)
+        .collect(toList());
+```
+
+大部分集合器的目的是最终映射为一个map。其中的每个元素包含一个key和一个value。最简单的map收集器接受两个参数`toMap(keyMapper, valueMapper)`，例如我们在item 34中提到的——
+
+```
+//Using a toMap collector to make a map from string to enum
+private static final Map<String, Operation> stringToEnum =
+            Stream.of(values()).collect(
+                Collectors.toMap(Object::toString, e -> e));
+```
+这要求每个元素映射的key值都是唯一的，如果有多个元素映射到同一个key，将抛出`IllegalStateException`异常。较复杂的`toMap`方法，或者`groupingBy`方法可以处理这种异常，提供一个`merge function`合并函数。任何映射到相同key的元素都这些曾合并函数，例如覆盖（只取最后一个）
+
+更多介绍参考`java.util.stream.Collectors`。最重要的方法包括：`toList, toSet, toMap, groupingBy, joining.`
+
+
+
 
 

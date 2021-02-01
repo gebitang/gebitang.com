@@ -2866,6 +2866,126 @@ private static final Map<String, Operation> stringToEnum =
 更多介绍参考`java.util.stream.Collectors`。最重要的方法包括：`toList, toSet, toMap, groupingBy, joining.`
 
 
+### Item 47: Prefer Collection to Stream as a return type
 
+需要返回最终元素时，根据需要返回不同的集合样式即可。包括`Collections, Set, List, Iterable, Array`。
 
+- 只需要执行for-each循环，不包含集合方法例如`contains(object)`时，返回`Iterable`
+- 如果是基础类型并且对性能有要求，使用数组
+
+引入Stream之后，这种情况需要谨慎了——
+
+```
+// Won't compile, due to limitations on Java's type inference
+for (ProcessHandle ph : ProcessHandle.allProcesses()::iterator) {
+    // Process the processs
+}
+```
+
+上面的代码实际上无法编译通过，需要进行强制转换——
+
+```
+for (ProcessHandle ph : (Iterable<ProcessHandle>)ProcessHandle.allProcesses()::iterator) {
+    // Process the processs
+}
+```
+更好的方式是提供一个适配器函数，通常成对出现，相互转换——
+
+```
+// Adapter from Stream<E> to Iterable<E>
+public static <E> Iterable<E> iterableOf(Stream<E> stream) {
+    return stream::iterator;
+}
+
+// Adapter from Iterable<E> to Stream<E>
+public static <E> Stream<E> streamOf(Iterable<E> iterable) {
+    return StreamSupport.stream(iterable.spliterator(), false);
+}
+
+```
+然后使用——
+
+```
+for (ProcessHandle p : iterableOf(ProcessHandle.allProcesses())) {
+    // Process the process
+}
+```
+提供的API服务对这两种情况都需要考虑。Collection接口既是Iterable的子类又包含stream方法，所以这种类型可以同时满足上面两种情况。如何返回的数据不大，可以使用`ArrayList`或`HashSet`直接返回。
+
+如果返回的数据过大，但可以简明地进行表达，可以返回特殊的集合。例如返回一个指定Set的幂Set：如果Set包含n个元素，对应的幂Set包含`2^n`个子set。`{a,b,c}`的幂set对应：`{{}, {a}, {b}, {c}, {a, b}, {a, c}, {b, c}, {a, b, c}}`
+
+但数据不是很大时，可以利用`AbstractList`实现自定义的集合——（只需要实现`size`和`contains`方法即可）
+
+```
+// Returns the power set of an input set as custom collection
+public class PowerSet {
+    public static final <E> Collection<Set<E>> of(Set<E> s) {
+        List<E> src = new ArrayList<>(s);
+        if (src.size() > 30)
+            throw new IllegalArgumentException("Set too big " + s);
+        return new AbstractList<Set<E>>() {
+            @Override public int size() {
+                return 1 << src.size(); // 2 to the power srcSize
+            }
+            @Override public boolean contains(Object o) {
+                return o instanceof Set && src.containsAll((Set)o);
+            }
+            @Override public Set<E> get(int index) {
+                Set<E> result = new HashSet<>();
+                for (int i = 0; index != 0; i++, index >>= 1)
+                    if ((index & 1) == 1)
+                        result.add(src.get(i));
+                return result;
+            }
+        };
+    }
+}
+```
+因为Collection包含了一个`size`方法，最大值为`Integer.MAX_VALUE`，`2^31-1`。更通用的实现是返回`Stream`类型
+
+算法思路——
+
+- 包含第一个元素的list称为前缀list，例如 `{a,b,c}`的前缀list包含：` (a), (a, b), (a, b, c)`
+- 包含最后一个元素的list称为后缀list，`{a,b,c}`的后缀list包含：`(a, b, c), (b, c), (c)`
+- list的所有子list实际是：前缀list的所有后缀list；或者说后缀list的所有前缀list。
+
+```
+// Returns a stream of all the sublists of its input list
+public class SubLists {
+    public static <E> Stream<List<E>> of(List<E> list) {
+        return Stream.concat(Stream.of(Collections.emptyList()),
+                prefixes(list).flatMap(SubLists::suffixes));
+    }
+    private static <E> Stream<List<E>> prefixes(List<E> list) {
+        return IntStream.rangeClosed(1, list.size())
+                .mapToObj(end -> list.subList(0, end));
+    }
+    private static <E> Stream<List<E>> suffixes(List<E> list) {
+        return IntStream.range(0, list.size())
+                .mapToObj(start -> list.subList(start, list.size()));
+    }
+}
+```
+
+相当于——
+```
+for (int start = 0; start < src.size(); start++)
+    for (int end = start + 1; end <= src.size(); end++)
+        System.out.println(src.subList(start, end));
+```
+
+实现到一个stream中——
+```
+// Returns a stream of all the sublists of its input list
+public static <E> Stream<List<E>> of(List<E> list) {
+    return IntStream.range(0, list.size())
+        .mapToObj(start ->
+            // start + (int)Math.signum(start) 可以产生空list？
+            IntStream.rangeClosed(start + 1, list.size())
+                .mapToObj(end -> list.subList(start, end)))
+        .flatMap(x -> x);
+}
+```
+
+上面两个都不包含空list，需要手动添加上。`start + (int)Math.signum(start)` 代替`start +1`可以产生空list？还不太明白
 

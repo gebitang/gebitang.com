@@ -14,6 +14,14 @@ toc = true
 
 ## IDEA
 
+### 折叠代码
+
+[Code folding](https://www.jetbrains.com/help/idea/working-with-source-code.html#code_folding)  
+
+- 折叠鼠标所在代码块：`Ctrl+NumPad +`或者 `Ctrl + plus`；反向操作`Ctrol + NumPad -`或`Ctrl + minus`
+- 折叠当前类/文件所有代码块：`Ctrl + Shife + NumPad +` 依次类推
+
+
 ### 相对路径问题
 
 默认的工作路径不同导致相同代码在Eclipse上通过，但IDEA下执行失败。 找不到路径

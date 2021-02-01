@@ -294,3 +294,12 @@ During db.vlog.open: Value log truncate required to run DB. This might result in
 
 - [Badger](https://github.com/dgraph-io/badger) `Fast key-value DB in Go.` 存储数据，所以需要使用SSD
 - [edwards25519](https://github.com/FiloSottile/edwards25519) google内Go团队负责密码和安全的大牛实现的edwards25519椭圆曲线实现，创建地址的基础
+
+### 主网转账
+
+[转账方式](https://github.com/MixinNetwork/developers.mixin.one/blob/main/developers/src/i18n/zh/document/mainnet/tutorials/full-node-join.md) 
+
+- 机器人的授权令牌调用 POST /transactions 转入到主网地址。[transfer-to-mainnet](https://developers.mixin.one/document/wallet/api/transfer-to-mainnet)浏览器默认英文环境，没有这个api的说明（默认中文环境时有），
+- 使用官方提供的机器人bot转账，最终也是调用的相同API——调用成功`Mixin transfer success snapshotId: 7cf6d709-c048-4c74-a7da-b822e9d84e09, transaction hash: 6cabed5cff5becd72a3533a318d49ee002ae38d27c18cba9b4710f4c770a624b`。转账成功后，调用任何一个节点的`gettransaction`API都可以查询到结果
+
+Java的api还没调通，看起来加密错误，目前提示：`PIN incorrect.`下一步参考go的实现debug一下。Java下的转账api工作OK的

@@ -19,12 +19,19 @@ toc = true
 
 [Maven in five minutes](https://maven.apache.org/guides/getting-started/maven-in-five-minutes.html)
 
+mvn命令是一段脚本程序。
 
 <!--more-->
 
-查看本地仓库位置： `mvn help:evaluate -Dexpression=settings.localRepository`
+## 查看本地仓库位置
+
+ `mvn help:evaluate -Dexpression=settings.localRepository`
+
+## 指定Java版本 
 
 [set specific java version to Maven](https://stackoverflow.com/a/19654699/1087122), You could also go into your mvn(non-windows)/mvn.bat/mvn.cmd(windows) and set your java version explicitly there.
+
+##  指定代理
 
 [set proxy for maven](https://medium.com/@petehouston/execute-maven-behind-a-corporate-proxy-network-5e08d075f744)
 
@@ -36,6 +43,10 @@ mvn clean package -Dmaven.test.skip=true -Dhttp.proxyHost=127.0.0.1 -Dhttp.proxy
 ```
 
 [maven plugins stored where](https://stackoverflow.com/a/2342391/1087122) `~/.m2/repository/org/apache/maven/plugins`
+
+## 命令行指定本地仓库
+
+使用 ` mvn -Dmaven.repo.local=/path/to/repo clean install`命令进行临时指定，注意路径必须为绝对路径[`The local repository must be an absolute path.`](https://maven.apache.org/guides/mini/guide-configuring-maven.html)
 
 ## 隐式声明导致的问题NoClassDefFoundError: org/hamcrest/SelfDescribing
 

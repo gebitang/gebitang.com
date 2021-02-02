@@ -14,6 +14,33 @@ toc = true
 
 ## Android problem
 
+### Android Studio无法启动
+
+升级之后，第一次无法启动页面，在任务管理器中显示已经启动。
+
+在bin目录的`idea.properties`文件中添加一行`disable.android.first.run=true`避免首次启动时自动重新下载SDK（在 Android SDK Manager 中是可以更新SDK）
+
+### 重新打包minicat
+
+一个古老的项目，用来同步FF和WB挺好用。看起来一年打包一次？命令行执行`gradlew bundle`最终限制在`Could not resolve com.android.support:support-v4:27.1.1`。重新升级AS到4.1版本，智能提醒最后还是提示相同的错误。
+
+[Failed to resolve: com.android.support:support-v4:27.1.1](https://stackoverflow.com/questions/49856331/failed-to-resolve-com-android-supportsupport-v427-1-1)类似问题提示，在`build.gradle`文件中添加——
+
+```
+allprojects {
+    repositories {
+        google()
+        jcenter()
+    }
+}
+```
+
+然后AS提示需要升级NDK到[`NDK (Side by side) 21.0.6113669 (ndk;21.0.6113669)`](https://dl.google.com/android/repository/android-ndk-r21-windows-x86_64.zip)，大小1GB左右
+
+折腾半天，还是恢复原状是work状态- -|| 升级操作后，`java.lang.NullPointerException: Attempt to invoke virtual method 'void android.support.v4.widget.SwipeRefreshLayout.setColorSchemeResources(int[])' on a null object reference` 因为对于的support版本支持的有问题。
+
+命令行打包debug版本就够用[Build a debug APK](https://developer.android.com/studio/build/building-cmdline#DebugMode)，先不折腾了
+
 ### android项目打包  
 
 提示报错：

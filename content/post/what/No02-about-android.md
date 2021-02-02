@@ -37,6 +37,8 @@ allprojects {
 
 然后AS提示需要升级NDK到[`NDK (Side by side) 21.0.6113669 (ndk;21.0.6113669)`](https://dl.google.com/android/repository/android-ndk-r21-windows-x86_64.zip)，大小1GB左右
 
+[Android Gradle plugin 和gradle版本的对应关系](https://developer.android.com/studio/releases/gradle-plugin)
+
 折腾半天，还是恢复原状是work状态- -|| 升级操作后，`java.lang.NullPointerException: Attempt to invoke virtual method 'void android.support.v4.widget.SwipeRefreshLayout.setColorSchemeResources(int[])' on a null object reference` 因为对于的support版本支持的有问题。
 
 - 下载使用本地wrapper包

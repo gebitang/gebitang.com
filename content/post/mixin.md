@@ -303,3 +303,40 @@ During db.vlog.open: Value log truncate required to run DB. This might result in
 - 使用官方提供的机器人bot转账，最终也是调用的相同API——调用成功`Mixin transfer success snapshotId: 7cf6d709-c048-4c74-a7da-b822e9d84e09, transaction hash: 6cabed5cff5becd72a3533a318d49ee002ae38d27c18cba9b4710f4c770a624b`。转账成功后，调用任何一个节点的`gettransaction`API都可以查询到结果
 
 Java的api还没调通，看起来加密错误，目前提示：`PIN incorrect.`下一步参考go的实现debug一下。Java下的转账api工作OK的
+
+### 地址格式
+
+- [从群环域到椭圆曲线密码学](https://github.com/AlexiaChen/AlexiaChen.github.io/issues/15)  
+- [深入了解Ed25519](https://github.com/AlexiaChen/AlexiaChen.github.io/issues/103)  
+- [一场椭圆曲线的寻根问祖之旅](https://www.infoq.cn/article/lbo7imfxawd6um6a6qy8)
+- [Ed25519 公钥从私钥哈希 SHA-512(k) 的“左半部分”计算而来](http://aandds.com/blog/eddsa.html)
+
+每个地址/秘钥都是基于`twisted Edwards curve`生成的地址，用来进行非对称加密。
+
+```
+-x^2 + y^2 = 1 + -(121665/121666)*x^2*y^2
+```
+
+第一步：生成创建地址的随机64位字节的seed：
+
+- 创建随机64位byte作为seed1，对其进行SHA3-256哈希取值获取到32位byte数组hash1
+- 将hash1再做一次SHA3-256哈希获得hash2
+- 将hash1和hash2合并得到64位的seed2
+
+第二步：生成地址
+
+- 使用seed1生成32位byte长度的Key作为spend Key
+- 使用seed2生成32位byte长度的Key作为view Key
+
+view key可以查看对应地址的转账信息；发起转账信息同时需要spend key和view key。
+
+地址包含了一对私钥，公钥可以通过私钥计算得出
+
+```
+A Scalar is an integer modulo 
+    l = 2^252 + 27742317777372353535851937790883648493
+which is the prime order of the edwards25519 group.
+This type works similarly to math/big.Int, and all arguments and receivers are allowed to alias.
+The zero value is a valid zero element.
+```
+

@@ -2989,3 +2989,38 @@ public static <E> Stream<List<E>> of(List<E> list) {
 
 上面两个都不包含空list，需要手动添加上。`start + (int)Math.signum(start)` 代替`start +1`可以产生空list？还不太明白
 
+
+### Item 48:  Use caution when making streams parallel
+
+一句话总结：非必要，不要对streams做并行处理。
+
+因为只需要对streams添加`.parallel()`就可以触发并行处理，但并行处理依赖的限制条件比较苛刻，条件不当时，这个调用不但不能提速，还可能导致灾难性结果(CPU飙升，进入死循环假死状态)。
+
+通常如果stream来自`Steam.iterate`或者中间操作包含了`limit`，并行操作无法提速性能。
+
+来自`ArrayList`, `HashMap`,`HashSet`, `ConcurrentHashMap`实例，`int range`，`long range`的Stream可以并行处理以提高性能。因为这些元素可以很容易地分割为任意大小(通过`spliterator`方法)。
+
+另外一个原因是这些元素有很好的“局部引用性”(locality of reference)——元素顺序存储在内存中。否则并行线程需要处于等待状态，等待元素加载到内存中
+
+如果最终操作的时长占总时长的比例较高，并行处理的效果也比较有限。`reductions`类型的最终操作——例如`min, max, count, sum`——比较适合并行操作。
+
+如果自定义Stream，Iterable或者Collection类型对象，提高并行计算需要重写`spliterator`方法并进行严格测试，确保并行可以提供性能。
+
+PS：维护数百万行代码并且重度使用streams的同事(who?)发现只有数个地方适合并行处理stream对象- -||
+
+当然，满足条件时，并行处理将获取接近线性的处理速度。在机器学习和大数据处理领域需要这种速度
+
+PS2： 一个光明的结尾~ 下列中可以使用并行处理，有效提高处理速度。处理`10^8`的数字从31秒提高到9.2秒
+
+```
+// Prime-counting stream pipeline - benefits from parallelization
+static long pi(long n) {
+    return LongStream.rangeClosed(2, n)
+            //.parallel() 
+            .mapToObj(BigInteger::valueOf)
+            .filter(i -> i.isProbablePrime(50))
+            .count();
+}
+```
+
+

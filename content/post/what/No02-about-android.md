@@ -39,7 +39,9 @@ allprojects {
 
 折腾半天，还是恢复原状是work状态- -|| 升级操作后，`java.lang.NullPointerException: Attempt to invoke virtual method 'void android.support.v4.widget.SwipeRefreshLayout.setColorSchemeResources(int[])' on a null object reference` 因为对于的support版本支持的有问题。
 
-命令行打包debug版本就够用[Build a debug APK](https://developer.android.com/studio/build/building-cmdline#DebugMode)，先不折腾了
+- 下载使用本地wrapper包
+- 更新key内容[weibo console](https://open.weibo.com/tools/console)
+- 命令行打包debug版本就够用[Build a debug APK](https://developer.android.com/studio/build/building-cmdline#DebugMode)
 
 ### android项目打包  
 

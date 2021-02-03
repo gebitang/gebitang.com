@@ -2470,7 +2470,7 @@ public class Bigram {
 
 总之，是一个平衡的选择。item 22中说“如果不想定义一个类型，不要使用接口”；这里表达的意思正好相反。
 
-## 5 Lambdas and Streams
+## 6 Lambdas and Streams
 
 Java 8 引入了“函数接口”(functional interfaces)，Lambdas和“方法引用”(method reference)。同时提供了Streams相关的API
 
@@ -3022,5 +3022,46 @@ static long pi(long n) {
             .count();
 }
 ```
+
+## 7 Methods
+
+如何处理参数和返回值；如何设计方法签名；如何给方法注释——同时适用于构造函数和方法。
+
+### 49: Check parameters for validity
+
+大部分方法或构造函数都对参数有一定的限制，应该在一开始就对参数限制做检查，避免因参数不合格导致的后续异常，异常导致的异常将使得后续排除更复杂。——这也违反了“错误原子性”（failure atomicity）
+
+对应public或protected的方法，使用JavaDoc注解`@throws`添加抛出的异常描述。通用的异常可以在class级别进行注释，方法上可以添加更具体一些的异常描述。例如——
+
+```
+/**
+* Returns a BigInteger whose value is (this mod m). This method
+* differs from the remainder method in that it always returns a
+* non-negative BigInteger.
+*
+* @param m the modulus, which must be positive
+* @return this mod m
+* @throws ArithmeticException if m is less than or equal to 0
+*/
+public BigInteger mod(BigInteger m) {
+    if (m.signum() <= 0)
+        throw new ArithmeticException("Modulus <= 0: " + m);
+    ... // Do the computation
+}
+```
+
+对于空指针可以使用Java 7中引入的`Objects.requireNonNull()`方法进行检查，不需要再进行手动检查。Java 9中引入了范围检查的方法，但没有这个方法方便，暂时不用也罢。
+
+对于私有方法，可以使用`assert`进行参数检查。检查后续的表达为真，如果失败，抛出`AssertionError`。如果启动时不启用检查(使用 -ea 或 -enableassertions 参数启动java应用)，这种方式没有任何额外的开销。
+
+这一规则的例外是：如果检查成本过于昂贵或不实际时，不做入参检查。例如对List进行排序操作时。
+
+如果计算时发出异常，抛出的异常于注释不符合时，应当做异常转换(exception translation)。
+
+武断的限制参数并不是好事，方法的参数应当越通用越好。
+
+
+
+
 
 

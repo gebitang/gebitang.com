@@ -3060,8 +3060,93 @@ public BigInteger mod(BigInteger m) {
 
 武断的限制参数并不是好事，方法的参数应当越通用越好。
 
+### Item50: Make defensive copies when needed
 
+相比与C或C++，Java算是一门安全语言，没有缓存溢出，数组溢出，野指针之类对问题。尽管如此，也需要做一下防御措施，防止调用方对类对象不可更改性质对破坏。
 
+```
+// Broken "immutable" time period class
+public final class Period {
+    private final Date start;
+    private final Date end;
 
+    /**
+     * @param start the beginning of the period
+     * @param end   the end of the period; must not precede start * @throws IllegalArgumentException if start is after end
+     * @throws NullPointerException if start or end is null
+     */
+    public Period(Date start, Date end) {
+        if (start.compareTo(end) > 0)
+            throw new IllegalArgumentException(
+                    start + " after " + end);
+        this.start = start;
+        this.end = end;
+    }
+
+    public Date start() {
+        return start;
+    }
+
+    public Date end() {
+        return end;
+    }
+    // Remainder omitted
+}
+```
+
+看起来上述类是final级别对，不能修改。但实际上很容易被破坏——
+
+```
+ // Attack the internals of a Period instance
+Date start = new Date();
+Date end = new Date();
+Period p = new Period(start, end); end.setYear(78); // Modifies internals of p!
+```
+
+在Java 8里，可以使用`Instant`或`LocalDateTime`或`ZoneDateTime`等不可变类代替可变类对象Date。
+
+另外一种保护方法是采用“防御性拷贝”(defensive copy)。对每一个构造函数都可变对参数象都先做一次复制——
+
+```
+// Repaired constructor - makes defensive copies of parameters
+   public Period(Date start, Date end) {
+       this.start = new Date(start.getTime());
+       this.end   = new Date(end.getTime());
+       if (this.start.compareTo(this.end) > 0)
+         throw new IllegalArgumentException(
+             this.start + " after " + this.end);
+}
+```
+
+注意先做拷贝再做检查都顺序，并且检查是针对拷贝判断。——这种做法是防止`TOCTOU`(Time-ofcheck/time-of-use)攻击：参数检查和参数复制时间差之间进行攻击（在检查后，复制前进行修改）
+
+另外也不实用Date都clone方法进行复制，因为传递进来都参数有可能是Date的子类，clone方法依然不安全。
+
+上面的防御拷贝力度实际还不够，依然可以被修改——
+
+```
+// Second attack on the internals of a Period instance
+Date start = new Date();
+Date end = new Date();
+Period p = new Period(start, end); p.end().setYear(78); // Modifies internals of p!
+```
+
+需要对访问方法也提供防御复制——
+
+```
+// Repaired accessors - make defensive copies of internal fields
+   public Date start() {
+       return new Date(start.getTime());
+}
+   public Date end() {
+       return new Date(end.getTime());
+}
+```
+
+这样，Period对象变成真正不可更改类。实际上，针对访问方法是可以使用clone方法对，因为我们确定这里对对象是Date本身，而不是子类。
+
+防御拷贝不知针对可变类，任何当你需要对客户端提供对引用保存到内部结构体时，都需要考虑这一引用是否会被修改，修改是否可被接受。
+
+总结：最好是使用不可变类；使用可变类需要考虑防御拷贝；如果只是包内使用或防御拷贝代价太大，不做防御拷贝时，做好对应的注释说明。
 
 

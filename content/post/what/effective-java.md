@@ -3171,5 +3171,138 @@ Period p = new Period(start, end); p.end().setYear(78); // Modifies internals of
 
 - 使用两元素等枚举类代替boolean参数。意义更明确并且更容易扩展。
 
+### Item 52: Use overloading judiciously
+
+谨慎使用方法重载。
+
+```
+// Broken! - What does this program print?
+public class CollectionClassifier {
+    public static String classify(Set<?> s) {
+        return "Set";
+    }
+    public static String classify(List<?> lst) {
+        return "List";
+    }
+    public static String classify(Collection<?> c) {
+        return "Unknown Collection";
+    }
+    public static void main(String[] args) {
+        Collection<?>[] collections = {
+                new HashSet<String>(),
+                new ArrayList<BigInteger>(),
+                new HashMap<String, String>().values()
+        };
+        for (Collection<?> c : collections)
+            System.out.println(classify(c));
+    }
+}
+```
+
+期望分别打印出来`Set, List, Unknown Collection`，实际上三次打印出来等都是`Unknown Collection`。
+
+重载方法纠结调用哪个是在编译期决定的，三次循环在编译期都识别为`Collection<?>`，尽管在运行时三次循环都对象分别不同，但不影响都调用了相同都重载方法。
+
+这有点反直觉。因为重载方法都选择是静态的（编译期）；重写方法的选择是动态的（运行时）。下面是运行时对重写方法的调用——（跟你期待的一样，重写方法的调用采用“最具体”原则，子类的重写方法优先于父类）
+
+```
+
+class Wine {
+    String name() { return "wine"; }
+}
+class SparklingWine extends Wine {
+    @Override String name() { return "sparkling wine"; }
+}
+class Champagne extends SparklingWine {
+    @Override String name() { return "champagne"; }
+}
+public class Overriding {
+    public static void main(String[] args) {
+        List<Wine> wineList = com.sun.tools.javac.util.List.of(
+                new Wine(), new SparklingWine(), new Champagne());
+        for (Wine wine : wineList)
+            System.out.println(wine.name());
+    }
+
+}
+```
+
+上面的`classify`方法想打印期待的结果，应当修改为——
+
+```
+public static String classify(Collection<?> c) {
+       return c instanceof Set  ? "Set" :
+              c instanceof List ? "List" : "Unknown Collection";
+}
+```
+
+重写是一种规范；重载却是一种例外。重载会导致用户的期待混乱，应当避免使用重载。
+
+纠结重载到哪一步会引起混乱还没有定论。但保守的使用原则是：不用重载相同参数个数的方法；如果方法使用变长参数，永远不要重载。
+
+可以理由不同的命名规则代替重载。例如`ObjectOutputStream`类中针对基本类型的write方法，分别命名为`writeInt(int)`，`writeBoolean(boolean)`，`writeLong(long)`。
+
+对于构造函数来说，无法重命名，可以使用静态工厂模式代替构造方法模式。
+
+相同参数个数的重载方法中，如果参数类型“极端不同”(`radically different`)时，问题也不大(因为无法在两种不同类型直接强制转换)。这种情况下，重载的调用会根据运行时的参数类型进行判断（选择对应的重载方法），而不会受限于编译期的类型判断。例如`ArrayList`包含一个参数为int的构造函数，一个类型为Collection的构造函数。
+
+在Java 5之前，所有的基本类型都是“极端不同”的，但由于自动装箱的引入，可能会引起问题，例如——
+
+```
+public class SetList {
+    public static void main(String[] args) {
+        Set<Integer> set = new TreeSet<>();
+        List<Integer> list = new ArrayList<>();
+        for (int i = -3; i < 3; i++) {
+            set.add(i);
+            list.add(i);
+        }
+        for (int i = 0; i < 3; i++) {
+            set.remove(i);
+            list.remove(i);
+        }
+        System.out.println(set + " " + list);
+    }
+}
+```
+期望的打印结果：`[-3, -2, -1] [-3, -2, -1]`  
+实际的打印结果：`[-3, -2, -1] [-2, 0, 2]`
+
+因为`Set`包含重载方法`remove(E)`，int被自动装箱为Integer，与期望相同；
+
+`list.remove(i)`调用时选择了`remove(int i)`的重载方法（而不是期望的`remove(E)`方法），移除对应index下的值，三次操作之后，原始的`[-3, -2, -1, 0, 1, 2]`就变成了`[-2, 0, 2]`，如果希望得到期望的值，调用需要修改为`list.remove((Integer) i);`或`list.remove(Integer.valueOf(i));`
+
+范型和自动装箱的引入破坏了`List`类的接口。也提醒要跟谨慎地使用重载方法。
+
+Java 8中引入的Lambda表达式和方法引用使得方法重载的调用机制更加负载。例如——
+
+```
+new Thread(System.out::println).start();
+
+ExecutorService exec = Executors.newCachedThreadPool();
+exec.submit(System.out::println);
+```
+
+第一个调用可以编译通过，第二种调用无法通过编译。原因是`submit`方法有一个重载方法`submit(Callable<T> c)`，而`Thread`的构造函数没有。
+
+尽管所有的`println`方法重载都是void类型，不可能是`Callable<T>`类型。但重载算法不是这样工作的。
+
+实际上，如果`println`方法如果没有重载，上面的`submit`方法调用执行将是合法的。正是方法引用的重载(println)和调用方法(submit)的组合导致了重载算法没有按照期待的结果执行。
+
+技术上将，`System.out::println`属于一种“不精确方法引用”`inexact method reference`[JSL, 15.13.1](https://docs.oracle.com/javase/specs/jls/se8/html/jls-15.html#jls-15.13.1)
+
+“如果参数表达式中包含了隐式的lambda表达式或不精确的方法引用，则适用性测试时可以忽略，因为直到类型被选定之前无法确定其含义“——针对编译器开发者的这段表示如果暂时无法理解也不用担心。
+
+只需要记住：如果方法在相同参数位置接受不同的函数接口时，不用重载此方法。
+
+如果必须要违反这一原则时，确保不同的重载方法的执行逻辑一致。例如String类中的`contentEquals`方法——
+
+```
+// Ensuring that 2 methods have identical behavior by forwarding
+   public boolean contentEquals(StringBuffer sb) {
+       return contentEquals((CharSequence) sb);
+}
+```
+
 
 

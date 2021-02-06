@@ -112,6 +112,43 @@ rm -rf ~/Library/Containers/com.docker.docker/Data/*
 
 系统--共享--远程登录
 
+### Mac多台电脑共享屏幕
+
+原生支持。多台Mac设备在相同的局域网内，系统设置 -- 共享 -- 屏幕共享（也可以选择其他共享的内容）
+
+Finder中选择 网络 -- 找到打开共享的机器，选择“共享屏幕”。 
+
+
+### 获取app的下载链接 
+
+在Apple store找到对应App，点击更多，选择Share App，有 Copy link选项。可以获取到对应App的下载链接
+
+google paly上可以web端搜索对应的app，获取到[url](https://play.google.com/store/apps/details?id=com.knowroaming.activities)，然后可以到[apkpure](https://apkpure.com/)网站获取下载地址。
+
+### 更改主机名，新建删除账户
+
+[menu->preferences->sharing](https://support.apple.com/en-gb/guide/mac-help/mchlp2322/mac)
+
+Change your computer's name or local hostname on Mac 
+
+On your Mac, choose Apple menu > System Preferences, then click Sharing. Open Sharing preferences for me.  
+Type a new name in the Computer Name field. You may need to click the lock icon and provide an administrator name and password before you can change the name.
+
+
+[Delete a user or group on Mac](https://support.apple.com/en-nz/guide/mac-help/mchlp1557/mac)
+
+Apple menu  > System Preferences, then click Users & Groups
+
+新建管理员账号，使用新建管理员账号删除另外一个管理员账号
+
+### 升级15版本后，XCODE无法打开
+
+提示类似：`Error Domain=PKInstallErrorDomain Code=102 "The package “XcodeSystemResources.pkg” is untrusted."`的错误。
+
+[Edit and set the date of your Mac as October 1st, 2019.](https://stackoverflow.com/questions/58550284/mobiledevice-pkg-untrusted-cannot-open-xcode-after-os-x-update)
+
+提示其他package的untrusted问题也使用修改日期的方式来解决。
+
 ### 快捷键 锁屏
 
 [macOS 使用手册](https://support.apple.com/zh-cn/guide/mac-help/welcome/mac)
@@ -345,7 +382,6 @@ brew install hugo
 
 ![](https://upload-images.jianshu.io/upload_images/3296949-eeea3ae57bd6b78f.png)
 
----
 ### Android共享代理
 上面的无效尝试也并非没有成果，搜到这篇[借助Proxy Server实现Android设备免root共享VPN连接](https://eugenegeng.blogspot.com/2018/10/share-vpn-with-proxy-server-on-Android-no-root.html)文章，尽管评论说v2rayng无效，还是尝试了一下我的。
 - 从google play搜索下载proxy server
@@ -356,7 +392,6 @@ brew install hugo
 
 挂上相同的代理，iPhone端从App Store下载一个免费的App，走到确认支付手段的地方，选择None选项（如果使用国内的wifi，是没有None选项的；如果使用国内信用卡，也始终无法通过Next），Next终于成功。
 
----
 
 首次走完上面的流程之后，再次使用就不需要必须使用美国IP了，因为不需要再走激活流程。付款方式采用none之后，可以使用礼品卡进行充值，可参考[这篇文章](https://www.hurbai.com/iOS/182)关注一下注意事项。
 
@@ -368,39 +403,3 @@ brew install hugo
 
 大概4小时之后可以收到，官方承诺的为24小时发货。
 ![](https://upload-images.jianshu.io/upload_images/3296949-e942a3d746a96c5e.png)
-
-### 获取app的下载链接 
-
-在Apple store找到对应App，点击更多，选择Share App，有 Copy link选项。可以获取到对应App的下载链接
-
-google paly上可以web端搜索对应的app，获取到[url](https://play.google.com/store/apps/details?id=com.knowroaming.activities)，然后可以到[apkpure](https://apkpure.com/)网站获取下载地址。
-
-### Mac多台电脑共享屏幕
-
-原生支持。多台Mac设备在相同的局域网内，系统设置 -- 共享 -- 屏幕共享（也可以选择其他共享的内容）
-
-Finder中选择 网络 -- 找到打开共享的机器，选择“共享屏幕”。 
-
-### 更改主机名，新建删除账户
-
-[menu->preferences->sharing](https://support.apple.com/en-gb/guide/mac-help/mchlp2322/mac)
-
-Change your computer's name or local hostname on Mac 
-
-On your Mac, choose Apple menu > System Preferences, then click Sharing. Open Sharing preferences for me.  
-Type a new name in the Computer Name field. You may need to click the lock icon and provide an administrator name and password before you can change the name.
-
-
-[Delete a user or group on Mac](https://support.apple.com/en-nz/guide/mac-help/mchlp1557/mac)
-
-Apple menu  > System Preferences, then click Users & Groups
-
-新建管理员账号，使用新建管理员账号删除另外一个管理员账号
-
-### 升级15版本后，XCODE无法打开
-
-提示类似：`Error Domain=PKInstallErrorDomain Code=102 "The package “XcodeSystemResources.pkg” is untrusted."`的错误。
-
-[Edit and set the date of your Mac as October 1st, 2019.](https://stackoverflow.com/questions/58550284/mobiledevice-pkg-untrusted-cannot-open-xcode-after-os-x-update)
-
-提示其他package的untrusted问题也使用修改日期的方式来解决。

@@ -43,9 +43,12 @@ allprojects {
 
 - 下载使用本地wrapper包
 - 更新key内容[weibo console](https://open.weibo.com/tools/console)
-- 命令行打包debug版本就够用[Build a debug APK](https://developer.android.com/studio/build/building-cmdline#DebugMode)编译产生的文件在`module_name-debug.apk`在`project_name/module_name/build/outputs/apk/`目录下
+- 命令行打包debug版本就够用[Build a debug APK](https://developer.android.com/studio/build/building-cmdline#DebugMode)执行`./gradlew assembleDebug`完成编译，产生的文件在`module_name-debug.apk`在`project_name/module_name/build/outputs/apk/`目录下（在Andoid Studio仅查看代码）
 
 ps: Mac环境下又重新折腾了一次。23.0.3版本的build-tools在Mac版本下工作不正常，提示错误`bad CPU type in executable`。重新下载一个高版本[24.0](https://androidsdkmanager.azurewebsites.net/Buildtools)的即可。解压后将`aapt`和`zipalign`可执行文件复制到指定的目录下即可
+
+[Android 11 中的存储机制更新](https://developer.android.com/about/versions/11/privacy/storage?hl=zh-cn)从 Android 11 开始，应用无法在外部存储设备上创建自己的应用专用目录。如需访问系统为您的应用提供的目录，请调用 getExternalFilesDirs()。
+
 
 ### android项目打包  
 

@@ -3362,4 +3362,37 @@ public void foo(int a1, int a2, int a3, int... rest) { }
 实际上，Java库中的`EnumSet`的`of(E)`方法就采用了这种小技巧
 
 
+### Item 54: Return empty collections or arrays,not nulls
+
+返回空集合，空数组，而不是返回null值。否则调用方始终需要处理null值的场景。
+
+有争议认为null值避免了分配空集合或空数组的性能开销。第一，不建议性能优化需要到这个级别，除非测量验证需要如此；第二，可以返回空数组或结合并且不进行内存分配。(how？)
+
+返回不可变的空集合对象，例如`Collections.emptyList`, `Collections.emptySet`, `Collections.emptyMap`。
+
+对于数组来说也类似，例如——(传递一个零长度的数组)
+
+```
+//The right way to return a possibly empty array
+public Cheese[] getCheeses() {
+    return cheesesInStock.toArray(new Cheese[0]);
+}
+```
+如果需要考虑性能，可以优化为不可变数组对象——
+
+```
+// Optimization - avoids allocating empty arrays
+private static final Cheese[] EMPTY_CHEESE_ARRAY = new Cheese[0];
+
+public Cheese[] getCheeses() {
+    return cheesesInStock.toArray(EMPTY_CHEESE_ARRAY);
+}
+```
+
+每一次调用都是返回相同都数组。不要进行提前分配，研究证明下面都方式反而会影响性能——
+
+```
+// Don’t do this - preallocating the array harms performance!
+   return cheesesInStock.toArray(new Cheese[cheesesInStock.size()]);
+```
 

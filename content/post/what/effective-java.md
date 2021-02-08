@@ -3304,5 +3304,62 @@ exec.submit(System.out::println);
 }
 ```
 
+### Item 53: Use varargs judiciously
+
+变长方法(Varargs methods)又被称为“变量变长方法”(variable arity methods)，参考[JLS, 8.4.1](https://docs.oracle.com/javase/specs/jls/se8/html/jls-8.html#jls-8.4.1)。指方法接受零个或多个相同类型的参数。
+
+处理时，首先会创建一个长度与变量个数相等的数组，然后将变量赋值给数组(变长方法每次都有这个开销)。简单示例——
+
+```
+// Simple use of varargs
+static int sum(int... args) {
+    int sum = 0;
+    for (int arg : args)
+        sum += arg;
+    return sum; 
+}
+```
+
+有时候方法通常需要的是一个或多个变量，需要先检查变量个数，类似——
+
+```
+// The WRONG way to use varargs to pass one or more arguments!
+static int min(int... args) {
+    if (args.length == 0)
+        throw new IllegalArgumentException("Too few arguments"); int min = args[0];
+    for (int i = 1; i < args.length; i++)
+        if (args[i] < min)
+            min = args[i];
+    return min; 
+}
+```
+
+上述写法的问题：如果没有传入任何参数，运行时才会报错；另外就是……丑，需要显示验证参数，并且无法使用for-each循环，除非将min初始化为`Integer.MAX_VALUE`（也很丑陋）
+
+正确的写法——
+
+```
+// The right way to use varargs to pass one or more arguments
+static int min(int firstArg, int... remainingArgs) {
+    int min = firstArg;
+    for (int arg : remainingArgs)
+        if (arg < min)
+            min = arg;
+    return min; 
+}
+```
+
+另外一种场景：加入95%的情况下参数个数都小于三个的话，考虑重载此方法（避免了数组创建、赋值的开销以提高性能），例如—— 
+
+```
+public void foo() { }
+public void foo(int a1) { }
+public void foo(int a1, int a2) { }
+public void foo(int a1, int a2, int a3) { }
+public void foo(int a1, int a2, int a3, int... rest) { }
+```
+
+实际上，Java库中的`EnumSet`的`of(E)`方法就采用了这种小技巧
+
 
 

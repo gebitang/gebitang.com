@@ -3396,3 +3396,84 @@ public Cheese[] getCheeses() {
    return cheesesInStock.toArray(new Cheese[cheesesInStock.size()]);
 ```
 
+### Item 55: Return optionals judiciously
+
+Java 8之前，当某些情况下无法返回一个值时，有两种处理方式：一，抛出异常（由于要保留堆栈信息，代价昂贵）；二，返回null值（调用方需要对其做特殊处理）。两种方式都不完美
+
+Java 8引入了`Optional<T>`类做第三种处理：要么是空值；要么是非空都引用。一个Optional实例属于不可变的集合，可包含绝大多数元素（不包括集合性质的元素）
+
+对于item 30中的例子——
+
+```
+// Returns maximum value in collection - throws exception if empty
+public static <E extends Comparable<E>> E max(Collection<E> c) { if (c.isEmpty())
+    throw new IllegalArgumentException("Empty collection");
+    E result = null;
+    for (E e : c)
+        if (result == null || e.compareTo(result) > 0)
+            result = Objects.requireNonNull(e);
+    return result;
+}
+```
+
+使用Optional的方式之后处理为——
+
+```
+// Returns maximum value in collection as an Optional<E>
+public static <E extends Comparable<E>> Optional<E> max(Collection<E> c) {
+    if (c.isEmpty())
+        return Optional.empty();
+    E result = null;
+    for (E e : c)
+        if (result == null || e.compareTo(result) > 0)
+            result = Objects.requireNonNull(e);
+    return Optional.of(result); 
+}
+```
+
+使用工厂模式返回合适的Optiona类型即可。注意其中的`Optional.of(value)`中的value不能为null，否则将抛出空指针异常；`Optional.ofNullable(value)`可以接受空值的value（但永远不要返回包含类null值但Optional对象，这完全违背类这个类但目的）
+
+需要流操作但最终动作返回optional类型，使用stream方式重写max方法——
+
+```
+// Returns max val in collection as Optional<E> - uses stream
+public static <E extends Comparable<E>>
+            Optional<E> max(Collection<E> c) {
+    return c.stream().max(Comparator.naturalOrder());
+}
+```
+
+Optional类提供类不同但API方便调用方进行返回值处理：
+
+- 提供默认返回值的方式 `String lastWordInLexicon = max(words).orElse("No words...");`
+
+- 抛出异常的方式 `Toy myToy = max(toys).orElseThrow(TemperTantrumException::new);` 
+注意传入的异常是一个异常工厂而不是实际的异常，这样可以避免创建异常实例的开销，除非实际抛出异常时，才会创建异常实例
+
+- 如果可以确保总会返回值，可以直接进行获取 `Element lastNobleGas = max(Elements.NOBLE_GASES).get();`
+
+- 当获取默认值开销巨大时，可以提供一个`Supplier<T>`用来获取——
+
+```
+public T orElseGet(Supplier<? extends T> other) {
+    return value != null ? value : other.get();
+}
+```
+
+不适合包装在Optional中的类型：Collections，maps，streams，arrays，optionals。很明显，返回`Optional<List<t>>`不如直接返回`List<T>`。
+
+确定方法的返回值可能出现无法获取的情况时才考虑使用Optional；
+
+Optional对象必须要进行创建，初始化，读取值等操作，对性能有严格要求的场景需要进行性能评估；
+
+禁止使用包含装箱后基础类型的Optional对象，这相当于进行了两次“装箱”操作。Java库提供了对应的`OptionalInt`，`OptionalLong`，`OptionalDouble`进行操作
+
+永远不要使用Optional对象做为Map的key，提高了理解负担。类似的不要这集合或数组中使用optional对象做为key、value或元素
+
+是否严格在对象的属性中包含Optional类型？通常不是一种好方式，但有时也是正确的选择：对象的有些字段并不是“必须”的时候，当然可以选择Optional
+
+
+
+
+
+

@@ -3027,7 +3027,7 @@ static long pi(long n) {
 
 如何处理参数和返回值；如何设计方法签名；如何给方法注释——同时适用于构造函数和方法。
 
-### 49: Check parameters for validity
+### Item 49: Check parameters for validity
 
 大部分方法或构造函数都对参数有一定的限制，应该在一开始就对参数限制做检查，避免因参数不合格导致的后续异常，异常导致的异常将使得后续排除更复杂。——这也违反了“错误原子性”（failure atomicity）
 
@@ -3060,7 +3060,7 @@ public BigInteger mod(BigInteger m) {
 
 武断的限制参数并不是好事，方法的参数应当越通用越好。
 
-### Item50: Make defensive copies when needed
+### Item 50: Make defensive copies when needed
 
 相比与C或C++，Java算是一门安全语言，没有缓存溢出，数组溢出，野指针之类对问题。尽管如此，也需要做一下防御措施，防止调用方对类对象不可更改性质对破坏。
 
@@ -3472,8 +3472,136 @@ Optional对象必须要进行创建，初始化，读取值等操作，对性能
 
 是否严格在对象的属性中包含Optional类型？通常不是一种好方式，但有时也是正确的选择：对象的有些字段并不是“必须”的时候，当然可以选择Optional
 
+### Item 56: Write doccomments for all exposed API elements
 
+可用的API必须有注释。通常API文档需要手动维护，与源码的同步是一件苦差事。Java语言提供了Javadoc工具，可以直接从源码获取到文档：使用特殊到“文档注释”(documentation comments)
 
+文档注释规范不是Java语言到正式部分，但已经是事实上的API标准。Java 4(2002年2月)发布的[“如何写注释”](https://www.oracle.com/technical-resources/articles/java/javadoc-tool.html)文档已经过去十八年，但依然价值巨大。
 
+- Java 5 `{@literal}`, `{@code}`
+- Java 8 `{@implSpec}`
+- Java 9中引入`{@index}`
 
+以上新引入的javadoc注释不包括在上述文档中（原文档一直未更新）
+
+- 每个暴露的类，接口，构造函数，方法，字段声明都应该包含对应的注释（缺少时，javadoc重复对应的声明做为java文档）
+- 文档注释应当简洁描述方法和调用者直接的契约(contract): 包含前提条件，事后场景，副作用等。对于继承的方法例外，后者关注what而不是how的问题
+
+一个完整注释的例子——
+
+```
+/**
+* Returns the element at the specified position in this list. *
+* <p>This method is <i>not</i> guaranteed to run in constant
+* time. In some implementations it may run in time proportional * to the element position.
+*
+* @param index index of element to return; must be
+* non-negative and less than the size of this list
+* @return the element at the specified position in this list
+* @throws IndexOutOfBoundsException if the index is out of range
+*  ({@code index < 0 || index >= this.size()})
+*
+*/
+E get(int index);
+
+```
+
+说明：  
+- 支持HTML标记，例如`<p>`和`<i>`
+- `{@code}`标记的作用是：内容使用代码字体进行渲染；对应内容不需要进行HTML解析，例如小于号`<`。还可以将对应的内容再包装到`<pre>`标记中，可以保留换行记录
+
+对于应用于继承的方法的注释示例——
+
+```
+/**
+* Returns true if this collection is empty.
+*
+* @implSpec
+* This implementation returns {@code this.size() == 0}. 
+*
+* @return true if this collection is empty
+*/
+public boolean isEmpty() { ... }
+
+```
+
+说明：  
+
+- 需要使用`@implSpec`注释说明：自用`self-use`场景。描述方法和子方法的契约。
+- Java 9中依然会忽略`@implSpec`标记，需要显示启用`-tag "implSpec:a:Implementation Requirements:"`
+
+- 对于HTML特殊符号`<, > &`的注释可以使用`{@literal}`注释，它与`{@code}`类似，只是不采用代码字体进行渲染。
+- 使用时需要确保源码效果和文档效果都有可读性。例如`* A geometric series converges if {@literal |r| < 1}.` 注释中实际只是对小于号进行声明，但将整个表达式都做声明保留了源码中的可读性
+
+- 第一句做为方法的概述(summary description)。避免任何不同的两个方法有相同的概述。注意不要让概述中的字符本身截断了句子（默认句号+空格做为概述的结束）。例如——
+
+```
+/**
+* A college degree, such as B.S., {@literal M.S.} or Ph.D. */
+public class Degree { ... }
+```
+
+- Java 9中生成的javadoc，右上角的搜索框中输入文字是，会自动生成下拉列表显示当前页面的index；源码注释中的index可以显示的在搜索中成为关键字匹配
+
+```
+* This method complies with the {@index IEEE 754} standard.
+
+```
+
+- 范型、枚举类、注解。需要对所有类型进行文档注释
+
+范型示例——
+```
+/**
+* An object that maps keys to values. A map cannot contain * duplicate keys; each key can map to at most one value.
+*
+* (Remainder omitted)
+*
+* @param <K> the type of keys maintained by this map
+* @param <V> the type of mapped values
+*/
+public interface Map<K, V> { ... }
+```
+
+枚举示例——
+
+```
+/**
+* An instrument section of a symphony orchestra.
+*/
+public enum OrchestraSection {
+    /** Woodwinds, such as flute, clarinet, and oboe. */
+    WOODWIND,
+    /** Brass instruments, such as french horn and trumpet. */
+    BRASS,
+    /** Percussion instruments, such as timpani and cymbals. */
+    PERCUSSION,
+    /** Stringed instruments, such as violin and cello. */
+    STRING; 
+}
+```
+
+注解示例——
+
+```
+/**
+* Indicates that the annotated method is a test method that
+* must throw the designated exception to pass.
+*/
+@Retention(RetentionPolicy.RUNTIME)
+@Target(ElementType.METHOD)
+public @interface ExceptionTest {
+    /**
+    * The exception that the annotated test method must throw
+    * in order to pass. (The test is permitted to throw any
+    * subtype of the type described by this class object.)
+    */
+    Class<? extends Throwable> value();
+}
+```
+
+- 包级别的注释可以直接写在`package-info.java`中，如果采用模块系统，模块级别的注释写在`module-info.java`中
+
+- 如果某个API没有提供注释，Javadoc会自动搜索合适的注释。搜索算法中[JavaDoc指南](https://docs.oracle.com/javase/8/docs/technotes/tools/windows/javadoc.html)中有介绍
+- 生成的JavaDoc页面可以利用[W3C验证器](https://validator.w3.org/)验证其有效性
 

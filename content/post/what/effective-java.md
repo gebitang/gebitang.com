@@ -3472,7 +3472,7 @@ Optional对象必须要进行创建，初始化，读取值等操作，对性能
 
 是否严格在对象的属性中包含Optional类型？通常不是一种好方式，但有时也是正确的选择：对象的有些字段并不是“必须”的时候，当然可以选择Optional
 
-### Item 56: Write doccomments for all exposed API elements
+### Item 56: Write doc comments for all exposed API elements
 
 可用的API必须有注释。通常API文档需要手动维护，与源码的同步是一件苦差事。Java语言提供了Javadoc工具，可以直接从源码获取到文档：使用特殊到“文档注释”(documentation comments)
 

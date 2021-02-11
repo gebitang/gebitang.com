@@ -17,6 +17,69 @@ toc = true
 
 <!--more-->
 
+### 静态站点
+
+[Serving Static Sites with Go](https://www.alexedwards.net/blog/serving-static-sites-with-go)
+
+```go
+package main
+
+import (
+  "log"
+  "net/http"
+)
+
+func main() {
+  fs := http.FileServer(http.Dir("./static"))
+  http.Handle("/", fs)
+
+  log.Println("Listening on :3000...")
+  err := http.ListenAndServe(":3000", nil)
+  if err != nil {
+    log.Fatal(err)
+  }
+}
+```
+
+- Hugo生成静态站点
+- 使用上面的go脚本即可做为web服务器
+- `sudo certbot --nginx`自动更新配置(确保：nginx中`server_name`有对应的真实有效域名，并且域名配置了对应的公网IP（域名解析）)，还自动添加了301跳转
+- 欢迎访问备份blog站点[不想注册](https://blog.buxiangzhuce.com)
+
+```
+server {
+
+    server_name blog.buxiangzhuce.com;
+    index index.html index.htm;
+    charset utf-8;
+
+    location / {
+        proxy_pass http://127.0.0.1:1313;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_set_header X-Forwarded-Port $server_port;
+    }
+
+    listen 443 ssl; # managed by Certbot
+    ssl_certificate /etc/letsencrypt/live/blog.buxiangzhuce.com/fullchain.pem; # managed by Certbot
+    ssl_certificate_key /etc/letsencrypt/live/blog.buxiangzhuce.com/privkey.pem; # managed by Certbot
+    include /etc/letsencrypt/options-ssl-nginx.conf; # managed by Certbot
+    ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem; # managed by Certbot
+
+}
+
+server {
+    if ($host = blog.buxiangzhuce.com) {
+        return 301 https://$host$request_uri;
+    } # managed by Certbot
+
+   server_name blog.buxiangzhuce.com;
+    listen 80;
+    return 404; # managed by Certbot
+
+}
+```
+
 ### Wire 
 
 [go wire](https://github.com/google/wire) and [wire blog](https://blog.golang.org/wire)

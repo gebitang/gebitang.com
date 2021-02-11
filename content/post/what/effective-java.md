@@ -3605,3 +3605,49 @@ public @interface ExceptionTest {
 - 如果某个API没有提供注释，Javadoc会自动搜索合适的注释。搜索算法中[JavaDoc指南](https://docs.oracle.com/javase/8/docs/technotes/tools/windows/javadoc.html)中有介绍
 - 生成的JavaDoc页面可以利用[W3C验证器](https://validator.w3.org/)验证其有效性
 
+## 8 General Programming
+
+本章讨论Java语言的具体细节。包括本地变量；控制结构；类库；数据类型；以及两个语言之外的东西：反射和原生方法；还包括优化和命名规范。
+
+### Item 57: Minimize the scope of local variables
+
+与旧式的C语言不同，Java允许在任何地方进行变量声明。
+
+- 最有效的方式是：在第一次使用前进行变量声明（方便控制变量周期）
+- 几乎所有的变量声明都应该进行初始化。例外是当变量初始化可能抛出异常时，在try-catch语句中进行初始化。
+- 循环中的变量声明。使用for循环方式优先while循环。前者可以自动限制变量的生命周期，后者扩大了变量周期，随意性可能导致问题。对比——
+
+```
+// Preferred idiom for iterating over a collection or array
+for (Element e : c) {
+    ... // Do Something with e
+}
+
+ // Idiom for iterating when you need the iterator
+for (Iterator<Element> i = c.iterator(); i.hasNext(); ) {
+    Element e = i.next();
+    ... // Do something with e and i
+}
+
+# 出现复制错误，for-loop方式下不会出现
+Iterator<Element> i = c.iterator();
+while (i.hasNext()) {
+    doSomething(i.next());
+}
+...
+Iterator<Element> i2 = c2.iterator(); while (i.hasNext()) { // BUG!
+       doSomethingElse(i2.next());
+   }
+
+```
+
+使用for-loop循环的另外一个好处是代码更简洁，同时可以确保初始化判断只执行一次，例如——
+
+```
+for (int i = 0, n = expensiveComputation(); i < n; i++) {
+       ... // Do something with i;
+}
+```
+
+- 最后一条——短小，聚焦
+

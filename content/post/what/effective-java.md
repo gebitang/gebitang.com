@@ -3651,3 +3651,78 @@ for (int i = 0, n = expensiveComputation(); i < n; i++) {
 
 - 最后一条——短小，聚焦
 
+### Item 58: Prefer for-each loops to traditional for loops
+
+使用for-each类型的循环代替传统的循环方式。
+
+```
+// Not the best way to iterate over a collection!
+for (Iterator<Element> i = c.iterator(); i.hasNext(); ) {
+    Element e = i.next();
+    ... // Do something with e
+}
+
+// Not the best way to iterate over an array!
+for (int i = 0; i < a.length; i++) {
+    ... // Do something with a[i]
+}
+```
+
+传统的循环中有很多琐碎代码，迭代器和index都不是必须的。for-each循环被官方称为“增强的循环”(enhanced for statement)，没有性能损失。
+
+```
+// The preferred idiom for iterating over collections and arrays
+for (Element e : elements) {
+    ... // Do something with e
+}
+```
+
+在嵌套循环中，增强循环类型更有优势，下面都传统循环方式包含了bug——
+
+```
+// Can you spot the bug?
+enum Suit { CLUB, DIAMOND, HEART, SPADE }
+enum Rank { ACE, DEUCE, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT,
+    NINE, TEN, JACK, QUEEN, KING }
+
+static Collection<Suit> suits = Arrays.asList(Suit.values());
+static Collection<Rank> ranks = Arrays.asList(Rank.values());
+List<Card> deck = new ArrayList<>();
+for (Iterator<Suit> i = suits.iterator(); i.hasNext(); )
+    for (Iterator<Rank> j = ranks.iterator(); j.hasNext(); )
+        deck.add(new Card(i.next(), j.next()));
+```
+内部循环对`i.next()`的调用超过了期待。很可能抛出`NoSuchElementException`的异常。应当在外层循环保留循环的值，再传递到内部循环中——
+
+```
+for (Iterator<Suit> i = suits.iterator(); i.hasNext(); ) {
+    Suit suit = i.next();
+    for (Iterator<Rank> j = ranks.iterator(); j.hasNext(); )
+        deck.add(new Card(suit, j.next()));
+}  
+```
+
+使用for-each循环方式，代码更简洁且不会出现上面的问题——
+
+```
+// Preferred idiom for nested iteration on collections and arrays
+for (Suit suit : suits)
+    for (Rank rank : ranks)
+        deck.add(new Card(suit, rank));
+```
+
+增强循环的限制——
+
+- 有损过滤(Destructive filtering)。如果需要移除集合中的特定元素，需要使用传统的index循环方式
+- 变换(Transforming)。需要对集合中的元素进行替换时需要使用index循环方式
+- 并行迭代(Parallel iteration)。使用传统循环方式
+
+事实上，任何实现了`Iterable`接口的对象都可以使用for-each增强循环方式。尽管实现自己都`iterator`有点麻烦。
+
+```
+public interface Iterable<E> {
+    // Returns an iterator over the elements in this iterable
+    Iterator<E> iterator();
+}
+```
+

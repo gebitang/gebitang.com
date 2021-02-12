@@ -30,7 +30,7 @@ import (
 )
 
 func main() {
-  fs := http.FileServer(http.Dir("./static"))
+  fs := http.FileServer(http.Dir("./static")) //absolute path if necessary
   http.Handle("/", fs)
 
   log.Println("Listening on :3000...")
@@ -42,9 +42,26 @@ func main() {
 ```
 
 - Hugo生成静态站点
-- 使用上面的go脚本即可做为web服务器
+- 使用上面的go脚本(保存为blog.go，编译`go build blog.go`，生成blog可执行文件)即可做为web服务器
 - `sudo certbot --nginx`自动更新配置(确保：nginx中`server_name`有对应的真实有效域名，并且域名配置了对应的公网IP（域名解析）)，还自动添加了301跳转
 - 欢迎访问备份blog站点[不想注册](https://blog.buxiangzhuce.com)
+- 设置为service服务，下面的内容保存为`/etc/systemd/system/blog.service`，执行`systemctl restart blog.service`期待服务
+- 执行`journalctl -u blog.service`查看此服务的log信息
+
+```
+[Unit]
+Description=Blog Daemon
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=/home/geb/blog
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
+
+```
 
 ```
 server {

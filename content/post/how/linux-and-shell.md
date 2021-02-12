@@ -334,6 +334,26 @@ systemctl daemon-reload
 systemctl enable rc.local.service
 ```
 
+最小配置——
+
+```
+[Unit]
+After=mysql.service
+
+[Service]
+ExecStart=/usr/local/bin/disk-space-check.sh
+
+[Install]
+WantedBy=default.target
+```
+
+- **After:** Instructs systemd on when the script should be run. In our case the script will run after mysql database has started. Other example could be `network.target` etc.
+- **ExecStart:** This field provides a full path the actual script to be execute
+- **WantedBy:** Into what boot target the systemd unit should be installed
+
+其它配置参考`man systemd.service`或[systemd.service.html](https://www.freedesktop.org/software/systemd/man/systemd.service.html)
+
+
 ### use oh my zsh
 [oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh)
 

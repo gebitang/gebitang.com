@@ -27,9 +27,11 @@ package main
 import (
   "log"
   "net/http"
+  "os"
 )
 
 func main() {
+  // fs := http.FileServer(HTMLDir{http.Dir("./static")})
   fs := http.FileServer(http.Dir("./static")) //absolute path if necessary
   http.Handle("/", fs)
 
@@ -38,6 +40,23 @@ func main() {
   if err != nil {
     log.Fatal(err)
   }
+}
+
+type HTMLDir struct {
+	d http.Dir
+}
+
+// https://stackoverflow.com/a/57281956/1087122
+func (d HTMLDir) Open(name string) (http.File, error) {
+	// Try name as supplied
+	f, err := d.d.Open(name)
+	if os.IsNotExist(err) {
+		// Not found, try with .html
+		if f, err := d.d.Open(name + ".html"); err == nil {
+			return f, nil
+		}
+	}
+	return f, err
 }
 ```
 

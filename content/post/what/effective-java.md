@@ -3726,3 +3726,67 @@ public interface Iterable<E> {
 }
 ```
 
+### Item 59: Know and use the libraries
+
+```
+// Common but deeply flawed!
+static Random rnd = new Random();
+static int random(int n) {
+    return Math.abs(rnd.nextInt()) % n;
+}
+```
+上例中有三个隐藏问题：
+- 如果n是2的低次幂，很快随机数就会重复
+- 如果n不是2的幂次方，有些随机数返回的概率更大，尤其当n的值较大时（下面的例子说明）
+- 极少数情况下，random方法将出现失败情况，返回值超出特定范围（因为使用`Math.abs`方法返回正数，如果`netxInt()`返回了`Integer.MIN_VALUE`，`Math.abs`也返回`Integer.MIN_VALUE`，此时余数方法`%`将返回一个负数。假设n不是2的幂次方，此时当前方法将必然失败）并且很难复现
+
+
+```
+public static void main(String[] args) {
+    int n = 2 * (Integer.MAX_VALUE / 3);
+    int low = 0;
+    for (int i = 0; i < 1000000; i++)
+        if (random(n) < n/2)
+            low++;
+    System.out.println(low);
+}
+
+```
+
+要写出一个好的随机数生成方法，需要了解不少以下知识才行——
+
+- 伪随机数生成器(pseudorandom number generators)
+- 数论(number theory)
+- 整数二进制补码的数学原理(two's complement arithmetic)
+
+幸运的时你也可以不需要了解，直接使用库方法`Random.nextInt(int)`即可。
+
+使用库方法的五大好处——
+
+- 第一，利用专家知识和经验
+
+上述库函数有高级算法工程师花费很多时间设计、实现、测试验证并经过专家评审以确保正确，即使出现问题也会很快发布修复版本。
+
+现在大部分场景下的随机数相关使用`ThreadLocalRandom`类；并行计算场景下使用`SplittableRandom`
+
+- 第二，不需要浪费时间实现只跟自身场景相关的算法，更应该关注在业务点上
+
+- 第三，随着时间推移，库方法性能会进一步提高（因为它们在工业级别大量使用，维护的组织有充分动力进行优化。实际上，Java平台库这些年来的性能有显著提示——
+
+- 第四，功能会越来越丰富
+- 第五，让代码更主流。更容易阅读，维护，重用。
+
+但很多程序员不去用，为什么？因为不知道。每次大版本发布都会有大量功能加入。
+
+需要掌握的基础库——
+
+- `java.lang`
+- `java.util`
+- `java.io`
+- 集合框架`the collections framework` 
+- 流处理`the streams library`
+- `java.util.concurrent`
+
+基础库无法满足要求时，优先考虑优质第三方库，例如`google guava`
+
+最后才考虑重复造轮子。（当然，进行研究学习时，鼓励造轮子）

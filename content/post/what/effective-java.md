@@ -3790,3 +3790,74 @@ public static void main(String[] args) {
 基础库无法满足要求时，优先考虑优质第三方库，例如`google guava`
 
 最后才考虑重复造轮子。（当然，进行研究学习时，鼓励造轮子）
+
+### Item 60: Avoid float and double if exact answers are required
+
+float和double是为工程科学计算而设计的，计算时使用"二进制浮点计算"(binary floating-point arithmetic)，获取的是近似值。
+
+需要获取精确值时，不要使用。尤其是涉及到货币计算时使用这两种类型尤其有问题。参考下例——
+
+```
+System.out.println(1.03 - 0.42);
+#  0.6100000000000001
+
+System.out.println(1.00 - 9 * 0.10);
+# 0.09999999999999998
+```
+
+计算：一美元买10美分、20美分、30美分……的东西(每个比前一个贵10美分)，一共可以购买多少个？
+
+采用double计算时——
+
+```
+// Broken - uses floating point for monetary calculation!
+public static void main(String[] args) {
+    double funds = 1.00;
+    int itemsBought = 0;
+    for (double price = 0.10; funds >= price; price += 0.10) {
+        funds -= price;
+        itemsBought++;
+    }
+    System.out.println(itemsBought + " items bought.");
+    System.out.println("Change: $" + funds);
+}
+```
+
+提示只能购买3个，还剩`0.3999999999999999`。显然是错误的结果。涉及到货币计算时，使用`BigDecimal`，`int`或者`long`。例如使用BigDecimal的方式（使用String方式构造函数）——
+
+```
+public static void main(String[] args) {
+    final BigDecimal TEN_CENTS = new BigDecimal(".10");
+    int itemsBought = 0;
+    BigDecimal funds = new BigDecimal("1.00"); 
+    for (BigDecimal price = TEN_CENTS;
+            funds.compareTo(price) >= 0;
+            price = price.add(TEN_CENTS)) {
+        funds = funds.subtract(price);
+        itemsBought++;
+    }
+    System.out.println(itemsBought + " items bought.");
+    System.out.println("Money left over: $" + funds);
+}
+```
+
+这种方式有两个问题：一是写起来复杂，二是计算速度慢。使用int的方式——
+
+```
+ public static void main(String[] args) {
+    int itemsBought = 0;
+    int funds = 100;
+    for (int price = 10; funds >= price; price += 10) {
+        funds -= price;
+        itemsBought++;
+    }
+    System.out.println(itemsBought + " items bought.");
+    System.out.println("Cash left over: " + funds + " cents");
+}
+```
+
+- 精度小于8位，使用int
+- 精度不超过18位，使用long
+- 精度超过18位，使用BigDecimal
+
+

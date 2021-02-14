@@ -114,6 +114,12 @@ C:yes sure , have a great day
 
 ---
 
+[International SIM card/UK Travel SIM card (Auto profile selection SIM) - Sim Expiration](https://www.worldsim.com/faqs?___store=global)
+
+>If your sim is not used or topped up for 12 months, the sim will automatically be deactivated after 12 months from last use, and the mobile number and any unused credit will be lost.
+
+>If you do not use the SIM card to make at least one chargeable call within a period of 12 months this agreement may terminate automatically and shall be deemed to be terminated by you.
+
 [https://toomanyadapters.com/international-sim-card-comparison/](https://toomanyadapters.com/international-sim-card-comparison/)
 [http://www.twobirdsbreakingfree.com/best-international-sim-cards-travel.html](http://www.twobirdsbreakingfree.com/best-international-sim-cards-travel.html)
 

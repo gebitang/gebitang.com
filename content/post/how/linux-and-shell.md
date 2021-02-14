@@ -14,6 +14,26 @@ toc = true
 
 ## Mac shell
 
+### 删除以中划线开头的文件
+
+直接使用`rm -fine.name`报错`rm: illegal option -- 8`
+
+[How to remove files starting with double hyphen](https://stackoverflow.com/questions/706196/how-to-remove-files-starting-with-double-hyphen)
+
+- 使用当前路径+文件名方式，例如`rm ./-fine.name`
+- 使用`rm -- --testings.html`方式
+- 使用node的删除方式，见下
+
+```
+➜  special ls -ilrt ./
+total 240
+679155 -rw-r--r-- 1 root root 243308 Feb 14 01:14 -e1T_oEsUcY.jpg
+➜  special ls
+-e1T_oEsUcY.jpg
+➜  special find ./ -inum 679155 -exec rm {} \;
+➜  special ls
+```
+
 ### support sz rz 
 
 use [iterm2-zmodem](https://github.com/luxihk/iterm2-zmodem)  
@@ -980,7 +1000,7 @@ Bus 001 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
 ```
 #打包
 # -c Create a new archive containing the specified items.
-# -z (c mode only) Compress the resulting archive with gzip(1).
+# -z (c mode only) Compress the resulting archive with gzip(1). 使用此参数将丢失原始文件的修改时间戳
 # -v Produce verbose output.
 # -f Read the archive from or write the archive to the specified file.
 tar -czvf ycdh.tar.gz ycdh.jar ycdh_lib tools config log4j.properties build.properties dh.sh noLog.sh updateself.sh

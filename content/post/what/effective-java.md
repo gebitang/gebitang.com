@@ -3860,4 +3860,72 @@ public static void main(String[] args) {
 - 精度不超过18位，使用long
 - 精度超过18位，使用BigDecimal
 
+### Item 61: Prefer primitive types to boxed primitives
+
+Java包含两种类型系统：原始类型，例如`int, double, boolean`；引用类型，例如`String, List`。
+
+每一种原始类型都有对应的引用类型，被称为“装箱原始类型”(boxed primitive)，例如`int, double, boolean`对应的引用类型分别是`Integer, Double, Boolean`。
+
+原始类型和装箱的原始类型主要有三点不同——
+
+- 原始类型只有值；装箱的原始类型还包含与其代表的值不同的“身份”(identitiy)，这表示两个装箱原始类型实例的值可以相同，但有不同的“身份”
+- 原始类型只有函数值(functional value)，装箱的原始类型另外还有一个非函数值`null`
+- 原始类型比装箱的原始类型更有效率（时间空间效率）
+
+演示一些错误示例——
+
+```
+// Broken comparator - can you spot the flaw?
+Comparator<Integer> naturalOrder =
+    (i, j) -> (i < j) ? -1 : (i == j ? 0 : 1);
+```
+调用`naturalOrder.compare(new Integer(42), new Integer(42))`将得到1而不是0。装箱的原始类型使用`=`操作符几乎总会出错（等号进行“身份/同一性”对比）
+
+使用变量进行自动拆箱——
+
+```
+Comparator<Integer> naturalOrder = (iBoxed, jBoxed) -> {
+    int i = iBoxed, j = jBoxed; // Auto-unboxing
+    return i < j ? -1 : (i == j ? 0 : 1);
+};
+```
+
+第二个——
+
+```
+public class Unbelievable {
+    static Integer i;
+    public static void main(String[] args) {
+        if (i == 42)
+            System.out.println("Unbelievable");
+    } 
+}
+```
+
+将抛出空指针异常。因为装箱的原始类型默认值是null，类似于引用类型的默认出生值。此例中声明为原始类型int则不会抛出异常
+
+第三个——
+
+```
+// Hideously slow program! Can you spot the object creation?
+public static void main(String[] args) {
+    Long sum = 0L;
+    for (long i = 0; i < Integer.MAX_VALUE; i++) {
+        sum += i;
+    }
+    System.out.println(sum);
+}
+```
+
+由于sum被声明为装箱的原始类型，每一次循环都会进行自动拆箱装箱操作，导致性能极大降低。
+
+那么什么情况下使用装箱的原始类型(而不是原始类型)呢？
+
+- 做为集合的元素、key或value时
+- 在参数化类型和参数化方法中只能使用装箱的原始类型，例如必须使用`ThreadLocal<Integer>`，不能使用`ThreadLocal<int>`
+- 反射调用时必须使用装箱的原始类型
+
+
+
+
 

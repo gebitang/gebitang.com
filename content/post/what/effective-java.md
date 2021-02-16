@@ -3925,7 +3925,74 @@ public static void main(String[] args) {
 - 在参数化类型和参数化方法中只能使用装箱的原始类型，例如必须使用`ThreadLocal<Integer>`，不能使用`ThreadLocal<int>`
 - 反射调用时必须使用装箱的原始类型
 
+### Item 62: Avoid strings where other types are more appropriate
 
+String被设计用来表示“文本”。如果对象时间表示的含义不是“文本”，强烈建议不要使用String类型。
 
+当数据来自文件、网络、键盘输入时，形式都是文本。通常人们将此数据一直保持为String类型。但如果数据实际但类型是数值、是否、枚举含义时，应当将其做对应的转换。
+
+- 值类型：int, float, BigInteger
+- 枚举类型
+- 聚合类型(aggregate type)：当对象包含多个组件时，不要使用String类型对其进行表示，例如——
+
+```
+// Inappropriate use of string as aggregate type
+String compoundKey = className + "#" + i.next();
+```
+
+- 素质(capability)，或称为“不可更改的key”(unforgeable key)
+
+有时string被用来进行功能访问，例如对本地线程提供变量设施(variable facility)
+
+```
+// Broken - inappropriate use of string as capability!
+public class ThreadLocal {
+    private ThreadLocal() { } // Noninstantiable
+    // Sets the current thread's value for the named variable.
+    public static void set(String key, Object value);
+    // Returns the current thread's value for the named variable.
+    public static Object get(String key);
+}
+```
+
+由于String使用共享的全局命名空间，上例中如果多个线程无意中使用了相同的String做为key，将导致意外。
+
+修复方式——
+
+```
+public class ThreadLocal {
+    private ThreadLocal() { }  // Noninstantiable
+    public static class Key {  // (Capability)
+        Key() { }
+    }
+    // Generates a unique, unforgeable key
+    public static Key getKey() {
+        return new Key();
+    }
+    public static void set(Key key, Object value);
+    public static Object get(Key key);
+}
+```
+这种情况下，也不需要再使用静态方法，不需要使用key表示本地变量，变量本身就属于当前线程——
+
+```
+public final class ThreadLocal {
+    public ThreadLocal();
+    public void set(Object value);
+    public Object get();
+}
+```
+
+上面情况的问题是使用时还需要对获取到的对象进行转换，进一步的优化——
+
+```
+public final class ThreadLocal<T> {
+    public ThreadLocal();
+    public void set(T value);
+    public T get();
+}
+```
+
+这其实就是`java.lang.ThreadLocal`提供的API的简易版本。
 
 

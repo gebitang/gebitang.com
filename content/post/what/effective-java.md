@@ -3995,4 +3995,35 @@ public final class ThreadLocal<T> {
 
 这其实就是`java.lang.ThreadLocal`提供的API的简易版本。
 
+### Item 63: Beware the performance of string concatenation
+
+字符串连接操作(`+`)可以方便地将数个字符串连接为一个。如果字符串不多，且大小固定，可以使用这种操作。
+
+n个字符串使用`+`号连接时消耗的时间是n的平方，这是因为string属于不可变对象，当两个字符串连接时，两个内容都需要做拷贝，——所以性能很差
+
+```
+// Inappropriate use of string concatenation - Performs poorly!
+public String statement() {
+    String result = "";
+    for (int i = 0; i < numItems(); i++)
+        result += lineForItem(i);  // String concatenation
+    return result;
+}
+```
+
+当数值很大时，上面的操作性能非常糟糕。应当使用`StringBuilder`代替String，并且最后事先声明其长度，避免自动扩展导致的性能损失——
+
+```
+public String statement() {
+StringBuilder b = new StringBuilder(numItems() * LINE_WIDTH); 
+for (int i = 0; i < numItems(); i++)
+    b.append(lineForItem(i)); return b.toString();
+}
+```
+
+第一种方法是item的平方级别；第二张是线性级别。
+
+总之，除非不考虑性能，或者字符串不多，否则不要使用字符串`+`操作，使用`StringBuilder`做为替代。
+
+（即使Java 6以来对字符串`+`操作做了大量改进，性能相比`StringBuilder`依然有巨大差距）
 

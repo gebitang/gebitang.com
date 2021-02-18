@@ -4027,3 +4027,33 @@ for (int i = 0; i < numItems(); i++)
 
 （即使Java 6以来对字符串`+`操作做了大量改进，性能相比`StringBuilder`依然有巨大差距）
 
+### Item 64: Refer to objects by their interfaces
+
+当对应的接口存在时，在参数、返回值、变量声明、字段定义等场景下，都应该优先使用接口类型。例如：
+
+使用——
+
+```
+// Good - uses interface as type
+Set<Son> sonSet = new LinkedHashSet<>();
+```
+
+而不是——
+
+```
+// Bad - uses class as type!
+LinkedHashSet<Son> sonSet = new LinkedHashSet<>();
+```
+
+当使用接口时，做变更时只需要对对应的声明做不同的实现即可，例如上例中使用`HashSet<>()`代替`LinkedHashSet`。其它对应的代码都不需要做变更。
+
+需要注意的时，如果对应代码使用了某个实现类特有的方法时，做对应的替换时需要确保替换的类实现也有对应的功能实现。
+
+使用接口方式，还可以确保客户端调用的兼容问题。即使将声明和对应的代码都做了对应的修改，但客户端调用时如果依赖修改前的实现，将会引起编译问题。
+
+有时候，需要使用类声明代替接口声明——
+
+- 没有对应的接口类。例如值类型类`String`或`BigInteger`。值类型类很少包含多种不同实现，方法也大多数final类型，很少有对应的接口类。（这种情况下，可以直接使用类声明）
+- 使用的框架基于class，没有合适的接口类。`java.io`下的类例如`OutputStream`都属于这种类型。这种情况下，尽量使用对应的抽象类
+- 实现接口的类提供了额外的接口中未定义的方法。例如`PriorityQueue`包含一个comarator方法在接口`Queue`中未定义，当程序需要依赖此额外方法时，声明时使用类，而不是接口方式
+

@@ -4057,3 +4057,70 @@ LinkedHashSet<Son> sonSet = new LinkedHashSet<>();
 - 使用的框架基于class，没有合适的接口类。`java.io`下的类例如`OutputStream`都属于这种类型。这种情况下，尽量使用对应的抽象类
 - 实现接口的类提供了额外的接口中未定义的方法。例如`PriorityQueue`包含一个comarator方法在接口`Queue`中未定义，当程序需要依赖此额外方法时，声明时使用类，而不是接口方式
 
+### Item 65: Prefer interfaces to reflection
+
+反射机制`java.lang.reflect`提供动态访问任意类的能力。任意一个Class对象，可以利用反射访问构造函数`Constructor`，方法`Method`，属性字段`Field`。
+
+即使在包含反射机制的类编译时不存在的类，也可以通过反射进行访问。
+
+不过，反射有以下问题——
+
+- 无法享受编译期检查的好处。如果通过反射访问不存在的方法，只能在运行时抛出异常
+- 反射代码通常笨拙而又冗长(clumsy and verbose)
+- 反射方法比正常调用低效很多。具体多少很难评估，受多种因素限制，但直观感受：仅调用一个不包含参数的方法就比正常调用慢11倍左右
+
+但有些代码分析工具和依赖注入框架的代码需要用到反射。看一个例子——“接受第一个命令行参数命名的`Set<String>`类型，打印剩余的参数列表”
+
+```
+// Reflective instantiation with interface access
+public static void main(String[] args) {
+    // Translate the class name into a Class object
+    Class<? extends Set<String>> cl = null;
+    try {
+        cl = (Class<? extends Set<String>>) // Unchecked cast!
+                Class.forName(args[0]);
+    } catch (ClassNotFoundException e) {
+        fatalError("Class not found.");
+    }
+    // Get the constructor
+    Constructor<? extends Set<String>> cons = null;
+    try {
+        cons = cl.getDeclaredConstructor();
+    } catch (NoSuchMethodException e) {
+        fatalError("No parameterless constructor");
+    }
+    // Instantiate the set
+    Set<String> s = null;
+    try {
+        s = cons.newInstance();
+    } catch (IllegalAccessException e) {
+        fatalError("Constructor not accessible");
+    } catch (InstantiationException e) {
+        fatalError("Class not instantiable.");
+    } catch (InvocationTargetException e) {
+        fatalError("Constructor threw " + e.getCause());
+    } catch (ClassCastException e) {
+        fatalError("Class doesn't implement Set");
+    }
+    // Exercise the set
+    s.addAll(Arrays.asList(args).subList(1, args.length));
+    System.out.println(s);
+}
+private static void fatalError(String msg) {
+    System.err.println(msg);
+    System.exit(1);
+}
+
+```
+
+上述例子演示了使用反射的两个缺点——
+
+- 第一，运行期可能抛出六种不同的异常，如果不使用反射，这六种异常在编译期就会被检查出来
+- 第二，需要二十五行代码完成实例的创建，正常使用时只需要一行代码 
+
+Java 7引入了`ReflectiveOperationException`这一各种反射异常的超类/父类。可以替换上述异常。
+
+一些复杂的系统编程任务中需要利用到反射机制。如果代码必须应对在编译期未知的类，应当使用反射。
+
+(总之能不用就不用吧- -)
+

@@ -52,6 +52,8 @@ Virtual Number can't receive text message.
 
 All prepaid credit and unused data packages will expire nine (9) months after the last prepaid credit purchase, unless otherwise stated. Any prepaid credit balance and unused data packages remaining in the account will expire if the customer does not make another prepaid credit purchase for a period of nine months. KnowRoaming allows a grace period of seven calendar days following the credit expiration date in order to purchase more credit and retain the prepaid balance and unused data packages.
 
+[As long as an account is in good standing with at least $5 (USD) in credit, we will not place limitations on the user’s ability to access our network. ](https://support.knowroaming.co/support/solutions/articles/2100023132-prepaid-services)
+
 ---
 
 M:does it(WorldSIM International SIM Card) cost any fee for receiving text message?

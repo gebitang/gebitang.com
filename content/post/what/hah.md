@@ -68,5 +68,7 @@ toc = true
   "pure-u-1-1|https://s3-img.meituan.net/v1/mss_3d027b52ec5a4d589e68050845611e68/ff/n0/0m/5x/s3_488963.jpg|华与华"
 >}}
 
+- 2021年1月5日，华杉在读客文化公司的年会上，做了题为[华杉2021读客年会演讲：习惯共同体](https://mp.weixin.qq.com/s/2w9XQFeORrCknntvheq-ww)的演讲
+- 2021年1月30日，华与华·浙江传媒学院超级符号研究所，在杭州召开了2021第一次超级符号学术研讨会。华杉在此次研讨会上所做的发言内容：[华与华超级符号理论的学术新发展](https://mp.weixin.qq.com/s/cotgw37JtdVm4Vv5IcMcYw)
 
 

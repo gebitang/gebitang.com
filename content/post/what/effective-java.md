@@ -4174,6 +4174,39 @@ Java本地调用(JNI: Java Native Interface)允许程序调用C或C++边写的�
 
 当然，算法本身导致的性能问题需要先做对应的优化。
 
+### Item 68: Adhere to generally accepted naming conventions
+
+[命名规范](https://docs.oracle.com/javase/specs/jls/se8/html/jls-6.html)通常分为两类：有关印刷的、有关语法上的
+
+印刷相关的包括：包、类、接口、方法、属性、类型变量——通常千万不要违背对应的命名规范
+
+**包**：使用句号并且以组件进行分割。通常使用小写字母，很少包含数字。对外使用的包使用域名的反序形式，例如`edu.cmu`, `com.google`, `org.eff`。  标准库除外，例如以`java`，`javax`开头的。
+
+接下来的包名称应当包含一或两个描述包信息的名字，尽量不超过8个字符，可以使用缩略。例如 `utl`, `awt`
+
+**类或接口**包括枚举类和注解：应当包含一个或多个单词。例如`List`，`FutureTask`。避免使用缩写除非是一些通用缩写，例如`min`和`max`。至于是`HTTPURL`还是`HttpUrl`尚无定论
+
+**方法或属性**：跟类或接口的规范相同，至少第一个字母应当小写。例如`remove`，`ensureCapacity`
+
+
+|Identifier Type |Examples|
+|---------|---------|
+|Package or module| org.junit.jupiter.api, com.google.common.collect|
+|Class or Interface |Stream, FutureTask, LinkedHashMap, HttpClient|
+|Method or Field |remove, groupingBy, getCrc|
+|Constant Field |MIN_VALUE, NEGATIVE_INFINITY|
+|Local Variable |i, denom, houseNum|
+|Type Parameter |T, E, K, V, X, R, U, V, T1, T2|
+
+
+语法相关的就比较灵活了。多学习，使用通用常识。一般的例子——
+
+`Thread`, `PriorityQueue`, `ChessPiece`——一两个单词的名词实例；  
+`Collectors`, `Collections`通用方法；  
+`BindingAnnotation`, `Inject`, `ImplementedBy`, `Singleton`注解方法名；  
+`append`, `drawImage`表动作的方法名；`isDigit`, `isProbablePrime`, `isEmpy`, `isEnabled`, `hasSiblings`, 表状态的方法名；  
+`toString`, `toArray`的变换方法名；`asList`转换类型方法；`intValue`, `getInstance`, `newInstance`等。
+
 
 
 

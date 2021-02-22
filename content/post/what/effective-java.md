@@ -4151,6 +4151,29 @@ Java本地调用(JNI: Java Native Interface)允许程序调用C或C++边写的�
 (again, 总之能不用就不用吧- -)
 
 
+### Item 67: Optimize judiciously 
+
+谨慎优化。人人都应该知道这有三条关于优化的格言——
+
+>More computing sins are committed in the name of efficiency(without neccessarily achieving it) than any other single reason--including blind stupidity. —— William A. Wulf    
+>以优化(没有最终实现)为名而导致的计算问题比其他任何一种原因(包括盲目地愚蠢)都要多。—— William A. Wulf
+
+>We should forget about small efficiencies, say about 97% of the time: premature optimization is the root of all evil. —— Donald E. Knuth    
+>97%的情况下，我们应该忘记小的效率提高：过早的优化是万恶之源 —— Donald E. Knuth
+
+>在优化方面，我们遵守两条原则——  
+> 规则一： 不用做(优化)  
+> 规则二：（仅针对专家）直到你有了清晰完美无法再优化的解决方案之前，不要做(优化)。  
+> —— M. A. Jackson
+
+- 努力写好的程序而不是快的程序。如果好的程序不够快，架构本身会运行你进行优化而不影响系统本身
+- 避免设计原因导致的性能限制。不同组件间交互或与外部世界交互的部分一旦确定将很难改变。例如API，底层协议，格式化数据等
+- 优化前后要对性能做对比。有可能优化的部分并没有提供总体性能，常识来说，系统会在10%的代码上耗费90%的时间
+
+性能分析工具(Profiler)可以帮助定位应当在哪里进行优化。Java的性能优化比其他语言更难一些，因为“抽象差距”(abstruction gap)更大：程序员写的代码和实际执行的代码（因为虚拟机的存在?）另外，不同平台上的不同实现也可能导致相同的代码有不同的表现，优化需要对不同的平台分别进行测量评估
+
+当然，算法本身导致的性能问题需要先做对应的优化。
+
 
 
 

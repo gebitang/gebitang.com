@@ -4207,6 +4207,63 @@ Java本地调用(JNI: Java Native Interface)允许程序调用C或C++边写的�
 `append`, `drawImage`表动作的方法名；`isDigit`, `isProbablePrime`, `isEmpy`, `isEnabled`, `hasSiblings`, 表状态的方法名；  
 `toString`, `toArray`的变换方法名；`asList`转换类型方法；`intValue`, `getInstance`, `newInstance`等。
 
+## Exceptions
+
+使用得当，异常可以提高程序可读性、可靠性、可维护性；使用不当，效果相反。
+
+### Item 69: Use exceptions only for exceptional conditions
+
+走“正道”，不要“奇技淫巧”。
+
+```
+// Horrible abuse of exceptions. Don't ever do this!
+try {
+    int i = 0;
+    while(true)
+        range[i++].climb();
+} catch (ArrayIndexOutOfBoundsException e) {
+}
+```
+
+上面这种就属于“奇技淫巧”，利用异常来中止循环。基于错误的原因(既然虚拟机会检查数组访问的边界，一般循环中的边界检查就不需要了)做出的提升性能的处理。
+
+这种原因有三点错误——
+
+- 第一，异常是为异常场景设计的，Java虚拟机的实现没有动机为此做性能优化
+- 第二，在try-catch语句块中的代码会抑制某些虚拟机原本会执行的优化
+- 第三，传统的循环中对数组的检查并不是不必要的，需要虚拟机实现会对此做优化
+
+实际上，上面的代码性能反而更差。不但如此，还可能导致其他的异常情况。如果循环体中有其他的数组访问并且出现了越界情况，那么catch将忽略此异常，中止循环…… 
+
+“正道”是异常就用在异常场景下，不要用于流程控制，即使可能提高性能。
+
+```
+for (Moutain m: range) 
+    m.climb();
+```
+
+API设计时也应当如此，有“状态依赖”(state-dependent)的方法应该做对应的判断，而不是利用“状态依赖”做流程控制，例如——
+
+```
+// Do not use this hideous code for iteration over a collection!
+try {
+    Iterator<Foo> i = collection.iterator();
+    while(true) {
+        Foo foo = i.next();
+        ...
+    }
+} catch (NoSuchElementException e) {
+}
+```
+
+“正道”方式——
+
+```
+for (Iterator<Foo> i = collection.iterator(); i.hasNext(); ) {
+    Foo foo = i.next();
+    ...
+}
+```
 
 
 

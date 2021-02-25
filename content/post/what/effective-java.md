@@ -4265,5 +4265,24 @@ for (Iterator<Foo> i = collection.iterator(); i.hasNext(); ) {
 }
 ```
 
+### Item 70:  Use checked exceptions for recoverable conditions and runtime exceptions for programming errors
+
+这句也算来自官方[文章](https://docs.oracle.com/javase/tutorial/essential/exceptions/runtime.html)——
+
+> If a client can reasonably be expected to recover from an exception, make it a checked exception. If a client cannot do anything to recover from the exception, make it an unchecked exception.
+> 如果客户端预期可以从异常中恢复，使用可检查的异常；如果不能，则使用非检查异常。
+
+Java提供了三类异常类型(Throwable)：检查异常(checked exceptions)、运行时异常(runtime exceptions)、错误(errors)
+
+“检查异常”(checked exception)和“非检查异常”(unchecked exception)是从编译检查来说的。编译期会检查的异常被称为“检查异常”，例如，IO异常`IOException`；编译期不检查的称为“非检查异常”，例如，运行时异常、空指针异常、数组越界异常等
+
+检查异常要求调用方处理此类异常信息(catch或进行忽略)，属于方法API的一部分（特定场景下，此方法会出现跑场异常的场景）。
+
+非检查异常表示程序运行时违反了某些“前置条件”(precondition violation)。例如，数组越界异常`ArrayIndexOutOfBoundsException`表示违反了数组访问的前置条件。
+
+尽管JAVA规范没有要求，但通用的规范是错误(errors)都保留给Java虚拟机使用。表示程序不应当继续执行了（继续执行更大可能带来更大的错误）。所以通常我们实现的非检查异常都应该是运行时异常的子类。
+
+尽管可以定义不属于`Exception`，`RuntimeException`，或`Error`的子类类别的异常(Throwable)，但永远不推荐这样使用。
+
 
 

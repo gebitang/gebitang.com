@@ -538,6 +538,15 @@ git remote add origin git@gitlab.com:gebitang/simpleweb.git
 git push -u origin --all
 git push -u origin --tags
 ```
+### 删除本地、远程分支
+
+```
+# 删除本地
+git branch -d local_branch
+
+# 删除远程 
+git push --delete remote_branch_name
+```
 
 ### 显示分支branch的关系
 [STO](https://stackoverflow.com/questions/5298972/relationship-between-n-git-branches)  

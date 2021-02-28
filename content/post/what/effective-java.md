@@ -4320,6 +4320,32 @@ try {
 
 这种做法在多线程操作时需要注意，对象的状态在`actionPermitted`和`action`之间可能发生变化。
 
+### Item 72: Favor the use of standard exceptions
+
+优先使用标准库的异常。专家程序员和无经验程序员之间的一个显著区别就是前者总是努力让自己的代码有更高的重用性。在抛出异常方面也是如此。
+
+Java库提供了可以覆盖绝大部分场景的异常。使用标准库异常至少有三点好处——
+
+- 第一，让程序更易学习和使用，因为遵守了大家熟悉的规范
+- 第二，程序更具可读性，因为没有琐碎的不熟悉的异常
+- 第三，更少的异常意味着更小的内存开销和加载耗时
+
+常用异常包括——
+
+`IllegalArgumentException`：参数不合法异常。例如参数要求正数的场景下传递了一个复数参数
+
+`IllegalStateException`：状态无效异常。例如调用方试图在对象初始化之前使用。可以说，每个错误的方法调用都可以最终归结为无效参数或状态。但有更具体的异常时，可以使用更具体异常。例如`NullPointerException`或`IndexOutOfBoundsException`
+
+`ConcurrentModificationException`：设计为单线程场景使用的对象被多个线程同时访问。
+
+
+`UnsupportedOperationException`：很少被使用。某个对象不支持特点的方法时抛出此异常。例如仅支持追加的List被调用了remove方法。
+
+具体场景下应该使用哪种异常是棘手的问题，因为上面的异常并不是相互排斥的。另外你也可以自定义异常如果上述异常不满足你的场景。
+
+
+
+
 
 
 

@@ -4284,5 +4284,44 @@ Java提供了三类异常类型(Throwable)：检查异常(checked exceptions)、
 
 尽管可以定义不属于`Exception`，`RuntimeException`，或`Error`的子类类别的异常(Throwable)，但永远不推荐这样使用。
 
+### Item 71: Avoid unnecessary use of checked exceptions
+
+避免不必要地使用检查的异常。
+
+许多程序员不喜欢使用检查的异常，但如果使用得当，可以增强程序的可读性。如果使用不当/过度使用检查的异常，则会起到反效果。
+
+使用检查的异常时，调用方必须处理此异常：或者在catch语句块中处理；或者继续抛出。哪一种方式都增加了调用方的负担。（Java 8中，此负担更重，因为在流处理中不能包含检查的异常）
+
+如果合理使用对应的API时无法避免异常情况，并且API使用者遇到异常场景时可以采取一些有用的行动——满足这两点时，检查异常的负担是值得的。否则，应当使用非检查的异常。
+
+消除检查异常的最简单方式是返回期待的返回类型的Optional对象，抛出异常时，返回空类型Optional对象即可。这种做法的缺点是此时无法提供额外的信息给调用方。
+
+另外一种方式是将抛出异常的方法拆成两个方法：第一个检查是否抛出了异常，另外一个返回正常情况下的返回值。例如，将下面的例子——
+
+```
+// Invocation with checked exception
+try {
+       obj.action(args);
+   } catch (TheCheckedException e) {
+       ... // Handle exceptional condition
+}
+```
+
+拆为以下格式——
+
+```
+// Invocation with state-testing method and unchecked exception
+   if (obj.actionPermitted(args)) {
+       obj.action(args);
+   } else {
+       ... // Handle exceptional condition
+}
+```
+
+这种做法在多线程操作时需要注意，对象的状态在`actionPermitted`和`action`之间可能发生变化。
+
+
+
+
 
 

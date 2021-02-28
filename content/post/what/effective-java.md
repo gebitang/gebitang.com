@@ -4343,9 +4343,61 @@ Java库提供了可以覆盖绝大部分场景的异常。使用标准库异常�
 
 具体场景下应该使用哪种异常是棘手的问题，因为上面的异常并不是相互排斥的。另外你也可以自定义异常如果上述异常不满足你的场景。
 
+### Item 73： Throw exceptions appropriate to the abstraction
 
+让一个方法抛出与自己所执行的任务不相干的异常会令调用方担心。当方法向上传递底层抛出的异常时会出现这种场景。实际上，这污染了上层API。如果上层API在后续的发布时对应的实现做了变化，将破坏现有的客户端调用。
 
+为避免这种情况，上层方法应当catch下层的异常，让后抛出上层抽象可解释的异常。——这也是通常所说的“异常转换”(exception translation)
 
+```
+// Exception Translation
+   try {
+       ... // Use lower-level abstraction to do our bidding
+   } catch (LowerLevelException e) {
+       throw new HigherLevelException(...);
+}
+```
+
+上面的是伪代码表达，来看`AbstractSequentialList`类中get方法中的具体应用—— 
+
+```
+/**
+* Returns the element at the specified position in this list. * @throws IndexOutOfBoundsException if the index is out of range * ({@code index < 0 || index >= size()}).
+*/
+public E get(int index) {
+    ListIterator<E> i = listIterator(index);
+    try {
+        return i.next();
+    } catch (NoSuchElementException e) {
+        throw new IndexOutOfBoundsException("Index: " + index);
+    }
+}
+```
+
+异常转换的一种特殊方法被称为“异常链接”。当底层异常有利于对上层的异常做调试分析时，底层的异常被传递给上层异常(通过`Throwable`对象的`getCause`方法提供访问）。例如——
+
+```
+// Exception Chaining
+   try {
+       ... // Use lower-level abstraction to do our bidding
+} catch (LowerLevelException cause) { throw new HigherLevelException(cause);
+}
+```
+
+上层异常的构造函数将异常原因传递给“链式感知”(chaining-aware)的父类构造函数，最终传递给`Throwable`类的对应构造函数。
+
+```
+// Exception with chaining-aware constructor
+class HigherLevelException extends Exception {
+    HigherLevelException(Throwable cause) {
+        super(cause);
+    }
+}
+```
+
+如果没有类似的构造方法，还可以通过`Throwable`类的`initCause`方法进行设置。
+
+尽管异常转换优于无脑传播(向上抛出)，但也不能过度使用。最好是能确保底层调用成功，避免抛出异常；次一步的处理是上层方法静默处理底层的异常，对上层方法的调用方隔绝底层的异常，这种情况下可以记录底层的异常信息。
 
 
 

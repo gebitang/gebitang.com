@@ -4417,4 +4417,42 @@ class HigherLevelException extends Exception {
 当某个类的许多方法都抛出某个异常时，可以将异常说明文档添加到类的注释上。
 
 
+### Item 75: Include failure-capture information in detail messages
+
+当程序由于未捕获的异常导致失败时，系统会自动打印异常的堆栈信息，包含了对应异常的字符串表示(string representation)，调用了异常的`toString`方法。通常包含异常对应的类名和详细信息。
+
+通常程序员或运维工程师关注这些详细信息，用来分析异常发生的原因。所以详细信息应当包含尽可能多的内容。通常应当包含导致异常的所有参数和属性。例如`IndexOutOfBoundsExceiption`应当包含起始位、结束位和当前位，因为任何一个都可以导致这个异常。
+
+另外需要考虑的是安全角度。异常的详细信息中不应当包含密码，私钥之类的信息。
+
+不需要过多描述自身，堆栈信息通常会包括调用过程，通过对应的源码或文档可以找到对应的位置。
+
+异常的详细信息是面向程序员、运维人员的，区别于面向用户的提示信息，后者通常是本地化之后的内容。
+
+需要的异常信息通常在构造函数中就获取到，而不是直接要求一个字符串内容，例如越界异常的一个构造函数如下——
+
+```
+/**
+* Constructs an IndexOutOfBoundsException.
+*
+* @param lowerBound the lowest legal index value
+* @param upperBound the highest legal index value plus one
+* @param index the actual index value
+*/
+public IndexOutOfBoundsException(int lowerBound, int upperBound,
+                                int index) {
+    // Generate a detail message that captures the failure
+    super(String.format("Lower bound: %d, Upper bound: %d, Index: %d",
+                        lowerBound, upperBound, index));
+    
+    // Save failure information for programmatic access
+    this.lowerBound = lowerBound;
+    this.upperBound = upperBound;
+    this.index = index;
+}
+```
+
+对详细信息的要求更适合检查的异常，程序员很少会动态访问非检查异常。但作为一个普遍原则，也应该提供(详细信息)。
+
+
 

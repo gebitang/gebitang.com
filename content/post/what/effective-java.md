@@ -4483,3 +4483,34 @@ public Object pop() {
 
 异常的原子性不是总能实现，例如多线程操作同一个对象时，将可能使得对象处于不一致的状态中；有时为了实现异常原子性将提供复杂性，代价过大。
 
+### Item 77: Don't ignore exceptions
+
+“不要忽略异常”。尽管这个建议看起来显而易见，但却被经常违反，值得再强调一遍。
+
+抛出异常就是为了告诉你对应的方法发生了一些事情。空catch块代码忽略异常如同忽略现实中的火警。任何时候看到空catch块，头脑中都应该响起警灯。
+
+```
+// Empty catch block ignores exception - Highly suspect!
+try {
+    ...
+} catch (SomeException e) {
+}
+```
+
+有些情况下可以忽略异常。例如关闭一个`FileInputStream`，一是你没有更改文件的状态，不需要进行恢复操作；二是已经获取了文件内容，不需要中止进行中的操作。这种情况下，异常可以忽略，最好添加上log信息，如果频繁出现，方便调研。
+
+另外，如果忽略异常，还应当添加合理的介绍说明忽略的合理性。例如——
+
+```
+Future<Integer> f = exec.submit(planarMap::chromaticNumber);
+int numColors = 4; // Default; guaranteed sufficient for any map
+try {
+    numColors = f.get(1L, TimeUnit.SECONDS);
+} catch (TimeoutException | ExecutionException ignored) {
+    // Use default: minimal coloring is desirable, not required
+}
+```
+
+“不要忽略异常”。这一建议对检查异常和非检查异常都适用。
+
+

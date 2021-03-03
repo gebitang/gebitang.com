@@ -23,6 +23,14 @@ mvn命令是一段脚本程序。
 
 <!--more-->
 
+## 多模块项目部署
+
+COLA框架生成的项目，本地可以直接运行。通过maven单独对各个依赖模块编译时，最底层的模块可以编译成功，中间层模块提示无法找到依赖的版本(snapshot版本会自动生成时间戳的后缀，不会影响实际查找的版本)。
+
+[Cannot resolve the SNAPSHOT dependency deployed via Maven deploy-file](https://community.sonatype.com/t/cannot-resolve-the-snapshot-dependency-deployed-via-maven-deploy-file/623)这里遇到的问题是时间戳后缀的版本独立在snapshot之外。
+
+最终方案：配置好settings.xml文件中的部署仓库，直接部署最顶层的项目。之后再单独部署子项目时就没有问题了。
+
 ## 查看本地仓库位置
 
  `mvn help:evaluate -Dexpression=settings.localRepository`

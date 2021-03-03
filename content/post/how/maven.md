@@ -31,6 +31,8 @@ COLA框架生成的项目，本地可以直接运行。通过maven单独对各�
 
 最终方案：配置好settings.xml文件中的部署仓库，直接部署最顶层的项目。之后再单独部署子项目时就没有问题了。
 
+`mvn -U clean install` 出错后优先使用清理功能。
+
 ## 查看本地仓库位置
 
  `mvn help:evaluate -Dexpression=settings.localRepository`

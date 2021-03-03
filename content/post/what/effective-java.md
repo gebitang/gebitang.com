@@ -4455,4 +4455,31 @@ public IndexOutOfBoundsException(int lowerBound, int upperBound,
 对详细信息的要求更适合检查的异常，程序员很少会动态访问非检查异常。但作为一个普遍原则，也应该提供(详细信息)。
 
 
+### Item 76: Strive for failure atomicity
+
+尽量保持错误的原子性——含义是即使发生了错误，也不应当影响对象的已有状态(依然可以正常访问、使用)——尤其是对于检查性的错误异常。
+
+有以下几种方式达到这个效果——
+
+最简单的是设计不可变对象。如果对象是不可变的，自然实现了异常原子性。
+
+对于可变对象，最普遍的做法是进行操作之前先进行参数检查。例如`Stack.pop`的操作——
+
+```
+public Object pop() {
+    if (size == 0)
+        throw new EmptyStackException();
+    Object result = elements[--size];
+    elements[size] = null; // Eliminate obsolete reference
+    return result;
+}
+```
+
+如果不做检查，当size为零时依然进行pop操作，将使得size字段变成负数。类似的方式还有：将计算动作放到对象操作之前。
+
+第三种方式是将操作动作施加于对象的副本，成功后再带他原对象。
+
+另外一个很少使用的方式是添加“恢复代码”(recovery code)。通常针对基于磁盘的持久化对象数据。
+
+异常的原子性不是总能实现，例如多线程操作同一个对象时，将可能使得对象处于不一致的状态中；有时为了实现异常原子性将提供复杂性，代价过大。
 

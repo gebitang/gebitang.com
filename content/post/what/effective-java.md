@@ -4207,7 +4207,7 @@ Java本地调用(JNI: Java Native Interface)允许程序调用C或C++边写的�
 `append`, `drawImage`表动作的方法名；`isDigit`, `isProbablePrime`, `isEmpy`, `isEnabled`, `hasSiblings`, 表状态的方法名；  
 `toString`, `toArray`的变换方法名；`asList`转换类型方法；`intValue`, `getInstance`, `newInstance`等。
 
-## Exceptions
+## 9 Exceptions
 
 使用得当，异常可以提高程序可读性、可靠性、可维护性；使用不当，效果相反。
 
@@ -4512,5 +4512,129 @@ try {
 ```
 
 “不要忽略异常”。这一建议对检查异常和非检查异常都适用。
+
+## 10 Concurrency
+
+### Item 78： Synchronize access to shared mutable data
+
+`synchronized`关键字用来确保每次只有一个线程执行某个方法或代码块。许多程序员将同步化看做一种“互相排斥”(mutual exclusion)的方法，防止某个线程中不稳定状态的对象被另外一个线程看到。正确使用同步可以确保没有线程可以观测到处于不一致状态的对象。
+
+但这只是一方面。没有同步化，一个线程的改版对另外一个线程来说可能是不可见的。同步不只是确保对象的不一致状态不可见，也确保了进入同步方法或代码块的线程可以看到前一次修改的状态。
+
+Java语言的[内存模型规范](https://docs.oracle.com/javase/specs/jls/se8/html/jls-17.html#jls-17.4)确保读写一个非long或double类型的变量是原子操作。换句话说，即使多个线程同时修改这种变量且没有进行同步化，其他线程读取这个变量时依然可以获取到变量值。
+
+你可能听过这种说法：为了提高性能，读写原子性数据时可以省略同步化操作。这是很危险的建议。语言规范确保线程读取变量时不会获取到随意值，但不能确保一个线程写入的值可以被另外一个线程看到。对于“互相排斥”(mutual exclusion)和“可靠通信”(reliable communication)来说，同步化都是必须的。上述内存模型规范中描述了一个线程何时以及如何看到另外一个线程的改变。
+
+Thread类中的stop方法已经废弃，因为其实现不安全，可能导致数据损坏。推荐做法是通过boolean变量控制线程执行流程，因为boolean类型值的读写是原子的，不使用同步化的方式这样处理——
+
+```
+// Broken! - How long would you expect this program to run?
+public class StopThread {
+
+    private static boolean stopRequested;
+    
+    public static void main(String[] args) throws InterruptedException {
+        Thread backgroundThread = new Thread(() -> {
+                    int i = 0;
+                    while (!stopRequested)
+                        i++;
+                });
+        backgroundThread.start();
+
+        TimeUnit.SECONDS.sleep(1);
+        stopRequested = true;
+    }
+}
+```
+期待应用执行一秒，主线程修改变量值之后，后台线程也将结束。然而，这个程序可能永不停止。原因是没有同步化，后台线程无法确保何时可以看到主线程对boolean变量的修改。没有同步化操作，虚拟机可能将项目的代码——
+
+```
+while (!stopRequested) 
+    i++;
+```
+
+转换为——
+
+```
+if(!stopRequested) 
+    while(true) 
+        i++;
+```
+这种优化被称为"提升"(hoisting)，OpenJDK的虚拟机服务就是这样实现的。这导致了“活性失败”(liveness failure: fail to make progress)。修改的方式之一就是采用同步访问方式——
+
+```
+// Properly synchronized cooperative thread termination
+public class StopThread {
+    private static boolean stopRequested;
+    private static synchronized void requestStop() {
+        stopRequested = true;
+    }
+    private static synchronized boolean stopRequested() {
+        return stopRequested;
+    }
+    public static void main(String[] args)
+            throws InterruptedException {
+        Thread backgroundThread = new Thread(() -> {
+            int i = 0;
+            while (!stopRequested())
+                i++;
+        });
+        backgroundThread.start();
+        TimeUnit.SECONDS.sleep(1);
+        requestStop();
+    }
+}
+```
+
+注意：只有写方法(requestStop)和读方法(stopRequested)都添加了同步关键字，同步化才有保障。只对写方法添加同步是不够的。偶尔只对其中一种方法添加同步可能在某些机器上也能正确执行。
+
+即使没有同步化操作，上述例子中对boolean值的方法操作也是原子性的。对方法的同步化只是确保“可靠通信”的，不涉及到“互相排斥”。尽管循环方法中每次迭代检查的花销很小，但这种情况下可以换一种方式以获取更好的性能：将变量声明为`volatile`类型的，此修饰符无法保证“互相排斥”，但可以确保任意线程读取其修身的字段时都会获取到最近写入的值。
+
+```
+// Cooperative thread termination with a volatile field
+public class StopThread {
+    private static volatile boolean stopRequested;
+    public static void main(String[] args)
+            throws InterruptedException {
+        Thread backgroundThread = new Thread(() -> {
+            int i = 0;
+            while (!stopRequested)
+                i++;
+        });
+        backgroundThread.start();
+        TimeUnit.SECONDS.sleep(1);
+        stopRequested = true;
+    }
+}
+```
+
+使用`volatile`关键字时需要小心，下面的方法并不能确保每次获取到的返回值都是不同的序列数字——
+
+```
+// Broken - requires synchronization!
+private static volatile int nextSerialNumber = 0;
+
+public static int generateSerialNumber() {
+    return nextSerialNumber++;
+}
+```
+
+尽管只涉及到对`volatile`类型的字段操作，但由于加操作(`++`)不是原子性的，它包含两个操作：读取字段值；然后再写入一个新值(等于原值加一)。这两个操作之间如果有不同的线程调用这个方法，将导致"安全错误"(safety failure: computes the wrong results)
+
+可以对声明添加`sychronized`关键字以确保多线程之间的调用不会相互干扰，每次调用都可以看到前一次的结果。这时可以移除`volitile`关键字。
+
+或者使用`java.util.concurrent.atomic`包下的`AtomicLong`类。提供了无锁且线程安全的方式。
+
+```
+// Lock-free synchronization with java.util.concurrent.atomic
+private static final AtomicLong nextSerialNum = new AtomicLong();
+
+public static long generateSerialNumber() {
+    return nextSerialNum.getAndIncrement();
+}
+```
+
+这种操作是可接受的：一个线程修改对象数据之后在分享给其他线程，只对分享操作添加同步化。其他线程只多钱对象，不做修改的情况下，是可以不添加同步化操作的。这种对象被称为`事实不可变`(effectively immutable)对象；在不同线程中传递这种对象被称为"安全发布"(safe publication)。可以有多种安全发布方式：存在类初始化时的静态变量中；字段声明为volatile类型；字段声明为final类型；或访问时添加了同步锁；或放到同步集合中(concurrent collection)
+
 
 

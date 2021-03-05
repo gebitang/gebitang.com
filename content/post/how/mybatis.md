@@ -41,6 +41,25 @@ MyBatis四大核心对象：
   "pure-u-1-1|https://upload-images.jianshu.io/upload_images/3296949-1e957fc8d8970241.png|MyBatis的工作原理|https://upload-images.jianshu.io/upload_images/3296949-1e957fc8d8970241.png"
 >}}
 
+## java.lang.NoClassDefFoundError: org/mybatis/logging/LoggerFactory
+
+依赖中同时包含以下两个包的时候会出现这个错误——
+
+```
+<dependency>
+  <groupId>org.mybatis.spring.boot</groupId>
+  <artifactId>mybatis-spring-boot-starter</artifactId>
+  <version>1.3.2</version>
+</dependency>
+
+# and 
+<dependency>
+  <groupId>com.baomidou</groupId>
+  <artifactId>mybatis-plus-boot-starter</artifactId>
+  <version>3.3.1.tmp</version>
+</dependency>
+```
+
 ## myybatis generator practice
 
 [quick start](https://mybatis.org/generator/quickstart.html)默认使用`generatorConfig.xml`文件定义如何generate。   

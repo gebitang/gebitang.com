@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>draft on 戈壁堂</title>
+    <link>http://gebitang.com/topics/draft/</link>
+    <description>Recent content in draft on 戈壁堂</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 07 Mar 2020 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://gebitang.com/topics/draft/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>appium-支持多设备</title>
+      <link>http://gebitang.com/post/jiansh/draft/appium-%E6%94%AF%E6%8C%81%E5%A4%9A%E8%AE%BE%E5%A4%87/</link>
+      <pubDate>Sat, 07 Mar 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://gebitang.com/post/jiansh/draft/appium-%E6%94%AF%E6%8C%81%E5%A4%9A%E8%AE%BE%E5%A4%87/</guid>
+      <description>支持多设备，每个设备启动一个appium的session appium -a 127.0.0.1 -p 4727 -bp 4728 -U deviceid --session-override 先安装appium库，在窗口执行appium返回appium版本</description>
+    </item>
+    
+    <item>
+      <title>传说中的一篇文章搞懂系列</title>
+      <link>http://gebitang.com/post/jiansh/draft/%E4%BC%A0%E8%AF%B4%E4%B8%AD%E7%9A%84%E4%B8%80%E7%AF%87%E6%96%87%E7%AB%A0%E6%90%9E%E6%87%82%E7%B3%BB%E5%88%97/</link>
+      <pubDate>Sat, 07 Mar 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://gebitang.com/post/jiansh/draft/%E4%BC%A0%E8%AF%B4%E4%B8%AD%E7%9A%84%E4%B8%80%E7%AF%87%E6%96%87%E7%AB%A0%E6%90%9E%E6%87%82%E7%B3%BB%E5%88%97/</guid>
+      <description>Mixin 公链，传说中的一篇文章搞懂系列——这篇全部理解透彻，算得上Mixin专家了 项目简介，项目特色，技术核心 团队介绍： 公链生态介绍：生态特色，生</description>
+    </item>
+    
+    <item>
+      <title>算法练习Stack--P503</title>
+      <link>http://gebitang.com/post/jiansh/draft/%E7%AE%97%E6%B3%95%E7%BB%83%E4%B9%A0stack-p503/</link>
+      <pubDate>Sat, 07 Mar 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://gebitang.com/post/jiansh/draft/%E7%AE%97%E6%B3%95%E7%BB%83%E4%B9%A0stack-p503/</guid>
+      <description>栈stack 503. Next Greater Element II Medium 503. 下一个更大元素 II 中等 避免出现理解失误的问题，中英文的都贴一下先——</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>mysql on 戈壁堂</title>
+    <link>http://gebitang.com/tags/mysql/</link>
+    <description>Recent content in mysql on 戈壁堂</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 24 Dec 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://gebitang.com/tags/mysql/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Mysql</title>
+      <link>http://gebitang.com/post/how/mysql/</link>
+      <pubDate>Tue, 24 Dec 2019 00:00:00 +0000</pubDate>
+      
+      <guid>http://gebitang.com/post/how/mysql/</guid>
+      <description>SQL Joins What&amp;rsquo;s the difference between INNER JOIN, LEFT JOIN, RIGHT JOIN and FULL JOIN? An SQL JOIN clause is used to combine rows from two or more tables, based on a common field between them. There are different types of joins available in SQL: INNER JOIN: returns rows when there is a match in both tables. LEFT JOIN: returns all rows from the left table, even if there are</description>
+    </item>
+    
+  </channel>
+</rss>

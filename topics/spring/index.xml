@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Spring on 戈壁堂</title>
+    <link>http://gebitang.com/topics/spring/</link>
+    <description>Recent content in Spring on 戈壁堂</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 07 Mar 2021 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://gebitang.com/topics/spring/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Spring-boot-project-trial</title>
+      <link>http://gebitang.com/post/jiansh/spring/spring-boot-project-trial/</link>
+      <pubDate>Sun, 07 Mar 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://gebitang.com/post/jiansh/spring/spring-boot-project-trial/</guid>
+      <description>涉及到的问题： Spring boot工程基础 使用bootcase工程完成练习。 yaml文件类型的配置使用，可参考spring yaml 默认位置为/myAppli</description>
+    </item>
+    
+    <item>
+      <title>Mybatis</title>
+      <link>http://gebitang.com/post/how/mybatis/</link>
+      <pubDate>Thu, 14 Jan 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://gebitang.com/post/how/mybatis/</guid>
+      <description>Basic info 工作原理 中文官方文档：入门 中文官方文档mybatis-spring：入门 最后实际用的应该是 mybatis-spring-boot-starter example for spring-boot-starter Mybatis generator 上面三篇读完基本就可以动手了。 JD</description>
+    </item>
+    
+    <item>
+      <title>lettuce-redis--Could-not-get-a-resource-from-the-pool</title>
+      <link>http://gebitang.com/post/jiansh/spring/lettuce-redis-could-not-get-a-resource-from-the-pool/</link>
+      <pubDate>Sat, 07 Mar 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://gebitang.com/post/jiansh/spring/lettuce-redis-could-not-get-a-resource-from-the-pool/</guid>
+      <description>link to JianShu这篇估计因为提到了VPN，至今依然是“仅自己可见” 使用VPN链接公司内网的环境。本地调试链接Redis时是不是会提示：完整</description>
+    </item>
+    
+    <item>
+      <title>Maven-build-lifesycle</title>
+      <link>http://gebitang.com/post/jiansh/spring/maven-build-lifesycle/</link>
+      <pubDate>Sat, 07 Mar 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://gebitang.com/post/jiansh/spring/maven-build-lifesycle/</guid>
+      <description>link on JianShu Introduction to the Build Lifecycle validate - validate the project is correct and all necessary information is available compile - compile the source code of the project test - test the compiled source code using a suitable unit testing framework. These tests should not require the code be packaged or deployed package - take the compiled code and package it in its distributable format, such as a</description>
+    </item>
+    
+    <item>
+      <title>Maven-pom-packaging</title>
+      <link>http://gebitang.com/post/jiansh/spring/maven-pom-packaging/</link>
+      <pubDate>Sat, 07 Mar 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://gebitang.com/post/jiansh/spring/maven-pom-packaging/</guid>
+      <description>link on JianShu What is “pom” packaging in maven? pom packaging is simply a specification that states the primary artifact is not a war or jar, but the pom.xml itself. 只是一直打包形式，打包为pom文件本身。加入当前目录是做完文档模块存在，</description>
+    </item>
+    
+    <item>
+      <title>Spring-boot服务(一)</title>
+      <link>http://gebitang.com/post/jiansh/spring/spring-boot%E6%9C%8D%E5%8A%A1%E4%B8%80/</link>
+      <pubDate>Sat, 07 Mar 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://gebitang.com/post/jiansh/spring/spring-boot%E6%9C%8D%E5%8A%A1%E4%B8%80/</guid>
+      <description>link to JianShu 阿里云 目前阿里云新用户有优惠，89年一年。购买的是劵，然后用劵再正式开通服务，设置好用户名密码，默认22端口开通。可以远程访问。 阿里云</description>
+    </item>
+    
+    <item>
+      <title>Spring-boot服务(二)：aliyun</title>
+      <link>http://gebitang.com/post/jiansh/spring/spring-boot%E6%9C%8D%E5%8A%A1%E4%BA%8Caliyun/</link>
+      <pubDate>Sat, 07 Mar 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://gebitang.com/post/jiansh/spring/spring-boot%E6%9C%8D%E5%8A%A1%E4%BA%8Caliyun/</guid>
+      <description>link on JianShu 从头再来。旧的镜像在我安装gitlab之后Gitlab CE，现在远程登录相当慢。重新初始化了一下镜像。使用强密码策略。 安装zsh+oh</description>
+    </item>
+    
+  </channel>
+</rss>

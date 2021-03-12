@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>yaml on 戈壁堂</title>
+    <link>http://gebitang.com/topics/yaml/</link>
+    <description>Recent content in yaml on 戈壁堂</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 26 Mar 2020 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://gebitang.com/topics/yaml/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>YAML八卦</title>
+      <link>http://gebitang.com/post/2020/0326-yaml/</link>
+      <pubDate>Thu, 26 Mar 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://gebitang.com/post/2020/0326-yaml/</guid>
+      <description>学以致用，最近要做Go单测，需要学习了解一下Golang。其实很早就有学的愿望。学不以致用，就没下文了。十年纪念中文版链接站点看到这一篇YA</description>
+    </item>
+    
+  </channel>
+</rss>

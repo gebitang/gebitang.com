@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html xmlns:wb="http://open.weibo.com/wb" lang="en" >
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="generator" content="Hugo 0.74.3" />
+
+  <title>Basic-Kibana &middot; 戈壁堂</title>
+
+    
+
+  
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/pure-min.css">
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-old-ie-min.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-min.css">
+  <!--<![endif]-->
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="http://gebitang.com/css/side-menu-old-ie.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="http://gebitang.com/css/side-menu.css">
+  <!--<![endif]-->
+
+  <link rel="stylesheet" href="http://gebitang.com/css/blackburn.css">
+
+  
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.9.0/css/all.css">
+
+  
+  <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet" type="text/css">
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+ 
+  
+
+  
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/androidstudio.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+  
+  <script>hljs.initHighlightingOnLoad();</script>
+  
+
+  <link rel="shortcut icon" href="http://gebitang.com/img/favicon.ico" type="image/x-icon" />
+
+  
+    
+        <link rel="stylesheet" href="http://gebitang.com/css/my.css">
+    
+  
+  
+    
+        <script src="http://gebitang.com/js/my.js"></script>
+    
+  
+
+</head>
+
+
+<body>
+<div id="layout">
+
+  
+<a href="#menu" id="menuLink" class="menu-link">
+  
+  <span></span>
+</a>
+<div id="menu">
+
+  
+  <a class="pure-menu-heading brand" href="http://gebitang.com/">Gebitang</a>
+
+
+  <div class="pure-menu">
+    <ul class="pure-menu-list">
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="http://gebitang.com/"><i class='fa fa-home fa-fw'></i>Home</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="http://gebitang.com/post/"><i class='fa fa-list fa-fw'></i>Posts</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="http://gebitang.com/about/"><i class='fa fa-user fa-fw'></i>About</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="http://gebitang.com/contact/"><i class='fa fa-phone fa-fw'></i>Contact</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="http://gebitang.com/tags/"><i class='fa fa-tags fa-fw'></i>Tags</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="http://gebitang.com/topics/"><i class='fa fa-folder fa-fw'></i>Topics</a>
+      
+        </li>
+      
+    </ul>
+  </div>
+
+  <div class="pure-menu social">
+  <ul class="pure-menu-list">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+  </ul>
+</div>
+
+
+  <div>
+
+  <div class="small-print">
+  	<small>
+    <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="知识共享许可协议" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/80x15.png" /></a><br/>本<span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" rel="dct:type">作品</span>由<a xmlns:cc="http://creativecommons.org/ns#" href="http://gebitang.com" property="cc:attributionName" rel="cc:attributionURL">&nbsp;Gebitang&nbsp;&nbsp;</a>采用<a rel="license" href="http://creativecommons.org/licenses/by/4.0/">知识共享署名 4.0 国际许可协议</a>进行许可&nbsp;&copy; 2018
+    </small>
+
+  </div>
+
+  <div class="small-print">
+    <small></small>
+  </div>
+  <div class="small-print">
+    <small>Built with&nbsp;<a href="https://gohugo.io/" target="_blank">Hugo</a></small>
+    <small>Theme&nbsp;<a href="https://github.com/yoshiharuyamashita/blackburn" target="_blank">Blackburn</a></small>
+  </div>
+
+  <div style="display:none">
+  <div class="small-print">
+    <small>
+    <wb:follow-button uid="2446212465" type="red_1" width="67" height="24"></wb:follow-button>
+  </small>
+  </div>
+  </div>
+
+</div>
+
+</div>
+
+
+  <div id="main">
+
+
+<div class="header">
+  <h1>Basic-Kibana</h1>
+  <h2></h2>
+</div>
+<div class="content">
+
+  <div class="post-meta">
+
+  <div>
+    <i class="fa fa-calendar fa-fw"></i>
+    <time>2020-03-07</time>
+  </div>
+
+  
+
+  
+  
+  
+  <div>
+    <i class="fa fa-folder fa-fw"></i>
+    
+      <a class="post-taxonomy-topic" href="http://gebitang.com/topics/jiansh">jiansh</a>&nbsp;&#47;
+    
+      <a class="post-taxonomy-topic" href="http://gebitang.com/topics/us">US</a>
+    
+  </div>
+  
+  
+
+  
+  
+  
+  <div>
+    <i class="fa fa-tags fa-fw"></i>
+    
+      <a class="post-taxonomy-tag" href="http://gebitang.com/tags/jiansh">jiansh</a>
+    
+  </div>
+  
+  
+
+</div>
+
+  
+	<nav id="TableOfContents"></nav>
+  
+
+  <p><a href="https://www.jianshu.com/p/3ac48be859b9">link on JianShu</a></p>
+<p>假装天天接触大数据的样子= =|</p>
+<p>Basic的意思就是：了解这个东西是做什么的？如何配置安装？简单实用方法是怎样的？</p>
+<p>有了这个概念，就可以上手操作。</p>
+<hr>
+<p>上云后，重新部署之后，对应的pod会被删除释放，但log信息存储到了ES里，所以可以从kibana上进行搜索。图形化工具可以简单完成过滤的需求。但需要连续的上下文时，就需要手写查询语句了。</p>
+<p>这里可以看到 <a href="https://www.elastic.co/">Elasticsearch</a>的<a href="http://www.ruanyifeng.com/blog/2017/08/elasticsearch.html">入门教程</a> ，配套使用的是 <a href="https://www.elastic.co/products/kibana">kibana</a>，kibana的简单安装教程<a href="https://segmentfault.com/a/1190000015107023">参考这里</a>，这是一个<a href="https://segmentfault.com/a/1190000015140854">系列文章</a>。</p>
+<blockquote>
+<p><a href="https://baike.baidu.com/item/%E5%85%A8%E6%96%87%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E">全文搜索</a>属于最常见的需求，开源的 <a href="https://www.elastic.co/">Elasticsearch</a> （以下简称 Elastic）是目前全文搜索引擎的首选。</p>
+</blockquote>
+<blockquote>
+<p>它可以快速地储存、搜索和分析海量数据。维基百科、Stack Overflow、Github 都采用它。</p>
+</blockquote>
+<p>下面这个操作，就可以返回连续时间片段内的200条内容。</p>
+<pre><code>POST /apps-log-2019-12-06/_search
+{
+  &quot;size&quot;: 200, 
+  &quot;_source&quot;: &quot;msg&quot;, 
+  &quot;query&quot;: {
+    &quot;bool&quot;: {
+      &quot;must&quot;: [
+        {
+          &quot;term&quot;: {
+            &quot;namespace&quot;: &quot;testtest&quot;
+          }
+          
+        },
+        {
+          &quot;term&quot;: {
+            &quot;cluster&quot;: &quot;dev1&quot;
+          }
+        },
+        {
+          &quot;term&quot;: {
+            &quot;deployname&quot;: &quot;pod name&quot;
+          }
+        },
+      {
+        &quot;range&quot;: {
+          &quot;@timestamp&quot;: {
+            &quot;gte&quot;: &quot;2019-12-06T06:30:28.626Z&quot;,
+            &quot;lte&quot;: &quot;2019-12-06T06:38:51.710Z&quot;
+          }
+        }
+      }
+      ]
+    }
+  }
+}
+</code></pre><hr>
+<p>上面这篇的关键就是最后的查询方法。</p>
+<p>可惜没掌握为什么，所以半年之后就忘记了。今天查询时再次遇到相同的场景，又自己查资料请教同事，最后得到的结果还是一样的。</p>
+<p>在Kibana的<code>dev tools</code>功能页面进行类SQL的查询。</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/6.4/query-filter-context.html">官方查询示例：query-filter-context </a></p>
+<pre><code>GET /_search
+{
+  &quot;query&quot;: { 
+    &quot;bool&quot;: { 
+      &quot;must&quot;: [
+        { &quot;match&quot;: { &quot;title&quot;:   &quot;Search&quot;        }}, 
+        { &quot;match&quot;: { &quot;content&quot;: &quot;Elasticsearch&quot; }}  
+      ],
+      &quot;filter&quot;: [ 
+        { &quot;term&quot;:  { &quot;status&quot;: &quot;published&quot; }}, 
+        { &quot;range&quot;: { &quot;publish_date&quot;: { &quot;gte&quot;: &quot;2015-01-01&quot; }}} 
+      ]
+    }
+  }
+}
+</code></pre><ul>
+<li>The <code>query</code> parameter indicates query context.</li>
+<li>The <code>bool</code> and two <code>match</code> clauses are used in query context, which means that they are used to score how well each document matches.</li>
+<li>The <code>filter</code> parameter indicates filter context.</li>
+<li>The <code>term</code> and <code>range</code> clauses are used in filter context. They will filter out documents which do not match, but they will not affect the score for matching documents.</li>
+</ul>
+<p>注意时间格式，最好转换为实际log中的日期格式格式，否则需要自己计算转换，官方支持的<a href="https://www.elastic.co/guide/en/elasticsearch/reference/6.4/common-options.html#date-math">日期格式</a>(从跳转关系可以看出来，目前使用的是6.4版本:) )</p>
+<pre><code>POST /apps-log-2020-07-08/_search
+{
+  &quot;size&quot;: 200, 
+  &quot;query&quot;: {
+    &quot;bool&quot;: {
+      &quot;must&quot;: [
+        {
+          &quot;term&quot;: {
+            &quot;namespace&quot;: &quot;namse of space&quot;
+          }
+          
+        },
+        {
+          &quot;term&quot;: {
+            &quot;cluster&quot;: &quot;dev1&quot;
+          }
+        },
+        {
+          &quot;term&quot;: {
+            &quot;deployname&quot;: &quot;service name&quot;
+          }
+        },
+        {
+          &quot;term&quot;: {
+            &quot;podname&quot;: &quot;pod name mc5cl&quot;
+          }
+        }
+      ],
+       &quot;filter&quot;: {
+      
+        &quot;range&quot;: {
+          &quot;@timestamp&quot;: {
+            &quot;gte&quot;: &quot;2020-07-08T17:31:00.000+08:00&quot;,
+            &quot;lte&quot;: &quot;2020-07-08T17:41:00.000+08:00&quot;
+          }
+        }
+      
+      }
+    }
+  }
+}
+</code></pre>
+  
+  
+
+  
+<div class="prev-next-post pure-g">
+  <div class="pure-u-1-24" style="text-align: left;">
+    
+    <a href="http://gebitang.com/post/jiansh/us/basic-sonarqube-sonarscanner/"><i class="fa fa-chevron-left"></i></a>
+    
+  </div>
+  <div class="pure-u-10-24">
+    
+    <nav class="prev">
+      <a href="http://gebitang.com/post/jiansh/us/basic-sonarqube-sonarscanner/">Basic-SonarQube-SonarScanner</a>
+    </nav>
+    
+  </div>
+  <div class="pure-u-2-24">
+    &nbsp;
+  </div>
+  <div class="pure-u-10-24">
+    
+    <nav class="next">
+      <a href="http://gebitang.com/post/jiansh/us/basic-kafka/">Basic-Kafka</a>
+    </nav>
+    
+  </div>
+  <div class="pure-u-1-24" style="text-align: right;">
+    
+    <a href="http://gebitang.com/post/jiansh/us/basic-kafka/"><i class="fa fa-chevron-right"></i></a>
+    
+  </div>
+</div>
+
+
+
+  
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+
+(function() {
+    
+    
+    if (window.location.hostname == "localhost")
+        return;
+
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    var disqus_shortname = 'gebitang';
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com/" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+</div>
+
+</div>
+</div>
+<script src="http://gebitang.com/js/ui.js"></script>
+<script src="http://gebitang.com/js/menus.js"></script>
+
+
+<script>
+  
+  if (window.location.hostname != "localhost") {
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-34303694-1', 'auto');
+    ga('send', 'pageview');
+  }
+</script>
+
+
+
+
+<button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
+</body>
+</html>
+

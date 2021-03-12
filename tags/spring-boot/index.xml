@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>spring boot on 戈壁堂</title>
+    <link>http://gebitang.com/tags/spring-boot/</link>
+    <description>Recent content in spring boot on 戈壁堂</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 09 May 2020 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://gebitang.com/tags/spring-boot/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>kill -TERM Spring Boot应用</title>
+      <link>http://gebitang.com/post/2020/0519-spring-boot-shutdown/</link>
+      <pubDate>Sat, 09 May 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://gebitang.com/post/2020/0519-spring-boot-shutdown/</guid>
+      <description>有关signals kill -INT $pid sends the &amp;ldquo;interrupt&amp;rdquo; signal to the process with process ID pid. kill -9 $pid sends the &amp;ldquo;kill&amp;rdquo; signal which cannot be caught or ignored. kill -INT $pid is the same as kill -2 $pid. kill -9 $pid is the same as kill -KILL $pid 常见信号 、wiki signals ➜ ~ /bin/kill -l</description>
+    </item>
+    
+  </channel>
+</rss>

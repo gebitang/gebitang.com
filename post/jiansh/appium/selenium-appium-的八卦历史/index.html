@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html xmlns:wb="http://open.weibo.com/wb" lang="en" >
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="generator" content="Hugo 0.74.3" />
+
+  <title>Selenium---Appium---的八卦历史 &middot; 戈壁堂</title>
+
+    
+
+  
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/pure-min.css">
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-old-ie-min.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-min.css">
+  <!--<![endif]-->
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="http://gebitang.com/css/side-menu-old-ie.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="http://gebitang.com/css/side-menu.css">
+  <!--<![endif]-->
+
+  <link rel="stylesheet" href="http://gebitang.com/css/blackburn.css">
+
+  
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.9.0/css/all.css">
+
+  
+  <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet" type="text/css">
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+ 
+  
+
+  
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/androidstudio.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+  
+  <script>hljs.initHighlightingOnLoad();</script>
+  
+
+  <link rel="shortcut icon" href="http://gebitang.com/img/favicon.ico" type="image/x-icon" />
+
+  
+    
+        <link rel="stylesheet" href="http://gebitang.com/css/my.css">
+    
+  
+  
+    
+        <script src="http://gebitang.com/js/my.js"></script>
+    
+  
+
+</head>
+
+
+<body>
+<div id="layout">
+
+  
+<a href="#menu" id="menuLink" class="menu-link">
+  
+  <span></span>
+</a>
+<div id="menu">
+
+  
+  <a class="pure-menu-heading brand" href="http://gebitang.com/">Gebitang</a>
+
+
+  <div class="pure-menu">
+    <ul class="pure-menu-list">
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="http://gebitang.com/"><i class='fa fa-home fa-fw'></i>Home</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="http://gebitang.com/post/"><i class='fa fa-list fa-fw'></i>Posts</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="http://gebitang.com/about/"><i class='fa fa-user fa-fw'></i>About</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="http://gebitang.com/contact/"><i class='fa fa-phone fa-fw'></i>Contact</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="http://gebitang.com/tags/"><i class='fa fa-tags fa-fw'></i>Tags</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="http://gebitang.com/topics/"><i class='fa fa-folder fa-fw'></i>Topics</a>
+      
+        </li>
+      
+    </ul>
+  </div>
+
+  <div class="pure-menu social">
+  <ul class="pure-menu-list">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+  </ul>
+</div>
+
+
+  <div>
+
+  <div class="small-print">
+  	<small>
+    <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="知识共享许可协议" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/80x15.png" /></a><br/>本<span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" rel="dct:type">作品</span>由<a xmlns:cc="http://creativecommons.org/ns#" href="http://gebitang.com" property="cc:attributionName" rel="cc:attributionURL">&nbsp;Gebitang&nbsp;&nbsp;</a>采用<a rel="license" href="http://creativecommons.org/licenses/by/4.0/">知识共享署名 4.0 国际许可协议</a>进行许可&nbsp;&copy; 2018
+    </small>
+
+  </div>
+
+  <div class="small-print">
+    <small></small>
+  </div>
+  <div class="small-print">
+    <small>Built with&nbsp;<a href="https://gohugo.io/" target="_blank">Hugo</a></small>
+    <small>Theme&nbsp;<a href="https://github.com/yoshiharuyamashita/blackburn" target="_blank">Blackburn</a></small>
+  </div>
+
+  <div style="display:none">
+  <div class="small-print">
+    <small>
+    <wb:follow-button uid="2446212465" type="red_1" width="67" height="24"></wb:follow-button>
+  </small>
+  </div>
+  </div>
+
+</div>
+
+</div>
+
+
+  <div id="main">
+
+
+<div class="header">
+  <h1>Selenium---Appium---的八卦历史</h1>
+  <h2></h2>
+</div>
+<div class="content">
+
+  <div class="post-meta">
+
+  <div>
+    <i class="fa fa-calendar fa-fw"></i>
+    <time>2020-03-07</time>
+  </div>
+
+  
+
+  
+  
+  
+  <div>
+    <i class="fa fa-folder fa-fw"></i>
+    
+      <a class="post-taxonomy-topic" href="http://gebitang.com/topics/jiansh">jiansh</a>&nbsp;&#47;
+    
+      <a class="post-taxonomy-topic" href="http://gebitang.com/topics/appium">Appium</a>
+    
+  </div>
+  
+  
+
+  
+  
+  
+  <div>
+    <i class="fa fa-tags fa-fw"></i>
+    
+      <a class="post-taxonomy-tag" href="http://gebitang.com/tags/jiansh">jiansh</a>
+    
+  </div>
+  
+  
+
+</div>
+
+  
+	<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#前传">前传</a></li>
+        <li><a href="#相逢">相逢</a></li>
+        <li><a href="#开始">开始</a></li>
+        <li><a href="#后续">后续</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  
+
+  <p><a href="https://www.jianshu.com/p/532b1c5e69d7">link to JianShu</a></p>
+<p>帅大叔放前面～
+<img src="https://upload-images.jianshu.io/upload_images/3296949-1d5136fd81440afe.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Jason Huggins"></p>
+<h3 id="前传">前传</h3>
+<p>1994年Jason Huggins在Notre Dame大学读工商信息管理专业，98年毕业后在PeopleSoft公司做了两年的售前技术支持，2000年开始加入了ThoughtWork公司，干了6年多。</p>
+<p>2004年在ThoughtWork工作时，为测试Plone(基于python的内容管理系统)写了“JavaScriptTestRunner”，这就是后来的Selenium-core的前身。Jason也就成为了Selenium的共同创始人。</p>
+<p>此时，Dan Cuellar还在卡耐基梅隆大学学习计算机科学。07年毕业后，Dan在微软做了4年的测试开发工程师之后，与11年加入Zoosk公司做测试Lead。随着iOS产品的测试用例越来越长，他开始调研如果自动化。彼时的苹果还支持UIAutomation。</p>
+<p>一番折腾之后，他完成了iOSAuto工具的开发，使用C#语言按照Selenium的语法方式实现了解析JS命令的自动化框架。</p>
+<h3 id="相逢">相逢</h3>
+<p>2012年Dan被在伦敦召开的Selenium大会选为演讲嘉宾，但演讲主题与他的iOSAuto无关，在演讲中Dan演示了他的iOSAuto框架，出人意料得大受欢迎，有人建议他再做一次Lighting Talk（闪电演讲）进行详细说明。</p>
+<p>第二天但闪电演讲正好由Huggins Jason主持，但Dan的演讲却出了故障，幻灯片一直无法加载，尽管最后时刻搞定了，但匆匆忙忙的5分钟演讲效果并不理想。</p>
+<p>话说Huggins在ThoughtWork工作了6年之后，与07年加入了Google，成为当时还是保密状态的Selenium支持小组成员，恰逢Google Doc产品需要大量的Web测试。</p>
+<p>基于这些经验，08年Huggins离开google，并作为联合创始人创办了Sauce Labs公司同时担任CTO。12年时，Sauce Labs也支持iOS端的测试。当年的Selenium大会之后又过了几个月，Huggins想到了Dan做的有个iOS测试的闪电演讲，当时iOSAuto还不开源，两人在旧金山的一个酒吧里会面。</p>
+<h3 id="开始">开始</h3>
+<p>在Huggins的鼓励下，Dan将iOAAuto开源，当年8月3日，在github上提交了C#版本的<a href="https://github.com/penguinho/appium-old/commit/3ab56d3a5601897b2790b5256351f9b5af3f9e90">第一版</a>，Huggins建议换个更受欢迎的语言以吸引更多的用户，9月1日，Dan又提交了一个<a href="https://github.com/penguinho/appium-old/commit/9b891207be0957bf209a77242750da17d3eb8eda">python版本</a></p>
+<p>为推广这个项目，Huggins建议在11月份举行的移动测试峰会（Mobile Testing Summit）上做演示。但需要换个名字。一番套路之后，他们决定使用“AppleCart”这个名字。但一天之后就不得不放弃了。</p>
+<p>Huggins仔细阅读了苹果公司的版权和商标相关指南之后，发现苹果公司“你要使用这个商标，我就告你”的列表第一名就是：“Applecart”。他将这个消息告诉Dan之后，两人又头脑风暴了一番。然后Huggins想到了这个绝妙的名字：Appium：Selenium for Apps</p>
+<h3 id="后续">后续</h3>
+<p>The rest is history.  Huggins的Sauce Labs公司全面拥抱appium，并成立工程小组推动使用，其中就包括Jonathan Lipps（现在的appium的项目Lead），小组决定完全重新Appium，使用NodeJS重写后端框架。</p>
+<p>PS：一直对机械电子感兴趣的Huggins在Sauce Labs公司时就开始折腾自动化机器人玩愤怒哦的小鸟，类似这样——
+<img src="https://upload-images.jianshu.io/upload_images/3296949-cf7a103242f25dd2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>离开Sauce Labs一年之后，2015年他又创建了<a href="https://www.tapster.io">Tapser Robotics</a>公司，大概卖这样的东西——
+<img src="https://upload-images.jianshu.io/upload_images/3296949-3fd85cca872ae119.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<hr>
+<p>Dan大学辅修的专业是音乐工业，现在是苹果Music的工程经理——
+<img src="https://upload-images.jianshu.io/upload_images/3296949-659571c1d64ef154.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Dan Cuellar"></p>
+
+  
+  
+
+  
+<div class="prev-next-post pure-g">
+  <div class="pure-u-1-24" style="text-align: left;">
+    
+    <a href="http://gebitang.com/post/jiansh/fgw/setup-selenium-with-chromedriver-on-ubuntu-18-04/"><i class="fa fa-chevron-left"></i></a>
+    
+  </div>
+  <div class="pure-u-10-24">
+    
+    <nav class="prev">
+      <a href="http://gebitang.com/post/jiansh/fgw/setup-selenium-with-chromedriver-on-ubuntu-18-04/">Setup-Selenium-with-ChromeDriver-on-Ubuntu-18-04</a>
+    </nav>
+    
+  </div>
+  <div class="pure-u-2-24">
+    &nbsp;
+  </div>
+  <div class="pure-u-10-24">
+    
+    <nav class="next">
+      <a href="http://gebitang.com/post/jiansh/stf/scala-pkg-pug-angular-directive/">Scala-Pkg-Pug-Angular-directive</a>
+    </nav>
+    
+  </div>
+  <div class="pure-u-1-24" style="text-align: right;">
+    
+    <a href="http://gebitang.com/post/jiansh/stf/scala-pkg-pug-angular-directive/"><i class="fa fa-chevron-right"></i></a>
+    
+  </div>
+</div>
+
+
+
+  
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+
+(function() {
+    
+    
+    if (window.location.hostname == "localhost")
+        return;
+
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    var disqus_shortname = 'gebitang';
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com/" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+</div>
+
+</div>
+</div>
+<script src="http://gebitang.com/js/ui.js"></script>
+<script src="http://gebitang.com/js/menus.js"></script>
+
+
+<script>
+  
+  if (window.location.hostname != "localhost") {
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-34303694-1', 'auto');
+    ga('send', 'pageview');
+  }
+</script>
+
+
+
+
+<button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
+</body>
+</html>
+

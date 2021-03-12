@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>English on 戈壁堂</title>
+    <link>http://gebitang.com/topics/english/</link>
+    <description>Recent content in English on 戈壁堂</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 20 Sep 2020 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://gebitang.com/topics/english/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>从说说起</title>
+      <link>http://gebitang.com/post/2020/start-with-speaking/</link>
+      <pubDate>Sun, 20 Sep 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://gebitang.com/post/2020/start-with-speaking/</guid>
+      <description>博主tertio结合林语堂的英文学习法所做的有关英语学习的讨论整理。 林语堂《英文学习法》原文：备份一、备份二、备份三 汽车分割法 大家常常把英语</description>
+    </item>
+    
+  </channel>
+</rss>

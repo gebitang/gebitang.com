@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>git on 戈壁堂</title>
+    <link>http://gebitang.com/tags/git/</link>
+    <description>Recent content in git on 戈壁堂</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 07 Jan 2021 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://gebitang.com/tags/git/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Git</title>
+      <link>http://gebitang.com/post/how/git/</link>
+      <pubDate>Thu, 07 Jan 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://gebitang.com/post/how/git/</guid>
+      <description>Git Pro 复现commit id How does Git create unique commit hashes, mainly the first few characters? Git uses the following information to generate the sha-1: The source tree of the commit (which unravels to all the subtrees and blobs) The parent commit sha1 The author info (with timestamp) The committer info (right, those are different!, also with timestamp) The commit message 完整</description>
+    </item>
+    
+  </channel>
+</rss>

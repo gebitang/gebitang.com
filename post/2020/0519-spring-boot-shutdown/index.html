@@ -1,0 +1,857 @@
+<!DOCTYPE html>
+<html xmlns:wb="http://open.weibo.com/wb" lang="en" >
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="how to shutdown spring boot app gracefully ">
+  <meta name="generator" content="Hugo 0.74.3" />
+
+  <title>kill -TERM Spring Boot应用 &middot; 戈壁堂</title>
+
+    
+
+  
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/pure-min.css">
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-old-ie-min.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-min.css">
+  <!--<![endif]-->
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="http://gebitang.com/css/side-menu-old-ie.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="http://gebitang.com/css/side-menu.css">
+  <!--<![endif]-->
+
+  <link rel="stylesheet" href="http://gebitang.com/css/blackburn.css">
+
+  
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.9.0/css/all.css">
+
+  
+  <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet" type="text/css">
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+ 
+  
+
+  
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/androidstudio.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+  
+  <script>hljs.initHighlightingOnLoad();</script>
+  
+
+  <link rel="shortcut icon" href="http://gebitang.com/img/favicon.ico" type="image/x-icon" />
+
+  
+    
+        <link rel="stylesheet" href="http://gebitang.com/css/my.css">
+    
+  
+  
+    
+        <script src="http://gebitang.com/js/my.js"></script>
+    
+  
+
+</head>
+
+
+<body>
+<div id="layout">
+
+  
+<a href="#menu" id="menuLink" class="menu-link">
+  
+  <span></span>
+</a>
+<div id="menu">
+
+  
+  <a class="pure-menu-heading brand" href="http://gebitang.com/">Gebitang</a>
+
+
+  <div class="pure-menu">
+    <ul class="pure-menu-list">
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="http://gebitang.com/"><i class='fa fa-home fa-fw'></i>Home</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="http://gebitang.com/post/"><i class='fa fa-list fa-fw'></i>Posts</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="http://gebitang.com/about/"><i class='fa fa-user fa-fw'></i>About</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="http://gebitang.com/contact/"><i class='fa fa-phone fa-fw'></i>Contact</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="http://gebitang.com/tags/"><i class='fa fa-tags fa-fw'></i>Tags</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="http://gebitang.com/topics/"><i class='fa fa-folder fa-fw'></i>Topics</a>
+      
+        </li>
+      
+    </ul>
+  </div>
+
+  <div class="pure-menu social">
+  <ul class="pure-menu-list">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+  </ul>
+</div>
+
+
+  <div>
+
+  <div class="small-print">
+  	<small>
+    <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="知识共享许可协议" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/80x15.png" /></a><br/>本<span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" rel="dct:type">作品</span>由<a xmlns:cc="http://creativecommons.org/ns#" href="http://gebitang.com" property="cc:attributionName" rel="cc:attributionURL">&nbsp;Gebitang&nbsp;&nbsp;</a>采用<a rel="license" href="http://creativecommons.org/licenses/by/4.0/">知识共享署名 4.0 国际许可协议</a>进行许可&nbsp;&copy; 2018
+    </small>
+
+  </div>
+
+  <div class="small-print">
+    <small></small>
+  </div>
+  <div class="small-print">
+    <small>Built with&nbsp;<a href="https://gohugo.io/" target="_blank">Hugo</a></small>
+    <small>Theme&nbsp;<a href="https://github.com/yoshiharuyamashita/blackburn" target="_blank">Blackburn</a></small>
+  </div>
+
+  <div style="display:none">
+  <div class="small-print">
+    <small>
+    <wb:follow-button uid="2446212465" type="red_1" width="67" height="24"></wb:follow-button>
+  </small>
+  </div>
+  </div>
+
+</div>
+
+</div>
+
+
+  <div id="main">
+
+
+<div class="header">
+  <h1>kill -TERM Spring Boot应用</h1>
+  <h2>how to shutdown spring boot app gracefully </h2>
+</div>
+<div class="content">
+
+  <div class="post-meta">
+
+  <div>
+    <i class="fa fa-calendar fa-fw"></i>
+    <time>2020-05-09</time>
+  </div>
+
+  
+
+  
+  
+  
+  <div>
+    <i class="fa fa-folder fa-fw"></i>
+    
+      <a class="post-taxonomy-topic" href="http://gebitang.com/topics/tech">tech</a>
+    
+  </div>
+  
+  
+
+  
+  
+  
+  <div>
+    <i class="fa fa-tags fa-fw"></i>
+    
+      <a class="post-taxonomy-tag" href="http://gebitang.com/tags/spring-boot">spring boot</a>&nbsp;&#47;
+    
+      <a class="post-taxonomy-tag" href="http://gebitang.com/tags/tech">tech</a>
+    
+  </div>
+  
+  
+
+</div>
+
+  
+	<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#有关signals">有关signals</a></li>
+        <li><a href="#spring-boot-shutdown">spring boot shutdown</a></li>
+        <li><a href="#spring启动逻辑">Spring启动逻辑</a></li>
+        <li><a href="#nginx-connect-failed-111-connection-refused-while-connecting-to-upstream">Nginx: connect() failed (111: Connection refused) while connecting to upstream</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  
+
+  <h3 id="有关signals">有关signals</h3>
+<p><code>kill -INT $pid</code> sends the &ldquo;interrupt&rdquo; signal to the process with process ID <code>pid</code>.<br>
+<code>kill -9 $pid</code> sends the &ldquo;kill&rdquo; signal which cannot be caught or ignored.</p>
+<p><code>kill -INT $pid</code> is the same as <code>kill -2 $pid</code>.<br>
+<code>kill -9 $pid</code> is the same as <code>kill -KILL $pid</code></p>
+<p><a href="https://unix.stackexchange.com/a/399440">常见信号</a> 、<a href="https://en.wikipedia.org/wiki/Signal_(IPC)#POSIX_signals">wiki signals</a></p>
+<pre><code>➜  ~ /bin/kill -l
+HUP INT QUIT ILL TRAP ABRT BUS FPE KILL USR1 SEGV USR2 PIPE ALRM TERM STKFLT
+CHLD CONT STOP TSTP TTIN TTOU URG XCPU XFSZ VTALRM PROF WINCH POLL PWR SYS
+
+
+ 1 HUP      2 INT      3 QUIT     4 ILL      5 TRAP     6 ABRT     7 BUS
+ 8 FPE      9 KILL    10 USR1    11 SEGV    12 USR2    13 PIPE    14 ALRM
+15 TERM    16 STKFLT  17 CHLD    18 CONT    19 STOP    20 TSTP    21 TTIN
+22 TTOU    23 URG     24 XCPU    25 XFSZ    26 VTALRM  27 PROF    28 WINCH
+29 POLL    30 PWR     31 SYS     
+
+</code></pre><p><a href="https://www.pearsonitcertification.com/articles/article.aspx?p=1246308&amp;seqNum=4">信号列表</a><br>
+Table Signals Available Under Solaris</p>
+<table>
+<thead>
+<tr>
+<th>Signal</th>
+<th>Number</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SIGHUP</td>
+<td>1</td>
+<td>Hangup. Usually means that the controlling terminal has been disconnected.</td>
+</tr>
+<tr>
+<td>SIGINT</td>
+<td>2</td>
+<td>Interrupt. The user can generate this signal by pressing Ctrl+C or Delete.</td>
+</tr>
+<tr>
+<td>SIGQUIT</td>
+<td>3</td>
+<td>Quits the process and produces a core dump.</td>
+</tr>
+<tr>
+<td>SIGILL</td>
+<td>4</td>
+<td>Illegal instruction.</td>
+</tr>
+<tr>
+<td>SIGTRAP</td>
+<td>5</td>
+<td>Trace or breakpoint trap.</td>
+</tr>
+<tr>
+<td>SIGABRT</td>
+<td>6</td>
+<td>Abort.</td>
+</tr>
+<tr>
+<td>SIGEMT</td>
+<td>7</td>
+<td>Emulation trap.</td>
+</tr>
+<tr>
+<td>SIGFPE</td>
+<td>8</td>
+<td>Arithmetic exception. Informs a process of a floating-point error.</td>
+</tr>
+<tr>
+<td>SIGKILL</td>
+<td>9</td>
+<td>Killed. Forces the process to terminate. This is a sure kill.</td>
+</tr>
+<tr>
+<td>SIGBUS</td>
+<td>10</td>
+<td>Bus error.</td>
+</tr>
+<tr>
+<td>SIGSEGV</td>
+<td>11</td>
+<td>Segmentation fault.</td>
+</tr>
+<tr>
+<td>SIGSYS</td>
+<td>12</td>
+<td>Bad system call.</td>
+</tr>
+<tr>
+<td>SIGPIPE</td>
+<td>13</td>
+<td>Broken pipe.</td>
+</tr>
+<tr>
+<td>SIGALRM</td>
+<td>14</td>
+<td>Alarm clock.</td>
+</tr>
+<tr>
+<td>SIGTERM</td>
+<td>15</td>
+<td>Terminated. A gentle kill that gives processes a chance to clean up.</td>
+</tr>
+<tr>
+<td>SIGUSR1</td>
+<td>16</td>
+<td>User signal 1.</td>
+</tr>
+<tr>
+<td>SIGUSR2</td>
+<td>17</td>
+<td>User signal 2.</td>
+</tr>
+<tr>
+<td>SIGCHLD</td>
+<td>18</td>
+<td>Child status changed.</td>
+</tr>
+<tr>
+<td>SIGPWR</td>
+<td>19</td>
+<td>Power fail or restart.</td>
+</tr>
+<tr>
+<td>SIGWINCH</td>
+<td>20</td>
+<td>Window size change.</td>
+</tr>
+<tr>
+<td>SIGURG</td>
+<td>21</td>
+<td>Urgent socket condition.</td>
+</tr>
+<tr>
+<td>SIGPOLL</td>
+<td>22</td>
+<td>Pollable event.</td>
+</tr>
+<tr>
+<td>SIGSTOP</td>
+<td>23</td>
+<td>Stopped (signal). Pauses a process.</td>
+</tr>
+<tr>
+<td>SIGTSTP</td>
+<td>24</td>
+<td>Stopped (user).</td>
+</tr>
+<tr>
+<td>SIGCONT</td>
+<td>25</td>
+<td>Continued.</td>
+</tr>
+<tr>
+<td>SIGTTIN</td>
+<td>26</td>
+<td>Stopped (tty input).</td>
+</tr>
+<tr>
+<td>SIGTTOU</td>
+<td>27</td>
+<td>Stopped (tty output).</td>
+</tr>
+<tr>
+<td>SIGVTALRM</td>
+<td>28</td>
+<td>Virtual timer expired.</td>
+</tr>
+<tr>
+<td>SIGPROF</td>
+<td>29</td>
+<td>Profiling timer expired.</td>
+</tr>
+<tr>
+<td>SIGXCPU</td>
+<td>30</td>
+<td>CPU time limit exceeded.</td>
+</tr>
+<tr>
+<td>SIGXFSZ</td>
+<td>31</td>
+<td>File size limit exceeded.</td>
+</tr>
+<tr>
+<td>SIGWAITING</td>
+<td>32</td>
+<td>Concurrency signal reserved by threads library.</td>
+</tr>
+<tr>
+<td>SIGLWP</td>
+<td>33</td>
+<td>Inter-LWP signal reserved by threads library.</td>
+</tr>
+<tr>
+<td>SIGFREEZE</td>
+<td>34</td>
+<td>Checkpoint freeze.</td>
+</tr>
+<tr>
+<td>SIGTHAW</td>
+<td>35</td>
+<td>Checkpoint thaw.</td>
+</tr>
+<tr>
+<td>SIGCANCEL</td>
+<td>36</td>
+<td>Cancellation signal reserved by the threads library.</td>
+</tr>
+</tbody>
+</table>
+<p><code>docker stop</code> 实际是发送 SIGTERM 指令即kill -15。该命令会把此信号发送给容器内<code>pid</code>为<code>1</code>的进程，因此需要保证服务的主进程是第一个进程。如果使用脚本启动服务或者在启动服务之前有其他动作，那么第一个进程是很可能不是服务主进程，从而导致无法优雅下线。这种情况下需要在主进程启动命令前面加上 <code>exec</code> 关键字来主进程的 id 为 1，例如: <code>cd /data/www/app &amp;&amp; exec java -jar app.jar</code></p>
+<h3 id="spring-boot-shutdown">spring boot shutdown</h3>
+<p>当 Java 主线程接收到 Kill -15 信号时，SpringBoot 的 MVC 框架本身会保证服务的平滑关闭。内建的Tomcat最多等待5秒，如果5秒内处理不完将会强制关闭。可以做如下修改以延长时间。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">    <span style="color:#75715e">/** 下面三个方法将会修改内置Tomcat的关闭信号量等到时间到30s **/</span>
+    <span style="color:#a6e22e">@Bean</span>
+    <span style="color:#66d9ef">public</span> GracefulShutdown <span style="color:#a6e22e">gracefulShutdown</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">new</span> GracefulShutdown<span style="color:#f92672">();</span>
+    <span style="color:#f92672">}</span>
+
+    <span style="color:#a6e22e">@Bean</span>
+    <span style="color:#66d9ef">public</span> ConfigurableServletWebServerFactory <span style="color:#a6e22e">webServerFactory</span><span style="color:#f92672">(</span><span style="color:#66d9ef">final</span> GracefulShutdown gracefulShutdown<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        TomcatServletWebServerFactory factory <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> TomcatServletWebServerFactory<span style="color:#f92672">();</span>
+        factory<span style="color:#f92672">.</span><span style="color:#a6e22e">addConnectorCustomizers</span><span style="color:#f92672">(</span>gracefulShutdown<span style="color:#f92672">);</span>
+        <span style="color:#66d9ef">return</span> factory<span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">GracefulShutdown</span> <span style="color:#66d9ef">implements</span> TomcatConnectorCustomizer<span style="color:#f92672">,</span> ApplicationListener<span style="color:#f92672">&lt;</span>ContextClosedEvent<span style="color:#f92672">&gt;</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">private</span> Connector connector<span style="color:#f92672">;</span>
+
+        <span style="color:#a6e22e">@Override</span>
+        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">customize</span><span style="color:#f92672">(</span>Connector connector<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+            <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">connector</span> <span style="color:#f92672">=</span> connector<span style="color:#f92672">;</span>
+        <span style="color:#f92672">}</span>
+
+        <span style="color:#a6e22e">@Override</span>
+        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">onApplicationEvent</span><span style="color:#f92672">(</span>ContextClosedEvent event<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+            <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">connector</span><span style="color:#f92672">.</span><span style="color:#a6e22e">pause</span><span style="color:#f92672">();</span>
+            Executor executor <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">connector</span><span style="color:#f92672">.</span><span style="color:#a6e22e">getProtocolHandler</span><span style="color:#f92672">().</span><span style="color:#a6e22e">getExecutor</span><span style="color:#f92672">();</span>
+            <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>executor <span style="color:#66d9ef">instanceof</span> ThreadPoolExecutor<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+                <span style="color:#66d9ef">try</span> <span style="color:#f92672">{</span>
+                    ThreadPoolExecutor threadPoolExecutor <span style="color:#f92672">=</span> <span style="color:#f92672">(</span>ThreadPoolExecutor<span style="color:#f92672">)</span> executor<span style="color:#f92672">;</span>
+                    threadPoolExecutor<span style="color:#f92672">.</span><span style="color:#a6e22e">shutdown</span><span style="color:#f92672">();</span>
+                    <span style="color:#66d9ef">if</span> <span style="color:#f92672">(!</span>threadPoolExecutor<span style="color:#f92672">.</span><span style="color:#a6e22e">awaitTermination</span><span style="color:#f92672">(</span>30<span style="color:#f92672">,</span> TimeUnit<span style="color:#f92672">.</span><span style="color:#a6e22e">SECONDS</span><span style="color:#f92672">))</span> <span style="color:#f92672">{</span>
+                        log<span style="color:#f92672">.</span><span style="color:#a6e22e">warn</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Tomcat thread pool did not shut down gracefully within &#34;</span>
+                                <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;30 seconds. Proceeding with forceful shutdown&#34;</span><span style="color:#f92672">);</span>
+                    <span style="color:#f92672">}</span>
+                <span style="color:#f92672">}</span> <span style="color:#66d9ef">catch</span> <span style="color:#f92672">(</span>InterruptedException ex<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+                    Thread<span style="color:#f92672">.</span><span style="color:#a6e22e">currentThread</span><span style="color:#f92672">().</span><span style="color:#a6e22e">interrupt</span><span style="color:#f92672">();</span>
+                <span style="color:#f92672">}</span>
+            <span style="color:#f92672">}</span>
+        <span style="color:#f92672">}</span>
+    <span style="color:#f92672">}</span>
+</code></pre></div><hr>
+<blockquote>
+<p><code>docker stop</code> 实际是发送 SIGTERM 指令即kill -15。</p>
+</blockquote>
+<p>主程序中可以添加ShutdownHook。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">Thread mainThread <span style="color:#f92672">=</span> Thread<span style="color:#f92672">.</span><span style="color:#a6e22e">currentThread</span><span style="color:#f92672">();</span>
+<span style="color:#75715e">//register a hook for Shutdown (signal term same as kill -15)
+</span><span style="color:#75715e"></span>ShutdownHook thread <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ShutdownHook<span style="color:#f92672">(</span>mainThread<span style="color:#f92672">,</span> 5000L<span style="color:#f92672">);</span>
+Runtime<span style="color:#f92672">.</span><span style="color:#a6e22e">getRuntime</span><span style="color:#f92672">().</span><span style="color:#a6e22e">addShutdownHook</span><span style="color:#f92672">(</span>thread<span style="color:#f92672">);</span>
+SpringApplication<span style="color:#f92672">.</span><span style="color:#a6e22e">run</span><span style="color:#f92672">(</span>Application<span style="color:#f92672">.</span><span style="color:#a6e22e">class</span><span style="color:#f92672">,</span> args<span style="color:#f92672">);</span>
+</code></pre></div><ul>
+<li>为虚拟机JVM注册一个shutdown类型的钩子hook</li>
+<li>钩子的含义为：初始化但未执行的线程</li>
+<li>此线程会在JVM关闭时执行</li>
+</ul>
+<p>JVM关闭的场景：</p>
+<ul>
+<li>正常关闭，例如最后一个非守护类型的线程退出时，或是System.exit调用时</li>
+<li>JVM收到了用户的打断interrupt，比如 <code>ctrl+C</code> (=<code>^C</code>)或 <code>SIGTERM</code></li>
+</ul>
+<p>hook注意事项：符合shutdown的场景，例如尽量执行可以很快结束的任务、非人机交互的任务等。</p>
+<hr>
+<p>官方doc：</p>
+<p>Registers a new virtual-machine shutdown hook.</p>
+<p>The Java virtual machine shuts down in response to two kinds of events:</p>
+<ul>
+<li>The program exits normally, when the last non-daemon thread exits or when the exit (equivalently, System.exit) method is invoked, or</li>
+<li>The virtual machine is terminated in response to a user interrupt, such as typing ^C, or a system-wide event, such as user logoff or system shutdown.</li>
+</ul>
+<p>A shutdown hook is simply an initialized but unstarted thread.</p>
+<p>When the virtual machine begins its shutdown sequence it will start all registered shutdown hooks in some <strong>unspecified order</strong> and let them run concurrently. When all the hooks have finished it will then run all uninvoked finalizers if finalization-on-exit has been enabled.</p>
+<p>Finally, the virtual machine will halt. Note that daemon threads will continue to run during the shutdown sequence, as will non-daemon threads if shutdown was initiated by invoking the exit method.</p>
+<p>Once the shutdown sequence has begun it can be stopped only by invoking the halt method, which forcibly terminates the virtual machine.</p>
+<p>Once the shutdown sequence has begun it is impossible to register a new shutdown hook or de-register a previously-registered hook.</p>
+<p>Attempting either of these operations will cause an IllegalStateException to be thrown.</p>
+<p>Shutdown hooks run at a delicate time in the life cycle of a virtual machine and should therefore be coded defensively.</p>
+<p>They should, in particular, be written to be thread-safe and to avoid deadlocks insofar as possible. They should also not rely blindly upon services that may have registered their own shutdown hooks and therefore may themselves in the process of shutting down. Attempts to use other thread-based services such as the AWT event-dispatch thread, for example, may lead to deadlocks.</p>
+<p>Shutdown hooks should also <strong>finish their work quickly</strong>. When a program invokes exit the expectation is that the virtual machine will promptly shut down and exit. When the virtual machine is terminated due to user logoff or system shutdown the underlying operating system may only allow a fixed amount of time in which to shut down and exit. It is therefore inadvisable to attempt any user interaction or to perform a long-running computation in a shutdown hook.</p>
+<p>Uncaught exceptions are handled in shutdown hooks just as in any other thread, by invoking the uncaughtException method of the thread&rsquo;s ThreadGroup object. The default implementation of this method prints the exception&rsquo;s stack trace to System.err and terminates the thread; it does not cause the virtual machine to exit or halt.</p>
+<p>In rare circumstances the virtual machine may abort, that is, stop running without shutting down cleanly. This occurs when the virtual machine is terminated externally, for example with the <code>SIGKILL</code> signal on Unix or the <code>TerminateProcess</code> call on Microsoft Windows. The virtual machine may also abort if a native method goes awry by, for example, corrupting internal data structures or attempting to access nonexistent memory. If the virtual machine aborts then no guarantee can be made about whether or not any shutdown hooks will be run.</p>
+<p>Params:</p>
+<ul>
+<li>hook – An initialized but unstarted Thread object</li>
+</ul>
+<p>Throws:</p>
+<ul>
+<li>IllegalArgumentException – If the specified hook has already been registered, or if it can be determined that the hook is already running or has already been run</li>
+<li>IllegalStateException – If the virtual machine is already in the process of shutting down</li>
+<li>SecurityException – If a security manager is present and it denies RuntimePermission(&ldquo;shutdownHooks&rdquo;)</li>
+</ul>
+<h3 id="spring启动逻辑">Spring启动逻辑</h3>
+<p><a href="https://www.baeldung.com/running-setup-logic-on-startup-in-spring">启动逻辑，如何启动自定义的服务</a></p>
+<p>有些一次性启动的服务，同时又想使用<code>autowired</code>的对象。</p>
+<ul>
+<li>不能在<code>component</code>的构造函数里直接调用<code>autowired</code>的对象——因为还没初始化完成。所以，推论就是可以在构造完成之后进行这个动作。使用注解<code>@PostConstruct</code>可以达到这个效果</li>
+</ul>
+<pre><code>@PostConstruct
+public void init() {
+    LOG.info(Arrays.asList(environment.getDefaultProfiles()));
+}
+</code></pre><ul>
+<li>使用<code>InitializingBean</code>接口和<code>afterPropertiesSet() </code>方法</li>
+</ul>
+<pre><code>@Component
+public class InitializingBeanExampleBean implements InitializingBean {
+ 
+    private static final Logger LOG 
+      = Logger.getLogger(InitializingBeanExampleBean.class);
+ 
+    @Autowired
+    private Environment environment;
+ 
+    @Override
+    public void afterPropertiesSet() throws Exception {
+        LOG.info(Arrays.asList(environment.getDefaultProfiles()));
+    }
+}
+
+</code></pre><ul>
+<li>使用<code>ApplicationListener</code>接口 或 <code>@EventListener </code>注解 完全启动完成之后执行</li>
+</ul>
+<pre><code>@Component
+public class StartupApplicationListenerExample implements
+  ApplicationListener&lt;ContextRefreshedEvent&gt; {
+ 
+    private static final Logger LOG 
+      = Logger.getLogger(StartupApplicationListenerExample.class);
+ 
+    public static int counter;
+ 
+    @Override public void onApplicationEvent(ContextRefreshedEvent event) {
+        LOG.info(&quot;Increment counter&quot;);
+        counter++;
+    }
+}
+</code></pre><p>效果等同于——</p>
+<pre><code>@Component
+public class EventListenerExampleBean {
+ 
+    private static final Logger LOG 
+      = Logger.getLogger(EventListenerExampleBean.class);
+ 
+    public static int counter;
+ 
+    @EventListener
+    public void onApplicationEvent(ContextRefreshedEvent event) {
+        LOG.info(&quot;Increment counter&quot;);
+        counter++;
+    }
+}
+</code></pre><p>&hellip;
+基本上这些就够用了，另外还有——</p>
+<ul>
+<li>The @Bean Initmethod Attribute</li>
+<li>Constructor Injection</li>
+<li>Spring Boot CommandLineRunner</li>
+<li>Spring Boot ApplicationRunner</li>
+</ul>
+<p>对应的介绍可以参考原文。</p>
+<p>对于 <code>CommandLineRunner</code>方式——</p>
+<pre><code>@Component
+public class CommandLineAppStartupRunner implements CommandLineRunner {
+    private static final Logger LOG =
+      LoggerFactory.getLogger(CommandLineAppStartupRunner.class);
+ 
+    public static int counter;
+ 
+    @Override
+    public void run(String...args) throws Exception {
+        LOG.info(&quot;Increment counter&quot;);
+        counter++;
+    }
+}
+</code></pre><p>实际使用中可以写成类似这样——</p>
+<pre><code>@Bean
+public CommandLineRunner commandLineRunner(ApplicationContext ctx) {
+    return args -&gt; {
+
+        System.out.println(&quot;\nLet's inspect the beans provided by Spring Boot:\n&quot;);
+
+        String[] beanNames = ctx.getBeanDefinitionNames();
+
+        Arrays.sort(beanNames);
+        for (String beanName : beanNames) {
+            System.out.println(beanName);
+        }
+
+        System.out.println(&quot;total: &quot;+ beanNames.length);
+        System.out.println(&quot;\nDone:)\n&quot;);
+
+
+    };
+}
+</code></pre><p>总结：实际的启动顺序——</p>
+<p>The order of execution is as follows:</p>
+<ul>
+<li>The constructor</li>
+<li>the @PostConstruct annotated methods</li>
+<li>the InitializingBean&rsquo;s afterPropertiesSet() method</li>
+<li>the initialization method specified as init-method in XML</li>
+</ul>
+<p>完整示例——</p>
+<pre><code>@Component
+@Scope(value = &quot;prototype&quot;)
+public class AllStrategiesExampleBean implements InitializingBean {
+ 
+    private static final Logger LOG 
+      = Logger.getLogger(AllStrategiesExampleBean.class);
+ 
+    public AllStrategiesExampleBean() {
+        LOG.info(&quot;Constructor&quot;);
+    }
+ 
+    @Override
+    public void afterPropertiesSet() throws Exception {
+        LOG.info(&quot;InitializingBean&quot;);
+    }
+ 
+    @PostConstruct
+    public void postConstruct() {
+        LOG.info(&quot;PostConstruct&quot;);
+    }
+ 
+    public void init() {
+        LOG.info(&quot;init-method&quot;);
+    }
+}
+</code></pre><p>输出内容——</p>
+<pre><code>[main] INFO o.b.startup.AllStrategiesExampleBean - Constructor
+[main] INFO o.b.startup.AllStrategiesExampleBean - PostConstruct
+[main] INFO o.b.startup.AllStrategiesExampleBean - InitializingBean
+[main] INFO o.b.startup.AllStrategiesExampleBean - init-method
+</code></pre><h3 id="nginx-connect-failed-111-connection-refused-while-connecting-to-upstream">Nginx: connect() failed (111: Connection refused) while connecting to upstream</h3>
+<pre><code>2020/10/07 21:39:38 [error] 26881#26881: *2013 connect() failed (111: Connection refused) while connecting to upstream, client: 196.52.43.110,     server: xxxx.com, request: &quot;GET / HTTP/1.1&quot;, upstream: &quot;http://127.0.0.1:9999/&quot;, host: &quot;123.57.140.21:80&quot;
+</code></pre><p>一直运行的好好的小破站出现类似上面的提示。一开始一直认为是环境的问题，搜了一顿类似的问题——</p>
+<p><a href="https://serverfault.com/questions/529394/nginx-connect-failed-111-connection-refused-while-connecting-to-upstream">nginx: connect() failed (111: Connection refused) while connecting to upstream</a></p>
+<p><a href="https://serverfault.com/questions/317393/connect-failed-111-connection-refused-while-connecting-to-upstream">connect() failed (111: Connection refused) while connecting to upstream</a></p>
+<p><a href="https://serverfault.com/questions/725262/what-causes-the-connection-refused-message">What causes the &lsquo;Connection Refused&rsquo; message?</a></p>
+<p>通过<code>netstat -ano | grep 9999</code> 查看端口正常。本地的另外一个服务也正常，只有这个Spring启动的端口报错。</p>
+<p>查看nginx的error.log发现还有另外的一个域名也绑定到了相同的ip上，在aliyun上提工单，一直秀智障AI机器人，放弃。</p>
+<p>更新了最新的站点代码，直接从本地调用这个端口的服务，也提示<code>Connection refused</code>——这说明跟nginx没有任何关系</p>
+<p>跟踪了一下log，意识到问题所在——还是基础知识没掌握住。</p>
+<p><a href="https://www.jianshu.com/p/433af14980a7">SpringBoot启动逻辑</a>利用这里的<code>@PostConstruct</code>注解的<code>init</code>方法执行了几个定时任务。后来发现定时任务失效，所以补了一个定时任务的“硬核”监控。导致这个方法一直没有结束返回。</p>
+<p>这造成Spring没有完全启动成功。定义的<a href="https://www.baeldung.com/running-setup-logic-on-startup-in-spring#6-spring-boot-commandlinerunner">commandLineRunner</a>没有执行。</p>
+<p>所以上面说的没错，链接被拒绝，只有两种情况：.</p>
+<ul>
+<li>
+<ol>
+<li>说明这个端口服务没有正常启动(Nothing is listening on the IP:Port you are trying to connect to.)</li>
+</ol>
+</li>
+<li>
+<ol start="2">
+<li>端口被防火墙阻拦(The port is blocked by a firewall.)</li>
+</ol>
+</li>
+</ul>
+<p>log中的<code>Tomcat initialized with port(s)</code>并不意味着这个端口上的服务启动成功。</p>
+<pre><code>2020-10-10 10:36:18.629  INFO 19165 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 9999 (http)
+2020-10-10 10:36:18.734  INFO 19165 --- [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2020-10-10 10:36:18.735  INFO 19165 --- [           main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.21]
+
+</code></pre>
+  
+  
+
+  
+<div class="prev-next-post pure-g">
+  <div class="pure-u-1-24" style="text-align: left;">
+    
+    <a href="http://gebitang.com/post/how/stf/"><i class="fa fa-chevron-left"></i></a>
+    
+  </div>
+  <div class="pure-u-10-24">
+    
+    <nav class="prev">
+      <a href="http://gebitang.com/post/how/stf/">STF</a>
+    </nav>
+    
+  </div>
+  <div class="pure-u-2-24">
+    &nbsp;
+  </div>
+  <div class="pure-u-10-24">
+    
+    <nav class="next">
+      <a href="http://gebitang.com/post/how/windows-usage/">Window系统使用</a>
+    </nav>
+    
+  </div>
+  <div class="pure-u-1-24" style="text-align: right;">
+    
+    <a href="http://gebitang.com/post/how/windows-usage/"><i class="fa fa-chevron-right"></i></a>
+    
+  </div>
+</div>
+
+
+
+  
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+
+(function() {
+    
+    
+    if (window.location.hostname == "localhost")
+        return;
+
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    var disqus_shortname = 'gebitang';
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com/" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+</div>
+
+</div>
+</div>
+<script src="http://gebitang.com/js/ui.js"></script>
+<script src="http://gebitang.com/js/menus.js"></script>
+
+
+<script>
+  
+  if (window.location.hostname != "localhost") {
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-34303694-1', 'auto');
+    ga('send', 'pageview');
+  }
+</script>
+
+
+
+
+<button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
+</body>
+</html>
+

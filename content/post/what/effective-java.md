@@ -4636,5 +4636,165 @@ public static long generateSerialNumber() {
 
 这种操作是可接受的：一个线程修改对象数据之后在分享给其他线程，只对分享操作添加同步化。其他线程只多钱对象，不做修改的情况下，是可以不添加同步化操作的。这种对象被称为`事实不可变`(effectively immutable)对象；在不同线程中传递这种对象被称为"安全发布"(safe publication)。可以有多种安全发布方式：存在类初始化时的静态变量中；字段声明为volatile类型；字段声明为final类型；或访问时添加了同步锁；或放到同步集合中(concurrent collection)
 
+### Item 79: Avoid excessive synchronization
+
+上一条讨论不要“锁得不充分”，这一条讨论相反的方面：不要“锁得太过分”。否则可能降低性能，导致死锁甚至不可知的程序行为。
+
+为避免活性失败和安全失败，永远不要在加锁的代码块中将控制权限交给客户端(调用方)，换句话说，不要对设计目的是被重写的方法加锁。从当前类的角度来看，这种方法属于“异形”(alien)，当前类对它们没有控制权。
+
+下面的列子可以演示这种场景——
+
+```
+// Broken - invokes alien method from synchronized block!
+public class ObservableSet<E> extends ForwardingSet<E> {
+    public ObservableSet(Set<E> set) {
+        super(set);
+    }
+
+    private final List<SetObserver<E>> observers
+            = new ArrayList<>();
+
+    public void addObserver(SetObserver<E> observer) {
+        synchronized (observers) {
+            observers.add(observer);
+        }
+    }
+
+    public boolean removeObserver(SetObserver<E> observer) {
+        synchronized (observers) {
+            return observers.remove(observer);
+        }
+    }
+
+    private void notifyElementAdded(E element) {
+        synchronized (observers) {
+            for (SetObserver<E> observer : observers)
+                observer.added(this, element);
+        }
+    }
+
+    @Override 
+    public boolean add(E element) {
+        boolean added = super.add(element);
+        if (added)
+            notifyElementAdded(element);
+        return added;
+    }
+    @Override 
+    public boolean addAll(Collection<? extends E> c) {
+        boolean result = false;
+        for (E element : c)
+            result |= add(element); // Calls notifyElementAdded
+        return result;
+    }
+}
+```
+
+观察者模式：观察者调用`addObserver`订阅通知，调用`removeObserver`取消订阅。两个方法都会传递下面的回调函数——
+
+```
+@FunctionalInterface 
+public interface SetObserver<E> {
+    // Invoked when an element is added to the observable set
+    void added(ObservableSet<E> set, E element);
+}
+```
+
+这个接口在结构上与`BiConsumer<ObservableSet<E>, E>`是相同的，我们使用自定义的名称只是为了语义更明确。简单调用时看起来没有问题——会正常打印出0~99
+
+```
+public static void main(String[] args) {
+    ObservableSet<Integer> set =
+            new ObservableSet<>(new HashSet<>());
+    set.addObserver((s, e) -> System.out.println(e));
+    for (int i = 0; i < 100; i++)
+        set.add(i);
+}
+```
+
+如果我们传递一个更复杂一些的`Observer`：打印传递的整数并且如果其值为23时，再删除自己。
+
+```
+set.addObserver(new SetObserver<>() {
+    public void added(ObservableSet<Integer> s, Integer e) {
+        System.out.println(e);
+        if (e == 23)
+            s.removeObserver(this);
+    }
+});
+```
+
+这里使用匿名类而不是lambda函数是因为函数对象需要将自己传递给`s.removeObserver`方法，lambda函数无法访问自身。
+
+我们期望打印到23然后程序停止，但实际上抛出了`ConcurrentModificationException`异常。因为当调用add方法时，`notifyElementAdded`方法正在对观察队列进行迭代，此时又需要移除观察队列中的元素。尽管`notifyElementAdded`方法加了锁，但无法阻止自身的迭代线程对观察set执行回调函数并对其进行修改
+
+现在换一种方式解决取消订阅的逻辑，不在当前线程中直接调用`removeObserver`，而使用executor服务——
+
+```
+// Observer that uses a background thread needlessly
+set.addObserver(new SetObserver<>() {
+    public void added(ObservableSet<Integer> s, Integer e) {
+        System.out.println(e);
+        if (e == 23) {
+            ExecutorService exec =
+                    Executors.newSingleThreadExecutor();
+            try {
+                exec.submit(() -> s.removeObserver(this)).get();
+            } catch (ExecutionException | InterruptedException ex) {
+                throw new AssertionError(ex);
+            } finally {
+                exec.shutdown();
+            }
+        }
+    }
+});
+```
+
+此时不会出现异常，但造成了死锁场景。执行器的新建线程中调用`s.removeObserver`方法试图锁住`observers`但无法成功，因为主线程已经获取到锁；但同时主线程又在等待执行器的线程通知它移除observer。
+
+解决方式——(将“异形”移除锁范围即可)
+
+```
+// Alien method moved outside of synchronized block - open calls
+private void notifyElementAdded(E element) {
+    List<SetObserver<E>> snapshot = null;
+    synchronized(observers) {
+        snapshot = new ArrayList<>(observers);
+    }
+    for (SetObserver<E> observer : snapshot)
+        observer.added(this, element);
+}
+```
+
+实际上，语言库中的同步集合中的`CopyOnWriterArrayList`是更好的解决方案，几乎是为这种场景定制的。内部实现了ArrayList的一个变体，每次操作都会重新复制一份新的数组。因为内部数组永远不会被修改，所以不需要加锁——
+
+```
+// Thread-safe observable set with CopyOnWriteArrayList
+private final List<SetObserver<E>> observers =
+        new CopyOnWriteArrayList<>();
+
+public void addObserver(SetObserver<E> observer) {
+    observers.add(observer);
+}
+
+public boolean removeObserver(SetObserver<E> observer) {
+    return observers.remove(observer);
+}
+
+private void notifyElementAdded(E element) {
+    for (SetObserver<E> observer : observers)
+        observer.added(this, element);
+}
+```
+
+作为一个原则：在加锁的代码块中应当做尽量少的操作。“获取锁，检查状态，需要的话进行状态转变，释放锁”——仅此而已。
+
+上面从正确性上看待加锁问题，现在从性能角度看一下：现在是多核时代，加锁将丧失了并行计算的优势；同时限制了VM的优化。
+
+如果写一个可变类，有两种选择：忽略所有的同步操作，交个调用方客户端处理；或者内部进行同步操作，确保类是线程安全的。Java早期，许多类的实现违反了这一原则，例如`StringBuffer`实例几乎总是被单线程使用，却采用了内部同步的机制，所有后续出现了`StringBuilder`，相当于无锁的`StringBuffer`。
+
+总结——
+>In summary, to avoid deadlock and data corruption, never call an alien method from within a ynchronized region. More generally, keep the amount of work that you do from within synchronized  egions to a minimum. When you are designing a mutable class, think about whether it should do its own synchronization. In the multicore era, it is more important than ever not to oversynchronize.  ynchronize your class internally only if there is a good reason to do so, and document your decision clearly (Item 82)
+
 
 

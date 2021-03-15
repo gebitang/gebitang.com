@@ -4796,5 +4796,21 @@ private void notifyElementAdded(E element) {
 总结——
 >In summary, to avoid deadlock and data corruption, never call an alien method from within a ynchronized region. More generally, keep the amount of work that you do from within synchronized  egions to a minimum. When you are designing a mutable class, think about whether it should do its own synchronization. In the multicore era, it is more important than ever not to oversynchronize.  ynchronize your class internally only if there is a good reason to do so, and document your decision clearly (Item 82)
 
+### Item 80: Prefer executors, tasks, and streams to threads
+
+在本书第一版本中包含一个`工作队列`(work queue)的简单实现；当第二版出版时，`java.util.concurrent`包已经加入Java，其中包含了一个基于接口的灵活的任务`执行框架`(Executor Framework)。
+
+- 创建一个工作队列只需要一行代码:`ExecutorService exec = Executors.newSingleThreadExecutor();`，
+- 添加执行任务`exec.execute(runnable);`
+- 优雅关闭执行器`exec.shutdown();`
+
+实际上还支持很多其他操作。框架提供了不同种类的执行器配置，满足大部分执行场景。如果还不满足，还可以直接使用`ThreadPoolExecutor`类自定义。
+
+选择哪种执行服务需要一些技巧。对应小型轻量服务来说，`Executors.newCachedThreadPool`通常是一个好选择，因为不需要做任何配置就可以很好完成工作。但对于高负荷生产服务就不是好选择。因为缓存线程池接受到任务时不会加入队列，而是立即创建一个线程去执行，如果负荷过高，所有CPU资源将很快被创建线程所耗尽。这种情况下，`Executors.newFiexedThreadPool`是更好的选择，如何需要更精细的控制，可以直接使用`ThreadPoolExecutor`
+
+一个线程服务同时包含了：“需要执行的单元”和“如何执行的机制”。在Java的执行框架中，执行单元和执行机制是分离的。执行单元的抽象被称为“任务”(task)，包含两种：`Runnable`和`Callable`，后者与前者的不同在于其可以返回值并且可以抛出异常。执行单元和执行机制分离后，可以根据场景选择对应的执行机制，然后有执行服务框架完成调度执行即可
+
+关于执行框架的更深一步解释，可参考<<Java Concurrency in Practice>>
+
 
 

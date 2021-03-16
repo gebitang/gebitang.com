@@ -4908,3 +4908,61 @@ synchronized (obj) {
 
 有了并发框架之后，最后不要再使用原生的`wait`和`notify`方法控制并发流程。
 
+### Item 82: Document thread safety
+
+一个类的方法在并发情况下的行为属于类与其客户端的重要协议。如果没有说明这种情况，调用方不得不自己假设，将可能导致过度同步或同步不足的问题。
+
+为了确保并发场景下的使用，类必须明确说明其支持的线程安全级别。通常有以下几个级别(尽管不够充分，但满足大部分场景)——
+
+- “不可变”(`Immutable`)：类实例相当于常量，不需要外部同步操作。例如`String`、`Long`、`BigInteger`
+- “无条件线程安全”(`Unconditional thread-safe`)：类实例是可变的，但内部有充分的同步限制，确保外部并发使用时不需要做同步化操作。例如`AtomicLong`、`ConcurrentHashMap`
+- “有条件的线程安全”(`Conditional thread-safe`)：与上一个情况类似，但需要尾部同步化操作以确保并发使用。例如`Collections.synchroinzed`包装返回的集合对象
+- “线程不安全”(`Not thread-safe`)：类实例是可变的，并发场景下，调用方必须对每个方法的调用都添加同步锁。例如`ArrayList`、`HashMap`
+- “线程恶意”(`Thread-hostile`)：在并发场景下使用不安全，即使外部调用时使用了同步操作
+
+通常关于同步的注释都是类级别的，但如果方法需要额外的说明时，需要对方法进行单独注释。类似`Collections.synchronizedMap`方法的做法——
+
+```
+Returns a synchronized (thread-safe) map backed by the specified map. In order to guarantee serial access, it is critical that all access to the backing map is accomplished through the returned map.
+It is imperative that the user manually synchronize on the returned map when iterating over any of its collection views:
+        Map m = Collections.synchronizedMap(new HashMap());
+            ...
+        Set s = m.keySet();  // Needn't be in synchronized block
+            ...
+        synchronized (m) {  // Synchronizing on m, not s!
+            Iterator i = s.iterator(); // Must be in synchronized block
+            while (i.hasNext())
+                foo(i.next());
+        }
+       
+Failure to follow this advice may result in non-deterministic behavior.
+The returned map will be serializable if the specified map is serializable.
+
+Params:
+    m – the map to be "wrapped" in a synchronized map.
+Type parameters:
+    <K> – the class of the map keys
+    <V> – the class of the map values
+Returns:
+    a synchronized view of the specified map.
+
+public static <K,V> Map<K,V> synchronizedMap(Map<K,V> m) {
+    return new SynchronizedMap<>(m);
+}
+```
+
+为防止“拒绝服务”(`dnial-of-service`)攻击，使用私有的锁对象(锁对象应该总是final级别的)——
+
+```
+// Private lock object idiom - thwarts denial-of-service attack
+private final Object lock = new Object();
+
+public void foo() {
+    synchronized(lock) {
+        ...
+    }
+}
+```
+
+
+

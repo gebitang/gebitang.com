@@ -4964,5 +4964,84 @@ public void foo() {
 }
 ```
 
+### Item 83：Use lazy initializaition judiciously
+
+大部分情况下，普通的初始化优于延迟初始化。
+
+谨慎使用“延迟初始化”(`lazy initialization`)操作。直到字段被需要时才进行初始化，如果不需要，字段永远不被初始化。这一技术适用于静态字段也适用于实例字段。通常这是一种优化策略，但使用不当将对类有破坏性。
+
+最后的处理是“能不用就不用(延迟初始化这把双刃剑)”：通过提高延迟初始化字段的成本降低了初始化类的成本。
+
+如果类的某个字段只在类的一部分场景下使用，并且初始化此字段的成本很高，这种场景下值得应用“延迟初始化”策略。
+
+在并发场景下，延迟初始化需要一些技巧。本条目讨论的技巧都是线程安全的方式——
+
+代替一般初始化`private final FieldType field = computeFieldValue();`的最简单操作：打破初始化流程，使用`synchronized`关键字——
+
+```
+// Lazy initialization of instance field - synchronized accessor
+private FieldType field;
+private synchronized FieldType getField() {
+    if (field == null)
+        field = computeFieldValue();
+    return field;
+}
+```
+
+上面的操作针对静态变量也是一样。静态字段的初始化可以使用“holder class”模式，确保静态变量只在被调用时才会被初始化。这一模式的优点在于不需要使用synchronized关键字，只是一次字段访问操作，没有增加额外的成本(通常虚拟机只有在初始化类是进行字段同步，之后再访问时不需要进行任何的同步操作)——
+
+```
+// Lazy initialization holder class idiom for static fields
+private static class FieldHolder {
+    static final FieldType field = computeFieldValue();
+}
+private static FieldType getField() { return FieldHolder.field; }
+```
+
+如果是针对类实例的字段进行延迟初始化，使用“double-check”方式。这种方式避免了初始化之后的加锁操作。之所以要检查两次，是因为如果字段没有初始化，一旦没有加锁，第二次检查时会加锁（有点绕，看代码。注意字段需要声明为`volatile`类型）——
+
+```
+// Double-check idiom for lazy initialization of instance fields
+private volatile FieldType field;
+
+private FieldType getField() {
+    FieldType result = field;
+    if (result == null) { // First check (no locking)
+        synchronized(this) {
+            if (field == null) // Second check (with locking)
+                field = result = computeFieldValue();
+        }
+    }
+    return result;
+}
+```
+
+上面的代码有点费解，尤其是局部变量的使用。其作用是确保实例变量`field`初始化之后，只被读取一次。有利于提高性能。对应静态变量实例的延迟初始化不需要使用这种方式，使用包装类的是更好的选择。
+
+如果可以忍受变量的多次初始化操作，“双检查”模式可以变换为“单检查”模式(变量依然被声明为`volatile`类型)——
+
+```
+// Single-check idiom - can cause repeated initialization!
+private volatile FieldType field;
+
+private FieldType getField() {
+    FieldType result = field;
+    if (result == null) { 
+        field = result = computeFieldValue();
+    }
+    return result;
+}
+```
+
+上述所以方法对原始类型和对象类型字段都有效。当适用于原始类型时，检查对比值为0而不是null。如果不关注是否每个线程都重新计算字段的值并且字段类型是除了long或double之外的原始类型，则`volatile`关键字可以省略——这一策略被称为"竞赛单检查"(`racy single-check`)模式。以增加初始化的代码加速字段的访问。
+
+
+
+
+
+
+
+
+
 
 

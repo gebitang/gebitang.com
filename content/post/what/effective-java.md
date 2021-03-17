@@ -5036,9 +5036,47 @@ private FieldType getField() {
 上述所以方法对原始类型和对象类型字段都有效。当适用于原始类型时，检查对比值为0而不是null。如果不关注是否每个线程都重新计算字段的值并且字段类型是除了long或double之外的原始类型，则`volatile`关键字可以省略——这一策略被称为"竞赛单检查"(`racy single-check`)模式。以增加初始化的代码加速字段的访问。
 
 
+### Item 84：Don't depend on the thread scheduler
 
+当有多个线程需要运行时，线程调度程序决定由哪个线程先执行以及执行多久。操作系统会尝试尽可能地公平调度，但调度策略区别很大。任何依赖于线程调度器来确保正确性以及性能的程序将丧失可移植性。
 
+编写健壮、有效、可移植程序的最好方式是确保平均的执行线程不大于内核数。这使得线程调度器的可选择性更少。这种情况下，即使调度策略不同，程序的行为区别也不大。
 
+确保运行中的线程尽可能少的主要方法是：让每个执行中的线程做有用的动作，然后等待(执行下一个有用的动作)。如果没有执行有效动作，线程不应该运行。在Java的执行框架中，这意味着限制线程池的大小，同时保持任务足够短小(不能太短，否则频繁分发任务也会影响性能)
+
+线程不应该处于"忙等待"(`busy-wait`)状态——频繁检查共享对象。这将增加内核的负载并使得线程调度跟脆弱。下面是一个极端“忙等待”例子——
+
+```
+// Awful CountDownLatch implementation - busy-waits incessantly!
+public class SlowCountDownLatch {
+
+    private int count;
+
+    public SlowCountDownLatch(int count) {
+        if (count < 0)
+            throw new IllegalArgumentException(count + " < 0");
+        this.count = count;
+    }
+
+    public void await() {
+        while (true) {
+            synchronized(this) {
+                if (count == 0)
+                    return;
+            }
+        }
+    }
+
+    public synchronized void countDown() {
+        if (count != 0)
+            count--;
+    }
+}
+```
+
+如果是因为程序线程无法获取到CPU时间导致无法正常工作，不要试图使用`Thread.yield`方法来解决。即使有效，也让程序丧失了可移植性。在一种JVM环境下yield有效时，在另外一种JVM下可能就无效，甚至让程序更糟糕。
+
+基于此的推论是调整线程的优先级。调整一些线程的优先级来调试程序的响应是有道理的，但这样程序也丧失了可移植性。
 
 
 

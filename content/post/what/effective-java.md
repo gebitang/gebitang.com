@@ -5079,6 +5079,58 @@ public class SlowCountDownLatch {
 基于此的推论是调整线程的优先级。调整一些线程的优先级来调试程序的响应是有道理的，但这样程序也丧失了可移植性。
 
 
+## 11 Serialization
+
+这一章关注对象的序列化问题(object serialization)。Java框架将对象编码为字节流(byte streams)过程称为“序列化”(`serializing`)，从字节流中重新构建出对象的过程称为“反序列化”(`deserializing`)。对象一旦被序列化后，就可以从一个虚拟机发送给另一个虚拟机或保存在硬盘以待后用。
+
+本章关注序列化时需要注意的危险问题以及如何最小化这些问题的影响。
+
+### Item 85： Prefer alternatives to Java serialization
+
+最好使用其他方式代替Java的序列化。
+
+当序列化在1997年被加入Java时，就被认为有一些冒险。这种方法在研究性语言上使用过，例如`[Modula-3](http://www.modula3.org/)`，但从来没有在生产级别的语言上使用。
+
+尽管轻松分发对象的允诺很有吸引力，但代价是：不可见构造函数；模糊了API和实现直接的界限；对正确性、安全、性能和维护都有潜在的问题。倡导者相信优点大于缺点，但历史却走向了另一个方向。
+
+本书上一版本中对应安全问题的描述如大家所害怕的一样都一一应验。上世纪还属于讨论阶段的脆弱性在接下来的十年内变成了严重的利用漏洞，包括2016年11月著名的针对“旧金山交通局”的勒索病毒攻击，导致系统瘫痪两天。
+
+序列化最基本的问题是：攻击面过于宽广导致无法防御。通过调用ObjectInputStream的readObject方法，只要类实现了`Serializable`接口，类路径下的任何类型的对象几乎都可以实例化。这导致几乎所有的类型都面临被攻击的危险。包括Java平台基础库、第三方库例如Apache Commons Collections。即使你遵守了写序列化类的所有最佳实践，你的应用依然很脆弱。
+
+攻击者和安全研究员研究Java类库和广泛使用的第三方库中的序列化类型，寻找反序列化时调用的可进行危险操作的方法。这些方法被称为“小玩意”(`gadgets`)。多个小玩意可以组成一个链条，时不时就可以发现一个链条，强大到可以允许攻击者对底层硬件执行任意的原生代码。只需要有机会对一段精心构建的字节流执行反序列化操作即可。针对旧金山交通局的工具就是这样发生的。这种攻击不是个案，而且会越来越多。
+
+甚至不需要任何小玩意，你可以利用反序列化发起“拒绝服务”攻击。一小段字节流的反序列化可能消耗很长的时间。这种字节流被称为“反序列化炸弹”(`deserialization bomb`)。下面一段演示只需要使用hash和字符串的序列化炸弹——
+
+```
+// Deserialization bomb - deserializing this stream takes forever
+static byte[] bomb() {
+    Set<Object> root = new HashSet<>();
+    Set<Object> s1 = root;
+    Set<Object> s2 = new HashSet<>();
+
+    for (int i = 0; i < 100; i++) {
+        Set<Object> t1 = new HashSet<>();
+        Set<Object> t2 = new HashSet<>();
+        t1.add("foo"); // Make t1 unequal to t2
+        s1.add(t1); s1.add(t2);
+        s2.add(t1); s2.add(t2);
+        s1 = t1;
+        s2 = t2;
+    }
+    return serialize(root); // Method omitted for brevity
+}
+```
+
+这组对象包含201个HashSet实例，每个实例包含少于3个的对象引用，整个字节流只有5744个字节。但直到太阳燃烧殆尽，反序列化这些字节依然没有完成。问题的关键是反序列一个HashSet需要计算元素的哈希值，上例中有100层深度的hash值需要计算，以为着`hashCode`方法要被计算2的100次方…… 
+
+最好的方式就是：能不用就不用(序列化)。在不同平台传递对象在本书被称为“跨平台结构化数据表示”(`cross-platform structured-data representation`)，现在有更简单方便的方式：基于文本的JSON格式和基于二进制的Protocal Buffer
+
+如果时历史遗留系统并且必须使用序列化。确保永远不要对不信任的数据进行反序列化操作。“信任的数据”可以利用“白名单”方式声明，或使用“黑名单”进行过滤。前者优于后者，因为后者只能保护已知的著名的危险类
+
+
+
+
+
 
 
 

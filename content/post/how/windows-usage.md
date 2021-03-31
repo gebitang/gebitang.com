@@ -712,9 +712,9 @@ Windows Registry Editor Version 5.00
 
 1.  On your computer, open [Google Maps](https://www.google.com/maps).
 2.  In the search box at the top, type your coordinates. Here are examples of formats that work:
-    *   Degrees, minutes, and seconds (DMS): 41°24'12.2"N 2°10'26.5"E
+    *   Degrees, minutes, and seconds (DMS): 41°42'04.0"N 86°44'29.0"E
     *   Degrees and decimal minutes (DMM): 41 24.2028, 2 10.4418
-    *   Decimal degrees (DD): 41.40338, 2.17403
+    *   Decimal degrees (DD): 41.701111, 86.741389
 3.  You'll see a pin show up at your coordinates.
 
 ### Get the coordinates of a place

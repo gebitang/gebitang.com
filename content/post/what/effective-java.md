@@ -5142,6 +5142,147 @@ static byte[] bomb() {
 
 第三个代价是增加了测试成本。新版本发布后，需要验证高低版本之间的序列化转换是否成功。随着版本的增加，序列化的测试成本是指数级的。
 
+### Item 87: Consider using a custom serialized form
+
+默认的序列化实现可以高效地表示当前对象的实体表现（~直接从英文翻译过来已经理解不能了~）时，可以采用默认实现。
+
+换句话表达上面的含义：序列化可以很好地表达对象中包含的数据以及所有从当前对象可触达的所有对象。（看后面一个例子就容易理解了）
+
+如果对象的实体表现(`physical representation`)与自身的逻辑内容(`logical content`)一致时，使用默认的序列化实现是可行的。例如下面的类——
+
+```
+// Good candidate for default serialized form
+public class Name implements Serializable {
+    /**
+     * Last name. Must be non-null.
+     * @serial
+     */
+    private final String lastName;
+    /**
+     * First name. Must be non-null.
+     * @serial
+     */
+    private final String firstName;
+
+    /**
+     * Middle name, or null if there is none.
+     * @serial
+     */
+    private final String middleName;
+
+    // Remainder omitted
+}
+```
+
+逻辑上讲，一个“名字”包含了last name、first name, 和middle name。上述类的字段正是这个逻辑内容的映射。
+
+即使默认序列化是合适的，也应该提供`readObject`方法以确保安全性和不可变性。针对上述类，需要确保lastName和firstName不为空。
+
+另外注意的时，尽管三个字段都是私有属性，依然添加了注释，因为序列化实现使得这些属性变成了公共API，所以需要添加注释。并且适用了`@serial`标签，告诉`Javadoc`将这些注释添加到特定的页面——序列化表格页。
+
+再看一个反例——
+
+```
+// Awful candidate for default serialized form
+public final class StringList implements Serializable {
+    private int size = 0;
+    private Entry head = null;
+
+    private static class Entry implements Serializable {
+        String data;
+        Entry next;
+        Entry previous;
+    }
+
+    // Remainder omitted
+}
+```
+
+逻辑上讲，这个类表示了一连串的字符串。实体上来看，适用双链表表示这一连串的字符串。如果使用默认的序列化操作，将双向映射链表中的每一个entry以及entry之间的所有链接。
+
+这种情况下，默认序列化操作有以下四个劣势——
+
+- 永久性将内部的表示暴露给了外部的API。`StringList.Entry`称为了公共API的一部分。后续表示即使变更，双向链表也无法去除。
+- 占据过量空间。默认序列化保持了所有的entry以及连接信息，后者只是实现的方式，不值得包含在序列化信息之中。这导致序列化占据过多空间，存盘还是网络传输时速度很慢。
+- 过于耗时。序列化逻辑不知道对象的拓扑结构，必须遍历所有的节点。实际上，上面的例子里只需要跟踪`next`引用即可
+- 可能导致堆溢出。默认的序列化操作执行递归遍历，即使数量不大，也可能引起堆溢出。根据不同的机器，1000~1800个字符串的序列化就可能出现堆溢出的情景。
+
+合理的序列化方式只需要记录字符串的个数以及字符串本身。这些构成了StringList类的逻辑数据。
+
+修改序列化实现的改进版本——
+
+```
+
+// StringList with a reasonable custom serialized form
+public final class StringList implements Serializable {
+
+    private transient int size = 0;
+    private transient Entry head = null;
+
+    // No longer Serializable!
+    private static class Entry {
+        String data;
+        Entry next;
+        Entry previous;
+    }
+
+    // Appends the specified string to the list
+    public final void add(String s) { /*...*/ }
+
+    /**
+     * Serialize this {@code StringList} instance.
+     *
+     * @serialData The size of the list (the number of strings
+     * it contains) is emitted ({@code int}), followed by all of
+     * its elements (each a {@code String}), in the proper
+     * sequence.
+     */
+    private void writeObject(ObjectOutputStream s)
+            throws IOException {
+        s.defaultWriteObject();
+        s.writeInt(size);
+        // Write out all elements in the proper order.
+        for (Entry e = head; e != null; e = e.next)
+            s.writeObject(e.data);
+    }
+
+    private void readObject(ObjectInputStream s)
+            throws IOException, ClassNotFoundException {
+        
+        s.defaultReadObject();
+        int numElements = s.readInt();
+        // Read in all elements and insert them in list
+        for (int i = 0; i < numElements; i++)
+            add((String) s.readObject());
+    }
+
+    // Remainder omitted
+}
+```
+
+即使所有字段都声明为`transient`，`writeObject`方法还是第一步先调用了`defaultWriteObject`方法；`readObject`方法第一件事也是调用`defaultReadObject`方法。虽然这种情况下，这两个方法调用可以省略。——这算是一种最佳实践，后续添加了非`transient`属性的字段时，依然可以兼容。
+
+私有方法添加了注释，其中`@serialData`标签告诉`JavaDoc`将这些内容放置在特定的序列化操作页面。
+
+修改之后，占据的空间更少，并且不再出现堆溢出现象。
+
+尽管StringList类的默认序列化操作有各种问题，但至少是可以工作的“正确实现”。有些类的序列化操作如果依赖默认实现将无法正常工作。例如哈希表对象，其实体表示是：一组哈希桶，每个桶包含了键-值对实例。每个桶是其包含的实例的key值的哈希函数。这意味着通常来说，每次实现的位置不一定都是相同的。实际上，每次运行时对应的位置都可能是不同的。这种情况下，使用默认的序列化操作将导致数据损坏。
+
+无论是否使用自定义的序列化操作，调用`defaultWriteObject`方法时，所以非`transient`属性的字段都会被执行序列化操作。因此，所以可以声明为`transient`的字段都应当声明为如此，包含延伸字段(值可以在运行时计算出来的字段)。
+
+默认序列化实现中，所以标记为`transient`属性的字段在反序列化时都会被初始化为默认值：`null, 0, false`。如果这些值不合适，则需要提供自定义的反序列化方法`readObject`，类似上面的例子。
+
+另外需要注意的两点：
+
+- 类中包含了线程安全的同步化操作时，序列化方法也需要添加同步锁。否则，将导致资源序列死锁`resource-ordering deadlock`
+- 最好提供自定义的UID值。`private static final long serialVersionUID = randomLongValue;`不需要确保唯一。但不同版本间需要保持一致。不同的值意味着打破了兼容性
+
+
+
+
+
+
+
 
 
 

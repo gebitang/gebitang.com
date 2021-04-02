@@ -5278,14 +5278,122 @@ public final class StringList implements Serializable {
 - 最好提供自定义的UID值。`private static final long serialVersionUID = randomLongValue;`不需要确保唯一。但不同版本间需要保持一致。不同的值意味着打破了兼容性
 
 
+### Item 88: Write readObject method defensively 
 
+Item 50中提到下面的例子，使用防御式复制方法以确保对象的不可变性。
 
+```
+// Immutable class that uses defensive copying
+public final class Period {
+    private final Date start;
+    private final Date end;
 
+    /**
+    * @param start the beginning of the period
+    * @param end the end of the period; must not precede start
+    * @throws IllegalArgumentException if start is after end
+    * @throws NullPointerException if start or end is null
+    */
+    public Period(Date start, Date end) {
+        this.start = new Date(start.getTime());
+        this.end = new Date(end.getTime());
+        if (this.start.compareTo(this.end) > 0)
+            throw new IllegalArgumentException(
+                            start + " after " + end);
+    }
 
+    public Date start () { return new Date(start.getTime()); }
+    public Date end () { return new Date(end.getTime()); }
+    
+    public String toString() { return start + " - " + end; }
+    
+    // Remainder omitted
+}
+```
 
+假设你决定让这个类实现序列化接口。由于实体展示与逻辑数据一致，使用默认的序列化方法是有道理的。所以只需要让当前类实现`Serializable`接口即可。如果这样做，这个类将不再能确保其关键的不可更改性。
 
+原因是`readObject`方法是另外一个公共的构造方法，应当跟上述已有方法一样需要仔细处理。（默认的序列化方法显然没有做这个动作）
 
+简单来说，`readObject`是一个构造方法，使用字节流作为唯一的参数(`byte stream`)。通常，这些字节流来自对构造实例对象的序列化。但如果字节流来自手动构造并且违反了类可变性，将创造出“不可能对象”(`impossible object`)——即不符合预期的对象。
 
+使用默认的序列化方法时，下面的代码将创建出结束日期在开始日期之前的Period对象。（因为Java缺少字节类型的字面值，所以需要进行强制转换——~这段解释也看不懂其实~）
 
+```
+public class BogusPeriod {
+    // Byte stream couldn't have come from a real Period instance!
+    private static final byte[] serializedForm = {
+            (byte)0xac, (byte)0xed, 0x00, 0x05, 0x73, 0x72, 0x00, 0x06,
+            0x50, 0x65, 0x72, 0x69, 0x6f, 0x64, 0x40, 0x7e, (byte)0xf8,
+            0x2b, 0x4f, 0x46, (byte)0xc0, (byte)0xf4, 0x02, 0x00, 0x02,
+            0x4c, 0x00, 0x03, 0x65, 0x6e, 0x64, 0x74, 0x00, 0x10, 0x4c,
+            0x6a, 0x61, 0x76, 0x61, 0x2f, 0x75, 0x74, 0x69, 0x6c, 0x2f,
+            0x44, 0x61, 0x74, 0x65, 0x3b, 0x4c, 0x00, 0x05, 0x73, 0x74,
+            0x61, 0x72, 0x74, 0x71, 0x00, 0x7e, 0x00, 0x01, 0x78, 0x70,
+            0x73, 0x72, 0x00, 0x0e, 0x6a, 0x61, 0x76, 0x61, 0x2e, 0x75,
+            0x74, 0x69, 0x6c, 0x2e, 0x44, 0x61, 0x74, 0x65, 0x68, 0x6a,
+            (byte)0x81, 0x01, 0x4b, 0x59, 0x74, 0x19, 0x03, 0x00, 0x00,
+            0x78, 0x70, 0x77, 0x08, 0x00, 0x00, 0x00, 0x66, (byte)0xdf,
+            0x6e, 0x1e, 0x00, 0x78, 0x73, 0x71, 0x00, 0x7e, 0x00, 0x03,
+            0x77, 0x08, 0x00, 0x00, 0x00, (byte)0xd5, 0x17, 0x69, 0x22,
+            0x00, 0x78
+    };
+    public static void main(String[] args) {
+        Period p = (Period) deserialize(serializedForm);
+        System.out.println(p);
+    }
+    // Returns the object with the specified serialized form
+    static Object deserialize(byte[] sf) {
+        try {
+            return new ObjectInputStream(
+                    new ByteArrayInputStream(sf)).readObject();
+        } catch (IOException | ClassNotFoundException e) {
+            throw new IllegalArgumentException(e);
+        }
+    }
+}
+```
 
+如果对如何构造字节流感兴趣可以参考[Java Object Serialization Specification](https://docs.oracle.com/javase/8/docs/platform/serialization/spec/serialTOC.html)，打印出`Fri Jan 01 12:00:00 PST 1999 - Sun Jan 01 12:00:00 PST 1984`违反了Period类的定义。
+
+做简单的防御处理——
+
+```
+// readObject method with validity checking - insufficient!
+private void readObject(ObjectInputStream s)
+    throws IOException, ClassNotFoundException {
+    s.defaultReadObject();
+
+    // Check that our invariants are satisfied
+    if (start.compareTo(end) > 0)
+        throw new InvalidObjectException(start +" after "+ end);
+}
+```
+
+上述防御还不充分，可以构造出符合规范的字节流，然后在字节流中再修改私有字段的属性以达到越过检查的目的（如何构造这些字节流超出本书的范围）(也超出我目前的理解范围)。
+
+加强版防御方法——
+
+```
+// readObject method with defensive copying and validity checking
+private void readObject(ObjectInputStream s)
+    throws IOException, ClassNotFoundException {
+    s.defaultReadObject();
+
+    // Defensively copy our mutable components
+    start = new Date(start.getTime());
+    end = new Date(end.getTime());
+    
+    // Check that our invariants are satisfied
+    if (start.compareTo(end) > 0)
+        throw new InvalidObjectException(start +" after "+ end);
+}
+```
+
+总结一下写反序列化方法的原则——
+
+- 类中的对象引用字段必须是私有时，对每一个这样的对象都要做防御拷贝
+- 对任何不可变量都要做检查，如果失败则抛出`InvalidObjectException`异常
+- 如果反序列化后必须对整体对象图做验证，使用`ObjectInputValidation`接口（？超纲内容- -）
+- 不要在类中调用任何重写的方法
 

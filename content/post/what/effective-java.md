@@ -5397,3 +5397,116 @@ private void readObject(ObjectInputStream s)
 - 如果反序列化后必须对整体对象图做验证，使用`ObjectInputValidation`接口（？超纲内容- -）
 - 不要在类中调用任何重写的方法
 
+### Item 89: For instance control, prefer enum types to readResolve
+
+Item 3中提到的单例模式如果实现了`Serializable`接口之后将失去“单例”效果(无论采用默认序列化方法，还是使用定制化的`readObject`方法，这一方法都将返回一个新创建的，不同于初始化时的类实例对象)。
+
+```
+public class Elvis {
+    public static final Elvis INSTANCE = new Elvis();
+    private Elvis() { ... }
+
+    public void leaveTheBuilding() { ... }
+}
+```
+
+`readResole`功能运行你使用一个实例代替由`readObject`方法返回的类实例，参考官方说法[Serialization, 3.7](https://docs.oracle.com/javase/8/docs/platform/serialization/spec/input.html)——
+
+>For Serializable and Externalizable classes, the `readResolve` method allows a class to replace/resolve the object read from the stream before it is returned to the caller. By implementing the readResolve method, a class can directly control the types and instances of its own instances being deserialized.
+
+利用这一特性，反序列化字节流后可以创建出的对象将返回有`readResolve`返回的对象。大部分场景下，这一对象没有任何引用，可以被GC立即回收。
+
+```
+// readResolve for instance control - you can do better!
+private Object readResolve() {
+    // Return the one true Elvis and let the garbage collector
+    // take care of the Elvis impersonator.
+    return INSTANCE;
+}
+```
+
+这要求序列化`Elvis`类时不能包含任何数据，所有字段必须声明为`transient`。否则可以被攻击者利用：在`readResolve`方法调用之前就构造出对反序列化对象的引用。
+
+攻击实现比较复杂，但原理很简单：如果单例对象包含非`transient`属性的字段，此字段内容将在`readResole`方法被调用之前执行反序列化操作，这就允许构造出“对反序列化对象的引用”。
+
+下面的内容未进行实操，来自原文——
+
+实现了`Serializable`接口的单例对象
+```
+// Broken singleton - has nontransient object reference field!
+public class Elvis implements Serializable {
+    public static final Elvis INSTANCE = new Elvis();
+    private Elvis() { }
+    private String[] favoriteSongs =
+            { "Hound Dog", "Heartbreak Hotel" };
+    public void printFavorites() {
+        System.out.println(Arrays.toString(favoriteSongs));
+    }
+    private Object readResolve() {
+        return INSTANCE;
+    }
+}
+```
+
+构造的“小偷”对象——
+```
+public class ElvisStealer implements Serializable {
+    static Elvis impersonator;
+    private Elvis payload;
+    
+    private Object readResolve() {
+        // Save a reference to the "unresolved" Elvis instance
+        impersonator = payload;
+        // Return object of correct type for favoriteSongs field
+        return new String[] { "A Fool Such as I" };
+    }
+    private static final long serialVersionUID = 0;
+}
+```
+
+攻击演示——
+
+```
+public class ElvisImpersonator {
+    // Byte stream couldn't have come from a real Elvis instance!
+    private static final byte[] serializedForm = {
+            (byte)0xac, (byte)0xed, 0x00, 0x05, 0x73, 0x72, 0x00, 0x05,
+            0x45, 0x6c, 0x76, 0x69, 0x73, (byte)0x84, (byte)0xe6,
+            (byte)0x93, 0x33, (byte)0xc3, (byte)0xf4, (byte)0x8b,
+            0x32, 0x02, 0x00, 0x01, 0x4c, 0x00, 0x0d, 0x66, 0x61, 0x76,
+            0x6f, 0x72, 0x69, 0x74, 0x65, 0x53, 0x6f, 0x6e, 0x67, 0x73,
+            0x74, 0x00, 0x12, 0x4c, 0x6a, 0x61, 0x76, 0x61, 0x2f, 0x6c,
+            0x61, 0x6e, 0x67, 0x2f, 0x4f, 0x62, 0x6a, 0x65, 0x63, 0x74,
+            0x3b, 0x78, 0x70, 0x73, 0x72, 0x00, 0x0c, 0x45, 0x6c, 0x76,
+            0x69, 0x73, 0x53, 0x74, 0x65, 0x61, 0x6c, 0x65, 0x72, 0x00,
+            0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0x00, 0x01,
+            0x4c, 0x00, 0x07, 0x70, 0x61, 0x79, 0x6c, 0x6f, 0x61, 0x64,
+            0x74, 0x00, 0x07, 0x4c, 0x45, 0x6c, 0x76, 0x69, 0x73, 0x3b,
+            0x78, 0x70, 0x71, 0x00, 0x7e, 0x00, 0x02
+    };
+    
+    public static void main(String[] args) {
+
+        // Initializes ElvisStealer.impersonator and returns
+        // the real Elvis (which is Elvis.INSTANCE)
+        Elvis elvis = (Elvis) deserialize(serializedForm);
+        Elvis impersonator = ElvisStealer.impersonator;
+
+        elvis.printFavorites();
+        impersonator.printFavorites();
+    }
+}
+```
+
+最终打印出——
+```
+[Hound Dog, Heartbreak Hotel]
+[A Fool Such as I]
+```
+
+解决这一问题可以将`favoriteSongs`字段声明为`transient`类型；但更好的解决方案是将`Elvis`类声明为枚举类。声明为枚举类之后，Java将保证除了声明的常量之外，不再有任何实例被创建。除非攻击者可以调用类似`AccessibleObject.setAccessible`方法——但这说明攻击者已经获取到了执行任意本地代码的权限。
+
+总结一下，尽管`readResole`方法没有被废弃，但使用单例方式最后使用枚举类的形式。如果即需要序列化又需要单例模式，必须提供`readResolve`方法，并且确保所以字段是`transient`类型或是基础类型。
+
+
+

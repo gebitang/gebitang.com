@@ -5508,5 +5508,99 @@ public class ElvisImpersonator {
 
 总结一下，尽管`readResole`方法没有被废弃，但使用单例方式最后使用枚举类的形式。如果即需要序列化又需要单例模式，必须提供`readResolve`方法，并且确保所以字段是`transient`类型或是基础类型。
 
+### Item 90: Consider serialization proxies instead of serialized instances
 
+使用序列化代理，而不是直接序列化实例
 
+item85中讨论的问题——实现序列化接口后更可能出现bug和安全问题——可以利用“序列化代理模式”(`serialization proxy pattern`)来降低风险。
+
+在要进行序列化的类中设计一个私有的静态嵌套类，作为其所在类的序列化代理。只包含一个构造函数，参数为其所在类的对象实例。两个类都需要实现序列化接口——
+
+```
+// Serialization proxy for Period class
+private static class SerializationProxy implements Serializable {
+    
+    private final Date start;
+    private final Date end;
+
+    SerializationProxy(Period p) {
+        this.start = p.start;
+        this.end = p.end;
+    }
+
+    private static final long serialVersionUID = 234098243823485285L; // Any number will do (Item 87)
+}
+```
+
+下一步，在序列代理所在的类(被称为`enclosing class`)中添加`writeReplace`方法(任何包含序列代理的类中都可以原样添加此方法)——
+
+```
+// writeReplace method for the serialization proxy pattern
+private Object writeReplace() {
+    return new SerializationProxy(this);
+}
+```
+
+包含了这个方法之后，所在类进行序列化时，序列化系统将产生(`emit`)`SerializationProxy`实例对象而不是所在类的实例。换句话说，在序列化之前，`writeReplace`方法将所在类的实例转化为了序列代理类。
+
+这样序列化实际序列化的是代理类。为防御攻击，需要另外在所在类中添加如下的`readObject`方法——
+
+```
+// readObject method for the serialization proxy pattern
+private void readObject(ObjectInputStream stream) throws InvalidObjectException {
+    throw new InvalidObjectException("Proxy required");
+}
+```
+
+最后，在序列代理类中提供`readResolve`方法，返回一个逻辑上与所在类等价的实例。这样确保让序列化系统将序列代理类重新转化为所在类对象实例。此方法中只需要调用公共的API即可——如果正常运行时调用一样(实际却是发生在反序列化过程中)
+
+```
+// readResolve method for Period.SerializationProxy
+private Object readResolve() {
+    return new Period(start, end); // Uses public constructor
+}
+```
+
+这让之前提到的防御拷贝，字节流攻击防御都不需要，而且所有字段都可以重新声明为final类型，让所在类重新变成不可变类。
+
+另外一个好处是，序列化代理可以实现在反序列化实例时生成不同的原始序列化类。（这在实际应用中很有用）
+
+例如item 36中提到的`EnumSet`类，没有构造函数，只有静态工厂。从客户端角度看，返回的都是`EnumSet`实例，但在实际的实现时，会根据枚举数量的不同返回不同的类：如果少于64个元素，返回`RegularEnumSet`对象；反之，返回的是`JumboEnumSet`。
+
+假设：序列化一个包含了60个元素的枚举类；然后再添加5个枚举常量；然后反序列化。序列化时，操作的是`RegularEnumSet`，但反序列化后，最后是返回`JumboEnumSet`实例。
+
+使用序列化代理可以轻松完成这一场景——
+
+```
+// EnumSet's serialization proxy
+private static class SerializationProxy <E extends Enum<E>> implements Serializable {
+    // The element type of this enum set.
+    private final Class<E> elementType;
+
+    // The elements contained in this enum set.
+    private final Enum<?>[] elements;
+    
+    SerializationProxy(EnumSet<E> set) {
+        elementType = set.elementType;
+        elements = set.toArray(new Enum<?>[0]);
+    }
+
+    private Object readResolve() {
+        EnumSet<E> result = EnumSet.noneOf(elementType);
+        for (Enum<?> e : elements)
+            result.add((E)e);
+        return result;
+    }
+
+    private static final long serialVersionUID = 362491234563181265L;
+}
+```
+
+序列化代理有两个限制：
+
+- 第一，不兼容用户扩展的类
+- 第二，不兼容对象graph包含循环的类。这种类中调用readResolve方法时将抛出`ClassCastException`（因为此时还没有对应的对象，只有序列化代理)
+
+另外，序列化代理有一些性能损耗。
+
+总之，如果类不允许用户扩展，需要进行序列化操作时尽量使用序列化代理模式。这是最简单的序列化方式。

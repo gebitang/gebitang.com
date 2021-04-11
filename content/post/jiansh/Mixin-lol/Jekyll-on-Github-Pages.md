@@ -45,3 +45,11 @@ bundle exec jekyll serve
 [github page官方文档](https://help.github.com/en/github/working-with-github-pages/creating-a-github-pages-site-with-jekyll)、[jekyll站点结构](https://jekyllrb.com/docs/structure/)，[jekyll永久链接](http://jekyllcn.com/docs/permalinks/) [jekyll permalinks](https://jekyllrb.com/docs/permalinks/)
 
 
+手动生成站点——
+
+```
+# jekyll --help
+jekyll build
+# 使用环境配置（不使用当前项目的配置）
+bundle exec jekyll  build
+```

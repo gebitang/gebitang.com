@@ -4636,5 +4636,971 @@ public static long generateSerialNumber() {
 
 这种操作是可接受的：一个线程修改对象数据之后在分享给其他线程，只对分享操作添加同步化。其他线程只多钱对象，不做修改的情况下，是可以不添加同步化操作的。这种对象被称为`事实不可变`(effectively immutable)对象；在不同线程中传递这种对象被称为"安全发布"(safe publication)。可以有多种安全发布方式：存在类初始化时的静态变量中；字段声明为volatile类型；字段声明为final类型；或访问时添加了同步锁；或放到同步集合中(concurrent collection)
 
+### Item 79: Avoid excessive synchronization
+
+上一条讨论不要“锁得不充分”，这一条讨论相反的方面：不要“锁得太过分”。否则可能降低性能，导致死锁甚至不可知的程序行为。
+
+为避免活性失败和安全失败，永远不要在加锁的代码块中将控制权限交给客户端(调用方)，换句话说，不要对设计目的是被重写的方法加锁。从当前类的角度来看，这种方法属于“异形”(alien)，当前类对它们没有控制权。
+
+下面的列子可以演示这种场景——
+
+```
+// Broken - invokes alien method from synchronized block!
+public class ObservableSet<E> extends ForwardingSet<E> {
+    public ObservableSet(Set<E> set) {
+        super(set);
+    }
+
+    private final List<SetObserver<E>> observers
+            = new ArrayList<>();
+
+    public void addObserver(SetObserver<E> observer) {
+        synchronized (observers) {
+            observers.add(observer);
+        }
+    }
+
+    public boolean removeObserver(SetObserver<E> observer) {
+        synchronized (observers) {
+            return observers.remove(observer);
+        }
+    }
+
+    private void notifyElementAdded(E element) {
+        synchronized (observers) {
+            for (SetObserver<E> observer : observers)
+                observer.added(this, element);
+        }
+    }
+
+    @Override 
+    public boolean add(E element) {
+        boolean added = super.add(element);
+        if (added)
+            notifyElementAdded(element);
+        return added;
+    }
+    @Override 
+    public boolean addAll(Collection<? extends E> c) {
+        boolean result = false;
+        for (E element : c)
+            result |= add(element); // Calls notifyElementAdded
+        return result;
+    }
+}
+```
+
+观察者模式：观察者调用`addObserver`订阅通知，调用`removeObserver`取消订阅。两个方法都会传递下面的回调函数——
+
+```
+@FunctionalInterface 
+public interface SetObserver<E> {
+    // Invoked when an element is added to the observable set
+    void added(ObservableSet<E> set, E element);
+}
+```
+
+这个接口在结构上与`BiConsumer<ObservableSet<E>, E>`是相同的，我们使用自定义的名称只是为了语义更明确。简单调用时看起来没有问题——会正常打印出0~99
+
+```
+public static void main(String[] args) {
+    ObservableSet<Integer> set =
+            new ObservableSet<>(new HashSet<>());
+    set.addObserver((s, e) -> System.out.println(e));
+    for (int i = 0; i < 100; i++)
+        set.add(i);
+}
+```
+
+如果我们传递一个更复杂一些的`Observer`：打印传递的整数并且如果其值为23时，再删除自己。
+
+```
+set.addObserver(new SetObserver<>() {
+    public void added(ObservableSet<Integer> s, Integer e) {
+        System.out.println(e);
+        if (e == 23)
+            s.removeObserver(this);
+    }
+});
+```
+
+这里使用匿名类而不是lambda函数是因为函数对象需要将自己传递给`s.removeObserver`方法，lambda函数无法访问自身。
+
+我们期望打印到23然后程序停止，但实际上抛出了`ConcurrentModificationException`异常。因为当调用add方法时，`notifyElementAdded`方法正在对观察队列进行迭代，此时又需要移除观察队列中的元素。尽管`notifyElementAdded`方法加了锁，但无法阻止自身的迭代线程对观察set执行回调函数并对其进行修改
+
+现在换一种方式解决取消订阅的逻辑，不在当前线程中直接调用`removeObserver`，而使用executor服务——
+
+```
+// Observer that uses a background thread needlessly
+set.addObserver(new SetObserver<>() {
+    public void added(ObservableSet<Integer> s, Integer e) {
+        System.out.println(e);
+        if (e == 23) {
+            ExecutorService exec =
+                    Executors.newSingleThreadExecutor();
+            try {
+                exec.submit(() -> s.removeObserver(this)).get();
+            } catch (ExecutionException | InterruptedException ex) {
+                throw new AssertionError(ex);
+            } finally {
+                exec.shutdown();
+            }
+        }
+    }
+});
+```
+
+此时不会出现异常，但造成了死锁场景。执行器的新建线程中调用`s.removeObserver`方法试图锁住`observers`但无法成功，因为主线程已经获取到锁；但同时主线程又在等待执行器的线程通知它移除observer。
+
+解决方式——(将“异形”移除锁范围即可)
+
+```
+// Alien method moved outside of synchronized block - open calls
+private void notifyElementAdded(E element) {
+    List<SetObserver<E>> snapshot = null;
+    synchronized(observers) {
+        snapshot = new ArrayList<>(observers);
+    }
+    for (SetObserver<E> observer : snapshot)
+        observer.added(this, element);
+}
+```
+
+实际上，语言库中的同步集合中的`CopyOnWriterArrayList`是更好的解决方案，几乎是为这种场景定制的。内部实现了ArrayList的一个变体，每次操作都会重新复制一份新的数组。因为内部数组永远不会被修改，所以不需要加锁——
+
+```
+// Thread-safe observable set with CopyOnWriteArrayList
+private final List<SetObserver<E>> observers =
+        new CopyOnWriteArrayList<>();
+
+public void addObserver(SetObserver<E> observer) {
+    observers.add(observer);
+}
+
+public boolean removeObserver(SetObserver<E> observer) {
+    return observers.remove(observer);
+}
+
+private void notifyElementAdded(E element) {
+    for (SetObserver<E> observer : observers)
+        observer.added(this, element);
+}
+```
+
+作为一个原则：在加锁的代码块中应当做尽量少的操作。“获取锁，检查状态，需要的话进行状态转变，释放锁”——仅此而已。
+
+上面从正确性上看待加锁问题，现在从性能角度看一下：现在是多核时代，加锁将丧失了并行计算的优势；同时限制了VM的优化。
+
+如果写一个可变类，有两种选择：忽略所有的同步操作，交个调用方客户端处理；或者内部进行同步操作，确保类是线程安全的。Java早期，许多类的实现违反了这一原则，例如`StringBuffer`实例几乎总是被单线程使用，却采用了内部同步的机制，所有后续出现了`StringBuilder`，相当于无锁的`StringBuffer`。
+
+总结——
+>In summary, to avoid deadlock and data corruption, never call an alien method from within a ynchronized region. More generally, keep the amount of work that you do from within synchronized  egions to a minimum. When you are designing a mutable class, think about whether it should do its own synchronization. In the multicore era, it is more important than ever not to oversynchronize.  ynchronize your class internally only if there is a good reason to do so, and document your decision clearly (Item 82)
+
+### Item 80: Prefer executors, tasks, and streams to threads
+
+在本书第一版本中包含一个`工作队列`(work queue)的简单实现；当第二版出版时，`java.util.concurrent`包已经加入Java，其中包含了一个基于接口的灵活的任务`执行框架`(Executor Framework)。
+
+- 创建一个工作队列只需要一行代码:`ExecutorService exec = Executors.newSingleThreadExecutor();`，
+- 添加执行任务`exec.execute(runnable);`
+- 优雅关闭执行器`exec.shutdown();`
+
+实际上还支持很多其他操作。框架提供了不同种类的执行器配置，满足大部分执行场景。如果还不满足，还可以直接使用`ThreadPoolExecutor`类自定义。
+
+选择哪种执行服务需要一些技巧。对应小型轻量服务来说，`Executors.newCachedThreadPool`通常是一个好选择，因为不需要做任何配置就可以很好完成工作。但对于高负荷生产服务就不是好选择。因为缓存线程池接受到任务时不会加入队列，而是立即创建一个线程去执行，如果负荷过高，所有CPU资源将很快被创建线程所耗尽。这种情况下，`Executors.newFiexedThreadPool`是更好的选择，如何需要更精细的控制，可以直接使用`ThreadPoolExecutor`
+
+一个线程服务同时包含了：“需要执行的单元”和“如何执行的机制”。在Java的执行框架中，执行单元和执行机制是分离的。执行单元的抽象被称为“任务”(task)，包含两种：`Runnable`和`Callable`，后者与前者的不同在于其可以返回值并且可以抛出异常。执行单元和执行机制分离后，可以根据场景选择对应的执行机制，然后有执行服务框架完成调度执行即可
+
+关于执行框架的更深一步解释，可参考<<Java Concurrency in Practice>>
+
+### Item 81: Prefer concurrency utilities to wait and notify
+
+对于`wait`和`notify`的使用建议，本书的第一版中做了单独的一个条目，这些建议依然有效并且列于本条目结尾。但这些建议不像曾经那么重要了。因为自Java 5以来，Java提供了高层抽象后的并发库`java.util.concurrent`，这个包括三个部分的内容：执行框架、并发集合、同步器。第一部分上个条目已经结束，本条目关注剩余两个方面。
+
+并发库实现了标准集合接口例如`List`、`Queue`和`Map`，内部实现管理同步请求，提供了高并发支持。在并发集合中显然无法排除并发操作，所以并发集合接口提供了状态依赖的控制操作(state-dependent modify operations)。
+
+例如：Map的`putIfAbsent(key, value)`方法：如果key不存在则添加新key并绑定value，方法本身返回null值；如果key已经存在，则返回key对应的当前值。`String.intern`方法就可以基于此实现——
+
+```
+// Concurrent canonicalizing map atop ConcurrentMap - not optimal
+private static final ConcurrentMap<String, String> map =
+    new ConcurrentHashMap<>();
+
+public static String intern(String s) {
+    String previousValue = map.putIfAbsent(s, s);
+    return previousValue == null ? s : previousValue;
+}
+```
+
+`ConcurrentHashMap`甚至对取数据做了优化，例如`get`方法——(下面的intern方法比`String.intern`方法快很多)
+
+```
+// Concurrent canonicalizing map atop ConcurrentMap - faster!
+public static String intern(String s) {
+    String result = map.get(s);
+    if (result == null) {
+        result = map.putIfAbsent(s, s);
+        if (result == null)
+            result = s;
+    }
+    return result;
+}
+```
+
+一些并发结合对象扩展了阻塞操作(blocking operation)，一直等待直到任务成功执行完毕。例如`BlockingQueue`扩展了`Queue`的同时增加了几个方法：`take`从队列头取出元素，如果队列为空则一直等待。实际上，执行器的许多实现都基于BlockingQueue实现
+
+同步器`Synchronizer`确保线程依次等待，用来协调他们之间的活动。最常用的同步器是`CountDownLatch`和`Semaphore`，不常用的包括`CyclicBarrier`和`Exchanger`；最强大的则是`Phaser`
+
+“倒数锁”(`Countdown latch`)允许一个或多个线程等待一个或多个线程完成事务处理。唯一的构造函数只需要一个int值表示`countDown`方法要被调用多少次之后，所以等待线程才被允许继续执行。例如，假设创建一个框架计算某个action的并发执行耗时：
+
+- 包括一个执行器执行动作
+- concurrency水平表示有多大的并发量
+- runnable对象
+
+所有的工作线程做好准备等待计时器线程“发令”执行；最后一个线程执行完任务后，计时线程停止计时。使用`wait`和`notify`实现这个场景将十分复杂，但基于`CountDownLatch`之上却十分简洁——
+
+```
+// Simple framework for timing concurrent execution
+public static long time(Executor executor, int concurrency,
+                        Runnable action) throws InterruptedException {
+    CountDownLatch ready = new CountDownLatch(concurrency);
+    CountDownLatch start = new CountDownLatch(1);
+    CountDownLatch done = new CountDownLatch(concurrency);
+    for (int i = 0; i < concurrency; i++) {
+        executor.execute(() -> {
+            ready.countDown(); // Tell timer we're ready
+            try {
+                start.await(); // Wait till peers are ready
+                action.run();
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+            } finally {
+                done.countDown(); // Tell timer we're done
+            }
+        });
+    }
+    ready.await(); // Wait for all workers to be ready
+    long startNanos = System.nanoTime();
+    start.countDown(); // And they're off!
+    done.await(); // Wait for all workers to finish
+    return System.nanoTime() - startNanos;
+}
+```
+
+上述方法需要注意的点：
+
+- 需要确保可以创建足够的执行线程，否则这个方法将永远不会停止。线程不足导致的死锁被称为：“线程饥饿死锁”(`thread starvation deadlock`)
+- 如果某个线程被抛出了中断异常`InterruptedException`，调用了`Thread.currentThread().interrupt()`方法重新声明中断，正常返回run方法结果
+- 计时使用`System.nanoTime`而不是`System.currentTimeMillis`。前者更精确并且不受系统时间的影响
+- 只有runnable对象需要消耗一些时间时，最终的计时才有意义。实际上，精确的“微基准”是很难获取到的。最后使用专业的框架例如`JMH`([Java Microbenchmark Harness (JMH)](https://github.com/openjdk/jmh))
+
+上述例子只是一个演示，实际上其中的三个`countdownlatch`对象可以使用一个`CyclicBarrier`或`Phaser`对象代替。代码将更简洁但会更难理解一些。
+
+标准的wait用法：永远只在循环中调用wait方法。同时确保`wait`方法在`notify`或`notifyall`方法调用之前就已经被调。否则无法保证线程会被重新唤醒
+
+```
+// The standard idiom for using the wait method
+synchronized (obj) {
+    while (<condition does not hold>)
+        obj.wait(); // (Releases lock, and reacquires on wakeup)
+        ... // Perform action appropriate to condition
+}
+```
+
+有了并发框架之后，最后不要再使用原生的`wait`和`notify`方法控制并发流程。
+
+### Item 82: Document thread safety
+
+一个类的方法在并发情况下的行为属于类与其客户端的重要协议。如果没有说明这种情况，调用方不得不自己假设，将可能导致过度同步或同步不足的问题。
+
+为了确保并发场景下的使用，类必须明确说明其支持的线程安全级别。通常有以下几个级别(尽管不够充分，但满足大部分场景)——
+
+- “不可变”(`Immutable`)：类实例相当于常量，不需要外部同步操作。例如`String`、`Long`、`BigInteger`
+- “无条件线程安全”(`Unconditional thread-safe`)：类实例是可变的，但内部有充分的同步限制，确保外部并发使用时不需要做同步化操作。例如`AtomicLong`、`ConcurrentHashMap`
+- “有条件的线程安全”(`Conditional thread-safe`)：与上一个情况类似，但需要尾部同步化操作以确保并发使用。例如`Collections.synchroinzed`包装返回的集合对象
+- “线程不安全”(`Not thread-safe`)：类实例是可变的，并发场景下，调用方必须对每个方法的调用都添加同步锁。例如`ArrayList`、`HashMap`
+- “线程恶意”(`Thread-hostile`)：在并发场景下使用不安全，即使外部调用时使用了同步操作
+
+通常关于同步的注释都是类级别的，但如果方法需要额外的说明时，需要对方法进行单独注释。类似`Collections.synchronizedMap`方法的做法——
+
+```
+Returns a synchronized (thread-safe) map backed by the specified map. In order to guarantee serial access, it is critical that all access to the backing map is accomplished through the returned map.
+It is imperative that the user manually synchronize on the returned map when iterating over any of its collection views:
+        Map m = Collections.synchronizedMap(new HashMap());
+            ...
+        Set s = m.keySet();  // Needn't be in synchronized block
+            ...
+        synchronized (m) {  // Synchronizing on m, not s!
+            Iterator i = s.iterator(); // Must be in synchronized block
+            while (i.hasNext())
+                foo(i.next());
+        }
+       
+Failure to follow this advice may result in non-deterministic behavior.
+The returned map will be serializable if the specified map is serializable.
+
+Params:
+    m – the map to be "wrapped" in a synchronized map.
+Type parameters:
+    <K> – the class of the map keys
+    <V> – the class of the map values
+Returns:
+    a synchronized view of the specified map.
+
+public static <K,V> Map<K,V> synchronizedMap(Map<K,V> m) {
+    return new SynchronizedMap<>(m);
+}
+```
+
+为防止“拒绝服务”(`dnial-of-service`)攻击，使用私有的锁对象(锁对象应该总是final级别的)——
+
+```
+// Private lock object idiom - thwarts denial-of-service attack
+private final Object lock = new Object();
+
+public void foo() {
+    synchronized(lock) {
+        ...
+    }
+}
+```
+
+### Item 83：Use lazy initializaition judiciously
+
+大部分情况下，普通的初始化优于延迟初始化。
+
+谨慎使用“延迟初始化”(`lazy initialization`)操作。直到字段被需要时才进行初始化，如果不需要，字段永远不被初始化。这一技术适用于静态字段也适用于实例字段。通常这是一种优化策略，但使用不当将对类有破坏性。
+
+最后的处理是“能不用就不用(延迟初始化这把双刃剑)”：通过提高延迟初始化字段的成本降低了初始化类的成本。
+
+如果类的某个字段只在类的一部分场景下使用，并且初始化此字段的成本很高，这种场景下值得应用“延迟初始化”策略。
+
+在并发场景下，延迟初始化需要一些技巧。本条目讨论的技巧都是线程安全的方式——
+
+代替一般初始化`private final FieldType field = computeFieldValue();`的最简单操作：打破初始化流程，使用`synchronized`关键字——
+
+```
+// Lazy initialization of instance field - synchronized accessor
+private FieldType field;
+private synchronized FieldType getField() {
+    if (field == null)
+        field = computeFieldValue();
+    return field;
+}
+```
+
+上面的操作针对静态变量也是一样。静态字段的初始化可以使用“holder class”模式，确保静态变量只在被调用时才会被初始化。这一模式的优点在于不需要使用synchronized关键字，只是一次字段访问操作，没有增加额外的成本(通常虚拟机只有在初始化类是进行字段同步，之后再访问时不需要进行任何的同步操作)——
+
+```
+// Lazy initialization holder class idiom for static fields
+private static class FieldHolder {
+    static final FieldType field = computeFieldValue();
+}
+private static FieldType getField() { return FieldHolder.field; }
+```
+
+如果是针对类实例的字段进行延迟初始化，使用“double-check”方式。这种方式避免了初始化之后的加锁操作。之所以要检查两次，是因为如果字段没有初始化，一旦没有加锁，第二次检查时会加锁（有点绕，看代码。注意字段需要声明为`volatile`类型）——
+
+```
+// Double-check idiom for lazy initialization of instance fields
+private volatile FieldType field;
+
+private FieldType getField() {
+    FieldType result = field;
+    if (result == null) { // First check (no locking)
+        synchronized(this) {
+            if (field == null) // Second check (with locking)
+                field = result = computeFieldValue();
+        }
+    }
+    return result;
+}
+```
+
+上面的代码有点费解，尤其是局部变量的使用。其作用是确保实例变量`field`初始化之后，只被读取一次。有利于提高性能。对应静态变量实例的延迟初始化不需要使用这种方式，使用包装类的是更好的选择。
+
+如果可以忍受变量的多次初始化操作，“双检查”模式可以变换为“单检查”模式(变量依然被声明为`volatile`类型)——
+
+```
+// Single-check idiom - can cause repeated initialization!
+private volatile FieldType field;
+
+private FieldType getField() {
+    FieldType result = field;
+    if (result == null) { 
+        field = result = computeFieldValue();
+    }
+    return result;
+}
+```
+
+上述所以方法对原始类型和对象类型字段都有效。当适用于原始类型时，检查对比值为0而不是null。如果不关注是否每个线程都重新计算字段的值并且字段类型是除了long或double之外的原始类型，则`volatile`关键字可以省略——这一策略被称为"竞赛单检查"(`racy single-check`)模式。以增加初始化的代码加速字段的访问。
 
 
+### Item 84：Don't depend on the thread scheduler
+
+当有多个线程需要运行时，线程调度程序决定由哪个线程先执行以及执行多久。操作系统会尝试尽可能地公平调度，但调度策略区别很大。任何依赖于线程调度器来确保正确性以及性能的程序将丧失可移植性。
+
+编写健壮、有效、可移植程序的最好方式是确保平均的执行线程不大于内核数。这使得线程调度器的可选择性更少。这种情况下，即使调度策略不同，程序的行为区别也不大。
+
+确保运行中的线程尽可能少的主要方法是：让每个执行中的线程做有用的动作，然后等待(执行下一个有用的动作)。如果没有执行有效动作，线程不应该运行。在Java的执行框架中，这意味着限制线程池的大小，同时保持任务足够短小(不能太短，否则频繁分发任务也会影响性能)
+
+线程不应该处于"忙等待"(`busy-wait`)状态——频繁检查共享对象。这将增加内核的负载并使得线程调度跟脆弱。下面是一个极端“忙等待”例子——
+
+```
+// Awful CountDownLatch implementation - busy-waits incessantly!
+public class SlowCountDownLatch {
+
+    private int count;
+
+    public SlowCountDownLatch(int count) {
+        if (count < 0)
+            throw new IllegalArgumentException(count + " < 0");
+        this.count = count;
+    }
+
+    public void await() {
+        while (true) {
+            synchronized(this) {
+                if (count == 0)
+                    return;
+            }
+        }
+    }
+
+    public synchronized void countDown() {
+        if (count != 0)
+            count--;
+    }
+}
+```
+
+如果是因为程序线程无法获取到CPU时间导致无法正常工作，不要试图使用`Thread.yield`方法来解决。即使有效，也让程序丧失了可移植性。在一种JVM环境下yield有效时，在另外一种JVM下可能就无效，甚至让程序更糟糕。
+
+基于此的推论是调整线程的优先级。调整一些线程的优先级来调试程序的响应是有道理的，但这样程序也丧失了可移植性。
+
+
+## 11 Serialization
+
+这一章关注对象的序列化问题(object serialization)。Java框架将对象编码为字节流(byte streams)过程称为“序列化”(`serializing`)，从字节流中重新构建出对象的过程称为“反序列化”(`deserializing`)。对象一旦被序列化后，就可以从一个虚拟机发送给另一个虚拟机或保存在硬盘以待后用。
+
+本章关注序列化时需要注意的危险问题以及如何最小化这些问题的影响。
+
+### Item 85： Prefer alternatives to Java serialization
+
+最好使用其他方式代替Java的序列化。
+
+当序列化在1997年被加入Java时，就被认为有一些冒险。这种方法在研究性语言上使用过，例如`[Modula-3](http://www.modula3.org/)`，但从来没有在生产级别的语言上使用。
+
+尽管轻松分发对象的允诺很有吸引力，但代价是：不可见构造函数；模糊了API和实现直接的界限；对正确性、安全、性能和维护都有潜在的问题。倡导者相信优点大于缺点，但历史却走向了另一个方向。
+
+本书上一版本中对应安全问题的描述如大家所害怕的一样都一一应验。上世纪还属于讨论阶段的脆弱性在接下来的十年内变成了严重的利用漏洞，包括2016年11月著名的针对“旧金山交通局”的勒索病毒攻击，导致系统瘫痪两天。
+
+序列化最基本的问题是：攻击面过于宽广导致无法防御。通过调用ObjectInputStream的readObject方法，只要类实现了`Serializable`接口，类路径下的任何类型的对象几乎都可以实例化。这导致几乎所有的类型都面临被攻击的危险。包括Java平台基础库、第三方库例如Apache Commons Collections。即使你遵守了写序列化类的所有最佳实践，你的应用依然很脆弱。
+
+攻击者和安全研究员研究Java类库和广泛使用的第三方库中的序列化类型，寻找反序列化时调用的可进行危险操作的方法。这些方法被称为“小玩意”(`gadgets`)。多个小玩意可以组成一个链条，时不时就可以发现一个链条，强大到可以允许攻击者对底层硬件执行任意的原生代码。只需要有机会对一段精心构建的字节流执行反序列化操作即可。针对旧金山交通局的工具就是这样发生的。这种攻击不是个案，而且会越来越多。
+
+甚至不需要任何小玩意，你可以利用反序列化发起“拒绝服务”攻击。一小段字节流的反序列化可能消耗很长的时间。这种字节流被称为“反序列化炸弹”(`deserialization bomb`)。下面一段演示只需要使用hash和字符串的序列化炸弹——
+
+```
+// Deserialization bomb - deserializing this stream takes forever
+static byte[] bomb() {
+    Set<Object> root = new HashSet<>();
+    Set<Object> s1 = root;
+    Set<Object> s2 = new HashSet<>();
+
+    for (int i = 0; i < 100; i++) {
+        Set<Object> t1 = new HashSet<>();
+        Set<Object> t2 = new HashSet<>();
+        t1.add("foo"); // Make t1 unequal to t2
+        s1.add(t1); s1.add(t2);
+        s2.add(t1); s2.add(t2);
+        s1 = t1;
+        s2 = t2;
+    }
+    return serialize(root); // Method omitted for brevity
+}
+```
+
+这组对象包含201个HashSet实例，每个实例包含少于3个的对象引用，整个字节流只有5744个字节。但直到太阳燃烧殆尽，反序列化这些字节依然没有完成。问题的关键是反序列一个HashSet需要计算元素的哈希值，上例中有100层深度的hash值需要计算，以为着`hashCode`方法要被计算2的100次方…… 
+
+最好的方式就是：能不用就不用(序列化)。在不同平台传递对象在本书被称为“跨平台结构化数据表示”(`cross-platform structured-data representation`)，现在有更简单方便的方式：基于文本的JSON格式和基于二进制的Protocal Buffer
+
+如果时历史遗留系统并且必须使用序列化。确保永远不要对不信任的数据进行反序列化操作。“信任的数据”可以利用“白名单”方式声明，或使用“黑名单”进行过滤。前者优于后者，因为后者只能保护已知的著名的危险类
+
+
+### Item 86: Implement Serializable with great caution
+
+序列化一个类只需要简单声明让其实现`Serializable`接口即可。看起来如此简单以至于被误认为实现序列化对程序员来说很容易。事实却复杂得多，即时代价也许可以忽略，但长期代价却很昂贵。
+
+主要代价之一是：一旦实现了`Serializable`序列化接口，发布后的类也就丧失了灵活性。序列化成为暴露的API的一部分。如果采用了序列化的默认实现，当前类的私有字段也成为了API的一部分。采用默认序列化实现后，如果后续修改了类的内部表现(`internal representation`)，将导致序列化失败。
+
+所以实现序列化接口后，应当仔细设计序列化实现——尽管这将增加一开始时的开发成本，但值得这么做。
+
+实现了序列化接口的类的演化的限制之一是“流统一标识符”(`stream unique identifiers`)，更通用的名称是“序列号”(`serial version UID`)。每个序列化类都有一个独特的标识符。如果没有声明一个静态final类型的long变量`serialVersionUID`，系统将在运行时通过SHA-1算法生成这个参数值。类名、实现的接口、大部分成员变量以及编译器生成的合成对象都将影响这个变量的值。如果其中任何一个项目有变化——例如增加一个方法——最终的UID都将发生变化。将抛出`InvalidClassException`异常
+
+第二个代价是实现序列化后提高了出现安全漏洞和bug的可能性。通常类初始化通过构造函数，但序列化提高了“语言之外的机制”(`extralinguistic mechanism`)完成类初始化动作。
+
+第三个代价是增加了测试成本。新版本发布后，需要验证高低版本之间的序列化转换是否成功。随着版本的增加，序列化的测试成本是指数级的。
+
+### Item 87: Consider using a custom serialized form
+
+默认的序列化实现可以高效地表示当前对象的实体表现（~直接从英文翻译过来已经理解不能了~）时，可以采用默认实现。
+
+换句话表达上面的含义：序列化可以很好地表达对象中包含的数据以及所有从当前对象可触达的所有对象。（看后面一个例子就容易理解了）
+
+如果对象的实体表现(`physical representation`)与自身的逻辑内容(`logical content`)一致时，使用默认的序列化实现是可行的。例如下面的类——
+
+```
+// Good candidate for default serialized form
+public class Name implements Serializable {
+    /**
+     * Last name. Must be non-null.
+     * @serial
+     */
+    private final String lastName;
+    /**
+     * First name. Must be non-null.
+     * @serial
+     */
+    private final String firstName;
+
+    /**
+     * Middle name, or null if there is none.
+     * @serial
+     */
+    private final String middleName;
+
+    // Remainder omitted
+}
+```
+
+逻辑上讲，一个“名字”包含了last name、first name, 和middle name。上述类的字段正是这个逻辑内容的映射。
+
+即使默认序列化是合适的，也应该提供`readObject`方法以确保安全性和不可变性。针对上述类，需要确保lastName和firstName不为空。
+
+另外注意的时，尽管三个字段都是私有属性，依然添加了注释，因为序列化实现使得这些属性变成了公共API，所以需要添加注释。并且适用了`@serial`标签，告诉`Javadoc`将这些注释添加到特定的页面——序列化表格页。
+
+再看一个反例——
+
+```
+// Awful candidate for default serialized form
+public final class StringList implements Serializable {
+    private int size = 0;
+    private Entry head = null;
+
+    private static class Entry implements Serializable {
+        String data;
+        Entry next;
+        Entry previous;
+    }
+
+    // Remainder omitted
+}
+```
+
+逻辑上讲，这个类表示了一连串的字符串。实体上来看，适用双链表表示这一连串的字符串。如果使用默认的序列化操作，将双向映射链表中的每一个entry以及entry之间的所有链接。
+
+这种情况下，默认序列化操作有以下四个劣势——
+
+- 永久性将内部的表示暴露给了外部的API。`StringList.Entry`称为了公共API的一部分。后续表示即使变更，双向链表也无法去除。
+- 占据过量空间。默认序列化保持了所有的entry以及连接信息，后者只是实现的方式，不值得包含在序列化信息之中。这导致序列化占据过多空间，存盘还是网络传输时速度很慢。
+- 过于耗时。序列化逻辑不知道对象的拓扑结构，必须遍历所有的节点。实际上，上面的例子里只需要跟踪`next`引用即可
+- 可能导致堆溢出。默认的序列化操作执行递归遍历，即使数量不大，也可能引起堆溢出。根据不同的机器，1000~1800个字符串的序列化就可能出现堆溢出的情景。
+
+合理的序列化方式只需要记录字符串的个数以及字符串本身。这些构成了StringList类的逻辑数据。
+
+修改序列化实现的改进版本——
+
+```
+
+// StringList with a reasonable custom serialized form
+public final class StringList implements Serializable {
+
+    private transient int size = 0;
+    private transient Entry head = null;
+
+    // No longer Serializable!
+    private static class Entry {
+        String data;
+        Entry next;
+        Entry previous;
+    }
+
+    // Appends the specified string to the list
+    public final void add(String s) { /*...*/ }
+
+    /**
+     * Serialize this {@code StringList} instance.
+     *
+     * @serialData The size of the list (the number of strings
+     * it contains) is emitted ({@code int}), followed by all of
+     * its elements (each a {@code String}), in the proper
+     * sequence.
+     */
+    private void writeObject(ObjectOutputStream s)
+            throws IOException {
+        s.defaultWriteObject();
+        s.writeInt(size);
+        // Write out all elements in the proper order.
+        for (Entry e = head; e != null; e = e.next)
+            s.writeObject(e.data);
+    }
+
+    private void readObject(ObjectInputStream s)
+            throws IOException, ClassNotFoundException {
+        
+        s.defaultReadObject();
+        int numElements = s.readInt();
+        // Read in all elements and insert them in list
+        for (int i = 0; i < numElements; i++)
+            add((String) s.readObject());
+    }
+
+    // Remainder omitted
+}
+```
+
+即使所有字段都声明为`transient`，`writeObject`方法还是第一步先调用了`defaultWriteObject`方法；`readObject`方法第一件事也是调用`defaultReadObject`方法。虽然这种情况下，这两个方法调用可以省略。——这算是一种最佳实践，后续添加了非`transient`属性的字段时，依然可以兼容。
+
+私有方法添加了注释，其中`@serialData`标签告诉`JavaDoc`将这些内容放置在特定的序列化操作页面。
+
+修改之后，占据的空间更少，并且不再出现堆溢出现象。
+
+尽管StringList类的默认序列化操作有各种问题，但至少是可以工作的“正确实现”。有些类的序列化操作如果依赖默认实现将无法正常工作。例如哈希表对象，其实体表示是：一组哈希桶，每个桶包含了键-值对实例。每个桶是其包含的实例的key值的哈希函数。这意味着通常来说，每次实现的位置不一定都是相同的。实际上，每次运行时对应的位置都可能是不同的。这种情况下，使用默认的序列化操作将导致数据损坏。
+
+无论是否使用自定义的序列化操作，调用`defaultWriteObject`方法时，所以非`transient`属性的字段都会被执行序列化操作。因此，所以可以声明为`transient`的字段都应当声明为如此，包含延伸字段(值可以在运行时计算出来的字段)。
+
+默认序列化实现中，所以标记为`transient`属性的字段在反序列化时都会被初始化为默认值：`null, 0, false`。如果这些值不合适，则需要提供自定义的反序列化方法`readObject`，类似上面的例子。
+
+另外需要注意的两点：
+
+- 类中包含了线程安全的同步化操作时，序列化方法也需要添加同步锁。否则，将导致资源序列死锁`resource-ordering deadlock`
+- 最好提供自定义的UID值。`private static final long serialVersionUID = randomLongValue;`不需要确保唯一。但不同版本间需要保持一致。不同的值意味着打破了兼容性
+
+
+### Item 88: Write readObject method defensively 
+
+Item 50中提到下面的例子，使用防御式复制方法以确保对象的不可变性。
+
+```
+// Immutable class that uses defensive copying
+public final class Period {
+    private final Date start;
+    private final Date end;
+
+    /**
+    * @param start the beginning of the period
+    * @param end the end of the period; must not precede start
+    * @throws IllegalArgumentException if start is after end
+    * @throws NullPointerException if start or end is null
+    */
+    public Period(Date start, Date end) {
+        this.start = new Date(start.getTime());
+        this.end = new Date(end.getTime());
+        if (this.start.compareTo(this.end) > 0)
+            throw new IllegalArgumentException(
+                            start + " after " + end);
+    }
+
+    public Date start () { return new Date(start.getTime()); }
+    public Date end () { return new Date(end.getTime()); }
+    
+    public String toString() { return start + " - " + end; }
+    
+    // Remainder omitted
+}
+```
+
+假设你决定让这个类实现序列化接口。由于实体展示与逻辑数据一致，使用默认的序列化方法是有道理的。所以只需要让当前类实现`Serializable`接口即可。如果这样做，这个类将不再能确保其关键的不可更改性。
+
+原因是`readObject`方法是另外一个公共的构造方法，应当跟上述已有方法一样需要仔细处理。（默认的序列化方法显然没有做这个动作）
+
+简单来说，`readObject`是一个构造方法，使用字节流作为唯一的参数(`byte stream`)。通常，这些字节流来自对构造实例对象的序列化。但如果字节流来自手动构造并且违反了类可变性，将创造出“不可能对象”(`impossible object`)——即不符合预期的对象。
+
+使用默认的序列化方法时，下面的代码将创建出结束日期在开始日期之前的Period对象。（因为Java缺少字节类型的字面值，所以需要进行强制转换——~这段解释也看不懂其实~）
+
+```
+public class BogusPeriod {
+    // Byte stream couldn't have come from a real Period instance!
+    private static final byte[] serializedForm = {
+            (byte)0xac, (byte)0xed, 0x00, 0x05, 0x73, 0x72, 0x00, 0x06,
+            0x50, 0x65, 0x72, 0x69, 0x6f, 0x64, 0x40, 0x7e, (byte)0xf8,
+            0x2b, 0x4f, 0x46, (byte)0xc0, (byte)0xf4, 0x02, 0x00, 0x02,
+            0x4c, 0x00, 0x03, 0x65, 0x6e, 0x64, 0x74, 0x00, 0x10, 0x4c,
+            0x6a, 0x61, 0x76, 0x61, 0x2f, 0x75, 0x74, 0x69, 0x6c, 0x2f,
+            0x44, 0x61, 0x74, 0x65, 0x3b, 0x4c, 0x00, 0x05, 0x73, 0x74,
+            0x61, 0x72, 0x74, 0x71, 0x00, 0x7e, 0x00, 0x01, 0x78, 0x70,
+            0x73, 0x72, 0x00, 0x0e, 0x6a, 0x61, 0x76, 0x61, 0x2e, 0x75,
+            0x74, 0x69, 0x6c, 0x2e, 0x44, 0x61, 0x74, 0x65, 0x68, 0x6a,
+            (byte)0x81, 0x01, 0x4b, 0x59, 0x74, 0x19, 0x03, 0x00, 0x00,
+            0x78, 0x70, 0x77, 0x08, 0x00, 0x00, 0x00, 0x66, (byte)0xdf,
+            0x6e, 0x1e, 0x00, 0x78, 0x73, 0x71, 0x00, 0x7e, 0x00, 0x03,
+            0x77, 0x08, 0x00, 0x00, 0x00, (byte)0xd5, 0x17, 0x69, 0x22,
+            0x00, 0x78
+    };
+    public static void main(String[] args) {
+        Period p = (Period) deserialize(serializedForm);
+        System.out.println(p);
+    }
+    // Returns the object with the specified serialized form
+    static Object deserialize(byte[] sf) {
+        try {
+            return new ObjectInputStream(
+                    new ByteArrayInputStream(sf)).readObject();
+        } catch (IOException | ClassNotFoundException e) {
+            throw new IllegalArgumentException(e);
+        }
+    }
+}
+```
+
+如果对如何构造字节流感兴趣可以参考[Java Object Serialization Specification](https://docs.oracle.com/javase/8/docs/platform/serialization/spec/serialTOC.html)，打印出`Fri Jan 01 12:00:00 PST 1999 - Sun Jan 01 12:00:00 PST 1984`违反了Period类的定义。
+
+做简单的防御处理——
+
+```
+// readObject method with validity checking - insufficient!
+private void readObject(ObjectInputStream s)
+    throws IOException, ClassNotFoundException {
+    s.defaultReadObject();
+
+    // Check that our invariants are satisfied
+    if (start.compareTo(end) > 0)
+        throw new InvalidObjectException(start +" after "+ end);
+}
+```
+
+上述防御还不充分，可以构造出符合规范的字节流，然后在字节流中再修改私有字段的属性以达到越过检查的目的（如何构造这些字节流超出本书的范围）(也超出我目前的理解范围)。
+
+加强版防御方法——
+
+```
+// readObject method with defensive copying and validity checking
+private void readObject(ObjectInputStream s)
+    throws IOException, ClassNotFoundException {
+    s.defaultReadObject();
+
+    // Defensively copy our mutable components
+    start = new Date(start.getTime());
+    end = new Date(end.getTime());
+    
+    // Check that our invariants are satisfied
+    if (start.compareTo(end) > 0)
+        throw new InvalidObjectException(start +" after "+ end);
+}
+```
+
+总结一下写反序列化方法的原则——
+
+- 类中的对象引用字段必须是私有时，对每一个这样的对象都要做防御拷贝
+- 对任何不可变量都要做检查，如果失败则抛出`InvalidObjectException`异常
+- 如果反序列化后必须对整体对象图做验证，使用`ObjectInputValidation`接口（？超纲内容- -）
+- 不要在类中调用任何重写的方法
+
+### Item 89: For instance control, prefer enum types to readResolve
+
+Item 3中提到的单例模式如果实现了`Serializable`接口之后将失去“单例”效果(无论采用默认序列化方法，还是使用定制化的`readObject`方法，这一方法都将返回一个新创建的，不同于初始化时的类实例对象)。
+
+```
+public class Elvis {
+    public static final Elvis INSTANCE = new Elvis();
+    private Elvis() { ... }
+
+    public void leaveTheBuilding() { ... }
+}
+```
+
+`readResole`功能运行你使用一个实例代替由`readObject`方法返回的类实例，参考官方说法[Serialization, 3.7](https://docs.oracle.com/javase/8/docs/platform/serialization/spec/input.html)——
+
+>For Serializable and Externalizable classes, the `readResolve` method allows a class to replace/resolve the object read from the stream before it is returned to the caller. By implementing the readResolve method, a class can directly control the types and instances of its own instances being deserialized.
+
+利用这一特性，反序列化字节流后可以创建出的对象将返回有`readResolve`返回的对象。大部分场景下，这一对象没有任何引用，可以被GC立即回收。
+
+```
+// readResolve for instance control - you can do better!
+private Object readResolve() {
+    // Return the one true Elvis and let the garbage collector
+    // take care of the Elvis impersonator.
+    return INSTANCE;
+}
+```
+
+这要求序列化`Elvis`类时不能包含任何数据，所有字段必须声明为`transient`。否则可以被攻击者利用：在`readResolve`方法调用之前就构造出对反序列化对象的引用。
+
+攻击实现比较复杂，但原理很简单：如果单例对象包含非`transient`属性的字段，此字段内容将在`readResole`方法被调用之前执行反序列化操作，这就允许构造出“对反序列化对象的引用”。
+
+下面的内容未进行实操，来自原文——
+
+实现了`Serializable`接口的单例对象
+```
+// Broken singleton - has nontransient object reference field!
+public class Elvis implements Serializable {
+    public static final Elvis INSTANCE = new Elvis();
+    private Elvis() { }
+    private String[] favoriteSongs =
+            { "Hound Dog", "Heartbreak Hotel" };
+    public void printFavorites() {
+        System.out.println(Arrays.toString(favoriteSongs));
+    }
+    private Object readResolve() {
+        return INSTANCE;
+    }
+}
+```
+
+构造的“小偷”对象——
+```
+public class ElvisStealer implements Serializable {
+    static Elvis impersonator;
+    private Elvis payload;
+    
+    private Object readResolve() {
+        // Save a reference to the "unresolved" Elvis instance
+        impersonator = payload;
+        // Return object of correct type for favoriteSongs field
+        return new String[] { "A Fool Such as I" };
+    }
+    private static final long serialVersionUID = 0;
+}
+```
+
+攻击演示——
+
+```
+public class ElvisImpersonator {
+    // Byte stream couldn't have come from a real Elvis instance!
+    private static final byte[] serializedForm = {
+            (byte)0xac, (byte)0xed, 0x00, 0x05, 0x73, 0x72, 0x00, 0x05,
+            0x45, 0x6c, 0x76, 0x69, 0x73, (byte)0x84, (byte)0xe6,
+            (byte)0x93, 0x33, (byte)0xc3, (byte)0xf4, (byte)0x8b,
+            0x32, 0x02, 0x00, 0x01, 0x4c, 0x00, 0x0d, 0x66, 0x61, 0x76,
+            0x6f, 0x72, 0x69, 0x74, 0x65, 0x53, 0x6f, 0x6e, 0x67, 0x73,
+            0x74, 0x00, 0x12, 0x4c, 0x6a, 0x61, 0x76, 0x61, 0x2f, 0x6c,
+            0x61, 0x6e, 0x67, 0x2f, 0x4f, 0x62, 0x6a, 0x65, 0x63, 0x74,
+            0x3b, 0x78, 0x70, 0x73, 0x72, 0x00, 0x0c, 0x45, 0x6c, 0x76,
+            0x69, 0x73, 0x53, 0x74, 0x65, 0x61, 0x6c, 0x65, 0x72, 0x00,
+            0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0x00, 0x01,
+            0x4c, 0x00, 0x07, 0x70, 0x61, 0x79, 0x6c, 0x6f, 0x61, 0x64,
+            0x74, 0x00, 0x07, 0x4c, 0x45, 0x6c, 0x76, 0x69, 0x73, 0x3b,
+            0x78, 0x70, 0x71, 0x00, 0x7e, 0x00, 0x02
+    };
+    
+    public static void main(String[] args) {
+
+        // Initializes ElvisStealer.impersonator and returns
+        // the real Elvis (which is Elvis.INSTANCE)
+        Elvis elvis = (Elvis) deserialize(serializedForm);
+        Elvis impersonator = ElvisStealer.impersonator;
+
+        elvis.printFavorites();
+        impersonator.printFavorites();
+    }
+}
+```
+
+最终打印出——
+```
+[Hound Dog, Heartbreak Hotel]
+[A Fool Such as I]
+```
+
+解决这一问题可以将`favoriteSongs`字段声明为`transient`类型；但更好的解决方案是将`Elvis`类声明为枚举类。声明为枚举类之后，Java将保证除了声明的常量之外，不再有任何实例被创建。除非攻击者可以调用类似`AccessibleObject.setAccessible`方法——但这说明攻击者已经获取到了执行任意本地代码的权限。
+
+总结一下，尽管`readResole`方法没有被废弃，但使用单例方式最后使用枚举类的形式。如果即需要序列化又需要单例模式，必须提供`readResolve`方法，并且确保所以字段是`transient`类型或是基础类型。
+
+### Item 90: Consider serialization proxies instead of serialized instances
+
+使用序列化代理，而不是直接序列化实例
+
+item85中讨论的问题——实现序列化接口后更可能出现bug和安全问题——可以利用“序列化代理模式”(`serialization proxy pattern`)来降低风险。
+
+在要进行序列化的类中设计一个私有的静态嵌套类，作为其所在类的序列化代理。只包含一个构造函数，参数为其所在类的对象实例。两个类都需要实现序列化接口——
+
+```
+// Serialization proxy for Period class
+private static class SerializationProxy implements Serializable {
+    
+    private final Date start;
+    private final Date end;
+
+    SerializationProxy(Period p) {
+        this.start = p.start;
+        this.end = p.end;
+    }
+
+    private static final long serialVersionUID = 234098243823485285L; // Any number will do (Item 87)
+}
+```
+
+下一步，在序列代理所在的类(被称为`enclosing class`)中添加`writeReplace`方法(任何包含序列代理的类中都可以原样添加此方法)——
+
+```
+// writeReplace method for the serialization proxy pattern
+private Object writeReplace() {
+    return new SerializationProxy(this);
+}
+```
+
+包含了这个方法之后，所在类进行序列化时，序列化系统将产生(`emit`)`SerializationProxy`实例对象而不是所在类的实例。换句话说，在序列化之前，`writeReplace`方法将所在类的实例转化为了序列代理类。
+
+这样序列化实际序列化的是代理类。为防御攻击，需要另外在所在类中添加如下的`readObject`方法——
+
+```
+// readObject method for the serialization proxy pattern
+private void readObject(ObjectInputStream stream) throws InvalidObjectException {
+    throw new InvalidObjectException("Proxy required");
+}
+```
+
+最后，在序列代理类中提供`readResolve`方法，返回一个逻辑上与所在类等价的实例。这样确保让序列化系统将序列代理类重新转化为所在类对象实例。此方法中只需要调用公共的API即可——如果正常运行时调用一样(实际却是发生在反序列化过程中)
+
+```
+// readResolve method for Period.SerializationProxy
+private Object readResolve() {
+    return new Period(start, end); // Uses public constructor
+}
+```
+
+这让之前提到的防御拷贝，字节流攻击防御都不需要，而且所有字段都可以重新声明为final类型，让所在类重新变成不可变类。
+
+另外一个好处是，序列化代理可以实现在反序列化实例时生成不同的原始序列化类。（这在实际应用中很有用）
+
+例如item 36中提到的`EnumSet`类，没有构造函数，只有静态工厂。从客户端角度看，返回的都是`EnumSet`实例，但在实际的实现时，会根据枚举数量的不同返回不同的类：如果少于64个元素，返回`RegularEnumSet`对象；反之，返回的是`JumboEnumSet`。
+
+假设：序列化一个包含了60个元素的枚举类；然后再添加5个枚举常量；然后反序列化。序列化时，操作的是`RegularEnumSet`，但反序列化后，最后是返回`JumboEnumSet`实例。
+
+使用序列化代理可以轻松完成这一场景——
+
+```
+// EnumSet's serialization proxy
+private static class SerializationProxy <E extends Enum<E>> implements Serializable {
+    // The element type of this enum set.
+    private final Class<E> elementType;
+
+    // The elements contained in this enum set.
+    private final Enum<?>[] elements;
+    
+    SerializationProxy(EnumSet<E> set) {
+        elementType = set.elementType;
+        elements = set.toArray(new Enum<?>[0]);
+    }
+
+    private Object readResolve() {
+        EnumSet<E> result = EnumSet.noneOf(elementType);
+        for (Enum<?> e : elements)
+            result.add((E)e);
+        return result;
+    }
+
+    private static final long serialVersionUID = 362491234563181265L;
+}
+```
+
+序列化代理有两个限制：
+
+- 第一，不兼容用户扩展的类
+- 第二，不兼容对象graph包含循环的类。这种类中调用readResolve方法时将抛出`ClassCastException`（因为此时还没有对应的对象，只有序列化代理)
+
+另外，序列化代理有一些性能损耗。
+
+总之，如果类不允许用户扩展，需要进行序列化操作时尽量使用序列化代理模式。这是最简单的序列化方式。

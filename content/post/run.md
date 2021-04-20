@@ -400,3 +400,11 @@ toc=true
 
 ![](https://s3-img.meituan.net/v1/mss_3d027b52ec5a4d589e68050845611e68/ff/n0/0m/d1/2f_238759.jpg@596w_1l.jpg)
 
+
+**21-04-20** 周二 6.88 (5.25 + 1.63)
+
+- 又是一年谷雨时
+- 跑量，配速搭配不错。顺利完成跑班最后一棒任务
+- 新加的跑班任务明天再开始吧
+
+![](https://s3-img.meituan.net/v1/mss_3d027b52ec5a4d589e68050845611e68/ff/n0/0m/d3/ff_240711.jpg@596w_1l.jpg)

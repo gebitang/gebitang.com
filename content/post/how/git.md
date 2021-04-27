@@ -321,7 +321,7 @@ Host github.com
     IdentityFile ~/.ssh/id_rsa
 Host prj.testin.cn
     HostName prj.testin.cn
-    # Specifies the port number to connect on the remote host.
+    # Specifies the port number to connect on the remote host. only if the port for ssh connection is not 22.
     Port 8201
     # The default is ~/.ssh/identity for protocol version 1, and ~/.ssh/id_dsa, ~/.ssh/id_ecdsa and ~/.ssh/id_rsa for protocol version 2.
     IdentityFile ~/.ssh/gitlab_id_rsa
@@ -333,6 +333,16 @@ Host bitbucket
     IdentityFile ~/.ssh/bitbucket_id_rsa
 
 ```
+
+[The SSH Protocol](https://git-scm.com/book/en/v2/Git-on-the-Server-The-Protocols)
+
+To clone a Git repository over SSH, you can specify an `ssh://` URL like this:
+
+`$ git clone ssh://[user@]server/project.git`
+
+Or you can use the shorter scp-like syntax for the SSH protocol:
+
+`$ git clone [user@]server:project.git`
 
 - ssh配置
 

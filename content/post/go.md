@@ -11,11 +11,67 @@ topics = [
 toc = true
 +++
 
+## 2021 
+
+### go get and gqlgen downgrade
+
+目前(2021-04-30)使用`go get github.com/99designs/gqlgen`安装的版本是0.13.0；目前项目中使用的版本是0.11.3；新版本会报错`validation failed: packages.Load: /xxx/xx/xx: WithPathContext not declared by package graphql`
+
+`go get`支持指定版本`go get github.com/99designs/gqlgen@v0.11.3`安装指定版本(默认按照到`GOPATH`路径下的bin目录下)。
+
+> go get github.com/99designs/gqlgen@v0.11.3   
+> go: cannot use path@version syntax in GOPATH mode
+
+注意需要打开go mod模式： 
+- (windows) `set GO111MODULE=on`
+- (unix*) `export GO111MODULE=on`
+
+### gqlgen 
+
+[Building a GraphQL API in Go using gqlgen](https://medium.com/weareservian/building-a-graphql-api-in-go-using-gqlgen-f7a42eba2193)
+
+依次执行以下命令，则完成了[gqlgen站点的getting started](https://gqlgen.com/getting-started/)的内容。
+
+```
+cd mygplprj/src
+go mod init gitlab.com/jigar_xyz/mygplprj
+cd cmd/go-graphql
+go get github.com/99designs/gqlgen
+go run github.com/99designs/gqlgen init --verbose
+```
+
+执行`go run ./server.go`就可以起到一个GraghQL站点。目录结构说明——
+
+```
+├── gqlgen.yml               - The gqlgen config file, knobs for controlling the generated code.
+├── graph
+│   ├── generated            - A package that only contains the generated runtime
+│   │   └── generated.go
+│   ├── model                - A package for all your graph models, generated or otherwise
+│   │   └── models_gen.go
+│   ├── resolver.go          - The root graph resolver type. This file wont get regenerated
+│   ├── schema.graphqls      - Some schema. You can split the schema into as many graphql files as you like
+│   └── schema.resolvers.go  - the resolver implementation for schema.graphql
+└── server.go                - The entry point to your app. Customize it however you see fit
+```
+
+- `gqlgen.xml` 配置文件，说明如何自动生成代码。更详细的介绍参考[config](https://gqlgen.com/config/)。结合目前工程中的`gqlgen.xml`可以更好理解
+- `generated/generated.go` 根据配置自动生成的服务端文件，相当于GraphQL的运行时。可在上述配置文件中做对应的声明(文件名，文件地址，所属的包)
+- `models_gen.go` 对应各个`*.graphqls`文件绑定的model，gqlgen会自己进行匹配，如果找到则忽略(相当于人工写)，否则会根据定义自动生成。[Generated models required to build the graph. Often you will override these with your own models. Still very useful for input types.](https://www.howtographql.com/graphql-go/1-getting-started/)
+- `resolver.go` 根类型resolver
+- `schema.graphqls` 定义的schema，可以分割到多个不同的文件中
+- `schema.resolvers.go` 对定义的实现
+
+[Introducing gqlgen: a GraphQL Server Generator for Go](https://en.99designs.de/blog/engineering/gqlgen-a-graphql-server-generator-for-go/) 项目开发人员对`gqlgen`的介绍
+
+
+## archive 2
+
 尴尬了，这篇的日期写的是`2018-01-03`，实际上是近三年前的帖子了。Go 1.9发布的时候就信誓旦旦的要进行学习。结果到今天还是无疾而终的样子，半途而废了好久。捞上来，看看这次可以坚持多久。
 
 [Mixin 大群部署完全教程](https://dbarobin.com/2019/05/19/mixin-super-group/) 拿这个练习，前后端一起端。
 
-<!--more-->
+*update@2021-04-30* 又是快一年过去，好像还是没啥进步乜。再来~
 
 ### 静态站点
 

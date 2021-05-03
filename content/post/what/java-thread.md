@@ -166,6 +166,43 @@ public class ExampleBlockLock {
 }
 ```
 
+---
 
+假设有多个线程都处于`wait()`状态。
+
+`notify()`是无法知道**应该**通知哪一个线程。所以可以调用`notifyAll()`，所有的等待线程都会收到通知。
+
+但并不是所有的等待线程都并行执行。因为从wait()状态返回后，还是要重新获取到对象锁才能继续执行，然后每个线程可以根据自己的情况判断：是继续执行；还是需要再次进入等待状态。
+
+这样有个好处是：
+
+- 系统释放的资源可能无法满足某一个wait的线程；但可能满足另外一个wait的线程
+- 甚至：释放的总资源，可能满足多个wait的线程（这需要程序员设计机制来进行资源分配，例如优先让需要资源较小的线程收到通知后继续执行）
+
+如果需要“精确”控制哪一个线程接收到通知，可以设计一个类似如下的类——
+
+```
+public class TargetNotify {
+    private Object Targets[] = null;
+    public TargetNotify (int numberOfTargets) {
+        Targets = new Object[numberOfTargets];
+        for (int i = 0; i < numberOfTargets; i++) {
+            Targets[i] = new Object();
+        }
+    }
+    public void wait (int targetNumber) {
+        synchronized (Targets[targetNumber]) {
+            try {
+                Targets[targetNumber].wait();
+            } catch (Exception e) {}
+        }
+    }
+    public void notify (int targetNumber) {
+        synchronized (Targets[targetNumber]) {
+            Targets[targetNumber].notify();
+        }
+    }
+}
+```
 
 

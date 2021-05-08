@@ -13,6 +13,74 @@ toc = true
 
 ## 2021 
 
+### 业务梳理一
+
+- UI：业务信息
+- 对应`"@/components/Setting/professional"`挂载前befoerMount调用`this.getOrgBusiness();`
+- 上述方法声明在`settingModule/GetOrgBusiness`(对应的js graph方法声明`api/modules/settings.js`) 
+- 查询的query方法`getOrgBusiness`
+
+进入后端逻辑——
+
+- 所有的query声明都在`query.graphqls`中定义，对应方法`orgBusiness: [OrgBusiness]`
+- 使用自动生成的resolver: `query.resolvers.go`(这里是如何知道使用store的get方法就可以完成？)
+- 对orgTree的接口方法实现中完成：
+  - 查询数据库，解析格式化内容返回格式化数据；
+  - 同时defer执行API调用：查询部门接口，解析结果，保存更新记录(只需要保持两条对应记录即可——只涉及到两个部门)
+
+### 文件上传
+
+本地文件上传移植后工作正常(不再维护的SDK还是可以正常工作——具体的原理后续再研究)。
+
+仿现有逻辑(添加URL前缀作为分类；定义处理请求的方法)添加上传文件的API接口——
+```
+func InitRouter(router *mux.Router) {
+	poolRoute := router.PathPrefix("/pool").Subrouter()
+	poolRoute.UseEncodedPath()
+
+	poolRoute.HandleFunc("/file/upload", UploadFile)
+
+}
+```
+[上传文件获取方式](// https://tutorialedge.net/golang/go-file-upload-tutorial/)，对比起来Java看起来是简单不少
+
+```
+#获取form文件
+file, handler, err := r.FormFile("file")
+
+#获取参数列表
+vars := mux.Vars(r)
+```
+
+[查看对象类型](https://yourbasic.org/golang/find-type-of-object/)(另外这个站点有很多有用的基础信息)
+
+本身的上传接口设计是“充分”的：本地文件上传，利用反射处理为string格式；如果是字节流，相当于slice类型（一开始传递的参数错误：将`multipart.File`对象直接传递进去，被认为是struct类型）
+
+字符串替换——
+
+```
+func nowAsString() string {
+	// .000将保留末尾的0值；.999将忽略末尾的0值
+	now := time.Now().Format("2006-01-02 15:04:05.000")
+	// 两个一组，使用后者替换前者
+	replacer := strings.NewReplacer("-", "", ":", "", ".", "", " ", "")
+	return replacer.Replace(now)
+}
+```
+
+### 初始化方法
+
+- 最权威的解释来自官方spec: [Program initialization and execution](https://golang.org/ref/spec#Program_initialization_and_execution)  
+- 简单解释可参考[effective go: initialization](https://golang.org/doc/effective_go#initialization)
+
+目前理解——
+
+- 安装程序入口进行初始化：按文件代码组织顺序，初始化所有引入的、自定义的文件中的初始化过程(这意味这当前程序用不到的代码不会被初始化——例如过程包括多个main包，每个主程序依赖不同的代码文件)
+- 初始化变量声明：常量，变量(根据声明的顺序；但如果变量依赖另外的变量，则先计算依赖的变量内容，而且如果依赖的变量来自多变量声明，则此多变量也会被优先初始化)如果有循环依赖的变量声明，则程序无效
+- 执行源码文件中定义的无参数的`init()`方法：可以包含多个的`init()`方法(不同的文件)；一个文件中也可以包含多个`init()`方法；各个init方法的执行顺序不确保有序，所以应当让各个方法做独立的逻辑
+- 进入主程序`main`方法的逻辑
+
+
 ### go get and gqlgen downgrade
 
 目前(2021-04-30)使用`go get github.com/99designs/gqlgen`安装的版本是0.13.0；目前项目中使用的版本是0.11.3；新版本会报错`validation failed: packages.Load: /xxx/xx/xx: WithPathContext not declared by package graphql`

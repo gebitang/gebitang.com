@@ -54,6 +54,13 @@ vars := mux.Vars(r)
 
 [查看对象类型](https://yourbasic.org/golang/find-type-of-object/)(另外这个站点有很多有用的基础信息)
 
+```
+var x interface{} = []int{1, 2, 3}
+xType := reflect.TypeOf(x)
+xValue := reflect.ValueOf(x)
+fmt.Println(xType, xValue) // "[]int [1 2 3]"
+```
+
 本身的上传接口设计是“充分”的：本地文件上传，利用反射处理为string格式；如果是字节流，相当于slice类型（一开始传递的参数错误：将`multipart.File`对象直接传递进去，被认为是struct类型）
 
 字符串替换——

@@ -139,14 +139,111 @@ go run github.com/99designs/gqlgen init --verbose
 
 [Introducing gqlgen: a GraphQL Server Generator for Go](https://en.99designs.de/blog/engineering/gqlgen-a-graphql-server-generator-for-go/) 项目开发人员对`gqlgen`的介绍
 
+在Windows环境下折腾半天，Mac环境下并不复现- -|| 还没了解原理的情况下，下搁这儿吧。
+
+>windows环境下 执行`gqlgen generate`时，总是报错类似——   
+>`/graph/model.CronJob failed: unable to build object definition: unable to find type git.gebtest.com/gebing/testprj`的错误  
+>或者`/graph/model.JobConditioned: unable to build object definition: unable to find type gebtest.com/gebing/testprj`  
+>配置文件中指定了`autobind`和`models`的配置。但项目中没找到  
+
+奇怪的是即使是windows环境下不能识别对前缀`gebtest.com/gebing/testprj`的定义；`/graph/model.JobConditioned`这个model实际不存在(项目里没这个定义)
+
+关于`unable to find type`的错误，也只有类似官方这个资料：[#issue911: gqlgen Autobind internal package - unable to find type](https://github.com/99designs/gqlgen/issues/911)，看起来跟上面的情况关系不大
+
+#### 接口定义与实现
+
+- 先定义接口`interface`，以及接口中可能用到的结构体。例如`pkg/todo_service.go`
+
+```
+type ToDoItem struct {
+	Id        string
+	Text      string
+	IsDone    bool
+	CreatedOn time.Time
+	UpdatedOn *time.Time
+}
+
+type ToDo interface {
+	Initialise() error
+	Create(text string, isDone bool) (*string, error)
+	Update(id string, text string, isDone bool) error
+	List() ([]ToDoItem, error)
+}
+```
+
+- 定义接口的实现对象结构体。让此结构体实现上述所有的接口方法。go语言中**任意实现了所有接口中定义的方法的对象，都默认实现了此接口。**例如`pkg/imp/todo_service.go`
+
+```
+
+type ToDoImpl struct {
+	DbUserName string
+	DbPassword string
+	DbURL      string
+	DbName     string
+}
+
+func (t *ToDoImpl) Initialise() error {...}
+
+func (t *ToDoImpl) Create(text string, isDone bool) (*string, error) {...}
+
+func (t *ToDoImpl) Update(id string, text string, isDone bool) error {...}
+
+func (t *ToDoImpl) List() ([]todo.ToDoItem, error) {...}
+```
+
+#### graphql请求与响应
+
+- 通常就两类主要的请求：一种为查询`query`；一种为变更`mutation`。通常在在`schema.graphl`文件中定义
+
+```
+schema {
+    query: MyQuery
+    mutation: MyMutation
+}
+
+type MyQuery {
+    todos: [Todo!]!
+}
+
+type MyMutation {
+    createTodo(todo: TodoInput!): Todo!
+}
+```
+
+- 响应会在对应的`schema.resolver.go`文件中实现。默认有一个`resolver.go`文件，可以一行实现`type Resolver struct{}`。关键的是对请求和响应的声明:
+
+```
+// MyMutation returns generated.MyMutationResolver implementation.
+func (r *Resolver) MyMutation() generated.MyMutationResolver { return &myMutationResolver{r} }
+
+// MyQuery returns generated.MyQueryResolver implementation.
+func (r *Resolver) MyQuery() generated.MyQueryResolver { return &myQueryResolver{r} }
+
+type myMutationResolver struct{ *Resolver }
+type myQueryResolver struct{ *Resolver }
+
+```
+
+- 然后在对应的resolver中实现graphql文件中的各种查询和变更的方法，gqlgen默认实现的方法只包含一句`panic(fmt.Errorf("not implemented"))`
+
+```
+func (r *myQueryResolver) Todo(ctx context.Context, id string) (*model.Todo, error) {...}
+func (r *myMutationResolver) CreateTodo(ctx context.Context, todo model.TodoInput) (*model.Todo, error) {...}
+```
+
+在对应resolver具体的方法实现中调用上述“接口方法”。完成对请求的最终响应。
+
+最终对graphql的请求处理，`gqlgen`会最终生成`generated.go`(具体名称有配置文件定义)作为运行时响应
+
+这样就算完成一个完整套路。更多细节学习官方文档：[Introduction to GraphQL](https://graphql.org/learn/)，[GraphQL 入门](https://graphql.cn/learn)
 
 ## archive 2
+
+*update@2021-04-30* 又是快一年过去，好像还是没啥进步乜。再来~
 
 尴尬了，这篇的日期写的是`2018-01-03`，实际上是近三年前的帖子了。Go 1.9发布的时候就信誓旦旦的要进行学习。结果到今天还是无疾而终的样子，半途而废了好久。捞上来，看看这次可以坚持多久。
 
 [Mixin 大群部署完全教程](https://dbarobin.com/2019/05/19/mixin-super-group/) 拿这个练习，前后端一起端。
-
-*update@2021-04-30* 又是快一年过去，好像还是没啥进步乜。再来~
 
 ### 静态站点
 

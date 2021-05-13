@@ -13,6 +13,8 @@ toc = true
 
 ## 2021 
 
+系统涉及内容：graphql(gqlgen)方式交互；restful api交互(包括中间件使用)；gorm数据库操作。
+
 ### 业务梳理一
 
 - UI：业务信息
@@ -88,7 +90,9 @@ func nowAsString() string {
 - 进入主程序`main`方法的逻辑
 
 
-### go get and gqlgen downgrade
+### gqlgen 
+
+#### go get and gqlgen downgrade
 
 目前(2021-04-30)使用`go get github.com/99designs/gqlgen`安装的版本是0.13.0；目前项目中使用的版本是0.11.3；新版本会报错`validation failed: packages.Load: /xxx/xx/xx: WithPathContext not declared by package graphql`
 
@@ -101,7 +105,6 @@ func nowAsString() string {
 - (windows) `set GO111MODULE=on`
 - (unix*) `export GO111MODULE=on`
 
-### gqlgen 
 
 [Building a GraphQL API in Go using gqlgen](https://medium.com/weareservian/building-a-graphql-api-in-go-using-gqlgen-f7a42eba2193)
 

@@ -77,6 +77,18 @@ func nowAsString() string {
 }
 ```
 
+### GORM
+
+[gorm](https://github.com/go-gorm/gorm/)，字节[jinzhu](https://github.com/jinzhu)开源的ORM（Object Relational Mapping）项目。
+
+- 使用`Update`方法时需要注意：`WARNING when update with struct, GORM will not update fields that with zero value` 
+
+如果直接使用struct类型(表的映射对象)进行更新时，零值将被忽略。加入字段之前有值，现在需要更新为零值。这是直接使用struct进行更新是无效的。零值被忽略之后，相当于字段还保留有旧值。
+
+这种情况下，需要将struct转换为`map[string]interface{}`之后再更新。使用`structs.Map(*struct)`将struct转换为map格式再调用`Update`方法即可，[参考这里](https://stackoverflow.com/questions/23589564/function-for-converting-a-struct-to-map-in-golang)。这个问题也是类似情况[Update method does not update zero value](https://stackoverflow.com/questions/64330504/update-method-does-not-update-zero-value)
+
+
+
 ### 初始化方法
 
 - 最权威的解释来自官方spec: [Program initialization and execution](https://golang.org/ref/spec#Program_initialization_and_execution)  

@@ -77,6 +77,57 @@ func nowAsString() string {
 }
 ```
 
+### Context
+
+[context](https://golang.org/pkg/context/#example_WithValue)传递数据。应用场景——
+
+进行用户认证，每次API调用都需要验证用户是否登录——通常都会使用SSO的方式，每个请求获取到COOKIE中的token，然后在中间层进行有效性验证。获取用户信息后可以保持在context中。然后继续执行请求处理`next.ServeHTTP(w, r)`
+
+```
+func WithValue(parent Context, key, val interface{}) Context
+```
+
+>WithValue returns a copy of parent in which the value associated with key is val.
+>
+>Use context Values only for request-scoped data that transits processes and APIs, not for passing optional parameters to functions.
+>
+>The provided key must be comparable and should not be of type string or any other built-in type to avoid collisions between packages using context.
+
+- 不建议直接使用string或内置的数据类型作为key——通常重新封装一个自定义的类型
+
+
+```
+type favContextKey string
+
+f := func(ctx context.Context, k favContextKey) {
+	if v := ctx.Value(k); v != nil {
+		fmt.Println("found value:", v)
+		return
+	}
+	fmt.Println("key not found:", k)
+}
+
+k := favContextKey("language")
+ctx := context.WithValue(context.Background(), k, "Go")
+
+f(ctx, k)
+f(ctx, favContextKey("color"))
+```
+
+>Value returns the value associated with this context for key, or nil if no value is associated with key. Successive calls to Value with the same key returns the same result.
+
+- key对应的值通常也会定义为结构体类型，通过key获取值时，使用结构体指针即可，例如`ctx.Value(userKey).(*User)`
+
+```
+type User struct {...}
+
+func FromContext(ctx context.Context) (*User, bool) {
+	u, ok := ctx.Value(userKey).(*User)
+	return u, ok
+}
+```
+
+
 ### GORM
 
 [gorm](https://github.com/go-gorm/gorm/)，字节[jinzhu](https://github.com/jinzhu)开源的ORM（Object Relational Mapping）项目。

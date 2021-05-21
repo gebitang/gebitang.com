@@ -11,6 +11,46 @@ topics = [
 toc = true
 +++
 
+## TypeScript
+
+[TypeScript](https://www.typescriptlang.org/)做为JS的超集，增强了Type的检查。但检查结果不影响最终的执行，因为依然使用JS相同的runtime。例如`console.log(4/[])`对应JS来说是有效的(- -|自由的过了火?)，返回`Infinity`，对于TS来说检查出问题：`The right-hand side of an arithmetic operation must be of type 'any', 'number', 'bigint' or an enum type.` 但编译到JS之后依然可以正常执行。参考[TypeScript: A Static Type Checker](https://www.typescriptlang.org/docs/handbook/typescript-from-scratch.html#types)
+
+JS过于自由，所以诞生TS，支持静态检查，引入了类似静态语言的类型检查、语法支持等扩展(但扩展的内容在编译后又会擦除这一切，因为最后再编译到JS语言(使用跟JS完全相同的runtime)进行使用——这样就可以依赖现有的JS生态。TS这个切入方式厉害了。不需要单独为TS写任何框架，现有的JS框架中都可以使用TS。[TS in 5 minutes](https://www.typescriptlang.org/docs/handbook/typescript-tooling-in-5-minutes.html)
+
+有Java背景的看一篇基础介绍基本就可以上手[TypeScript 入门教程](https://segmentfault.com/a/1190000022876390)
+
+实际上比Java更灵活，Type类型检查只是“名义上的”，实际上是一组set，所以可以这样定义`type Foo = string | number | boolean;`。另外，“类型擦除”又类似Go语言中的“实现了所有接口方法的结构体都被认为实现了改接口”，例如——
+
+```
+interface Pointlike {
+  x: number;
+  y: number;
+}
+interface Named {
+  name: string;
+}
+
+function logPoint(point: Pointlike) {
+  console.log("x = " + point.x + ", y = " + point.y);
+}
+
+function logName(x: Named) {
+  console.log("Hello, " + x.name);
+}
+
+const obj = {
+  x: 0,
+  y: 0,
+  name: "Origin",
+};
+
+logPoint(obj);
+logName(obj);
+```
+
+看完上面这些就可以直接找项目上手练习了。
+
+
 ## Jekyll Usage 
 
 ### 图片增加title和link

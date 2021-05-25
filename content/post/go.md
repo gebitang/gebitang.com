@@ -303,6 +303,111 @@ func (r *myMutationResolver) CreateTodo(ctx context.Context, todo model.TodoInpu
 
 这样就算完成一个完整套路。更多细节学习官方文档：[Introduction to GraphQL](https://graphql.org/learn/)，[GraphQL 入门](https://graphql.cn/learn)
 
+#### 混合使用
+
+根据[How to configure gqlgen using gqlgen.yml](https://gqlgen.com/config/)中的描述，`models`字段的含义如下——
+
+> This section declares type mapping between the GraphQL and go type systems
+> 
+> The first line in each type will be used as defaults for resolver arguments and
+> modelgen, the others will be allowed when binding to fields. Configure them to
+> your liking
+
+
+参考[Create Your First Simple GraphQL Golang Application with GQLGen](https://medium.com/@ktrilaksono/create-your-first-simple-graphql-golang-application-with-go-gqlgen-793e11dc5fc4)中的实践——
+
+```
+schema:
+- schema.graphql
+exec:
+  filename: generated.go
+models:
+  Person:
+    model: github.com/antoooks/go-graphql-tutorial/models.Person
+  Pet:
+    model: github.com/antoooks/go-graphql-tutorial/models.Pet
+resolver:
+  filename: resolver.go
+  type: Resolver
+autobind: []
+```
+
+会优先使用`models`中定义的映射关系；如果没有找到，则会根据自动匹配规则，创建新的resolver进行实现。
+
+例如，以下查询表示的查询方法为`app`，返回的对象再做“次级选择”(sub-selection)，返回`users`对象的username, role两个字段。这意味着查询方法`app`(这个方法后台定义返回一个`App`对象)返回的对象里**一定**包含一个次级对象查询`users`的实现。
+
+```
+query($id: String!){
+    app (id: $id) {
+      users {
+        username
+        role
+      }
+    }
+  }
+```
+
+验证一下：采用默认的配置文件，在`App.graphqls`文件中添加一个新的查询方法——
+```
+type App {
+    # The app id.
+    id: Int
+    # The namespace of the app
+    namespace: String!
+    # The name of the app
+    name: String!
+    # The users belong to the app
+    users: [AppUser]
+    # 新增一个方法
+    geb: [Gebitang]
+}
+
+type Gebitang {
+    id: Int!
+    name: String!
+    grade: String
+}
+```
+
+如果在配置文件中指定了`App`对应的model——`github.com/antoooks/go-graphql-tutorial/models.App`，需要在`github.com/antoooks/go-graphql-tutorial/models`目录下的`App.go`文件中定义对应的结构体和方法
+
+```
+func (a *App) Geb(ctx context.Context) ([]*Gebitang, error) {
+ g := make([]*Gebitang, 0)
+ ...
+ return g, nil
+}
+
+Gebitang struct {
+  Id    int
+  Name  string
+  Grade string
+}
+```
+
+这种情况下执行`gqlgen generate`时，只会更新最终的`generated.go`文件——用于生产运行时；如果没有更新`App.go`的情况执行`gqlgen generate`，则会根据配置文件自动更新——
+
+- `app.resolver.go` 自动生成查询方法`Geb`和`GetInfo`方法，需要手动做进一步的实现，如下。
+- `models_gen.go` 中自动生成对`Gebitang`结构体的声明，如下。
+
+```
+# in app.resolver.go
+func (r *appResolver) Geb(ctx context.Context, obj *App) ([]*Gebitang, error) {
+ panic(fmt.Errorf("not implemented"))
+}
+
+func (r *appResolver) GetInfo(ctx context.Context, obj *App) ([]*GebInfo, error) {
+ panic(fmt.Errorf("not implemented"))
+}
+
+# in models_gen.go 
+type Gebitang struct {
+ ID    int     `json:"id"`
+ Name  string  `json:"name"`
+ Grade *string `json:"grade"`
+}
+```
+
 ## archive 2
 
 *update@2021-04-30* 又是快一年过去，好像还是没啥进步乜。再来~

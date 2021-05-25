@@ -13,9 +13,34 @@ toc = true
 
 ## 2021 
 
-系统涉及内容：graphql(gqlgen)方式交互；restful api交互(包括中间件使用)；gorm数据库操作。
+### 版本升级
+
+[升级原理实现的源码: dl项目](https://github.com/golang/dl)，[升级原理说明](https://mp.weixin.qq.com/s/jEhX5JHAo9L6iD3N54x6aA) 
+
+操作步骤： 
+
+```
+go get golang.org/dl/go<version>  // 其中 <version> 替换为你希望安装的 Go 版本
+go<version> download   // 和上面一样，<version> 是具体的版本
+# 例如
+go get golang.org/dl/go1.14.15
+go1.14.15 download
+```
+
+- `GOPATH`相当于工作目录，即使go mod启用后，也是在`$GOPATH/pkg/mod`目录下维护。上述执行`go get`下载的可执行文件也是在`GOPATH/bin`路径下，所以可以在下一步执行`go1.14.15`。[go环境变量含义官方说明](https://golang.org/cmd/go/#hdr-Environment_variables)
+- `GOROOT`相当于go的安装目录
+
+执行`go1.14.15 download`时，相当于执行的`https://github.com/golang/dl/blob/master/go1.14.15/main.go`方法，内部实现为`version.Run("go1.14.15")`，会单独处理`download`命令，其他命令则统一执行`runGo(root)`方法
+
+多版本使用——(windows环境下，就添加环境变量吧)
+- 将 ~/sdk/go1.16.4/bin/go 加入 PATH 环境变量（替换原来的）；
+- 做一个软连，默认 go 执行 go1.16.4（推荐这种方式），不需要频繁修改 PATH；
+- 移动 go1.16.4 替换之前的 go（不推荐）；
+
 
 ### 业务梳理一
+
+系统涉及内容：graphql(gqlgen)方式交互；restful api交互(包括中间件使用)；gorm数据库操作。
 
 - UI：业务信息
 - 对应`"@/components/Setting/professional"`挂载前befoerMount调用`this.getOrgBusiness();`

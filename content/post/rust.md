@@ -41,7 +41,157 @@ toc = true
 - `rustc`相当于类似gcc的编译器，单个文件编译
 - `Cargo` 是 rust 的构建系统和包管理器，相当于工程抓手
 
+#### Hello World
+
+- 单个无依赖的rust文件可以使用`rustc main.rs`进行编译，生成可执行文件
+- 项目管理使用`cargo`(不同平台下，命令相同)：
+  - `cargo build` 解析cargo.toml文件，管理下载，编译生成可执行文件，默认生成的为debug版本，位于`target/debug`目录下
+  - `cargo check` 只做编译检查，不生成可执行文件，速度更快
+  - `cargo run` 编译+运行
+  - `cargo build --release`生成优化后的发布版本，位于`target/release`目录下，编译更耗时
+  - `cargo doc --open`可以本地浏览当前项目中用到的所有crate的文档
+
+[cargo 官方文档](https://doc.rust-lang.org/cargo/)
+
+- 两类数据类型子集：标量（scalar）和复合（compound） 
+  - 四种基本的标量类型：整型、浮点型、布尔类型和字符类型
+  - 两个原生的复合类型：元组（tuple）和数组（array）
+
+```rust
+
+fn main() {
+
+    //let x = 5;
+    let mut x = 5;
+    println!("the value of x is {}", x);
+
+    x = 6;
+    println!("the value of x is {}", x);
+
+    const MAX_POINT: u32 = 100_000;
+
+    println!("max point is {}", MAX_POINT);
+
+    let y = 5;
+    let y = y + 2;
+    let y = y + 1;
+    println!("now the value of y is {}", y);
+
+    let space = "abc";
+    let space = space.len();
+    println!("the length of space is {}", space);
+
+    // 加法
+    let sum = 5 + 10;
+    // 减法
+    let difference = 95.5 - 4.3;
+    // 乘法
+    let product = 4 * 30;
+    // 除法
+    let quotient = 56.7 / 32.2;
+    // 取余
+    let remainder = 43 % 5;
+
+    println!("sum:{} difference:{} product:{}, quatient:{} remainder:{}", sum, difference, product, quotient, remainder);
+
+    // char 类型的大小为四个字节(four bytes)，并代表了一个 Unicode 标量值（Unicode Scalar Value)
+    let c = 'z';
+    let z = 'ℤ';
+    let heart_eyed_cat = '😻';
+    println!("c:{} z:{} hec:{}", c, z, heart_eyed_cat);
+
+    //元组长度固定：一旦声明，其长度不会增大或缩小
+    let tup: (i32, f64, u8) = (500, 6.4, 1);
+    let (x, y, z) = tup; // ignore x and z
+
+    println!("The value of x is: {} = {}", tup.0, x);
+    println!("The value of y is: {} = {}", tup.1, y);
+    println!("The value of z is: {} = {}", tup.2, z);
+
+    let tup = ("abc", 1);
+    println!("the first tuple value: {}", tup.0);
+
+    // Rust 中的数组是固定长度的：一旦声明，它们的长度不能增长或缩小。
+    let months = ["January", "February", "March", "April", "May", "June", "July",
+              "August", "September", "October", "November", "December"];
+
+    let a: [i32; 5] = [1, 2, 3, 4, 5];
+
+    println!("print a: {}", a[2]);
+    println!("print month {}", months[3]);
+
+    // 包含 5 个元素，这些元素的值最初都将被设置为 3
+    let a = [3; 5];
+    println!("len: {}", a.len());
+
+    // let a = [1, 2, 3, 4, 5];
+    // let index = 10;
+    // let element = a[index];
+    // println!("The value of element is: {}", element);
+
+    another_function(5);
+
+    let x = 5;
+
+    let y = {
+        let x = 3;
+        x + 1 //表达式的结尾加上分号，它就变成了语句，而语句不会返回值
+    };
+
+    println!("The value of y is: {} x:{}", y, x);
+
+    println!("five func return {}", five());
+
+    println!("plus one func return {}", plus_one(7));
 
 
+    let condition = true;
+    let number = if condition {
+        5
+    } else {
+        6
+    };
+
+    println!("The value of number is: {}", number);
+
+    let mut counter = 0;
+
+    let result = loop {
+        counter += 1;
+
+        if counter == 10 {
+            break counter * 2;
+        }
+    };
+
+    println!("The result is {}", result);
 
 
+    // for 循环
+    let a = [10, 20, 30, 40, 50];
+
+    for element in a.iter() {
+        println!("the value is: {}", element);
+    }
+
+    for number in (1..4).rev() {
+        println!("{}!", number);
+    }
+    println!("LIFTOFF!!!");
+}
+
+fn another_function(x: i32) {
+    println!("this is another function. {}", x);
+}
+
+// 没有函数调用、宏、甚至没有 let 语句——只有数字 5。这在 Rust 中是一个完全有效的函数
+fn five() ->i32 {
+    5
+}
+
+// 包含 x + 1 的行尾加上一个分号，把它从表达式变成语句，将是一个错误。mismatched types
+fn plus_one(x: i32) -> i32 {
+    x +1 
+}
+
+```

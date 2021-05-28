@@ -195,3 +195,40 @@ fn plus_one(x: i32) -> i32 {
 }
 
 ```
+
+### Ownership
+
+所有权（系统）是 Rust 最为与众不同的特性，它让 Rust 无需垃圾回收（garbage collector）即可保障内存安全。相关功能包括：借用、slice 以及 Rust 如何在内存中布局数据。
+
+程序管理使用计算机内存的方式：
+
+- 垃圾回收机制。如Java 
+- 手动分配分配和释放内存。如C，C++
+- 所有权系统管理内存。如Rust。其优点：编译器在编译时会根据一系列的规则进行检查。在运行时，所有权系统的任何功能都不会减慢程序(也就没有STW问题)。
+
+首先要了解“栈（Stack）与堆（Heap）”的四个主要区别——
+
+- 栈：后进先出（last in, first out）；所有数据都必须占用已知且固定的大小；分配快，(因为（入栈时）操作系统无需为存储新数据去搜索内存空间；其位置总是在栈顶)；访问快(因为存储的连续性）
+- 堆：指针访问；数据大小可能变化；分配慢(需要先搜索到足够大的空间；标记已用；返回指针——allocating on the heap)；访问慢（需要通过指针跳转）
+
+>>当代码调用一个函数时，传递给函数的值（包括可能指向堆上数据的指针）和函数的局部变量被压入栈中。当函数结束时，这些值被移出栈。
+
+所有权意义：(管理堆数据)
+
+- 跟踪哪部分代码正在使用堆上的哪些数据
+- 最大限度的减少堆上的重复数据的数量
+- 清理堆上不再使用的数据确保不会耗尽空间
+
+所有权规则：
+
+1. Rust 中的每一个值都有一个被称为其 所有者（owner）的变量。Each value in Rust has a variable that’s called its *owner*.
+2. 值在任一时刻有且只有一个所有者。There can only be one owner at a time.
+3. 当所有者（变量）离开作用域，这个值将被丢弃。When the owner goes out of scope, the value will be dropped.
+
+```
+let s1 = String::from("hello");
+let s2 = s1;
+
+println!("{}, world!", s1); // 无效
+println!("{}, world!", s2);
+```

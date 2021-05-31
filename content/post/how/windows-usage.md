@@ -19,6 +19,55 @@ toc = true
 
 <!-- more -->
 
+### Electron devTools
+
+快捷键`Ctrl+Shift+I`打开调试工具
+
+### WSL
+
+[Windows Subsystem for Linux Installation Guide for Windows 10](https://docs.microsoft.com/en-us/windows/wsl/install-win10)
+
+使用管理员权限打开PowersShell
+
+- 启用WSL功能：`dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart`
+- 确保系统版本不低于1903，构建版本不低于18362(可使用`winver`命令查看系统版本)
+- 激活虚拟机器功能`dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart`(重启生效)
+- 下载升级最新版本[WSL2](https://wslstorestorage.blob.core.windows.net/wslblob/wsl_update_x64.msi)
+- 安装完成之后设置wsl2版本为默认版本`wsl --set-default-version 2`
+- 之后就可以在Microsoft Store中下载安装各种版本的linux
+
+PS：使用代理的情况下，Microsoft Stroe将提示`代码: 0x80072EFD`[无法打开页面](https://answers.microsoft.com/zh-hans/windows/forum/windows_10-windows_store-winpc/win10%E5%BA%94%E7%94%A8%E5%95%86%E5%BA%97%E6%89%93/dc6f68b9-e414-40d5-9491-ae70c83fbae3)，需要在系统的网络设置里先取消网络代理。
+
+从Store里安装完成之后(首次安装比较耗时，实际的安装目录似乎在[`%localappdata%\Packages`](https://www.howtogeek.com/261383/how-to-access-your-ubuntu-bash-files-in-windows-and-your-windows-system-drive-in-bash)目录下)，可以将此“文件”添加到“开始”目录，然后直接进入(首次启动比较耗时)
+
+- windows本身的目录可以在默认mount在`/mnt`目录
+- 已安装的应用可以`wsl --list`查看
+
+```
+PS C:\Users\joechin> dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart
+
+部署映像服务和管理工具
+版本: 10.0.19041.844
+
+映像版本: 10.0.19043.1023
+
+启用一个或多个功能
+[==========================100.0%==========================]
+操作成功完成。
+PS C:\Users\joechin> dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
+
+部署映像服务和管理工具
+版本: 10.0.19041.844
+
+映像版本: 10.0.19043.1023
+
+启用一个或多个功能
+[==========================100.0%==========================]
+操作成功完成。
+PS C:\Users\joechin>
+```
+
+
 ## 断电重启后自动修复失败
 
 异常断电，重新供电后，系统自动加电。但此时系统无法正常启动，需要长按电源键关机。然后重新开机——之前这样操作之后，系统可以正常启动。

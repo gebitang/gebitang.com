@@ -42,6 +42,20 @@ PS：使用代理的情况下，Microsoft Stroe将提示`代码: 0x80072EFD`[无
 
 - windows本身的目录可以在默认mount在`/mnt`目录
 - 已安装的应用可以`wsl --list`查看
+- Windows下可以在浏览器服务`file://wsl%24/Ubuntu-20.04/`查看安装的ubuntu文件
+
+#### 启动、移动
+
+[Using the WSL command line tool](https://stackoverflow.com/questions/38779801/move-wsl-bash-on-windows-root-filesystem-to-another-hard-drive)。将安装的应用移动到其他目录(默认安装到系统盘)
+
+- 导出到tar包`wsl --export Ubuntu-20.04 d:\20.04.tar`
+- 导入到其他位置`wsl --import myubuntu d:\wsl\ubuntu20 d:\20.04.tar`
+- 指定启动新的系统`wsl -d myubuntu`此时将以root用户启动，指定用户`wsl -d myubuntu --user geb`
+- 将新的系统设置为默认启动`wsl --set-default myubuntu`
+
+参考`wsl --help`介绍各个命令的作用。
+
+PS：可以在conEmu命令行启动，交互页面更友好一些；在linux下可以尝试使用下[fish shell](https://fishshell.com/docs/current/)
 
 ```
 PS C:\Users\joechin> dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart

@@ -138,3 +138,13 @@ draft = true
 - 机器不但要负责自己的本职工作，还需要具备错误侦测能力。“异常处理，主动告警。”
 
 [丰田生产方式的启发](https://mp.weixin.qq.com/s/Dq7aw-OKYYHwKRl70k1M1A )
+
+[浮生若梦，墨手留香](https://www.jianshu.com/p/503852319450)
+
+[From Ignorance to Wisdom: A Framework for Knowledge](https://moretothat.com/framework-for-knowledge/)的四个阶段：Awareness, Curiosity, Diligence, Education
+
+[8+1](https://hellohenrik.com/81-framework)系统: Transact, Invest, Assist, Learn, Health, Family, Relations, Ego(self-kindness) `3 + 2 + 3`结构，
+
+- 独自完成的：学习；健康；快乐
+- 与人联系的：助人，家庭，社交
+- 与社会立足：挣钱，投资

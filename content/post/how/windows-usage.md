@@ -19,11 +19,14 @@ toc = true
 
 <!-- more -->
 
-### Electron devTools
+## 禁止chrome自动更新
+
+[How to disable Google Chrome auto update?](https://stackoverflow.com/questions/18483087/how-to-disable-google-chrome-auto-update)，高大上的方法不用使用。找到chrome安装目录，对应的文件夹下有个`Update`文件夹，将此文件夹重新命名即可。即使修改了一堆注册表，实际执行升级动作是还是需要有对应的程序，这个思路就是：“你找不到做升级动作的程序，看你还怎么升级”LOL 
+## Electron devTools
 
 快捷键`Ctrl+Shift+I`打开调试工具
 
-### WSL
+## WSL
 
 [Windows Subsystem for Linux Installation Guide for Windows 10](https://docs.microsoft.com/en-us/windows/wsl/install-win10)
 
@@ -44,7 +47,7 @@ PS：使用代理的情况下，Microsoft Stroe将提示`代码: 0x80072EFD`[无
 - 已安装的应用可以`wsl --list`查看
 - Windows下可以在浏览器服务`file://wsl%24/Ubuntu-20.04/`查看安装的ubuntu文件
 
-#### 启动、移动
+### 启动、移动
 
 [Using the WSL command line tool](https://stackoverflow.com/questions/38779801/move-wsl-bash-on-windows-root-filesystem-to-another-hard-drive)。将安装的应用移动到其他目录(默认安装到系统盘)
 

@@ -123,6 +123,29 @@ PS：晚上没关机，第二天看起来又自动重启了? 通过“任务管�
 第二，重新生效后记录`other.xml`的信息，对比试用过期后的变化  
 第三，猜测逻辑：第一次启动时，获取生成`PermanentDeviceId`, `PermanentDeviceId`（确保唯一性）；过期后通过other.xml中记录的参数进行检查
 
+### Goland 链接数据库
+
+同一个数据库，在IntelliJIdea2021.1里连接可以正常连接成功；在GoLand2021.1里连接提示如下问题（似乎是升级之前可以连接成功）
+
+```
+[08S01]
+	Communications link failure
+
+	The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.
+javax.net.ssl.SSLHandshakeException: No appropriate protocol (protocol is disabled or cipher suites are inappropriate).
+```
+
+根据提示，应该是下面四种问题之一—— [No appropriate protocol](https://stackoverflow.com/questions/38205947/sslhandshakeexception-no-appropriate-protocol)
+
+- The TLS implementation used by the client does not support the cipher suites used by the server's certificate.
+- The TLS configuration on the server has disabled cipher suites supported by the client.
+- The TLS configurations on the client disable cipher suites offered by the server.
+- TLS version incompatibility between the client and server.
+
+[javax.net.ssl.SSLHandshakeException: No appropriate protocol (protocol is disabled or cipher suites are inappropriate)](https://help.mulesoft.com/s/article/javax-net-ssl-SSLHandshakeException-No-appropriate-protocol-protocol-is-disabled-or-cipher-suites-are-inappropriate)
+
+根据环境条件，看起来是Goland这个版本的问题，下搁置一下。官方也有类似的issue在跟踪: [Can't connect to remote MySQL since last version of IntelliJ](https://youtrack.jetbrains.com/issue/DBE-13313)
+
 
 ## win 10 锁屏不断网
 

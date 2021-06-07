@@ -84,6 +84,13 @@ PS C:\Users\joechin> dism.exe /online /enable-feature /featurename:VirtualMachin
 PS C:\Users\joechin>
 ```
 
+### 插件Remote-WSL登录问题
+
+[wsl: allow to run with a non-default user ](https://github.com/microsoft/vscode-remote-release/issues/286)看起来目前无法做到使用“非默认用户root”登录的要求。[官方文档所谓“specific settings”](http://code.visualstudio.com/docs/remote/wsl)指的时连接到wsl之后针对编辑器、命令行等工具的配置。
+
+[WSL2 starting as root when starting with wsl.exe](https://github.com/microsoft/WSL/issues/4276)，[Impossible to set default user of distribution installed via wsl --import on 1903](https://github.com/microsoft/WSL/issues/3974)这两个是针对wsl本身的，命令行指定用户没有问题。`wsl -u username -d ubuntu20`这样就可以
+
+
 
 ## 断电重启后自动修复失败
 

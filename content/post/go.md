@@ -193,6 +193,12 @@ func FromContext(ctx context.Context) (*User, bool) {
 - (windows) `set GO111MODULE=on`
 - (unix*) `export GO111MODULE=on`
 
+如果安装时的依赖出现`unrecognized import path... connect: connection refused`的错误，是因为本地代理未启用https服务，使用`insecure`模式进行独立安装即可`go gen -insecure git.xxx.com/medusa/crd` 
+
+```
+unrecognized import path "git.xxx.com/medusa/crd": https fetch: Get "https://git.xxx.com/medusa/crd?go-get=1": dial tcp 10.16.210.58:443: connect: connection refused
+```
+
 
 [Building a GraphQL API in Go using gqlgen](https://medium.com/weareservian/building-a-graphql-api-in-go-using-gqlgen-f7a42eba2193)
 
@@ -240,6 +246,13 @@ go run github.com/99designs/gqlgen init --verbose
 奇怪的是即使是windows环境下不能识别对前缀`gebtest.com/gebing/testprj`的定义；`/graph/model.JobConditioned`这个model实际不存在(项目里没这个定义)
 
 关于`unable to find type`的错误，也只有类似官方这个资料：[#issue911: gqlgen Autobind internal package - unable to find type](https://github.com/99designs/gqlgen/issues/911)，看起来跟上面的情况关系不大
+
+#### wsl相关：不能识别autobind的配置
+
+使用wsl环境，从wsl里访问windows环境下的项目，执行`gqlgen generate`时提示`unable to load module_name/graph/model - make sure you're using an import path to a package that exists`，及时修改为绝对路径，类似`/mnt/d/project/prjname/graph/model`也无法识别。源码的[config_test.go](unable to load ../chat - make sure you're using an import path to a package that exists)文件中有这种场景。暂时先忽略这个问题，涉及到两个不同操作系统互相访问的问题，识别不到也正常。
+
+在wsl环境里重新clone当前项目——而不是直接访问windows环境下的此项目，可以正常执行。应用层没有问题，上面的异常涉及到了系统层
+
 
 #### 接口定义与实现
 

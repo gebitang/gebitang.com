@@ -253,6 +253,8 @@ go run github.com/99designs/gqlgen init --verbose
 
 在wsl环境里重新clone当前项目——而不是直接访问windows环境下的此项目，可以正常执行。应用层没有问题，上面的异常涉及到了系统层
 
+如果提示`could not import C (no metadata for C) `，安装gcc即可`sudo apt install gcc`
+
 
 #### 接口定义与实现
 

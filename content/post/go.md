@@ -13,6 +13,15 @@ toc = true
 
 ## 2021 
 
+### http head 
+
+[GoLang: Case-sensitive HTTP Headers with net/http](https://dhdersch.github.io/golang/2016/08/11/golang-case-sensitive-http-headers.html) 
+```go
+// use this to avoid the key being canonicalized by  textproto.CanonicalMIMEHeaderKey. 
+req.Header["kbn-version"] = []string{"6.4.3"}
+// the key will be canoicalized as "Content-Type"
+req.Header.Set("content-type", "application/json")
+```
 ### 版本升级
 
 [升级原理实现的源码: dl项目](https://github.com/golang/dl)，[升级原理说明](https://mp.weixin.qq.com/s/jEhX5JHAo9L6iD3N54x6aA) 

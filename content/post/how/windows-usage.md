@@ -160,6 +160,32 @@ javax.net.ssl.SSLHandshakeException: No appropriate protocol (protocol is disabl
 
 根据环境条件，看起来是Goland这个版本的问题，下搁置一下。官方也有类似的issue在跟踪: [Can't connect to remote MySQL since last version of IntelliJ](https://youtrack.jetbrains.com/issue/DBE-13313)
 
+仔细看下上面的issue跟踪，包含了解决方法：
+
+如果MySql版本为8.0, 5.7.28, 5.6.46和以上版本，如果服务端启用了`TLSv1.2`配置，则可以在链接属性`data source properties`的高级设置中设置`enabledTLSprotocols`的值为`TLSv1,TLSv1.1,TLSv1.2,TLSv1.3`(默认这个链接值为空)
+
+>If you are running MySQL 8.0, 5.7.28, 5.6.46 and later and your server is configured with TLSv1.2 you can enabled it in driver:
+open up data source properties, switch to Advanced tab and set value for enabledTLSprotocols to TLSv1,TLSv1.1,TLSv1.2,TLSv1.3
+
+另外一个解决方法思路相同，只不过是通过配置文件的方式进行配置——
+
+**Workaround #1**
+
+We've updated java recently and we've moved to `TLSv1` to the `jdk.tls.disabledAlgorithms` due to security reasons. So to get it back you need to do the following:
+
+1. Create a file `custom.java.security` with the following contents:
+
+```
+jdk.tls.disabledAlgorithms=SSLv3, TLSv1.1, RC4, DES, MD5withRSA, \
+    DH keySize < 1024, EC keySize < 224, 3DES_EDE_CBC, anon, NULL, \
+    include jdk.disabled.namedCurves
+```
+
+I removed `TLSv1` from the list.
+
+2. Go to you data source *Advanced* tab and add to *VM Options*: `-Djava.security.properties=${PATH_TO_FILE?}/custom.java.security`. Don't forget to replace `${PATH_TO_FILE?}`.
+
+3. You can connect.
 
 ## win 10 锁屏不断网
 

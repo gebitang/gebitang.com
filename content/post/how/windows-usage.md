@@ -878,3 +878,17 @@ Here are some tips for formatting your coordinates so they work on Google Maps:
 *   Check that the first number in your latitude coordinate is between -90 and 90.
 *   Check that the first number in your longitude coordinate is between -180 and 180.
 
+## A记录查询 
+
+
+- 使用API:[nodes](https://api.mixin.space/nodes)获取节点信息，可以看到节点host信息
+- 本地使用DIG命令查询命中的结果可能来自缓存服务器——在不同的机器上执行`dig +short domain.com`返回的结果不同
+- 依赖[`ipip.net/ip.html`](https://www.ipip.net/ip.html)的服务查询ip的情况下是靠谱的，但如果直接查询域名，自动解析的结果也有出入(部分情况跟本地执行dig返回的结果相同，猜测可能使用的是后台机器的dig服务？)
+- 查询A服务的工具: [toolbox from google apps](https://toolbox.googleapps.com/apps/dig/#A/)，查询结果跟上面的匹配度更高，这个工具更权威一些
+- 使用[ipinfo.io](https://ipinfo.io/)提供的免费查询服务，类似`curl ipinfo.io/8.8.8.8/geo?token=$TOKEN`接口返回城市经纬度信息(每月50000次调用足够)，官方还提供各种语言的SDK服务[Java](https://github.com/ipinfo/java)，[go](https://github.com/ipinfo/go)
+
+>make a DNS lookup:   
+>> Enter domain name (trailing dot will be auto-appended).  
+>> Lookup and enjoy the output.  
+
+从结果来看，后两个工具信息更准确。下一步可以着手自动化处理

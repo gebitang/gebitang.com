@@ -172,6 +172,64 @@ func FromContext(ctx context.Context) (*User, bool) {
 
 这种情况下，需要将struct转换为`map[string]interface{}`之后再更新。使用`structs.Map(*struct)`将struct转换为map格式再调用`Update`方法即可，[参考这里](https://stackoverflow.com/questions/23589564/function-for-converting-a-struct-to-map-in-golang)。这个问题也是类似情况[Update method does not update zero value](https://stackoverflow.com/questions/64330504/update-method-does-not-update-zero-value)
 
+#### Singular Table
+
+[Mapping between Gorm and database (singular and plural) table structures](https://www.programmersought.com/article/53034028334/)
+
+数据库连接设置了以下属性的含义——对应变量在`model_struct.go`文件中的` GetModelStruct()`方法和`TableName(db *DB) string`中应用
+
+```go
+db.SingularTable(true)
+```
+
+假设定义了——
+
+```go
+type User struct {
+   Id   int    `json:"id"`
+   Name string `json:"name"`
+   Age  int    `json:"age"`
+}
+
+type Users struct {
+   Id   int    `json:"id"`
+   Name string `json:"name"`
+   Age  int    `json:"age"`
+}
+```
+
+1. 数据库中没有`users`表也没有`user`表，执行`DB.AutoMigrate(&User{})`或`DB.AutoMigrate(&Users{})`—— 
+    - 没有上述设置，则都自动创建`users`表(自动设置为复数形式)；
+    - 有上述设置时，则自动分别创建`user`表和`users`(遵守单数形式)
+
+
+2. 数据库中只有`users`表，没有`db.SingularTable(true)`设置
+
+以下操作会将数据都添加到`users`表；设置之后，第一行将保存提示`user`表不存在
+```
+DB.Create(&User{Name: "Li", Age: 5})  // 
+DB.Create(&Users{Name: "Li", Age: 5}) // 
+```
+
+3. 数据库中只有`user`表，没有`db.SingularTable(true)`设置，相同的添加数据的操作都会失败，提示`users`表不存在
+
+```
+DB.Create(&User{Name: "Li", Age: 5}) // Table 'users' doesn't exist
+DB.Create(&Users{Name: "Li", Age: 5}) // Table 'users' doesn't exist
+```
+
+总结：gorm默认使用复数映射，go代码的单数、复数struct形式都匹配到复数表中，创建表、添加数据时都是如此。指定了`db.SingularTable(true)`之后，进行严格匹配。
+
+#### 连表查询
+
+`db.SingularTable(true)`一开始我以为这意味着只能操作单表- -|(如果有这种限制，相当于数据库表彼此没有“关系”了)导致需要连表查询时，只能手动进行数据整合，查出一个集合，再对集合中的每一条记录进行扩展(再查另外一个表获取关系)。耗时自然就无法接受了。总体梳理只有3k左右的数据，做上述操作(相当于先模糊查询一次，然后再连续查询3k次)之后，耗时20s以上
+
+实际上gorm是支持连表查询，类似——相当于`PoolApp`表关联`leftJoin`了`pool_week`表表，然后再定义出要联合查询的字段(`dbSelect`)、查询的条件(`where`)、结果偏移量、查询总数等信息之后。就可以依次返回需要的查询结果。（相当于拆解sql语句，这样才能称为orm撒~）
+
+```
+leftJoin := "left join pool_week on pool_app.app_id = pool_week.app_id"
+GetDB(ctx).Model(dbmodel.PoolApp{}).Joins(leftJoin).Select(dbSelect).Where(where).Order(order).Offset(offset).Limit(limit).Scan(&res)
+```
 
 
 ### 初始化方法

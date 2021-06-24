@@ -340,3 +340,21 @@ This type works similarly to math/big.Int, and all arguments and receivers are a
 The zero value is a valid zero element.
 ```
 
+## TIP
+
+Mixin使用的六位PIM码管理用户私钥的方案正式开源。2000+行代码完成。
+
+引用一下骚总的评论—— 
+>晓东是我见过最牛逼程序员～️ 他前几天感冒了，稍微好点的时候，给我们讲了一下Mixin支持原链资产钱包的思路，然后晚上大搞了一下，好像是每人搞了大约12000搞（我们发明的酒精单位，1搞=0.01ml酒精）～ 后面两天也不怎么说话，吃饭也不怎么愿意去了，总去最近的麦当劳，一天到晚坐电脑前，我一度以为他感冒没好，状态不佳～⌨️ 过了两天跟我们说，他已经写完了代码，随时可以上线～✅ 坐在对面的我感到很惭愧，只能安慰自己，每个人擅长的不一样，每个人都有独特的价值～🤦‍♂️ 今天他发布了详细的 6 位数字 PIN 码实现方案开源版本： https://github.com/MixinNetwork/tip
+
+用到了[Boneh-Lynn-Shacham (BLS) signature](https://en.wikipedia.org/wiki/BLS_digital_signature)算法做签。有关BLS介绍参考这个[理解 BLS 签名算法](https://ethfans.org/posts/bls-signatures-better-than-schnorr)，[英文原文: BLS signatures: better than Schnorr](https://medium.com/cryptoadvance/bls-signatures-better-than-schnorr-5a7fe30ea716)以及对于对于Schnorr算法的介绍[How Schnorr signatures may improve Bitcoin](https://medium.com/cryptoadvance/how-schnorr-signatures-may-improve-bitcoin-91655bcb4744)
+
+>BLS 签名算法是一种可以实现签名聚合和密钥聚合的算法（即可以将多个密钥聚合成一把密钥，将多个签名聚合成一个签名）。
+
+这其实是算法发明者的三个字母缩写——三位斯坦福大学的教授+学生Dan Boneh, Ben Lynn, Hovav Shacham于2004年在《Journal of Cryptology》上发表的论文[Short Signatures from the Weil Pairing](https://link.springer.com/chapter/10.1007/3-540-45682-1_30)，下载版本可以从[google scholar](https://scholar.google.com/citations?user=262Twn0AAAAJ&hl=en)上获取
+
+- 第一作者[Dan Boneh](https://crypto.stanford.edu/~dabo/)是为真正的大佬，教密码学课程，开源了一本结束密码学教科书[A Graduate Course in Applied Cryptography](http://toc.cryptobook.us/)，还在coursera开免费课[Cryptography I](https://www.coursera.org/learn/crypto)
+- 第二作者[Ben Lynn](https://crypto.stanford.edu/~blynn/)好像是台湾人，还开源了一份git教程[Git Magic](https://crypto.stanford.edu/~blynn/gitmagic/)。大佬比较低调[github地址](https://github.com/blynn)
+- 第三作者[Hovav Shacham](https://www.cs.utexas.edu/~hovav/)2018年去了University of Texas at Austin 
+
+刹车刹车，先学习TIP的代码~ 

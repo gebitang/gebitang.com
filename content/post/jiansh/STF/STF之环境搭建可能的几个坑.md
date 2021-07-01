@@ -49,3 +49,37 @@ adb E   661  9881 usb_osx.cpp:265] Could not find device interface
 
 6. `npm install`失败都话，先执行 `npm cache clean --force` ，然后重新执行这个命令
 
+7. STF之SSO认证
+
+集成了公司的SSO认证，一直工作正常，临时断电，重启PC后。服务正常启动，但服务时走认证流程时提示——`Failed to obtain access token`，搜索对应的问题，找到[InternalOAuthError: Failed to obtain access token](https://stackoverflow.com/questions/21129989/internaloautherror-failed-to-obtain-access-token)
+
+```
+InternalOAuthError: Failed to obtain access token
+    at Strategy.OAuth2Strategy._createOAuthError (/home/stf/RemoteDeviceNew/node_modules/passport-oauth2/lib/strategy.js:410:17)
+    at /home/stf/RemoteDeviceNew/node_modules/passport-oauth2/lib/strategy.js:177:24
+    at /home/stf/RemoteDeviceNew/node_modules/oauth/lib/oauth2.js:191:18
+    at ClientRequest.<anonymous> (/home/stf/RemoteDeviceNew/node_modules/oauth/lib/oauth2.js:162:5)
+    at emitOne (events.js:116:13)
+    at ClientRequest.emit (events.js:211:7)
+    at TLSSocket.socketErrorListener (_http_client.js:401:9)
+    at emitOne (events.js:116:13)
+    at TLSSocket.emit (events.js:211:7)
+    at emitErrorNT (internal/streams/destroy.js:66:8)
+    at _combinedTickCallback (internal/process/next_tick.js:139:11)
+    at process._tickCallback (internal/process/next_tick.js:181:9)
+
+```
+看起来是相同的问题，直接采用`require('https').globalAgent.options.rejectUnauthorized = false;`问题依然复现。
+
+在`node_modules/passport-oauth2/lib/strategy.js`文件中添加debug信息，重启服务后提示——`getaddrinfo ENOTFOUND `，看起来是无法找到SSO服务器。从STF所在的机器ping此地址（断电重启的原因？）尝试先在`/etc/hosts`中添加解析地址。搞定~ 
+
+```
+Failed to obtain access in======== token:  { Error: getaddrinfo ENOTFOUND sso.test-sso.com sso.test-sso.com:443
+    at GetAddrInfoReqWrap.onlookup [as oncomplete] (dns.js:67:26)
+  errno: 'ENOTFOUND',
+  code: 'ENOTFOUND',
+  syscall: 'getaddrinfo',
+  hostname: 'sso.test-sso.com',
+  host: 'sso.test-sso.com',
+  port: 443 }
+```

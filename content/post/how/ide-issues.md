@@ -14,6 +14,58 @@ toc = true
 
 ## IDEA
 
+### 异常断电导致无法启动
+
+重启PC后报错`Internal error. Please refer to https://jb.gg/ide/critical-startup-errors`，`Caused by: java.net.BindException: Address already in use: bind`，`java.util.concurrent.CompletionException: java.net.BindException: Address already in use: bind`，详细报错——
+
+```
+Internal error. Please refer to https://jb.gg/ide/critical-startup-errors
+
+java.util.concurrent.CompletionException: java.net.BindException: Address already in use: bind
+    at java.base/java.util.concurrent.CompletableFuture.encodeThrowable(CompletableFuture.java:314)
+    at java.base/java.util.concurrent.CompletableFuture.completeThrowable(CompletableFuture.java:319)
+    at java.base/java.util.concurrent.CompletableFuture$AsyncSupply.run(CompletableFuture.java:1702)
+    at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+    at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+    at java.base/java.util.concurrent.Executors$PrivilegedThreadFactory$1$1.run(Executors.java:668)
+    at java.base/java.util.concurrent.Executors$PrivilegedThreadFactory$1$1.run(Executors.java:665)
+    at java.base/java.security.AccessController.doPrivileged(Native Method)
+    at java.base/java.util.concurrent.Executors$PrivilegedThreadFactory$1.run(Executors.java:665)
+    at java.base/java.lang.Thread.run(Thread.java:829)
+Caused by: java.net.BindException: Address already in use: bind
+    at java.base/sun.nio.ch.Net.bind0(Native Method)
+    at java.base/sun.nio.ch.Net.bind(Net.java:455)
+    at java.base/sun.nio.ch.Net.bind(Net.java:447)
+    at java.base/sun.nio.ch.ServerSocketChannelImpl.bind(ServerSocketChannelImpl.java:227)
+    at io.netty.channel.socket.nio.NioServerSocketChannel.doBind(NioServerSocketChannel.java:134)
+    at io.netty.channel.AbstractChannel$AbstractUnsafe.bind(AbstractChannel.java:550)
+    at io.netty.channel.DefaultChannelPipeline$HeadContext.bind(DefaultChannelPipeline.java:1334)
+    at io.netty.channel.AbstractChannelHandlerContext.invokeBind(AbstractChannelHandlerContext.java:506)
+    at io.netty.channel.AbstractChannelHandlerContext.bind(AbstractChannelHandlerContext.java:491)
+    at io.netty.channel.DefaultChannelPipeline.bind(DefaultChannelPipeline.java:973)
+    at io.netty.channel.AbstractChannel.bind(AbstractChannel.java:248)
+    at io.netty.bootstrap.AbstractBootstrap$2.run(AbstractBootstrap.java:356)
+    at io.netty.util.concurrent.AbstractEventExecutor.safeExecute(AbstractEventExecutor.java:164)
+    at io.netty.util.concurrent.SingleThreadEventExecutor.runAllTasks(SingleThreadEventExecutor.java:472)
+    at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:500)
+    at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:989)
+    at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
+    at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+    ... 1 more
+
+-----
+Your JRE: 11.0.11+9-b1341.57 amd64 (JetBrains s.r.o.)
+C:\Program Files\JetBrains\IntelliJ IDEA 2019.2.3\jbr
+```
+
+[Start Failed, Internal error](https://intellij-support.jetbrains.com/hc/en-us/articles/360007568559)，官方答复临时[解决方案](https://youtrack.jetbrains.com/issue/IDEA-238995)
+
+原因是因为本地端口都被占用了，这种情况下，异常断电导致系统没有释放上次依然在使用中的端口。暴力处理，管理员权限cmd命令执行`net stop winnat`关闭nat，重启nat`net start winnat`
+
+因为ide启动时会试图使用这些端口：`If all the 50 ports between 6942 and 6991 are reserved, taken by the other apps or firewall doesn't allow IDE to bind on them, startup fails with the following exception:`，如有已经被占用，重启这些端口服务。
+
+*另外，终极重启大法也好使*
+
 ### 折叠代码
 
 [Code folding](https://www.jetbrains.com/help/idea/working-with-source-code.html#code_folding)  

@@ -23,6 +23,66 @@ mvn命令是一段脚本程序。
 
 <!--more-->
 
+## 混合编译java和scala
+
+参考[Scala in a Java Maven Project](https://dzone.com/articles/scala-in-java-maven-project)。项目中包含scala和java混合代码时，需要添加对应的maven插件:[scala-maven-plugin](https://github.com/davidB/scala-maven-plugin)即可(不需要安装scala环境)。
+
+[官方文档说明](https://davidb.github.io/scala-maven-plugin/usage.html)。执行对应定义的goal即可。`mvn scala:help`或者`mvn scala:compile`
+
+```xml
+<project>
+  ...
+  <build>
+    <sourceDirectory>src/main/scala</sourceDirectory>
+    <testSourceDirectory>src/test/scala</testSourceDirectory>
+    ...
+    <plugins>
+      ...
+      <plugin>
+        <groupId>net.alchim31.maven</groupId>
+        <artifactId>scala-maven-plugin</artifactId>
+        <version>4.5.3</version>
+        ... (see other usage or goals for details) ...
+      </plugin>
+      ...
+    </plugins>
+    ...
+  </build>
+  ...
+</project>
+```
+
+混合项目打包需要向将scala代码编译后才能在打包时识别出来(idea IDE中安装scala的插件是在ide中识别对应的代码，但跟打包没关系)，统一打包命令`mvn clean scala:compile package`依次执行对应的goal。确保scala的命令在package之前执行即可。
+
+在ide的maven插件中，可以现在`plugins`模块下选择执行`scala:compile`，然后再执行主工程的package——实测也可以打包成功。
+
+注：因为package相当于执行“项目编译、单元测试、打包功能”，maven的[生命周期](https://maven.apache.org/guides/introduction/introduction-to-the-lifecycle.html)还是要理解清楚
+
+## 上传仓库报错
+
+提示类似`repository element was not specified in the POM inside distributionManagement element or in -DaltDeploymentRepository=id::layout::url parameter` 
+
+错误信息表示：没有在pom文件的`distributionManagement`元素下声明仓库(repository)，或是没有指定参数`-DaltDeploymentRepository`的值(格式为`id::layout::url`)
+
+- 第一，首先确定配置了对应的上传仓库
+- 第二，在项目的pom文件中定义了上传仓库的url，类似——
+
+```
+<distributionManagement>
+        <snapshotRepository>
+            <id>snapshots</id>
+            <url>http://nexus.dns.xxx.com:8081/nexus/content/repositories/snapshots/</url>
+        </snapshotRepository>
+        <repository>
+            <id>releases</id>
+            <url>http://nexus.dns.xxx.com:8081/nexus/content/repositories/releases/</url>
+        </repository>
+    </distributionManagement>
+```
+
+
+
+
 ## 多模块项目部署
 
 COLA框架生成的项目，本地可以直接运行。通过maven单独对各个依赖模块编译时，最底层的模块可以编译成功，中间层模块提示无法找到依赖的版本(snapshot版本会自动生成时间戳的后缀，不会影响实际查找的版本)。

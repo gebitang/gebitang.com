@@ -13,9 +13,9 @@ toc = true
 draft = true
 +++
 
-SQL: Structured Query Language
-NoSQL: not only SQL (键值、文档、列存储、图)
-NewSQL: combine SQL and NoSQL ??
+SQL: Structured Query Language  
+NoSQL: not only SQL (键值、文档、列存储、图)  
+NewSQL: combine SQL and NoSQL ??  
 
 [SQL vs NoSQL vs NewSQL](https://www.xenonstack.com/blog/sql-vs-nosql-vs-newsql)
 
@@ -47,6 +47,23 @@ OLTP则强调“事务”（transaction）本身，关注在“业务”进行�
 
 >ATM center. Assume that a couple has a joint account with a bank. One day both simultaneously reach different ATM centers at precisely the same time and want to withdraw total amount present in their bank account.
 
+## Database VS. Schema 
+
+[Difference between Database and Schema](https://www.javatpoint.com/database-vs-schema) 
+
+这里的区分是针对`database.schema.table`这种情况下的区分来说的。
+
+- database是“实体的”，schema是“表现的”。
+- 前者用来存储结构化的数据；后者描述了数据库的表现形式
+- 前者使用DML`data manipulation language`来操作数据；后者使用DDL`Data Definition Language`描述数据库的表现形式
+
+只是在Mysql中，这两个概念不做区分[`In MySQL, physically, a schema is synonymous with a database.`](https://dev.mysql.com/doc/refman/8.0/en/glossary.html#glos_schema)
+
+可以参考PostgresSQL中的[PostgreSQL Schema](https://www.javatpoint.com/postgresql-tutorial)，实现了上述的区别。
+
+这样是在一个数据库中，可以创建不同的schema，然后不同的schema下面可以包含相同的table名称。只是有一个数据库连接就可以为不同用户提供相同的服务
+
+
 ## Lealone basic
 
 [用户文档 快速入门](https://github.com/lealone/Lealone-Docs/blob/master/%E5%BA%94%E7%94%A8%E6%96%87%E6%A1%A3/%E7%94%A8%E6%88%B7%E6%96%87%E6%A1%A3.md)
@@ -61,7 +78,7 @@ OLTP则强调“事务”（transaction）本身，关注在“业务”进行�
 - 1. ~~Maven编译需要暂时去掉 `<module>lealone-test</module>`模块，否则会出现测试脚本失败的情况~~
 这是因为我在Powershell环境下执行` mvn clean package assembly:assembly -Dmaven.test.skip=true`这个目录导致的。[参考](https://stackoverflow.com/a/6351739/1087122)这里，可以看到实际上跳过test的命令并没有生效。需要使用`mvn clean package assembly:assembly '-Dmaven.test.skip=true'`的方式执行才会生效。
 
-效果还是很直接的——
+效果还是很直接的—— [原文地址](https://www.jianshu.com/p/54e816217e5f)
 
 ![server 启动](https://upload-images.jianshu.io/upload_images/3296949-969f1fe012b279e6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 

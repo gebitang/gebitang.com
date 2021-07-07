@@ -27,6 +27,41 @@ NewSQL: combine SQL and NoSQL ??
 
 [oltp vs. olap](https://www.guru99.com/oltp-vs-olap.html)
 
+## How does a relational database work
+
+原始文章： [How does a relational database work](http://coding-geek.com/how-databases-work/?print=print) 
+
+英文版本的[book样式](https://walleipt.gitbooks.io/how-does-a-relational-database-work/content/)
+
+中文版本备份：关于数据库原理的总结[【一】](https://zhuanlan.zhihu.com/p/48629562) [【二】](https://zhuanlan.zhihu.com/p/48633080) 
+
+本文主要介绍核心组件以及其中应用到的算法以及使用的数据结构：
+
+- 基础
+  - 时间复杂度(决定了后续不同场景下需要采用何种算法，以及由于条件限制——时间，CPU，内存等——采用哪种工程实现)
+  - 合并排序(分治法)
+  - 数据结构：数组，B+树，Hash表
+- 数据库组件总览(参考下图)，然后重点介绍了三个组件——
+  - Client Manager
+  - Query Manager
+  - Data Manager
+
+![](https://s3-img.meituan.net/v1/mss_3d027b52ec5a4d589e68050845611e68/ff/n0/0m/kg/8c_288742.jpg@596w_1l.jpg)
+
+更通用性的框架介绍参考《数据库系统基础教程(A first course in database systems)》中提到的组成
+
+![](https://s3-img.meituan.net/v1/mss_3d027b52ec5a4d589e68050845611e68/ff/n0/0m/kg/7n_289069.jpg@596w_1l.jpg)
+
+- 单框表示不同的组件
+- 双框表示内存中的数据结构
+- 实线表示控制和数据流
+- 虚线只表示数据流
+
+文中提到的[Architecture of a Database System ](http://db.cs.berkeley.edu/papers/fntdb07-architecture.pdf)研究论文提到的组件构成——
+
+
+![](https://s3-img.meituan.net/v1/mss_3d027b52ec5a4d589e68050845611e68/ff/n0/0m/kg/8v_288731.jpg@596w_1l.jpg)
+
 ## OLAP VS. OLTP
 
 ### OLAP

@@ -62,6 +62,17 @@ NewSQL: combine SQL and NoSQL ??
 
 ![](https://s3-img.meituan.net/v1/mss_3d027b52ec5a4d589e68050845611e68/ff/n0/0m/kg/8v_288731.jpg@596w_1l.jpg)
 
+[H2 DB Architecture](https://h2database.com/html/architecture.html) Top-down Overview
+
+- JDBC driver `org.h2.jdbc, org.h2.jdbcx`
+- Connection/session management `org.h2.engine.Database, org.h2.engine.SessionInterface, org.h2.engine.Session, org.h2.engine.SessionRemote`
+- SQL Parser `org.h2.command.Parser`
+- Command execution and planning `org.h2.command.ddl, org.h2.command.dml`
+- Table/Index/Constraints `org.h2.table, org.h2.index`
+- Undo log, redo log, and transactions layer 
+- B-tree engine and page-based storage allocation `org.h2.store`
+- Filesystem abstraction `org.h2.store.FileStore.`
+
 ## OLAP VS. OLTP
 
 ### OLAP

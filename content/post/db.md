@@ -71,7 +71,7 @@ NewSQL: combine SQL and NoSQL ??
 - Table/Index/Constraints `org.h2.table, org.h2.index`
 - Undo log, redo log, and transactions layer 
 - B-tree engine and page-based storage allocation `org.h2.store`
-- Filesystem abstraction `org.h2.store.FileStore.`
+- Filesystem abstraction `org.h2.store.FileStore`
 
 ## OLAP VS. OLTP
 

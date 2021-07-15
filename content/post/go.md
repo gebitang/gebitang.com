@@ -260,7 +260,7 @@ GetDB(ctx).Model(dbmodel.PoolApp{}).Joins(leftJoin).Select(dbSelect).Where(where
 - (windows) `set GO111MODULE=on`
 - (unix*) `export GO111MODULE=on`
 
-如果安装时的依赖出现`unrecognized import path... connect: connection refused`的错误，是因为本地代理未启用https服务，使用`insecure`模式进行独立安装即可`go gen -insecure git.xxx.com/medusa/crd` 
+如果安装时的依赖出现`unrecognized import path... connect: connection refused`的错误，是因为本地代理未启用https服务，使用`insecure`模式进行独立安装即可`go get -insecure git.xxx.com/medusa/crd` 
 
 ```
 unrecognized import path "git.xxx.com/medusa/crd": https fetch: Get "https://git.xxx.com/medusa/crd?go-get=1": dial tcp 10.16.210.58:443: connect: connection refused

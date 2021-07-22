@@ -5,7 +5,7 @@ tags = [
     "sql",
     "db"
 ]
-date = "2020-11-26"
+date = "2021-07-21"
 topics = [
     "sql"
 ]
@@ -26,6 +26,18 @@ NewSQL: combine SQL and NoSQL ??
 >**Durability** – permanent effect on the database by the changes  
 
 [oltp vs. olap](https://www.guru99.com/oltp-vs-olap.html)
+
+## lealone 
+
+### 创建IDE Debug环境
+
+- git clone下代码导入IDEA
+- 在`lealone-main`模块下增加resources文件夹，将`lealone-dist`模块下conf文件夹的内容复制到resources下（这一步为了识别log4j的配置文件，可以调整log文件位置）
+- 需要设置`lealone.config`系统变量，可以通过`System.setProperty("lealone.config", "file:///D:/path/to/resources/lealone.yaml");`完成（可以参考`lealone-dist`模块下bin文件夹的脚本内容查看需要的信息）
+- 启动debug模式，配合打包编译后的`sqlshell`作为客户端。完成debug交互
+
+第一步，修改root用户的密码。默认用户为root，密码为空。连接进入后，执行`SET PASSWORD 'your-new-password'`就可以完成管理员账号的密码设置
+
 
 ## How does a relational database work
 

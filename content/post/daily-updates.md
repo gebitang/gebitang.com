@@ -24,6 +24,8 @@ toc = true
 
 [cloc](https://github.com/AlDanial/cloc) 计算代码行数的命令行工具
 
+忽略vendor文件夹：`cloc --exclude-dir=vendor .`
+
 支持单个文件，指定目录，zip包，commit等参数。window环境下的执行程序不需要安装任何依赖，直接使用。
 
 不同环境的安装方式—— 

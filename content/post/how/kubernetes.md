@@ -14,6 +14,18 @@ draft = false
 toc = true
 +++
 
+### 术语列表
+
+
+{{< fluid_imgs
+  "pure-u-1-1|https://static001.geekbang.org/resource/image/8e/67/8ee9f2fa987eccb490cfaa91c6484f67.png|Kubernetes项目架构|https://time.geekbang.org/column/article/23132"
+>}}
+
+- OCI: Open Container Initiative
+- CNI: Container Network Interface
+- CRI: Container Runtime Interface
+- CSI: Container Storage Interface
+
 使用环境Windows。
 
 根据[云原生技术基础](https://edu.aliyun.com/roadmap/cloudnative)的[第三课的demo](https://edu.aliyun.com/lesson_1651_16894)

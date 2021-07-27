@@ -28,6 +28,77 @@ toc = true
 
 使用环境Windows。
 
+### WSL2 + Kubernetes
+
+[在 Windows 下使用 WSL2 搭建 Kubernetes 集群](https://www.qikqiak.com/post/deploy-k8s-on-win-use-wsl2)
+
+- 安装商店里的`windows terminal`
+- 更新ubuntu的软件源
+
+```
+cp /etc/apt/sources.list /etc/apt/sources.list.bak
+root@k8s:~# echo "deb http://mirrors.aliyun.com/ubuntu/ focal main restricted
+deb http://mirrors.aliyun.com/ubuntu/ focal-updates main restricted
+deb http://mirrors.aliyun.com/ubuntu/ focal universe
+deb http://mirrors.aliyun.com/ubuntu/ focal-updates universe
+deb http://mirrors.aliyun.com/ubuntu/ focal multiverse
+deb http://mirrors.aliyun.com/ubuntu/ focal-updates multiverse
+deb http://mirrors.aliyun.com/ubuntu/ focal-backports main restricted universe multiverse
+deb http://mirrors.aliyun.com/ubuntu/ focal-security main restricted
+deb http://mirrors.aliyun.com/ubuntu/ focal-security universe
+deb http://mirrors.aliyun.com/ubuntu/ focal-security multiverse" > /etc/apt/sources.list
+```
+
+- kind可以从github上下载后手动安装——本身是go编译的二进制文件
+- 但kind安装kubernetes集群时使用的是编译发布在hub.docker.com上的镜像，WSL2里遇到网络问题
+
+>This will bootstrap a Kubernetes cluster using a pre-built [node image](https://kind.sigs.k8s.io/docs/design/node-image). Prebuilt images are hosted at[`kindest/node`](https://hub.docker.com/r/kindest/node/)
+
+```
+root@Gebitang:/home/geb# kind create cluster --name wslk8s
+Creating cluster "wslk8s" ...
+ ✓ Ensuring node image (kindest/node:v1.21.1) 🖼
+ ✓ Preparing nodes 📦
+ ✓ Writing configuration 📜
+ ✓ Starting control-plane 🕹️
+ ✓ Installing CNI 🔌
+ ✓ Installing StorageClass 💾
+Set kubectl context to "kind-wslk8s"
+You can now use your cluster with:
+
+kubectl cluster-info --context kind-wslk8s
+
+Thanks for using kind! 😊
+```
+
+重新使用`kubeadm`进行安装：
+
+- 需要先将apt-key.gpg证书导入`curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add -`。可以先将文件下载到本地，然后`cat apt-get.gpg | apt-key add -`
+- 添加镜像源到列表：在`/etc/apt/sources.list.d/`目录下创建`kubernetes.list`文件，内容为`deb http://mirrors.ustc.edu.cn/kubernetes/apt kubernetes-xenial main`
+- 执行`apt-get update && apt-get install -y kubeadm`
+
+执行`kubeadm version`返回信息。
+
+### Errors were encountered while processing:  ubuntu-advantage-tools
+
+ubuntu20.04执行`apt-get upgrade`时遇到类似上面的问题，看起来是个[bug](https://bugs.launchpad.net/ubuntu/+source/ubuntu-advantage-tools/+bug/1938097)，官方提示修复方式：
+
+- 编辑`/var/lib/dpkg/info/ubuntu-advantage-tools.postinst`
+- 执行`dpkg --configure -a`
+```
+I think the problem is in the postinst script, line 295:
+
+    cloud_id=""
+    if command -v "cloud-id" > /dev/null ; then
+      cloud_id=$(cloud-id)
+    fi
+
+The third line should rather be:
+
+      cloud_id=$(cloud-id || true)
+```
+
+
 根据[云原生技术基础](https://edu.aliyun.com/roadmap/cloudnative)的[第三课的demo](https://edu.aliyun.com/lesson_1651_16894)
 
 ### 前提环境

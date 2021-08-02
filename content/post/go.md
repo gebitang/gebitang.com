@@ -13,6 +13,10 @@ toc = true
 
 ## 2021 
 
+### go mod vendor 
+
+[Vendor dependencies of a module in Go ](https://golangbyexample.com/vendor-dependency-go/)，使用mod模式，生成vendor文件夹`go mod vendor`将项目依赖的所有依赖保存到工程的vendor文件夹目录下，增加新的依赖之后，再次执行此命令，添加新的依赖。执行`go mod vendor -v`查看所有的依赖信息
+
 ### http head 
 
 [GoLang: Case-sensitive HTTP Headers with net/http](https://dhdersch.github.io/golang/2016/08/11/golang-case-sensitive-http-headers.html) 

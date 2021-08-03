@@ -13,6 +13,22 @@ toc = true
 
 ## Git Pro
 
+### 获取commit的代码变动
+
+[How to count the lines changed between two commits in gitlab?](https://stackoverflow.com/questions/42249174/how-to-count-the-lines-changed-between-two-commits-in-gitlab/42254042)
+
+[gitlab commit api](https://docs.gitlab.com/ee/api/commits.html#get-a-single-commit)默认的`stats`参数为true，会返回类似如下数据。使用sdk时需要注意传递指定参数，否则这个字段不会返回
+
+```
+stats: {
+    additions: 2,
+    deletions: 3,
+    total: 5
+},
+```
+
+commit涉及到的每个具体文件的变更，需要调用[commit diff api](https://docs.gitlab.com/ee/api/commits.html#get-the-diff-of-a-commit)，再重新解析diff字段进行判断。
+
 ### 复现commit id
 
 [How does Git create unique commit hashes, mainly the first few characters?](https://stackoverflow.com/questions/34764195/how-does-git-create-unique-commit-hashes-mainly-the-first-few-characters)

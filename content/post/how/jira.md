@@ -11,7 +11,8 @@ topics = [
 toc = true
 +++
 
-
+- [golang jira client api](https://github.com/andygrunwald/go-jira)
+- [Simple command line client for Atlassian's Jira service written in Go.](https://github.com/go-jira/jira)
 ## 搜索 
 
 ### JIRA 获取查询语句

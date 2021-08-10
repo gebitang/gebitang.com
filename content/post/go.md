@@ -13,6 +13,53 @@ toc = true
 
 ## 2021 
 
+### go 汇编
+
+[GO的编译执行流程](https://zhuanlan.zhihu.com/p/62922404) `go build -n main.go` (-n 不执行地打印流程中用到的命令)
+
+- 创建临时目录，`mkdir -p $WORK/b001/`
+- 查找依赖信息，`cat >$WORK/b001/importcfg << ...`
+- 执行源代码编译，`/home/geb/go/pkg/tool/linux_amd64//compile ...`
+- 收集链接库文件，`cat >$WORK/b001/importcfg.link << ...`
+- 生成可执行文件，`/home/geb/go/pkg/tool/linux_amd64/link -o ...`
+- 移动可执行文件，`mv $WORK/b001/exe/a.out main`
+
+
+[GO汇编入门](https://mp.weixin.qq.com/s/pOyN1CM3op_OSeBiNOnLbg)
+
+- AX――累加器（Accumulator），使用频度最高
+- BX――基址寄存器（Base Register），常存放存储器地址
+- CX――计数器（Count Register），常作为计数器
+- DX――数据寄存器（Data Register），存放数据
+- SI――源变址寄存器（Source Index），常保存存储单元地址
+- DI――目的变址寄存器（Destination Index），常保存存储单元地址
+- BP――基址指针寄存器（Base Pointer），表示堆栈区域中的基地址
+- SP――堆栈指针寄存器（Stack Pointer），指示堆栈区域的栈顶地址
+- IP――指令指针寄存器（Instruction Pointer），指示要执行指令所在存储单元的地址。IP寄存器是一个专用寄存器。
+
+针对`main.go`，获取汇编
+
+方式一：
+
+- 使用 `go build -gcflags "-N -l" main.go` 生成对应的可执行二进制文件 
+- 使用 `go tool objdump -s "main\." main` 反编译获取对应的汇编
+
+>反编译时`"main\."` 表示只输出 main 包中相关的汇编；`"main\.main"` 则表示只输出 main 包中 main 方法相关的汇编
+
+方式二：
+
+- 使用 `go tool compile -S -N -l main.go` 这种方式直接输出汇编
+
+方式三：
+
+- 使用 `go build -gcflags="-N -l -S" main.go`直接输出汇编
+
+关键是`gcflags`对应的参数——
+
+> `-l` 禁止内联   
+> `-N` 编译时，禁止优化  
+> `-S` 输出汇编代码  
+
 ### go time format 
 
 [Go 的时间格式化为什么是 2006-01-02 15:04:05？](https://mp.weixin.qq.com/s/f3VWaUGseWX6NCA2KGT-pw)， 参考`src/time/format.go`源码 

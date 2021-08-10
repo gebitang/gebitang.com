@@ -13,6 +13,24 @@ toc = true
 
 ## 2021 
 
+### go time format 
+
+[Go 的时间格式化为什么是 2006-01-02 15:04:05？](https://mp.weixin.qq.com/s/f3VWaUGseWX6NCA2KGT-pw)， 参考`src/time/format.go`源码 
+
+```
+1: month (January, Jan, 01, etc)
+2: day
+3: hour (15 is 3pm on a 24 hour clock)
+4: minute
+5: second
+6: year (2006)
+7: timezone (GMT-7 is MST)
+
+ANSIC       = "Mon Jan _2 15:04:05 2006"
+```
+进行数字排序的结果，方便记忆“一月二号三点四分五秒2006年西七区”，英文的书写格式为`Mon, 02 Jan 2006 15:04:05 -0700` ([RFC1123](https://tools.ietf.org/html/rfc1123)带有数字时区的表达方式)
+
+
 ### go mod vendor 
 
 [Vendor dependencies of a module in Go ](https://golangbyexample.com/vendor-dependency-go/)，使用mod模式，生成vendor文件夹`go mod vendor`将项目依赖的所有依赖保存到工程的vendor文件夹目录下，增加新的依赖之后，再次执行此命令，添加新的依赖。执行`go mod vendor -v`查看所有的依赖信息

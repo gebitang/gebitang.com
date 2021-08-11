@@ -13,6 +13,29 @@ toc = true
 
 ## 2021 
 
+### go len函数
+
+[关于 len 函数的诡异 Go 面试题解析](https://mp.weixin.qq.com/s/1fAmtwDTc7Gv8sGilKdGTQ)里提到的例子：
+```go
+package main
+
+func main() {
+  var x *struct {
+    s [][32]byte
+  }
+  
+  println(len(x.s[99]))
+}
+```
+正确答案是打印32，程序不会panic。尽管作为“一个结构体类型指针变量”x没有进行初始化。因为len为内置函数，根据[标准库文档](https://golang.org/ref/spec#Length_and_capacity)中对于`Length and capacity`的说明——
+
+>The built-in functions `len` and `cap` take arguments of various types and return a result of type int. The implementation **guarantees** that the result always fits into an int.  
+>The expression len(s) is constant if s is a string constant. The expressions len(s) and cap(s) are constants if the type of s is an array or pointer to an array and the expression s does not contain channel receives or (non-constant) function calls; in this case s is not evaluated. Otherwise, invocations of len and cap are not constant and s is evaluated.
+
+>如果 v 的类型是数组或指向数组的指针，且表达式 v 没有包含 channel 接收或（非常量）函数调用，则返回值也是一个常量。这种情况下，不会对 v 进行求值（即编译期就能确定）。否则返回值不是常量，且会对 v 进行求值（即得运行时确定）。
+
+因为`x.s[99]` 的类型是 `[32]byte`，以此不会求值，编译器能够在编译阶段分析出 x.s[99] 的类型是 [32]byte，且不需要对 x.s[99] 求值，因此直接返回数组的长度，即 32。具体的编译计算方法，可以参考[Go len() 是怎么计算出来的](https://mp.weixin.qq.com/s/0Twg1EWtatd2CMRAppfukw)
+
 ### go 汇编
 
 [GO的编译执行流程](https://zhuanlan.zhihu.com/p/62922404) `go build -n main.go` (-n 不执行地打印流程中用到的命令)

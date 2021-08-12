@@ -22,6 +22,9 @@ toc = true
 ## 禁止chrome自动更新
 
 [How to disable Google Chrome auto update?](https://stackoverflow.com/questions/18483087/how-to-disable-google-chrome-auto-update)，高大上的方法不用使用。找到chrome安装目录，对应的文件夹下有个`Update`文件夹，将此文件夹重新命名即可。即使修改了一堆注册表，实际执行升级动作是还是需要有对应的程序，这个思路就是：“你找不到做升级动作的程序，看你还怎么升级”LOL 
+
+[chromium download](https://chromium.cypress.io/) 各个平台的chrome历史版本
+
 ## Electron devTools
 
 快捷键`Ctrl+Shift+I`打开调试工具

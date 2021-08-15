@@ -20,6 +20,12 @@ toc = true
 
 <!--more-->
 
+## IFTTT 
+
+临时起意查了一下，[自 2021 年 3 月 11 日开始，IFTTT 将移除新浪微博的 Applet](https://blog.spencerwoo.com/2019/11/weibo-to-twitter)，据说[由于微博的原因，导致 IFTTT 从微博上抓取内容的 OAuth 接口无法使用，所以上述方法暂时失效了，并通过 IFTTT 客服了解到，因为联系不上微博方面修复这个问题，所以他们也不知道何时才能恢复。](https://old-panda.com/2020/09/20/sync-weibo-to-twitter/) 
+
+IFTTT有开发者模式，大致研究了一些，可以自己搭建服务，实现对应的API就可以完成发送的需求，目前只在[测试模式下完成](https://twitter.com/gebitang/status/1426574047828193284)，还不能精确控制，需要再验证一下API的逻辑
+
 ## cloc Count Lines of Code
 
 [cloc](https://github.com/AlDanial/cloc) 计算代码行数的命令行工具

@@ -138,6 +138,31 @@ Root can run commands as other users via the "su" command. I believe if you crea
 
 `su -c /path/to/your/script username`
 
+### BASH_REMATCH
+
+[Bash: Using BASH_REMATCH to pull capture groups from a regex](https://fabianlee.org/2020/01/29/bash-using-bash_rematch-to-pull-capture-groups-from-a-regex/)
+
+```
+if [[ "The quick brown fox" =~ ^The.*(fox)$ ]]; then 
+  echo "The animal is a ${BASH_REMATCH[1]}"
+fi
+
+The animal is a fox
+
+
+IFS='\n'
+cat /proc/cpuinfo | while read line ; do 
+  if [[ "$line" =~ ^cache[[:blank:]]size[[:blank:]]*:[[:blank:]]([[:digit:]]*)[[:space:]]([[:alpha:]]*) ]]; then 
+    echo cache set to ${BASH_REMATCH[1]} ${BASH_REMATCH[2]}
+  fi
+done
+
+cache set to 16384 KB
+cache set to 16384 KB
+cache set to 16384 KB
+cache set to 16384 KB
+```
+
 ### 新用户添加sudo权限
 
 [ubuntu：](https://phoenixnap.com/kb/how-to-create-sudo-user-on-ubuntu) `sudo adduser newuser; sudo usermod -aG sudo newuser`，验证 `groups newuser`  
@@ -466,6 +491,16 @@ Window环境下可能有空格问题，需要转义 `curl -v -F 'upload=@\"C:/my
 ```
 curl -H "Authorization: Basic ZnJlZDpmcmVk" -X GET -H "Content-Type: application/json" http://localhost:8080/rest/api/2/issue/createmeta
 ```
+
+### Curl post in Windows env 
+
+坑死，需要做转义控制，负责解析失败。使用双引号，然后数据中的key-value值的双引号需要做转义，类似下面
+
+```
+curl -i -H "Accept:application/json" -H "Content-Type:application/json" -XPOST "http://sss.com/abc/" -d "{\"email_address\":\"test@abc.com\"}"
+```
+
+否则将报错：`invalid character '\'' looking for beginning of value`
 
 ### curl post json
 

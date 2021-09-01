@@ -264,6 +264,18 @@ func FromContext(ctx context.Context) (*User, bool) {
 
 这种情况下，需要将struct转换为`map[string]interface{}`之后再更新。使用`structs.Map(*struct)`将struct转换为map格式再调用`Update`方法即可，[参考这里](https://stackoverflow.com/questions/23589564/function-for-converting-a-struct-to-map-in-golang)。这个问题也是类似情况[Update method does not update zero value](https://stackoverflow.com/questions/64330504/update-method-does-not-update-zero-value)
 
+
+### converting argument $1 type: unsupported type []int, a slice of int
+
+[go sql报错](https://blog.csdn.net/xiaomin1328/article/details/114269917)：
+
+>当…Type做为参数时，本质上函数会把参数转化成一个Type类型的切片，因而在上述代码中，Service层调以可变参数形式传入一个参数，在Exec中的args就已经是[]interface{}类型了，若是直接把args做为func (s *Stmt) Exec args …interface{}) (Result, error)的参数，对于Exec来讲，收到的args就只有一个长度为1的切片，其元素类型为[]interface{}，因而就有了上述的报错，解决办法很简单，就是在一个slice后加上…，这样就能把它拆包成一个可变参数的形式传入函数。
+
+```golang
+res, err := mt.Exec(msg...)//正确引用exec
+res, err := mt.Exec(msg)//错误引用exec
+```
+
 #### Singular Table
 
 [Mapping between Gorm and database (singular and plural) table structures](https://www.programmersought.com/article/53034028334/)

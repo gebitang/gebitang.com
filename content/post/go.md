@@ -13,6 +13,20 @@ toc = true
 
 ## 2021 
 
+
+### download excel & go-echarts
+
+excel操作： 阿里巴巴的开发者开源的[excelize](https://github.com/qax-os/excelize)，最低要求1.15版本
+
+[go-echarts](https://github.com/wcharczuk/go-chart)可以方便画出图表，产出物是html文件，需要想办法转换为图片——echarts自身提供了js交互的图片下载，需要在浏览器打开才能操作
+
+[issue 38](https://github.com/go-echarts/go-echarts/issues/38)提到这个问题——
+
+>So the only possibility to achieve this is to:  
+- use headless browser that will enter generated page and initiate the download :(
+- wkhtmltoimage (or similar package)
+- use external APIs that do html -> img as a service
+
 ### go len函数
 
 [关于 len 函数的诡异 Go 面试题解析](https://mp.weixin.qq.com/s/1fAmtwDTc7Gv8sGilKdGTQ)里提到的例子：

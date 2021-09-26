@@ -14,7 +14,7 @@ toc = true
 ## 2021 
 
 
-### download excel & go-echarts
+### download excel & go-echarts & plot
 
 excel操作： 阿里巴巴的开发者开源的[excelize](https://github.com/qax-os/excelize)，最低要求1.15版本
 
@@ -26,6 +26,8 @@ excel操作： 阿里巴巴的开发者开源的[excelize](https://github.com/qa
 - use headless browser that will enter generated page and initiate the download :(
 - wkhtmltoimage (or similar package)
 - use external APIs that do html -> img as a service
+
+echarts最终还是利用js进行画图，导致使用工具将html文件装换为图片时无法保存图表。最终使用[plot](https://github.com/gonum/plot)，类似与python生态的`matplotlib.pyplot`，直接画图
 
 ### go len函数
 

@@ -440,7 +440,7 @@ go run github.com/99designs/gqlgen init --verbose
 
 在wsl环境里重新clone当前项目——而不是直接访问windows环境下的此项目，可以正常执行。应用层没有问题，上面的异常涉及到了系统层——重新clone的方法也不好使了这次。
 
-使用`export GOFLAGS=-mod=vendor`模式运行，需要确保vendor文件夹下的内容是OK的。重新先执行`go mod vendor`之后再执行`gqlgen generate`，问题消失
+使用`export GOFLAGS=-mod=vendor`模式运行，需要确保vendor文件夹下的内容是OK的。重新先执行`go mod vendor`之后再执行`gqlgen generate`，问题消失。但实际上`go mod vendor`并没有改变什么vendor文件夹下的内容啊？只是在不同的平台下，几个文件的换行符不同而已，诡异。这个问题还是没定位到最终原因
 
 如果提示`could not import C (no metadata for C) `，安装gcc即可`sudo apt install gcc`
 

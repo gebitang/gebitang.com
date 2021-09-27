@@ -436,9 +436,11 @@ go run github.com/99designs/gqlgen init --verbose
 
 #### wsl相关：不能识别autobind的配置
 
-使用wsl环境，从wsl里访问windows环境下的项目，执行`gqlgen generate`时提示`unable to load module_name/graph/model - make sure you're using an import path to a package that exists`，及时修改为绝对路径，类似`/mnt/d/project/prjname/graph/model`也无法识别。源码的[config_test.go](unable to load ../chat - make sure you're using an import path to a package that exists)文件中有这种场景。暂时先忽略这个问题，涉及到两个不同操作系统互相访问的问题，识别不到也正常。
+使用wsl环境，从wsl里访问windows环境下的项目，执行`gqlgen generate`时提示`unable to load module_name/graph/model - make sure you're using an import path to a package that exists`，即使修改为绝对路径，类似`/mnt/d/project/prjname/graph/model`也无法识别。源码的[config_test.go](https://github.com/99designs/gqlgen/blob/master/codegen/config/config_test.go)(unable to load ../chat - make sure you're using an import path to a package that exists)文件中有这种场景。 ~~暂时先忽略这个问题，涉及到两个不同操作系统互相访问的问题，识别不到也正常。~~ mac环境也出现这个现象，看来还没定位到真实的原因
 
-在wsl环境里重新clone当前项目——而不是直接访问windows环境下的此项目，可以正常执行。应用层没有问题，上面的异常涉及到了系统层
+在wsl环境里重新clone当前项目——而不是直接访问windows环境下的此项目，可以正常执行。应用层没有问题，上面的异常涉及到了系统层——重新clone的方法也不好使了这次。
+
+使用`export GOFLAGS=-mod=vendor`模式运行，需要确保vendor文件夹下的内容是OK的。重新先执行`go mod vendor`之后再执行`gqlgen generate`，问题消失
 
 如果提示`could not import C (no metadata for C) `，安装gcc即可`sudo apt install gcc`
 

@@ -29,6 +29,30 @@ excel操作： 阿里巴巴的开发者开源的[excelize](https://github.com/qa
 
 echarts最终还是利用js进行画图，导致使用工具将html文件装换为图片时无法保存图表。最终使用[plot](https://github.com/gonum/plot)，类似与python生态的`matplotlib.pyplot`，直接画图
 
+gonum/plot默认不支持中文字体，需要自己手动加载，参考[这里](https://github.com/gonum/plot/issues/702#issuecomment-858640740)，也可以通过网上下载解压操作，[参考](https://pkg.go.dev/gonum.org/v1/plot@v0.9.0/vg#example-package-AddFont)
+
+```go
+ttf, err := os.ReadFile("/System/Library/Fonts/Supplemental/Arial.ttf")
+if err != nil {
+	panic(err)
+}
+fontTTF, err := opentype.Parse(ttf)
+if err != nil {
+	log.Fatal(err)
+}
+
+arial := font.Font{Typeface: "Arial"}
+font.DefaultCache.Add([]font.Face{
+	{
+		Font: arial,
+		Face: fontTTF,
+	},
+})
+
+plot.DefaultFont = arial
+p := p.New()
+```
+
 ### go len函数
 
 [关于 len 函数的诡异 Go 面试题解析](https://mp.weixin.qq.com/s/1fAmtwDTc7Gv8sGilKdGTQ)里提到的例子：

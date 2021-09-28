@@ -13,6 +13,19 @@ toc = true
 
 ## 2021 
 
+### go mail 
+
+原生自动的需要指定证书。本地测试会报错`x509: certificate signed by unknown authority`，不指定证书的验证方式，使用[go-simple-mail](https://github.com/xhit/go-simple-mail)完成。
+
+其中自定义了`loginAuth`模式，实现官方的auth接口；指定为`EncryptionNone`模式时，直接建立连接，不使用tls模式——
+
+```go
+case EncryptionSSL, EncryptionSSLTLS:
+		conn, err = tls.Dial("tcp", address, config)
+default:
+	conn, err = net.Dial("tcp", address)
+}
+```
 
 ### download excel & go-echarts & plot
 

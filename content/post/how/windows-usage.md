@@ -19,6 +19,14 @@ toc = true
 
 <!-- more -->
 
+## MAS
+
+[Microsoft-Activation-Scripts](https://github.com/massgravel/Microsoft-Activation-Scripts)，纯batchfile语言实现——
+
+>A collection of scripts for activating Microsoft products using HWID / KMS38 / Online KMS activation methods with a focus on open-source code, less antivirus detection and user-friendliness.
+
+G出来[这篇文章](https://www.bilibili.com/read/cv3048559)，使用的还是1.0版本，测试可用。强悍
+
 ## 禁止chrome自动更新
 
 [How to disable Google Chrome auto update?](https://stackoverflow.com/questions/18483087/how-to-disable-google-chrome-auto-update)，高大上的方法不用使用。找到chrome安装目录，对应的文件夹下有个`Update`文件夹，将此文件夹重新命名即可。即使修改了一堆注册表，实际执行升级动作是还是需要有对应的程序，这个思路就是：“你找不到做升级动作的程序，看你还怎么升级”LOL 

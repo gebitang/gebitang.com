@@ -20,6 +20,20 @@ toc = true
 
 <!--more-->
 
+## dubbo
+
+[简单用法](https://dubbo.apache.org/zh/docsv2.7/user/preface/usage/)
+
+将本地调用拆分为远程调用
+
+## 添加git-bash到windows terminal 
+
+豪华版版可参考[Windows 11 runs Graphical Linux Apps out of the box with WSLg](https://www.youtube.com/watch?v=b1YBx1L8op4) 
+
+普通版本进行自定义设置即可。复制一份现有的配置，设置对应的项目即可。也可以直接打开配置文件进行设置。注意添加的bash需要是git安装目录下的bin目录下文件，否则会在新窗口打开命令行。
+
+windows powershell下执行`[guid]::NewGuid()`生成新的guid
+
 ## IFTTT 
 
 临时起意查了一下，[自 2021 年 3 月 11 日开始，IFTTT 将移除新浪微博的 Applet](https://blog.spencerwoo.com/2019/11/weibo-to-twitter)，据说[由于微博的原因，导致 IFTTT 从微博上抓取内容的 OAuth 接口无法使用，所以上述方法暂时失效了，并通过 IFTTT 客服了解到，因为联系不上微博方面修复这个问题，所以他们也不知道何时才能恢复。](https://old-panda.com/2020/09/20/sync-weibo-to-twitter/) 

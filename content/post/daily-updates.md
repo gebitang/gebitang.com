@@ -34,6 +34,44 @@ toc = true
 
 windows powershell下执行`[guid]::NewGuid()`生成新的guid
 
+## 为windows terminal设置代理
+
+[参考Windows Terminal: run CLI command on start up](https://superuser.com/a/1607723) 
+
+[How do I run two commands in one line in Windows CMD?](https://stackoverflow.com/questions/8055371/how-do-i-run-two-commands-in-one-line-in-windows-cmd)
+
+使用`/k`保持后面的执行结果；一行执行多个命令，使用`&`链接。 
+
+>  /k parameter (/k means keep, /c will close window):
+>  A && B, B only will run if A is successful, whereas A & B will run B after A, no matter what the outcome of A is
+
+```
+ 
+{
+    "altGrAliasing": true,
+    "antialiasingMode": "grayscale",
+    "closeOnExit": "graceful",
+    "colorScheme": "Campbell",
+    "commandline": "cmd.exe /k set \"http_proxy=http://127.0.0.1:7890\" & set \"https_proxy=http://127.0.0.1:7890\" & E: && cd tempd ",
+    "cursorShape": "bar",
+    "font": 
+    {
+        "face": "Cascadia Mono",
+        "size": 12
+    },
+    "guid": "{70f5c618-6972-459f-819c-3cce9e91d5a1}",
+    "historySize": 9001,
+    "icon": "ms-appx:///ProfileIcons/{0caa0dad-35be-5f56-a8ff-afceeeaa6101}.png",
+    "name": "proxy",
+    "padding": "8, 8, 8, 8",
+    "snapOnInput": true,
+    "startingDirectory": "C:\\Users\\username",
+    "suppressApplicationTitle": true,
+    "tabTitle": "proxy",
+    "useAcrylic": false
+}
+```
+
 ## IFTTT 
 
 临时起意查了一下，[自 2021 年 3 月 11 日开始，IFTTT 将移除新浪微博的 Applet](https://blog.spencerwoo.com/2019/11/weibo-to-twitter)，据说[由于微博的原因，导致 IFTTT 从微博上抓取内容的 OAuth 接口无法使用，所以上述方法暂时失效了，并通过 IFTTT 客服了解到，因为联系不上微博方面修复这个问题，所以他们也不知道何时才能恢复。](https://old-panda.com/2020/09/20/sync-weibo-to-twitter/) 

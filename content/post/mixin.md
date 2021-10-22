@@ -19,6 +19,31 @@ toc=true
 
 <!--more-->
 
+## 大群
+
+### 前端 
+
+1. 进入web目录
+2. 执行`npm install`
+3. 执行`npm run serve`进行本地调试
+
+可能遇到的问题——
+
+- 编译报错`typeerror this.getoptions is not a function`
+
+[it seems like `sass-loader@11.0.0` doesn't work with `vue@2.6.12`.](https://stackoverflow.com/a/66087132/1087122)降级之后`"sass-loader": "^10",`之后编译正常
+
+- windows环境下报错`Error: PostCSS received undefined instead of CSS string`
+
+中心编译`node-sass`后可以正常启动了 `npm rebuild node-sass`
+
+### 后端
+
+后端服务分为两个部分，一个是为前端服务的http服务；一个是进行message通信的服务。
+需要配置一个postgres数据库，初始化文件为models目录下的`schema.sql`。远程登录问题参考[sonarqube](../how/sonarqube#postgresql远程登录)中的远程登录部分
+
+---
+
 当然入门后，遇到问题问题可以进一步搜索对应的资源，例如关于“切片”的内容——
 
 - [短文介绍区别](https://medium.com/@marty.stepien/arrays-vs-slices-bonanza-in-golang-fa8d32cd2b7c)
@@ -36,9 +61,10 @@ toc=true
 - 涉及到的API调用可以独立练手
 - 整理出来一段文字记录
 
-## 第一周
+## 历史
+### 第一周
 
-### 第一天
+#### 第一天
 fork出来一份代码，新建一个分支，直接在源码上添加注释进行学习。
 
 简单读完入门系列，现在大群的代码至少可以看下去了。配合这张图就比较好理解，部署的时候启动的两个服务：`http`, `message`
@@ -75,7 +101,7 @@ go loopPendingSuccessMessages(ctx)
 
 包引用关系：`main→A→B→C`，那么初始化顺序为`C.init→B.init→A.init→main`，编译时，匿名导入的包依然会编译到可执行文件中。
 
-### 第二天
+#### 第二天
 
 [Mixin Messenger 机器人接入指南](https://w3c.group/c/1567337919309762)
 
@@ -107,11 +133,11 @@ go loopPendingSuccessMessages(ctx)
 
 搜索之后，还是长老的教程里说得明白。参见如上。长老的另外一篇文章[Mixin 公链](https://w3c.group/c/1573118879471104)，传说中的一篇文章搞懂系列——这篇全部理解透彻，算得上Mixin专家了。
 
-## 第二周 
+### 第二周 
 
 执行数据库事务。这种实现可以理解业务逻辑。
 
-### func closure 
+#### func closure 
 
 models目录下的`property.go`中包含以下方法——将函数作为参数传递给函数。这里对bool变量b的赋值操作有点秀？（为什么可以这样操作？）
 

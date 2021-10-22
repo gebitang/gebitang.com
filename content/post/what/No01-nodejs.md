@@ -11,6 +11,13 @@ topics = [
 toc = true
 +++
 
+## VueJS created() vs mounted()
+
+[VueJS created() vs mounted()](https://devpremier.medium.com/vuejs-created-vs-mounted-life-cycle-hooks-74c522b9ceee)
+
+- `mounted()` : it will executed before creating the component.  
+- `created()` : it will executed after creating the component for render.
+
 ## TypeScript
 
 [TypeScript](https://www.typescriptlang.org/)做为JS的超集，增强了Type的检查。但检查结果不影响最终的执行，因为依然使用JS相同的runtime。例如`console.log(4/[])`对应JS来说是有效的(- -|自由的过了火?)，返回`Infinity`，对于TS来说检查出问题：`The right-hand side of an arithmetic operation must be of type 'any', 'number', 'bigint' or an enum type.` 但编译到JS之后依然可以正常执行。参考[TypeScript: A Static Type Checker](https://www.typescriptlang.org/docs/handbook/typescript-from-scratch.html#types)

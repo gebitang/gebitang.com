@@ -11,6 +11,21 @@ topics = [
 toc = true
 +++
 
+
+
+## 忘记密码 admin
+
+默认密码为`admin/admin`，修改过，忘记了。[官方指导操作instance-administration/security](https://docs.sonarqube.org/8.9/instance-administration/security/)
+
+```sql
+-- 使用对应的用户登录postgresSql
+psql
+-- 链接到对应的数据库
+\c dbname
+-- 执行恢复密码操作
+update users set crypted_password='100000$t2h8AtNs1AlCHuLobDjHQTn9XppwTIx88UjqUm4s8RsfTuXQHSd/fpFexAnewwPsO6jGFQUv/24DnO55hY6Xew==', salt='k9x9eN127/3e/hf38iNiKwVfaVk=', hash_method='PBKDF2', reset_password='true', user_local='true' where login='admin';
+```
+
 ## 插件开发 plugin develop
 
 ### SonarQube Kotlin插件

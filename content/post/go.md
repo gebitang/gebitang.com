@@ -13,6 +13,18 @@ toc = true
 
 ## 2021 
 
+### clash 
+
+>V2ray + COW实现go build编译。前者提供Sock5代理，后者提供http代理，并使用Sock5做二级代理 
+
+实践上可以直接使用[clash](https://github.com/Dreamacro/clash)，完全使用go语言实现的clash core，[支持proxy providers](https://github.com/Dreamacro/clash/wiki/configuration#proxy-providers)，windows平台下的[clash for windows](https://github.com/Fndroid/clash_for_windows_pkg)，其实就是使用Electron开发的基于Clash内核的GUI版本(`A Windows/macOS/Linux GUI based on Clash and Electron.`)
+
+>- Clash：一个 Go 语言开发的多平台代理客户端，[Github](https://github.com/Dreamacro/clash)
+>- ClashX：Clash 的 Mac 图形客户端，[Github](https://github.com/yichengchen/clashX)
+>- ClashForAndroid：Clash 的 Android 图形客户端，[Github](https://github.com/Kr328/ClashForAndroid)
+>- Clash for Windows：Clash 的 Windows/macOS 图形客户端，[Github](https://github.com/Fndroid/clash_for_windows_pkg)
+
+
 ### unable to find utility "clang", not a developer tool or in PATH
 
 执行`go run main.go`提示如下错误，找不到clang环境。

@@ -44,6 +44,18 @@ $> adb push .\TugaPowerP12_OP1.zip /sdcard/
 系统占用 2.7G左右。
 
 --- 
+
+一加3T：
+
+- 需要在开发者选项中打开“允许oem unlock”的选项
+- 然后先执行`fastboot oem unlock`之后再刷twrp，详细[参考](https://segmentfault.com/a/1190000012314376)
+
+然后我不小心五清了所有数据，导致进入twrp之后找不到安装文件，只能使用sideload方式进行安装——
+
+- 进入twrp之后，选择advanced选项，进入sideload模式
+- 直接刷机：`adb sideload TugaPowerP23_OP3.zip`，刷完之后，重启手机即可
+
+--- 
 [参考、物料](https://www.jianshu.com/p/8d5ac011e907)
 
 

@@ -26,6 +26,12 @@ toc = true
 
 将本地调用拆分为远程调用
 
+## windows terminal 字体问题
+
+打开提示——找不到所选字体“Cascadia Mono“。 改为选择“Consolas“。
+
+- 修改设置，选择其他的字体
+- 或者安装这个字体，从github下载[Cascadia Code](https://github.com/microsoft/cascadia-code/releases)，解压后找到`Cascadia.ttf`文件，双击打开，选择安装即可。
 ## 添加git-bash到windows terminal 
 
 豪华版版可参考[Windows 11 runs Graphical Linux Apps out of the box with WSLg](https://www.youtube.com/watch?v=b1YBx1L8op4) 

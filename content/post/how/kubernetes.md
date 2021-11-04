@@ -14,6 +14,165 @@ draft = false
 toc = true
 +++
 
+
+## start over 
+
+### setup 
+
+[download binary](https://www.downloadkubernetes.com/)
+
+跟着[演示](https://www.qikqiak.com/post/deploy-k8s-on-win-use-wsl2)直到部署三个节点的cluster都正常，安装一个 Kubernetes Dashboard时(`kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.0.1/aio/deploy/recommended.yaml`)，`kubectl get all -n kubernetes-dashboard`命令显示，一直处于"ContainerCreating"状态。感觉应该是我本地网络原因？ [issue 2863](https://github.com/kubernetes/dashboard/issues/2863)
+
+
+```
+geb@Gebitang:~$ kubectl get all -n kubernetes-dashboard
+NAME                                             READY   STATUS              RESTARTS   AGE
+pod/dashboard-metrics-scraper-5594697f48-wgpst   0/1     ContainerCreating   0          14m
+pod/kubernetes-dashboard-bc8f4fc6f-f2mqg         0/1     ContainerCreating   0          14m
+
+NAME                                TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)    AGE
+service/dashboard-metrics-scraper   ClusterIP   10.96.21.147   <none>        8000/TCP   14m
+service/kubernetes-dashboard        ClusterIP   10.96.173.37   <none>        443/TCP    14m
+
+NAME                                        READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/dashboard-metrics-scraper   0/1     1            0           14m
+deployment.apps/kubernetes-dashboard        0/1     1            0           14m
+
+NAME                                                   DESIRED   CURRENT   READY   AGE
+replicaset.apps/dashboard-metrics-scraper-5594697f48   1         1         0       14m
+replicaset.apps/kubernetes-dashboard-bc8f4fc6f         1         1         0       14m
+
+#  kubectl get pods --all-namespaces
+NAMESPACE              NAME                                                      READY   STATUS              RESTARTS   AGE
+kube-system            coredns-558bd4d5db-57bh5                                  1/1     Running             0          16m
+kube-system            coredns-558bd4d5db-sfsfp                                  1/1     Running             0          16m
+kube-system            etcd-wslkindmultinodes-control-plane                      1/1     Running             0          17m
+kube-system            kindnet-2k9fg                                             1/1     Running             0          16m
+kube-system            kindnet-ssl4j                                             1/1     Running             0          16m
+kube-system            kindnet-z5mgq                                             1/1     Running             0          16m
+kube-system            kube-apiserver-wslkindmultinodes-control-plane            1/1     Running             0          17m
+kube-system            kube-controller-manager-wslkindmultinodes-control-plane   1/1     Running             1          17m
+kube-system            kube-proxy-b4r8b                                          1/1     Running             0          16m
+kube-system            kube-proxy-mwlms                                          1/1     Running             0          16m
+kube-system            kube-proxy-smhm5                                          1/1     Running             0          16m
+kube-system            kube-scheduler-wslkindmultinodes-control-plane            1/1     Running             1          17m
+kubernetes-dashboard   dashboard-metrics-scraper-5594697f48-wgpst                0/1     ContainerCreating   0          15m
+kubernetes-dashboard   kubernetes-dashboard-bc8f4fc6f-f2mqg                      0/1     ContainerCreating   0          15m
+local-path-storage     local-path-provisioner-547f784dff-dngw5                   1/1     Running             0          16m
+```
+
+需要先安装网络—— 
+
+[参考这个comment](https://github.com/kubernetes/dashboard/issues/2863#issuecomment-368785304)
+
+```
+# 可以将url内容保存到文件进行执行
+kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
+
+kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/k8s-manifests/kube-flannel-rbac.yml
+```
+
+执行之后，`kubectl get all -n kubernetes-dashboard`可以看到对应的pod都正常运行起来了
+
+```
+geb@Gebitang:~$ kubectl get all -n kubernetes-dashboard
+NAME                                             READY   STATUS    RESTARTS   AGE
+pod/dashboard-metrics-scraper-5594697f48-wgpst   1/1     Running   0          33m
+pod/kubernetes-dashboard-bc8f4fc6f-f2mqg         1/1     Running   0          33m
+
+NAME                                TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)    AGE
+service/dashboard-metrics-scraper   ClusterIP   10.96.21.147   <none>        8000/TCP   33m
+service/kubernetes-dashboard        ClusterIP   10.96.173.37   <none>        443/TCP    33m
+
+NAME                                        READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/dashboard-metrics-scraper   1/1     1            1           33m
+deployment.apps/kubernetes-dashboard        1/1     1            1           33m
+
+NAME                                                   DESIRED   CURRENT   READY   AGE
+replicaset.apps/dashboard-metrics-scraper-5594697f48   1         1         1       33m
+replicaset.apps/kubernetes-dashboard-bc8f4fc6f         1         1         1       33m
+```
+
+
+proxy启动后，使用如下方式获取token，
+```
+# 创建一个新的 ServiceAccount
+kubectl apply -f - <<EOF
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: admin-user
+  namespace: kubernetes-dashboard
+EOF
+# 将上面的 SA 绑定到系统的 cluster-admin 这个集群角色上
+kubectl apply -f - <<EOF
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: admin-user
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: cluster-admin
+subjects:
+- kind: ServiceAccount
+  name: admin-user
+  namespace: kubernetes-dashboard
+EOF
+
+# ----------actual result-------
+geb@Gebitang:~$ kubectl apply -f - <<EOF
+> apiVersion: v1
+> kind: ServiceAccount
+etadata:> metadata:
+>   name: admin-user
+namespac>   namespace: kubernetes-dashboard
+> EOF
+serviceaccount/admin-user created
+geb@Gebitang:~$ kubectl apply -f - <<EOF
+iVersio> apiVersion: rbac.authorization.k8s.io/v1
+> kind: ClusterRoleBinding
+> metadata:
+>   name: admin-user
+> roleRef:
+>   apiGroup: rbac.authorization.k8s.io
+>   kind: ClusterRole
+>   name: cluster-admin
+> subjects:
+> - kind: ServiceAccount
+>   name: admin-user
+>   namespace: kubernetes-dashboard
+> EOF
+clusterrolebinding.rbac.authorization.k8s.io/admin-user created
+geb@Gebitang:~$
+geb@Gebitang:~$ kubectl -n kubernetes-dashboard describe secret $(kubectl -n kubernetes-dashboard get secret | grep admin-user | awk '{print $1}')
+Name:         admin-user-token-d4mkv
+Namespace:    kubernetes-dashboard
+Labels:       <none>
+Annotations:  kubernetes.io/service-account.name: admin-user
+              kubernetes.io/service-account.uid: b66a6322-81a3-4bec-af6a-c329c4702ef8
+
+Type:  kubernetes.io/service-account-token
+
+Data
+====
+ca.crt:     1066 bytes
+namespace:  20 bytes
+token:      eyJhbGciOiJSUzI1NiIsImtpZCI6IjdnaktTQ2Nuc1RfbGhWaWs3NHYtRzF2VFhIU2ZTX3g4aFBHUkNfYkROOU0ifQ.eyJpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2VhY2NvdW50Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9uYW1lc3BhY2UiOiJrdWJlcm5ldGVzLWRhc2hib2FyZCIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VjcmV0Lm5hbWUiOiJhZG1pbi11c2VyLXRva2VuLWQ0bWt2Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9zZXJ2aWNlLWFjY291bnQubmFtZSI6ImFkbWluLXVzZXIiLCJrdWJlcm5ldGVzLmlvL3NlcnZpY2VhY2NvdW50L3NlcnZpY2UtYWNjb3VudC51aWQiOiJiNjZhNjMyMi04MWEzLTRiZWMtYWY2YS1jMzI5YzQ3MDJlZjgiLCJzdWIiOiJzeXN0ZW06c2VydmljZWFjY291bnQ6a3ViZXJuZXRlcy1kYXNoYm9hcmQ6YWRtaW4tdXNlciJ9.pSiZrLue_t9R8qXN7Dm6jaOblVnLr_qI0NvkL25N3TB78rvR3O2zIzZ0cJ5ylvl7hdxIRXoKQxZUvY8cCeFRosBdGp_gaevd_33vlLNfcj0UM3x_9IQeS4cqPlI0EkWcrVXbPbQQyCLKBSgaaCNQrijtiQXUgaK2eLh8FCmvFIIE5U2vs-GqlmTy1YNpGr28WjtML-bFvQIsL7BpZieWzBNb7VfnsNMRPjpmUUE6iurVApwZSNTesFcKQP-dW7trN0B8hI7SllRMN64rfUnNwZX58eI5esgicQ2STJ64WkqTRYbGs1up__Iz_xvoRYXQq4bN_SSVnCnLOtf8jpVuyA
+geb@Gebitang:~$
+```
+
+访问`http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/`选择token方式，将上面获取到的token输入后，就可以看到UI页面
+
+删除集群——
+
+```
+# 查找集群
+kind get cluster 
+# 删除现在的集群
+kind delete cluster --name wslkindmultinodes
+```
+## archive 
 ### 术语列表
 
 

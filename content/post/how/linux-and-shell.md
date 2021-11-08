@@ -138,6 +138,11 @@ Root can run commands as other users via the "su" command. I believe if you crea
 
 `su -c /path/to/your/script username`
 
+### htop 
+
+[htop official site](https://htop.dev/downloads.html), [htop explained](https://peteris.rocks/blog/htop/#htop-on-ubuntu-server-16-04-x64), Explanation of everything you can see in htop/top on Linux.
+
+
 ### BASH_REMATCH
 
 [Bash: Using BASH_REMATCH to pull capture groups from a regex](https://fabianlee.org/2020/01/29/bash-using-bash_rematch-to-pull-capture-groups-from-a-regex/)

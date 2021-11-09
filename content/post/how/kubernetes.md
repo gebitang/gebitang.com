@@ -17,6 +17,26 @@ toc = true
 
 ## start over 
 
+### wsl2 时间同步
+
+按照[Kubernetes Tutorial - Step by Step Introduction to Basic Concepts](https://auth0.com/blog/kubernetes-tutorial-step-by-step-introduction-to-basic-concepts/)介绍在DO上创建免费的k8s集群，在wsl2里进行访问时提示错误：`Unable to connect to the server: x509: certificate has expired or is not yet valid: current time 2021-11-09T02:59:51+08:00 is before 2021-11-09T07:47:25Z`查看本地时间，显示比实际实际慢
+
+执行`sudo hwclock -s `同步时间依然没有变化，官方[issue 4149](https://github.com/microsoft/WSL/issues/4149)中提供了临时解决方案——netdate。立即生效，不影响任何进程
+
+```
+# 按照ntpdate set the date and time via  Network Time Protocol (NTP)
+sudo apt install ntpdate
+# 同步时间
+sudo ntpdate -sb time.nist.gov
+# 或执行
+sudo ntpdate time.windows.com
+
+myu@Gebitang:~$ sudo ntpdate time.windows.com
+ 9 Nov 16:09:43 ntpdate[1727]: step time server 52.231.114.183 offset 46499.066385 sec
+```
+
+同步时间之后，可以跟集群正常交互
+
 ### K8S中的CRD开发
 
 CRD: `CustomResourceDefinition`, Custom code that defines a resource to add to your Kubernetes API server without building a complete custom server.
@@ -29,6 +49,28 @@ CRD: `CustomResourceDefinition`, Custom code that defines a resource to add to y
 ### setup 
 
 [download binary](https://www.downloadkubernetes.com/)
+
+[Install kubectl on Linux](https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/)
+
+```
+chmod +x kubectl
+mkdir -p ~/.local/bin/kubectl
+mv ./kubectl ~/.local/bin/kubectl
+# and then add ~/.local/bin/kubectl to $PATH
+```
+
+自动完成Enable kubectl autocompletion
+
+```shell
+source <(kubectl completion bash)
+alias k=kubectl
+complete -F __start_kubectl k
+
+#shell生效
+echo 'source <(kubectl completion bash)' >>~/.bashrc
+echo 'alias k=kubectl' >>~/.bashrc
+echo 'complete -F __start_kubectl k' >>~/.bashrc
+```
 
 跟着[演示](https://www.qikqiak.com/post/deploy-k8s-on-win-use-wsl2)直到部署三个节点的cluster都正常，安装一个 Kubernetes Dashboard时(`kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.0.1/aio/deploy/recommended.yaml`)，`kubectl get all -n kubernetes-dashboard`命令显示，一直处于"ContainerCreating"状态。感觉应该是我本地网络原因？ [issue 2863](https://github.com/kubernetes/dashboard/issues/2863)
 

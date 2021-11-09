@@ -17,6 +17,15 @@ toc = true
 
 ## start over 
 
+### K8S中的CRD开发
+
+CRD: `CustomResourceDefinition`, Custom code that defines a resource to add to your Kubernetes API server without building a complete custom server.
+
+[2021-05-04版本](http://bingerambo.com/posts/2021/05/k8s%E4%B8%AD%E7%9A%84crd%E5%BC%80%E5%8F%91)流程。依赖[code-generator](https://github.com/kubernetes/code-generator)，官方示例[sample-controller](https://github.com/kubernetes/sample-controller)，也可以参考[K8s Client代码自动生成](http://ljchen.net/2019/06/14/K8s-client%E4%BB%A3%E7%A0%81%E8%87%AA%E5%8A%A8%E7%94%9F%E6%88%90/)
+
+使用代码生成器生成的api兼容标准的k8s api，操作动作相同。
+
+
 ### setup 
 
 [download binary](https://www.downloadkubernetes.com/)

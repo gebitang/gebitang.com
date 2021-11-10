@@ -37,6 +37,23 @@ myu@Gebitang:~$ sudo ntpdate time.windows.com
 
 同步时间之后，可以跟集群正常交互
 
+### Kubernetes Tutorial
+
+上面提到的文章有点老，遇到的问题记录一下——
+
+- 通过promote code注册DO需要手动提交个ticket，否则无法创建k8s集群，提示droplet超限
+- 部署`NGINX ingress controller`的yaml文件地址已失效，参考[ingress-nginx](https://kubernetes.github.io/ingress-nginx/deploy/#digital-ocean)中的说明，使用`https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.0.4/deploy/static/provider/do/deploy.yaml`文件
+
+```
+myu@Gebitang:~$ k get pods -n ingress-nginx
+NAME                                        READY   STATUS      RESTARTS   AGE
+ingress-nginx-admission-create-n2dgj        0/1     Completed   0          87s
+ingress-nginx-admission-patch-jldqd         0/1     Completed   2          86s
+ingress-nginx-controller-5c8d66c76d-fgvpb   1/1     Running     0          90s
+```
+
+- 最终部署完service之后，获取外网ip的步骤也失效了，通过`k get svc -n ingress-nginx`可以看到外网ip地址，尽管访问服务时提示404，至少表示nginx启动起来了
+
 ### K8S中的CRD开发
 
 CRD: `CustomResourceDefinition`, Custom code that defines a resource to add to your Kubernetes API server without building a complete custom server.

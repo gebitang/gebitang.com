@@ -92,6 +92,20 @@ echo 'complete -F __start_kubectl k' >>~/.bashrc
 跟着[演示](https://www.qikqiak.com/post/deploy-k8s-on-win-use-wsl2)直到部署三个节点的cluster都正常，安装一个 Kubernetes Dashboard时(`kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.0.1/aio/deploy/recommended.yaml`)，`kubectl get all -n kubernetes-dashboard`命令显示，一直处于"ContainerCreating"状态。感觉应该是我本地网络原因？ [issue 2863](https://github.com/kubernetes/dashboard/issues/2863)
 
 
+多个配置文件切换[Configure Access to Multiple Clusters](https://kubernetes.io/docs/tasks/access-application-cluster/configure-access-multiple-clusters/)
+
+```shell
+# online.config.yaml for pro, dev.config.yaml for dev
+kubectl config --kubeconfig=online.config.yaml view
+
+# export
+export KUBECONFIG=$KUBECONFIG:$HOME/.kube/config
+export KUBECONFIG_SAVED=$KUBECONFIG
+kubectl config view
+# clean up 
+export KUBECONFIG=$KUBECONFIG_SAVED
+```
+
 ```
 geb@Gebitang:~$ kubectl get all -n kubernetes-dashboard
 NAME                                             READY   STATUS              RESTARTS   AGE

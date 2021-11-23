@@ -18,6 +18,46 @@ toc = true
 
 练习记录，[官方Tasks](https://kubernetes.io/docs/tasks/)，[中文版本对照](https://kubernetes.io/zh/docs/tasks/)跟着练习一遍之后，各个概念就清楚了。
 
+### 更新DaemonSet 
+
+[对 DaemonSet 执行滚动更新](https://kubernetes.io/zh/docs/tasks/manage-daemon/update-daemon-set/)，本地控制DO的集群，默认会超时，无法apply对象，提示
+
+```
+E1123 19:37:27.679680     511 request.go:1027] Unexpected error when reading response body: net/http: request canceled (Client.Timeout or context cancellation while reading body)
+error: unexpected error when reading response body. Please retry. Original error: net/http: request canceled (Client.Timeout or context cancellation while reading body)
+# 或者 
+Unable to connect to the server: net/http: TLS handshake timeout
+```
+
+增加超时时间设置`k apply -f xxx.yaml  --request-timeout="50"`，还可以指定log级别`-v=6`，参考[【Kubernetes】Client.Timeout or context cancellation while reading bodyというエラーの解消方法](https://www.mtioutput.com/entry/kubectl-timeout-error)
+
+- 设置DaemonSet内容，查看更新策略`kubectl get ds/fluentd-elasticsearch  -n kube-system -o go-template='{{.spec.updateStrategy.type}}{{"\n"}}'` 查看方式也可以为 `-o yaml`
+- 对 RollingUpdate DaemonSet 的 `.spec.template` 的任何更新都将触发滚动更新。例如增加了cpu和内存的限制
+
+以下方式都可以更新——
+```shell
+# 声明式命令
+kubectl apply -f https://k8s.io/examples/controllers/fluentd-daemonset-update.yaml
+# 指令式命令 Edit a resource from the default editor.
+kubectl edit ds/fluentd-elasticsearch -n kube-system #打开文件编辑，保持。远程不建议这样操作
+# 只更新容器镜像
+kubectl set image ds/fluentd-elasticsearch fluentd-elasticsearch=quay.io/fluentd_elasticsearch/fluentd:v2.6.0 -n kube-system
+```
+
+更新结果类似——
+```
+myu@Gebitang:~$ k apply -f fluentd-daemonset-update.yaml
+daemonset.apps/fluentd-elasticsearch configured
+myu@Gebitang:~$ kubectl rollout status ds/fluentd-elasticsearch -n kube-system
+Waiting for daemon set "fluentd-elasticsearch" rollout to finish: 1 out of 3 new pods have been updated...
+Waiting for daemon set "fluentd-elasticsearch" rollout to finish: 1 out of 3 new pods have been updated...
+Waiting for daemon set "fluentd-elasticsearch" rollout to finish: 2 out of 3 new pods have been updated...
+Waiting for daemon set "fluentd-elasticsearch" rollout to finish: 2 out of 3 new pods have been updated...
+Waiting for daemon set "fluentd-elasticsearch" rollout to finish: 2 out of 3 new pods have been updated...
+Waiting for daemon set "fluentd-elasticsearch" rollout to finish: 2 of 3 updated pods are available...
+daemon set "fluentd-elasticsearch" successfully rolled out
+```
+
 ### 管理内存、CPU、配额
 
 [管理内存](https://kubernetes.io/zh/docs/tasks/administer-cluster/manage-resources/memory-default-namespace/)，提示`looking up service account default-mem-example/default: serviceaccount "default" not found`，意味着没有服务账号(默认空间有默认的账号，但新创建的namespace下没有服务账户)，可以先执行任务[为pod配置服务账户](https://kubernetes.io/zh/docs/tasks/configure-pod-container/configure-service-account/)

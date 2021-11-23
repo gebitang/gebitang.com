@@ -14,6 +14,79 @@ draft = false
 toc = true
 +++
 
+## Tasks
+
+练习记录，[官方Tasks](https://kubernetes.io/docs/tasks/)，[中文版本对照](https://kubernetes.io/zh/docs/tasks/)跟着练习一遍之后，各个概念就清楚了。
+
+### 管理内存、CPU、配额
+
+[管理内存](https://kubernetes.io/zh/docs/tasks/administer-cluster/manage-resources/memory-default-namespace/)，提示`looking up service account default-mem-example/default: serviceaccount "default" not found`，意味着没有服务账号(默认空间有默认的账号，但新创建的namespace下没有服务账户)，可以先执行任务[为pod配置服务账户](https://kubernetes.io/zh/docs/tasks/configure-pod-container/configure-service-account/)
+
+```shell
+kubectl create -f - <<EOF
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: default
+  namespace: default-mem-example
+EOF
+# 然后再在对应空间下创建pod即可
+```
+
+执行删除namespace的命令后`k delete namespace default-mem-example`，一直没有返回结果，Ctrl+C强制结束，查看状态显示为`Terminating`，参考[Namespace "stuck" as Terminating, How I removed it](https://stackoverflow.com/questions/52369247/namespace-stuck-as-terminating-how-i-removed-it)，当前空间下还有其他资源？`kubectl api-resources --verbs=list --namespaced -o name  | xargs -n 1 kubectl get --show-kind --ignore-not-found -n default-mem-example`，删除对应的资源后，状态依然为`Terminating`
+
+```shell
+geb@Gebitang:~$ k delete limitranges --namespace=default-mem-example
+error: resource(s) were provided, but no name was specified
+geb@Gebitang:~$ k delete limitrange/mem-limit-range --namespace=default-mem-example
+limitrange "mem-limit-range" deleted
+geb@Gebitang:~$ k delete serviceaccount/default --namespace=default-mem-example
+serviceaccount "default" deleted
+
+# 查看空间信息 k get namespace default-mem-example -o json
+```
+
+```json
+{
+    "apiVersion": "v1",
+    "kind": "Namespace",
+    "metadata": {
+        "creationTimestamp": "2021-11-23T07:17:26Z",
+        "deletionTimestamp": "2021-11-23T07:55:36Z",
+        "labels": {
+            "kubernetes.io/metadata.name": "default-mem-example"
+        },
+        "name": "default-mem-example",
+        "resourceVersion": "2161742",
+        "uid": "7f0fd528-b681-45f7-887e-49820024333e"
+    },
+    "spec": {
+        "finalizers": [
+            "kubernetes"
+        ]
+    },
+    "status": {
+        "phase": "Terminating"
+    }
+}
+```
+
+调用api，将finalizers字段置空即可：
+
+```shell
+# 使用proxy，然后调用http server api
+NAMESPACE=your-rogue-namespace
+kubectl proxy &
+kubectl get namespace $NAMESPACE -o json |jq '.spec = {"finalizers":[]}' >temp.json
+curl -k -H "Content-Type: application/json" -X PUT --data-binary @temp.json 127.0.0.1:8001/api/v1/namespaces/$NAMESPACE/finalize
+
+# 直接调用，将上述json内容的finalizers数组置为空，保存为 default-mem-example.json， 调用
+ k replace --raw "/api/v1/namespaces/default-mem-example/finalize" -f default-mem-example.json
+# 再查看空间时，此空间被彻底删除
+```
+
+其他资源类似
+
 
 ## start over 
 

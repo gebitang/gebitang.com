@@ -136,11 +136,20 @@ CRD: `CustomResourceDefinition`, Custom code that defines a resource to add to y
 使用代码生成器生成的api兼容标准的k8s api，操作动作相同。
 
 
-### setup 
+### setup with dashboard
 
 [download binary](https://www.downloadkubernetes.com/)
 
 [Install kubectl on Linux](https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/)
+
+关于UI管理使用的[kubernetes/dashboard](https://github.com/kubernetes/dashboard/tree/master/docs)，参考具体的[doc: creating sample user](https://github.com/kubernetes/dashboard/blob/master/docs/user/access-control/creating-sample-user.md)
+
+关于用户的步骤——
+
+- 基于RBAC的方式创建`ServiceAccount`
+- 将创建的SA进行`CluserRoleBinding`
+
+示例中如果将namespace指定为`cluser-admin`，将拥有管理员权限。(通过`k get clusterroles`查看集群中都有哪些角色)
 
 ```
 chmod +x kubectl

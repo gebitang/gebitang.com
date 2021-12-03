@@ -19,6 +19,32 @@ toc = true
 
 这篇留在这里已经快一年了，也没啥动静。还是得**“业务”**驱动。
 
+### 配置docker engine
+
+默认的配置文件`insecure-registries`和`registry-mirrors`都为空，本地私服和公网镜像可以添加到配置中，类似——
+
+```
+{
+  "builder": {
+    "gc": {
+      "defaultKeepStorage": "20GB",
+      "enabled": true
+    }
+  },
+  "experimental": false,
+  "features": {
+    "buildkit": true
+  },
+  "insecure-registries": [
+    "hub.xxx.com"
+  ],
+  "registry-mirrors": [
+    "https://nmhwesdd.mirror.aliyuncs.com"
+  ]
+}
+
+```
+
 ### Sonar支持go工程覆盖率
 
 [Sonar实践问题：支持go工程的覆盖率](../../../post/2020/0319-sonar-go-with-coverage/)本地执行跑完了简易流程。线上使用时要求：Java环境+Go环境

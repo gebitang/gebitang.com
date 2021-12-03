@@ -58,6 +58,8 @@ Waiting for daemon set "fluentd-elasticsearch" rollout to finish: 2 of 3 updated
 daemon set "fluentd-elasticsearch" successfully rolled out
 ```
 
+从名字空间中删除 DaemonSet：`kubectl delete ds fluentd-elasticsearch -n kube-system`
+
 ### 管理内存、CPU、配额
 
 [管理内存](https://kubernetes.io/zh/docs/tasks/administer-cluster/manage-resources/memory-default-namespace/)，提示`looking up service account default-mem-example/default: serviceaccount "default" not found`，意味着没有服务账号(默认空间有默认的账号，但新创建的namespace下没有服务账户)，可以先执行任务[为pod配置服务账户](https://kubernetes.io/zh/docs/tasks/configure-pod-container/configure-service-account/)

@@ -18,7 +18,7 @@ toc = true
 [The Missing Semester of Your CS Education](https://missing.csail.mit.edu/)的[中文版本](https://github.com/missing-semester-cn/missing-semester-cn.github.io)，提到安全相关的应用：
 
 - PGP电子邮件加密，windows平台下可以使用[gpg4win](https://www.gpg4win.org/)，参考[PGP加密电子邮件演示](https://mycyberpunk.com/2020/04/27/pgp-email/)或[利用 PGP 技术对你的邮件进行加密](https://sspai.com/post/35592)，使用非对称加密邮件：将要发送的邮件进行加密，邮件客户端进行解密。公布自己的PGP公钥，这样别人可以使用公钥加密要发送给你的内容，自己的邮件客户端使用私钥进行解密即可
-- 密码管理。提到了[pass](https://www.passwordstore.org/)，之前经理[介绍过](https://gitpress.io/@lyric/password-management-with-pass)。项目有很多配套支持，发现使用go语言开发的gui项目已经暂停开发(因为依赖的[qml](https://github.com/go-qml/qml)项目停止维护)，作者重新使用rust语言写了新的客户端。前两天看到[wormhole-gui](https://github.com/jacalz/wormhole-gui)项目，可以依赖[fyne](https://github.com/fyne-io/fyne)项目(Cross platform GUI in Go inspired by Material Design)实现一个兼容的客户端？
+- 密码管理。提到了[pass](https://www.passwordstore.org/)，之前经理[介绍过](https://gitpress.io/@lyric/password-management-with-pass)。项目有很多配套支持，发现使用go语言开发的gui项目已经暂停开发(因为依赖的[qml](https://github.com/go-qml/qml)项目停止维护)，作者重新使用rust语言写了新的客户端。前两天看到[wormhole-gui](https://github.com/jacalz/wormhole-gui)项目，可以依赖[fyne](https://github.com/fyne-io/fyne)项目(Cross platform GUI in Go inspired by Material Design)实现一个兼容的客户端？提供了从其他密码软件导入的功能：通常是导出不同的文件格式，然后进行格式转换即可，例如lasspass可以导出cvs文件，然后解析并导入到pass，提供了[ruby脚本](https://git.zx2c4.com/password-store/tree/contrib/importers/lastpass2pass.rb)
 
 ### clash 
 

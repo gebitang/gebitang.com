@@ -91,6 +91,17 @@ pass git push -u --all
 
 - 看起来导入私钥有问题，每次编码总进行提醒`There is no assurance this key belongs to the named user`， 需要进行[trust操作](https://stackoverflow.com/a/34132924/1087122)
 - `pass edit folder/name`时会使用默认的编辑器，编辑修改默认的编辑器`sudo update-alternatives --config editor`
+- `pass -c folder/name`提示: `Can't open display:0`。
+
+[参考](https://stackoverflow.com/questions/61110603/how-to-set-up-working-x11-forwarding-on-wsl2)：
+
+```shell
+export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2}'):0
+export LIBGL_ALWAYS_INDIRECT=1
+```
+
+需要激活X11 server，本地使用了MobaXTerm，提示允许后，可以剪切到内容，但不稳定。对应的[Can't use X-Server in WSL 2](https://github.com/microsoft/WSL/issues/4106)，先pending着再说
+
 
 ```shell
 gpg --edit-key <KEY_ID>
@@ -105,6 +116,11 @@ m = back to the main menu
 
 Your decision? 5
 Do you really want to set this key to ultimate trust? (y/N) y
+
+# 可以执行passwd进行密码修改
+passwd
+# save
+save
 ```
 
 

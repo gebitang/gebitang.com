@@ -39,7 +39,6 @@ toc = true
 
 - 域名 + SSL 问题
 - Nginx 配置学习
-- PostgreSQL基础用法
 - V2ray + COW实现go build编译 
 - yaml文件配置
 - 日志问题
@@ -159,70 +158,6 @@ IMPORTANT NOTES:
 
 参考默认的配置`/etc/nginx/conf.d/default.conf`和文章[Configuring HTTPS servers](http://nginx.org/en/docs/http/configuring_https_servers.html)学习基础的配置选项
 
-## PostgreSQL基础用法
-
-- 安装数据库
-
-```
-$ apt -y update
-$ apt -y install postgresql postgresql-contrib
-...
-..
-.
-$ /usr/lib/postgresql/10/bin/postgres -V
-postgres (PostgreSQL) 10.12 (Ubuntu 10.12-0ubuntu0.18.04.1)
-```
-
-- 数据库配置
-
-`vim /etc/postgresql/10/main/postgresql.conf`
-重启数据库 `systemctl restart postgresql`
-
-- 基础用法
-
-[How to List Databases and Tables in PostgreSQL Using psql](https://chartio.com/resources/tutorials/how-to-list-databases-and-tables-in-postgresql-using-psql/)
-
-1. 切换到默认数据库管理员用户 postgres ` sudo -i -u postgres`；
-2. `psql`命令连接进入数据库
-3. 默认提示符为 `username=#`；
-4. 使用`createdb dbname`创建数据库
-5. `\conninfo`查看连接信息
-6. `\i paht\to\schema.sql` 执行sql语句
-7. `\l`查看当前数据库下的表
-8. `\c dbname`连接到数据库
-9. `\dt`显示当前数据的表
-10. `SELECT pg_size_pretty( pg_database_size('dbname') );` 查看数据库大小，或者使用 `\l+ dbname`， 使用 `\l`默认[显示所有数据库](https://stackoverflow.com/a/23990410/1087122)
-11. `SELECT pg_size_pretty(pg_relation_size('table_name'));` 查看当前连接的数据库里的表的大小
-12. `\d+` 显示当前数据库的表的大小
-13. 按照大小排列当前数据库的表大小
-
-```
-# https://stackoverflow.com/a/21738505/1087122
-#  the size of all tables in the schema public 
-select table_name, pg_relation_size(quote_ident(table_name))
-from information_schema.tables
-where table_schema = 'public'
-order by 2 desc
-```
-
-```
-➜  ~ sudo -i -u postgres
-postgres@iZ2zebob74margeal4esovZ:~$
-postgres@iZ2zebob74margeal4esovZ:~$ psql
-psql (10.12 (Ubuntu 10.12-0ubuntu0.18.04.1))
-Type "help" for help.
-
-
-postgres=# help
-You are using psql, the command-line interface to PostgreSQL.
-Type:  \copyright for distribution terms
-       \h for help with SQL commands
-       \? for help with psql commands
-       \g or terminate with semicolon to execute query
-       \q to quit
-postgres=#
-
-```
 
 ## 镜像编译
 

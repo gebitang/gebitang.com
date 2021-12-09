@@ -33,9 +33,17 @@ apt-get install gnupg
 #生成证书
 gpg --gen-key
 #导出证书，pass在不同设备间同步时，解密需要
-gpg --output private.pgp --armor --export-secret-key username@email
+gpg --output private.pgp --armor --export-secret-key username@email #私钥
+gpg --armor --output public.key --export username@email  #公钥
 # 更新证书等操作参考： man 手册或官方文档 https://gnupg.org/documentation/manuals/gnupg/
+#导入证书， 在另外的linux上重建pass
+gpg --import private.pgp 
+pgp --import publick.key
 ```
+
+**安装pass**
+
+`sudo apt-get install pass`
 
 - 生成密码库 `pass init "pgp key id"`，详细步骤[参考](https://git.zx2c4.com/password-store/about/#EXTENDED%20GIT%20EXAMPLE)
 
@@ -68,7 +76,37 @@ pass git push -u --all
 
 从lastPass导出csv文件，linux下安装ruby环境，执行导入`./lastpass2pass.rb path/to/passwords_file.csv` 如果存储的数据不规范，可能报错，删除对应的数据即可。
 
->文件夹乱码''$'\020'(编码为\020)，在linxu下可以创建文件夹成功，在window环境下无法创建对应的文件夹，导致git同步失败。
+>文件夹乱码''$'\020'(编码为\020)，在linxu下可以创建文件夹成功，在window环境下无法创建对应的文件夹，导致git同步失败。  
+> 导入需要做一些必要的处理(正好借此机会整理一下密码列表)，因为pass以`文件夹/域名名称`做区分，lastPass下可以在同一个域名下保存多个用户名密码，后者的搜索也更强大   
+
+**pass同步**
+
+条件：pass的git仓库已经存在，需要在另外一台linux机器上进行同步。
+
+- 安装pass，导入相同的公钥私钥
+- `git clone git.path.url ~/.password-store ` 这个步骤比较关键，这样才能确保文件目录一致
+- 然后执行`pass init fingerprint`进行初始化
+
+**问题**
+
+- 看起来导入私钥有问题，每次编码总进行提醒`There is no assurance this key belongs to the named user`， 需要进行[trust操作](https://stackoverflow.com/a/34132924/1087122)
+- `pass edit folder/name`时会使用默认的编辑器，编辑修改默认的编辑器`sudo update-alternatives --config editor`
+
+```shell
+gpg --edit-key <KEY_ID>
+gpg> trust
+# You will be asked to select the trust level from the following:
+1 = I don't know or won't say
+2 = I do NOT trust
+3 = I trust marginally
+4 = I trust fully
+5 = I trust ultimately
+m = back to the main menu
+
+Your decision? 5
+Do you really want to set this key to ultimate trust? (y/N) y
+```
+
 
 ### clash 
 

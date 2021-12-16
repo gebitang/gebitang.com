@@ -23,6 +23,14 @@ toc = true
 
 利用git同步密码仓库，全平台覆盖
 
+**基础操作**
+
+- 显示所有内容`pass`
+- 显示某一项内容 `pass folder/site.name`
+- 新建一项纪录 `pass insert folder/site.name` 手动输入密码
+- 自动创建密码 `pass generate folder/site.name 15` 自动生成长度15字符串的密码
+- 删除密码项目 `pass rm folder/site.name` 
+
 **pgp秘钥**
 
 - 首先需要生成一个pgp秘钥(用来加密对应的密码) 

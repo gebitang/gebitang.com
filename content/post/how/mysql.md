@@ -12,6 +12,10 @@ topics = [
 toc = true
 +++
 
+### limit offset 
+
+`select * from talbe order by orderedColumn desc limit 2, 1`表示查找的结果列表里，先偏移2个之后第1行。
+
 ### SQL Joins
 
 [What's the difference between INNER JOIN, LEFT JOIN, RIGHT JOIN and FULL JOIN? ](https://stackoverflow.com/questions/5706437/whats-the-difference-between-inner-join-left-join-right-join-and-full-join)

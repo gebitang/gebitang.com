@@ -1419,7 +1419,7 @@ window环境下编译成功，但生成的sh脚本默认的回车格式为`Windo
 官方指导[upgrade guide](https://redirect.sonarsource.com/doc/upgrading.html).
 
 - 下载、解压
-- 根据[兼容性列表](https://docs.sonarqube.org/display/PLUG/Plugin+Version+Matrix)复制对应的插件到插件目录`extensions/plugins` [兼容性列表详情](https://update.sonarsource.org/plugins/compatibility-matrix.html)
+- 根据[兼容性列表](https://docs.sonarqube.org/display/PLUG/Plugin+Version+Matrix)复制对应的插件到插件目录`extensions/plugins` [兼容性列表详情](https://docs.sonarqube.org/latest/instance-administration/plugin-version-matrix/)
 - 更新对应的配置文件`sonar.properties` 和 `wrapper.conf`
 - 停止旧版本、启动新版本
 - 访问`http://yourSonarQubeServerURL/setup`目录根据提示进行升级操作

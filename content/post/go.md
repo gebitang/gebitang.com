@@ -13,6 +13,12 @@ toc = true
 
 ## 2021 
 
+### quorum 
+
+API文档查看，依赖[swaggo](https://github.com/swaggo/swag)，启动swagger服务依赖swaggo生成的docs包。scripts文件夹下提供了对应的生成脚本，结果我自己研究了半天，只生成了个空的swagger接口文档。
+
+最终在wsl环境下生产，再把文件复制回来即可。
+
 ### pass 
 
 [The Missing Semester of Your CS Education](https://missing.csail.mit.edu/)的[中文版本](https://github.com/missing-semester-cn/missing-semester-cn.github.io)，提到安全相关的应用：

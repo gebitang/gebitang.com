@@ -460,6 +460,20 @@ xcode-select: note: install requested for command line developer tools
 ➜  gebitang.com git:(master) ✗
 ```
 
+### Clang issue 
+
+执行`go run main.go`提示如下错误，找不到clang环境。
+```
+ go run main.go
+# runtime/cgo
+sh: line 1: 52743 Bus error: 10           /Applications/Xcode.app/Contents/Developer/usr/bin/xcodebuild -sdk /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk -find clang 2> /dev/null
+clang: error: unable to find utility "clang", not a developer tool or in PATH
+```
+
+需要先安装`CommandLineTools`，可以先检查`xcode-select --print-path`安装路径，如果不是`/Library/Developer/CommandLineTools`，则需要先安装`xcode-select --install`，然后修改路径`sudo xcode-select --switch /Library/Developer/CommandLineTools`。正常情况下，此时环境恢复正常。
+
+通过命令行更新xcode版本：检查配套版本：`softwareupdate --list`。参考[How to update Xcode from command line](https://stackoverflow.com/questions/34617452/how-to-update-xcode-from-command-line)老版本可参考此操作。
+
 ### 升级到Big Sur之后git无法使用
 
 到git仓库下执行`git status`检查时提示找不到git，not a developer tool or in PATH。 搜索了一圈，只有这个[比较靠谱](https://timemachine.icu/posts/9894dc13/)

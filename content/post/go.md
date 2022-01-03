@@ -19,6 +19,21 @@ API文档查看，依赖[swaggo](https://github.com/swaggo/swag)，启动swagger
 
 最终在wsl环境下生产，再把文件复制回来即可。
 
+网络状态判断：`/v1/network` API返回`pkg/p2p/network.go`中的`func (node *Node) eventhandler(ctx context.Context) `的状态，订阅了网络状态的事件[Reachability](https://pkg.go.dev/github.com/libp2p/go-libp2p-core/network#Reachability)，默认未知，如果公网可访问则是public状态，否则是private
+
+编译quorum，在服务器端启动：
+
+- 启动需要添加`-ips public.ip.xx.xx`参数
+- 远程使用rum-app节点模式连接时，需要在本地做接口映射，否则需要提供jwt信息
+
+接口转发Fow Windows，使用`netsh`，使用管理员权限执行
+
+`netsh interface portproxy add v4tov4 listenport=8002 listenaddress=127.0.0.1 connectport=8002 connectaddress=public.ip.xx.xx`
+
+接口转发Fow MacOS，使用`nmap`，brew安装如果有问题，直接从[官网下载编译好的二进制文件安装](https://nmap.org/download.html#macosx)
+
+`ncat -l 127.0.0.1 8002 --sh-exec "ncat public.ip.xx.xx 8002" --keep-open`
+
 ### pass 
 
 [The Missing Semester of Your CS Education](https://missing.csail.mit.edu/)的[中文版本](https://github.com/missing-semester-cn/missing-semester-cn.github.io)，提到安全相关的应用：

@@ -168,7 +168,7 @@ PS：晚上没关机，第二天看起来又自动重启了? 通过“任务管�
 - 可以“win+e”，地址栏输入“回收站”回车即可
 - “WIN+R”打开运行窗口，执行`explorer.exe ::{645FF040-5081-101B-9F08-00AA002F954E}`
 
-## Goland 试用 
+## Goland 试用 (2022年1月3购买正版授权)
 
 [恢复试用IntelliJ IDEA](https://mp.weixin.qq.com/s/NStUocPCaCUzWCa90SfavQ)介绍了idea的恢复，Goland作为同一家产品适用相同的逻辑
 

@@ -50,16 +50,57 @@ toc=true
 
 ---
 
-## 元拳摇膀
+## 跑步，年度回顾(2021)
 
-九月份加入，十月份开始学习，这个月正式开始。
+[有图版本](https://www.jianshu.com/p/1553777a5270)
 
-第一次打卡反馈：“出手贴近腋下，在胸侧定位。肩膀放松。”
+回忆不一定准确，但也只能听“回忆”的一面之词了
 
-通用问题：“手的定型、定位，和腰胯下盘的要领方面，有共同的问题。请大家仔细看老师的课程，每个细节要领都不要落下呀”
+第一次跑记得很清楚，周末写完这篇[“先Run起来再说”](https://www.jianshu.com/p/ed65443ed5d7)之后就一路小跑回家，0.90公里，耗时6分08秒（这是悦跑圈的第一条记录2019-10-27）
 
-**21-11-09** 前两次打卡都比较简单只做了几个而已。今天上量大概做了一百多（距离真正的上量还差两个数量级，1k，5k，1w），~~动作自我感觉还行，实际还差得比较远。~~ 到晚上发现两个肩胛骨下端和大腿都有点酸
+“背单词和跑步提供了每天的【确定性】”——拓词CEO薛淡表达过这样的观点，参加了拓词背单词之后发现CEO还经常跑步
 
-**21-11-10** 跑完步，做完拉伸很可以摇百下。然后打卡，今天有幸指导员给出指导意见：“向上打开不是简单的向上伸手。向后要牵扯充分，直到把自己拎起来。手出来时贴近腋下。腰胯要稳。还需要再多看教学视频呀”
+![](https://upload-images.jianshu.io/upload_images/3296949-85daef78ea6b17b0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
-要把分解动作都注意到要领才行，今天抽空再练练
+正好那段时间感觉自己有变胖的趋势，也顺道开始使用悦跑圈跑步
+
+![](https://upload-images.jianshu.io/upload_images/3296949-736580871be610cc.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+
+第一年相当于只跑了两个月多一点
+
+![](https://upload-images.jianshu.io/upload_images/3296949-e38015c2b6446acd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+
+2020年打算好好跑起来，后来的事注定写进历史，一场疫情，至今未息。挡不住开始的热情，过年在家，不让下楼之后，甚至跑得楼顶慢跑，惹得顶楼住户上来反对。三月底母亲去世，又回家一趟。一直到四月都没怎么跑，眼看着年度计划完成无望，五月开始每天走路的时段也开着App记录……所以20年配速整体不好看，反而是年度挑战完成得更快
+
+![](https://upload-images.jianshu.io/upload_images/3296949-a0980e1d9fbbaa23.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+![](https://upload-images.jianshu.io/upload_images/3296949-2fe51476ced3f0bd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+![](https://upload-images.jianshu.io/upload_images/3296949-6edf7ea1bdd268e7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+
+---
+
+2021年重新继续开跑，这次决定“每一步都算数”。当时怎么也没想到直到2022年元旦了，疫情还没结束。
+
+![](https://upload-images.jianshu.io/upload_images/3296949-c8eef01bd469eb41.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+![](https://upload-images.jianshu.io/upload_images/3296949-327e904e1d593b66.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+![](https://upload-images.jianshu.io/upload_images/3296949-61916f7c0f37f758.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+一月、二月依然延续着跑步的热情。三月先回老家看姥姥——没想到居然是见她的最后一面，四月姥姥去世——然后回新疆祭奠母亲去世一周年；重新回京没多久，听闻“树”也走了，后来我们想着在蚂蚁森林大家以他的名义攒一年能量种树；彼时“狐狸”还跟我们一起贡献能量，谁知道八月份他也离开了大家……二位群里的位置挨着，灰的
+
+人到中年，慢慢会面对更多地生老病死。跑步，渐渐也没有那么大的热情，健康跑到老最重要。即使不跑步的日子，也坚持每天走至少一万步，四月开始记录，已经连续260天。
+
+![](https://upload-images.jianshu.io/upload_images/3296949-b1d6290d4a981bd5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+
+![](https://upload-images.jianshu.io/upload_images/3296949-cc229eeebfe134d6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+---
+
+“背单词和跑步提供了每天的`确定性`”，明年见。
+

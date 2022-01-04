@@ -164,6 +164,13 @@ save
 >- ClashForAndroid：Clash 的 Android 图形客户端，[Github](https://github.com/Kr328/ClashForAndroid)
 >- Clash for Windows：Clash 的 Windows/macOS 图形客户端，[Github](https://github.com/Fndroid/clash_for_windows_pkg)
 
+命令行使用基础：
+
+- 下载对应平台[最新版本](https://github.com/Dreamacro/clash/releases/latest)
+- 解压文件`gzip -d clash-linux-amd64-v1.9.0.gz`后，添加可执行权限`chmod +x clash-xxx`
+- `cp clash-darwin-amd64-vx.y.z /usr/local/bin/clash`添加到用户可执行文件目录
+- 下载配置文件到目录`mkdir /usr/local/etc/clash`
+- 执行 `clash -d /usr/local/etc/clash` 即可运行 clash 并打印暴露在本地的代理服务端口，默认为 `127.0.0.1:7890`
 
 ### unable to find utility "clang", not a developer tool or in PATH
 

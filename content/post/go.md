@@ -67,7 +67,7 @@ gpg --armor --output public.key --export username@email  #公钥
 # 更新证书等操作参考： man 手册或官方文档 https://gnupg.org/documentation/manuals/gnupg/
 #导入证书， 在另外的linux上重建pass
 gpg --import private.pgp 
-pgp --import publick.key
+gpg --import publick.key
 ```
 
 **安装pass**
@@ -152,6 +152,21 @@ passwd
 save
 ```
 
+**保存私钥**
+
+还差最后一步，如何保存生成的私钥。
+
+- 使用openssl对称加密对应的私钥和公钥文件 `openssl aes-256-cbc -in public.key -out sslpub.key`将秘钥加密，私钥采用对应的操作
+- 将加密后的文件保存为hex格式——方便保存 `xxd -p sslpub.key > hexsslpub.key`
+- hexsslpub.key文件的内容就可以公开分发了，例如同步到Rum群组中
+
+**恢复秘钥**
+
+- `xxd -r -p hexsslpub.key sslpub.key`将hex格式的文件重新恢复为加密后的文件
+- 使用openssl进行解密`openssl aes-256-cbc -d -in sslpub.key -out publicreverse.key` 
+- 验证恢复后的两个文件是否一致，例如检查md5或进行字节比对`cmp public.key publicreverse.key`
+
+整个方案中只需要记住两个密码：一个是pgp的密码，一个是对称加解密的密码。
 
 ### clash 
 

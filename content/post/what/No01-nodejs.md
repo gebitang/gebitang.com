@@ -328,11 +328,14 @@ wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.33.2/install.sh | 
 - 查看可用版本
 ```
 # lts long-time-stable
-nvm ls-remote --lts 
+#nvm ls-remote --lts 
+nvm list available
 ```
 - 安装指定版本： nvm install v8.12.0
 
 - 切换到指定版本 `nvm use v8.12.0`
+
+- 需要安装yarn到对应版本上`npm install -g yarn`
 
 [删除nvm](https://github.com/nvm-sh/nvm/issues/298)  
 默认会安装到 $HOME/.nvm 文件夹下 + 更新了环境变量。 反向操作即可。

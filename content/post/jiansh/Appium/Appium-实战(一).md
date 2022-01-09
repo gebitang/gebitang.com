@@ -21,7 +21,7 @@ STF目前使用的是8.16版本的Node环境，需要使用多版本Node。
 
 ```
 # 查看长期稳定版本
-nvm ls-rmote --lts
+nvm ls-remote --lts
 ...
 v10.17.0   (Latest LTS: Dubnium)
 v12.13.0   (Latest LTS: Erbium)

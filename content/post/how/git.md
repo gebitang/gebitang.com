@@ -315,6 +315,16 @@ git commit -a
 
 
 ### ssh config 示例 多个rsa文件时
+
+ssh登录远程机器：
+
+- server端不允许密码登录， `/etc/ssh/sshd_config`配置中`PasswordAuthentication no`
+- client端生成ssh-key `ssh-keygen -t rsa`保持可区分的不同秘钥名称
+- 将对应的public key的内容追加到server端对应用户的`/home/user/.ssh/authorized_keys`文件中
+- client端配置`.ssh/config`内容，指定登录server时使用对应的秘钥
+
+配置好之后，可以声明对应的alias，例如`alias geb="ssh ubuntu@xx.xxx.xx.xx"`
+
 [SSH CONFIG FILE](https://www.ssh.com/ssh/config/)</br>
 [OpenSSH Config File Examples](https://www.cyberciti.biz/faq/create-ssh-config-file-on-linux-unix/)
 

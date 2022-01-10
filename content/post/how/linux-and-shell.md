@@ -412,6 +412,9 @@ WantedBy=default.target
 sudo apt-get -y instal zsh
 
 # zsh --version to check version
+
+wget https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh
+sh install.sh
 ```
 
 #### update zsh
@@ -1173,7 +1176,7 @@ root权限，更多信息，[参考](http://www.cnblogs.com/guangbei/archive/201
 -G 使新用户加入一个新组。每个群组使用逗号“，”隔开，不可以夹杂空白字
 -s 指定新用户的登陆Shell
 -u 设定新用户的ID值
-如：useradd getbitang -d /home/gebitang -u 525 -s /bin/bash 默认新用户就在自己同名的组里
+如：useradd gebitang -d /home/gebitang -u 525 -s /bin/bash 默认新用户就在自己同名的组里
 成功创建一个新用户以后，在/etc/passwd文件中就会增加一行该用户的信息，其格式如下：
 〔用户名〕：〔密码〕：〔UID〕：〔GID〕：〔身份描述〕：〔主目录〕：〔登陆Shell〕
 其中个字段被冒号“：”分成7各部分。

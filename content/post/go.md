@@ -25,14 +25,23 @@ API文档查看，依赖[swaggo](https://github.com/swaggo/swag)，启动swagger
 
 - 启动需要添加`-ips public.ip.xx.xx`参数
 - 远程使用rum-app节点模式连接时，需要在本地做接口映射，否则需要提供jwt信息
+- 可以先通过api生成token，则不需要进行端口转发 `curl -k -X POST "https://127.0.0.1:8002/app/api/v1/token/apply" -H "accept: application/json"`
 
 接口转发Fow Windows，使用`netsh`，使用管理员权限执行
 
 `netsh interface portproxy add v4tov4 listenport=8002 listenaddress=127.0.0.1 connectport=8002 connectaddress=public.ip.xx.xx`
 
+删除转发：[参考](https://stackoverflow.com/a/11535395/1087122)
+
+`netsh interface portproxy delete v4tov4 listenport=8002 listenaddress=127.0.0.1`
+
 接口转发Fow MacOS，使用`nmap`，brew安装如果有问题，直接从[官网下载编译好的二进制文件安装](https://nmap.org/download.html#macosx)
 
-`ncat -l 127.0.0.1 8002 --sh-exec "ncat public.ip.xx.xx 8002" --keep-open`
+`ncat -l 127.0.0.1 8002 --sh-exec "ncat public.ip.xx.xx 8002" --keep-open` 
+
+Mac端开源通过Ctrl+C停止转发
+
+**异常现象**  使用jwt认证后，证书信息不再是必须的(配置为空时会提醒报错，但实际可以随意填写)
 
 ### pass 
 
@@ -379,6 +388,13 @@ go1.14.15 download
 - 做一个软连，默认 go 执行 go1.16.4（推荐这种方式），不需要频繁修改 PATH；
 - 移动 go1.16.4 替换之前的 go（不推荐）；
 
+```
+# 下载tar包，定义文件目录 /usr/local/go
+# go 安装&升级
+rm -rf /usr/local/go && tar -C /usr/local -xzf go1.17.6.linux-amd64.tar.gz
+# 添加到环境变量
+export PATH=$PATH:/usr/local/go/bin
+```
 
 ### 业务梳理一
 

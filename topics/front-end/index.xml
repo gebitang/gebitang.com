@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Front-End on 戈壁堂</title>
+    <link>http://gebitang.com/topics/front-end/</link>
+    <description>Recent content in Front-End on 戈壁堂</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 17 Mar 2020 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://gebitang.com/topics/front-end/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Electron安装失败</title>
+      <link>http://gebitang.com/post/2020/0317-electron-failed-to-install/</link>
+      <pubDate>Tue, 17 Mar 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://gebitang.com/post/2020/0317-electron-failed-to-install/</guid>
+      <description>8.4.0版本 Mac 删除Cache还是升级了Mixin。 0.10.2版本Mac上需要electron的8.4版本 cat yarn.lock | grep electron Mac上出现跟Wind</description>
+    </item>
+    
+    <item>
+      <title>BASed(一)</title>
+      <link>http://gebitang.com/post/jiansh/front-end/based%E4%B8%80/</link>
+      <pubDate>Sat, 07 Mar 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://gebitang.com/post/jiansh/front-end/based%E4%B8%80/</guid>
+      <description>link on JianShu B &amp;ndash;&amp;gt; A &amp;ndash;&amp;gt; S 学习材料收集一下先： PC端学习项目：vue-element-admin，DaXiang的前端使用的架子来自这个项目。 移动端：</description>
+    </item>
+    
+    <item>
+      <title>BASed(二)</title>
+      <link>http://gebitang.com/post/jiansh/front-end/based%E4%BA%8C/</link>
+      <pubDate>Sat, 07 Mar 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://gebitang.com/post/jiansh/front-end/based%E4%BA%8C/</guid>
+      <description>link on JianShu BASed(一)里提到—— 使用Auth0站点的指南文章01-login 跟着指南做一遍，有点感觉了。 走遍天下都一样，代码永远比文档快。跟</description>
+    </item>
+    
+    <item>
+      <title>前端之路：好懵</title>
+      <link>http://gebitang.com/post/jiansh/front-end/%E5%89%8D%E7%AB%AF%E4%B9%8B%E8%B7%AF%E5%A5%BD%E6%87%B5/</link>
+      <pubDate>Sat, 07 Mar 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://gebitang.com/post/jiansh/front-end/%E5%89%8D%E7%AB%AF%E4%B9%8B%E8%B7%AF%E5%A5%BD%E6%87%B5/</guid>
+      <description>link on JianShu 一个感觉：调试跟黑盒一样，当没有按照预想的方式进行起来时，前端这玩意完全看不出来原因啊。 我添加STF页面时就把一个搜索框放不到正确的位</description>
+    </item>
+    
+    <item>
+      <title>前端之路：学习进度跟踪</title>
+      <link>http://gebitang.com/post/jiansh/front-end/%E5%89%8D%E7%AB%AF%E4%B9%8B%E8%B7%AF%E5%AD%A6%E4%B9%A0%E8%BF%9B%E5%BA%A6%E8%B7%9F%E8%B8%AA/</link>
+      <pubDate>Sat, 07 Mar 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://gebitang.com/post/jiansh/front-end/%E5%89%8D%E7%AB%AF%E4%B9%8B%E8%B7%AF%E5%AD%A6%E4%B9%A0%E8%BF%9B%E5%BA%A6%E8%B7%9F%E8%B8%AA/</guid>
+      <description>link on JianShu 日日不断 angularjs 1.6.10 tutorial angularjs 1.x api API学习每天3个API AIP 文档有41个模块，每天至少阅读1个模块 重新前端专栏58讲，已学20个。每天至少学习一篇。</description>
+    </item>
+    
+    <item>
+      <title>前端之路：第一周总结</title>
+      <link>http://gebitang.com/post/jiansh/front-end/%E5%89%8D%E7%AB%AF%E4%B9%8B%E8%B7%AF%E7%AC%AC%E4%B8%80%E5%91%A8%E6%80%BB%E7%BB%93/</link>
+      <pubDate>Sat, 07 Mar 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://gebitang.com/post/jiansh/front-end/%E5%89%8D%E7%AB%AF%E4%B9%8B%E8%B7%AF%E7%AC%AC%E4%B8%80%E5%91%A8%E6%80%BB%E7%BB%93/</guid>
+      <description>link on JianShu 上周结束后就自己先总结了开发黑白棋时遇到的问题：前端之路：黑白棋一、二 本周以来，大群、小组里都讨论得很热烈。以我目前都水平，暂没有啥参</description>
+    </item>
+    
+    <item>
+      <title>前端之路：组件化一</title>
+      <link>http://gebitang.com/post/jiansh/front-end/%E5%89%8D%E7%AB%AF%E4%B9%8B%E8%B7%AF%E7%BB%84%E4%BB%B6%E5%8C%96%E4%B8%80/</link>
+      <pubDate>Sat, 07 Mar 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://gebitang.com/post/jiansh/front-end/%E5%89%8D%E7%AB%AF%E4%B9%8B%E8%B7%AF%E7%BB%84%E4%BB%B6%E5%8C%96%E4%B8%80/</guid>
+      <description>link on JianShu 授课 第一次进行线上课程。三段论节奏还是很清晰： 组件化演进历史以及三大主流组件（React、Agnular、Vue）的方案 进行需求分析：</description>
+    </item>
+    
+    <item>
+      <title>前端之路：组件化二</title>
+      <link>http://gebitang.com/post/jiansh/front-end/%E5%89%8D%E7%AB%AF%E4%B9%8B%E8%B7%AF%E7%BB%84%E4%BB%B6%E5%8C%96%E4%BA%8C/</link>
+      <pubDate>Sat, 07 Mar 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://gebitang.com/post/jiansh/front-end/%E5%89%8D%E7%AB%AF%E4%B9%8B%E8%B7%AF%E7%BB%84%E4%BB%B6%E5%8C%96%E4%BA%8C/</guid>
+      <description>link on JianShu 轮播图效果+注释说明 w3.org上默认使用duckduckgo搜索引擎，查找站点内容可以使用这样到方式：比如搜索 white-space</description>
+    </item>
+    
+    <item>
+      <title>前端之路：黑白棋一</title>
+      <link>http://gebitang.com/post/jiansh/front-end/%E5%89%8D%E7%AB%AF%E4%B9%8B%E8%B7%AF%E9%BB%91%E7%99%BD%E6%A3%8B%E4%B8%80/</link>
+      <pubDate>Sat, 07 Mar 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://gebitang.com/post/jiansh/front-end/%E5%89%8D%E7%AB%AF%E4%B9%8B%E8%B7%AF%E9%BB%91%E7%99%BD%E6%A3%8B%E4%B8%80/</guid>
+      <description>link on JianShu HTML 5.3 W3C Working Draft, 18 October 2018 HTML Living Standard — Last Updated 18 July 2019 MDN Web/HTML MDN CSS MDN CN JavaScript ECMAScript 6.0 about:blank Object.getOwnPropertyNames(window) 学习搜集整理基本的知识图谱路线图之后，今天开始——黑白棋开发之旅。 规则简述： 8</description>
+    </item>
+    
+    <item>
+      <title>前端之路：黑白棋二</title>
+      <link>http://gebitang.com/post/jiansh/front-end/%E5%89%8D%E7%AB%AF%E4%B9%8B%E8%B7%AF%E9%BB%91%E7%99%BD%E6%A3%8B%E4%BA%8C/</link>
+      <pubDate>Sat, 07 Mar 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://gebitang.com/post/jiansh/front-end/%E5%89%8D%E7%AB%AF%E4%B9%8B%E8%B7%AF%E9%BB%91%E7%99%BD%E6%A3%8B%E4%BA%8C/</guid>
+      <description>link on JianShu 前端之路：黑白棋一里提到：包含悔棋功能时，下棋的落子状态没有显示出来。 因为是现场跟着老师一起做的，总感觉功能是OK的。使用BBEdit</description>
+    </item>
+    
+    <item>
+      <title>有关CORS的资源</title>
+      <link>http://gebitang.com/post/jiansh/front-end/%E6%9C%89%E5%85%B3cors%E7%9A%84%E8%B5%84%E6%BA%90/</link>
+      <pubDate>Sat, 07 Mar 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://gebitang.com/post/jiansh/front-end/%E6%9C%89%E5%85%B3cors%E7%9A%84%E8%B5%84%E6%BA%90/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

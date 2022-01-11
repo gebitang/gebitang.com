@@ -1,0 +1,645 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Topics on 戈壁堂</title>
+    <link>http://gebitang.com/topics/</link>
+    <description>Recent content in Topics on 戈壁堂</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 09 Dec 2021 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://gebitang.com/topics/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>postgres</title>
+      <link>http://gebitang.com/topics/postgres/</link>
+      <pubDate>Thu, 09 Dec 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://gebitang.com/topics/postgres/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>sql</title>
+      <link>http://gebitang.com/topics/sql/</link>
+      <pubDate>Thu, 09 Dec 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://gebitang.com/topics/sql/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>tech</title>
+      <link>http://gebitang.com/topics/tech/</link>
+      <pubDate>Thu, 09 Dec 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://gebitang.com/topics/tech/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>skywalking</title>
+      <link>http://gebitang.com/topics/skywalking/</link>
+      <pubDate>Sat, 13 Nov 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://gebitang.com/topics/skywalking/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>run</title>
+      <link>http://gebitang.com/topics/run/</link>
+      <pubDate>Mon, 01 Nov 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://gebitang.com/topics/run/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>jira</title>
+      <link>http://gebitang.com/topics/jira/</link>
+      <pubDate>Thu, 05 Aug 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://gebitang.com/topics/jira/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>rust</title>
+      <link>http://gebitang.com/topics/rust/</link>
+      <pubDate>Thu, 27 May 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://gebitang.com/topics/rust/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>reading</title>
+      <link>http://gebitang.com/topics/reading/</link>
+      <pubDate>Thu, 06 May 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://gebitang.com/topics/reading/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>java</title>
+      <link>http://gebitang.com/topics/java/</link>
+      <pubDate>Sun, 25 Apr 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://gebitang.com/topics/java/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>BB</title>
+      <link>http://gebitang.com/topics/bb/</link>
+      <pubDate>Fri, 09 Apr 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://gebitang.com/topics/bb/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>jiansh</title>
+      <link>http://gebitang.com/topics/jiansh/</link>
+      <pubDate>Fri, 09 Apr 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://gebitang.com/topics/jiansh/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Spring</title>
+      <link>http://gebitang.com/topics/spring/</link>
+      <pubDate>Sun, 07 Mar 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://gebitang.com/topics/spring/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>hah</title>
+      <link>http://gebitang.com/topics/hah/</link>
+      <pubDate>Sat, 23 Jan 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://gebitang.com/topics/hah/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>mybatis</title>
+      <link>http://gebitang.com/topics/mybatis/</link>
+      <pubDate>Thu, 14 Jan 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://gebitang.com/topics/mybatis/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>ham</title>
+      <link>http://gebitang.com/topics/ham/</link>
+      <pubDate>Fri, 08 Jan 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://gebitang.com/topics/ham/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>git</title>
+      <link>http://gebitang.com/topics/git/</link>
+      <pubDate>Thu, 07 Jan 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://gebitang.com/topics/git/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>rpc</title>
+      <link>http://gebitang.com/topics/rpc/</link>
+      <pubDate>Mon, 21 Dec 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://gebitang.com/topics/rpc/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>mesh</title>
+      <link>http://gebitang.com/topics/mesh/</link>
+      <pubDate>Sat, 19 Dec 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://gebitang.com/topics/mesh/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>gitlab</title>
+      <link>http://gebitang.com/topics/gitlab/</link>
+      <pubDate>Mon, 09 Nov 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://gebitang.com/topics/gitlab/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>crypt</title>
+      <link>http://gebitang.com/topics/crypt/</link>
+      <pubDate>Tue, 27 Oct 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://gebitang.com/topics/crypt/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>English</title>
+      <link>http://gebitang.com/topics/english/</link>
+      <pubDate>Sun, 20 Sep 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://gebitang.com/topics/english/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>github</title>
+      <link>http://gebitang.com/topics/github/</link>
+      <pubDate>Wed, 26 Aug 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://gebitang.com/topics/github/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>work</title>
+      <link>http://gebitang.com/topics/work/</link>
+      <pubDate>Mon, 24 Aug 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://gebitang.com/topics/work/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>k8s</title>
+      <link>http://gebitang.com/topics/k8s/</link>
+      <pubDate>Sun, 23 Aug 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://gebitang.com/topics/k8s/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>kubernetes</title>
+      <link>http://gebitang.com/topics/kubernetes/</link>
+      <pubDate>Sun, 23 Aug 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://gebitang.com/topics/kubernetes/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>opengrok</title>
+      <link>http://gebitang.com/topics/opengrok/</link>
+      <pubDate>Sun, 16 Aug 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://gebitang.com/topics/opengrok/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>info</title>
+      <link>http://gebitang.com/topics/info/</link>
+      <pubDate>Wed, 29 Jul 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://gebitang.com/topics/info/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>regex</title>
+      <link>http://gebitang.com/topics/regex/</link>
+      <pubDate>Wed, 29 Jul 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://gebitang.com/topics/regex/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>maven</title>
+      <link>http://gebitang.com/topics/maven/</link>
+      <pubDate>Mon, 13 Jul 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://gebitang.com/topics/maven/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>go</title>
+      <link>http://gebitang.com/topics/go/</link>
+      <pubDate>Tue, 30 Jun 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://gebitang.com/topics/go/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>mixin</title>
+      <link>http://gebitang.com/topics/mixin/</link>
+      <pubDate>Tue, 30 Jun 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://gebitang.com/topics/mixin/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>auth</title>
+      <link>http://gebitang.com/topics/auth/</link>
+      <pubDate>Thu, 21 May 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://gebitang.com/topics/auth/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>windows</title>
+      <link>http://gebitang.com/topics/windows/</link>
+      <pubDate>Thu, 14 May 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://gebitang.com/topics/windows/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>stf</title>
+      <link>http://gebitang.com/topics/stf/</link>
+      <pubDate>Mon, 27 Apr 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://gebitang.com/topics/stf/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>sonar</title>
+      <link>http://gebitang.com/topics/sonar/</link>
+      <pubDate>Thu, 23 Apr 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://gebitang.com/topics/sonar/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>yaml</title>
+      <link>http://gebitang.com/topics/yaml/</link>
+      <pubDate>Thu, 26 Mar 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://gebitang.com/topics/yaml/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>docker</title>
+      <link>http://gebitang.com/topics/docker/</link>
+      <pubDate>Mon, 23 Mar 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://gebitang.com/topics/docker/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>US</title>
+      <link>http://gebitang.com/topics/us/</link>
+      <pubDate>Thu, 19 Mar 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://gebitang.com/topics/us/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Front-End</title>
+      <link>http://gebitang.com/topics/front-end/</link>
+      <pubDate>Tue, 17 Mar 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://gebitang.com/topics/front-end/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>algo</title>
+      <link>http://gebitang.com/topics/algo/</link>
+      <pubDate>Sat, 07 Mar 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://gebitang.com/topics/algo/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Appium</title>
+      <link>http://gebitang.com/topics/appium/</link>
+      <pubDate>Sat, 07 Mar 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://gebitang.com/topics/appium/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>apple</title>
+      <link>http://gebitang.com/topics/apple/</link>
+      <pubDate>Sat, 07 Mar 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://gebitang.com/topics/apple/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>CPO</title>
+      <link>http://gebitang.com/topics/cpo/</link>
+      <pubDate>Sat, 07 Mar 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://gebitang.com/topics/cpo/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>draft</title>
+      <link>http://gebitang.com/topics/draft/</link>
+      <pubDate>Sat, 07 Mar 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://gebitang.com/topics/draft/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>FGW</title>
+      <link>http://gebitang.com/topics/fgw/</link>
+      <pubDate>Sat, 07 Mar 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://gebitang.com/topics/fgw/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>IM</title>
+      <link>http://gebitang.com/topics/im/</link>
+      <pubDate>Sat, 07 Mar 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://gebitang.com/topics/im/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Mixin-lol</title>
+      <link>http://gebitang.com/topics/mixin-lol/</link>
+      <pubDate>Sat, 07 Mar 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://gebitang.com/topics/mixin-lol/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>dev</title>
+      <link>http://gebitang.com/topics/dev/</link>
+      <pubDate>Wed, 15 May 2019 00:00:00 +0000</pubDate>
+      
+      <guid>http://gebitang.com/topics/dev/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>mac</title>
+      <link>http://gebitang.com/topics/mac/</link>
+      <pubDate>Wed, 15 May 2019 00:00:00 +0000</pubDate>
+      
+      <guid>http://gebitang.com/topics/mac/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>daily</title>
+      <link>http://gebitang.com/topics/daily/</link>
+      <pubDate>Thu, 22 Nov 2018 00:00:00 +0000</pubDate>
+      
+      <guid>http://gebitang.com/topics/daily/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>gd</title>
+      <link>http://gebitang.com/topics/gd/</link>
+      <pubDate>Thu, 22 Nov 2018 00:00:00 +0000</pubDate>
+      
+      <guid>http://gebitang.com/topics/gd/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>life</title>
+      <link>http://gebitang.com/topics/life/</link>
+      <pubDate>Wed, 10 Oct 2018 00:00:00 +0000</pubDate>
+      
+      <guid>http://gebitang.com/topics/life/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>c</title>
+      <link>http://gebitang.com/topics/c/</link>
+      <pubDate>Wed, 09 May 2018 00:00:00 +0000</pubDate>
+      
+      <guid>http://gebitang.com/topics/c/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>cs</title>
+      <link>http://gebitang.com/topics/cs/</link>
+      <pubDate>Wed, 09 May 2018 00:00:00 +0000</pubDate>
+      
+      <guid>http://gebitang.com/topics/cs/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>practice</title>
+      <link>http://gebitang.com/topics/practice/</link>
+      <pubDate>Mon, 09 Apr 2018 00:00:00 +0000</pubDate>
+      
+      <guid>http://gebitang.com/topics/practice/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>android</title>
+      <link>http://gebitang.com/topics/android/</link>
+      <pubDate>Sun, 01 Apr 2018 00:00:00 +0000</pubDate>
+      
+      <guid>http://gebitang.com/topics/android/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>book</title>
+      <link>http://gebitang.com/topics/book/</link>
+      <pubDate>Wed, 31 Jan 2018 00:00:00 +0000</pubDate>
+      
+      <guid>http://gebitang.com/topics/book/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>hugo</title>
+      <link>http://gebitang.com/topics/hugo/</link>
+      <pubDate>Sat, 27 Jan 2018 00:00:00 +0000</pubDate>
+      
+      <guid>http://gebitang.com/topics/hugo/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>wercker</title>
+      <link>http://gebitang.com/topics/wercker/</link>
+      <pubDate>Sat, 27 Jan 2018 00:00:00 +0000</pubDate>
+      
+      <guid>http://gebitang.com/topics/wercker/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>write</title>
+      <link>http://gebitang.com/topics/write/</link>
+      <pubDate>Fri, 05 Jan 2018 00:00:00 +0000</pubDate>
+      
+      <guid>http://gebitang.com/topics/write/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>fitness</title>
+      <link>http://gebitang.com/topics/fitness/</link>
+      <pubDate>Thu, 04 Jan 2018 00:00:00 +0000</pubDate>
+      
+      <guid>http://gebitang.com/topics/fitness/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>finace</title>
+      <link>http://gebitang.com/topics/finace/</link>
+      <pubDate>Sun, 03 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://gebitang.com/topics/finace/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>stock</title>
+      <link>http://gebitang.com/topics/stock/</link>
+      <pubDate>Sun, 03 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://gebitang.com/topics/stock/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>vim</title>
+      <link>http://gebitang.com/topics/vim/</link>
+      <pubDate>Mon, 16 Oct 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://gebitang.com/topics/vim/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>socket</title>
+      <link>http://gebitang.com/topics/socket/</link>
+      <pubDate>Thu, 21 Sep 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://gebitang.com/topics/socket/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>career</title>
+      <link>http://gebitang.com/topics/career/</link>
+      <pubDate>Tue, 05 Sep 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://gebitang.com/topics/career/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>写作</title>
+      <link>http://gebitang.com/topics/%E5%86%99%E4%BD%9C/</link>
+      <pubDate>Sat, 27 May 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://gebitang.com/topics/%E5%86%99%E4%BD%9C/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>记录</title>
+      <link>http://gebitang.com/topics/%E8%AE%B0%E5%BD%95/</link>
+      <pubDate>Sat, 27 May 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://gebitang.com/topics/%E8%AE%B0%E5%BD%95/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Development</title>
+      <link>http://gebitang.com/topics/development/</link>
+      <pubDate>Tue, 02 Dec 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://gebitang.com/topics/development/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>golang</title>
+      <link>http://gebitang.com/topics/golang/</link>
+      <pubDate>Tue, 02 Dec 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://gebitang.com/topics/golang/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

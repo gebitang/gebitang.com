@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html xmlns:wb="http://open.weibo.com/wb" lang="en" >
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="generator" content="Hugo 0.74.3" />
+
+  <title>STF之Provider系列五 &middot; 戈壁堂</title>
+
+    
+
+  
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/pure-min.css">
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-old-ie-min.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-min.css">
+  <!--<![endif]-->
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="http://gebitang.com/css/side-menu-old-ie.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="http://gebitang.com/css/side-menu.css">
+  <!--<![endif]-->
+
+  <link rel="stylesheet" href="http://gebitang.com/css/blackburn.css">
+
+  
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.9.0/css/all.css">
+
+  
+  <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet" type="text/css">
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+ 
+  
+
+  
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/androidstudio.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+  
+  <script>hljs.initHighlightingOnLoad();</script>
+  
+
+  <link rel="shortcut icon" href="http://gebitang.com/img/favicon.ico" type="image/x-icon" />
+
+  
+    
+        <link rel="stylesheet" href="http://gebitang.com/css/my.css">
+    
+  
+  
+    
+        <script src="http://gebitang.com/js/my.js"></script>
+    
+  
+
+</head>
+
+
+<body>
+<div id="layout">
+
+  
+<a href="#menu" id="menuLink" class="menu-link">
+  
+  <span></span>
+</a>
+<div id="menu">
+
+  
+  <a class="pure-menu-heading brand" href="http://gebitang.com/">Gebitang</a>
+
+
+  <div class="pure-menu">
+    <ul class="pure-menu-list">
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="http://gebitang.com/"><i class='fa fa-home fa-fw'></i>Home</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="http://gebitang.com/post/"><i class='fa fa-list fa-fw'></i>Posts</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="http://gebitang.com/about/"><i class='fa fa-user fa-fw'></i>About</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="http://gebitang.com/contact/"><i class='fa fa-phone fa-fw'></i>Contact</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="http://gebitang.com/tags/"><i class='fa fa-tags fa-fw'></i>Tags</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="http://gebitang.com/topics/"><i class='fa fa-folder fa-fw'></i>Topics</a>
+      
+        </li>
+      
+    </ul>
+  </div>
+
+  <div class="pure-menu social">
+  <ul class="pure-menu-list">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+  </ul>
+</div>
+
+
+  <div>
+
+  <div class="small-print">
+  	<small>
+    <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="知识共享许可协议" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/80x15.png" /></a><br/>本<span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" rel="dct:type">作品</span>由<a xmlns:cc="http://creativecommons.org/ns#" href="http://gebitang.com" property="cc:attributionName" rel="cc:attributionURL">&nbsp;Gebitang&nbsp;&nbsp;</a>采用<a rel="license" href="http://creativecommons.org/licenses/by/4.0/">知识共享署名 4.0 国际许可协议</a>进行许可&nbsp;&copy; 2018
+    </small>
+
+  </div>
+
+  <div class="small-print">
+    <small></small>
+  </div>
+  <div class="small-print">
+    <small>Built with&nbsp;<a href="https://gohugo.io/" target="_blank">Hugo</a></small>
+    <small>Theme&nbsp;<a href="https://github.com/yoshiharuyamashita/blackburn" target="_blank">Blackburn</a></small>
+  </div>
+
+  <div style="display:none">
+  <div class="small-print">
+    <small>
+    <wb:follow-button uid="2446212465" type="red_1" width="67" height="24"></wb:follow-button>
+  </small>
+  </div>
+  </div>
+
+</div>
+
+</div>
+
+
+  <div id="main">
+
+
+<div class="header">
+  <h1>STF之Provider系列五</h1>
+  <h2></h2>
+</div>
+<div class="content">
+
+  <div class="post-meta">
+
+  <div>
+    <i class="fa fa-calendar fa-fw"></i>
+    <time>2020-03-07</time>
+  </div>
+
+  
+
+  
+  
+  
+  <div>
+    <i class="fa fa-folder fa-fw"></i>
+    
+      <a class="post-taxonomy-topic" href="http://gebitang.com/topics/jiansh">jiansh</a>&nbsp;&#47;
+    
+      <a class="post-taxonomy-topic" href="http://gebitang.com/topics/stf">STF</a>
+    
+  </div>
+  
+  
+
+  
+  
+  
+  <div>
+    <i class="fa fa-tags fa-fw"></i>
+    
+      <a class="post-taxonomy-tag" href="http://gebitang.com/tags/jiansh">jiansh</a>
+    
+  </div>
+  
+  
+
+</div>
+
+  
+	<nav id="TableOfContents">
+  <ul>
+    <li><a href="#mac环境下支持脚本自动部署">Mac环境下支持脚本自动部署</a></li>
+  </ul>
+</nav>
+  
+
+  <p><a href="https://www.jianshu.com/p/a358dbb7c05d">link on JianShu</a></p>
+<h2 id="mac环境下支持脚本自动部署">Mac环境下支持脚本自动部署</h2>
+<p>需要Mac环境已经安装了XCode，因为环境编译时需要C++的编译器。</p>
+<pre><code>#!/bin/bash
+
+# base on https://gist.github.com/aamnah/a62d30340de4f7ae98ea57b219d98d14
+# NOTES
+# `which` command will tell you a program is installed ONLY if it's in the $PATH
+# so if your program is installed but the $PATH wasn't updated for whatever reason, it'll tell you program isn't installed
+# `command -v foo` is a better alternative to `which foo`
+# https://stackoverflow.com/a/46998376/890814
+# Check if Homebrew is installed, install if we don't have it, update if we do
+homebrew() {
+
+	# $() is for command substitution, commands don't _return_ values, they _capture_ them
+	# more here: https://stackoverflow.com/a/12137501/890814
+	# [[ ]] is the newer _test command_ for evaluations, is more literal
+	# more here: http://mywiki.wooledge.org/BashFAQ/031
+	# the double [[ ]], and $() is important
+	# `command -v brew` will output nothing if Homebrew is not installed
+	if [[ $(command -v brew) == &quot;&quot; ]]; then
+		echo &quot;Installing Homebrew.. &quot;
+		ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&quot;
+	else
+		echo &quot;Homebrew installed. &quot;
+	fi
+}
+
+
+# brew check 
+brewcheck() {
+  if brew list $1 &gt;/dev/null ; then
+    echo &quot;$1 installed&quot;
+  else
+    echo &quot;$1 not installed &quot;
+	brew install $1
+  fi
+}
+
+
+# check adb and link 
+adbcheck() {
+	adbversion=`adb version`
+	if [[ $adbversion == *&quot;version 1.0.40&quot;* ]]; then
+		echo $adbversion
+	else
+	    currentdir=`pwd`
+		echo &quot;use custom adb &quot; $currentdir
+		if [[ -f /usr/local/bin/adb ]]; then 
+			rm /usr/local/bin/adb 
+		fi 
+		ln -s  $currentdir/tools/mac/adb /usr/local/bin/adb
+	fi
+}
+
+# update environment file if exist
+updateEnvFile() {
+	if [[ -f $HOME/$1 ]]; then
+		echo -e &quot;export NVM_DIR=\&quot;\$HOME/.nvm\&quot;&quot; &gt;&gt; $HOME/$1 
+		# echo -e &quot;[ -s \&quot;\$NVM_DIR/nvm.sh\&quot; ] &amp;&amp; . \&quot;\$NVM_DIR/nvm.sh\&quot; &quot; &gt;&gt; $HOME/$1 
+		# echo -e &quot;[ -s \&quot;\$NVM_DIR/bash_completion\&quot; ] &amp;&amp; . \&quot;\$NVM_DIR/bash_completion\&quot; &quot; &gt;&gt; $HOME/$1 
+		source $HOME/$1 
+	fi 
+}
+
+# node check
+nodecheck() {
+  nodeversion=`node -v`
+  if [[ $nodeversion == &quot;v8&quot;* ]]; then
+    echo $nodeversion
+  else
+    echo &quot;install node carbon&quot;
+	if [[ $(command -v nvm) == &quot;&quot; ]]; then
+		echo &quot;Installing nvm first. &quot;
+		wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.33.2/install.sh | bash
+		export NVM_DIR=&quot;$HOME/.nvm&quot;
+		[ -s &quot;$NVM_DIR/nvm.sh&quot; ] &amp;&amp; \. &quot;$NVM_DIR/nvm.sh&quot;  # This loads nvm
+		[ -s &quot;$NVM_DIR/bash_completion&quot; ] &amp;&amp; \. &quot;$NVM_DIR/bash_completion&quot;  # This loads nvm bash_completion
+		updateEnvFile &quot;.zshrc&quot;
+		updateEnvFile &quot;.bashrc&quot;
+		updateEnvFile &quot;.bash_profile&quot;
+
+	else
+		echo &quot;nvm already installed. &quot;
+	fi
+    
+    nvm install v8.16.0
+    nvm use v8.16.0
+  fi
+
+}
+
+# start here
+if xcode-select -p &gt; /dev/null ; then
+   echo &quot;XCode installed.&quot;
+else
+   echo &quot;need xcode, please install XCode first. &quot;
+   exit 0
+fi
+
+# check brew
+homebrew
+
+declare -a array=(wget graphicsmagick zeromq protobuf yasm pkg-config)
+
+# Install dependencies
+for e in &quot;${array[@]}&quot;
+do
+   brewcheck $e
+done
+
+# check adb version and link adb 
+adbcheck
+
+# check node version 
+nodecheck
+
+echo &quot;current node:&quot; `node -v` &quot; npm:&quot; `npm -v`
+
+nodeversion=`node -v`
+if [[ $nodeversion == &quot;v8&quot;* ]]; then
+	# start install 	
+	echo &quot;useRepository: &quot; `npm config get registry`
+	npm install 
+
+	adbversion=`adb version`
+	if [[ $adbversion == *&quot;version 1.0.40&quot;* ]]; then
+		./provider.sh 
+	else
+		echo &quot;adb version: &quot; $adbversion
+	fi
+else
+  echo &quot;environment not fit. current node:&quot; `node -v` &quot; npm:&quot; `npm -v`
+fi 
+</code></pre><p><a href="https://blog.csdn.net/taiyang1987912/article/details/39551385">Linux下的正斜杠&rdquo;/&ldquo;和&rdquo;&quot;的区别</a></p>
+<blockquote>
+<p>Windows 用反斜杠（“\”）的历史来自 DOS，而 DOS 的另一个传统是用斜杠（“/”）表示命令行参数，比如：
+　　cd %SystemDrive%
+　　dir /s /b shell32.dll
+　　既然 DOS 这边斜杠被占用了，只好找一个最接近的。那就是它了。而在 UNIX 环境中，我们用减号（“-”）和双减号（“&ndash;”）表示命令行参数。
+　　用斜杠表示命令行参数是兼容性原因。这个问题最初起源自 IBM。IBM 在最初加入 DOS 开发时贡献了大批工具，它们都是用斜杠处理命令行参数的。而这个传统源自于 <strong>DEC/IBM</strong>，比如当年的 VMS 就是用斜杠处理命令行参数，它的目录分隔符是美元符（“$”）。顺便说一句，这个传统也被部分地继承进了 DOS 和 Windows 体系，日文版的 Windows 就把反斜杠在屏幕上显示为“¥”，虽然实际上还是反斜杠。
+　　如今的 Windows 内核在处理路径时确实可以同时支持斜杠和反斜杠。很多时候我们看到用斜杠时出错，是因为应用程序层面的原因。比如 cmd.exe 就不支持用斜杠表示路径，而PowerShell.exe 支持，也正因为这个原因，PowerShell 开始转而使用减号作为命令行参数的起始符。</p>
+</blockquote>
+<p><a href="https://blogs.msdn.microsoft.com/larryosterman/2005/06/24/why-is-the-dos-path-character/">Why is the DOS path character &ldquo;&rdquo;?</a></p>
+
+  
+  
+
+  
+<div class="prev-next-post pure-g">
+  <div class="pure-u-1-24" style="text-align: left;">
+    
+    <a href="http://gebitang.com/post/jiansh/stf/stf%E4%B9%8Bprovider%E7%B3%BB%E5%88%97%E5%85%ADbrew/"><i class="fa fa-chevron-left"></i></a>
+    
+  </div>
+  <div class="pure-u-10-24">
+    
+    <nav class="prev">
+      <a href="http://gebitang.com/post/jiansh/stf/stf%E4%B9%8Bprovider%E7%B3%BB%E5%88%97%E5%85%ADbrew/">STF之Provider系列六：brew</a>
+    </nav>
+    
+  </div>
+  <div class="pure-u-2-24">
+    &nbsp;
+  </div>
+  <div class="pure-u-10-24">
+    
+    <nav class="next">
+      <a href="http://gebitang.com/post/jiansh/stf/stf%E4%B9%8Bprovider%E7%B3%BB%E5%88%97%E4%BA%8C/">STF之Provider系列二</a>
+    </nav>
+    
+  </div>
+  <div class="pure-u-1-24" style="text-align: right;">
+    
+    <a href="http://gebitang.com/post/jiansh/stf/stf%E4%B9%8Bprovider%E7%B3%BB%E5%88%97%E4%BA%8C/"><i class="fa fa-chevron-right"></i></a>
+    
+  </div>
+</div>
+
+
+
+  
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+
+(function() {
+    
+    
+    if (window.location.hostname == "localhost")
+        return;
+
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    var disqus_shortname = 'gebitang';
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com/" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+</div>
+
+</div>
+</div>
+<script src="http://gebitang.com/js/ui.js"></script>
+<script src="http://gebitang.com/js/menus.js"></script>
+
+
+<script>
+  
+  if (window.location.hostname != "localhost") {
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-34303694-1', 'auto');
+    ga('send', 'pageview');
+  }
+</script>
+
+
+
+
+<button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
+</body>
+</html>
+

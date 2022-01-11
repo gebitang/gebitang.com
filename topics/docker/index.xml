@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>docker on 戈壁堂</title>
+    <link>http://gebitang.com/topics/docker/</link>
+    <description>Recent content in docker on 戈壁堂</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 23 Mar 2020 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://gebitang.com/topics/docker/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>docker practice</title>
+      <link>http://gebitang.com/post/how/learn-docker/</link>
+      <pubDate>Mon, 23 Mar 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://gebitang.com/post/how/learn-docker/</guid>
+      <description>Docker — 从入门到实践, Source 这篇留在这里已经快一年了，也没啥动静。还是得**“业务”**驱动。 配置docker engine 默认的配置文件insecure-re</description>
+    </item>
+    
+  </channel>
+</rss>

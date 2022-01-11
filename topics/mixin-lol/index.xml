@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Mixin-lol on 戈壁堂</title>
+    <link>http://gebitang.com/topics/mixin-lol/</link>
+    <description>Recent content in Mixin-lol on 戈壁堂</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 07 Mar 2020 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://gebitang.com/topics/mixin-lol/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>[GPWG]-Unit-0--Getting-started</title>
+      <link>http://gebitang.com/post/jiansh/mixin-lol/gpwg-unit-0-getting-started/</link>
+      <pubDate>Sat, 07 Mar 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://gebitang.com/post/jiansh/mixin-lol/gpwg-unit-0-getting-started/</guid>
+      <description>link to JianShu
+get programming with go
+https://play.golang.org/
+https://golang.org/ref/spec
+Unit 0 Getting started lesson 1 get ready, get set, go  With the Go Playground you can start using Go without installing anything. Every Go program is made up of functions contained in packages. To print text on the screen, use the fmt package provided by the standard library. Punctuation is just as important in programming languages as it is in natural languages.</description>
+    </item>
+    
+    <item>
+      <title>A股港股打新比较</title>
+      <link>http://gebitang.com/post/jiansh/mixin-lol/a%E8%82%A1%E6%B8%AF%E8%82%A1%E6%89%93%E6%96%B0%E6%AF%94%E8%BE%83/</link>
+      <pubDate>Sat, 07 Mar 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://gebitang.com/post/jiansh/mixin-lol/a%E8%82%A1%E6%B8%AF%E8%82%A1%E6%89%93%E6%96%B0%E6%AF%94%E8%BE%83/</guid>
+      <description>link on JianShu 甲乙组是以500万为临界点对新股认购用户做的分组，认购总金额≤500万港元的，就属于甲组(小散)；认购总金额&amp;gt;500万港元的，就</description>
+    </item>
+    
+    <item>
+      <title>Desktop-App</title>
+      <link>http://gebitang.com/post/jiansh/mixin-lol/desktop-app/</link>
+      <pubDate>Sat, 07 Mar 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://gebitang.com/post/jiansh/mixin-lol/desktop-app/</guid>
+      <description>link on JianShu how to clean cache in yarn yarn cache clean 安装下面的 操作在Window环境下执行OK了。没想到在Mac环境上反而出了问题。 git clone https://github.com/MixinNetwork/desktop-app.git cd desktop-app yarn install yarn electron:serve 一开始是yarn i</description>
+    </item>
+    
+    <item>
+      <title>Jekyll-on-Github-Pages</title>
+      <link>http://gebitang.com/post/jiansh/mixin-lol/jekyll-on-github-pages/</link>
+      <pubDate>Sat, 07 Mar 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://gebitang.com/post/jiansh/mixin-lol/jekyll-on-github-pages/</guid>
+      <description>link on JianShu 在github上使用github page：jekyll github pages 实际上，GitHub Pages are powered by Jekyll behind the scenes, so they’re a great way to host your Jekyll-powered website for free. 所有</description>
+    </item>
+    
+    <item>
+      <title>Jekyll-on-Mac</title>
+      <link>http://gebitang.com/post/jiansh/mixin-lol/jekyll-on-mac/</link>
+      <pubDate>Sat, 07 Mar 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://gebitang.com/post/jiansh/mixin-lol/jekyll-on-mac/</guid>
+      <description>link on JianShu 标准操作只需要三部： 安装gem：gem install bundler jekyll 生成站点：jekyll new my-awesome-site 启动站点：bundle exec jekyll serve bundle exec jekyll serve --drafts VS. hugo server --watch --verbose --buildDrafts 以为会简单许多</description>
+    </item>
+    
+    <item>
+      <title>Jekyll-on-Windows</title>
+      <link>http://gebitang.com/post/jiansh/mixin-lol/jekyll-on-windows/</link>
+      <pubDate>Sat, 07 Mar 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://gebitang.com/post/jiansh/mixin-lol/jekyll-on-windows/</guid>
+      <description>link on JianShu 看了官方文档才意识到Windows 10已经默认支持了windows subsystem for linux，直接在命令行里执行 bash就可以切换到linux环境</description>
+    </item>
+    
+    <item>
+      <title>Lettes-to-Shareholders：Mixin节点换届信息</title>
+      <link>http://gebitang.com/post/jiansh/mixin-lol/lettes-to-shareholdersmixin%E8%8A%82%E7%82%B9%E6%8D%A2%E5%B1%8A%E4%BF%A1%E6%81%AF/</link>
+      <pubDate>Sat, 07 Mar 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://gebitang.com/post/jiansh/mixin-lol/lettes-to-shareholdersmixin%E8%8A%82%E7%82%B9%E6%8D%A2%E5%B1%8A%E4%BF%A1%E6%81%AF/</guid>
+      <description>link on JianShu MIXIN链接未来世界节点更迭说明 Mixin 节点 2020 更迭信息汇总 Mixin Messenger 会不会受到 SIM 卡转移攻击？ 区块链项目 — — Mixin 公链 Mixin Network 全节点加入指北 Mixin Network 全节点的稳</description>
+    </item>
+    
+    <item>
+      <title>Mixin-lol</title>
+      <link>http://gebitang.com/post/jiansh/mixin-lol/mixin-lol/</link>
+      <pubDate>Sat, 07 Mar 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://gebitang.com/post/jiansh/mixin-lol/mixin-lol/</guid>
+      <description>link to JianShu Don&amp;rsquo;t laugh and weep all at once, I have an ulterior motive for learning Go and Electron. TEE-BFT-DAG network 拜占庭容错机制 1）互联网的创造 2）公钥加密算法的发明 3）点对点Bitorrent(BT)协议的发</description>
+    </item>
+    
+    <item>
+      <title>Mixin-network-Assets-Value-track</title>
+      <link>http://gebitang.com/post/jiansh/mixin-lol/mixin-network-assets-value-track/</link>
+      <pubDate>Sat, 07 Mar 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://gebitang.com/post/jiansh/mixin-lol/mixin-network-assets-value-track/</guid>
+      <description>link on JianShu from: mixin.lol/assets Mixin做为二级网络，到底在网络内沉淀了多少的区块链资产，大概是最有说服力的信息了。 官方提供了排名靠前的资产列表Top Asset</description>
+    </item>
+    
+    <item>
+      <title>Mixin-Nodes-Info</title>
+      <link>http://gebitang.com/post/jiansh/mixin-lol/mixin-nodes-info/</link>
+      <pubDate>Sat, 07 Mar 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://gebitang.com/post/jiansh/mixin-lol/mixin-nodes-info/</guid>
+      <description>link on JianShu 根据这里的公开信息，做了一点整理工作。 在ipapi网站注册后，可以利用接口查询域名或ip的地址信息。再对数据做简单的整理之后可以得到这</description>
+    </item>
+    
+    <item>
+      <title>Mixin-Nodes-Location</title>
+      <link>http://gebitang.com/post/jiansh/mixin-lol/mixin-nodes-location/</link>
+      <pubDate>Sat, 07 Mar 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://gebitang.com/post/jiansh/mixin-lol/mixin-nodes-location/</guid>
+      <description>link on JianShu origin source 根据源码信息，整理了目前已知是31个节点的信息。（截止到2019-12-22日） 详细信息如下—— host ip address onda.mixin-node.tako.vip 35.197.52.186 美国俄勒冈州达尔斯 noodle.mixin-node.tako.vip 35.202.91.225 美</description>
+    </item>
+    
+    <item>
+      <title>关于港股中签率</title>
+      <link>http://gebitang.com/post/jiansh/mixin-lol/%E5%85%B3%E4%BA%8E%E6%B8%AF%E8%82%A1%E4%B8%AD%E7%AD%BE%E7%8E%87/</link>
+      <pubDate>Sat, 07 Mar 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://gebitang.com/post/jiansh/mixin-lol/%E5%85%B3%E4%BA%8E%E6%B8%AF%E8%82%A1%E4%B8%AD%E7%AD%BE%E7%8E%87/</guid>
+      <description>link on JianShu 中签率即为一手中签率，是指不同申购数量下所对应的平均每中签一手的概率。 一手中签率=总中签手数/总认购手数。 实际中签率=一手中签率*申购</description>
+    </item>
+    
+    <item>
+      <title>关于港股回拨机制</title>
+      <link>http://gebitang.com/post/jiansh/mixin-lol/%E5%85%B3%E4%BA%8E%E6%B8%AF%E8%82%A1%E5%9B%9E%E6%8B%A8%E6%9C%BA%E5%88%B6/</link>
+      <pubDate>Sat, 07 Mar 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://gebitang.com/post/jiansh/mixin-lol/%E5%85%B3%E4%BA%8E%E6%B8%AF%E8%82%A1%E5%9B%9E%E6%8B%A8%E6%9C%BA%E5%88%B6/</guid>
+      <description>link on JianShu 什么是回拨机制 港股新股发行分为公开发售（散户认购）和国际配售（机构投资者认购）。通常公开发售占所有发行股份的10%，国际配售占所有发行</description>
+    </item>
+    
+    <item>
+      <title>关于港股暗盘交易</title>
+      <link>http://gebitang.com/post/jiansh/mixin-lol/%E5%85%B3%E4%BA%8E%E6%B8%AF%E8%82%A1%E6%9A%97%E7%9B%98%E4%BA%A4%E6%98%93/</link>
+      <pubDate>Sat, 07 Mar 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://gebitang.com/post/jiansh/mixin-lol/%E5%85%B3%E4%BA%8E%E6%B8%AF%E8%82%A1%E6%9A%97%E7%9B%98%E4%BA%A4%E6%98%93/</guid>
+      <description>link on JianShu 暗盘交易不通过交易所系统，而是通过某些大型券商自行设立的内部系统进行报价撮合。大部分港股新股中签结果公布和暗盘交易是同一天，一般为新股</description>
+    </item>
+    
+    <item>
+      <title>关于港股的白表和黄表</title>
+      <link>http://gebitang.com/post/jiansh/mixin-lol/%E5%85%B3%E4%BA%8E%E6%B8%AF%E8%82%A1%E7%9A%84%E7%99%BD%E8%A1%A8%E5%92%8C%E9%BB%84%E8%A1%A8/</link>
+      <pubDate>Sat, 07 Mar 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://gebitang.com/post/jiansh/mixin-lol/%E5%85%B3%E4%BA%8E%E6%B8%AF%E8%82%A1%E7%9A%84%E7%99%BD%E8%A1%A8%E5%92%8C%E9%BB%84%E8%A1%A8/</guid>
+      <description>link on JianShu 白表：个人 黄表：机构 Please use this form if you want the Hong Kong Offer Shares to be issued in your name 如 閣下欲以本身名義登記將獲發行的香港發售股份，請使用本表格 Please use this form if you want the Hong Kong</description>
+    </item>
+    
+  </channel>
+</rss>

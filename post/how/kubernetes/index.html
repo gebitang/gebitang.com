@@ -1,0 +1,950 @@
+<!DOCTYPE html>
+<html xmlns:wb="http://open.weibo.com/wb" lang="en" >
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="the way to kubernetes">
+  <meta name="generator" content="Hugo 0.74.3" />
+
+  <title>k8s practice &middot; 戈壁堂</title>
+
+    
+
+  
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/pure-min.css">
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-old-ie-min.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-min.css">
+  <!--<![endif]-->
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="http://gebitang.com/css/side-menu-old-ie.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="http://gebitang.com/css/side-menu.css">
+  <!--<![endif]-->
+
+  <link rel="stylesheet" href="http://gebitang.com/css/blackburn.css">
+
+  
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.9.0/css/all.css">
+
+  
+  <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet" type="text/css">
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+ 
+  
+
+  
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/androidstudio.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+  
+  <script>hljs.initHighlightingOnLoad();</script>
+  
+
+  <link rel="shortcut icon" href="http://gebitang.com/img/favicon.ico" type="image/x-icon" />
+
+  
+    
+        <link rel="stylesheet" href="http://gebitang.com/css/my.css">
+    
+  
+  
+    
+        <script src="http://gebitang.com/js/my.js"></script>
+    
+  
+
+</head>
+
+
+<body>
+<div id="layout">
+
+  
+<a href="#menu" id="menuLink" class="menu-link">
+  
+  <span></span>
+</a>
+<div id="menu">
+
+  
+  <a class="pure-menu-heading brand" href="http://gebitang.com/">Gebitang</a>
+
+
+  <div class="pure-menu">
+    <ul class="pure-menu-list">
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="http://gebitang.com/"><i class='fa fa-home fa-fw'></i>Home</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="http://gebitang.com/post/"><i class='fa fa-list fa-fw'></i>Posts</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="http://gebitang.com/about/"><i class='fa fa-user fa-fw'></i>About</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="http://gebitang.com/contact/"><i class='fa fa-phone fa-fw'></i>Contact</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="http://gebitang.com/tags/"><i class='fa fa-tags fa-fw'></i>Tags</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="http://gebitang.com/topics/"><i class='fa fa-folder fa-fw'></i>Topics</a>
+      
+        </li>
+      
+    </ul>
+  </div>
+
+  <div class="pure-menu social">
+  <ul class="pure-menu-list">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+  </ul>
+</div>
+
+
+  <div>
+
+  <div class="small-print">
+  	<small>
+    <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="知识共享许可协议" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/80x15.png" /></a><br/>本<span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" rel="dct:type">作品</span>由<a xmlns:cc="http://creativecommons.org/ns#" href="http://gebitang.com" property="cc:attributionName" rel="cc:attributionURL">&nbsp;Gebitang&nbsp;&nbsp;</a>采用<a rel="license" href="http://creativecommons.org/licenses/by/4.0/">知识共享署名 4.0 国际许可协议</a>进行许可&nbsp;&copy; 2018
+    </small>
+
+  </div>
+
+  <div class="small-print">
+    <small></small>
+  </div>
+  <div class="small-print">
+    <small>Built with&nbsp;<a href="https://gohugo.io/" target="_blank">Hugo</a></small>
+    <small>Theme&nbsp;<a href="https://github.com/yoshiharuyamashita/blackburn" target="_blank">Blackburn</a></small>
+  </div>
+
+  <div style="display:none">
+  <div class="small-print">
+    <small>
+    <wb:follow-button uid="2446212465" type="red_1" width="67" height="24"></wb:follow-button>
+  </small>
+  </div>
+  </div>
+
+</div>
+
+</div>
+
+
+  <div id="main">
+
+
+<div class="header">
+  <h1>k8s practice</h1>
+  <h2>the way to kubernetes</h2>
+</div>
+<div class="content">
+
+  <div class="post-meta">
+
+  <div>
+    <i class="fa fa-calendar fa-fw"></i>
+    <time>2020-08-23</time>
+  </div>
+
+  
+
+  
+  
+  
+  <div>
+    <i class="fa fa-folder fa-fw"></i>
+    
+      <a class="post-taxonomy-topic" href="http://gebitang.com/topics/kubernetes">kubernetes</a>&nbsp;&#47;
+    
+      <a class="post-taxonomy-topic" href="http://gebitang.com/topics/k8s">k8s</a>
+    
+  </div>
+  
+  
+
+  
+  
+  
+  <div>
+    <i class="fa fa-tags fa-fw"></i>
+    
+      <a class="post-taxonomy-tag" href="http://gebitang.com/tags/kubernetes">kubernetes</a>&nbsp;&#47;
+    
+      <a class="post-taxonomy-tag" href="http://gebitang.com/tags/k8s">k8s</a>
+    
+  </div>
+  
+  
+
+</div>
+
+  
+	<nav id="TableOfContents">
+  <ul>
+    <li><a href="#tasks">Tasks</a>
+      <ul>
+        <li><a href="#更新daemonset">更新DaemonSet</a></li>
+        <li><a href="#管理内存cpu配额">管理内存、CPU、配额</a></li>
+      </ul>
+    </li>
+    <li><a href="#start-over">start over</a>
+      <ul>
+        <li><a href="#wsl2-时间同步">wsl2 时间同步</a></li>
+        <li><a href="#kubernetes-tutorial">Kubernetes Tutorial</a></li>
+        <li><a href="#k8s中的crd开发">K8S中的CRD开发</a></li>
+        <li><a href="#setup-with-dashboard">setup with dashboard</a></li>
+      </ul>
+    </li>
+    <li><a href="#archive">archive</a>
+      <ul>
+        <li><a href="#术语列表">术语列表</a></li>
+        <li><a href="#wsl2--kubernetes">WSL2 + Kubernetes</a></li>
+        <li><a href="#errors-were-encountered-while-processing--ubuntu-advantage-tools">Errors were encountered while processing:  ubuntu-advantage-tools</a></li>
+        <li><a href="#前提环境">前提环境</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  
+
+  <h2 id="tasks">Tasks</h2>
+<p>练习记录，<a href="https://kubernetes.io/docs/tasks/">官方Tasks</a>，<a href="https://kubernetes.io/zh/docs/tasks/">中文版本对照</a>跟着练习一遍之后，各个概念就清楚了。</p>
+<h3 id="更新daemonset">更新DaemonSet</h3>
+<p><a href="https://kubernetes.io/zh/docs/tasks/manage-daemon/update-daemon-set/">对 DaemonSet 执行滚动更新</a>，本地控制DO的集群，默认会超时，无法apply对象，提示</p>
+<pre><code>E1123 19:37:27.679680     511 request.go:1027] Unexpected error when reading response body: net/http: request canceled (Client.Timeout or context cancellation while reading body)
+error: unexpected error when reading response body. Please retry. Original error: net/http: request canceled (Client.Timeout or context cancellation while reading body)
+# 或者 
+Unable to connect to the server: net/http: TLS handshake timeout
+</code></pre><p>增加超时时间设置<code>k apply -f xxx.yaml  --request-timeout=&quot;50&quot;</code>，还可以指定log级别<code>-v=6</code>，参考<a href="https://www.mtioutput.com/entry/kubectl-timeout-error">【Kubernetes】Client.Timeout or context cancellation while reading bodyというエラーの解消方法</a></p>
+<ul>
+<li>设置DaemonSet内容，查看更新策略<code>kubectl get ds/fluentd-elasticsearch  -n kube-system -o go-template='{{.spec.updateStrategy.type}}{{&quot;\n&quot;}}'</code> 查看方式也可以为 <code>-o yaml</code></li>
+<li>对 RollingUpdate DaemonSet 的 <code>.spec.template</code> 的任何更新都将触发滚动更新。例如增加了cpu和内存的限制</li>
+</ul>
+<p>以下方式都可以更新——</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#75715e"># 声明式命令</span>
+kubectl apply -f https://k8s.io/examples/controllers/fluentd-daemonset-update.yaml
+<span style="color:#75715e"># 指令式命令 Edit a resource from the default editor.</span>
+kubectl edit ds/fluentd-elasticsearch -n kube-system <span style="color:#75715e">#打开文件编辑，保持。远程不建议这样操作</span>
+<span style="color:#75715e"># 只更新容器镜像</span>
+kubectl set image ds/fluentd-elasticsearch fluentd-elasticsearch<span style="color:#f92672">=</span>quay.io/fluentd_elasticsearch/fluentd:v2.6.0 -n kube-system
+</code></pre></div><p>更新结果类似——</p>
+<pre><code>myu@Gebitang:~$ k apply -f fluentd-daemonset-update.yaml
+daemonset.apps/fluentd-elasticsearch configured
+myu@Gebitang:~$ kubectl rollout status ds/fluentd-elasticsearch -n kube-system
+Waiting for daemon set &quot;fluentd-elasticsearch&quot; rollout to finish: 1 out of 3 new pods have been updated...
+Waiting for daemon set &quot;fluentd-elasticsearch&quot; rollout to finish: 1 out of 3 new pods have been updated...
+Waiting for daemon set &quot;fluentd-elasticsearch&quot; rollout to finish: 2 out of 3 new pods have been updated...
+Waiting for daemon set &quot;fluentd-elasticsearch&quot; rollout to finish: 2 out of 3 new pods have been updated...
+Waiting for daemon set &quot;fluentd-elasticsearch&quot; rollout to finish: 2 out of 3 new pods have been updated...
+Waiting for daemon set &quot;fluentd-elasticsearch&quot; rollout to finish: 2 of 3 updated pods are available...
+daemon set &quot;fluentd-elasticsearch&quot; successfully rolled out
+</code></pre><p>从名字空间中删除 DaemonSet：<code>kubectl delete ds fluentd-elasticsearch -n kube-system</code></p>
+<h3 id="管理内存cpu配额">管理内存、CPU、配额</h3>
+<p><a href="https://kubernetes.io/zh/docs/tasks/administer-cluster/manage-resources/memory-default-namespace/">管理内存</a>，提示<code>looking up service account default-mem-example/default: serviceaccount &quot;default&quot; not found</code>，意味着没有服务账号(默认空间有默认的账号，但新创建的namespace下没有服务账户)，可以先执行任务<a href="https://kubernetes.io/zh/docs/tasks/configure-pod-container/configure-service-account/">为pod配置服务账户</a></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">kubectl create -f - <span style="color:#e6db74">&lt;&lt;EOF
+</span><span style="color:#e6db74">apiVersion: v1
+</span><span style="color:#e6db74">kind: ServiceAccount
+</span><span style="color:#e6db74">metadata:
+</span><span style="color:#e6db74">  name: default
+</span><span style="color:#e6db74">  namespace: default-mem-example
+</span><span style="color:#e6db74">EOF</span>
+<span style="color:#75715e"># 然后再在对应空间下创建pod即可</span>
+</code></pre></div><p>执行删除namespace的命令后<code>k delete namespace default-mem-example</code>，一直没有返回结果，Ctrl+C强制结束，查看状态显示为<code>Terminating</code>，参考<a href="https://stackoverflow.com/questions/52369247/namespace-stuck-as-terminating-how-i-removed-it">Namespace &ldquo;stuck&rdquo; as Terminating, How I removed it</a>，当前空间下还有其他资源？<code>kubectl api-resources --verbs=list --namespaced -o name  | xargs -n 1 kubectl get --show-kind --ignore-not-found -n default-mem-example</code>，删除对应的资源后，状态依然为<code>Terminating</code></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">geb@Gebitang:~$ k delete limitranges --namespace<span style="color:#f92672">=</span>default-mem-example
+error: resource<span style="color:#f92672">(</span>s<span style="color:#f92672">)</span> were provided, but no name was specified
+geb@Gebitang:~$ k delete limitrange/mem-limit-range --namespace<span style="color:#f92672">=</span>default-mem-example
+limitrange <span style="color:#e6db74">&#34;mem-limit-range&#34;</span> deleted
+geb@Gebitang:~$ k delete serviceaccount/default --namespace<span style="color:#f92672">=</span>default-mem-example
+serviceaccount <span style="color:#e6db74">&#34;default&#34;</span> deleted
+
+<span style="color:#75715e"># 查看空间信息 k get namespace default-mem-example -o json</span>
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
+    <span style="color:#f92672">&#34;apiVersion&#34;</span>: <span style="color:#e6db74">&#34;v1&#34;</span>,
+    <span style="color:#f92672">&#34;kind&#34;</span>: <span style="color:#e6db74">&#34;Namespace&#34;</span>,
+    <span style="color:#f92672">&#34;metadata&#34;</span>: {
+        <span style="color:#f92672">&#34;creationTimestamp&#34;</span>: <span style="color:#e6db74">&#34;2021-11-23T07:17:26Z&#34;</span>,
+        <span style="color:#f92672">&#34;deletionTimestamp&#34;</span>: <span style="color:#e6db74">&#34;2021-11-23T07:55:36Z&#34;</span>,
+        <span style="color:#f92672">&#34;labels&#34;</span>: {
+            <span style="color:#f92672">&#34;kubernetes.io/metadata.name&#34;</span>: <span style="color:#e6db74">&#34;default-mem-example&#34;</span>
+        },
+        <span style="color:#f92672">&#34;name&#34;</span>: <span style="color:#e6db74">&#34;default-mem-example&#34;</span>,
+        <span style="color:#f92672">&#34;resourceVersion&#34;</span>: <span style="color:#e6db74">&#34;2161742&#34;</span>,
+        <span style="color:#f92672">&#34;uid&#34;</span>: <span style="color:#e6db74">&#34;7f0fd528-b681-45f7-887e-49820024333e&#34;</span>
+    },
+    <span style="color:#f92672">&#34;spec&#34;</span>: {
+        <span style="color:#f92672">&#34;finalizers&#34;</span>: [
+            <span style="color:#e6db74">&#34;kubernetes&#34;</span>
+        ]
+    },
+    <span style="color:#f92672">&#34;status&#34;</span>: {
+        <span style="color:#f92672">&#34;phase&#34;</span>: <span style="color:#e6db74">&#34;Terminating&#34;</span>
+    }
+}
+</code></pre></div><p>调用api，将finalizers字段置空即可：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#75715e"># 使用proxy，然后调用http server api</span>
+NAMESPACE<span style="color:#f92672">=</span>your-rogue-namespace
+kubectl proxy &amp;
+kubectl get namespace $NAMESPACE -o json |jq <span style="color:#e6db74">&#39;.spec = {&#34;finalizers&#34;:[]}&#39;</span> &gt;temp.json
+curl -k -H <span style="color:#e6db74">&#34;Content-Type: application/json&#34;</span> -X PUT --data-binary @temp.json 127.0.0.1:8001/api/v1/namespaces/$NAMESPACE/finalize
+
+<span style="color:#75715e"># 直接调用，将上述json内容的finalizers数组置为空，保存为 default-mem-example.json， 调用</span>
+ k replace --raw <span style="color:#e6db74">&#34;/api/v1/namespaces/default-mem-example/finalize&#34;</span> -f default-mem-example.json
+<span style="color:#75715e"># 再查看空间时，此空间被彻底删除</span>
+</code></pre></div><p>其他资源类似</p>
+<h2 id="start-over">start over</h2>
+<h3 id="wsl2-时间同步">wsl2 时间同步</h3>
+<p>按照<a href="https://auth0.com/blog/kubernetes-tutorial-step-by-step-introduction-to-basic-concepts/">Kubernetes Tutorial - Step by Step Introduction to Basic Concepts</a>介绍在DO上创建免费的k8s集群，在wsl2里进行访问时提示错误：<code>Unable to connect to the server: x509: certificate has expired or is not yet valid: current time 2021-11-09T02:59:51+08:00 is before 2021-11-09T07:47:25Z</code>查看本地时间，显示比实际实际慢</p>
+<p>执行<code>sudo hwclock -s </code>同步时间依然没有变化，官方<a href="https://github.com/microsoft/WSL/issues/4149">issue 4149</a>中提供了临时解决方案——netdate。立即生效，不影响任何进程</p>
+<pre><code># 按照ntpdate set the date and time via  Network Time Protocol (NTP)
+sudo apt install ntpdate
+# 同步时间
+sudo ntpdate -sb time.nist.gov
+# 或执行
+sudo ntpdate time.windows.com
+
+myu@Gebitang:~$ sudo ntpdate time.windows.com
+ 9 Nov 16:09:43 ntpdate[1727]: step time server 52.231.114.183 offset 46499.066385 sec
+</code></pre><p>同步时间之后，可以跟集群正常交互</p>
+<h3 id="kubernetes-tutorial">Kubernetes Tutorial</h3>
+<p>上面提到的文章有点老，遇到的问题记录一下——</p>
+<ul>
+<li>通过promote code注册DO需要手动提交个ticket，否则无法创建k8s集群，提示droplet超限</li>
+<li>部署<code>NGINX ingress controller</code>的yaml文件地址已失效，参考<a href="https://kubernetes.github.io/ingress-nginx/deploy/#digital-ocean">ingress-nginx</a>中的说明，使用<code>https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.0.4/deploy/static/provider/do/deploy.yaml</code>文件</li>
+</ul>
+<pre><code>myu@Gebitang:~$ k get pods -n ingress-nginx
+NAME                                        READY   STATUS      RESTARTS   AGE
+ingress-nginx-admission-create-n2dgj        0/1     Completed   0          87s
+ingress-nginx-admission-patch-jldqd         0/1     Completed   2          86s
+ingress-nginx-controller-5c8d66c76d-fgvpb   1/1     Running     0          90s
+</code></pre><ul>
+<li>最终部署完service之后，获取外网ip的步骤也失效了，通过<code>k get svc -n ingress-nginx</code>可以看到外网ip地址，尽管访问服务时提示404，至少表示nginx启动起来了</li>
+</ul>
+<h3 id="k8s中的crd开发">K8S中的CRD开发</h3>
+<p>CRD: <code>CustomResourceDefinition</code>, Custom code that defines a resource to add to your Kubernetes API server without building a complete custom server.</p>
+<p><a href="http://bingerambo.com/posts/2021/05/k8s%E4%B8%AD%E7%9A%84crd%E5%BC%80%E5%8F%91">2021-05-04版本</a>流程。依赖<a href="https://github.com/kubernetes/code-generator">code-generator</a>，官方示例<a href="https://github.com/kubernetes/sample-controller">sample-controller</a>，也可以参考<a href="http://ljchen.net/2019/06/14/K8s-client%E4%BB%A3%E7%A0%81%E8%87%AA%E5%8A%A8%E7%94%9F%E6%88%90/">K8s Client代码自动生成</a></p>
+<p>使用代码生成器生成的api兼容标准的k8s api，操作动作相同。</p>
+<h3 id="setup-with-dashboard">setup with dashboard</h3>
+<p><a href="https://www.downloadkubernetes.com/">download binary</a></p>
+<p><a href="https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/">Install kubectl on Linux</a></p>
+<p>关于UI管理使用的<a href="https://github.com/kubernetes/dashboard/tree/master/docs">kubernetes/dashboard</a>，参考具体的<a href="https://github.com/kubernetes/dashboard/blob/master/docs/user/access-control/creating-sample-user.md">doc: creating sample user</a></p>
+<p>关于用户的步骤——</p>
+<ul>
+<li>基于RBAC的方式创建<code>ServiceAccount</code></li>
+<li>将创建的SA进行<code>CluserRoleBinding</code></li>
+</ul>
+<p>示例中如果将namespace指定为<code>cluser-admin</code>，将拥有管理员权限。(通过<code>k get clusterroles</code>查看集群中都有哪些角色)</p>
+<pre><code>chmod +x kubectl
+mkdir -p ~/.local/bin/kubectl
+mv ./kubectl ~/.local/bin/kubectl
+# and then add ~/.local/bin/kubectl to $PATH
+</code></pre><p>自动完成Enable kubectl autocompletion</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">source &lt;<span style="color:#f92672">(</span>kubectl completion bash<span style="color:#f92672">)</span>
+alias k<span style="color:#f92672">=</span>kubectl
+complete -F __start_kubectl k
+
+<span style="color:#75715e">#shell生效</span>
+echo <span style="color:#e6db74">&#39;source &lt;(kubectl completion bash)&#39;</span> &gt;&gt;~/.bashrc
+echo <span style="color:#e6db74">&#39;alias k=kubectl&#39;</span> &gt;&gt;~/.bashrc
+echo <span style="color:#e6db74">&#39;complete -F __start_kubectl k&#39;</span> &gt;&gt;~/.bashrc
+</code></pre></div><p>使用<code>kind</code>创建集群 <a href="https://kind.sigs.k8s.io/docs/user/quick-start/">quick start</a></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#75715e"># 创建一个3节点集群的配置文件</span>
+cat <span style="color:#e6db74">&lt;&lt; EOF &gt; kind-3nodes.yaml
+</span><span style="color:#e6db74">kind: Cluster
+</span><span style="color:#e6db74">apiVersion: kind.x-k8s.io/v1alpha4
+</span><span style="color:#e6db74">nodes:
+</span><span style="color:#e6db74">  - role: control-plane
+</span><span style="color:#e6db74">  - role: worker
+</span><span style="color:#e6db74">  - role: worker
+</span><span style="color:#e6db74">EOF</span>
+<span style="color:#75715e"># 使用配置文件创建新的集群</span>
+kind create cluster --name wslkindmultinodes --config ./kind-3nodes.yaml
+<span style="color:#75715e"># 获取集群节点</span>
+kubectl get nodes
+<span style="color:#75715e"># 删除集群</span>
+kind delete cluster --name wslkindmultinodess
+</code></pre></div><p>跟着<a href="https://www.qikqiak.com/post/deploy-k8s-on-win-use-wsl2">演示</a>直到部署三个节点的cluster都正常，安装一个 Kubernetes Dashboard时(<code>kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.0.1/aio/deploy/recommended.yaml</code>)，<code>kubectl get all -n kubernetes-dashboard</code>命令显示，一直处于&quot;ContainerCreating&quot;状态。感觉应该是我本地网络原因？ <a href="https://github.com/kubernetes/dashboard/issues/2863">issue 2863</a></p>
+<p>多个配置文件切换<a href="https://kubernetes.io/docs/tasks/access-application-cluster/configure-access-multiple-clusters/">Configure Access to Multiple Clusters</a></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#75715e"># online.config.yaml for pro, dev.config.yaml for dev</span>
+kubectl config --kubeconfig<span style="color:#f92672">=</span>online.config.yaml view
+
+<span style="color:#75715e"># export</span>
+export KUBECONFIG<span style="color:#f92672">=</span>$KUBECONFIG:$HOME/.kube/config
+export KUBECONFIG_SAVED<span style="color:#f92672">=</span>$KUBECONFIG
+kubectl config view
+<span style="color:#75715e"># clean up</span> 
+export KUBECONFIG<span style="color:#f92672">=</span>$KUBECONFIG_SAVED
+</code></pre></div><pre><code>geb@Gebitang:~$ kubectl get all -n kubernetes-dashboard
+NAME                                             READY   STATUS              RESTARTS   AGE
+pod/dashboard-metrics-scraper-5594697f48-wgpst   0/1     ContainerCreating   0          14m
+pod/kubernetes-dashboard-bc8f4fc6f-f2mqg         0/1     ContainerCreating   0          14m
+
+NAME                                TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)    AGE
+service/dashboard-metrics-scraper   ClusterIP   10.96.21.147   &lt;none&gt;        8000/TCP   14m
+service/kubernetes-dashboard        ClusterIP   10.96.173.37   &lt;none&gt;        443/TCP    14m
+
+NAME                                        READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/dashboard-metrics-scraper   0/1     1            0           14m
+deployment.apps/kubernetes-dashboard        0/1     1            0           14m
+
+NAME                                                   DESIRED   CURRENT   READY   AGE
+replicaset.apps/dashboard-metrics-scraper-5594697f48   1         1         0       14m
+replicaset.apps/kubernetes-dashboard-bc8f4fc6f         1         1         0       14m
+
+#  kubectl get pods --all-namespaces
+NAMESPACE              NAME                                                      READY   STATUS              RESTARTS   AGE
+kube-system            coredns-558bd4d5db-57bh5                                  1/1     Running             0          16m
+kube-system            coredns-558bd4d5db-sfsfp                                  1/1     Running             0          16m
+kube-system            etcd-wslkindmultinodes-control-plane                      1/1     Running             0          17m
+kube-system            kindnet-2k9fg                                             1/1     Running             0          16m
+kube-system            kindnet-ssl4j                                             1/1     Running             0          16m
+kube-system            kindnet-z5mgq                                             1/1     Running             0          16m
+kube-system            kube-apiserver-wslkindmultinodes-control-plane            1/1     Running             0          17m
+kube-system            kube-controller-manager-wslkindmultinodes-control-plane   1/1     Running             1          17m
+kube-system            kube-proxy-b4r8b                                          1/1     Running             0          16m
+kube-system            kube-proxy-mwlms                                          1/1     Running             0          16m
+kube-system            kube-proxy-smhm5                                          1/1     Running             0          16m
+kube-system            kube-scheduler-wslkindmultinodes-control-plane            1/1     Running             1          17m
+kubernetes-dashboard   dashboard-metrics-scraper-5594697f48-wgpst                0/1     ContainerCreating   0          15m
+kubernetes-dashboard   kubernetes-dashboard-bc8f4fc6f-f2mqg                      0/1     ContainerCreating   0          15m
+local-path-storage     local-path-provisioner-547f784dff-dngw5                   1/1     Running             0          16m
+</code></pre><p>需要先安装网络——</p>
+<p><a href="https://github.com/kubernetes/dashboard/issues/2863#issuecomment-368785304">参考这个comment</a></p>
+<pre><code># 可以将url内容保存到文件进行执行
+kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
+
+kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/k8s-manifests/kube-flannel-rbac.yml
+</code></pre><p>执行之后，<code>kubectl get all -n kubernetes-dashboard</code>可以看到对应的pod都正常运行起来了</p>
+<pre><code>geb@Gebitang:~$ kubectl get all -n kubernetes-dashboard
+NAME                                             READY   STATUS    RESTARTS   AGE
+pod/dashboard-metrics-scraper-5594697f48-wgpst   1/1     Running   0          33m
+pod/kubernetes-dashboard-bc8f4fc6f-f2mqg         1/1     Running   0          33m
+
+NAME                                TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)    AGE
+service/dashboard-metrics-scraper   ClusterIP   10.96.21.147   &lt;none&gt;        8000/TCP   33m
+service/kubernetes-dashboard        ClusterIP   10.96.173.37   &lt;none&gt;        443/TCP    33m
+
+NAME                                        READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/dashboard-metrics-scraper   1/1     1            1           33m
+deployment.apps/kubernetes-dashboard        1/1     1            1           33m
+
+NAME                                                   DESIRED   CURRENT   READY   AGE
+replicaset.apps/dashboard-metrics-scraper-5594697f48   1         1         1       33m
+replicaset.apps/kubernetes-dashboard-bc8f4fc6f         1         1         1       33m
+</code></pre><p>proxy启动后，使用如下方式获取token，</p>
+<pre><code># 创建一个新的 ServiceAccount
+kubectl apply -f - &lt;&lt;EOF
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: admin-user
+  namespace: kubernetes-dashboard
+EOF
+# 将上面的 SA 绑定到系统的 cluster-admin 这个集群角色上
+kubectl apply -f - &lt;&lt;EOF
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: admin-user
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: cluster-admin
+subjects:
+- kind: ServiceAccount
+  name: admin-user
+  namespace: kubernetes-dashboard
+EOF
+
+# ----------actual result-------
+geb@Gebitang:~$ kubectl apply -f - &lt;&lt;EOF
+&gt; apiVersion: v1
+&gt; kind: ServiceAccount
+etadata:&gt; metadata:
+&gt;   name: admin-user
+namespac&gt;   namespace: kubernetes-dashboard
+&gt; EOF
+serviceaccount/admin-user created
+geb@Gebitang:~$ kubectl apply -f - &lt;&lt;EOF
+iVersio&gt; apiVersion: rbac.authorization.k8s.io/v1
+&gt; kind: ClusterRoleBinding
+&gt; metadata:
+&gt;   name: admin-user
+&gt; roleRef:
+&gt;   apiGroup: rbac.authorization.k8s.io
+&gt;   kind: ClusterRole
+&gt;   name: cluster-admin
+&gt; subjects:
+&gt; - kind: ServiceAccount
+&gt;   name: admin-user
+&gt;   namespace: kubernetes-dashboard
+&gt; EOF
+clusterrolebinding.rbac.authorization.k8s.io/admin-user created
+geb@Gebitang:~$
+geb@Gebitang:~$ kubectl -n kubernetes-dashboard describe secret $(kubectl -n kubernetes-dashboard get secret | grep admin-user | awk '{print $1}')
+Name:         admin-user-token-d4mkv
+Namespace:    kubernetes-dashboard
+Labels:       &lt;none&gt;
+Annotations:  kubernetes.io/service-account.name: admin-user
+              kubernetes.io/service-account.uid: b66a6322-81a3-4bec-af6a-c329c4702ef8
+
+Type:  kubernetes.io/service-account-token
+
+Data
+====
+ca.crt:     1066 bytes
+namespace:  20 bytes
+token:      eyJhbGciOiJSUzI1NiIsImtpZCI6IjdnaktTQ2Nuc1RfbGhWaWs3NHYtRzF2VFhIU2ZTX3g4aFBHUkNfYkROOU0ifQ.eyJpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2VhY2NvdW50Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9uYW1lc3BhY2UiOiJrdWJlcm5ldGVzLWRhc2hib2FyZCIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VjcmV0Lm5hbWUiOiJhZG1pbi11c2VyLXRva2VuLWQ0bWt2Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9zZXJ2aWNlLWFjY291bnQubmFtZSI6ImFkbWluLXVzZXIiLCJrdWJlcm5ldGVzLmlvL3NlcnZpY2VhY2NvdW50L3NlcnZpY2UtYWNjb3VudC51aWQiOiJiNjZhNjMyMi04MWEzLTRiZWMtYWY2YS1jMzI5YzQ3MDJlZjgiLCJzdWIiOiJzeXN0ZW06c2VydmljZWFjY291bnQ6a3ViZXJuZXRlcy1kYXNoYm9hcmQ6YWRtaW4tdXNlciJ9.pSiZrLue_t9R8qXN7Dm6jaOblVnLr_qI0NvkL25N3TB78rvR3O2zIzZ0cJ5ylvl7hdxIRXoKQxZUvY8cCeFRosBdGp_gaevd_33vlLNfcj0UM3x_9IQeS4cqPlI0EkWcrVXbPbQQyCLKBSgaaCNQrijtiQXUgaK2eLh8FCmvFIIE5U2vs-GqlmTy1YNpGr28WjtML-bFvQIsL7BpZieWzBNb7VfnsNMRPjpmUUE6iurVApwZSNTesFcKQP-dW7trN0B8hI7SllRMN64rfUnNwZX58eI5esgicQ2STJ64WkqTRYbGs1up__Iz_xvoRYXQq4bN_SSVnCnLOtf8jpVuyA
+geb@Gebitang:~$
+</code></pre><p>访问<code>http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/</code>选择token方式，将上面获取到的token输入后，就可以看到UI页面</p>
+<p>删除集群——</p>
+<pre><code># 查找集群
+kind get cluster 
+# 删除现在的集群
+kind delete cluster --name wslkindmultinodes
+</code></pre><h2 id="archive">archive</h2>
+<h3 id="术语列表">术语列表</h3>
+
+
+<div class="pure-g">
+
+  
+  
+  
+  
+  <div class="pure-u-1-1">
+    <div style="padding: 0 .2em">
+      <a href="https://time.geekbang.org/column/article/23132" target="_blank" >
+      <img
+        class="pure-img-responsive"
+        src="https://static001.geekbang.org/resource/image/8e/67/8ee9f2fa987eccb490cfaa91c6484f67.png"
+        alt title="Kubernetes项目架构">
+      </a>
+    </div>
+  </div>
+  
+
+</div>
+
+<ul>
+<li>OCI: Open Container Initiative</li>
+<li>CNI: Container Network Interface</li>
+<li>CRI: Container Runtime Interface</li>
+<li>CSI: Container Storage Interface</li>
+</ul>
+<p>使用环境Windows。</p>
+<h3 id="wsl2--kubernetes">WSL2 + Kubernetes</h3>
+<p><a href="https://www.qikqiak.com/post/deploy-k8s-on-win-use-wsl2">在 Windows 下使用 WSL2 搭建 Kubernetes 集群</a></p>
+<ul>
+<li>安装商店里的<code>windows terminal</code></li>
+<li>更新ubuntu的软件源</li>
+</ul>
+<pre><code>cp /etc/apt/sources.list /etc/apt/sources.list.bak
+root@k8s:~# echo &quot;deb http://mirrors.aliyun.com/ubuntu/ focal main restricted
+deb http://mirrors.aliyun.com/ubuntu/ focal-updates main restricted
+deb http://mirrors.aliyun.com/ubuntu/ focal universe
+deb http://mirrors.aliyun.com/ubuntu/ focal-updates universe
+deb http://mirrors.aliyun.com/ubuntu/ focal multiverse
+deb http://mirrors.aliyun.com/ubuntu/ focal-updates multiverse
+deb http://mirrors.aliyun.com/ubuntu/ focal-backports main restricted universe multiverse
+deb http://mirrors.aliyun.com/ubuntu/ focal-security main restricted
+deb http://mirrors.aliyun.com/ubuntu/ focal-security universe
+deb http://mirrors.aliyun.com/ubuntu/ focal-security multiverse&quot; &gt; /etc/apt/sources.list
+</code></pre><ul>
+<li>kind可以从github上下载后手动安装——本身是go编译的二进制文件</li>
+<li>但kind安装kubernetes集群时使用的是编译发布在hub.docker.com上的镜像，WSL2里遇到网络问题</li>
+</ul>
+<blockquote>
+<p>This will bootstrap a Kubernetes cluster using a pre-built <a href="https://kind.sigs.k8s.io/docs/design/node-image">node image</a>. Prebuilt images are hosted at<a href="https://hub.docker.com/r/kindest/node/"><code>kindest/node</code></a></p>
+</blockquote>
+<pre><code>root@Gebitang:/home/geb# kind create cluster --name wslk8s
+Creating cluster &quot;wslk8s&quot; ...
+ ✓ Ensuring node image (kindest/node:v1.21.1) 🖼
+ ✓ Preparing nodes 📦
+ ✓ Writing configuration 📜
+ ✓ Starting control-plane 🕹️
+ ✓ Installing CNI 🔌
+ ✓ Installing StorageClass 💾
+Set kubectl context to &quot;kind-wslk8s&quot;
+You can now use your cluster with:
+
+kubectl cluster-info --context kind-wslk8s
+
+Thanks for using kind! 😊
+</code></pre><p>重新使用<code>kubeadm</code>进行安装：</p>
+<ul>
+<li>需要先将apt-key.gpg证书导入<code>curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add -</code>。可以先将文件下载到本地，然后<code>cat apt-get.gpg | apt-key add -</code></li>
+<li>添加镜像源到列表：在<code>/etc/apt/sources.list.d/</code>目录下创建<code>kubernetes.list</code>文件，内容为<code>deb http://mirrors.ustc.edu.cn/kubernetes/apt kubernetes-xenial main</code></li>
+<li>执行<code>apt-get update &amp;&amp; apt-get install -y kubeadm</code></li>
+</ul>
+<p>执行<code>kubeadm version</code>返回信息。</p>
+<h3 id="errors-were-encountered-while-processing--ubuntu-advantage-tools">Errors were encountered while processing:  ubuntu-advantage-tools</h3>
+<p>ubuntu20.04执行<code>apt-get upgrade</code>时遇到类似上面的问题，看起来是个<a href="https://bugs.launchpad.net/ubuntu/+source/ubuntu-advantage-tools/+bug/1938097">bug</a>，官方提示修复方式：</p>
+<ul>
+<li>编辑<code>/var/lib/dpkg/info/ubuntu-advantage-tools.postinst</code></li>
+<li>执行<code>dpkg --configure -a</code></li>
+</ul>
+<pre><code>I think the problem is in the postinst script, line 295:
+
+    cloud_id=&quot;&quot;
+    if command -v &quot;cloud-id&quot; &gt; /dev/null ; then
+      cloud_id=$(cloud-id)
+    fi
+
+The third line should rather be:
+
+      cloud_id=$(cloud-id || true)
+</code></pre><p>根据<a href="https://edu.aliyun.com/roadmap/cloudnative">云原生技术基础</a>的<a href="https://edu.aliyun.com/lesson_1651_16894">第三课的demo</a></p>
+<h3 id="前提环境">前提环境</h3>
+<p>三件套：VirturalBox、kubectl、minikube。</p>
+<ul>
+<li>
+<p>安装 VirtualBox： <a href="https://www.virtualbox.org/wiki/Downloads">https://www.virtualbox.org/wiki/Downloads</a></p>
+</li>
+<li>
+<p>安装<a href="https://kubernetes.io/docs/tasks/tools/install-kubectl/#install-kubectl-on-windows">kubectl on windows</a></p>
+</li>
+</ul>
+<p>下载、添加PATH、验证版本</p>
+<ol>
+<li>
+<p>Download the latest release v1.18.0 from <a href="https://storage.googleapis.com/kubernetes-release/release/v1.18.0/bin/windows/amd64/kubectl.exe">this link</a>.</p>
+<p>Or if you have <code>curl</code> installed, use this command:</p>
+<pre><code>curl -LO https://storage.googleapis.com/kubernetes-release/release/v1.18.0/bin/windows/amd64/kubectl.exe
+</code></pre><p>To find out the latest stable version (for example, for scripting), take a look at <a href="https://storage.googleapis.com/kubernetes-release/release/stable.txt">https://storage.googleapis.com/kubernetes-release/release/stable.txt</a>.</p>
+</li>
+<li>
+<p>Add the binary in to your PATH.</p>
+</li>
+<li>
+<p>Test to ensure the version of <code>kubectl</code> is the same as downloaded:</p>
+<pre><code>kubectl version --client
+</code></pre></li>
+</ol>
+<ul>
+<li>安装minikube，<a href="https://kubernetes.io/docs/tasks/tools/install-minikube/">原生安装</a>，<a href="https://developer.aliyun.com/article/221687">aliyun: Minikube - Kubernetes本地实验环境</a></li>
+</ul>
+<p>先进行系统检测<code>systeminfo</code></p>
+<pre><code>Hyper-V Requirements:     A hypervisor has been detected. Features required for Hyper-V will not be displayed.
+Hyper-V 要求:     已检测到虚拟机监控程序。将不显示 Hyper-V 所需的功能。
+</code></pre><hr>
+<p>启动命令： <code>minikube start --driver virtualbox</code></p>
+<pre><code>D:\&gt;minikube start --driver=virtualbox
+* Microsoft Windows 10 Education 10.0.18363 Build 18363 上的 minikube v1.12.3
+* 根据现有的配置文件使用 virtualbox 驱动程序
+* Starting control plane node minikube in cluster minikube
+* Creating virtualbox VM (CPUs=4, Memory=6000MB, Disk=20000MB) ...
+! StartHost failed, but will try again: creating host: create: precreate: This computer is running Hyper-V. VirtualBox won't boot a 64bits VM when Hyper-V is activated. Either use Hyper-V as a driver, or disable the Hyper-V hypervisor. (To skip this check, use --virtualbox-no-vtx-check)
+* Creating virtualbox VM (CPUs=4, Memory=6000MB, Disk=20000MB) ...
+* Failed to start virtualbox VM. &quot;minikube start&quot; may fix it: creating host: create: precreate: This computer is running Hyper-V. VirtualBox won't boot a 64bits VM when Hyper-V is activated. Either use Hyper-V as a driver, or disable the Hyper-V hypervisor. (To skip this check, use --virtualbox-no-vtx-check)
+*
+E0821 17:24:38.091674   11324 exit.go:76] &amp;{ID:VBOX_HYPERV_64_BOOT Err:This computer is running Hyper-V. VirtualBox won't boot a 64bits VM when Hyper-V is activated. Either use Hyper-V as a driver, or disable the Hyper-V hypervisor. (To skip this check, use --virtualbox-no-vtx-check)
+precreate
+k8s.io/minikube/pkg/minikube/machine.(*LocalClient).Create
+        /app/pkg/minikube/machine/client.go:225
+k8s.io/minikube/pkg/minikube/machine.timedCreateHost.func2
+        /app/pkg/minikube/machine/start.go:188
+runtime.goexit
+        /usr/local/go/src/runtime/asm_amd64.s:1373
+create
+k8s.io/minikube/pkg/minikube/machine.timedCreateHost
+        /app/pkg/minikube/machine/start.go:197
+k8s.io/minikube/pkg/minikube/machine.createHost
+        /app/pkg/minikube/machine/start.go:163
+k8s.io/minikube/pkg/minikube/machine.StartHost
+        /app/pkg/minikube/machine/start.go:86
+k8s.io/minikube/pkg/minikube/node.startHost
+        /app/pkg/minikube/node/start.go:401
+k8s.io/minikube/pkg/minikube/node.startMachine
+        /app/pkg/minikube/node/start.go:345
+k8s.io/minikube/pkg/minikube/node.Provision
+        /app/pkg/minikube/node/start.go:234
+k8s.io/minikube/cmd/minikube/cmd.provisionWithDriver
+        /app/cmd/minikube/cmd/start.go:275
+k8s.io/minikube/cmd/minikube/cmd.runStart
+        /app/cmd/minikube/cmd/start.go:169
+github.com/spf13/cobra.(*Command).execute
+        /go/pkg/mod/github.com/spf13/cobra@v1.0.0/command.go:846
+github.com/spf13/cobra.(*Command).ExecuteC
+        /go/pkg/mod/github.com/spf13/cobra@v1.0.0/command.go:950
+github.com/spf13/cobra.(*Command).Execute
+        /go/pkg/mod/github.com/spf13/cobra@v1.0.0/command.go:887
+k8s.io/minikube/cmd/minikube/cmd.Execute
+        /app/cmd/minikube/cmd/root.go:106
+main.main
+        /app/cmd/minikube/main.go:71
+runtime.main
+        /usr/local/go/src/runtime/proc.go:203
+runtime.goexit
+        /usr/local/go/src/runtime/asm_amd64.s:1373
+creating host
+k8s.io/minikube/pkg/minikube/machine.createHost
+        /app/pkg/minikube/machine/start.go:164
+k8s.io/minikube/pkg/minikube/machine.StartHost
+        /app/pkg/minikube/machine/start.go:86
+k8s.io/minikube/pkg/minikube/node.startHost
+        /app/pkg/minikube/node/start.go:401
+k8s.io/minikube/pkg/minikube/node.startMachine
+        /app/pkg/minikube/node/start.go:345
+k8s.io/minikube/pkg/minikube/node.Provision
+        /app/pkg/minikube/node/start.go:234
+k8s.io/minikube/cmd/minikube/cmd.provisionWithDriver
+        /app/cmd/minikube/cmd/start.go:275
+k8s.io/minikube/cmd/minikube/cmd.runStart
+        /app/cmd/minikube/cmd/start.go:169
+github.com/spf13/cobra.(*Command).execute
+        /go/pkg/mod/github.com/spf13/cobra@v1.0.0/command.go:846
+github.com/spf13/cobra.(*Command).ExecuteC
+        /go/pkg/mod/github.com/spf13/cobra@v1.0.0/command.go:950
+github.com/spf13/cobra.(*Command).Execute
+        /go/pkg/mod/github.com/spf13/cobra@v1.0.0/command.go:887
+k8s.io/minikube/cmd/minikube/cmd.Execute
+        /app/cmd/minikube/cmd/root.go:106
+main.main
+        /app/cmd/minikube/main.go:71
+runtime.main
+        /usr/local/go/src/runtime/proc.go:203
+runtime.goexit
+        /usr/local/go/src/runtime/asm_amd64.s:1373
+Failed to start host
+k8s.io/minikube/pkg/minikube/node.startMachine
+        /app/pkg/minikube/node/start.go:347
+k8s.io/minikube/pkg/minikube/node.Provision
+        /app/pkg/minikube/node/start.go:234
+k8s.io/minikube/cmd/minikube/cmd.provisionWithDriver
+        /app/cmd/minikube/cmd/start.go:275
+k8s.io/minikube/cmd/minikube/cmd.runStart
+        /app/cmd/minikube/cmd/start.go:169
+github.com/spf13/cobra.(*Command).execute
+        /go/pkg/mod/github.com/spf13/cobra@v1.0.0/command.go:846
+github.com/spf13/cobra.(*Command).ExecuteC
+        /go/pkg/mod/github.com/spf13/cobra@v1.0.0/command.go:950
+github.com/spf13/cobra.(*Command).Execute
+        /go/pkg/mod/github.com/spf13/cobra@v1.0.0/command.go:887
+k8s.io/minikube/cmd/minikube/cmd.Execute
+        /app/cmd/minikube/cmd/root.go:106
+main.main
+        /app/cmd/minikube/main.go:71
+runtime.main
+        /usr/local/go/src/runtime/proc.go:203
+runtime.goexit
+        /usr/local/go/src/runtime/asm_amd64.s:1373 Advice:VirtualBox and Hyper-V are having a conflict. Use '--driver=hyperv' or disable Hyper-V using: 'bcdedit /set hypervisorlaunchtype off' URL: Issues:[4051 4783] ShowIssueLink:false}
+* [VBOX_HYPERV_64_BOOT] error provisioning host Failed to start host: creating host: create: precreate: This computer is running Hyper-V. VirtualBox won't boot a 64bits VM when Hyper-V is activated. Either use Hyper-V as a driver, or disable the Hyper-V hypervisor. (To skip this check, use --virtualbox-no-vtx-check)
+* 建议：VirtualBox and Hyper-V are having a conflict. Use '--driver=hyperv' or disable Hyper-V using: 'bcdedit /set hypervisorlaunchtype off'
+* 相关问题：
+  - https://github.com/kubernetes/minikube/issues/4051
+  - https://github.com/kubernetes/minikube/issues/4783
+
+</code></pre><p>报错信息还是很清楚，运行时冲突：</p>
+<ul>
+<li>使用管理员权限执行<code>bcdedit /set hypervisorlaunchtype off</code>，成功后，还是提示相同的问题。</li>
+<li>使用<code>--virtualbox-no-vtx-check</code> 提示这个<code>Error: unknown flag: --virtualbox-no-vtx-check</code> 可以See <code>minikube start --help' for usage.</code></li>
+</ul>
+<p>果然，现在的参数是<code>--no-vtx-check=true</code>。所以完整的参数应该是<code>minikube start --driver=virtualbox --no-vtx-check=true</code></p>
+<p>不幸的时，还是遇到问题了</p>
+<pre><code>PS D:\&gt; minikube start --driver=virtualbox --no-vtx-check=true
+* Microsoft Windows 10 Education 10.0.18363 Build 18363 上的 minikube v1.12.3
+* 根据现有的配置文件使用 virtualbox 驱动程序
+* Starting control plane node minikube in cluster minikube
+* Creating virtualbox VM (CPUs=4, Memory=6000MB, Disk=20000MB) ...
+* 正在 Docker 19.03.12 中准备 Kubernetes v1.18.3…
+* Unable to load cached images: loading cached images: transferring cached image: sudo test -d /var/lib/minikube/images &amp;&amp; sudo scp -t /var/lib/minikube/images &amp;&amp; sudo touch -d &quot;2020-08-21 17:31:20.5418176 +0800&quot; /var/lib/minikube/images/etcd_3.4.3-0: wait: remote command exited without exit status or exit signal
+output:
+...
+stdout:
+
+stderr:
+fatal error: index out of range
+runtime: panic before malloc heap initialized
+
+</code></pre><p>执行<code>bcdedit /set hypervisorlaunchtype off</code>之后出现docker无法启动情况？管理员权限执行<code>bcdedit /Set {current} hypervisorlaunchtype auto</code>恢复初始值，执行<code>bcdedit</code>可看到全部配置信息。</p>
+<p>自动提示链接为<a href="https://docs.docker.com/docker-for-windows/troubleshoot/#virtualization-must-be-enabled">VIRTUALIZATION MUST BE ENABLED</a>，但检查是符合要求的。重启后再看吧。接着先往下学课程。</p>
+
+  
+  
+
+  
+<div class="prev-next-post pure-g">
+  <div class="pure-u-1-24" style="text-align: left;">
+    
+    <a href="http://gebitang.com/post/how/open-grok/"><i class="fa fa-chevron-left"></i></a>
+    
+  </div>
+  <div class="pure-u-10-24">
+    
+    <nav class="prev">
+      <a href="http://gebitang.com/post/how/open-grok/">部署验证OpenGrok</a>
+    </nav>
+    
+  </div>
+  <div class="pure-u-2-24">
+    &nbsp;
+  </div>
+  <div class="pure-u-10-24">
+    
+    <nav class="next">
+      <a href="http://gebitang.com/post/daily-updates/">Daily Playground</a>
+    </nav>
+    
+  </div>
+  <div class="pure-u-1-24" style="text-align: right;">
+    
+    <a href="http://gebitang.com/post/daily-updates/"><i class="fa fa-chevron-right"></i></a>
+    
+  </div>
+</div>
+
+
+
+  
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+
+(function() {
+    
+    
+    if (window.location.hostname == "localhost")
+        return;
+
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    var disqus_shortname = 'gebitang';
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com/" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+</div>
+
+</div>
+</div>
+<script src="http://gebitang.com/js/ui.js"></script>
+<script src="http://gebitang.com/js/menus.js"></script>
+
+
+<script>
+  
+  if (window.location.hostname != "localhost") {
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-34303694-1', 'auto');
+    ga('send', 'pageview');
+  }
+</script>
+
+
+
+
+<button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
+</body>
+</html>
+

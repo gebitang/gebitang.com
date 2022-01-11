@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html xmlns:wb="http://open.weibo.com/wb" lang="en" >
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="ideA problems">
+  <meta name="generator" content="Hugo 0.74.3" />
+
+  <title>IDEA issues &middot; 戈壁堂</title>
+
+    
+
+  
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/pure-min.css">
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-old-ie-min.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-min.css">
+  <!--<![endif]-->
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="http://gebitang.com/css/side-menu-old-ie.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="http://gebitang.com/css/side-menu.css">
+  <!--<![endif]-->
+
+  <link rel="stylesheet" href="http://gebitang.com/css/blackburn.css">
+
+  
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.9.0/css/all.css">
+
+  
+  <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet" type="text/css">
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+ 
+  
+
+  
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/androidstudio.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+  
+  <script>hljs.initHighlightingOnLoad();</script>
+  
+
+  <link rel="shortcut icon" href="http://gebitang.com/img/favicon.ico" type="image/x-icon" />
+
+  
+    
+        <link rel="stylesheet" href="http://gebitang.com/css/my.css">
+    
+  
+  
+    
+        <script src="http://gebitang.com/js/my.js"></script>
+    
+  
+
+</head>
+
+
+<body>
+<div id="layout">
+
+  
+<a href="#menu" id="menuLink" class="menu-link">
+  
+  <span></span>
+</a>
+<div id="menu">
+
+  
+  <a class="pure-menu-heading brand" href="http://gebitang.com/">Gebitang</a>
+
+
+  <div class="pure-menu">
+    <ul class="pure-menu-list">
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="http://gebitang.com/"><i class='fa fa-home fa-fw'></i>Home</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="http://gebitang.com/post/"><i class='fa fa-list fa-fw'></i>Posts</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="http://gebitang.com/about/"><i class='fa fa-user fa-fw'></i>About</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="http://gebitang.com/contact/"><i class='fa fa-phone fa-fw'></i>Contact</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="http://gebitang.com/tags/"><i class='fa fa-tags fa-fw'></i>Tags</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="http://gebitang.com/topics/"><i class='fa fa-folder fa-fw'></i>Topics</a>
+      
+        </li>
+      
+    </ul>
+  </div>
+
+  <div class="pure-menu social">
+  <ul class="pure-menu-list">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+  </ul>
+</div>
+
+
+  <div>
+
+  <div class="small-print">
+  	<small>
+    <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="知识共享许可协议" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/80x15.png" /></a><br/>本<span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" rel="dct:type">作品</span>由<a xmlns:cc="http://creativecommons.org/ns#" href="http://gebitang.com" property="cc:attributionName" rel="cc:attributionURL">&nbsp;Gebitang&nbsp;&nbsp;</a>采用<a rel="license" href="http://creativecommons.org/licenses/by/4.0/">知识共享署名 4.0 国际许可协议</a>进行许可&nbsp;&copy; 2018
+    </small>
+
+  </div>
+
+  <div class="small-print">
+    <small></small>
+  </div>
+  <div class="small-print">
+    <small>Built with&nbsp;<a href="https://gohugo.io/" target="_blank">Hugo</a></small>
+    <small>Theme&nbsp;<a href="https://github.com/yoshiharuyamashita/blackburn" target="_blank">Blackburn</a></small>
+  </div>
+
+  <div style="display:none">
+  <div class="small-print">
+    <small>
+    <wb:follow-button uid="2446212465" type="red_1" width="67" height="24"></wb:follow-button>
+  </small>
+  </div>
+  </div>
+
+</div>
+
+</div>
+
+
+  <div id="main">
+
+
+<div class="header">
+  <h1>IDEA issues</h1>
+  <h2>ideA problems</h2>
+</div>
+<div class="content">
+
+  <div class="post-meta">
+
+  <div>
+    <i class="fa fa-calendar fa-fw"></i>
+    <time>2018-06-17</time>
+  </div>
+
+  
+
+  
+  
+  
+  <div>
+    <i class="fa fa-folder fa-fw"></i>
+    
+      <a class="post-taxonomy-topic" href="http://gebitang.com/topics/work">work</a>
+    
+  </div>
+  
+  
+
+  
+  
+  
+  <div>
+    <i class="fa fa-tags fa-fw"></i>
+    
+      <a class="post-taxonomy-tag" href="http://gebitang.com/tags/ide">ide</a>&nbsp;&#47;
+    
+      <a class="post-taxonomy-tag" href="http://gebitang.com/tags/work">work</a>
+    
+  </div>
+  
+  
+
+</div>
+
+  
+	<nav id="TableOfContents">
+  <ul>
+    <li><a href="#idea">IDEA</a>
+      <ul>
+        <li><a href="#异常断电导致无法启动">异常断电导致无法启动</a></li>
+        <li><a href="#折叠代码">折叠代码</a></li>
+        <li><a href="#相对路径问题">相对路径问题</a></li>
+        <li><a href="#使用本地文件作为依赖的源码">使用本地文件作为依赖的源码</a></li>
+        <li><a href="#个人正版支持多个设备使用">个人正版支持多个设备使用</a></li>
+        <li><a href="#将ide以及工程目录添加到信任区">将IDE以及工程目录添加到信任区</a></li>
+        <li><a href="#自动清除import-ctrlalto">自动清除import <code>ctrl+alt+o</code></a></li>
+        <li><a href="#desktop-entry">Desktop Entry</a></li>
+        <li><a href="#全屏显示-view---enter-full-screen">全屏显示 view -&gt; enter full screen</a></li>
+        <li><a href="#查找类方法快捷键">查找类方法快捷键</a></li>
+        <li><a href="#linux环境下提示-external-changes-too-low">linux环境下提示 “external changes too low”</a></li>
+        <li><a href="#找不到jar包的异常">找不到jar包的异常</a>
+          <ul>
+            <li><a href="#jar包依赖">jar包依赖</a></li>
+            <li><a href="#gui依赖">gui依赖</a></li>
+          </ul>
+        </li>
+        <li><a href="#修改terminal的显示大小">修改terminal的显示大小</a></li>
+        <li><a href="#find-usages-not-working">&ldquo;find usages&rdquo; not working</a></li>
+        <li><a href="#idea-import-">idea import *</a></li>
+        <li><a href="#errorjava-compilation-failed-internal-java-compiler-error">Error:java: Compilation failed: internal java compiler error</a></li>
+        <li><a href="#log4j生成的log内容时间与系统时间不匹配">Log4j生成的log内容时间与系统时间不匹配</a></li>
+        <li><a href="#slice2java-ice生成java文件">slice2java ice生成java文件</a></li>
+        <li><a href="#it-is-indirectly-referenced-from-required-class-files">It is indirectly referenced from required .class files</a></li>
+        <li><a href="#cannot-be-resolved-to-a-type">cannot be resolved to a type</a></li>
+        <li><a href="#设置背景图片">设置背景图片</a></li>
+        <li><a href="#全屏模式">全屏模式</a></li>
+        <li><a href="#idea-不显示gradle工具栏">idea 不显示gradle工具栏</a></li>
+        <li><a href="#lombok-注解不生效">lombok 注解不生效</a></li>
+        <li><a href="#其他idea时提示端口占用问题">其他IDEA时提示端口占用问题</a></li>
+        <li><a href="#cannot-resolve-symbol">cannot resolve symbol</a></li>
+        <li><a href="#打开uiautomator类型的源码项目">打开uiautomator类型的源码项目</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  
+
+  <h2 id="idea">IDEA</h2>
+<h3 id="异常断电导致无法启动">异常断电导致无法启动</h3>
+<p>重启PC后报错<code>Internal error. Please refer to https://jb.gg/ide/critical-startup-errors</code>，<code>Caused by: java.net.BindException: Address already in use: bind</code>，<code>java.util.concurrent.CompletionException: java.net.BindException: Address already in use: bind</code>，详细报错——</p>
+<pre><code>Internal error. Please refer to https://jb.gg/ide/critical-startup-errors
+
+java.util.concurrent.CompletionException: java.net.BindException: Address already in use: bind
+    at java.base/java.util.concurrent.CompletableFuture.encodeThrowable(CompletableFuture.java:314)
+    at java.base/java.util.concurrent.CompletableFuture.completeThrowable(CompletableFuture.java:319)
+    at java.base/java.util.concurrent.CompletableFuture$AsyncSupply.run(CompletableFuture.java:1702)
+    at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+    at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+    at java.base/java.util.concurrent.Executors$PrivilegedThreadFactory$1$1.run(Executors.java:668)
+    at java.base/java.util.concurrent.Executors$PrivilegedThreadFactory$1$1.run(Executors.java:665)
+    at java.base/java.security.AccessController.doPrivileged(Native Method)
+    at java.base/java.util.concurrent.Executors$PrivilegedThreadFactory$1.run(Executors.java:665)
+    at java.base/java.lang.Thread.run(Thread.java:829)
+Caused by: java.net.BindException: Address already in use: bind
+    at java.base/sun.nio.ch.Net.bind0(Native Method)
+    at java.base/sun.nio.ch.Net.bind(Net.java:455)
+    at java.base/sun.nio.ch.Net.bind(Net.java:447)
+    at java.base/sun.nio.ch.ServerSocketChannelImpl.bind(ServerSocketChannelImpl.java:227)
+    at io.netty.channel.socket.nio.NioServerSocketChannel.doBind(NioServerSocketChannel.java:134)
+    at io.netty.channel.AbstractChannel$AbstractUnsafe.bind(AbstractChannel.java:550)
+    at io.netty.channel.DefaultChannelPipeline$HeadContext.bind(DefaultChannelPipeline.java:1334)
+    at io.netty.channel.AbstractChannelHandlerContext.invokeBind(AbstractChannelHandlerContext.java:506)
+    at io.netty.channel.AbstractChannelHandlerContext.bind(AbstractChannelHandlerContext.java:491)
+    at io.netty.channel.DefaultChannelPipeline.bind(DefaultChannelPipeline.java:973)
+    at io.netty.channel.AbstractChannel.bind(AbstractChannel.java:248)
+    at io.netty.bootstrap.AbstractBootstrap$2.run(AbstractBootstrap.java:356)
+    at io.netty.util.concurrent.AbstractEventExecutor.safeExecute(AbstractEventExecutor.java:164)
+    at io.netty.util.concurrent.SingleThreadEventExecutor.runAllTasks(SingleThreadEventExecutor.java:472)
+    at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:500)
+    at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:989)
+    at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
+    at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+    ... 1 more
+
+-----
+Your JRE: 11.0.11+9-b1341.57 amd64 (JetBrains s.r.o.)
+C:\Program Files\JetBrains\IntelliJ IDEA 2019.2.3\jbr
+</code></pre><p><a href="https://intellij-support.jetbrains.com/hc/en-us/articles/360007568559">Start Failed, Internal error</a>，官方答复临时<a href="https://youtrack.jetbrains.com/issue/IDEA-238995">解决方案</a></p>
+<p>原因是因为本地端口都被占用了，这种情况下，异常断电导致系统没有释放上次依然在使用中的端口。暴力处理，管理员权限cmd命令执行<code>net stop winnat</code>关闭nat，重启nat<code>net start winnat</code></p>
+<p>因为ide启动时会试图使用这些端口：<code>If all the 50 ports between 6942 and 6991 are reserved, taken by the other apps or firewall doesn't allow IDE to bind on them, startup fails with the following exception:</code>，如有已经被占用，重启这些端口服务。</p>
+<p><em>另外，终极重启大法也好使</em></p>
+<h3 id="折叠代码">折叠代码</h3>
+<p><a href="https://www.jetbrains.com/help/idea/working-with-source-code.html#code_folding">Code folding</a></p>
+<ul>
+<li>折叠鼠标所在代码块：<code>Ctrl+NumPad +</code>或者 <code>Ctrl + plus</code>；反向操作<code>Ctrol + NumPad -</code>或<code>Ctrl + minus</code></li>
+<li>折叠当前类/文件所有代码块：<code>Ctrl + Shife + NumPad +</code> 依次类推</li>
+</ul>
+<h3 id="相对路径问题">相对路径问题</h3>
+<p>默认的工作路径不同导致相同代码在Eclipse上通过，但IDEA下执行失败。 找不到路径</p>
+<p>查看当前路径——</p>
+<pre><code>File file = new File(&quot;.&quot;);
+for(String fileNames : file.list())
+    System.out.println(fileNames);
+</code></pre><p>对应多模块项目来说——</p>
+<ul>
+<li>Eclipse默认是当前模块所在的路径</li>
+<li>idea默认的是当前项目所在的路径。可以在<code>run -&gt; edit configurations -&gt; working directory</code>配置下修改工作目录</li>
+</ul>
+<h3 id="使用本地文件作为依赖的源码">使用本地文件作为依赖的源码</h3>
+<p><code>Project Settings</code> &ndash;&gt; <code>Libraries</code> &ndash;&gt; 选中对应的jar包，右侧添加<code>Source</code>选中本地文件夹(项目的src文件夹)</p>
+<h3 id="个人正版支持多个设备使用">个人正版支持多个设备使用</h3>
+<p><a href="https://sales.jetbrains.com/hc/en-gb/articles/206544319-Can-I-use-my-personal-license-on-multiple-machines-">Can I use my personal license on multiple machines?</a></p>
+<p>趁着<a href="https://www.jetbrains.com/zh-cn/lp/programmers-day/">1024节日活动</a>，购买了第一份license for IDEA Ultimate</p>
+<h3 id="将ide以及工程目录添加到信任区">将IDE以及工程目录添加到信任区</h3>
+<p><a href="https://intellij-support.jetbrains.com/hc/en-us/articles/360006298560">Antivirus Impact on Build Speed</a>，这篇文章里可以链接到：社区版本的源码库、</p>
+<p>将对应的文件夹、exe文件添加到信任区。</p>
+<p><a href="https://intellij-support.jetbrains.com/hc/en-us/articles/207240985">Changing IDE default directories used for config, plugins, and caches storage</a>修改默认的目录地址。</p>
+<h3 id="自动清除import-ctrlalto">自动清除import <code>ctrl+alt+o</code></h3>
+<p>配置方法: settings-general-auto import-java项，勾选optimize imports on the fly，在当前项目下会自动清除无效的import。</p>
+<h3 id="desktop-entry">Desktop Entry</h3>
+<p>在Application列表中展示</p>
+<p><code>Tools -&gt; Generate Desktop Entry</code></p>
+<h3 id="全屏显示-view---enter-full-screen">全屏显示 view -&gt; enter full screen</h3>
+<h3 id="查找类方法快捷键">查找类方法快捷键</h3>
+<p>默认为 Ctrl+F12，可修改：
+settings -&gt; keymap -&gt; Main Menu -&gt; Navigate -&gt; File Structure</p>
+<p>所有快捷键都可以从这里进行对于的修改</p>
+<h3 id="linux环境下提示-external-changes-too-low">linux环境下提示 “external changes too low”</h3>
+<p><a href="https://confluence.jetbrains.com/display/IDEADEV/Inotify+Watches+Limit">Inotify Watches Limit</a></p>
+<pre><code>#1. Add the following line to either /etc/sysctl.conf file or a new *.conf file (e.g. idea.conf) under /etc/sysctl.d/ directory:
+fs.inotify.max_user_watches = 524288
+#2. Then run this command to apply the change:
+sudo sysctl -p --system
+</code></pre><h3 id="找不到jar包的异常">找不到jar包的异常</h3>
+<p>工程A直接依赖jarA，但jarA依赖jarB，此时如果jarB没有正常引入：</p>
+<h4 id="jar包依赖">jar包依赖</h4>
+<p>执行主线程将“跑飞”，但不会有任何提示（期待的报错如：java.lang.ClassNotFoundException:xxx 不会显示）
+如：runner中对jarchivelib的依赖</p>
+<h4 id="gui依赖">gui依赖</h4>
+<p>主线程不会有任何提示。 如果jarA和jarB都没有导入，则会提示java.lang.ClassNotFoundException</p>
+<p>如：Gluon Scene Builder打开 引入了<code>de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView</code>的fxml文件</p>
+<p>需要引入依赖：<a href="https://stackoverflow.com/a/30078204/1087122">Adding a custom component to SceneBuilder 2.0</a></p>
+<p>PS: 也可以将导入的jar包直接导入GSB的lib目录，通常为 <code>%HOME_USER%\AppData\Roaming\Scene Builder\Library</code></p>
+<h3 id="修改terminal的显示大小">修改terminal的显示大小</h3>
+<p><a href="https://intellij-support.jetbrains.com/hc/en-us/community/posts/206381169-Terminal-Line-Buffer-increase">Terminal Line Buffer increase</a></p>
+<p>Help/Find action, type &lsquo;registry&rsquo; (it&rsquo;s IDE&rsquo;s internal registry (hidden settings, if you wish)), search the registry for <code>terminal.buffer.max.lines.count</code>.</p>
+<h3 id="find-usages-not-working">&ldquo;find usages&rdquo; not working</h3>
+<p>import异常&quot;cannot resolve symbol&rdquo;；方法、变量的调用不再有效；所有方法认为“never used”。 原因：异常关闭导致的工程的index错乱</p>
+<p><code>File --&gt; Invalidate Caches and restart</code> 重启后会重新建立index，比较耗时。</p>
+<h3 id="idea-import-">idea import *</h3>
+<pre><code>Setting -- Editor -- Code Style -- Java -- Imports -- Class count to use import with '*':
+</code></pre><h3 id="errorjava-compilation-failed-internal-java-compiler-error">Error:java: Compilation failed: internal java compiler error</h3>
+<p>设置里的java complier设置与当前工程的设置冲突造成的</p>
+<h3 id="log4j生成的log内容时间与系统时间不匹配">Log4j生成的log内容时间与系统时间不匹配</h3>
+<p>启动时指定Java参数 -Duser.timezone=GMT+08</p>
+<h3 id="slice2java-ice生成java文件">slice2java ice生成java文件</h3>
+<p>根据具体的.ice文件，执行命令</p>
+<pre><code>slice2java --output-dir=output/dir/path xxx.ice
+</code></pre><h3 id="it-is-indirectly-referenced-from-required-class-files">It is indirectly referenced from required .class files</h3>
+<p><a href="http://blog.csdn.net/hello_yz/article/details/40113213">参考</a></p>
+<ul>
+<li>jdk版本问题</li>
+<li>如果是在IDEA中，在Project Structure中对几个项目使用的jdk版本做统一处理</li>
+</ul>
+<h3 id="cannot-be-resolved-to-a-type">cannot be resolved to a type</h3>
+<p><a href="http://blog.csdn.net/testcs_dn/article/details/39643119">参考</a></p>
+<ul>
+<li>JDK版本不匹配</li>
+<li>jar包缺失或冲突</li>
+</ul>
+<h3 id="设置背景图片">设置背景图片</h3>
+<p>Ctrl+Shift+A (Help -&gt; Find Action) &ndash;&gt; Set background image.</p>
+<h3 id="全屏模式">全屏模式</h3>
+<p>Ctrl+Alt+S (in Settings) &ndash;&gt; Search &ldquo;full screen&rdquo; (Toggle Full Screen mode) &ndash;&gt; add new keymap.</p>
+<p>for me, it&rsquo;s <code>Ctrl+Shift+G</code></p>
+<h3 id="idea-不显示gradle工具栏">idea 不显示gradle工具栏</h3>
+<p><a href="https://intellij-support.jetbrains.com/hc/en-us/community/posts/205449130-gradle-tool-window-missing">gradle tool window missing</a>， 先手动创建一个gradle类型的工程后，gradle工具栏会显示出来，之后再导入gradle工程。</p>
+<h3 id="lombok-注解不生效">lombok 注解不生效</h3>
+<p>前提需要安装lombok插件：<code>ctrl+alt+s</code>（或者<code>file-&gt;settings</code>）搜索lombok，安装后重启生效</p>
+<h3 id="其他idea时提示端口占用问题">其他IDEA时提示端口占用问题</h3>
+<p>Start Failed, Internal error: recovering IDE to the working state after the critical <a href="https://intellij-support.jetbrains.com/hc/en-us/articles/360007568559">startup error</a></p>
+<p>这里的解决方案并未生效，差点就重装了。重启电脑后可以正常启动，怀疑是上次有server在运行中，强制关机导致的。端口一直没有释放，需要使用 <code>netstat -ano | findstr 28000</code> + <code>taskkill /F /PID 3223(端口号)</code>配合检查一下是否有端口真正被占用。</p>
+<pre><code>Address already in use
+...
+---
+JRE 11.0.4+10-b304.69 amd64 by JetBrains s.r.o C:\Program Files\JetBrains\IntelliJ IDEA 2019.2.3\jbr
+</code></pre><h3 id="cannot-resolve-symbol">cannot resolve symbol</h3>
+<p>代码中的类明明在，却找不到。看起来是个<a href="https://stackoverflow.com/questions/5905896/intellij-inspection-gives-cannot-resolve-symbol-but-still-compiles-code">普遍问题</a></p>
+<p>尝试操作包括：</p>
+<ul>
+<li>File &ndash; Settings &ndash; Invalid Cache and Restart</li>
+<li>Re-Import all Maven projects</li>
+<li>manage projects：删除当前有问题的项目，重新导入，导入时选择删除已有的项目重新导入 （work for me this way）</li>
+</ul>
+<h3 id="打开uiautomator类型的源码项目">打开uiautomator类型的源码项目</h3>
+<p>针对project settings：</p>
+<ul>
+<li>Project</li>
+<li>Modules</li>
+<li>Libraries</li>
+<li>Facets</li>
+<li>Artifacts</li>
+</ul>
+<p>关注前三个——</p>
+<p><strong>Project</strong>：</p>
+<p>配置对应的SDK、语言级别、编译输出的目录</p>
+<p><strong>Modules</strong>：</p>
+<p>选择Sources对应的目录（src），否则打开源码时无法识别调用关系</p>
+<p><strong>Libraries</strong>：</p>
+<p>依赖的lib通常直接在工程目录下，需要手动新建lib（添加，选择Java类型，选中对应的目录，如libs。）</p>
+<hr>
+<p>关键是对于Modules和Libraries的设置，否则IDE无法识别工程。</p>
+
+  
+  
+
+  
+<div class="prev-next-post pure-g">
+  <div class="pure-u-1-24" style="text-align: left;">
+    
+    <a href="http://gebitang.com/post/what/no00-cs-c-family/"><i class="fa fa-chevron-left"></i></a>
+    
+  </div>
+  <div class="pure-u-10-24">
+    
+    <nav class="prev">
+      <a href="http://gebitang.com/post/what/no00-cs-c-family/">CS course</a>
+    </nav>
+    
+  </div>
+  <div class="pure-u-2-24">
+    &nbsp;
+  </div>
+  <div class="pure-u-10-24">
+    
+    <nav class="next">
+      <a href="http://gebitang.com/post/what/flu-flow/">病中吟</a>
+    </nav>
+    
+  </div>
+  <div class="pure-u-1-24" style="text-align: right;">
+    
+    <a href="http://gebitang.com/post/what/flu-flow/"><i class="fa fa-chevron-right"></i></a>
+    
+  </div>
+</div>
+
+
+
+  
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+
+(function() {
+    
+    
+    if (window.location.hostname == "localhost")
+        return;
+
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    var disqus_shortname = 'gebitang';
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com/" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+</div>
+
+</div>
+</div>
+<script src="http://gebitang.com/js/ui.js"></script>
+<script src="http://gebitang.com/js/menus.js"></script>
+
+
+<script>
+  
+  if (window.location.hostname != "localhost") {
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-34303694-1', 'auto');
+    ga('send', 'pageview');
+  }
+</script>
+
+
+
+
+<button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
+</body>
+</html>
+

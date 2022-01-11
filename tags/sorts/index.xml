@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>sorts on 戈壁堂</title>
+    <link>http://gebitang.com/tags/sorts/</link>
+    <description>Recent content in sorts on 戈壁堂</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 24 Apr 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://gebitang.com/tags/sorts/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Problems</title>
+      <link>http://gebitang.com/post/algo/problems/</link>
+      <pubDate>Wed, 24 Apr 2019 00:00:00 +0000</pubDate>
+      
+      <guid>http://gebitang.com/post/algo/problems/</guid>
+      <description>&lt;p&gt;list of all Problems from leetcode.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Algo issues</title>
+      <link>http://gebitang.com/post/algo/algo-issues/</link>
+      <pubDate>Mon, 15 Apr 2019 00:00:00 +0000</pubDate>
+      
+      <guid>http://gebitang.com/post/algo/algo-issues/</guid>
+      <description>第一周题目 链表 简单：https://leetcode.com/problems/remove-duplicates-from-sorted-</description>
+    </item>
+    
+  </channel>
+</rss>

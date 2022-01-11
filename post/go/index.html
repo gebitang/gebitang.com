@@ -1,0 +1,1607 @@
+<!DOCTYPE html>
+<html xmlns:wb="http://open.weibo.com/wb" lang="en" >
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Go Go Go">
+  <meta name="generator" content="Hugo 0.74.3" />
+
+  <title>Go &middot; 戈壁堂</title>
+
+    
+
+  
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/pure-min.css">
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-old-ie-min.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-min.css">
+  <!--<![endif]-->
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="http://gebitang.com/css/side-menu-old-ie.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="http://gebitang.com/css/side-menu.css">
+  <!--<![endif]-->
+
+  <link rel="stylesheet" href="http://gebitang.com/css/blackburn.css">
+
+  
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.9.0/css/all.css">
+
+  
+  <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet" type="text/css">
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+ 
+  
+
+  
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/androidstudio.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+  
+  <script>hljs.initHighlightingOnLoad();</script>
+  
+
+  <link rel="shortcut icon" href="http://gebitang.com/img/favicon.ico" type="image/x-icon" />
+
+  
+    
+        <link rel="stylesheet" href="http://gebitang.com/css/my.css">
+    
+  
+  
+    
+        <script src="http://gebitang.com/js/my.js"></script>
+    
+  
+
+</head>
+
+
+<body>
+<div id="layout">
+
+  
+<a href="#menu" id="menuLink" class="menu-link">
+  
+  <span></span>
+</a>
+<div id="menu">
+
+  
+  <a class="pure-menu-heading brand" href="http://gebitang.com/">Gebitang</a>
+
+
+  <div class="pure-menu">
+    <ul class="pure-menu-list">
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="http://gebitang.com/"><i class='fa fa-home fa-fw'></i>Home</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="http://gebitang.com/post/"><i class='fa fa-list fa-fw'></i>Posts</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="http://gebitang.com/about/"><i class='fa fa-user fa-fw'></i>About</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="http://gebitang.com/contact/"><i class='fa fa-phone fa-fw'></i>Contact</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="http://gebitang.com/tags/"><i class='fa fa-tags fa-fw'></i>Tags</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="http://gebitang.com/topics/"><i class='fa fa-folder fa-fw'></i>Topics</a>
+      
+        </li>
+      
+    </ul>
+  </div>
+
+  <div class="pure-menu social">
+  <ul class="pure-menu-list">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+  </ul>
+</div>
+
+
+  <div>
+
+  <div class="small-print">
+  	<small>
+    <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="知识共享许可协议" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/80x15.png" /></a><br/>本<span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" rel="dct:type">作品</span>由<a xmlns:cc="http://creativecommons.org/ns#" href="http://gebitang.com" property="cc:attributionName" rel="cc:attributionURL">&nbsp;Gebitang&nbsp;&nbsp;</a>采用<a rel="license" href="http://creativecommons.org/licenses/by/4.0/">知识共享署名 4.0 国际许可协议</a>进行许可&nbsp;&copy; 2018
+    </small>
+
+  </div>
+
+  <div class="small-print">
+    <small></small>
+  </div>
+  <div class="small-print">
+    <small>Built with&nbsp;<a href="https://gohugo.io/" target="_blank">Hugo</a></small>
+    <small>Theme&nbsp;<a href="https://github.com/yoshiharuyamashita/blackburn" target="_blank">Blackburn</a></small>
+  </div>
+
+  <div style="display:none">
+  <div class="small-print">
+    <small>
+    <wb:follow-button uid="2446212465" type="red_1" width="67" height="24"></wb:follow-button>
+  </small>
+  </div>
+  </div>
+
+</div>
+
+</div>
+
+
+  <div id="main">
+
+
+<div class="header">
+  <h1>Go</h1>
+  <h2>Go Go Go</h2>
+</div>
+<div class="content">
+
+  <div class="post-meta">
+
+  <div>
+    <i class="fa fa-calendar fa-fw"></i>
+    <time>2020-06-21</time>
+  </div>
+
+  
+
+  
+  
+  
+  <div>
+    <i class="fa fa-folder fa-fw"></i>
+    
+      <a class="post-taxonomy-topic" href="http://gebitang.com/topics/go">go</a>
+    
+  </div>
+  
+  
+
+  
+  
+  
+  <div>
+    <i class="fa fa-tags fa-fw"></i>
+    
+      <a class="post-taxonomy-tag" href="http://gebitang.com/tags/go">go</a>
+    
+  </div>
+  
+  
+
+</div>
+
+  
+	<nav id="TableOfContents">
+  <ul>
+    <li><a href="#2021">2021</a>
+      <ul>
+        <li><a href="#quorum">quorum</a></li>
+        <li><a href="#pass">pass</a></li>
+        <li><a href="#clash">clash</a></li>
+        <li><a href="#unable-to-find-utility-clang-not-a-developer-tool-or-in-path">unable to find utility &ldquo;clang&rdquo;, not a developer tool or in PATH</a></li>
+        <li><a href="#go-mail">go mail</a></li>
+        <li><a href="#download-excel--go-echarts--plot">download excel &amp; go-echarts &amp; plot</a></li>
+        <li><a href="#go-len函数">go len函数</a></li>
+        <li><a href="#go-汇编">go 汇编</a></li>
+        <li><a href="#go-time-format">go time format</a></li>
+        <li><a href="#go-mod-vendor">go mod vendor</a></li>
+        <li><a href="#http-head">http head</a></li>
+        <li><a href="#版本升级">版本升级</a></li>
+        <li><a href="#业务梳理一">业务梳理一</a></li>
+        <li><a href="#文件上传">文件上传</a></li>
+        <li><a href="#context">Context</a></li>
+        <li><a href="#gorm">GORM</a></li>
+        <li><a href="#converting-argument-1-type-unsupported-type-int-a-slice-of-int">converting argument $1 type: unsupported type []int, a slice of int</a>
+          <ul>
+            <li><a href="#singular-table">Singular Table</a></li>
+            <li><a href="#连表查询">连表查询</a></li>
+          </ul>
+        </li>
+        <li><a href="#初始化方法">初始化方法</a></li>
+        <li><a href="#gqlgen">gqlgen</a>
+          <ul>
+            <li><a href="#go-get-and-gqlgen-downgrade">go get and gqlgen downgrade</a></li>
+            <li><a href="#wsl相关不能识别autobind的配置">wsl相关：不能识别autobind的配置</a></li>
+            <li><a href="#接口定义与实现">接口定义与实现</a></li>
+            <li><a href="#graphql请求与响应">graphql请求与响应</a></li>
+            <li><a href="#混合使用">混合使用</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#archive-2">archive 2</a>
+      <ul>
+        <li><a href="#静态站点">静态站点</a></li>
+        <li><a href="#wire">Wire</a></li>
+        <li><a href="#go-ldflags">go ldflags</a></li>
+        <li><a href="#fmt-string">fmt string</a></li>
+        <li><a href="#闭包函数传参">闭包函数传参：</a></li>
+        <li><a href="#how-to-write-go-code">How to write Go code</a></li>
+        <li><a href="#gocker-docker">Gocker Docker</a></li>
+        <li><a href="#结构体对应数据绑定">结构体对应数据绑定</a></li>
+        <li><a href="#正则限制">正则限制</a></li>
+        <li><a href="#go-vendor-依赖">go vendor 依赖</a></li>
+      </ul>
+    </li>
+    <li><a href="#archive">archive</a>
+      <ul>
+        <li><a href="#update-project">update project</a></li>
+        <li><a href="#go-get-golangorgx-包失败解决方法">go get golang.org/x 包失败解决方法</a></li>
+        <li><a href="#go-test">go test</a></li>
+        <li><a href="#go-import">go import</a></li>
+        <li><a href="#go-mod">go mod</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  
+
+  <h2 id="2021">2021</h2>
+<h3 id="quorum">quorum</h3>
+<p>API文档查看，依赖<a href="https://github.com/swaggo/swag">swaggo</a>，启动swagger服务依赖swaggo生成的docs包。scripts文件夹下提供了对应的生成脚本，结果我自己研究了半天，只生成了个空的swagger接口文档。</p>
+<p>最终在wsl环境下生产，再把文件复制回来即可。</p>
+<p>网络状态判断：<code>/v1/network</code> API返回<code>pkg/p2p/network.go</code>中的<code>func (node *Node) eventhandler(ctx context.Context) </code>的状态，订阅了网络状态的事件<a href="https://pkg.go.dev/github.com/libp2p/go-libp2p-core/network#Reachability">Reachability</a>，默认未知，如果公网可访问则是public状态，否则是private</p>
+<p>编译quorum，在服务器端启动：</p>
+<ul>
+<li>启动需要添加<code>-ips public.ip.xx.xx</code>参数</li>
+<li>远程使用rum-app节点模式连接时，需要在本地做接口映射，否则需要提供jwt信息</li>
+<li>可以先通过api生成token，则不需要进行端口转发 <code>curl -k -X POST &quot;https://127.0.0.1:8002/app/api/v1/token/apply&quot; -H &quot;accept: application/json&quot;</code></li>
+</ul>
+<p>接口转发Fow Windows，使用<code>netsh</code>，使用管理员权限执行</p>
+<p><code>netsh interface portproxy add v4tov4 listenport=8002 listenaddress=127.0.0.1 connectport=8002 connectaddress=public.ip.xx.xx</code></p>
+<p>删除转发：<a href="https://stackoverflow.com/a/11535395/1087122">参考</a></p>
+<p><code>netsh interface portproxy delete v4tov4 listenport=8002 listenaddress=127.0.0.1</code></p>
+<p>接口转发Fow MacOS，使用<code>nmap</code>，brew安装如果有问题，直接从<a href="https://nmap.org/download.html#macosx">官网下载编译好的二进制文件安装</a></p>
+<p><code>ncat -l 127.0.0.1 8002 --sh-exec &quot;ncat public.ip.xx.xx 8002&quot; --keep-open</code></p>
+<p>Mac端开源通过Ctrl+C停止转发</p>
+<p><strong>异常现象</strong>  使用jwt认证后，证书信息不再是必须的(配置为空时会提醒报错，但实际可以随意填写)</p>
+<h3 id="pass">pass</h3>
+<p><a href="https://missing.csail.mit.edu/">The Missing Semester of Your CS Education</a>的<a href="https://github.com/missing-semester-cn/missing-semester-cn.github.io">中文版本</a>，提到安全相关的应用：</p>
+<ul>
+<li>PGP电子邮件加密，windows平台下可以使用<a href="https://www.gpg4win.org/">gpg4win</a>，参考<a href="https://mycyberpunk.com/2020/04/27/pgp-email/">PGP加密电子邮件演示</a>或<a href="https://sspai.com/post/35592">利用 PGP 技术对你的邮件进行加密</a>，使用非对称加密邮件：将要发送的邮件进行加密，邮件客户端进行解密。公布自己的PGP公钥，这样别人可以使用公钥加密要发送给你的内容，自己的邮件客户端使用私钥进行解密即可</li>
+<li>密码管理。提到了<a href="https://www.passwordstore.org/">pass</a>，之前经理<a href="https://gitpress.io/@lyric/password-management-with-pass">介绍过</a>。项目有很多配套支持，发现使用go语言开发的gui项目已经暂停开发(因为依赖的<a href="https://github.com/go-qml/qml">qml</a>项目停止维护)，作者重新使用rust语言写了新的客户端。前两天看到<a href="https://github.com/jacalz/wormhole-gui">wormhole-gui</a>项目，可以依赖<a href="https://github.com/fyne-io/fyne">fyne</a>项目(Cross platform GUI in Go inspired by Material Design)实现一个兼容的客户端？提供了从其他密码软件导入的功能：通常是导出不同的文件格式，然后进行格式转换即可，例如lasspass可以导出cvs文件，然后解析并导入到pass，提供了<a href="https://git.zx2c4.com/password-store/tree/contrib/importers/lastpass2pass.rb">ruby脚本</a></li>
+</ul>
+<p>利用git同步密码仓库，全平台覆盖</p>
+<p><strong>基础操作</strong></p>
+<ul>
+<li>显示所有内容<code>pass</code></li>
+<li>显示某一项内容 <code>pass folder/site.name</code></li>
+<li>新建一项纪录 <code>pass insert folder/site.name</code> 手动输入密码</li>
+<li>自动创建密码 <code>pass generate folder/site.name 15</code> 自动生成长度15字符串的密码</li>
+<li>删除密码项目 <code>pass rm folder/site.name</code></li>
+</ul>
+<p><strong>pgp秘钥</strong></p>
+<ul>
+<li>首先需要生成一个pgp秘钥(用来加密对应的密码)</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#75715e">#安装</span>
+apt-get install gnupg
+<span style="color:#75715e">#生成证书</span>
+gpg --gen-key
+<span style="color:#75715e">#导出证书，pass在不同设备间同步时，解密需要</span>
+gpg --output private.pgp --armor --export-secret-key username@email <span style="color:#75715e">#私钥</span>
+gpg --armor --output public.key --export username@email  <span style="color:#75715e">#公钥</span>
+<span style="color:#75715e"># 更新证书等操作参考： man 手册或官方文档 https://gnupg.org/documentation/manuals/gnupg/</span>
+<span style="color:#75715e">#导入证书， 在另外的linux上重建pass</span>
+gpg --import private.pgp 
+gpg --import publick.key
+</code></pre></div><p><strong>安装pass</strong></p>
+<p><code>sudo apt-get install pass</code></p>
+<ul>
+<li>生成密码库 <code>pass init &quot;pgp key id&quot;</code>，详细步骤<a href="https://git.zx2c4.com/password-store/about/#EXTENDED%20GIT%20EXAMPLE">参考</a></li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">pass init <span style="color:#e6db74">&#34;pgp key id&#34;</span>
+pass git init
+pass git remote add origin git.store.url
+pass git push -u --all 
+</code></pre></div><ul>
+<li>正常维护密码库，然后进行同步即可。</li>
+</ul>
+<p><strong>Android同步</strong></p>
+<p>需要安装对应的android app <a href="https://github.com/android-password-store/Android-Password-Store#readme">Android-Password-Store</a>和 <a href="https://github.com/open-keychain/open-keychain">OpenKeyChain</a></p>
+<p>前者用来同步git仓库，后者用来导入gpg证书(上一步中使用的证书)。两者配合就可以在android上使用</p>
+<p><strong>浏览器同步</strong></p>
+<p>这样可以在不同的PC、Mac平台使用。</p>
+<ul>
+<li>安装<a href="https://www.gpg4win.org/">gpg4win</a>。导入pass使用的gpg证书</li>
+<li>安装<a href="https://github.com/browserpass/browserpass-native">browserpass-native</a>，从release页面进行安装</li>
+<li>安装<a href="https://github.com/browserpass/browserpass-extension">browserpass-extension</a>，从chrome web store安装
+<ul>
+<li>配置插件的<code>Custom gpg binary</code>，通常在安装gpg4win同级的目录<code>GnuPG\bin\gpg.exe</code>(这里折腾了半天，从命令行里找到了灵感<code>which gpg</code>)</li>
+<li>配置同步后的git目录</li>
+</ul>
+</li>
+</ul>
+<p><strong>迁移</strong></p>
+<p>从lastPass导出csv文件，linux下安装ruby环境，执行导入<code>./lastpass2pass.rb path/to/passwords_file.csv</code> 如果存储的数据不规范，可能报错，删除对应的数据即可。</p>
+<blockquote>
+<p>文件夹乱码'&lsquo;$&rsquo;\020&rsquo;(编码为\020)，在linxu下可以创建文件夹成功，在window环境下无法创建对应的文件夹，导致git同步失败。<br>
+导入需要做一些必要的处理(正好借此机会整理一下密码列表)，因为pass以<code>文件夹/域名名称</code>做区分，lastPass下可以在同一个域名下保存多个用户名密码，后者的搜索也更强大</p>
+</blockquote>
+<p><strong>pass同步</strong></p>
+<p>条件：pass的git仓库已经存在，需要在另外一台linux机器上进行同步。</p>
+<ul>
+<li>安装pass，导入相同的公钥私钥</li>
+<li><code>git clone git.path.url ~/.password-store </code> 这个步骤比较关键，这样才能确保文件目录一致</li>
+<li>然后执行<code>pass init fingerprint</code>进行初始化</li>
+</ul>
+<p><strong>问题</strong></p>
+<ul>
+<li>看起来导入私钥有问题，每次编码总进行提醒<code>There is no assurance this key belongs to the named user</code>， 需要进行<a href="https://stackoverflow.com/a/34132924/1087122">trust操作</a></li>
+<li><code>pass edit folder/name</code>时会使用默认的编辑器，编辑修改默认的编辑器<code>sudo update-alternatives --config editor</code></li>
+<li><code>pass -c folder/name</code>提示: <code>Can't open display:0</code>。</li>
+</ul>
+<p><a href="https://stackoverflow.com/questions/61110603/how-to-set-up-working-x11-forwarding-on-wsl2">参考</a>：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">export DISPLAY<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>cat /etc/resolv.conf | grep nameserver | awk <span style="color:#e6db74">&#39;{print $2}&#39;</span><span style="color:#66d9ef">)</span>:0
+export LIBGL_ALWAYS_INDIRECT<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>
+</code></pre></div><p>需要激活X11 server，本地使用了MobaXTerm，提示允许后，可以剪切到内容，但不稳定。对应的<a href="https://github.com/microsoft/WSL/issues/4106">Can&rsquo;t use X-Server in WSL 2</a>，先pending着再说</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">gpg --edit-key &lt;KEY_ID&gt;
+gpg&gt; trust
+<span style="color:#75715e"># You will be asked to select the trust level from the following:</span>
+1 <span style="color:#f92672">=</span> I don<span style="color:#e6db74">&#39;t know or won&#39;</span>t say
+2 <span style="color:#f92672">=</span> I <span style="color:#66d9ef">do</span> NOT trust
+3 <span style="color:#f92672">=</span> I trust marginally
+4 <span style="color:#f92672">=</span> I trust fully
+5 <span style="color:#f92672">=</span> I trust ultimately
+m <span style="color:#f92672">=</span> back to the main menu
+
+Your decision? <span style="color:#ae81ff">5</span>
+Do you really want to set this key to ultimate trust? <span style="color:#f92672">(</span>y/N<span style="color:#f92672">)</span> y
+
+<span style="color:#75715e"># 可以执行passwd进行密码修改</span>
+passwd
+<span style="color:#75715e"># save</span>
+save
+</code></pre></div><p><strong>保存私钥</strong></p>
+<p>还差最后一步，如何保存生成的私钥。</p>
+<ul>
+<li>使用openssl对称加密对应的私钥和公钥文件 <code>openssl aes-256-cbc -in public.key -out sslpub.key</code>将秘钥加密，私钥采用对应的操作</li>
+<li>将加密后的文件保存为hex格式——方便保存 <code>xxd -p sslpub.key &gt; hexsslpub.key</code></li>
+<li>hexsslpub.key文件的内容就可以公开分发了，例如同步到Rum群组中</li>
+</ul>
+<p><strong>恢复秘钥</strong></p>
+<ul>
+<li><code>xxd -r -p hexsslpub.key sslpub.key</code>将hex格式的文件重新恢复为加密后的文件</li>
+<li>使用openssl进行解密<code>openssl aes-256-cbc -d -in sslpub.key -out publicreverse.key</code></li>
+<li>验证恢复后的两个文件是否一致，例如检查md5或进行字节比对<code>cmp public.key publicreverse.key</code></li>
+</ul>
+<p>整个方案中只需要记住两个密码：一个是pgp的密码，一个是对称加解密的密码。</p>
+<h3 id="clash">clash</h3>
+<blockquote>
+<p>V2ray + COW实现go build编译。前者提供Sock5代理，后者提供http代理，并使用Sock5做二级代理</p>
+</blockquote>
+<p>实践上可以直接使用<a href="https://github.com/Dreamacro/clash">clash</a>，完全使用go语言实现的clash core，<a href="https://github.com/Dreamacro/clash/wiki/configuration#proxy-providers">支持proxy providers</a>，windows平台下的<a href="https://github.com/Fndroid/clash_for_windows_pkg">clash for windows</a>，其实就是使用Electron开发的基于Clash内核的GUI版本(<code>A Windows/macOS/Linux GUI based on Clash and Electron.</code>)</p>
+<blockquote>
+<ul>
+<li>Clash：一个 Go 语言开发的多平台代理客户端，<a href="https://github.com/Dreamacro/clash">Github</a></li>
+<li>ClashX：Clash 的 Mac 图形客户端，<a href="https://github.com/yichengchen/clashX">Github</a></li>
+<li>ClashForAndroid：Clash 的 Android 图形客户端，<a href="https://github.com/Kr328/ClashForAndroid">Github</a></li>
+<li>Clash for Windows：Clash 的 Windows/macOS 图形客户端，<a href="https://github.com/Fndroid/clash_for_windows_pkg">Github</a></li>
+</ul>
+</blockquote>
+<p>命令行使用基础：</p>
+<ul>
+<li>下载对应平台<a href="https://github.com/Dreamacro/clash/releases/latest">最新版本</a></li>
+<li>解压文件<code>gzip -d clash-linux-amd64-v1.9.0.gz</code>后，添加可执行权限<code>chmod +x clash-xxx</code></li>
+<li><code>cp clash-darwin-amd64-vx.y.z /usr/local/bin/clash</code>添加到用户可执行文件目录</li>
+<li>下载配置文件到目录<code>mkdir /usr/local/etc/clash</code></li>
+<li>执行 <code>clash -d /usr/local/etc/clash</code> 即可运行 clash 并打印暴露在本地的代理服务端口，默认为 <code>127.0.0.1:7890</code></li>
+</ul>
+<h3 id="unable-to-find-utility-clang-not-a-developer-tool-or-in-path">unable to find utility &ldquo;clang&rdquo;, not a developer tool or in PATH</h3>
+<p>执行<code>go run main.go</code>提示如下错误，找不到clang环境。</p>
+<pre><code> go run main.go
+# runtime/cgo
+sh: line 1: 52743 Bus error: 10           /Applications/Xcode.app/Contents/Developer/usr/bin/xcodebuild -sdk /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk -find clang 2&gt; /dev/null
+clang: error: unable to find utility &quot;clang&quot;, not a developer tool or in PATH
+</code></pre><p>需要先安装<code>CommandLineTools</code>，可以先检查<code>xcode-select --print-path</code>安装路径，如果不是<code>/Library/Developer/CommandLineTools</code>，则需要先安装<code>xcode-select --install</code>，然后修改路径<code>sudo xcode-select --switch /Library/Developer/CommandLineTools</code>。正常情况下，此时环境恢复正常。</p>
+<p>通过命令行更新xcode版本：检查配套版本：<code>softwareupdate --list</code>。参考<a href="https://stackoverflow.com/questions/34617452/how-to-update-xcode-from-command-line">How to update Xcode from command line</a>老版本可参考此操作。</p>
+<h3 id="go-mail">go mail</h3>
+<p>原生自动的需要指定证书。本地测试会报错<code>x509: certificate signed by unknown authority</code>，不指定证书的验证方式，使用<a href="https://github.com/xhit/go-simple-mail">go-simple-mail</a>完成。</p>
+<p>其中自定义了<code>loginAuth</code>模式，实现官方的auth接口；指定为<code>EncryptionNone</code>模式时，直接建立连接，不使用tls模式——</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">case</span> <span style="color:#a6e22e">EncryptionSSL</span>, <span style="color:#a6e22e">EncryptionSSLTLS</span>:
+		<span style="color:#a6e22e">conn</span>, <span style="color:#a6e22e">err</span> = <span style="color:#a6e22e">tls</span>.<span style="color:#a6e22e">Dial</span>(<span style="color:#e6db74">&#34;tcp&#34;</span>, <span style="color:#a6e22e">address</span>, <span style="color:#a6e22e">config</span>)
+<span style="color:#66d9ef">default</span>:
+	<span style="color:#a6e22e">conn</span>, <span style="color:#a6e22e">err</span> = <span style="color:#a6e22e">net</span>.<span style="color:#a6e22e">Dial</span>(<span style="color:#e6db74">&#34;tcp&#34;</span>, <span style="color:#a6e22e">address</span>)
+}
+</code></pre></div><h3 id="download-excel--go-echarts--plot">download excel &amp; go-echarts &amp; plot</h3>
+<p>excel操作： 阿里巴巴的开发者开源的<a href="https://github.com/qax-os/excelize">excelize</a>，最低要求1.15版本</p>
+<p><a href="https://github.com/wcharczuk/go-chart">go-echarts</a>可以方便画出图表，产出物是html文件，需要想办法转换为图片——echarts自身提供了js交互的图片下载，需要在浏览器打开才能操作</p>
+<p><a href="https://github.com/go-echarts/go-echarts/issues/38">issue 38</a>提到这个问题——</p>
+<blockquote>
+<p>So the only possibility to achieve this is to:</p>
+</blockquote>
+<ul>
+<li>use headless browser that will enter generated page and initiate the download :(</li>
+<li>wkhtmltoimage (or similar package)</li>
+<li>use external APIs that do html -&gt; img as a service</li>
+</ul>
+<p>echarts最终还是利用js进行画图，导致使用工具将html文件装换为图片时无法保存图表。最终使用<a href="https://github.com/gonum/plot">plot</a>，类似与python生态的<code>matplotlib.pyplot</code>，直接画图</p>
+<p>gonum/plot默认不支持中文字体，需要自己手动加载，参考<a href="https://github.com/gonum/plot/issues/702#issuecomment-858640740">这里</a>，也可以通过网上下载解压操作，<a href="https://pkg.go.dev/gonum.org/v1/plot@v0.9.0/vg#example-package-AddFont">参考</a></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#a6e22e">ttf</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">os</span>.<span style="color:#a6e22e">ReadFile</span>(<span style="color:#e6db74">&#34;/System/Library/Fonts/Supplemental/Arial.ttf&#34;</span>)
+<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+	panic(<span style="color:#a6e22e">err</span>)
+}
+<span style="color:#a6e22e">fontTTF</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">opentype</span>.<span style="color:#a6e22e">Parse</span>(<span style="color:#a6e22e">ttf</span>)
+<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+	<span style="color:#a6e22e">log</span>.<span style="color:#a6e22e">Fatal</span>(<span style="color:#a6e22e">err</span>)
+}
+
+<span style="color:#a6e22e">arial</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">font</span>.<span style="color:#a6e22e">Font</span>{<span style="color:#a6e22e">Typeface</span>: <span style="color:#e6db74">&#34;Arial&#34;</span>}
+<span style="color:#a6e22e">font</span>.<span style="color:#a6e22e">DefaultCache</span>.<span style="color:#a6e22e">Add</span>([]<span style="color:#a6e22e">font</span>.<span style="color:#a6e22e">Face</span>{
+	{
+		<span style="color:#a6e22e">Font</span>: <span style="color:#a6e22e">arial</span>,
+		<span style="color:#a6e22e">Face</span>: <span style="color:#a6e22e">fontTTF</span>,
+	},
+})
+
+<span style="color:#a6e22e">plot</span>.<span style="color:#a6e22e">DefaultFont</span> = <span style="color:#a6e22e">arial</span>
+<span style="color:#a6e22e">p</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">p</span>.<span style="color:#a6e22e">New</span>()
+</code></pre></div><h3 id="go-len函数">go len函数</h3>
+<p><a href="https://mp.weixin.qq.com/s/1fAmtwDTc7Gv8sGilKdGTQ">关于 len 函数的诡异 Go 面试题解析</a>里提到的例子：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
+
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+  <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">x</span> <span style="color:#f92672">*</span><span style="color:#66d9ef">struct</span> {
+    <span style="color:#a6e22e">s</span> [][<span style="color:#ae81ff">32</span>]<span style="color:#66d9ef">byte</span>
+  }
+  
+  println(len(<span style="color:#a6e22e">x</span>.<span style="color:#a6e22e">s</span>[<span style="color:#ae81ff">99</span>]))
+}
+</code></pre></div><p>正确答案是打印32，程序不会panic。尽管作为“一个结构体类型指针变量”x没有进行初始化。因为len为内置函数，根据<a href="https://golang.org/ref/spec#Length_and_capacity">标准库文档</a>中对于<code>Length and capacity</code>的说明——</p>
+<blockquote>
+<p>The built-in functions <code>len</code> and <code>cap</code> take arguments of various types and return a result of type int. The implementation <strong>guarantees</strong> that the result always fits into an int.<br>
+The expression len(s) is constant if s is a string constant. The expressions len(s) and cap(s) are constants if the type of s is an array or pointer to an array and the expression s does not contain channel receives or (non-constant) function calls; in this case s is not evaluated. Otherwise, invocations of len and cap are not constant and s is evaluated.</p>
+</blockquote>
+<blockquote>
+<p>如果 v 的类型是数组或指向数组的指针，且表达式 v 没有包含 channel 接收或（非常量）函数调用，则返回值也是一个常量。这种情况下，不会对 v 进行求值（即编译期就能确定）。否则返回值不是常量，且会对 v 进行求值（即得运行时确定）。</p>
+</blockquote>
+<p>因为<code>x.s[99]</code> 的类型是 <code>[32]byte</code>，以此不会求值，编译器能够在编译阶段分析出 x.s[99] 的类型是 [32]byte，且不需要对 x.s[99] 求值，因此直接返回数组的长度，即 32。具体的编译计算方法，可以参考<a href="https://mp.weixin.qq.com/s/0Twg1EWtatd2CMRAppfukw">Go len() 是怎么计算出来的</a></p>
+<h3 id="go-汇编">go 汇编</h3>
+<p><a href="https://zhuanlan.zhihu.com/p/62922404">GO的编译执行流程</a> <code>go build -n main.go</code> (-n 不执行地打印流程中用到的命令)</p>
+<ul>
+<li>创建临时目录，<code>mkdir -p $WORK/b001/</code></li>
+<li>查找依赖信息，<code>cat &gt;$WORK/b001/importcfg &lt;&lt; ...</code></li>
+<li>执行源代码编译，<code>/home/geb/go/pkg/tool/linux_amd64//compile ...</code></li>
+<li>收集链接库文件，<code>cat &gt;$WORK/b001/importcfg.link &lt;&lt; ...</code></li>
+<li>生成可执行文件，<code>/home/geb/go/pkg/tool/linux_amd64/link -o ...</code></li>
+<li>移动可执行文件，<code>mv $WORK/b001/exe/a.out main</code></li>
+</ul>
+<p><a href="https://mp.weixin.qq.com/s/pOyN1CM3op_OSeBiNOnLbg">GO汇编入门</a></p>
+<ul>
+<li>AX――累加器（Accumulator），使用频度最高</li>
+<li>BX――基址寄存器（Base Register），常存放存储器地址</li>
+<li>CX――计数器（Count Register），常作为计数器</li>
+<li>DX――数据寄存器（Data Register），存放数据</li>
+<li>SI――源变址寄存器（Source Index），常保存存储单元地址</li>
+<li>DI――目的变址寄存器（Destination Index），常保存存储单元地址</li>
+<li>BP――基址指针寄存器（Base Pointer），表示堆栈区域中的基地址</li>
+<li>SP――堆栈指针寄存器（Stack Pointer），指示堆栈区域的栈顶地址</li>
+<li>IP――指令指针寄存器（Instruction Pointer），指示要执行指令所在存储单元的地址。IP寄存器是一个专用寄存器。</li>
+</ul>
+<p>针对<code>main.go</code>，获取汇编</p>
+<p>方式一：</p>
+<ul>
+<li>使用 <code>go build -gcflags &quot;-N -l&quot; main.go</code> 生成对应的可执行二进制文件</li>
+<li>使用 <code>go tool objdump -s &quot;main\.&quot; main</code> 反编译获取对应的汇编</li>
+</ul>
+<blockquote>
+<p>反编译时<code>&quot;main\.&quot;</code> 表示只输出 main 包中相关的汇编；<code>&quot;main\.main&quot;</code> 则表示只输出 main 包中 main 方法相关的汇编</p>
+</blockquote>
+<p>方式二：</p>
+<ul>
+<li>使用 <code>go tool compile -S -N -l main.go</code> 这种方式直接输出汇编</li>
+</ul>
+<p>方式三：</p>
+<ul>
+<li>使用 <code>go build -gcflags=&quot;-N -l -S&quot; main.go</code>直接输出汇编</li>
+</ul>
+<p>关键是<code>gcflags</code>对应的参数——</p>
+<blockquote>
+<p><code>-l</code> 禁止内联<br>
+<code>-N</code> 编译时，禁止优化<br>
+<code>-S</code> 输出汇编代码</p>
+</blockquote>
+<h3 id="go-time-format">go time format</h3>
+<p><a href="https://mp.weixin.qq.com/s/f3VWaUGseWX6NCA2KGT-pw">Go 的时间格式化为什么是 2006-01-02 15:04:05？</a>， 参考<code>src/time/format.go</code>源码</p>
+<pre><code>1: month (January, Jan, 01, etc)
+2: day
+3: hour (15 is 3pm on a 24 hour clock)
+4: minute
+5: second
+6: year (2006)
+7: timezone (GMT-7 is MST)
+
+ANSIC       = &quot;Mon Jan _2 15:04:05 2006&quot;
+</code></pre><p>进行数字排序的结果，方便记忆“一月二号三点四分五秒2006年西七区”，英文的书写格式为<code>Mon, 02 Jan 2006 15:04:05 -0700</code> (<a href="https://tools.ietf.org/html/rfc1123">RFC1123</a>带有数字时区的表达方式)</p>
+<h3 id="go-mod-vendor">go mod vendor</h3>
+<p><a href="https://golangbyexample.com/vendor-dependency-go/">Vendor dependencies of a module in Go </a>，使用mod模式，生成vendor文件夹<code>go mod vendor</code>将项目依赖的所有依赖保存到工程的vendor文件夹目录下，增加新的依赖之后，再次执行此命令，添加新的依赖。执行<code>go mod vendor -v</code>查看所有的依赖信息</p>
+<h3 id="http-head">http head</h3>
+<p><a href="https://dhdersch.github.io/golang/2016/08/11/golang-case-sensitive-http-headers.html">GoLang: Case-sensitive HTTP Headers with net/http</a></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#75715e">// use this to avoid the key being canonicalized by  textproto.CanonicalMIMEHeaderKey. 
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">Header</span>[<span style="color:#e6db74">&#34;kbn-version&#34;</span>] = []<span style="color:#66d9ef">string</span>{<span style="color:#e6db74">&#34;6.4.3&#34;</span>}
+<span style="color:#75715e">// the key will be canoicalized as &#34;Content-Type&#34;
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">Header</span>.<span style="color:#a6e22e">Set</span>(<span style="color:#e6db74">&#34;content-type&#34;</span>, <span style="color:#e6db74">&#34;application/json&#34;</span>)
+</code></pre></div><h3 id="版本升级">版本升级</h3>
+<p><a href="https://github.com/golang/dl">升级原理实现的源码: dl项目</a>，<a href="https://mp.weixin.qq.com/s/jEhX5JHAo9L6iD3N54x6aA">升级原理说明</a></p>
+<p>操作步骤：</p>
+<pre><code>go get golang.org/dl/go&lt;version&gt;  // 其中 &lt;version&gt; 替换为你希望安装的 Go 版本
+go&lt;version&gt; download   // 和上面一样，&lt;version&gt; 是具体的版本
+# 例如
+go get golang.org/dl/go1.14.15
+go1.14.15 download
+</code></pre><ul>
+<li><code>GOPATH</code>相当于工作目录，即使go mod启用后，也是在<code>$GOPATH/pkg/mod</code>目录下维护。上述执行<code>go get</code>下载的可执行文件也是在<code>GOPATH/bin</code>路径下，所以可以在下一步执行<code>go1.14.15</code>。<a href="https://golang.org/cmd/go/#hdr-Environment_variables">go环境变量含义官方说明</a></li>
+<li><code>GOROOT</code>相当于go的安装目录</li>
+</ul>
+<p>执行<code>go1.14.15 download</code>时，相当于执行的<code>https://github.com/golang/dl/blob/master/go1.14.15/main.go</code>方法，内部实现为<code>version.Run(&quot;go1.14.15&quot;)</code>，会单独处理<code>download</code>命令，其他命令则统一执行<code>runGo(root)</code>方法</p>
+<p>多版本使用——(windows环境下，就添加环境变量吧)</p>
+<ul>
+<li>将 ~/sdk/go1.16.4/bin/go 加入 PATH 环境变量（替换原来的）；</li>
+<li>做一个软连，默认 go 执行 go1.16.4（推荐这种方式），不需要频繁修改 PATH；</li>
+<li>移动 go1.16.4 替换之前的 go（不推荐）；</li>
+</ul>
+<pre><code># 下载tar包，定义文件目录 /usr/local/go
+# go 安装&amp;升级
+rm -rf /usr/local/go &amp;&amp; tar -C /usr/local -xzf go1.17.6.linux-amd64.tar.gz
+# 添加到环境变量
+export PATH=$PATH:/usr/local/go/bin
+</code></pre><h3 id="业务梳理一">业务梳理一</h3>
+<p>系统涉及内容：graphql(gqlgen)方式交互；restful api交互(包括中间件使用)；gorm数据库操作。</p>
+<ul>
+<li>UI：业务信息</li>
+<li>对应<code>&quot;@/components/Setting/professional&quot;</code>挂载前befoerMount调用<code>this.getOrgBusiness();</code></li>
+<li>上述方法声明在<code>settingModule/GetOrgBusiness</code>(对应的js graph方法声明<code>api/modules/settings.js</code>)</li>
+<li>查询的query方法<code>getOrgBusiness</code></li>
+</ul>
+<p>进入后端逻辑——</p>
+<ul>
+<li>所有的query声明都在<code>query.graphqls</code>中定义，对应方法<code>orgBusiness: [OrgBusiness]</code></li>
+<li>使用自动生成的resolver: <code>query.resolvers.go</code>(这里是如何知道使用store的get方法就可以完成？)</li>
+<li>对orgTree的接口方法实现中完成：
+<ul>
+<li>查询数据库，解析格式化内容返回格式化数据；</li>
+<li>同时defer执行API调用：查询部门接口，解析结果，保存更新记录(只需要保持两条对应记录即可——只涉及到两个部门)</li>
+</ul>
+</li>
+</ul>
+<h3 id="文件上传">文件上传</h3>
+<p>本地文件上传移植后工作正常(不再维护的SDK还是可以正常工作——具体的原理后续再研究)。</p>
+<p>仿现有逻辑(添加URL前缀作为分类；定义处理请求的方法)添加上传文件的API接口——</p>
+<pre><code>func InitRouter(router *mux.Router) {
+	poolRoute := router.PathPrefix(&quot;/pool&quot;).Subrouter()
+	poolRoute.UseEncodedPath()
+
+	poolRoute.HandleFunc(&quot;/file/upload&quot;, UploadFile)
+
+}
+</code></pre><p>[上传文件获取方式](// <a href="https://tutorialedge.net/golang/go-file-upload-tutorial/">https://tutorialedge.net/golang/go-file-upload-tutorial/</a>)，对比起来Java看起来是简单不少</p>
+<pre><code>#获取form文件
+file, handler, err := r.FormFile(&quot;file&quot;)
+
+#获取参数列表
+vars := mux.Vars(r)
+</code></pre><p><a href="https://yourbasic.org/golang/find-type-of-object/">查看对象类型</a>(另外这个站点有很多有用的基础信息)</p>
+<pre><code>var x interface{} = []int{1, 2, 3}
+xType := reflect.TypeOf(x)
+xValue := reflect.ValueOf(x)
+fmt.Println(xType, xValue) // &quot;[]int [1 2 3]&quot;
+</code></pre><p>本身的上传接口设计是“充分”的：本地文件上传，利用反射处理为string格式；如果是字节流，相当于slice类型（一开始传递的参数错误：将<code>multipart.File</code>对象直接传递进去，被认为是struct类型）</p>
+<p>字符串替换——</p>
+<pre><code>func nowAsString() string {
+	// .000将保留末尾的0值；.999将忽略末尾的0值
+	now := time.Now().Format(&quot;2006-01-02 15:04:05.000&quot;)
+	// 两个一组，使用后者替换前者
+	replacer := strings.NewReplacer(&quot;-&quot;, &quot;&quot;, &quot;:&quot;, &quot;&quot;, &quot;.&quot;, &quot;&quot;, &quot; &quot;, &quot;&quot;)
+	return replacer.Replace(now)
+}
+</code></pre><h3 id="context">Context</h3>
+<p><a href="https://golang.org/pkg/context/#example_WithValue">context</a>传递数据。应用场景——</p>
+<p>进行用户认证，每次API调用都需要验证用户是否登录——通常都会使用SSO的方式，每个请求获取到COOKIE中的token，然后在中间层进行有效性验证。获取用户信息后可以保持在context中。然后继续执行请求处理<code>next.ServeHTTP(w, r)</code></p>
+<pre><code>func WithValue(parent Context, key, val interface{}) Context
+</code></pre><blockquote>
+<p>WithValue returns a copy of parent in which the value associated with key is val.</p>
+<p>Use context Values only for request-scoped data that transits processes and APIs, not for passing optional parameters to functions.</p>
+<p>The provided key must be comparable and should not be of type string or any other built-in type to avoid collisions between packages using context.</p>
+</blockquote>
+<ul>
+<li>不建议直接使用string或内置的数据类型作为key——通常重新封装一个自定义的类型</li>
+</ul>
+<pre><code>type favContextKey string
+
+f := func(ctx context.Context, k favContextKey) {
+	if v := ctx.Value(k); v != nil {
+		fmt.Println(&quot;found value:&quot;, v)
+		return
+	}
+	fmt.Println(&quot;key not found:&quot;, k)
+}
+
+k := favContextKey(&quot;language&quot;)
+ctx := context.WithValue(context.Background(), k, &quot;Go&quot;)
+
+f(ctx, k)
+f(ctx, favContextKey(&quot;color&quot;))
+</code></pre><blockquote>
+<p>Value returns the value associated with this context for key, or nil if no value is associated with key. Successive calls to Value with the same key returns the same result.</p>
+</blockquote>
+<ul>
+<li>key对应的值通常也会定义为结构体类型，通过key获取值时，使用结构体指针即可，例如<code>ctx.Value(userKey).(*User)</code></li>
+</ul>
+<pre><code>type User struct {...}
+
+func FromContext(ctx context.Context) (*User, bool) {
+	u, ok := ctx.Value(userKey).(*User)
+	return u, ok
+}
+</code></pre><h3 id="gorm">GORM</h3>
+<p><a href="https://github.com/go-gorm/gorm/">gorm</a>，字节<a href="https://github.com/jinzhu">jinzhu</a>开源的ORM（Object Relational Mapping）项目。</p>
+<ul>
+<li>使用<code>Update</code>方法时需要注意：<code>WARNING when update with struct, GORM will not update fields that with zero value</code></li>
+</ul>
+<p>如果直接使用struct类型(表的映射对象)进行更新时，零值将被忽略。加入字段之前有值，现在需要更新为零值。这是直接使用struct进行更新是无效的。零值被忽略之后，相当于字段还保留有旧值。</p>
+<p>这种情况下，需要将struct转换为<code>map[string]interface{}</code>之后再更新。使用<code>structs.Map(*struct)</code>将struct转换为map格式再调用<code>Update</code>方法即可，<a href="https://stackoverflow.com/questions/23589564/function-for-converting-a-struct-to-map-in-golang">参考这里</a>。这个问题也是类似情况<a href="https://stackoverflow.com/questions/64330504/update-method-does-not-update-zero-value">Update method does not update zero value</a></p>
+<h3 id="converting-argument-1-type-unsupported-type-int-a-slice-of-int">converting argument $1 type: unsupported type []int, a slice of int</h3>
+<p><a href="https://blog.csdn.net/xiaomin1328/article/details/114269917">go sql报错</a>：</p>
+<blockquote>
+<p>当…Type做为参数时，本质上函数会把参数转化成一个Type类型的切片，因而在上述代码中，Service层调以可变参数形式传入一个参数，在Exec中的args就已经是[]interface{}类型了，若是直接把args做为func (s *Stmt) Exec args …interface{}) (Result, error)的参数，对于Exec来讲，收到的args就只有一个长度为1的切片，其元素类型为[]interface{}，因而就有了上述的报错，解决办法很简单，就是在一个slice后加上…，这样就能把它拆包成一个可变参数的形式传入函数。</p>
+</blockquote>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#a6e22e">res</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">mt</span>.<span style="color:#a6e22e">Exec</span>(<span style="color:#a6e22e">msg</span><span style="color:#f92672">...</span>)<span style="color:#75715e">//正确引用exec
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">res</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">mt</span>.<span style="color:#a6e22e">Exec</span>(<span style="color:#a6e22e">msg</span>)<span style="color:#75715e">//错误引用exec
+</span></code></pre></div><h4 id="singular-table">Singular Table</h4>
+<p><a href="https://www.programmersought.com/article/53034028334/">Mapping between Gorm and database (singular and plural) table structures</a></p>
+<p>数据库连接设置了以下属性的含义——对应变量在<code>model_struct.go</code>文件中的<code> GetModelStruct()</code>方法和<code>TableName(db *DB) string</code>中应用</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#a6e22e">db</span>.<span style="color:#a6e22e">SingularTable</span>(<span style="color:#66d9ef">true</span>)
+</code></pre></div><p>假设定义了——</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">User</span> <span style="color:#66d9ef">struct</span> {
+   <span style="color:#a6e22e">Id</span>   <span style="color:#66d9ef">int</span>    <span style="color:#e6db74">`json:&#34;id&#34;`</span>
+   <span style="color:#a6e22e">Name</span> <span style="color:#66d9ef">string</span> <span style="color:#e6db74">`json:&#34;name&#34;`</span>
+   <span style="color:#a6e22e">Age</span>  <span style="color:#66d9ef">int</span>    <span style="color:#e6db74">`json:&#34;age&#34;`</span>
+}
+
+<span style="color:#66d9ef">type</span> <span style="color:#a6e22e">Users</span> <span style="color:#66d9ef">struct</span> {
+   <span style="color:#a6e22e">Id</span>   <span style="color:#66d9ef">int</span>    <span style="color:#e6db74">`json:&#34;id&#34;`</span>
+   <span style="color:#a6e22e">Name</span> <span style="color:#66d9ef">string</span> <span style="color:#e6db74">`json:&#34;name&#34;`</span>
+   <span style="color:#a6e22e">Age</span>  <span style="color:#66d9ef">int</span>    <span style="color:#e6db74">`json:&#34;age&#34;`</span>
+}
+</code></pre></div><ol>
+<li>
+<p>数据库中没有<code>users</code>表也没有<code>user</code>表，执行<code>DB.AutoMigrate(&amp;User{})</code>或<code>DB.AutoMigrate(&amp;Users{})</code>——</p>
+<ul>
+<li>没有上述设置，则都自动创建<code>users</code>表(自动设置为复数形式)；</li>
+<li>有上述设置时，则自动分别创建<code>user</code>表和<code>users</code>(遵守单数形式)</li>
+</ul>
+</li>
+<li>
+<p>数据库中只有<code>users</code>表，没有<code>db.SingularTable(true)</code>设置</p>
+</li>
+</ol>
+<p>以下操作会将数据都添加到<code>users</code>表；设置之后，第一行将保存提示<code>user</code>表不存在</p>
+<pre><code>DB.Create(&amp;User{Name: &quot;Li&quot;, Age: 5})  // 
+DB.Create(&amp;Users{Name: &quot;Li&quot;, Age: 5}) // 
+</code></pre><ol start="3">
+<li>数据库中只有<code>user</code>表，没有<code>db.SingularTable(true)</code>设置，相同的添加数据的操作都会失败，提示<code>users</code>表不存在</li>
+</ol>
+<pre><code>DB.Create(&amp;User{Name: &quot;Li&quot;, Age: 5}) // Table 'users' doesn't exist
+DB.Create(&amp;Users{Name: &quot;Li&quot;, Age: 5}) // Table 'users' doesn't exist
+</code></pre><p>总结：gorm默认使用复数映射，go代码的单数、复数struct形式都匹配到复数表中，创建表、添加数据时都是如此。指定了<code>db.SingularTable(true)</code>之后，进行严格匹配。</p>
+<h4 id="连表查询">连表查询</h4>
+<p><code>db.SingularTable(true)</code>一开始我以为这意味着只能操作单表- -|(如果有这种限制，相当于数据库表彼此没有“关系”了)导致需要连表查询时，只能手动进行数据整合，查出一个集合，再对集合中的每一条记录进行扩展(再查另外一个表获取关系)。耗时自然就无法接受了。总体梳理只有3k左右的数据，做上述操作(相当于先模糊查询一次，然后再连续查询3k次)之后，耗时20s以上</p>
+<p>实际上gorm是支持连表查询，类似——相当于<code>PoolApp</code>表关联<code>leftJoin</code>了<code>pool_week</code>表表，然后再定义出要联合查询的字段(<code>dbSelect</code>)、查询的条件(<code>where</code>)、结果偏移量、查询总数等信息之后。就可以依次返回需要的查询结果。（相当于拆解sql语句，这样才能称为orm撒~）</p>
+<pre><code>leftJoin := &quot;left join pool_week on pool_app.app_id = pool_week.app_id&quot;
+GetDB(ctx).Model(dbmodel.PoolApp{}).Joins(leftJoin).Select(dbSelect).Where(where).Order(order).Offset(offset).Limit(limit).Scan(&amp;res)
+</code></pre><h3 id="初始化方法">初始化方法</h3>
+<ul>
+<li>最权威的解释来自官方spec: <a href="https://golang.org/ref/spec#Program_initialization_and_execution">Program initialization and execution</a></li>
+<li>简单解释可参考<a href="https://golang.org/doc/effective_go#initialization">effective go: initialization</a></li>
+</ul>
+<p>目前理解——</p>
+<ul>
+<li>安装程序入口进行初始化：按文件代码组织顺序，初始化所有引入的、自定义的文件中的初始化过程(这意味这当前程序用不到的代码不会被初始化——例如过程包括多个main包，每个主程序依赖不同的代码文件)</li>
+<li>初始化变量声明：常量，变量(根据声明的顺序；但如果变量依赖另外的变量，则先计算依赖的变量内容，而且如果依赖的变量来自多变量声明，则此多变量也会被优先初始化)如果有循环依赖的变量声明，则程序无效</li>
+<li>执行源码文件中定义的无参数的<code>init()</code>方法：可以包含多个的<code>init()</code>方法(不同的文件)；一个文件中也可以包含多个<code>init()</code>方法；各个init方法的执行顺序不确保有序，所以应当让各个方法做独立的逻辑</li>
+<li>进入主程序<code>main</code>方法的逻辑</li>
+</ul>
+<h3 id="gqlgen">gqlgen</h3>
+<h4 id="go-get-and-gqlgen-downgrade">go get and gqlgen downgrade</h4>
+<p>目前(2021-04-30)使用<code>go get github.com/99designs/gqlgen</code>安装的版本是0.13.0；目前项目中使用的版本是0.11.3；新版本会报错<code>validation failed: packages.Load: /xxx/xx/xx: WithPathContext not declared by package graphql</code></p>
+<p><code>go get</code>支持指定版本<code>go get github.com/99designs/gqlgen@v0.11.3</code>安装指定版本(默认按照到<code>GOPATH</code>路径下的bin目录下)。</p>
+<blockquote>
+<p>go get <a href="mailto:github.com/99designs/gqlgen@v0.11.3">github.com/99designs/gqlgen@v0.11.3</a><br>
+go: cannot use path@version syntax in GOPATH mode</p>
+</blockquote>
+<p>注意需要打开go mod模式：</p>
+<ul>
+<li>(windows) <code>set GO111MODULE=on</code></li>
+<li>(unix*) <code>export GO111MODULE=on</code></li>
+</ul>
+<p>如果安装时的依赖出现<code>unrecognized import path... connect: connection refused</code>的错误，是因为本地代理未启用https服务，使用<code>insecure</code>模式进行独立安装即可<code>go get -insecure git.xxx.com/medusa/crd</code></p>
+<pre><code>unrecognized import path &quot;git.xxx.com/medusa/crd&quot;: https fetch: Get &quot;https://git.xxx.com/medusa/crd?go-get=1&quot;: dial tcp 10.16.210.58:443: connect: connection refused
+</code></pre><p><a href="https://medium.com/weareservian/building-a-graphql-api-in-go-using-gqlgen-f7a42eba2193">Building a GraphQL API in Go using gqlgen</a></p>
+<p>依次执行以下命令，则完成了<a href="https://gqlgen.com/getting-started/">gqlgen站点的getting started</a>的内容。</p>
+<pre><code>cd mygplprj/src
+go mod init gitlab.com/jigar_xyz/mygplprj
+cd cmd/go-graphql
+go get github.com/99designs/gqlgen
+go run github.com/99designs/gqlgen init --verbose
+</code></pre><p>执行<code>go run ./server.go</code>就可以起到一个GraghQL站点。目录结构说明——</p>
+<pre><code>├── gqlgen.yml               - The gqlgen config file, knobs for controlling the generated code.
+├── graph
+│   ├── generated            - A package that only contains the generated runtime
+│   │   └── generated.go
+│   ├── model                - A package for all your graph models, generated or otherwise
+│   │   └── models_gen.go
+│   ├── resolver.go          - The root graph resolver type. This file wont get regenerated
+│   ├── schema.graphqls      - Some schema. You can split the schema into as many graphql files as you like
+│   └── schema.resolvers.go  - the resolver implementation for schema.graphql
+└── server.go                - The entry point to your app. Customize it however you see fit
+</code></pre><ul>
+<li><code>gqlgen.xml</code> 配置文件，说明如何自动生成代码。更详细的介绍参考<a href="https://gqlgen.com/config/">config</a>。结合目前工程中的<code>gqlgen.xml</code>可以更好理解</li>
+<li><code>generated/generated.go</code> 根据配置自动生成的服务端文件，相当于GraphQL的运行时。可在上述配置文件中做对应的声明(文件名，文件地址，所属的包)</li>
+<li><code>models_gen.go</code> 对应各个<code>*.graphqls</code>文件绑定的model，gqlgen会自己进行匹配，如果找到则忽略(相当于人工写)，否则会根据定义自动生成。<a href="https://www.howtographql.com/graphql-go/1-getting-started/">Generated models required to build the graph. Often you will override these with your own models. Still very useful for input types.</a></li>
+<li><code>resolver.go</code> 根类型resolver</li>
+<li><code>schema.graphqls</code> 定义的schema，可以分割到多个不同的文件中</li>
+<li><code>schema.resolvers.go</code> 对定义的实现</li>
+</ul>
+<p><a href="https://en.99designs.de/blog/engineering/gqlgen-a-graphql-server-generator-for-go/">Introducing gqlgen: a GraphQL Server Generator for Go</a> 项目开发人员对<code>gqlgen</code>的介绍</p>
+<p>在Windows环境下折腾半天，Mac环境下并不复现- -|| 还没了解原理的情况下，下搁这儿吧。</p>
+<blockquote>
+<p>windows环境下 执行<code>gqlgen generate</code>时，总是报错类似——<br>
+<code>/graph/model.CronJob failed: unable to build object definition: unable to find type git.gebtest.com/gebing/testprj</code>的错误<br>
+或者<code>/graph/model.JobConditioned: unable to build object definition: unable to find type gebtest.com/gebing/testprj</code><br>
+配置文件中指定了<code>autobind</code>和<code>models</code>的配置。但项目中没找到</p>
+</blockquote>
+<p>奇怪的是即使是windows环境下不能识别对前缀<code>gebtest.com/gebing/testprj</code>的定义；<code>/graph/model.JobConditioned</code>这个model实际不存在(项目里没这个定义)</p>
+<p>关于<code>unable to find type</code>的错误，也只有类似官方这个资料：<a href="https://github.com/99designs/gqlgen/issues/911">#issue911: gqlgen Autobind internal package - unable to find type</a>，看起来跟上面的情况关系不大</p>
+<h4 id="wsl相关不能识别autobind的配置">wsl相关：不能识别autobind的配置</h4>
+<p>使用wsl环境，从wsl里访问windows环境下的项目，执行<code>gqlgen generate</code>时提示<code>unable to load module_name/graph/model - make sure you're using an import path to a package that exists</code>，即使修改为绝对路径，类似<code>/mnt/d/project/prjname/graph/model</code>也无法识别。源码的<a href="https://github.com/99designs/gqlgen/blob/master/codegen/config/config_test.go">config_test.go</a>(unable to load ../chat - make sure you&rsquo;re using an import path to a package that exists)文件中有这种场景。 <del>暂时先忽略这个问题，涉及到两个不同操作系统互相访问的问题，识别不到也正常。</del> mac环境也出现这个现象，看来还没定位到真实的原因</p>
+<p>在wsl环境里重新clone当前项目——而不是直接访问windows环境下的此项目，可以正常执行。应用层没有问题，上面的异常涉及到了系统层——重新clone的方法也不好使了这次。</p>
+<p>使用<code>export GOFLAGS=-mod=vendor</code>模式运行，需要确保vendor文件夹下的内容是OK的。重新先执行<code>go mod vendor</code>之后再执行<code>gqlgen generate</code>，问题消失。但实际上<code>go mod vendor</code>并没有改变什么vendor文件夹下的内容啊？只是在不同的平台下，几个文件的换行符不同而已，诡异。这个问题还是没定位到最终原因</p>
+<p>如果提示<code>could not import C (no metadata for C) </code>，安装gcc即可<code>sudo apt install gcc</code></p>
+<h4 id="接口定义与实现">接口定义与实现</h4>
+<ul>
+<li>先定义接口<code>interface</code>，以及接口中可能用到的结构体。例如<code>pkg/todo_service.go</code></li>
+</ul>
+<pre><code>type ToDoItem struct {
+	Id        string
+	Text      string
+	IsDone    bool
+	CreatedOn time.Time
+	UpdatedOn *time.Time
+}
+
+type ToDo interface {
+	Initialise() error
+	Create(text string, isDone bool) (*string, error)
+	Update(id string, text string, isDone bool) error
+	List() ([]ToDoItem, error)
+}
+</code></pre><ul>
+<li>定义接口的实现对象结构体。让此结构体实现上述所有的接口方法。go语言中**任意实现了所有接口中定义的方法的对象，都默认实现了此接口。**例如<code>pkg/imp/todo_service.go</code></li>
+</ul>
+<pre><code>
+type ToDoImpl struct {
+	DbUserName string
+	DbPassword string
+	DbURL      string
+	DbName     string
+}
+
+func (t *ToDoImpl) Initialise() error {...}
+
+func (t *ToDoImpl) Create(text string, isDone bool) (*string, error) {...}
+
+func (t *ToDoImpl) Update(id string, text string, isDone bool) error {...}
+
+func (t *ToDoImpl) List() ([]todo.ToDoItem, error) {...}
+</code></pre><h4 id="graphql请求与响应">graphql请求与响应</h4>
+<ul>
+<li>通常就两类主要的请求：一种为查询<code>query</code>；一种为变更<code>mutation</code>。通常在在<code>schema.graphl</code>文件中定义</li>
+</ul>
+<pre><code>schema {
+    query: MyQuery
+    mutation: MyMutation
+}
+
+type MyQuery {
+    todos: [Todo!]!
+}
+
+type MyMutation {
+    createTodo(todo: TodoInput!): Todo!
+}
+</code></pre><ul>
+<li>响应会在对应的<code>schema.resolver.go</code>文件中实现。默认有一个<code>resolver.go</code>文件，可以一行实现<code>type Resolver struct{}</code>。关键的是对请求和响应的声明:</li>
+</ul>
+<pre><code>// MyMutation returns generated.MyMutationResolver implementation.
+func (r *Resolver) MyMutation() generated.MyMutationResolver { return &amp;myMutationResolver{r} }
+
+// MyQuery returns generated.MyQueryResolver implementation.
+func (r *Resolver) MyQuery() generated.MyQueryResolver { return &amp;myQueryResolver{r} }
+
+type myMutationResolver struct{ *Resolver }
+type myQueryResolver struct{ *Resolver }
+
+</code></pre><ul>
+<li>然后在对应的resolver中实现graphql文件中的各种查询和变更的方法，gqlgen默认实现的方法只包含一句<code>panic(fmt.Errorf(&quot;not implemented&quot;))</code></li>
+</ul>
+<pre><code>func (r *myQueryResolver) Todo(ctx context.Context, id string) (*model.Todo, error) {...}
+func (r *myMutationResolver) CreateTodo(ctx context.Context, todo model.TodoInput) (*model.Todo, error) {...}
+</code></pre><p>在对应resolver具体的方法实现中调用上述“接口方法”。完成对请求的最终响应。</p>
+<p>最终对graphql的请求处理，<code>gqlgen</code>会最终生成<code>generated.go</code>(具体名称有配置文件定义)作为运行时响应</p>
+<p>这样就算完成一个完整套路。更多细节学习官方文档：<a href="https://graphql.org/learn/">Introduction to GraphQL</a>，<a href="https://graphql.cn/learn">GraphQL 入门</a></p>
+<h4 id="混合使用">混合使用</h4>
+<p>根据<a href="https://gqlgen.com/config/">How to configure gqlgen using gqlgen.yml</a>中的描述，<code>models</code>字段的含义如下——</p>
+<blockquote>
+<p>This section declares type mapping between the GraphQL and go type systems</p>
+<p>The first line in each type will be used as defaults for resolver arguments and
+modelgen, the others will be allowed when binding to fields. Configure them to
+your liking</p>
+</blockquote>
+<p>参考<a href="https://medium.com/@ktrilaksono/create-your-first-simple-graphql-golang-application-with-go-gqlgen-793e11dc5fc4">Create Your First Simple GraphQL Golang Application with GQLGen</a>中的实践——</p>
+<pre><code>schema:
+- schema.graphql
+exec:
+  filename: generated.go
+models:
+  Person:
+    model: github.com/antoooks/go-graphql-tutorial/models.Person
+  Pet:
+    model: github.com/antoooks/go-graphql-tutorial/models.Pet
+resolver:
+  filename: resolver.go
+  type: Resolver
+autobind: []
+</code></pre><p>会优先使用<code>models</code>中定义的映射关系；如果没有找到，则会根据自动匹配规则，创建新的resolver进行实现。</p>
+<p>例如，以下查询表示的查询方法为<code>app</code>，返回的对象再做“次级选择”(sub-selection)，返回<code>users</code>对象的username, role两个字段。这意味着查询方法<code>app</code>(这个方法后台定义返回一个<code>App</code>对象)返回的对象里<strong>一定</strong>包含一个次级对象查询<code>users</code>的实现。</p>
+<pre><code>query($id: String!){
+    app (id: $id) {
+      users {
+        username
+        role
+      }
+    }
+  }
+</code></pre><p>验证一下：采用默认的配置文件，在<code>App.graphqls</code>文件中添加一个新的查询方法——</p>
+<pre><code>type App {
+    # The app id.
+    id: Int
+    # The namespace of the app
+    namespace: String!
+    # The name of the app
+    name: String!
+    # The users belong to the app
+    users: [AppUser]
+    # 新增一个方法
+    geb: [Gebitang]
+}
+
+type Gebitang {
+    id: Int!
+    name: String!
+    grade: String
+}
+</code></pre><p>如果在配置文件中指定了<code>App</code>对应的model——<code>github.com/antoooks/go-graphql-tutorial/models.App</code>，需要在<code>github.com/antoooks/go-graphql-tutorial/models</code>目录下的<code>App.go</code>文件中定义对应的结构体和方法</p>
+<pre><code>func (a *App) Geb(ctx context.Context) ([]*Gebitang, error) {
+ g := make([]*Gebitang, 0)
+ ...
+ return g, nil
+}
+
+Gebitang struct {
+  Id    int
+  Name  string
+  Grade string
+}
+</code></pre><p>这种情况下执行<code>gqlgen generate</code>时，只会更新最终的<code>generated.go</code>文件——用于生产运行时；如果没有更新<code>App.go</code>的情况执行<code>gqlgen generate</code>，则会根据配置文件自动更新——</p>
+<ul>
+<li><code>app.resolver.go</code> 自动生成查询方法<code>Geb</code>和<code>GetInfo</code>方法，需要手动做进一步的实现，如下。</li>
+<li><code>models_gen.go</code> 中自动生成对<code>Gebitang</code>结构体的声明，如下。</li>
+</ul>
+<pre><code># in app.resolver.go
+func (r *appResolver) Geb(ctx context.Context, obj *App) ([]*Gebitang, error) {
+ panic(fmt.Errorf(&quot;not implemented&quot;))
+}
+
+func (r *appResolver) GetInfo(ctx context.Context, obj *App) ([]*GebInfo, error) {
+ panic(fmt.Errorf(&quot;not implemented&quot;))
+}
+
+# in models_gen.go 
+type Gebitang struct {
+ ID    int     `json:&quot;id&quot;`
+ Name  string  `json:&quot;name&quot;`
+ Grade *string `json:&quot;grade&quot;`
+}
+</code></pre><h2 id="archive-2">archive 2</h2>
+<p><em>update@2021-04-30</em> 又是快一年过去，好像还是没啥进步乜。再来~</p>
+<p>尴尬了，这篇的日期写的是<code>2018-01-03</code>，实际上是近三年前的帖子了。Go 1.9发布的时候就信誓旦旦的要进行学习。结果到今天还是无疾而终的样子，半途而废了好久。捞上来，看看这次可以坚持多久。</p>
+<p><a href="https://dbarobin.com/2019/05/19/mixin-super-group/">Mixin 大群部署完全教程</a> 拿这个练习，前后端一起端。</p>
+<h3 id="静态站点">静态站点</h3>
+<p><a href="https://www.alexedwards.net/blog/serving-static-sites-with-go">Serving Static Sites with Go</a></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
+
+<span style="color:#f92672">import</span> (
+  <span style="color:#e6db74">&#34;log&#34;</span>
+  <span style="color:#e6db74">&#34;net/http&#34;</span>
+  <span style="color:#e6db74">&#34;os&#34;</span>
+)
+
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+  <span style="color:#75715e">// fs := http.FileServer(HTMLDir{http.Dir(&#34;./static&#34;)})
+</span><span style="color:#75715e"></span>  <span style="color:#a6e22e">fs</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">FileServer</span>(<span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">Dir</span>(<span style="color:#e6db74">&#34;./static&#34;</span>)) <span style="color:#75715e">//absolute path if necessary
+</span><span style="color:#75715e"></span>  <span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">Handle</span>(<span style="color:#e6db74">&#34;/&#34;</span>, <span style="color:#a6e22e">fs</span>)
+
+  <span style="color:#a6e22e">log</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;Listening on :3000...&#34;</span>)
+  <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">ListenAndServe</span>(<span style="color:#e6db74">&#34;:3000&#34;</span>, <span style="color:#66d9ef">nil</span>)
+  <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+    <span style="color:#a6e22e">log</span>.<span style="color:#a6e22e">Fatal</span>(<span style="color:#a6e22e">err</span>)
+  }
+}
+
+<span style="color:#66d9ef">type</span> <span style="color:#a6e22e">HTMLDir</span> <span style="color:#66d9ef">struct</span> {
+	<span style="color:#a6e22e">d</span> <span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">Dir</span>
+}
+
+<span style="color:#75715e">// https://stackoverflow.com/a/57281956/1087122
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">d</span> <span style="color:#a6e22e">HTMLDir</span>) <span style="color:#a6e22e">Open</span>(<span style="color:#a6e22e">name</span> <span style="color:#66d9ef">string</span>) (<span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">File</span>, <span style="color:#66d9ef">error</span>) {
+	<span style="color:#75715e">// Try name as supplied
+</span><span style="color:#75715e"></span>	<span style="color:#a6e22e">f</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">d</span>.<span style="color:#a6e22e">d</span>.<span style="color:#a6e22e">Open</span>(<span style="color:#a6e22e">name</span>)
+	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">os</span>.<span style="color:#a6e22e">IsNotExist</span>(<span style="color:#a6e22e">err</span>) {
+		<span style="color:#75715e">// Not found, try with .html
+</span><span style="color:#75715e"></span>		<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">f</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">d</span>.<span style="color:#a6e22e">d</span>.<span style="color:#a6e22e">Open</span>(<span style="color:#a6e22e">name</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;.html&#34;</span>); <span style="color:#a6e22e">err</span> <span style="color:#f92672">==</span> <span style="color:#66d9ef">nil</span> {
+			<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">f</span>, <span style="color:#66d9ef">nil</span>
+		}
+	}
+	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">f</span>, <span style="color:#a6e22e">err</span>
+}
+</code></pre></div><ul>
+<li>Hugo生成静态站点</li>
+<li>使用上面的go脚本(保存为blog.go，编译<code>go build blog.go</code>，生成blog可执行文件)即可做为web服务器</li>
+<li><code>sudo certbot --nginx</code>自动更新配置(确保：nginx中<code>server_name</code>有对应的真实有效域名，并且域名配置了对应的公网IP（域名解析）)，还自动添加了301跳转</li>
+<li>欢迎访问备份blog站点<a href="https://blog.buxiangzhuce.com">不想注册</a></li>
+<li>设置为service服务，下面的内容保存为<code>/etc/systemd/system/blog.service</code>，执行<code>systemctl restart blog.service</code>期待服务</li>
+<li>执行<code>journalctl -u blog.service</code>查看此服务的log信息</li>
+</ul>
+<pre><code>[Unit]
+Description=Blog Daemon
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=/home/geb/blog
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
+
+</code></pre><pre><code>server {
+
+    server_name blog.buxiangzhuce.com;
+    index index.html index.htm;
+    charset utf-8;
+
+    location / {
+        proxy_pass http://127.0.0.1:1313;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_set_header X-Forwarded-Port $server_port;
+    }
+
+    listen 443 ssl; # managed by Certbot
+    ssl_certificate /etc/letsencrypt/live/blog.buxiangzhuce.com/fullchain.pem; # managed by Certbot
+    ssl_certificate_key /etc/letsencrypt/live/blog.buxiangzhuce.com/privkey.pem; # managed by Certbot
+    include /etc/letsencrypt/options-ssl-nginx.conf; # managed by Certbot
+    ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem; # managed by Certbot
+
+}
+
+server {
+    if ($host = blog.buxiangzhuce.com) {
+        return 301 https://$host$request_uri;
+    } # managed by Certbot
+
+   server_name blog.buxiangzhuce.com;
+    listen 80;
+    return 404; # managed by Certbot
+
+}
+</code></pre><h3 id="wire">Wire</h3>
+<p><a href="https://github.com/google/wire">go wire</a> and <a href="https://blog.golang.org/wire">wire blog</a></p>
+<p>前提：已经将<code>$GOPATH/bin</code>目录添加到环境变量<code>$PATH</code>
+安装<code>go get github.com/google/wire/cmd/wire</code></p>
+<p><a href="https://github.com/google/wire/blob/master/_tutorial/README.md">wire tutorial</a></p>
+<ul>
+<li>Goland 提示 <code>wire.go doesn't match to garget system. File will be ignored by build tool</code></li>
+</ul>
+<p>在设置&ndash;&gt; Go &ndash;&gt; Build Tags &amp; Vendoring中的Custom tags里指定要用的编译tag，例如 <code>wireinject</code>。参考<a href="https://studygolang.com/topics/10193">指定编译tag</a>，<a href="https://www.jianshu.com/p/858a0791f618">编译go build -tags</a>，<a href="https://pkg.go.dev/go/build?tab=doc">编译官方手册</a></p>
+<ul>
+<li>执行wire命令时提示<code>go list stderr &lt;&lt;go: finding module for package pattern=. &gt;&gt;</code></li>
+</ul>
+<pre><code>go list stderr &lt;&lt;go: finding module for package pattern=. &gt;&gt;
+wire: packages not found
+wire: generate failed
+</code></pre><p><a href="https://github.com/google/wire/issues/125#issuecomment-462505979">官方issue #125</a>中的解决方案——</p>
+<pre><code># 先升级 go/packages，可以添加 -v参数看到升级了哪些packages
+go get -u golang.org/x/tools/go/packages
+# 再重新安装 wire
+go get github.com/google/wire/cmd/wire
+</code></pre><p><a href="https://github.com/google/wire/issues/125#issuecomment-462516570">解释</a>是这样的——</p>
+<blockquote>
+<p>So Wire uses <a href="https://godoc.org/golang.org/x/tools/go/packages">golang.org/x/tools/go/packages</a> behind the scenes in order to gather all of the files to parse. go/packages is specifically designed to be agnostic to source code layout (e.g. modules versus GOPATH workspaces), so it shells out to the go tool to obtain the information that it needs. Since this requires cooperation from both your installed go tool and the go/packages version, an outdated go/packages library can mess up the communication and report bad results to Wire (which is what happened here).</p>
+<p>In the Go modules future, your built version of Wire would have used a known-tested version of go/packages and this issue would not have occurred.</p>
+</blockquote>
+<p>执行完之后，可以正常生成<code>wire_gen.go</code>文件。可以先执行<code>wire check</code>检查是否符合编译条件。</p>
+<p>执行完一次<code>wire</code>命令之后，再次需要更新<code>wire_gen.go</code>文件时，执行<code>go generate</code>命令即可</p>
+<p><a href="https://github.com/google/wire/issues/224#issuecomment-558819174">undefined: InitializeEvent</a>， 使用wire生成注入代码之后，编译时需要带上对应的代码。</p>
+<p>执行 <code>go build</code>默认使用了上次的配置? <code>go build main.go wire_gen.go</code>可生成可执行文件</p>
+<p><a href="https://github.com/google/wire/blob/master/docs/guide.md">wire guide</a></p>
+<p><a href="https://github.com/google/wire/blob/master/docs/faq.md#what-if-my-dependency-graph-has-two-dependencies-of-the-same-type">依赖两个相同的provider？</a></p>
+<h3 id="go-ldflags">go ldflags</h3>
+<p><a href="https://www.digitalocean.com/community/tutorials/using-ldflags-to-set-version-information-for-go-applications">Using <code>ldflags</code> with <code>go build</code></a></p>
+<p><code>ld</code> stands for linker, the program that links together the different pieces of the compiled source code into the final binary.</p>
+<p><code>ldflags</code>, stands for linker flags. It passes a flag to the underlying Go toolchain linker, <a href="https://golang.org/cmd/link">cmd/link</a>, that allows you to change the values of imported packages at build time from the command line.</p>
+<p>使用方式为：</p>
+<pre><code># 格式
+go build -ldflags=&quot;-flag&quot;
+# 示例
+go build -ldflags=&quot;-X 'package_path.variable_name=new_value'&quot;
+# 实例
+go build -ldflags=&quot;-X 'main.Version=v1.0.0'&quot;
+#复杂实例
+go build -v -ldflags=&quot;-X 'main.Version=v1.0.0' -X 'app/build.User=$(id -u -n)' -X 'app/build.Time=$(date)'&quot;
+</code></pre><ul>
+<li>外层使用双引号，确保传递的flag中的内容即使包含空格也不截断命令；</li>
+<li>key-value值使用单引号</li>
+<li>要改变的变量需要是包级别的string类型变量。不能是const类型</li>
+<li>变量是否export都可以（大小写开头的变量都支持）</li>
+</ul>
+<p>进一步可以使用<code>nm</code>工具查找编译文件中的<code>symbols</code>。（包名中不能包含非ASCII码，引号<code>&quot;</code>和百分号<code>%</code>）</p>
+<p>在make文件中使用——<a href="https://gist.github.com/marz619/e91796afa5a951c0aa4595d7e73d78d0"></a></p>
+<p><code>main.go</code></p>
+<pre><code>package main
+
+var (
+	version string
+	date    string
+)
+
+func init() {
+	if version == &quot;&quot; {
+		version = &quot;no version&quot;
+	}
+	if date == &quot;&quot; {
+		date = &quot;(Mon YYYY)&quot;
+	}
+}
+
+func main() {
+	println(version, date)
+}
+</code></pre><p><code>makefile:</code></p>
+<pre><code>version=0.0.1
+date=$(shell date -j &quot;+(%b %Y)&quot;)
+exec=a.out
+
+.PHONY: all
+
+all:
+	@echo &quot; make &lt;cmd&gt;&quot;
+	@echo &quot;&quot;
+	@echo &quot;commands:&quot;
+	@echo &quot; build          - runs go build&quot;
+	@echo &quot; build_version  - runs go build with ldflags version=${version} &amp; date=${date}&quot;
+	@echo &quot;&quot;
+
+build: clean
+	@go build -v -o ${exec}
+
+build_version: check_version
+	@go build -v -ldflags '-X &quot;main.version=${version}&quot; -X &quot;main.date=${date}&quot;' -o ${exec}_${version}
+
+clean:
+	@rm -f ${exec}
+
+check_version:
+	@if [ -a &quot;${exec}_${version}&quot; ]; then \
+		echo &quot;${exec}_${version} already exists&quot;; \
+		exit 1; \
+	fi;
+</code></pre><p><a href="https://blog.cloudflare.com/setting-go-variables-at-compile-time/">Setting Go variables from the outside</a></p>
+<p>在<code>go run</code>命令中也可以直接使用（因为会默认先执行<code>go build</code>)</p>
+<p><code>go run -ldflags=&quot;-X main.who CloudFlare&quot; hello.go</code></p>
+<h3 id="fmt-string">fmt string</h3>
+<p><a href="https://gobyexample.com/string-formatting">Go by Example: String Formatting</a></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
+
+<span style="color:#f92672">import</span> (
+	<span style="color:#e6db74">&#34;fmt&#34;</span>
+	<span style="color:#e6db74">&#34;os&#34;</span>
+)
+
+<span style="color:#66d9ef">type</span> <span style="color:#a6e22e">point</span> <span style="color:#66d9ef">struct</span> {
+	<span style="color:#a6e22e">x</span>, <span style="color:#a6e22e">y</span> <span style="color:#66d9ef">int</span>
+}
+
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+
+	<span style="color:#a6e22e">p</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">point</span>{<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>}
+
+	<span style="color:#75715e">// v for verbs? value?
+</span><span style="color:#75715e"></span>	<span style="color:#75715e">// {1 2}
+</span><span style="color:#75715e"></span>	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;%v\n&#34;</span>, <span style="color:#a6e22e">p</span>)
+
+	<span style="color:#75715e">// include the struct’s field names.
+</span><span style="color:#75715e"></span>	<span style="color:#75715e">// {x:1 y:2}
+</span><span style="color:#75715e"></span>	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;%+v\n&#34;</span>, <span style="color:#a6e22e">p</span>)
+
+	<span style="color:#75715e">//  prints a Go syntax representation of the value
+</span><span style="color:#75715e"></span>	<span style="color:#75715e">//  main.point{x:1, y:2}
+</span><span style="color:#75715e"></span>	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;%#v\n&#34;</span>, <span style="color:#a6e22e">p</span>)
+
+	<span style="color:#75715e">// print the type of a value
+</span><span style="color:#75715e"></span>	<span style="color:#75715e">// main.point
+</span><span style="color:#75715e"></span>	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;%T\n&#34;</span>, <span style="color:#a6e22e">p</span>)
+
+	<span style="color:#75715e">// Formatting booleans
+</span><span style="color:#75715e"></span>	<span style="color:#75715e">// false
+</span><span style="color:#75715e"></span>	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;%t\n&#34;</span>, <span style="color:#66d9ef">false</span>)
+
+	<span style="color:#75715e">//  base-10 formatting.
+</span><span style="color:#75715e"></span>	<span style="color:#75715e">// 123
+</span><span style="color:#75715e"></span>	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;%d\n&#34;</span>, <span style="color:#ae81ff">123</span>)
+
+	<span style="color:#75715e">// binary formatting
+</span><span style="color:#75715e"></span>	<span style="color:#75715e">// 1110
+</span><span style="color:#75715e"></span>	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;%b\n&#34;</span>, <span style="color:#ae81ff">14</span>)
+
+	<span style="color:#75715e">// prints the character corresponding to the given integer.
+</span><span style="color:#75715e"></span>	<span style="color:#75715e">// !
+</span><span style="color:#75715e"></span>	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;%c\n&#34;</span>, <span style="color:#ae81ff">33</span>)
+
+	<span style="color:#75715e">// provides hex encoding.
+</span><span style="color:#75715e"></span>	<span style="color:#75715e">// 1c8
+</span><span style="color:#75715e"></span>	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;%x\n&#34;</span>, <span style="color:#ae81ff">456</span>)
+
+	<span style="color:#75715e">//  formatting options for floats. For basic decimal formatting use %f.
+</span><span style="color:#75715e"></span>	<span style="color:#75715e">// 78.900000
+</span><span style="color:#75715e"></span>	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;%f\n&#34;</span>, <span style="color:#ae81ff">78.9</span>)
+
+	<span style="color:#75715e">// format the float in (slightly different versions of) scientific notation
+</span><span style="color:#75715e"></span>	<span style="color:#75715e">// 1.234000e+08
+</span><span style="color:#75715e"></span>	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;%e\n&#34;</span>, <span style="color:#ae81ff">123400000.0</span>)
+	<span style="color:#75715e">// 1.234000E+08
+</span><span style="color:#75715e"></span>	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;%E\n&#34;</span>, <span style="color:#ae81ff">123400000.0</span>)
+
+	<span style="color:#75715e">// print basic string
+</span><span style="color:#75715e"></span>	<span style="color:#75715e">// &#34;string&#34;
+</span><span style="color:#75715e"></span>	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;%s\n&#34;</span>, <span style="color:#e6db74">&#34;\&#34;string\&#34;&#34;</span>)
+
+	<span style="color:#75715e">// double-quote strings
+</span><span style="color:#75715e"></span>	<span style="color:#75715e">// &#34;\&#34;string\&#34;&#34;
+</span><span style="color:#75715e"></span>	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;%q\n&#34;</span>, <span style="color:#e6db74">&#34;\&#34;string\&#34;&#34;</span>)
+
+	<span style="color:#75715e">// renders the string in base-16, with two output characters per byte of input
+</span><span style="color:#75715e"></span>	<span style="color:#75715e">// 6865782074686973
+</span><span style="color:#75715e"></span>	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;%x\n&#34;</span>, <span style="color:#e6db74">&#34;hex this&#34;</span>)
+
+	<span style="color:#75715e">// print a representation of a pointer
+</span><span style="color:#75715e"></span>	<span style="color:#75715e">// 0xc00000a210 (address)
+</span><span style="color:#75715e"></span>	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;%p\n&#34;</span>, <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">p</span>)
+
+	<span style="color:#75715e">// specify the width of an integer, use a number after the % in the verb. By default the result will be right-justified and padded with spaces.
+</span><span style="color:#75715e"></span>	<span style="color:#75715e">// |    12|   345|
+</span><span style="color:#75715e"></span>	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;|%6d|%6d|\n&#34;</span>, <span style="color:#ae81ff">12</span>, <span style="color:#ae81ff">345</span>)
+
+	<span style="color:#75715e">// restrict the decimal precision at the same time with the width.precision syntax
+</span><span style="color:#75715e"></span>	<span style="color:#75715e">// |  1.20|  3.45|
+</span><span style="color:#75715e"></span>	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;|%6.2f|%6.2f|\n&#34;</span>, <span style="color:#ae81ff">1.2</span>, <span style="color:#ae81ff">3.45</span>)
+
+	<span style="color:#75715e">// left-justify, use the - flag
+</span><span style="color:#75715e"></span>	<span style="color:#75715e">// |1.20  |3.45  |
+</span><span style="color:#75715e"></span>	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;|%-6.2f|%-6.2f|\n&#34;</span>, <span style="color:#ae81ff">1.2</span>, <span style="color:#ae81ff">3.45</span>)
+
+	<span style="color:#75715e">// format string
+</span><span style="color:#75715e"></span>	<span style="color:#75715e">// |   foo|     b|
+</span><span style="color:#75715e"></span>	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;|%6s|%6s|\n&#34;</span>, <span style="color:#e6db74">&#34;foo&#34;</span>, <span style="color:#e6db74">&#34;b&#34;</span>)
+
+	<span style="color:#75715e">// |foo   |b     |
+</span><span style="color:#75715e"></span>	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;|%-6s|%-6s|\n&#34;</span>, <span style="color:#e6db74">&#34;foo&#34;</span>, <span style="color:#e6db74">&#34;b&#34;</span>)
+
+	<span style="color:#75715e">// return string
+</span><span style="color:#75715e"></span>	<span style="color:#a6e22e">s</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Sprintf</span>(<span style="color:#e6db74">&#34;a %s&#34;</span>, <span style="color:#e6db74">&#34;string&#34;</span>)
+	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">s</span>)
+
+	<span style="color:#75715e">// format+print to io.Writers other than os.Stdout using Fprintf.
+</span><span style="color:#75715e"></span>	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Fprintf</span>(<span style="color:#a6e22e">os</span>.<span style="color:#a6e22e">Stderr</span>, <span style="color:#e6db74">&#34;an %s\n&#34;</span>, <span style="color:#e6db74">&#34;error&#34;</span>)
+
+}
+
+</code></pre></div><h3 id="闭包函数传参">闭包函数传参：</h3>
+<p><a href="https://stackoverflow.com/a/30183893/1087122">Passing parameters to function closure</a>，<a href="https://github.com/golang/go/wiki/CommonMistakes#using-goroutines-on-loop-iterator-variables">Using goroutines on loop iterator variables</a></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">for</span> <span style="color:#a6e22e">i</span> <span style="color:#f92672">:=</span> <span style="color:#ae81ff">0</span>; <span style="color:#a6e22e">i</span> &lt; <span style="color:#ae81ff">3</span>; <span style="color:#a6e22e">i</span><span style="color:#f92672">++</span> {
+    <span style="color:#66d9ef">go</span> <span style="color:#66d9ef">func</span>() {
+        <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">i</span>)
+    }()
+}
+<span style="color:#75715e">//result: 3 3 3
+</span><span style="color:#75715e"></span>
+<span style="color:#66d9ef">for</span> <span style="color:#a6e22e">i</span> <span style="color:#f92672">:=</span> <span style="color:#ae81ff">0</span>; <span style="color:#a6e22e">i</span> &lt; <span style="color:#ae81ff">3</span>; <span style="color:#a6e22e">i</span><span style="color:#f92672">++</span> {
+    <span style="color:#66d9ef">go</span> <span style="color:#66d9ef">func</span>(<span style="color:#a6e22e">v</span> <span style="color:#66d9ef">int</span>) {
+        <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">v</span>)
+    }(<span style="color:#a6e22e">i</span>)
+}
+<span style="color:#75715e">// result: 0, 1, 2
+</span></code></pre></div><h3 id="how-to-write-go-code">How to write Go code</h3>
+<p>重新更新了环境，使用<code>go1.14.4</code>开始，即使在window环境上，<a href="https://golang.org/doc/install">安装</a>也只需要解压、更新环境变量（如果使用cgo的话，还需要gcc环境，机器上已经有了，但目前以我这水平应该还用不到）就可以立即上手了。</p>
+<p><a href="https://golang.org/doc/code.html">How to write Go code</a>实践——</p>
+<ul>
+<li>创建工作目录，后续在工作目录进行操作</li>
+<li>使用<code>go mod init example.com/user/hello</code>进行初始化，生成<code>go.mod</code>文件，包含了包名和使用的版本名</li>
+<li>使用<code>go install</code>进行安装，三种等价操作。<code>go install .</code>, <code>go install example.com/user/hello</code></li>
+<li>在本地定义引用的包信息：目录名作为引入的内容，其中的方法使用大写字母开头自动<code>exported</code>，使用<code>go build</code>就可以将引用包安装到本地。之后就可以在应用中使用</li>
+<li>引入remote的包会自动去下载远程的包。通过<code>go install</code>、<code>go build</code>、<code>go run</code>都可以触发下载动作，并会更新<code>go.mod</code>文件</li>
+<li>使用 <code>go test</code>进行测试</li>
+</ul>
+<p>注意事项：</p>
+<ol>
+<li>可以使用<code>go env -w GOBIN=/path/to/bin</code>和<code>go env -u GOBIN</code>进行变量声明和修改</li>
+<li>在cmd环境下可以临时设置代理，持续到窗口关闭，前提是本地已经有了proxy<code>set http_proxy=http://127.0.0.1:7890</code>, <code>set https_proxy=http://127.0.0.1:7890</code></li>
+<li>使用<code>go test ./...</code>可以自动遍历当前工程所有文件夹下的test文件</li>
+</ol>
+<p>要用到<code>go module</code>，参考这两篇——<a href="https://mp.weixin.qq.com/s/6gJkSyGAFR0v6kow2uVklA">Go Modules 终极入门</a>，<a href="https://mp.weixin.qq.com/s/jpp7vs3Fdg4m15P1SHt1yA">干货满满的 Go Modules 和 goproxy.cn</a>。</p>
+<h3 id="gocker-docker">Gocker Docker</h3>
+<p><a href="https://mp.weixin.qq.com/s/P9bVFtXeduZ8Lv-0vFaXAg">用 Go 从头实现一个迷你 Docker — Gocker</a><br>
+<a href="https://unixism.net/2020/06/containers-the-hard-way-gocker-a-mini-docker-written-in-go/">原文: Containers the hard way: Gocker: A mini Docker written in Go</a><br>
+<a href="https://github.com/shuveb/containers-the-hard-way">源码：Gocker</a></p>
+<p>这个看起来有点帅啊，而且代码不是很多的样子，结合耗子叔的这几篇一起理解更有帮助——</p>
+<p><a href="https://coolshell.cn/articles/17010.html">DOCKER基础技术：LINUX NAMESPACE（上）</a><br>
+<a href="https://coolshell.cn/articles/17029.html">DOCKER基础技术：LINUX NAMESPACE（下）</a><br>
+<a href="https://coolshell.cn/articles/17049.html">DOCKER基础技术：LINUX CGROUP</a><br>
+<a href="https://coolshell.cn/articles/17061.html">DOCKER基础技术：AUFS</a><br>
+<a href="https://coolshell.cn/articles/17200.html">DOCKER基础技术：DEVICEMAPPER</a></p>
+<h3 id="结构体对应数据绑定">结构体对应数据绑定</h3>
+<p><a href="https://mp.weixin.qq.com/s/DuEGITdOYHYOXk-v-u2V5A">Go Echo: get started</a>, <a href="https://mp.weixin.qq.com/s/vg9OSO4g0KG7iDQ7GXoUSQ">Go Echo: basic features</a>跟着这个例子写一个简单的登录demo。</p>
+<p>趁热打铁，第三篇新鲜出炉<a href="https://mp.weixin.qq.com/s/2wARcsszax6GFbZcjJPoig">Go Echo: custom Binder</a></p>
+<ul>
+<li>param tag 对应路径参数；</li>
+<li>query tag 对应 URL 参数；</li>
+<li>json tag 对应 application/json 方式参数；</li>
+<li>form tag 对应 POST 表单数据；</li>
+<li>xml tag 对应 application/xml 或 text/xml；</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#75715e">// 表述结构体对应数据绑定时，对应的tag和字段。 如，json类型的name字段；form类型的name字段
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">User</span> <span style="color:#66d9ef">struct</span> {
+ <span style="color:#a6e22e">Name</span> <span style="color:#66d9ef">string</span> <span style="color:#e6db74">`query:&#34;name&#34; form:&#34;name&#34; json:&#34;name&#34; xml:&#34;name&#34;`</span>
+ <span style="color:#a6e22e">Sex</span>  <span style="color:#66d9ef">string</span> <span style="color:#e6db74">`query:&#34;sex&#34; form:&#34;sex&#34; json:&#34;sex&#34; xml:&#34;sex&#34;`</span>
+}
+</code></pre></div><p>顺带安装一下很好用的http调试工具<a href="https://httpie.org/docs#installation">httpie</a>，python写得，依赖python3.6以上版本（本地的环境已经很混乱得啥都有， 使用<code>py --version</code>可以调用python3版本），直接使用 <code>pip install  --upgrade httpie</code>安装成功了。</p>
+<p>没有进行数据绑定时，传递xml类型数据时，被认为是<code>Content-Type: text/plain;</code>；指定了绑定规则后可以识别并转换为<code>Content-Type: application/json; charset=UTF-8</code></p>
+<h3 id="正则限制">正则限制</h3>
+<p><a href="https://groups.google.com/forum/#!topic/golang-nuts/7qgSDWPIh_E">https://groups.google.com/forum/#!topic/golang-nuts/7qgSDWPIh_E</a></p>
+<blockquote>
+<p>that (?!re) regular expression is not supported neither in re2 nor in Google Go. Is there any chance that its support will be implemented in future releases? (it is supported at least in Ruby, Python, Java, Perl)</p>
+</blockquote>
+<p><a href="https://www.reddit.com/r/programmingcirclejerk/comments/5ml6yj/golangs_standard_regex_library_doesnt_have/">https://www.reddit.com/r/programmingcirclejerk/comments/5ml6yj/golangs_standard_regex_library_doesnt_have/</a></p>
+<p><a href="https://github.com/golang/go/issues/18868">go-issues:18868 regexp: support lookaheads and lookbehinds</a></p>
+<p><a href="https://github.com/StefanSchroeder/Golang-Regex-Tutorial/issues/11">Golang doesn&rsquo;t support positive lookbehind assertion?</a></p>
+<p>支持的场景： <a href="https://github.com/google/re2/wiki/Syntax">https://github.com/google/re2/wiki/Syntax</a>要求<a href="https://groups.google.com/d/msg/golang-nuts/7qgSDWPIh_E/OHTAm4wRZL0J"><code>makes a single scan over the input and runs in O(n) time</code></a></p>
+<blockquote>
+<p>The lack of generalized assertions, like the lack of backreferences, is not a statement on our part about regular expression style.  It is a consequence of not knowing how to implement them efficiently.  If you can implement them while preserving the guarantees made by the current package regexp, namely that it makes a single scan over the input and runs in O(n) time, then I would be happy to review and approve that CL.  However, I have pondered how to do this for five years, off and on, and gotten nowhere.</p>
+</blockquote>
+<p>包含在一传字符串中的手机号，类似<code>abcd13566778888xyz</code>这样的手机号码前后<code>不包含数字</code>的正则在Go语言里是不支持的。因为无法<code>一次扫描并在O(n)的时间</code>里完成。</p>
+<p><code>(?=re)</code>	before text matching <code>re</code> (NOT SUPPORTED)
+<code>(?!re)</code>	before text not matching <code>re</code> (NOT SUPPORTED)
+<code>(?&lt;=re)</code>	after text matching <code>re</code> (NOT SUPPORTED)
+<code>(?&lt;!re)</code>	after text not matching <code>re</code> (NOT SUPPORTED)</p>
+<h3 id="go-vendor-依赖">go vendor 依赖</h3>
+<p>低版本下对于vendor目录的查找逻辑：</p>
+<ul>
+<li>需要将项目建立在<code>$GOPATH</code>目录下的<code>src</code>目录（前提）</li>
+<li>查找当前工程下的vendor目录(vendor tree) （如果项目没有在<code>$GOPATH</code>目录下，这一步将会被忽略）<a href="https://github.com/golang/go/issues/14566">go issue #14566</a></li>
+<li>在<code>$GOROOT</code>目录下查找(from $GOROOT)</li>
+<li>在<code>$GOPATH</code>目录下查找(from $GOPATH)</li>
+</ul>
+<hr>
+<h2 id="archive">archive</h2>
+<blockquote>
+<p>Go release 1.9 version on 24 August 2017. I&rsquo;m the <a href="https://github.com/golang/go/stargazers">31,365</a> people to start it on github and just get started to learn it :).</p>
+<p><a href="https://blog.golang.org/go1.9">Go 1.9 is released</a>. <a href="https://blog.golang.org/index"><strong>Here</strong></a> are all the blogs about go.</p>
+<p><a href="https://commandcenter.blogspot.co.uk/2017/09/go-ten-years-and-climbing.html">Go: Ten years and climbing</a>
+<a href="http://tonybai.com/2017/09/24/go-ten-years-and-climbing/">Go十年</a>
+<a href="https://jeiwan.cc/tags/blockchain/">BIG: Blockchain In Go</a></p>
+</blockquote>
+<p>VS环境设置：</p>
+<p><a href="https://github.com/Microsoft/vscode-go/wiki/Go-tools-that-the-Go-extension-depends-on">Go tools that the Go extension depends on</a></p>
+<p>Ctrl + b: 显示/隐藏侧边栏
+Ctrl + j: 显示/隐藏Panel控制栏</p>
+<h3 id="update-project">update project</h3>
+<pre><code># Add Hugo and its package dependencies to your go src directory.
+go get -v github.com/gohugoio/hugo
+</code></pre><p>$GOPATH 目录约定有三个子目录：</p>
+<ul>
+<li>src 存放源代码（比如：.go .c .h .s等）</li>
+<li>pkg 编译后生成的文件（比如：.a）</li>
+<li>bin 编译后生成的可执行文件（为了方便，可以把此目录加入到 $PATH 变量中，如果有多个gopath，那么使用${GOPATH//://bin:}/bin添加所有的bin目录）</li>
+</ul>
+<pre><code>$ go env
+set GOARCH=amd64
+set GOBIN=
+set GOEXE=.exe
+set GOHOSTARCH=amd64
+set GOHOSTOS=windows
+set GOOS=windows
+set GOPATH=F:\Tools\gopath\
+set GORACE=
+set GOROOT=F:\Tools\go
+set GOTOOLDIR=F:\Tools\go\pkg\tool\windows_amd64
+set GCCGO=gccgo
+set CC=gcc
+set GOGCCFLAGS=-m64 -mthreads -fmessage-length=0 -fdebug-prefix-map=G:\TempFolder\userTemp\go-build565356171=/tmp/go-build -gno-record-gcc-switches
+set CXX=g++
+set CGO_ENABLED=1
+set CGO_CFLAGS=-g -O2
+set CGO_CPPFLAGS=
+set CGO_CXXFLAGS=-g -O2
+set CGO_FFLAGS=-g -O2
+set CGO_LDFLAGS=-g -O2
+set PKG_CONFIG=pkg-config
+
+</code></pre><h3 id="go-get-golangorgx-包失败解决方法">go get golang.org/x 包失败解决方法</h3>
+<p><a href="http://blog.csdn.net/alexwoo0501/article/details/73409917">方案</a>由于限制问题，国内使用 go get 安装 golang 官方包可能会失败</p>
+<pre><code>go get -v golang.org/x/tour/pic
+Fetching https://golang.org/x/tour/pic?go-get=1
+https fetch failed: Get https://golang.org/x/tour/pic?go-get=1: dial tcp 216.239.37.1:443: i/o timeout
+package golang.org/x/tour/pic: unrecognized import path &quot;golang.org/x/tour/pic&quot; (https fetch: Get https://golang.org/x/tour/pic?go-get=1: dial tcp 216.239.37.1:443: i/o timeout)
+
+</code></pre><p>golang 在 github 上建立了一个**<a href="https://github.com/golang">镜像库</a>**，如 <a href="https://github.com/golang/net">https://github.com/golang/net</a> 即是 <a href="https://golang.org/x/net">https://golang.org/x/net</a> 的镜像库</p>
+<p>获取 golang.org/x/net 包，其实只需要以下步骤：</p>
+<pre><code>mkdir -p $GOPATH/src/golang.org/x
+cd $GOPATH/src/golang.org/x
+git clone https://github.com/golang/net.git
+
+## example
+➜  src mkdir -p golang.org/x
+➜  src cd golang.org/x
+➜  x git clone https://github.com/golang/tour.git
+Cloning into 'tour'...
+remote: Counting objects: 2092, done.
+remote: Total 2092 (delta 0), reused 0 (delta 0), pack-reused 2092
+Receiving objects: 100% (2092/2092), 895.19 KiB | 133.00 KiB/s, done.
+Resolving deltas: 100% (1329/1329), done.
+## now you can import &quot;golang.org/x/tour/pic&quot; 
+</code></pre><p>其它 golang.org/x 下的包获取皆可使用该方法</p>
+<p>或者使用软连接的方式代替</p>
+<pre><code>git clone https://github.com/golang/net.git $GOPATH/src/github.com/golang/net
+
+git clone https://github.com/golang/sys.git $GOPATH/src/github.com/golang/sys
+
+git clone https://github.com/golang/tools.git $GOPATH/src/github.com/golang/tools
+
+ln -s $GOPATH/src/github.com/golang $GOPATH/src/golang.org/x1
+
+</code></pre><h3 id="go-test">go test</h3>
+<p>同事的项目本地执行没有问题，线上跑go test的时候一直无法通过，build 失败。</p>
+<p>最终定位原因：</p>
+<ul>
+<li>环境需要安装gcc环境</li>
+<li>打开golang的环境变量 <code>CGO_ENABLED=&quot;1&quot;</code></li>
+</ul>
+<p>环境默认是打开了CGO的，但执行go test时会报gcc错误。为了不安装gcc环境，强制修改了这个变量（还尝试了半天修改的方法）</p>
+<p>这是因为甚至是<code>go test ./...</code>时，有些报会使用到 “C混合编译”，需要注意这俩个关键因素。</p>
+<h3 id="go-import">go import</h3>
+<p><a href="https://lucasfcosta.com/2017/02/07/Understanding-Go-Dependency-Management.html">Understanding Dependency Management in Go</a> Understanding Vendoring：</p>
+<p>In order to be able to fully understand how vendoring works we must understand the algorithm used by Go to resolve import paths, which is the following:</p>
+<ol>
+<li>Look for the import at the local vendor directory (if any)</li>
+<li>If we can’t find this package in the local vendor directory we go up to the parent folder and try to find it in the vendor directory there (if any)</li>
+<li>We repeat step 2 until we reach $GOPATH/src</li>
+<li>We look for the imported package at $GOROOT</li>
+<li>If we can’t find this package at $GOROOT we look for it in our $GOPATH/src folder</li>
+</ol>
+<h3 id="go-mod">go mod</h3>
+<p><a href="https://segmentfault.com/a/1190000018536993">Go mod 使用</a><br>
+<a href="https://www.jianshu.com/p/bbed916d16ea">告别GOPATH，快速使用 go mod（Golang包管理工具）</a></p>
+<p>go.mod文件中定义了当前项目对应的module名称，如<code>golang.gebitang.com/my/module</code>。</p>
+<p>对于<code>pkg/util/log</code>的包，当前项目中使用import时，可以使用下面的方式进行引入。go mod模块会自动进行转换</p>
+<pre><code>import (
+    &quot;golang.gebitang.com/my/module/pkg/util/log&quot;
+)
+</code></pre><p>go mod将依赖统一放到GOPATH下的pkg下的pkg下面，并且支持不同版本（使用@vMajor.minor.path）的格式管理</p>
+<p><a href="https://golang.org/ref/mod#go-mod-vendor">usage of <code>go mod vendor</code></a></p>
+<p>The <code>go mod vendor</code> command constructs a directory named vendor in the main module&rsquo;s root directory that contains copies of all packages needed to support builds and tests of packages in the main module.</p>
+<!-- raw HTML omitted -->
+<p>As you append to a slice, its capacity <a href="https://stackoverflow.com/a/45423692/1087122">doubles in size</a> every time it exceeds its current capacity.</p>
+
+  
+  
+
+  
+<div class="prev-next-post pure-g">
+  <div class="pure-u-1-24" style="text-align: left;">
+    
+    <a href="http://gebitang.com/post/2020/0609-about-unit-test/"><i class="fa fa-chevron-left"></i></a>
+    
+  </div>
+  <div class="pure-u-10-24">
+    
+    <nav class="prev">
+      <a href="http://gebitang.com/post/2020/0609-about-unit-test/">关于单测哪些事儿</a>
+    </nav>
+    
+  </div>
+  <div class="pure-u-2-24">
+    &nbsp;
+  </div>
+  <div class="pure-u-10-24">
+    
+    <nav class="next">
+      <a href="http://gebitang.com/post/2020/0627-mixin-super-group-deploy/">Mixin 大群部署完全教程 实操总结</a>
+    </nav>
+    
+  </div>
+  <div class="pure-u-1-24" style="text-align: right;">
+    
+    <a href="http://gebitang.com/post/2020/0627-mixin-super-group-deploy/"><i class="fa fa-chevron-right"></i></a>
+    
+  </div>
+</div>
+
+
+
+  
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+
+(function() {
+    
+    
+    if (window.location.hostname == "localhost")
+        return;
+
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    var disqus_shortname = 'gebitang';
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com/" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+</div>
+
+</div>
+</div>
+<script src="http://gebitang.com/js/ui.js"></script>
+<script src="http://gebitang.com/js/menus.js"></script>
+
+
+<script>
+  
+  if (window.location.hostname != "localhost") {
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-34303694-1', 'auto');
+    ga('send', 'pageview');
+  }
+</script>
+
+
+
+
+<button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
+</body>
+</html>
+

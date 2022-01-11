@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>linked-list on 戈壁堂</title>
+    <link>http://gebitang.com/tags/linked-list/</link>
+    <description>Recent content in linked-list on 戈壁堂</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 21 Oct 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://gebitang.com/tags/linked-list/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Linked list problems solution</title>
+      <link>http://gebitang.com/post/algo/algo-linked-list/</link>
+      <pubDate>Mon, 21 Oct 2019 00:00:00 +0000</pubDate>
+      
+      <guid>http://gebitang.com/post/algo/algo-linked-list/</guid>
+      <description>linked-list Problem 2 Add Two Numbers 2. Add Two Numbers Medium You are given two non-empty linked lists representing two non-negative integers. The digits are stored in reverse order and each of their nodes contain a single digit. Add the two numbers and return it as a linked list. You may assume the two numbers do not contain any leading zero, except the number 0 itself. Example: Input: (2 -&amp;gt;</description>
+    </item>
+    
+  </channel>
+</rss>

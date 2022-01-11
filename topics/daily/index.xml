@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>daily on 戈壁堂</title>
+    <link>http://gebitang.com/topics/daily/</link>
+    <description>Recent content in daily on 戈壁堂</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 22 Nov 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://gebitang.com/topics/daily/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Go Deeper</title>
+      <link>http://gebitang.com/post/gd/</link>
+      <pubDate>Thu, 22 Nov 2018 00:00:00 +0000</pubDate>
+      
+      <guid>http://gebitang.com/post/gd/</guid>
+      <description>**************************************************** *** *** *** Go Deepper, Not Wilder *** *** *** **************************************************** Go Deepper, Not Wilder 最高的效率是不返工，最快的进步是不退步。每天进步一点点，二十年超过所有人，活在他人想象之外！ 四省察 今天有什么</description>
+    </item>
+    
+  </channel>
+</rss>

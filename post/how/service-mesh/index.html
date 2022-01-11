@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html xmlns:wb="http://open.weibo.com/wb" lang="en" >
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Leaning about service mesh">
+  <meta name="generator" content="Hugo 0.74.3" />
+
+  <title>Service Mesh &middot; 戈壁堂</title>
+
+    
+
+  
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/pure-min.css">
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-old-ie-min.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-min.css">
+  <!--<![endif]-->
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="http://gebitang.com/css/side-menu-old-ie.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="http://gebitang.com/css/side-menu.css">
+  <!--<![endif]-->
+
+  <link rel="stylesheet" href="http://gebitang.com/css/blackburn.css">
+
+  
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.9.0/css/all.css">
+
+  
+  <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet" type="text/css">
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+ 
+  
+
+  
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/androidstudio.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+  
+  <script>hljs.initHighlightingOnLoad();</script>
+  
+
+  <link rel="shortcut icon" href="http://gebitang.com/img/favicon.ico" type="image/x-icon" />
+
+  
+    
+        <link rel="stylesheet" href="http://gebitang.com/css/my.css">
+    
+  
+  
+    
+        <script src="http://gebitang.com/js/my.js"></script>
+    
+  
+
+</head>
+
+
+<body>
+<div id="layout">
+
+  
+<a href="#menu" id="menuLink" class="menu-link">
+  
+  <span></span>
+</a>
+<div id="menu">
+
+  
+  <a class="pure-menu-heading brand" href="http://gebitang.com/">Gebitang</a>
+
+
+  <div class="pure-menu">
+    <ul class="pure-menu-list">
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="http://gebitang.com/"><i class='fa fa-home fa-fw'></i>Home</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="http://gebitang.com/post/"><i class='fa fa-list fa-fw'></i>Posts</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="http://gebitang.com/about/"><i class='fa fa-user fa-fw'></i>About</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="http://gebitang.com/contact/"><i class='fa fa-phone fa-fw'></i>Contact</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="http://gebitang.com/tags/"><i class='fa fa-tags fa-fw'></i>Tags</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="http://gebitang.com/topics/"><i class='fa fa-folder fa-fw'></i>Topics</a>
+      
+        </li>
+      
+    </ul>
+  </div>
+
+  <div class="pure-menu social">
+  <ul class="pure-menu-list">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+  </ul>
+</div>
+
+
+  <div>
+
+  <div class="small-print">
+  	<small>
+    <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="知识共享许可协议" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/80x15.png" /></a><br/>本<span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" rel="dct:type">作品</span>由<a xmlns:cc="http://creativecommons.org/ns#" href="http://gebitang.com" property="cc:attributionName" rel="cc:attributionURL">&nbsp;Gebitang&nbsp;&nbsp;</a>采用<a rel="license" href="http://creativecommons.org/licenses/by/4.0/">知识共享署名 4.0 国际许可协议</a>进行许可&nbsp;&copy; 2018
+    </small>
+
+  </div>
+
+  <div class="small-print">
+    <small></small>
+  </div>
+  <div class="small-print">
+    <small>Built with&nbsp;<a href="https://gohugo.io/" target="_blank">Hugo</a></small>
+    <small>Theme&nbsp;<a href="https://github.com/yoshiharuyamashita/blackburn" target="_blank">Blackburn</a></small>
+  </div>
+
+  <div style="display:none">
+  <div class="small-print">
+    <small>
+    <wb:follow-button uid="2446212465" type="red_1" width="67" height="24"></wb:follow-button>
+  </small>
+  </div>
+  </div>
+
+</div>
+
+</div>
+
+
+  <div id="main">
+
+
+<div class="header">
+  <h1>Service Mesh</h1>
+  <h2>Leaning about service mesh</h2>
+</div>
+<div class="content">
+
+  <div class="post-meta">
+
+  <div>
+    <i class="fa fa-calendar fa-fw"></i>
+    <time>2020-12-19</time>
+  </div>
+
+  
+
+  
+  
+  
+  <div>
+    <i class="fa fa-folder fa-fw"></i>
+    
+      <a class="post-taxonomy-topic" href="http://gebitang.com/topics/mesh">mesh</a>&nbsp;&#47;
+    
+      <a class="post-taxonomy-topic" href="http://gebitang.com/topics/tech">tech</a>
+    
+  </div>
+  
+  
+
+  
+  
+  
+  <div>
+    <i class="fa fa-tags fa-fw"></i>
+    
+      <a class="post-taxonomy-tag" href="http://gebitang.com/tags/mesh">mesh</a>
+    
+  </div>
+  
+  
+
+</div>
+
+  
+	<nav id="TableOfContents">
+  <ul>
+    <li><a href="#basic-info">Basic info</a>
+      <ul>
+        <li><a href="#octo-envoy-cap">Octo, Envoy, CAP</a></li>
+        <li><a href="#iaas-paas-saas">IaaS, PaaS, Saas</a></li>
+        <li><a href="#network">Network</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  
+
+  <h2 id="basic-info">Basic info</h2>
+<p>微服务下一步，在服务层再做一层抽象，处理服务之间的通信、认证、流量控制，blablabla~ 关键词：<strong>SideCar</strong></p>
+<ul>
+<li><a href="https://www.nginx.com/blog/what-is-a-service-mesh/">What Is a Service Mesh? &ndash; by Nignx</a></li>
+<li><a href="https://www.redhat.com/en/topics/microservices/what-is-a-service-mesh">What&rsquo;s a service mesh? &ndash;by Red Hat</a></li>
+<li><a href="https://www.infoq.com/articles/service-mesh-ultimate-guide/">Service Mesh Ultimate Guide: Managing Service-to-Service Communications in the Era of Microservices &ndash; by InfoQ</a></li>
+</ul>
+<blockquote>
+<p>A <strong>service mesh</strong> is a configurable, low‑latency infrastructure layer designed to handle a high volume of network‑based interprocess communication among application infrastructure services using application programming interfaces (APIs).</p>
+</blockquote>
+<p><img src="https://upload-images.jianshu.io/upload_images/3296949-188781ea7b951e83.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/3296949-8289c1faf36275af.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>所谓提供L7层的服务路由(处理service之间的通信，自然需要到7层)</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/3296949-417afc9a0aa38bd8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>目前的实现——</p>
+<ul>
+<li><a href="https://linkerd.io/">Linkerd</a></li>
+<li><a href="https://istio.io/">Istio</a></li>
+<li><a href="https://www.consul.io/">Consul</a></li>
+<li><a href="https://kuma.io/">Kuma</a></li>
+<li><a href="https://containo.us/maesh/">Maesh</a></li>
+<li><a href="https://aws.amazon.com/app-mesh/">AWS App Mesh</a></li>
+</ul>
+<p><a href="https://platform9.com/blog/kubernetes-service-mesh-a-comparison-of-istio-linkerd-and-consul/">Kubernetes Service Mesh: A Comparison of Istio, Linkerd and Consul</a></p>
+<h3 id="octo-envoy-cap">Octo, Envoy, CAP</h3>
+<p><a href="https://tech.meituan.com/tags/octo.html">美团服务治理 Octo</a></p>
+<blockquote>
+<p>美团采用数据面基于 Envoy 二次开发、控制面自研为主、SDK 协同升级的方案（内部项目名是 OCTO Mesh ）</p>
+</blockquote>
+<p>控制面 VS 数据面</p>
+<p><a href="https://www.envoyproxy.io/docs/envoy/latest/intro/what_is_envoy">What is Envoy</a></p>
+<blockquote>
+<p>Envoy is an L7 proxy and communication bus designed for large modern service oriented architectures. The project was born out of the belief that:</p>
+<blockquote>
+<p>The network should be transparent to applications. When network and application problems do occur it should be easy to determine the source of the problem.</p>
+</blockquote>
+</blockquote>
+<p><a href="https://www.envoyproxy.io/docs/envoy/latest/intro/arch_overview/operations/dynamic_configuration">xDS</a>  “某某服务发现”的意思</p>
+<blockquote>
+<p>These APIs are collectively known as <a href="https://www.envoyproxy.io/docs/envoy/latest/api-docs/xds_protocol#xds-protocol">“xDS”</a> (* discovery service).</p>
+</blockquote>
+<p>CP系统 VS. AP系统 来自于 CAP的概念——<a href="https://zhuanlan.zhihu.com/p/108002021">（译）请不要再称数据库为 CP 和 AP</a>，<a href="https://martin.kleppmann.com/2015/05/11/please-stop-calling-databases-cp-or-ap.html">英文原文</a></p>
+<ul>
+<li><em>一致性（Consistency）</em> 在 CAP 中是<a href="http://cs.brown.edu/~mph/HerlihyW90/p463-herlihy.pdf">可线性化</a>的意思（linearizability）。这是一个非常特殊（而且非常强）的一致性。需要说明的是，虽然 ACID 中的 C 也是一致性（Consistency），但它和这里的一致性没有任何关系，我会在后面解释可线性化是什么意思。</li>
+<li>*可用性（Availability）*在CAP中被定义为&rdquo;<strong>所有</strong>工作中的[数据库]节点对于每一个收到的请求，都必须返回一个[非错误]的响应（response）&quot;。只有部分节点能处理请求是不够的：所有工作中的节点都必须能正确处理请求。所以很多自称&quot;高度可用&rdquo;（如，系统总体很少宕机）的系统其实并没有满足这里的可用性的定义。</li>
+<li><em>分区容错（Partition Tolerance，这个名字误导性很强）</em> 基本上是说你在一个消息可能会被延迟发送或者干脆丢失的<a href="http://www.the-paper-trail.org/page/cap-faq/">异步网络</a>中通信。互联网和数据中心都有这个<a href="https://aphyr.com/posts/288-the-network-is-reliable">特性</a>，所以在这件事上我们没得选。</li>
+</ul>
+<p>一致性漫画一则——<a href="https://www.zipcomic.com/invincible-2018-issue-1">来源</a></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/3296949-51ea7c1ac34e6583.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<h3 id="iaas-paas-saas">IaaS, PaaS, Saas</h3>
+<p><a href="https://www.bmc.com/blogs/saas-vs-paas-vs-iaas-whats-the-difference-and-how-to-choose">SaaS vs PaaS vs IaaS: What’s The Difference &amp; How To Choose</a></p>
+<ul>
+<li><a href="https://www.bmc.com/blogs/saas-vs-paas-vs-iaas-whats-the-difference-and-how-to-choose/#ref1">Software as a Service (SaaS)</a></li>
+<li><a href="https://www.bmc.com/blogs/saas-vs-paas-vs-iaas-whats-the-difference-and-how-to-choose/#ref2">Platform as a Service (PaaS)</a></li>
+<li><a href="https://www.bmc.com/blogs/saas-vs-paas-vs-iaas-whats-the-difference-and-how-to-choose/#ref3">Infrastructure as a Service (IaaS)</a></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Platform Type</th>
+<th>Common Examples</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SaaS</td>
+<td>Google Workspace, Dropbox, Salesforce, Cisco WebEx, Concur, GoToMeeting</td>
+</tr>
+<tr>
+<td>PaaS</td>
+<td>AWS Elastic Beanstalk, Windows Azure, Heroku, Force.com, Google App Engine, Apache Stratos, OpenShift</td>
+</tr>
+<tr>
+<td>IaaS</td>
+<td>DigitalOcean, Linode, Rackspace, Amazon Web Services (AWS), Cisco Metapod, Microsoft Azure, Google Compute Engine (GCE)</td>
+</tr>
+</tbody>
+</table>
+<p>从以下维度有谁负责管理的角度区分这几个名词——</p>
+<ul>
+<li>Applications 应用</li>
+<li>Virtualization 可视化</li>
+<li>Servers 服务端</li>
+<li>Data 数据</li>
+<li>Storage 存储</li>
+<li>Runtime 运行时</li>
+<li>Middleware 中间件</li>
+<li>Networking 网络</li>
+<li>O/S 操作系统</li>
+</ul>
+<p><strong>On-Premises 私有化部署</strong>
+<img src="https://upload-images.jianshu.io/upload_images/3296949-192ed35452b9f4c4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="On Premise"></p>
+<p><strong>IaaS</strong>
+<img src="https://upload-images.jianshu.io/upload_images/3296949-ab15834110de8e53.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="IaaS"></p>
+<p><strong>PasS</strong>
+<img src="https://upload-images.jianshu.io/upload_images/3296949-1ae4ed670de5881b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Paas"></p>
+<p><strong>SasS</strong></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/3296949-1a939847913ab6ed.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="SaaS"></p>
+<h3 id="network">Network</h3>
+<p><a href="https://www.sohu.com/a/297996753_100169323">二层网络和三层网络 </a></p>
+<p>二层网络：交换机直接与终端通信。</p>
+<blockquote>
+<p>交换机根据MAC地址表进行数据包的转发。</p>
+<p>有则转发，无则泛洪，即将数据包广播发送到所有端口，如果目的终端收到给出回应，那么交换机就可以将该MAC地址添加到地址表中，这是交换机对MAC地址进行建立的过程。</p>
+</blockquote>
+<p>扩展二层网络——</p>
+<p>三层网络：加快大型局域网内部的数据交换。</p>
+<p>包括：核心层、汇聚层和接入层</p>
+<p>核心层：对接外部网络
+汇聚层：实施安全功能（划分VLAN和配置ACL）、工作组整体接入功能、虚拟网络过滤功能。因此，汇聚层设备应采用三层交换机。
+接入层：对接具体接入的终端设备</p>
+<p><a href="https://blog.csdn.net/cj2580/article/details/80107037">两层网络、三层网络的理解</a> 实例演示</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/3296949-8df98da14b1fc498.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<ul>
+<li>二层交换机：只识别MAC地址，不识别IP地址（IP地址由电脑负责转换），不能路由，所以叫二层交换机</li>
+<li>三层交换机：不但能识别MAC地址，还能把MAC地址中的IP地址识别出来，进行路由。</li>
+</ul>
+<p>实际做法：</p>
+<ul>
+<li>处于同一个局域网中的各个子网的互联以及局域网中VLAN间的路由，用三层交换机来代替路由器</li>
+<li>局域网与公网互联之间要实现跨地域的网络访问时，使用专业路由器</li>
+</ul>
+
+  
+  
+
+  
+<div class="prev-next-post pure-g">
+  <div class="pure-u-1-24" style="text-align: left;">
+    
+    <a href="http://gebitang.com/post/what/chang-e-five/"><i class="fa fa-chevron-left"></i></a>
+    
+  </div>
+  <div class="pure-u-10-24">
+    
+    <nav class="prev">
+      <a href="http://gebitang.com/post/what/chang-e-five/">嫦娥五号</a>
+    </nav>
+    
+  </div>
+  <div class="pure-u-2-24">
+    &nbsp;
+  </div>
+  <div class="pure-u-10-24">
+    
+    <nav class="next">
+      <a href="http://gebitang.com/post/how/rpc/">RPC</a>
+    </nav>
+    
+  </div>
+  <div class="pure-u-1-24" style="text-align: right;">
+    
+    <a href="http://gebitang.com/post/how/rpc/"><i class="fa fa-chevron-right"></i></a>
+    
+  </div>
+</div>
+
+
+
+  
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+
+(function() {
+    
+    
+    if (window.location.hostname == "localhost")
+        return;
+
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    var disqus_shortname = 'gebitang';
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com/" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+</div>
+
+</div>
+</div>
+<script src="http://gebitang.com/js/ui.js"></script>
+<script src="http://gebitang.com/js/menus.js"></script>
+
+
+<script>
+  
+  if (window.location.hostname != "localhost") {
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-34303694-1', 'auto');
+    ga('send', 'pageview');
+  }
+</script>
+
+
+
+
+<button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
+</body>
+</html>
+

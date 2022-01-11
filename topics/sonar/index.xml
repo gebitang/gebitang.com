@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>sonar on 戈壁堂</title>
+    <link>http://gebitang.com/topics/sonar/</link>
+    <description>Recent content in sonar on 戈壁堂</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 23 Apr 2020 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://gebitang.com/topics/sonar/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>SonarQube</title>
+      <link>http://gebitang.com/post/how/sonarqube/</link>
+      <pubDate>Thu, 23 Apr 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://gebitang.com/post/how/sonarqube/</guid>
+      <description>忘记密码 admin 默认密码为admin/admin，修改过，忘记了。官方指导操作instance-administration/security -- 使</description>
+    </item>
+    
+  </channel>
+</rss>

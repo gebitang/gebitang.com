@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html xmlns:wb="http://open.weibo.com/wb" lang="en" >
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="dashboard">
+  <meta name="generator" content="Hugo 0.74.3" />
+
+  <title>Nodejs Vue &middot; 戈壁堂</title>
+
+    
+
+  
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/pure-min.css">
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-old-ie-min.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-min.css">
+  <!--<![endif]-->
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="http://gebitang.com/css/side-menu-old-ie.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="http://gebitang.com/css/side-menu.css">
+  <!--<![endif]-->
+
+  <link rel="stylesheet" href="http://gebitang.com/css/blackburn.css">
+
+  
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.9.0/css/all.css">
+
+  
+  <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet" type="text/css">
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+ 
+  
+
+  
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/androidstudio.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+  
+  <script>hljs.initHighlightingOnLoad();</script>
+  
+
+  <link rel="shortcut icon" href="http://gebitang.com/img/favicon.ico" type="image/x-icon" />
+
+  
+    
+        <link rel="stylesheet" href="http://gebitang.com/css/my.css">
+    
+  
+  
+    
+        <script src="http://gebitang.com/js/my.js"></script>
+    
+  
+
+</head>
+
+
+<body>
+<div id="layout">
+
+  
+<a href="#menu" id="menuLink" class="menu-link">
+  
+  <span></span>
+</a>
+<div id="menu">
+
+  
+  <a class="pure-menu-heading brand" href="http://gebitang.com/">Gebitang</a>
+
+
+  <div class="pure-menu">
+    <ul class="pure-menu-list">
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="http://gebitang.com/"><i class='fa fa-home fa-fw'></i>Home</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="http://gebitang.com/post/"><i class='fa fa-list fa-fw'></i>Posts</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="http://gebitang.com/about/"><i class='fa fa-user fa-fw'></i>About</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="http://gebitang.com/contact/"><i class='fa fa-phone fa-fw'></i>Contact</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="http://gebitang.com/tags/"><i class='fa fa-tags fa-fw'></i>Tags</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="http://gebitang.com/topics/"><i class='fa fa-folder fa-fw'></i>Topics</a>
+      
+        </li>
+      
+    </ul>
+  </div>
+
+  <div class="pure-menu social">
+  <ul class="pure-menu-list">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+  </ul>
+</div>
+
+
+  <div>
+
+  <div class="small-print">
+  	<small>
+    <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="知识共享许可协议" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/80x15.png" /></a><br/>本<span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" rel="dct:type">作品</span>由<a xmlns:cc="http://creativecommons.org/ns#" href="http://gebitang.com" property="cc:attributionName" rel="cc:attributionURL">&nbsp;Gebitang&nbsp;&nbsp;</a>采用<a rel="license" href="http://creativecommons.org/licenses/by/4.0/">知识共享署名 4.0 国际许可协议</a>进行许可&nbsp;&copy; 2018
+    </small>
+
+  </div>
+
+  <div class="small-print">
+    <small></small>
+  </div>
+  <div class="small-print">
+    <small>Built with&nbsp;<a href="https://gohugo.io/" target="_blank">Hugo</a></small>
+    <small>Theme&nbsp;<a href="https://github.com/yoshiharuyamashita/blackburn" target="_blank">Blackburn</a></small>
+  </div>
+
+  <div style="display:none">
+  <div class="small-print">
+    <small>
+    <wb:follow-button uid="2446212465" type="red_1" width="67" height="24"></wb:follow-button>
+  </small>
+  </div>
+  </div>
+
+</div>
+
+</div>
+
+
+  <div id="main">
+
+
+<div class="header">
+  <h1>Nodejs Vue</h1>
+  <h2>dashboard</h2>
+</div>
+<div class="content">
+
+  <div class="post-meta">
+
+  <div>
+    <i class="fa fa-calendar fa-fw"></i>
+    <time>2018-10-01</time>
+  </div>
+
+  
+
+  
+  
+  
+  <div>
+    <i class="fa fa-folder fa-fw"></i>
+    
+      <a class="post-taxonomy-topic" href="http://gebitang.com/topics/work">work</a>
+    
+  </div>
+  
+  
+
+  
+  
+  
+  <div>
+    <i class="fa fa-tags fa-fw"></i>
+    
+      <a class="post-taxonomy-tag" href="http://gebitang.com/tags/work">work</a>
+    
+  </div>
+  
+  
+
+</div>
+
+  
+	<nav id="TableOfContents">
+  <ul>
+    <li><a href="#vuejs-created-vs-mounted">VueJS created() vs mounted()</a></li>
+    <li><a href="#typescript">TypeScript</a></li>
+    <li><a href="#jekyll-usage">Jekyll Usage</a>
+      <ul>
+        <li><a href="#图片增加title和link">图片增加title和link</a></li>
+        <li><a href="#文章文件命名规范">文章文件命名规范</a></li>
+        <li><a href="#链接方法">链接方法</a></li>
+      </ul>
+    </li>
+    <li><a href="#重学前端">重学前端</a></li>
+    <li><a href="#window-env">Window env</a>
+      <ul>
+        <li><a href="#配置国内repository">配置国内repository</a></li>
+      </ul>
+    </li>
+    <li><a href="#version规则">Version规则</a></li>
+    <li><a href="#guides">guides</a></li>
+    <li><a href="#require-模块">require 模块</a></li>
+    <li><a href="#exports-moduleexports">exports module.exports</a></li>
+    <li><a href="#install---save">install &ndash;save</a></li>
+    <li><a href="#package-lock-packagejson">package-lock package.json</a></li>
+    <li><a href="#install-error--unexpected-end-of-json-input">install error:  Unexpected end of JSON input</a></li>
+    <li><a href="#多版本管理">多版本管理</a></li>
+    <li><a href="#nrm-管理镜像">nrm 管理镜像</a></li>
+    <li><a href="#npm-err-cannot-read-property-match-of-undefined-错误处理">npm ERR! Cannot read property &lsquo;match&rsquo; of undefined 错误处理</a></li>
+    <li><a href="#request-to-httpsbowerherokuappcompackages-failed-with-502">Request to <a href="https://bower.herokuapp.com/packages/">https://bower.herokuapp.com/packages/</a> failed with 502</a></li>
+    <li><a href="#phantomjs配置">phantomjs配置</a></li>
+  </ul>
+</nav>
+  
+
+  <h2 id="vuejs-created-vs-mounted">VueJS created() vs mounted()</h2>
+<p><a href="https://devpremier.medium.com/vuejs-created-vs-mounted-life-cycle-hooks-74c522b9ceee">VueJS created() vs mounted()</a></p>
+<ul>
+<li><code>mounted()</code> : it will executed before creating the component.</li>
+<li><code>created()</code> : it will executed after creating the component for render.</li>
+</ul>
+<h2 id="typescript">TypeScript</h2>
+<p><a href="https://www.typescriptlang.org/">TypeScript</a>做为JS的超集，增强了Type的检查。但检查结果不影响最终的执行，因为依然使用JS相同的runtime。例如<code>console.log(4/[])</code>对应JS来说是有效的(- -|自由的过了火?)，返回<code>Infinity</code>，对于TS来说检查出问题：<code>The right-hand side of an arithmetic operation must be of type 'any', 'number', 'bigint' or an enum type.</code> 但编译到JS之后依然可以正常执行。参考<a href="https://www.typescriptlang.org/docs/handbook/typescript-from-scratch.html#types">TypeScript: A Static Type Checker</a></p>
+<p>JS过于自由，所以诞生TS，支持静态检查，引入了类似静态语言的类型检查、语法支持等扩展(但扩展的内容在编译后又会擦除这一切，因为最后再编译到JS语言(使用跟JS完全相同的runtime)进行使用——这样就可以依赖现有的JS生态。TS这个切入方式厉害了。不需要单独为TS写任何框架，现有的JS框架中都可以使用TS。<a href="https://www.typescriptlang.org/docs/handbook/typescript-tooling-in-5-minutes.html">TS in 5 minutes</a></p>
+<p>有Java背景的看一篇基础介绍基本就可以上手<a href="https://segmentfault.com/a/1190000022876390">TypeScript 入门教程</a></p>
+<p>实际上比Java更灵活，Type类型检查只是“名义上的”，实际上是一组set，所以可以这样定义<code>type Foo = string | number | boolean;</code>。另外，“类型擦除”又类似Go语言中的“实现了所有接口方法的结构体都被认为实现了改接口”，例如——</p>
+<pre><code>interface Pointlike {
+  x: number;
+  y: number;
+}
+interface Named {
+  name: string;
+}
+
+function logPoint(point: Pointlike) {
+  console.log(&quot;x = &quot; + point.x + &quot;, y = &quot; + point.y);
+}
+
+function logName(x: Named) {
+  console.log(&quot;Hello, &quot; + x.name);
+}
+
+const obj = {
+  x: 0,
+  y: 0,
+  name: &quot;Origin&quot;,
+};
+
+logPoint(obj);
+logName(obj);
+</code></pre><p>看完上面这些就可以直接找项目上手练习了。</p>
+<h2 id="jekyll-usage">Jekyll Usage</h2>
+<h3 id="图片增加title和link">图片增加title和link</h3>
+<p><a href="https://eduardoboucas.com/blog/2014/12/07/including-and-managing-images-in-jekyll.html">参考1</a>、<a href="https://stackoverflow.com/a/19360305/1087122">参考2</a></p>
+<p>处理为——</p>
+<pre><code>&lt;figure class=&quot;image&quot;&gt;
+    &lt;figcaption&gt;{{ include.description }}&lt;/figcaption&gt;
+    {% if include.link %}
+    &lt;a href=&quot;{{ include.link }}&quot; target=&quot;_blank&quot;&gt;&lt;img src=&quot;{{ include.url }}&quot; alt=&quot;{{ include.description }}&quot;&gt; &lt;/a&gt;
+    {% else %}
+    &lt;img src=&quot;{{ include.url }}&quot; alt=&quot;{{ include.description }}&quot;&gt;    
+    {% endif %}    
+&lt;/figure&gt;  
+</code></pre><h3 id="文章文件命名规范">文章文件命名规范</h3>
+<p>Jekyll requires blog post files to be named according to the following format:</p>
+<blockquote>
+<p><code>YEAR-MONTH-DAY-title.MARKUP</code></p>
+</blockquote>
+<p>Where <code>YEAR</code> is a four-digit number, <code>MONTH</code> and <code>DAY</code> are both two-digit numbers, and <code>MARKUP</code> is the file extension representing the format used in the file. After that, include the necessary front matter. Take a look at the source for this post to get an idea about how it works.</p>
+<p>Jekyll also offers powerful support for code snippets:</p>
+<pre><code>{% highlight ruby %}
+def print_hi(name)
+  puts &quot;Hi, #{name}&quot;
+end
+print_hi('Tom')
+#=&gt; prints 'Hi, Tom' to STDOUT.
+{% endhighlight %}
+
+{% highlight java %}
+public static void main(String[] args) {
+    System.out.println(&quot;Welcome to Mixin 101&quot;);
+}
+{% endhighlight %}
+</code></pre><h3 id="链接方法">链接方法</h3>
+<p>Check out the <a href="https://jekyllrb.com/docs/home">Jekyll docs</a> for more info on how to get the most out of Jekyll. File all bugs/feature requests at <a href="https://github.com/jekyll/jekyll">Jekyll’s GitHub repo</a>. If you have questions, you can ask them on <a href="https://talk.jekyllrb.com/">Jekyll Talk</a>.</p>
+<p><a href="https://zenhabits.net/dashboard/">Use Dashboard</a> to <a href="http://www.raptitude.com/2017/12/go-deeper-not-wider/">Go Deeper, Not Wider</a></p>
+<h2 id="重学前端">重学前端</h2>
+<pre><code># 7 种基本类型
+Undefined； 
+Null； 
+Boolean； 
+Striing;
+Number;
+Symbol;
+Object
+
+#  7 种语言类型
+List 和 Record： 用于描述函数传参过程。 
+Set：主要用于解释字符集等。
+Completion Record：用于描述异常、跳出等语句执行过程。
+Reference：用于描述对象属性访问、delete 等。
+Property Descriptor：用于描述对象的属性。
+Lexical Environment 和 Environm Record：用于描述变量和作用域
+Data Block：用于描述二进制数据。
+</code></pre><h2 id="window-env">Window env</h2>
+<p>安装完成后，自带npm目录，可以在安装目录的<code>/nodejs/node_modules/npm/html/doc/index.html</code>查看帮助文档</p>
+<pre><code>npm -l 
+
+npm &lt;command&gt; -h  quick help on &lt;command&gt;
+npm -l            display full usage info
+npm help &lt;term&gt;   search for help on &lt;term&gt;
+npm help npm      involved overview
+
+Specify configs in the ini-formatted file:
+    C:\Users\joechin\.npmrc
+or on the command line via: npm &lt;command&gt; --key value
+Config info can be viewed via: npm help config
+
+npm@6.4.1 C:\Program Files\nodejs\node_modules\npm
+</code></pre><h3 id="配置国内repository">配置国内repository</h3>
+<ol>
+<li>
+<p>临时使用<code>npm --registry https://registry.npm.taobao.org install express</code></p>
+</li>
+<li>
+<p>持久使用 <code>npm config set registry https://registry.npm.taobao.org</code></p>
+</li>
+<li>
+<p>通过cnpm使用<code>npm install -g cnpm --registry=https://registry.npm.taobao.org</code></p>
+</li>
+</ol>
+<blockquote>
+<p>使用cnpm进行安装 <code>cnpm install express</code></p>
+</blockquote>
+<p>配置后可通过下面方式来验证是否成功</p>
+<pre><code># 查看配置的repository信息
+npm config get registry
+# View registry info for express
+npm info express
+# default registry
+➜  ~ npm config get registry 
+https://registry.npmjs.org/
+➜  ~ npm config set registry https://registry.npm.taobao.org
+➜  ~ npm config get registry                                
+https://registry.npm.taobao.org/
+➜  ~ npm install --global vue-cli
+</code></pre><pre><code># save to app.js, then: node app.js
+# visit http://localhost:3000, and you will see a message 'Hello World'
+const http = require('http');
+
+const hostname = '127.0.0.1';
+const port = 3000;
+
+const server = http.createServer((req, res) =&gt; {
+  res.statusCode = 200;
+  res.setHeader('Content-Type', 'text/plain');
+  res.end('Hello World\n');
+});
+
+server.listen(port, hostname, () =&gt; {
+  console.log(`Server running at http://${hostname}:${port}/`);
+});
+
+</code></pre><h2 id="version规则">Version规则</h2>
+<p><a href="https://semver.org/lang/zh-CN/">SemVer</a><br>
+NPM使用语义版本号来管理代码：<code>MAJOR,MINOR.PATCH</code><br>
+MAJOR：这个版本号变化了表示有了一个不可以和上个版本兼容的大更改。<br>
+MINOR：这个版本号变化了表示有了增加了新的功能，并且可以向后兼容。<br>
+PATCH：这个版本号变化了表示修复了bug，并且可以向后兼容。</p>
+<pre><code>&quot;dependencies&quot;: {
+    &quot;bluebird&quot;: &quot;^3.3.4&quot;, //&gt;=3.3.4 &lt;4.0.0
+    &quot;body-parser&quot;: &quot;~1.15.2&quot; // &gt;=1.15.2 &lt;1.16.0  
+}
+</code></pre><p>波浪符号（~）：更新到当前minor version中最新的版本。body-parser:~1.15.2，这个库会去匹配更新到1.15.x的最新版本，如果出了一个新的版本为1.16.0，则不会自动升级。</p>
+<p>插入符号（^）：更新到当前major version中最新的版本。bluebird:^3.3.4，这个库会去匹配3.x.x中最新的版本，但是他不会自动更新到4.0.0。</p>
+<p>波浪符号是曾经npm安装时候的默认符号，现在已经变为了插入符号。</p>
+<h2 id="guides">guides</h2>
+<p><a href="https://nodejs.org/en/docs/guides/dont-block-the-event-loop/">Don&rsquo;t Block the Event Loop (or the Worker Pool)</a></p>
+<p>Event Loop:<br>
+the Event Loop executes the JavaScript callbacks registered for events, and is also responsible for fulfilling non-blocking asynchronous requests like network I/O.</p>
+<p>Worker Pool:</p>
+<ol>
+<li>I/O-intensive
+<ol>
+<li><a href="https://nodejs.org/api/dns.html">DNS</a>: <code>dns.lookup()</code>, <code>dns.loopupService</code>.</li>
+<li><a href="https://nodejs.org/api/fs.html#fs_threadpool_usage">File System</a>:All file system APIs except <code>fs.FSWatcher()</code> and those that are explicitly synchronous use libuv&rsquo;s threadpool.</li>
+</ol>
+</li>
+<li>CPU-intensive
+<ol>
+<li><a href="https://nodejs.org/api/crypto.html">Crypto</a>: <code>crypto.pbkdf2()</code>, <code>crypto.scrypt()</code>, <code>crypto.randomBytes()</code>, <code>crypto.randomFill()</code>, <code>crypto.generateKeyPair()</code>.</li>
+<li><a href="https://nodejs.org/api/zlib.html#zlib_threadpool_usage">Zlib</a>All zlib APIs except those that are explicitly synchronous use libuv&rsquo;s threadpool.</li>
+</ol>
+</li>
+</ol>
+<h2 id="require-模块">require 模块</h2>
+
+
+<div class="pure-g">
+
+  
+  
+  
+  
+  <div class="pure-u-1-1">
+    <div style="padding: 0 .2em">
+      <a href="" target="_blank" >
+      <img
+        class="pure-img-responsive"
+        src="https://www.runoob.com/wp-content/uploads/2014/03/nodejs-require.jpg"
+        alt title="node require">
+      </a>
+    </div>
+  </div>
+  
+
+</div>
+
+<pre><code>1. 如果 X 是内置模块
+   a. 返回内置模块
+   b. 停止执行
+2. 如果 X 以 '/' 开头
+   a. 设置 Y 为文件根路径
+3. 如果 X 以 './' 或 '/' or '../' 开头
+   a. LOAD_AS_FILE(Y + X)
+   b. LOAD_AS_DIRECTORY(Y + X)
+4. LOAD_NODE_MODULES(X, dirname(Y))
+5. 抛出异常 &quot;not found&quot;
+
+LOAD_AS_FILE(X)
+1. 如果 X 是一个文件, 将 X 作为 JavaScript 文本载入并停止执行。
+2. 如果 X.js 是一个文件, 将 X.js 作为 JavaScript 文本载入并停止执行。
+3. 如果 X.json 是一个文件, 解析 X.json 为 JavaScript 对象并停止执行。
+4. 如果 X.node 是一个文件, 将 X.node 作为二进制插件载入并停止执行。
+
+LOAD_INDEX(X)
+1. 如果 X/index.js 是一个文件,  将 X/index.js 作为 JavaScript 文本载入并停止执行。
+2. 如果 X/index.json 是一个文件, 解析 X/index.json 为 JavaScript 对象并停止执行。
+3. 如果 X/index.node 是一个文件,  将 X/index.node 作为二进制插件载入并停止执行。
+
+LOAD_AS_DIRECTORY(X)
+1. 如果 X/package.json 是一个文件,
+   a. 解析 X/package.json, 并查找 &quot;main&quot; 字段。
+   b. let M = X + (json main 字段)
+   c. LOAD_AS_FILE(M)
+   d. LOAD_INDEX(M)
+2. LOAD_INDEX(X)
+
+LOAD_NODE_MODULES(X, START)
+1. let DIRS=NODE_MODULES_PATHS(START)
+2. for each DIR in DIRS:
+   a. LOAD_AS_FILE(DIR/X)
+   b. LOAD_AS_DIRECTORY(DIR/X)
+
+NODE_MODULES_PATHS(START)
+1. let PARTS = path split(START)
+2. let I = count of PARTS - 1
+3. let DIRS = []
+4. while I &gt;= 0,
+   a. if PARTS[I] = &quot;node_modules&quot; CONTINUE
+   b. DIR = path join(PARTS[0 .. I] + &quot;node_modules&quot;)
+   c. DIRS = DIRS + DIR
+   d. let I = I - 1
+5. return DIRS
+</code></pre><h2 id="exports-moduleexports">exports module.exports</h2>
+<p><a href="https://www.runoob.com/nodejs/nodejs-module-system.html">node module</a><br>
+如果要对外暴露属性或方法，就用 exports 就行，要暴露对象(类似class，包含了很多属性和方法)，就用 module.exports。</p>
+<h2 id="install---save">install &ndash;save</h2>
+<p>-save和save-dev可以省掉你手动修改package.json文件的步骤。<br>
+npm install module-name -save 自动把模块和版本号添加到dependencies部分<br>
+npm install module-name -save-dve 自动把模块和版本号添加到devdependencies部分</p>
+<h2 id="package-lock-packagejson">package-lock package.json</h2>
+<p>锁定安装时的包的版本号，以保证其他人在npm install时大家的依赖能保证一致。<br>
+<a href="https://blog.csdn.net/aaa333qwe/article/details/78021704">source</a></p>
+<ul>
+<li>使用npm install xxx命令安装模块时，不再需要&ndash;save选项，会自动将模块依赖信息保存到 package.json 文件；</li>
+<li>安装模块操作（改变 node_modules 文件夹内容）会生成或更新 package-lock.json 文件</li>
+<li>发布的模块不会包含 package-lock.json 文件</li>
+<li>如果手动修改了 package.json 文件中已有模块的版本，直接执行npm install不会安装新指定的版本，只能通过npm install xxx@yy更新</li>
+</ul>
+<h2 id="install-error--unexpected-end-of-json-input">install error:  Unexpected end of JSON input</h2>
+<p><a href="https://github.com/facebook/jest/issues/6944">issue</a><br>
+npm install error:  Unexpected end of JSON input while parsing near &lsquo;&hellip;edc4cd&rdquo;,&ldquo;size&rdquo;:396934&rsquo;
+solution: npm cache clean &ndash;force</p>
+<h2 id="多版本管理">多版本管理</h2>
+<p><a href="https://segmentfault.com/a/1190000010252661">node 多版本控制</a></p>
+<ul>
+<li>安装nvm</li>
+</ul>
+<pre><code>curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.2/install.sh | bash
+
+或者 Wget:
+
+wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.33.2/install.sh | bash
+</code></pre><ul>
+<li>查看可用版本</li>
+</ul>
+<pre><code># lts long-time-stable
+#nvm ls-remote --lts 
+nvm list available
+</code></pre><ul>
+<li>
+<p>安装指定版本： nvm install v8.12.0</p>
+</li>
+<li>
+<p>切换到指定版本 <code>nvm use v8.12.0</code></p>
+</li>
+<li>
+<p>需要安装yarn到对应版本上<code>npm install -g yarn</code></p>
+</li>
+</ul>
+<p><a href="https://github.com/nvm-sh/nvm/issues/298">删除nvm</a><br>
+默认会安装到 $HOME/.nvm 文件夹下 + 更新了环境变量。 反向操作即可。</p>
+<h2 id="nrm-管理镜像">nrm 管理镜像</h2>
+<pre><code>安装nrm
+$ npm install -g nrm
+
+列出可用镜像
+$ nrm ls
+
+使用淘宝镜像
+$ nrm use taobao 
+</code></pre><h2 id="npm-err-cannot-read-property-match-of-undefined-错误处理">npm ERR! Cannot read property &lsquo;match&rsquo; of undefined 错误处理</h2>
+<p><a href="https://blog.csdn.net/Jane_96/article/details/81451759">Cannot read property &lsquo;match&rsquo; of undefined</a></p>
+<pre><code># first just 
+rm package-lock.json
+# if it doesn't work
+rm -rf node_modules
+rm package-lock.json
+npm cache clear --force
+npm install
+</code></pre><h2 id="request-to-httpsbowerherokuappcompackages-failed-with-502">Request to <a href="https://bower.herokuapp.com/packages/">https://bower.herokuapp.com/packages/</a> failed with 502</h2>
+<p><a href="https://stackoverflow.com/a/51020318/1087122">bower issue</a></p>
+<h2 id="phantomjs配置">phantomjs配置</h2>
+<p>使用<code>npm install</code>的时候，可以看到会进行phantomjs的安装，有类似如下信息——
+<img src="https://upload-images.jianshu.io/upload_images/3296949-f98fe9c9dbaf7bc3.png" alt=""></p>
+<p>这个包<a href="https://github.com/Medium/phantomjs/releases/download/v2.1.1/phantomjs-2.1.1-macosx.zip">phantomjs</a> 实际上是一个“可执行的包”，作用为 <code>An NPM installer for [PhantomJS](http://phantomjs.org/), headless webkit with JS API</code></p>
+<ul>
+<li>
+<p>受限于网络环境，下载比较缓慢，可以进行本地安装。然后将bin目录加入$PATH即可。 <code>export PATH=/Users/gebitang/phantomjs-2.1.1-macosx/bin:$PATH</code></p>
+</li>
+<li>
+<p>如何有本地的私有源，也可以通过npm进行配置
+<code>npm config set phantomjs_cdnurl http://npm.stf.demo.com/mirrors/phantomjs/ -g</code>
+<a href="https://github.com/Medium/phantomjs">phantomjs </a>If github is down, or the Great Firewall is blocking github, you may need to use a different download mirror. To set a mirror, set npm config property phantomjs_cdnurl.</p>
+</li>
+</ul>
+<p>更详细介绍——<a href="https://github.com/Medium/phantomjs/blob/master/README.md">README.md </a></p>
+<p>使用 <code>npm config list</code>查看配置的默认变量</p>
+
+  
+  
+
+  
+<div class="prev-next-post pure-g">
+  <div class="pure-u-1-24" style="text-align: left;">
+    
+    <a href="http://gebitang.com/post/what/arts/"><i class="fa fa-chevron-left"></i></a>
+    
+  </div>
+  <div class="pure-u-10-24">
+    
+    <nav class="prev">
+      <a href="http://gebitang.com/post/what/arts/">ARTS</a>
+    </nav>
+    
+  </div>
+  <div class="pure-u-2-24">
+    &nbsp;
+  </div>
+  <div class="pure-u-10-24">
+    
+    <nav class="next">
+      <a href="http://gebitang.com/post/why/4d-list/">四维清单</a>
+    </nav>
+    
+  </div>
+  <div class="pure-u-1-24" style="text-align: right;">
+    
+    <a href="http://gebitang.com/post/why/4d-list/"><i class="fa fa-chevron-right"></i></a>
+    
+  </div>
+</div>
+
+
+
+  
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+
+(function() {
+    
+    
+    if (window.location.hostname == "localhost")
+        return;
+
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    var disqus_shortname = 'gebitang';
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com/" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+</div>
+
+</div>
+</div>
+<script src="http://gebitang.com/js/ui.js"></script>
+<script src="http://gebitang.com/js/menus.js"></script>
+
+
+<script>
+  
+  if (window.location.hostname != "localhost") {
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-34303694-1', 'auto');
+    ga('send', 'pageview');
+  }
+</script>
+
+
+
+
+<button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
+</body>
+</html>
+

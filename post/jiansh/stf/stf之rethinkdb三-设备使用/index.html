@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html xmlns:wb="http://open.weibo.com/wb" lang="en" >
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="generator" content="Hugo 0.74.3" />
+
+  <title>STF之RethinkDB三-设备使用 &middot; 戈壁堂</title>
+
+    
+
+  
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/pure-min.css">
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-old-ie-min.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-min.css">
+  <!--<![endif]-->
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="http://gebitang.com/css/side-menu-old-ie.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="http://gebitang.com/css/side-menu.css">
+  <!--<![endif]-->
+
+  <link rel="stylesheet" href="http://gebitang.com/css/blackburn.css">
+
+  
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.9.0/css/all.css">
+
+  
+  <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet" type="text/css">
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+ 
+  
+
+  
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/androidstudio.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+  
+  <script>hljs.initHighlightingOnLoad();</script>
+  
+
+  <link rel="shortcut icon" href="http://gebitang.com/img/favicon.ico" type="image/x-icon" />
+
+  
+    
+        <link rel="stylesheet" href="http://gebitang.com/css/my.css">
+    
+  
+  
+    
+        <script src="http://gebitang.com/js/my.js"></script>
+    
+  
+
+</head>
+
+
+<body>
+<div id="layout">
+
+  
+<a href="#menu" id="menuLink" class="menu-link">
+  
+  <span></span>
+</a>
+<div id="menu">
+
+  
+  <a class="pure-menu-heading brand" href="http://gebitang.com/">Gebitang</a>
+
+
+  <div class="pure-menu">
+    <ul class="pure-menu-list">
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="http://gebitang.com/"><i class='fa fa-home fa-fw'></i>Home</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="http://gebitang.com/post/"><i class='fa fa-list fa-fw'></i>Posts</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="http://gebitang.com/about/"><i class='fa fa-user fa-fw'></i>About</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="http://gebitang.com/contact/"><i class='fa fa-phone fa-fw'></i>Contact</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="http://gebitang.com/tags/"><i class='fa fa-tags fa-fw'></i>Tags</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="http://gebitang.com/topics/"><i class='fa fa-folder fa-fw'></i>Topics</a>
+      
+        </li>
+      
+    </ul>
+  </div>
+
+  <div class="pure-menu social">
+  <ul class="pure-menu-list">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+  </ul>
+</div>
+
+
+  <div>
+
+  <div class="small-print">
+  	<small>
+    <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="知识共享许可协议" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/80x15.png" /></a><br/>本<span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" rel="dct:type">作品</span>由<a xmlns:cc="http://creativecommons.org/ns#" href="http://gebitang.com" property="cc:attributionName" rel="cc:attributionURL">&nbsp;Gebitang&nbsp;&nbsp;</a>采用<a rel="license" href="http://creativecommons.org/licenses/by/4.0/">知识共享署名 4.0 国际许可协议</a>进行许可&nbsp;&copy; 2018
+    </small>
+
+  </div>
+
+  <div class="small-print">
+    <small></small>
+  </div>
+  <div class="small-print">
+    <small>Built with&nbsp;<a href="https://gohugo.io/" target="_blank">Hugo</a></small>
+    <small>Theme&nbsp;<a href="https://github.com/yoshiharuyamashita/blackburn" target="_blank">Blackburn</a></small>
+  </div>
+
+  <div style="display:none">
+  <div class="small-print">
+    <small>
+    <wb:follow-button uid="2446212465" type="red_1" width="67" height="24"></wb:follow-button>
+  </small>
+  </div>
+  </div>
+
+</div>
+
+</div>
+
+
+  <div id="main">
+
+
+<div class="header">
+  <h1>STF之RethinkDB三-设备使用</h1>
+  <h2></h2>
+</div>
+<div class="content">
+
+  <div class="post-meta">
+
+  <div>
+    <i class="fa fa-calendar fa-fw"></i>
+    <time>2020-03-07</time>
+  </div>
+
+  
+
+  
+  
+  
+  <div>
+    <i class="fa fa-folder fa-fw"></i>
+    
+      <a class="post-taxonomy-topic" href="http://gebitang.com/topics/jiansh">jiansh</a>&nbsp;&#47;
+    
+      <a class="post-taxonomy-topic" href="http://gebitang.com/topics/stf">STF</a>
+    
+  </div>
+  
+  
+
+  
+  
+  
+  <div>
+    <i class="fa fa-tags fa-fw"></i>
+    
+      <a class="post-taxonomy-tag" href="http://gebitang.com/tags/jiansh">jiansh</a>
+    
+  </div>
+  
+  
+
+</div>
+
+  
+	<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#前端逻辑">前端逻辑</a></li>
+        <li><a href="#设备使用">设备使用</a></li>
+        <li><a href="#数据库操作">数据库操作</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  
+
+  <p><a href="https://www.jianshu.com/p/538e516643aa">link on JianShu</a></p>
+<p><a href="https://www.jianshu.com/p/fac393d47fb2">STF之RethinkDB二</a>
+获取到设备使用、停止使用的切入口之后，甚至不需要了解设备使用的业务逻辑，就可以直接进行数据库操作，完成<strong>记录设备使用时长</strong>的功能。</p>
+<h3 id="前端逻辑">前端逻辑</h3>
+<p>入口app.js，开始加载各个模块，除了核心模块<code>ngRoute, ngTouch, gettext, angular-hotkeys</code>之外，还有其他到相对目录下到模块，如<code>./layout, ./device-list, ./control-panes</code>，最后一个 <code>stf/standalone</code>属于components目录下到对应模块（webpack.config.json中指定）</p>
+<p>其中下一级到<code>control-panes/index.js</code>中又定义了再下一级到引用。其中<code>ControlPanesController</code>中传递到参数都是来自这里都引用。</p>
+<pre><code>module.exports =
+  function ControlPanesController($scope, $http, gettext, $routeParams,
+    $timeout, $location, DeviceService, GroupService, ControlService,
+    StorageService, FatalMessageService, SettingsService) {
+</code></pre><p>比如<code>DeviceService</code>就来自<code>stf/device/index.js</code>中定义的<code>.factory('DeviceService', require('./device-service'))</code> 使用socket.io的websocket协议进行设备添加、删除、变化的监听</p>
+<h3 id="设备使用">设备使用</h3>
+<p>前台跳转到设备页面<code>#!/control/serial</code>之后，<code>res/app/control-panes/control-panes-controller.js</code>的ControlPanesController会调用<code>getDevice($routeParams.serial)</code>方法。</p>
+<p>查找到设备后，会使用websocket发送group.invite消息——</p>
+<pre><code>DeviceService.get(serial, $scope)
+        .then(function(device) {
+          return GroupService.invite(device)
+        })
+</code></pre><p>收到消息后使用zeromq消息通知对应的provider设备被占用</p>
+<pre><code># lib/units/websocket/index.js
+.on('group.invite', function(channel, responseChannel, data) {
+          joinChannel(responseChannel)
+          push.send([
+            channel
+          , wireutil.transaction(
+              responseChannel
+            , new wire.GroupMessage(
+                new wire.OwnerMessage(
+                  user.email
+                , user.name
+                , user.group
+                )
+              , data.timeout || null
+              , wireutil.toDeviceRequirements(data.requirements)
+              )
+            )
+          ])
+        })
+</code></pre><p>收到<code>wire.GroupMessage</code>后，会进行查找匹配——</p>
+<pre><code>#lib/units/device/plugins/group.js
+router
+      .on(wire.GroupMessage, function(channel, message) {
+        var reply = wireutil.reply(options.serial)
+        grouputil.match(ident, message.requirements)
+          .then(function() {
+            return plugin.join(message.owner, message.timeout, message.usage)
+          })
+          .then(function() {
+            push.send([
+              channel
+            , reply.okay()
+            ])
+          })
+          .catch(grouputil.RequirementMismatchError, function(err) {
+            push.send([
+              channel
+            , reply.fail(err.message)
+            ])
+          })
+          .catch(grouputil.AlreadyGroupedError, function(err) {
+            push.send([
+              channel
+            , reply.fail(err.message)
+            ])
+          })
+      })
+</code></pre><p>log输出里可以看到使用设备后，会有类似下面但log</p>
+<pre><code>2019-08-13T02:51:55.662Z IMP/device:plugins:group 25893 [3967b3c2] Now owned by &quot;xxx@xxx.com&quot;
+2019-08-13T02:51:55.663Z INF/device:plugins:group 25893 [3967b3c2] Subscribing to group channel &quot;jUKrIsV5SmCRtSaSRsjvBQ==&quot;
+</code></pre><p>然后再次发送<code>new wire.JoinGroupMessage</code> 消息——</p>
+<pre><code>push.send([
+            wireutil.global
+          , wireutil.envelope(new wire.JoinGroupMessage(
+              options.serial
+            , currentGroup
+            , usage
+            ))
+          ])
+</code></pre><p>服务端的<code>processor</code>收到消息，更新数据库。——这样就到了我们到入口</p>
+<p>对应的还有<code>wire.LeaveGroupMessage</code>消息</p>
+<h3 id="数据库操作">数据库操作</h3>
+<p>有了切入口，后续只剩下数据库本身的操作——</p>
+<ul>
+<li>初始化时，新增 usageRecord表</li>
+<li>开始使用JoinGroupMessage时只devices表，新增起始时间、使用者字段</li>
+<li>结束使用LeaveGroupMessage时更新devices，新增结束时间
+在usageRecord表上插入记录： 最后一步操作成功之后，获取devices表上对应设备，</li>
+</ul>
+<pre><code>dbapi.unsetDeviceOwner(message.serial, new Date().getTime())
+  .then(function(){
+    return dbapi.getDeviceBySerial(message.serial)
+  })
+  .then(function(device){
+    let duration = Math.floor((device.timestampEnd - device.timestampStart)/1000)
+    dbapi.saveUsageRecord(message.serial, device.lastUser, device.timestampStart, device.timestampEnd, duration)
+  })
+</code></pre>
+  
+  
+
+  
+<div class="prev-next-post pure-g">
+  <div class="pure-u-1-24" style="text-align: left;">
+    
+    <a href="http://gebitang.com/post/jiansh/stf/stf%E4%B9%8Brethinkdb%E4%BA%8C/"><i class="fa fa-chevron-left"></i></a>
+    
+  </div>
+  <div class="pure-u-10-24">
+    
+    <nav class="prev">
+      <a href="http://gebitang.com/post/jiansh/stf/stf%E4%B9%8Brethinkdb%E4%BA%8C/">STF之RethinkDB二</a>
+    </nav>
+    
+  </div>
+  <div class="pure-u-2-24">
+    &nbsp;
+  </div>
+  <div class="pure-u-10-24">
+    
+    <nav class="next">
+      <a href="http://gebitang.com/post/jiansh/stf/stf%E4%B9%8Brethinkdb%E4%B8%80/">STF之RethinkDB一</a>
+    </nav>
+    
+  </div>
+  <div class="pure-u-1-24" style="text-align: right;">
+    
+    <a href="http://gebitang.com/post/jiansh/stf/stf%E4%B9%8Brethinkdb%E4%B8%80/"><i class="fa fa-chevron-right"></i></a>
+    
+  </div>
+</div>
+
+
+
+  
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+
+(function() {
+    
+    
+    if (window.location.hostname == "localhost")
+        return;
+
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    var disqus_shortname = 'gebitang';
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com/" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+</div>
+
+</div>
+</div>
+<script src="http://gebitang.com/js/ui.js"></script>
+<script src="http://gebitang.com/js/menus.js"></script>
+
+
+<script>
+  
+  if (window.location.hostname != "localhost") {
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-34303694-1', 'auto');
+    ga('send', 'pageview');
+  }
+</script>
+
+
+
+
+<button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
+</body>
+</html>
+

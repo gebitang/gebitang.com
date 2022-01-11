@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html xmlns:wb="http://open.weibo.com/wb" lang="en" >
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="mixin kernel">
+  <meta name="generator" content="Hugo 0.74.3" />
+
+  <title>Go Mixin Go &middot; 戈壁堂</title>
+
+    
+
+  
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/pure-min.css">
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-old-ie-min.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-min.css">
+  <!--<![endif]-->
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="http://gebitang.com/css/side-menu-old-ie.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="http://gebitang.com/css/side-menu.css">
+  <!--<![endif]-->
+
+  <link rel="stylesheet" href="http://gebitang.com/css/blackburn.css">
+
+  
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.9.0/css/all.css">
+
+  
+  <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet" type="text/css">
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+ 
+  
+
+  
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/androidstudio.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+  
+  <script>hljs.initHighlightingOnLoad();</script>
+  
+
+  <link rel="shortcut icon" href="http://gebitang.com/img/favicon.ico" type="image/x-icon" />
+
+  
+    
+        <link rel="stylesheet" href="http://gebitang.com/css/my.css">
+    
+  
+  
+    
+        <script src="http://gebitang.com/js/my.js"></script>
+    
+  
+
+</head>
+
+
+<body>
+<div id="layout">
+
+  
+<a href="#menu" id="menuLink" class="menu-link">
+  
+  <span></span>
+</a>
+<div id="menu">
+
+  
+  <a class="pure-menu-heading brand" href="http://gebitang.com/">Gebitang</a>
+
+
+  <div class="pure-menu">
+    <ul class="pure-menu-list">
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="http://gebitang.com/"><i class='fa fa-home fa-fw'></i>Home</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="http://gebitang.com/post/"><i class='fa fa-list fa-fw'></i>Posts</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="http://gebitang.com/about/"><i class='fa fa-user fa-fw'></i>About</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="http://gebitang.com/contact/"><i class='fa fa-phone fa-fw'></i>Contact</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="http://gebitang.com/tags/"><i class='fa fa-tags fa-fw'></i>Tags</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="http://gebitang.com/topics/"><i class='fa fa-folder fa-fw'></i>Topics</a>
+      
+        </li>
+      
+    </ul>
+  </div>
+
+  <div class="pure-menu social">
+  <ul class="pure-menu-list">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+  </ul>
+</div>
+
+
+  <div>
+
+  <div class="small-print">
+  	<small>
+    <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="知识共享许可协议" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/80x15.png" /></a><br/>本<span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" rel="dct:type">作品</span>由<a xmlns:cc="http://creativecommons.org/ns#" href="http://gebitang.com" property="cc:attributionName" rel="cc:attributionURL">&nbsp;Gebitang&nbsp;&nbsp;</a>采用<a rel="license" href="http://creativecommons.org/licenses/by/4.0/">知识共享署名 4.0 国际许可协议</a>进行许可&nbsp;&copy; 2018
+    </small>
+
+  </div>
+
+  <div class="small-print">
+    <small></small>
+  </div>
+  <div class="small-print">
+    <small>Built with&nbsp;<a href="https://gohugo.io/" target="_blank">Hugo</a></small>
+    <small>Theme&nbsp;<a href="https://github.com/yoshiharuyamashita/blackburn" target="_blank">Blackburn</a></small>
+  </div>
+
+  <div style="display:none">
+  <div class="small-print">
+    <small>
+    <wb:follow-button uid="2446212465" type="red_1" width="67" height="24"></wb:follow-button>
+  </small>
+  </div>
+  </div>
+
+</div>
+
+</div>
+
+
+  <div id="main">
+
+
+<div class="header">
+  <h1>Go Mixin Go</h1>
+  <h2>mixin kernel</h2>
+</div>
+<div class="content">
+
+  <div class="post-meta">
+
+  <div>
+    <i class="fa fa-calendar fa-fw"></i>
+    <time>2020-06-30</time>
+  </div>
+
+  
+
+  
+  
+  
+  <div>
+    <i class="fa fa-folder fa-fw"></i>
+    
+      <a class="post-taxonomy-topic" href="http://gebitang.com/topics/mixin">mixin</a>&nbsp;&#47;
+    
+      <a class="post-taxonomy-topic" href="http://gebitang.com/topics/go">go</a>
+    
+  </div>
+  
+  
+
+  
+  
+  
+  <div>
+    <i class="fa fa-tags fa-fw"></i>
+    
+      <a class="post-taxonomy-tag" href="http://gebitang.com/tags/mixin">mixin</a>&nbsp;&#47;
+    
+      <a class="post-taxonomy-tag" href="http://gebitang.com/tags/go">go</a>
+    
+  </div>
+  
+  
+
+</div>
+
+  
+	<nav id="TableOfContents">
+  <ul>
+    <li><a href="#大群">大群</a>
+      <ul>
+        <li><a href="#前端">前端</a></li>
+        <li><a href="#后端">后端</a></li>
+      </ul>
+    </li>
+    <li><a href="#历史">历史</a>
+      <ul>
+        <li><a href="#第一周">第一周</a>
+          <ul>
+            <li><a href="#第一天">第一天</a></li>
+            <li><a href="#第二天">第二天</a></li>
+          </ul>
+        </li>
+        <li><a href="#第二周">第二周</a>
+          <ul>
+            <li><a href="#func-closure">func closure</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#kernel">Kernel</a>
+      <ul>
+        <li><a href="#getinfo">getInfo</a></li>
+        <li><a href="#kernel-components">kernel components</a></li>
+        <li><a href="#主网转账">主网转账</a></li>
+        <li><a href="#地址格式">地址格式</a></li>
+      </ul>
+    </li>
+    <li><a href="#tip">TIP</a></li>
+  </ul>
+</nav>
+  
+
+  <p>推荐Go语言入门：<a href="http://golang.iswbm.com/en/latest/index.html">Go编程时光</a>对应的微信公众号系列<a href="http://mp.weixin.qq.com/mp/homepage?__biz=MzU1NzU1MTM2NA==&amp;hid=1&amp;sn=a016a47829bf9148498adf7195b850b5&amp;scene=18#wechat_redirect">Go 语言入门指南</a></p>
+<p>文章写的通俗易懂，很快就可以过一遍Go语言学习的最小必要知识点。——先“眼到”，至少可以先“读懂”开源项目的代码，然后尝试在开源项目上捣鼓，锻炼“手到”的能力。</p>
+<h2 id="大群">大群</h2>
+<h3 id="前端">前端</h3>
+<ol>
+<li>进入web目录</li>
+<li>执行<code>npm install</code></li>
+<li>执行<code>npm run serve</code>进行本地调试</li>
+</ol>
+<p>可能遇到的问题——</p>
+<ul>
+<li>编译报错<code>typeerror this.getoptions is not a function</code></li>
+</ul>
+<p><a href="https://stackoverflow.com/a/66087132/1087122">it seems like <code>sass-loader@11.0.0</code> doesn&rsquo;t work with <code>vue@2.6.12</code>.</a>降级之后<code>&quot;sass-loader&quot;: &quot;^10&quot;,</code>之后编译正常</p>
+<ul>
+<li>windows环境下报错<code>Error: PostCSS received undefined instead of CSS string</code></li>
+</ul>
+<p>中心编译<code>node-sass</code>后可以正常启动了 <code>npm rebuild node-sass</code></p>
+<h3 id="后端">后端</h3>
+<p>后端服务分为两个部分，一个是为前端服务的http服务；一个是进行message通信的服务。
+需要配置一个postgres数据库，初始化文件为models目录下的<code>schema.sql</code>。远程登录问题参考<a href="../how/sonarqube#postgresql%E8%BF%9C%E7%A8%8B%E7%99%BB%E5%BD%95">sonarqube</a>中的远程登录部分</p>
+<hr>
+<p>当然入门后，遇到问题问题可以进一步搜索对应的资源，例如关于“切片”的内容——</p>
+<ul>
+<li>
+<p><a href="https://medium.com/@marty.stepien/arrays-vs-slices-bonanza-in-golang-fa8d32cd2b7c">短文介绍区别</a></p>
+</li>
+<li>
+<p><a href="https://github.com/golang/go/wiki/SliceTricks">官方tricks</a></p>
+</li>
+<li>
+<p><a href="https://blog.golang.org/slices-intro">官方博客介绍切片</a></p>
+</li>
+<li>
+<p><strong><a href="https://blog.golang.org/index">官方博客 index</a></strong></p>
+</li>
+</ul>
+<p>读完入门系列，实操了<a href="../2020/0627-mixin-super-group-deploy/">Mixin大群部署</a>，下一步开始学习<a href="https://github.com/MixinNetwork/supergroup.mixin.one">Mixin Supergroup的代码逻辑</a>，正好前后端一起来。</p>
+<p>计划每天学习内容：</p>
+<ul>
+<li>源码阅读</li>
+<li>涉及到的API调用可以独立练手</li>
+<li>整理出来一段文字记录</li>
+</ul>
+<h2 id="历史">历史</h2>
+<h3 id="第一周">第一周</h3>
+<h4 id="第一天">第一天</h4>
+<p>fork出来一份代码，新建一个分支，直接在源码上添加注释进行学习。</p>
+<p>简单读完入门系列，现在大群的代码至少可以看下去了。配合这张图就比较好理解，部署的时候启动的两个服务：<code>http</code>, <code>message</code></p>
+
+
+<div class="pure-g">
+
+  
+  
+  
+  
+  <div class="pure-u-1-1">
+    <div style="padding: 0 .2em">
+      <a href="https://dbarobin.com/2019/05/19/mixin-super-group/" target="_blank" >
+      <img
+        class="pure-img-responsive"
+        src="https://cdn.dbarobin.com/loplv1n.png"
+        alt title="架构示意图">
+      </a>
+    </div>
+  </div>
+  
+
+</div>
+
+<ul>
+<li>读取配置文件</li>
+<li>创建数据库连接</li>
+<li>根据传递的参数启动两个服务</li>
+</ul>
+<p>Message服务启动：使用结构体Hub进行包装：使用Context，并对ctx进行一些列设置，最后启动接口方法 MessageService.Run()。</p>
+<p>这个实现里具体的业务逻辑还没完全搞清楚，大概意思是利用数据库做中转：判断具体的群业务？在loop中做消息处理，使用WebSocker的传输方式。</p>
+<p>对比起来，Go代码的确看着舒服——这样，就完成了并发下的业务处理逻辑</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">go</span> <span style="color:#a6e22e">distribute</span>(<span style="color:#a6e22e">ctx</span>)
+<span style="color:#66d9ef">go</span> <span style="color:#a6e22e">loopInactiveUsers</span>(<span style="color:#a6e22e">ctx</span>)
+<span style="color:#66d9ef">go</span> <span style="color:#a6e22e">loopPendingMessages</span>(<span style="color:#a6e22e">ctx</span>)
+<span style="color:#66d9ef">go</span> <span style="color:#a6e22e">handlePendingParticipants</span>(<span style="color:#a6e22e">ctx</span>)
+<span style="color:#66d9ef">go</span> <span style="color:#a6e22e">handleExpiredPackets</span>(<span style="color:#a6e22e">ctx</span>)
+<span style="color:#66d9ef">go</span> <span style="color:#a6e22e">handlePendingRewards</span>(<span style="color:#a6e22e">ctx</span>)
+<span style="color:#66d9ef">go</span> <span style="color:#a6e22e">loopPendingSuccessMessages</span>(<span style="color:#a6e22e">ctx</span>)
+</code></pre></div><p>知识点：</p>
+<p><a href="https://mp.weixin.qq.com/s?__biz=MzU1NzU1MTM2NA==&amp;mid=2247483769&amp;idx=1&amp;sn=5ce6c75ecccad89f455f5c43712a6d74&amp;scene=19#wechat_redirect">有关包导入</a></p>
+<ul>
+<li>匿名导入 <code>_ &quot;net/http/pprof&quot;</code>，显示导入时不使用会报错，采用匿名导入的方式，默认会执行导入的包的<code>init</code>方法。init方法先于main方法执行，并且深度优先。“导入的导入的导入的包”的init方法最新执行</li>
+</ul>
+<p>包引用关系：<code>main→A→B→C</code>，那么初始化顺序为<code>C.init→B.init→A.init→main</code>，编译时，匿名导入的包依然会编译到可执行文件中。</p>
+<h4 id="第二天">第二天</h4>
+<p><a href="https://w3c.group/c/1567337919309762">Mixin Messenger 机器人接入指南</a></p>
+<blockquote>
+<p>APP_BUTTON 的 action 支持 <code>input:SOMETHING</code> 。例如当前的 App Button 的 action 是 “input:subscribe” ，当用户点击这个按钮时客户端会自动发送一条 “subscribe” 的消息给机器人，开发者可以任意指定 input 后面的文字。</p>
+</blockquote>
+<p>根据大群的代码以及<a href="https://developers.mixin.one/api/beta-mixin-message/websocket-messages/">API说明</a>，action也可以为url地址，作为认证首页使用</p>
+<pre><code>  {
+    &quot;id&quot;: &quot;UUID&quot;,
+    &quot;action&quot;: &quot;CREATE_MESSAGE&quot;,
+    &quot;params&quot;: {
+      &quot;conversation_id&quot;: &quot;UUID&quot;,
+      &quot;category&quot;: &quot;APP_BUTTON_GROUP&quot;,
+      &quot;status&quot;: &quot;SENT&quot;,
+      &quot;message_id&quot;: &quot;UUID&quot;,
+      &quot;data&quot;: &quot;Base64 encoded data&quot;
+    }
+  }
+
+# data format
+[{&quot;label&quot;: &quot;Mixin Website&quot;, &quot;color&quot;: &quot;#46B8DA&quot;, &quot;action&quot;: &quot;https://mixin.one&quot;}, ...]
+</code></pre><p>记得签到<a href="https://github.com/yiplee/blockquiz">答题机器人</a>有对话式式的交互。下载下来读了下源码，一直没搞清楚的关键点是：“提供给用户选项，用户选择后，可以知道用户的选择是什么？”</p>
+<ul>
+<li>定位到了如何提供用户选项</li>
+<li>后面用户选择，以及用户选择了什么一直没搞清楚</li>
+</ul>
+<p>搜索之后，还是长老的教程里说得明白。参见如上。长老的另外一篇文章<a href="https://w3c.group/c/1573118879471104">Mixin 公链</a>，传说中的一篇文章搞懂系列——这篇全部理解透彻，算得上Mixin专家了。</p>
+<h3 id="第二周">第二周</h3>
+<p>执行数据库事务。这种实现可以理解业务逻辑。</p>
+<h4 id="func-closure">func closure</h4>
+<p>models目录下的<code>property.go</code>中包含以下方法——将函数作为参数传递给函数。这里对bool变量b的赋值操作有点秀？（为什么可以这样操作？）</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">ReadProhibitedProperty</span>(<span style="color:#a6e22e">ctx</span> <span style="color:#a6e22e">context</span>.<span style="color:#a6e22e">Context</span>) (<span style="color:#66d9ef">bool</span>, <span style="color:#66d9ef">error</span>) {
+  <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">b</span> <span style="color:#66d9ef">bool</span>
+  <span style="color:#75715e">//传递匿名函数
+</span><span style="color:#75715e"></span>	<span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">session</span>.<span style="color:#a6e22e">Database</span>(<span style="color:#a6e22e">ctx</span>).<span style="color:#a6e22e">RunInTransaction</span>(<span style="color:#a6e22e">ctx</span>, <span style="color:#66d9ef">nil</span>, <span style="color:#66d9ef">func</span>(<span style="color:#a6e22e">ctx</span> <span style="color:#a6e22e">context</span>.<span style="color:#a6e22e">Context</span>, <span style="color:#a6e22e">tx</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">sql</span>.<span style="color:#a6e22e">Tx</span>) <span style="color:#66d9ef">error</span> {
+		<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">err</span> <span style="color:#66d9ef">error</span>
+		<span style="color:#a6e22e">b</span>, <span style="color:#a6e22e">err</span> = <span style="color:#a6e22e">readPropertyAsBool</span>(<span style="color:#a6e22e">ctx</span>, <span style="color:#a6e22e">tx</span>, <span style="color:#a6e22e">ProhibitedMessage</span>)
+		<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">err</span>
+	})
+	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+		<span style="color:#66d9ef">return</span> <span style="color:#66d9ef">false</span>, <span style="color:#a6e22e">session</span>.<span style="color:#a6e22e">TransactionError</span>(<span style="color:#a6e22e">ctx</span>, <span style="color:#a6e22e">err</span>)
+	}
+	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">b</span>, <span style="color:#66d9ef">nil</span>
+}
+
+<span style="color:#75715e">// 实际执行的函数
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">readPropertyAsBool</span>(<span style="color:#a6e22e">ctx</span> <span style="color:#a6e22e">context</span>.<span style="color:#a6e22e">Context</span>, <span style="color:#a6e22e">tx</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">sql</span>.<span style="color:#a6e22e">Tx</span>, <span style="color:#a6e22e">name</span> <span style="color:#66d9ef">string</span>) (<span style="color:#66d9ef">bool</span>, <span style="color:#66d9ef">error</span>) {
+	<span style="color:#a6e22e">query</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Sprintf</span>(<span style="color:#e6db74">&#34;SELECT %s FROM properties WHERE name=$1&#34;</span>, <span style="color:#a6e22e">strings</span>.<span style="color:#a6e22e">Join</span>(<span style="color:#a6e22e">propertiesColumns</span>, <span style="color:#e6db74">&#34;,&#34;</span>))
+	<span style="color:#a6e22e">row</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">tx</span>.<span style="color:#a6e22e">QueryRowContext</span>(<span style="color:#a6e22e">ctx</span>, <span style="color:#a6e22e">query</span>, <span style="color:#a6e22e">name</span>)
+	<span style="color:#a6e22e">property</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">propertyFromRow</span>(<span style="color:#a6e22e">row</span>)
+	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> <span style="color:#f92672">||</span> <span style="color:#a6e22e">property</span> <span style="color:#f92672">==</span> <span style="color:#66d9ef">nil</span> {
+		<span style="color:#66d9ef">return</span> <span style="color:#66d9ef">false</span>, <span style="color:#a6e22e">err</span>
+	}
+	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">property</span>.<span style="color:#a6e22e">Value</span> <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;true&#34;</span>, <span style="color:#66d9ef">nil</span>
+}
+</code></pre></div><p>被调用的函数定义在durable目录下的<code>database.go</code>文件中——</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">d</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">Database</span>) <span style="color:#a6e22e">RunInTransaction</span>(<span style="color:#a6e22e">ctx</span> <span style="color:#a6e22e">context</span>.<span style="color:#a6e22e">Context</span>, <span style="color:#a6e22e">opts</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">sql</span>.<span style="color:#a6e22e">TxOptions</span>, <span style="color:#a6e22e">fn</span> <span style="color:#66d9ef">func</span>(<span style="color:#a6e22e">ctx</span> <span style="color:#a6e22e">context</span>.<span style="color:#a6e22e">Context</span>, <span style="color:#a6e22e">tx</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">sql</span>.<span style="color:#a6e22e">Tx</span>) <span style="color:#66d9ef">error</span>) <span style="color:#66d9ef">error</span> {
+	<span style="color:#a6e22e">tx</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">d</span>.<span style="color:#a6e22e">BeginTx</span>(<span style="color:#a6e22e">ctx</span>, <span style="color:#a6e22e">opts</span>)
+	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+		<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">err</span>
+	}
+	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">fn</span>(<span style="color:#a6e22e">ctx</span>, <span style="color:#a6e22e">tx</span>); <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+		<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">tx</span>.<span style="color:#a6e22e">Rollback</span>(); <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+			<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">err</span>
+		}
+		<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">err</span>
+	}
+	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">tx</span>.<span style="color:#a6e22e">Commit</span>()
+}
+</code></pre></div><p>上面的代码，原理上理解还有点困难，这些资料需要参考一下：</p>
+<p><a href="https://stackoverflow.com/questions/12655464/can-functions-be-passed-as-parameters">Can functions be passed as parameters?</a></p>
+<p><a href="https://tour.golang.org/moretypes/25">go tour: Function closures</a> 完整的的<a href="https://tour.golang.org/list">go tour</a> （现在居然对有些国家不提供服务？）</p>
+<p>Go functions may be <code>closures</code>. A closure is a function value that references variables from outside its body. The function may access and assign to the referenced variables; in this sense the function is &ldquo;bound&rdquo; to the variables.</p>
+<p>For example, the adder function returns a closure. Each closure is bound to its own <code>sum</code> variable.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
+
+<span style="color:#f92672">import</span> <span style="color:#e6db74">&#34;fmt&#34;</span>
+
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">adder</span>() <span style="color:#66d9ef">func</span>(<span style="color:#66d9ef">int</span>) <span style="color:#66d9ef">int</span> {
+	<span style="color:#a6e22e">sum</span> <span style="color:#f92672">:=</span> <span style="color:#ae81ff">0</span>
+	<span style="color:#66d9ef">return</span> <span style="color:#66d9ef">func</span>(<span style="color:#a6e22e">x</span> <span style="color:#66d9ef">int</span>) <span style="color:#66d9ef">int</span> {
+		<span style="color:#a6e22e">sum</span> <span style="color:#f92672">+=</span> <span style="color:#a6e22e">x</span>
+		<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">sum</span>
+	}
+}
+
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+	<span style="color:#a6e22e">pos</span>, <span style="color:#a6e22e">neg</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">adder</span>(), <span style="color:#a6e22e">adder</span>()
+	<span style="color:#66d9ef">for</span> <span style="color:#a6e22e">i</span> <span style="color:#f92672">:=</span> <span style="color:#ae81ff">0</span>; <span style="color:#a6e22e">i</span> &lt; <span style="color:#ae81ff">10</span>; <span style="color:#a6e22e">i</span><span style="color:#f92672">++</span> {
+		<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(
+			<span style="color:#a6e22e">pos</span>(<span style="color:#a6e22e">i</span>),
+			<span style="color:#a6e22e">neg</span>(<span style="color:#f92672">-</span><span style="color:#ae81ff">2</span><span style="color:#f92672">*</span><span style="color:#a6e22e">i</span>),
+		)
+	}
+}
+</code></pre></div><h2 id="kernel">Kernel</h2>
+<p>代码只有15K就完成了白皮书的技术实现。可以读文档，结合代码学习一下。</p>
+<pre><code>140 text files.
+140 unique files.
+43 files ignored.
+--------------------------------------------------------------------------------
+Language                      files          blank        comment           code
+--------------------------------------------------------------------------------
+Go                              113           1839             89          15140
+Markdown                          9            327              0           1249
+JSON                              2              0              0            196
+XML                               4              0              0             81
+TOML                              1              4             14             16
+Bourne Again Shell                1              4              0             12
+Bourne Shell                      1              1              0              4
+--------------------------------------------------------------------------------
+SUM:                            131           2175            103          16698
+--------------------------------------------------------------------------------
+</code></pre><p>第一步编译，Mac上没有问题，Windows下提示<code>exec: “gcc”: executable file not found in %PATH%</code>，需要安装一下gcc的环境，<a href="https://stackoverflow.com/questions/43580131">参考</a>——</p>
+<ul>
+<li>从<a href="https://sourceforge.net/projects/mingw-w64/files/">mingw-w64</a>这里下载编译好的MinGW-W64 GCC-8.1.0，选择<code>x86_64</code>版本的</li>
+<li>解压后将目前下的bin文件夹添加到环境变量</li>
+</ul>
+<p>重新编译后生成mixin.exe文件。可以直接使用——这一点go语言的确有优势，直接打包出来的产出物就可以使用</p>
+<p>创建运行测试网络<code>mixin setuptestnet</code>会直接在exe所在目录创建对应的目录……一系列逻辑参考源码吧：生成七个地址，创建七个目录。为下一步启动主网做准备。</p>
+<p>依次执行<code>mixin kernel -dir /tmp/mixin-7001 -port 7001</code> 启动七个节点。可以根据log输出结合代码看看运行逻辑。运行了一会，产生了28G的数据。</p>
+<p>主网代币转账的说明应该无法在测试环境下实现。因为没有实际的Domain将资产接入到主网。</p>
+<p>昨天的RPC调用一直不成功，今天阅读源码之后，就知道正确的姿势了——本地返回大概是这样滴，线上环境类似，只是数据更多一些。</p>
+<h3 id="getinfo">getInfo</h3>
+<p><code>mixin -n http://127.0.0.1:8001 getinfo</code> 端口默认+1000；返回值最后的<code>node</code>字段代表自己</p>
+<pre><code>{
+    &quot;epoch&quot;:&quot;2021-01-28T16:41:41+08:00&quot;,
+    &quot;graph&quot;:{
+        &quot;cache&quot;:Object{...},
+        &quot;consensus&quot;:[
+            Object{...},
+            Object{...},
+            Object{...},
+            Object{...},
+            Object{...},
+            Object{...},
+            Object{...}
+        ],
+        &quot;final&quot;:Object{...},
+        &quot;sps&quot;:0,
+        &quot;topology&quot;:7
+    },
+    &quot;mint&quot;:{
+        &quot;batch&quot;:0,
+        &quot;pool&quot;:&quot;500000.00000000&quot;
+    },
+    &quot;network&quot;:&quot;28f297fa972963a7dde67c02dc5169bb7f5d2227d22b71ab458560c7fd70b8ed&quot;,
+    &quot;node&quot;:&quot;4fd6038742ef3f3c4b8a3a08567e11ba5921171b2e7638b520b8e75f707a04c8&quot;,
+    &quot;queue&quot;:{
+        &quot;caches&quot;:0,
+        &quot;finals&quot;:0
+    },
+    &quot;timestamp&quot;:&quot;2021-01-28T16:41:41.000000001+08:00&quot;,
+    &quot;uptime&quot;:&quot;57.732462s&quot;,
+    &quot;version&quot;:&quot;v0.9.9-BUILD_VERSION&quot;
+}
+</code></pre><p>如何知道主网地址对应的node？</p>
+<p>跟踪了一些——CV了一些代码，获取到<code>IdForNetwork</code>的值。不知道私钥的情况下是无法将<code>genesis.json</code>中的地址跟config中的host对应起来的。这样也启动隐私保护的作用。根据<code>IdForNetwork</code>来对应host即可。获取不同host的<code>getinfo</code>即可</p>
+<p>JSON解析：<code>cannot unmarshal string into go struct field</code> 需要让对应的struct实现<code>MarshalJSON(b []byte) error</code>和<code>UnmarshalJSON(b []byte) error</code>方法，就可以完成自定义的解析，<a href="https://golang.org/pkg/encoding/json/">官方示例</a>，详细介绍<a href="https://blog.golang.org/json">blog golang json</a></p>
+<p>测试网络如何正常关闭？否则重启——</p>
+<pre><code>badger 2021/01/29 20:58:18 INFO: All 0 tables opened in 0s
+badger 2021/01/29 20:58:18 INFO: Replaying file id: 0 at offset: 0
+badger 2021/01/29 20:58:18 WARNING: Truncate Needed. File /tmp/mixin-7001/snapshots\000000.vlog size: 2147483646 Endoffset: 19566
+During db.vlog.open: Value log truncate required to run DB. This might result in data loss
+</code></pre><p><a href="https://github.com/dgraph-io/badger/issues/744">badger issue 744</a> <code>Win7 will be prompted, Mac can start normally</code>开起来是正常现象。启动参数添加<code>opt.Truncate=true</code>可解决，<a href="https://github.com/dgraph-io/badger/issues/1353">参考</a></p>
+<h3 id="kernel-components">kernel components</h3>
+<p>可以梳理一些kernel都用到了哪些开源组件。查看项目的<a href="https://github.com/MixinNetwork/mixin/blob/master/go.mod"><code>go.mod</code></a>文件可以有获取全部信息。</p>
+<ul>
+<li><a href="https://github.com/dgraph-io/badger">Badger</a> <code>Fast key-value DB in Go.</code> 存储数据，所以需要使用SSD</li>
+<li><a href="https://github.com/FiloSottile/edwards25519">edwards25519</a> google内Go团队负责密码和安全的大牛实现的edwards25519椭圆曲线实现，创建地址的基础</li>
+</ul>
+<h3 id="主网转账">主网转账</h3>
+<p><a href="https://github.com/MixinNetwork/developers.mixin.one/blob/main/developers/src/i18n/zh/document/mainnet/tutorials/full-node-join.md">转账方式</a></p>
+<ul>
+<li>机器人的授权令牌调用 POST /transactions 转入到主网地址。<a href="https://developers.mixin.one/document/wallet/api/transfer-to-mainnet">transfer-to-mainnet</a>浏览器默认英文环境，没有这个api的说明（默认中文环境时有），</li>
+<li>使用官方提供的机器人bot转账，最终也是调用的相同API——调用成功<code>Mixin transfer success snapshotId: 7cf6d709-c048-4c74-a7da-b822e9d84e09, transaction hash: 6cabed5cff5becd72a3533a318d49ee002ae38d27c18cba9b4710f4c770a624b</code>。转账成功后，调用任何一个节点的<code>gettransaction</code>API都可以查询到结果</li>
+</ul>
+<p>Java的api还没调通，看起来加密错误，目前提示：<code>PIN incorrect.</code>下一步参考go的实现debug一下。Java下的转账api工作OK的</p>
+<h3 id="地址格式">地址格式</h3>
+<ul>
+<li><a href="https://github.com/AlexiaChen/AlexiaChen.github.io/issues/15">从群环域到椭圆曲线密码学</a></li>
+<li><a href="https://github.com/AlexiaChen/AlexiaChen.github.io/issues/103">深入了解Ed25519</a></li>
+<li><a href="https://www.infoq.cn/article/lbo7imfxawd6um6a6qy8">一场椭圆曲线的寻根问祖之旅</a></li>
+<li><a href="http://aandds.com/blog/eddsa.html">Ed25519 公钥从私钥哈希 SHA-512(k) 的“左半部分”计算而来</a></li>
+</ul>
+<p>每个地址/秘钥都是基于<code>twisted Edwards curve</code>生成的地址，用来进行非对称加密。</p>
+<pre><code>-x^2 + y^2 = 1 + -(121665/121666)*x^2*y^2
+</code></pre><p>第一步：生成创建地址的随机64位字节的seed：</p>
+<ul>
+<li>创建随机64位byte作为seed1，对其进行SHA3-256哈希取值获取到32位byte数组hash1</li>
+<li>将hash1再做一次SHA3-256哈希获得hash2</li>
+<li>将hash1和hash2合并得到64位的seed2</li>
+</ul>
+<p>第二步：生成地址</p>
+<ul>
+<li>使用seed1生成32位byte长度的Key作为spend Key</li>
+<li>使用seed2生成32位byte长度的Key作为view Key</li>
+</ul>
+<p>view key可以查看对应地址的转账信息；发起转账信息同时需要spend key和view key。</p>
+<p>地址包含了一对私钥，公钥可以通过私钥计算得出</p>
+<pre><code>A Scalar is an integer modulo 
+    l = 2^252 + 27742317777372353535851937790883648493
+which is the prime order of the edwards25519 group.
+This type works similarly to math/big.Int, and all arguments and receivers are allowed to alias.
+The zero value is a valid zero element.
+</code></pre><h2 id="tip">TIP</h2>
+<p>Mixin使用的六位PIM码管理用户私钥的方案正式开源。2000+行代码完成。</p>
+<p>引用一下骚总的评论——</p>
+<blockquote>
+<p>晓东是我见过最牛逼程序员～️ 他前几天感冒了，稍微好点的时候，给我们讲了一下Mixin支持原链资产钱包的思路，然后晚上大搞了一下，好像是每人搞了大约12000搞（我们发明的酒精单位，1搞=0.01ml酒精）～ 后面两天也不怎么说话，吃饭也不怎么愿意去了，总去最近的麦当劳，一天到晚坐电脑前，我一度以为他感冒没好，状态不佳～⌨️ 过了两天跟我们说，他已经写完了代码，随时可以上线～✅ 坐在对面的我感到很惭愧，只能安慰自己，每个人擅长的不一样，每个人都有独特的价值～🤦‍♂️ 今天他发布了详细的 6 位数字 PIN 码实现方案开源版本： <a href="https://github.com/MixinNetwork/tip">https://github.com/MixinNetwork/tip</a></p>
+</blockquote>
+<p>用到了<a href="https://en.wikipedia.org/wiki/BLS_digital_signature">Boneh-Lynn-Shacham (BLS) signature</a>算法做签。有关BLS介绍参考这个<a href="https://ethfans.org/posts/bls-signatures-better-than-schnorr">理解 BLS 签名算法</a>，<a href="https://medium.com/cryptoadvance/bls-signatures-better-than-schnorr-5a7fe30ea716">英文原文: BLS signatures: better than Schnorr</a>以及对于对于Schnorr算法的介绍<a href="https://medium.com/cryptoadvance/how-schnorr-signatures-may-improve-bitcoin-91655bcb4744">How Schnorr signatures may improve Bitcoin</a></p>
+<blockquote>
+<p>BLS 签名算法是一种可以实现签名聚合和密钥聚合的算法（即可以将多个密钥聚合成一把密钥，将多个签名聚合成一个签名）。</p>
+</blockquote>
+<p>这其实是算法发明者的三个字母缩写——三位斯坦福大学的教授+学生Dan Boneh, Ben Lynn, Hovav Shacham于2004年在《Journal of Cryptology》上发表的论文<a href="https://link.springer.com/chapter/10.1007/3-540-45682-1_30">Short Signatures from the Weil Pairing</a>，下载版本可以从<a href="https://scholar.google.com/citations?user=262Twn0AAAAJ&amp;hl=en">google scholar</a>上获取</p>
+<ul>
+<li>第一作者<a href="https://crypto.stanford.edu/~dabo/">Dan Boneh</a>是为真正的大佬，教密码学课程，开源了一本结束密码学教科书<a href="http://toc.cryptobook.us/">A Graduate Course in Applied Cryptography</a>，还在coursera开免费课<a href="https://www.coursera.org/learn/crypto">Cryptography I</a></li>
+<li>第二作者<a href="https://crypto.stanford.edu/~blynn/">Ben Lynn</a>好像是台湾人，还开源了一份git教程<a href="https://crypto.stanford.edu/~blynn/gitmagic/">Git Magic</a>。大佬比较低调<a href="https://github.com/blynn">github地址</a></li>
+<li>第三作者<a href="https://www.cs.utexas.edu/~hovav/">Hovav Shacham</a>2018年去了University of Texas at Austin</li>
+</ul>
+<p>刹车刹车，先学习TIP的代码~</p>
+  
+  
+
+  
+<div class="prev-next-post pure-g">
+  <div class="pure-u-1-24" style="text-align: left;">
+    
+    <a href="http://gebitang.com/post/2020/june-run/"><i class="fa fa-chevron-left"></i></a>
+    
+  </div>
+  <div class="pure-u-10-24">
+    
+    <nav class="prev">
+      <a href="http://gebitang.com/post/2020/june-run/">Run June</a>
+    </nav>
+    
+  </div>
+  <div class="pure-u-2-24">
+    &nbsp;
+  </div>
+  <div class="pure-u-10-24">
+    
+    <nav class="next">
+      <a href="http://gebitang.com/post/2020/0709-about-sonar/">Sonar info</a>
+    </nav>
+    
+  </div>
+  <div class="pure-u-1-24" style="text-align: right;">
+    
+    <a href="http://gebitang.com/post/2020/0709-about-sonar/"><i class="fa fa-chevron-right"></i></a>
+    
+  </div>
+</div>
+
+
+
+  
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+
+(function() {
+    
+    
+    if (window.location.hostname == "localhost")
+        return;
+
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    var disqus_shortname = 'gebitang';
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com/" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+</div>
+
+</div>
+</div>
+<script src="http://gebitang.com/js/ui.js"></script>
+<script src="http://gebitang.com/js/menus.js"></script>
+
+
+<script>
+  
+  if (window.location.hostname != "localhost") {
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-34303694-1', 'auto');
+    ga('send', 'pageview');
+  }
+</script>
+
+
+
+
+<button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
+</body>
+</html>
+

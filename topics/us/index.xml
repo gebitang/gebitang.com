@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>US on 戈壁堂</title>
+    <link>http://gebitang.com/topics/us/</link>
+    <description>Recent content in US on 戈壁堂</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 19 Mar 2020 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://gebitang.com/topics/us/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Sonar实践问题：支持go工程的覆盖率</title>
+      <link>http://gebitang.com/post/2020/0319-sonar-go-with-coverage/</link>
+      <pubDate>Thu, 19 Mar 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://gebitang.com/post/2020/0319-sonar-go-with-coverage/</guid>
+      <description>Go for SonarQube Go for SonarCloud with Github Actions 示例工程 service_sonar go testing 步骤—— go build生成可执行程序 执行 go test -coverprofile=bin/cov.out service-sonar 生成覆盖率文件 执行sonar-scanner 关键时如何生成覆盖</description>
+    </item>
+    
+    <item>
+      <title>Sonar扫描的NPE问题</title>
+      <link>http://gebitang.com/post/2020/0312-npe-issue-stringutils/</link>
+      <pubDate>Thu, 12 Mar 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://gebitang.com/post/2020/0312-npe-issue-stringutils/</guid>
+      <description>直到我修改为这样的代码才通过—— public class DetectorImport { public String check1(Nonentity nonentity) { String s; if(nonentity == null) { s = null; }else { s = nonentity.getName(); } if(s !=null) { s = s.replaceAll(&amp;quot;（&amp;quot</description>
+    </item>
+    
+    <item>
+      <title>Additional-info-for-service-provider</title>
+      <link>http://gebitang.com/post/jiansh/us/additional-info-for-service-provider/</link>
+      <pubDate>Sat, 07 Mar 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://gebitang.com/post/jiansh/us/additional-info-for-service-provider/</guid>
+      <description>link on JianShu 在线图片格式转换，包括webp格式转jpg、png。 chrome 插件全页面截图，好用又强大，官方网站 购买服务器（需要使用服务器申请备案号），邮箱</description>
+    </item>
+    
+    <item>
+      <title>Basic-Javaagent</title>
+      <link>http://gebitang.com/post/jiansh/us/basic-javaagent/</link>
+      <pubDate>Sat, 07 Mar 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://gebitang.com/post/jiansh/us/basic-javaagent/</guid>
+      <description>link on JianShu man java -javaagent:jarpath[=options] Loads the specified Java programming language agent. For more information about instrumenting Java applications, see the java.lang.instrument package description in the Java API documentation at http://docs.oracle.com/javase/8/docs/api/java/lang/instrument/package-summary.html 文档说明部分介绍了基本概念 Provides services that allow Java programming language agents to instrument programs running on the JVM. 四步快速入门： Implement a static</description>
+    </item>
+    
+    <item>
+      <title>Basic-Kafka</title>
+      <link>http://gebitang.com/post/jiansh/us/basic-kafka/</link>
+      <pubDate>Sat, 07 Mar 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://gebitang.com/post/jiansh/us/basic-kafka/</guid>
+      <description>link on JianShu https://kafka.apache.org/quickstart Java8 + Windows环境 Zookeeper环境 启动Server时，会提示java.lang.NumberFormatException</description>
+    </item>
+    
+    <item>
+      <title>Basic-Kibana</title>
+      <link>http://gebitang.com/post/jiansh/us/basic-kibana/</link>
+      <pubDate>Sat, 07 Mar 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://gebitang.com/post/jiansh/us/basic-kibana/</guid>
+      <description>link on JianShu 假装天天接触大数据的样子= =| Basic的意思就是：了解这个东西是做什么的？如何配置安装？简单实用方法是怎样的？ 有了这个概念，就可以上手</description>
+    </item>
+    
+    <item>
+      <title>Basic-SonarQube-SonarScanner</title>
+      <link>http://gebitang.com/post/jiansh/us/basic-sonarqube-sonarscanner/</link>
+      <pubDate>Sat, 07 Mar 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://gebitang.com/post/jiansh/us/basic-sonarqube-sonarscanner/</guid>
+      <description>link on JianShu SonarQube Continuous code quality made easy. Start In Two Minute 下载 SonarQube downloads，使用Sonar qube 7.6版本，Java8支持；最新版本8.0，需要Java 11+ 解压后将bin</description>
+    </item>
+    
+    <item>
+      <title>JaCoCo--skipping-jacoco-due-to-missing-data-file</title>
+      <link>http://gebitang.com/post/jiansh/us/jacoco-skipping-jacoco-due-to-missing-data-file/</link>
+      <pubDate>Sat, 07 Mar 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://gebitang.com/post/jiansh/us/jacoco-skipping-jacoco-due-to-missing-data-file/</guid>
+      <description>link on JianShu 昨天开始有一个多module的项目一直无法获取到单测覆盖率结果。 初步跟踪了一下执行log，发现多个提示：&amp;ldquo;skipping</description>
+    </item>
+    
+    <item>
+      <title>JaCoCo-Multi-Module</title>
+      <link>http://gebitang.com/post/jiansh/us/jacoco-multi-module/</link>
+      <pubDate>Sat, 07 Mar 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://gebitang.com/post/jiansh/us/jacoco-multi-module/</guid>
+      <description>link on JianShu 官方提供的说明 Create a dedicated module in your project for generation of the report. This module should depend on all or some other modules in the project. JaCoCo itself does this in the org.jacoco.doc module (see the pom.xml). JaCoCo 0.7.7版本开始提供这个功能。使用独立的模块</description>
+    </item>
+    
+    <item>
+      <title>Sonar-Web-api(一)</title>
+      <link>http://gebitang.com/post/jiansh/us/sonar-web-api%E4%B8%80/</link>
+      <pubDate>Sat, 07 Mar 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://gebitang.com/post/jiansh/us/sonar-web-api%E4%B8%80/</guid>
+      <description>link on JianShu 数据库定义，但 不建议直接查询DB，使用Sonar提供的Web_Api，默认在SonarQube服务的/web_api下可以查看到提供的</description>
+    </item>
+    
+    <item>
+      <title>Sonar-Web-api(二)</title>
+      <link>http://gebitang.com/post/jiansh/us/sonar-web-api%E4%BA%8C/</link>
+      <pubDate>Sat, 07 Mar 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://gebitang.com/post/jiansh/us/sonar-web-api%E4%BA%8C/</guid>
+      <description>link on JianShu 每个项目主页： http://example.sonar.com/dashboard?id=growth_client:restful-api-seller 主页的核心数据来源： http://example.sonar.com/api/measures/component?additionalFields=metrics,periods&amp;amp;component=projectGroup1:projectNameExample&amp;amp;metricKeys=alert_status,quality_gate_details,bugs,new_bugs,reliability_rating,new_reliability_rating,vulnerabilities,new_vulnerabilities,security_rating,new_security_rating,code_smells,new_code_smells,sqale_rating,new_maintainability_rating,sqale_index,new_technical_debt,coverage,new_coverage,new_lines_to_cover,tests,duplicated_lines_density,new_duplicated_lines_density,duplicated_blocks,ncloc,ncloc_language_distribution,projects,new_lines 最近一次current扫描时间信息： http://example.sonar.com/api/ce/component?component=projectGroup1:projectNameExample { &amp;quot;queue&amp;quot;:[ ], &amp;quot;current&amp;quot;:{ &amp;quot;id&amp;quot;:&amp;quot;AW7LG4x5rEHtiKcxk1nN&amp;quot;, &amp;quot;type&amp;quot;:&amp;quot;REPORT&amp;quot;, &amp;quot;componentId&amp;quot;:&amp;quot;AWvpaqUHahV-mFVL-A1-&amp;quot;, &amp;quot;componentKey&amp;quot;:&amp;quot;projectGroup1:projectNameExample&amp;quot;, &amp;quot;componentName&amp;quot;:&amp;quot;projectGroup1:projectNameExample&amp;quot;, &amp;quot;componentQualifier&amp;quot;:&amp;quot;TRK&amp;quot;, &amp;quot;analysisId&amp;quot;:&amp;quot;AW7LG5GFQzwg82DVBAfm&amp;quot;, &amp;quot;status&amp;quot;:&amp;quot;SUCCESS&amp;quot;, &amp;quot;submittedAt&amp;quot;:&amp;quot;2019-12-03T17:33:30+0800&amp;quot;, &amp;quot;submitterLogin&amp;quot;:&amp;quot;admin&amp;quot;, &amp;quot;startedAt&amp;quot;:&amp;quot;2019-12-03T17:33:31+0800&amp;quot;, &amp;quot;executedAt&amp;quot;:&amp;quot;2019-12-03T17:33:33+0800&amp;quot;, &amp;quot;executionTimeMs&amp;quot;:1694, &amp;quot;logs&amp;quot;:false, &amp;quot;hasScannerContext&amp;quot;:true, &amp;quot;organization&amp;quot;:&amp;quot;default-organization&amp;quot;, &amp;quot;warningCount&amp;quot;:1, &amp;quot;warnings&amp;quot;:[ ] } } 查询me</description>
+    </item>
+    
+    <item>
+      <title>SonarLint-使用</title>
+      <link>http://gebitang.com/post/jiansh/us/sonarlint-%E4%BD%BF%E7%94%A8/</link>
+      <pubDate>Sat, 07 Mar 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://gebitang.com/post/jiansh/us/sonarlint-%E4%BD%BF%E7%94%A8/</guid>
+      <description>link on JianShu 基本上开箱即用。 安装 手动下载： 不同版本 下载到本地，然后从Idea的settings-&amp;gt;Plugins-&amp;gt;settings install</description>
+    </item>
+    
+    <item>
+      <title>Sonar实践问题记录(一)</title>
+      <link>http://gebitang.com/post/jiansh/us/sonar%E5%AE%9E%E8%B7%B5%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95%E4%B8%80/</link>
+      <pubDate>Sat, 07 Mar 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://gebitang.com/post/jiansh/us/sonar%E5%AE%9E%E8%B7%B5%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95%E4%B8%80/</guid>
+      <description>link on JianShu 跟踪了一天的问题，记录一下。 问题一： 目前最大的问题为获取Sonar数据时一直处于超时状态。 第一步，怀疑在超时时间内一直请求，相当于对s</description>
+    </item>
+    
+    <item>
+      <title>Sonar实践问题记录(七)node版本排查</title>
+      <link>http://gebitang.com/post/jiansh/us/sonar%E5%AE%9E%E8%B7%B5%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95%E4%B8%83node%E7%89%88%E6%9C%AC%E6%8E%92%E6%9F%A5/</link>
+      <pubDate>Sat, 07 Mar 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://gebitang.com/post/jiansh/us/sonar%E5%AE%9E%E8%B7%B5%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95%E4%B8%83node%E7%89%88%E6%9C%AC%E6%8E%92%E6%9F%A5/</guid>
+      <description>link on JianShu 关键问题 #!/usr/bin/env node 采用事实上标准而不是通用标准。所以前端项目扫描使用ESlint，而不是Sonar自带的扫描规则。（如何使用的逻辑还没有搞清</description>
+    </item>
+    
+    <item>
+      <title>Sonar实践问题记录(三)-SonarQube</title>
+      <link>http://gebitang.com/post/jiansh/us/sonar%E5%AE%9E%E8%B7%B5%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95%E4%B8%89-sonarqube/</link>
+      <pubDate>Sat, 07 Mar 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://gebitang.com/post/jiansh/us/sonar%E5%AE%9E%E8%B7%B5%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95%E4%B8%89-sonarqube/</guid>
+      <description>link on JianShu 8.0版本需要Java 11，java8环境启动时就会提示。可以下载7.6版本 ###架构 Sonarqube Architecture One SonarQube Server starting 3 main processes: Web Server for developers, managers to browse quality snapshots and configure the SonarQube instance Search</description>
+    </item>
+    
+    <item>
+      <title>Sonar实践问题记录(九)：sonar-scanner分析参数</title>
+      <link>http://gebitang.com/post/jiansh/us/sonar%E5%AE%9E%E8%B7%B5%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95%E4%B9%9Dsonar-scanner%E5%88%86%E6%9E%90%E5%8F%82%E6%95%B0/</link>
+      <pubDate>Sat, 07 Mar 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://gebitang.com/post/jiansh/us/sonar%E5%AE%9E%E8%B7%B5%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95%E4%B9%9Dsonar-scanner%E5%88%86%E6%9E%90%E5%8F%82%E6%95%B0/</guid>
+      <description>link on JianShu ERROR: Validation of project reactor failed: &amp;ldquo;groupName:projectName:BranchName-22695-合规视频&amp;rdquo; is not a valid</description>
+    </item>
+    
+    <item>
+      <title>Sonar实践问题记录(二)</title>
+      <link>http://gebitang.com/post/jiansh/us/sonar%E5%AE%9E%E8%B7%B5%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95%E4%BA%8C/</link>
+      <pubDate>Sat, 07 Mar 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://gebitang.com/post/jiansh/us/sonar%E5%AE%9E%E8%B7%B5%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95%E4%BA%8C/</guid>
+      <description>link on JianShu 查询字段的时间戳格式： Hi, the correct format is yyyy-MM-dd&amp;rsquo;T&amp;rsquo;HH:mm:ssZ, so in your example createdAfter=2017-10-19T13:00:00+0200 is correct, but you need to url-encode the + character to %2b : createdAfter=2017-10-19T13:00:00%2b0200 Issue包括：Bug、Vulnerability、Code_</description>
+    </item>
+    
+    <item>
+      <title>Sonar实践问题记录(五)-插件Plugins</title>
+      <link>http://gebitang.com/post/jiansh/us/sonar%E5%AE%9E%E8%B7%B5%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95%E4%BA%94-%E6%8F%92%E4%BB%B6plugins/</link>
+      <pubDate>Sat, 07 Mar 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://gebitang.com/post/jiansh/us/sonar%E5%AE%9E%E8%B7%B5%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95%E4%BA%94-%E6%8F%92%E4%BB%B6plugins/</guid>
+      <description>link on JianShu 插件也需要与主版本兼容。 例如7.6版本的中文包需要使用sonar-l10n-zh-plugin-1.26.jar , 8.0版本的sona</description>
+    </item>
+    
+    <item>
+      <title>Sonar实践问题记录(八)jacoco-plugin</title>
+      <link>http://gebitang.com/post/jiansh/us/sonar%E5%AE%9E%E8%B7%B5%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95%E5%85%ABjacoco-plugin/</link>
+      <pubDate>Sat, 07 Mar 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://gebitang.com/post/jiansh/us/sonar%E5%AE%9E%E8%B7%B5%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95%E5%85%ABjacoco-plugin/</guid>
+      <description>link on JianShu SonarQube 7.4以上版本默认自动jacoco plugin，可以分析jacoco生成的xml格式的测试报告。 在 配置 &amp;ndash; 应用市场 可以看到已安装的——</description>
+    </item>
+    
+    <item>
+      <title>Sonar实践问题记录(六)webhook</title>
+      <link>http://gebitang.com/post/jiansh/us/sonar%E5%AE%9E%E8%B7%B5%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95%E5%85%ADwebhook/</link>
+      <pubDate>Sat, 07 Mar 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://gebitang.com/post/jiansh/us/sonar%E5%AE%9E%E8%B7%B5%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95%E5%85%ADwebhook/</guid>
+      <description>link on JianShu sonarqube7.6 webhook 使用SonarScanner扫描结束后，会将结果提交给SonarQube，其中的Computer Engine会负责分析数据——这会</description>
+    </item>
+    
+    <item>
+      <title>Sonar实践问题记录(四)</title>
+      <link>http://gebitang.com/post/jiansh/us/sonar%E5%AE%9E%E8%B7%B5%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95%E5%9B%9B/</link>
+      <pubDate>Sat, 07 Mar 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://gebitang.com/post/jiansh/us/sonar%E5%AE%9E%E8%B7%B5%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95%E5%9B%9B/</guid>
+      <description>link on JianShu 配置 默认配置包括以下几个方面—— DATABASE WEB SERVER SSO AUTHENTICATION LDAP CONFIGURATION ELASTICSEARCH UPDATE CENTER LOGGING OTHERS 默认配置文件sonar.properties中对每一项有详细的说明。 与默认配置</description>
+    </item>
+    
+    <item>
+      <title>进程信息跟踪：top-jps-jstack</title>
+      <link>http://gebitang.com/post/jiansh/us/%E8%BF%9B%E7%A8%8B%E4%BF%A1%E6%81%AF%E8%B7%9F%E8%B8%AAtop-jps-jstack/</link>
+      <pubDate>Sat, 07 Mar 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://gebitang.com/post/jiansh/us/%E8%BF%9B%E7%A8%8B%E4%BF%A1%E6%81%AF%E8%B7%9F%E8%B8%AAtop-jps-jstack/</guid>
+      <description>link on JianShu 万事多用Man Top Top命令含义 What are us, sy, ni, id, wa, hi, si and st (for CPU usage)? us: user cpu time (or) % CPU time spent in user space sy: system cpu time (or) % CPU time spent in kernel space ni: user nice cpu time (or) % CPU time spent on low priority processes</description>
+    </item>
+    
+  </channel>
+</rss>

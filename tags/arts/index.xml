@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>arts on 戈壁堂</title>
+    <link>http://gebitang.com/tags/arts/</link>
+    <description>Recent content in arts on 戈壁堂</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 10 Oct 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://gebitang.com/tags/arts/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>四维清单</title>
+      <link>http://gebitang.com/post/why/4d-list/</link>
+      <pubDate>Wed, 10 Oct 2018 00:00:00 +0000</pubDate>
+      
+      <guid>http://gebitang.com/post/why/4d-list/</guid>
+      <description>灵感发端于国庆假期开元寺禅修打坐时的念想 与已相处 与人相处 与时相处 与世相处</description>
+    </item>
+    
+    <item>
+      <title>ARTS</title>
+      <link>http://gebitang.com/post/what/arts/</link>
+      <pubDate>Tue, 18 Sep 2018 00:00:00 +0000</pubDate>
+      
+      <guid>http://gebitang.com/post/what/arts/</guid>
+      <description>******************************************************* ** ARTS *** ** Algorithm: solve one leetcode problem *** ** Review: review an English tech article *** ** Tip: learn one working tip *** ** Share: share your daily though *** ******************************************************* 通用学习策略 By Pumel at 2018-10-10 13:20:19 如何进行目标驱动型学习，做一个功利可被验证的学习流</description>
+    </item>
+    
+  </channel>
+</rss>

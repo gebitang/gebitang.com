@@ -78,6 +78,114 @@ Mac端开源通过Ctrl+C停止转发
 
 通道建立后，后续每次通信都将使用不同的session key进行签名，同时TLS通过MAC(message authentication code)确保每次发送的信息没有被篡改。[参考how-does-ssl-work](https://www.cloudflare.com/learning/ssl/how-does-ssl-work/)
 
+
+配合实例——可以看到TLS握手建立的过程。更详细的说明[解刨TLS](https://www.catchpoint.com/blog/wireshark-tls-handshake)，这里面根据wireshark的抓包信息有更详细的解释。
+
+```shell
+➜ curl -k -vvv  "https://127.0.0.1:8002/api/v1/groups2" -H "accept: application/json"
+*   Trying 127.0.0.1...
+* TCP_NODELAY set
+* Connected to 127.0.0.1 (127.0.0.1) port 8002 (#0)
+* ALPN, offering h2 # https://www.keycdn.com/support/alpn Application-Layer Protocol Negotiation 可减少round trip
+* ALPN, offering http/1.1
+* successfully set certificate verify locations: 
+*   CAfile: /etc/ssl/cert.pem #证书验证位置
+  CApath: none #证书路径
+* TLSv1.2 (OUT), TLS handshake, Client hello (1): 
+* TLSv1.2 (IN), TLS handshake, Server hello (2):
+* TLSv1.2 (IN), TLS handshake, Certificate (11):
+* TLSv1.2 (IN), TLS handshake, Server key exchange (12):
+* TLSv1.2 (IN), TLS handshake, Server finished (14):
+* TLSv1.2 (OUT), TLS handshake, Client key exchange (16):
+* TLSv1.2 (OUT), TLS change cipher, Change cipher spec (1):
+* TLSv1.2 (OUT), TLS handshake, Finished (20):
+* TLSv1.2 (IN), TLS change cipher, Change cipher spec (1):
+* TLSv1.2 (IN), TLS handshake, Finished (20):
+* SSL connection using TLSv1.2 / ECDHE-RSA-AES128-GCM-SHA256
+* ALPN, server accepted to use h2
+* Server certificate:
+*  subject: O=Acme Co; CN=*
+*  start date: Dec 31 10:38:55 2021 GMT
+*  expire date: Dec 29 10:38:55 2031 GMT
+*  issuer: O=Acme Co; CN=*
+*  SSL certificate verify result: self signed certificate (18), continuing anyway.
+* Using HTTP2, server supports multi-use
+* Connection state changed (HTTP/2 confirmed)
+* Copying HTTP/2 data in stream buffer to connection buffer after upgrade: len=0
+* Using Stream ID: 1 (easy handle 0x7fc8b800b600)
+> GET /api/v1/groups2 HTTP/2
+> Host: 127.0.0.1:8002
+> User-Agent: curl/7.64.1
+> accept: application/json
+>
+* Connection state changed (MAX_CONCURRENT_STREAMS == 250)!
+< HTTP/2 404
+< content-type: application/json; charset=UTF-8
+< content-length: 24
+< date: Wed, 12 Jan 2022 10:11:28 GMT
+<
+{"message":"Not Found"}
+* Connection #0 to host 127.0.0.1 left intact
+* Closing connection 0
+
+
+➜ curl  -vvv  "https://qq.com/healthcheck" -H "accept: application/json"
+*   Trying 58.250.137.36...
+* TCP_NODELAY set
+* Connected to qq.com (58.250.137.36) port 443 (#0)
+* ALPN, offering h2
+* ALPN, offering http/1.1
+* successfully set certificate verify locations:
+*   CAfile: /etc/ssl/cert.pem
+  CApath: none
+* TLSv1.2 (OUT), TLS handshake, Client hello (1):
+* TLSv1.2 (IN), TLS handshake, Server hello (2):
+* TLSv1.2 (IN), TLS handshake, Certificate (11):
+* TLSv1.2 (IN), TLS handshake, Server key exchange (12):
+* TLSv1.2 (IN), TLS handshake, Server finished (14):
+* TLSv1.2 (OUT), TLS handshake, Client key exchange (16):
+* TLSv1.2 (OUT), TLS change cipher, Change cipher spec (1):
+* TLSv1.2 (OUT), TLS handshake, Finished (20):
+* TLSv1.2 (IN), TLS change cipher, Change cipher spec (1):
+* TLSv1.2 (IN), TLS handshake, Finished (20):
+* SSL connection using TLSv1.2 / ECDHE-RSA-AES128-GCM-SHA256
+* ALPN, server accepted to use h2
+* Server certificate:
+*  subject: C=CN; ST=\U5E7F\U4E1C\U7701; L=\U6DF1\U5733\U5E02; O=Shenzhen Tencent Computer Systems Company Limited; CN=qq.com
+*  start date: Jul 26 00:00:00 2021 GMT
+*  expire date: Jul 26 23:59:59 2022 GMT
+*  subjectAltName: host "qq.com" matched cert's "qq.com"
+*  issuer: C=US; O=DigiCert Inc; CN=DigiCert Secure Site CN CA G3
+*  SSL certificate verify ok.
+* Using HTTP2, server supports multi-use
+* Connection state changed (HTTP/2 confirmed)
+* Copying HTTP/2 data in stream buffer to connection buffer after upgrade: len=0
+* Using Stream ID: 1 (easy handle 0x7fa424811c00)
+> GET /healthcheck HTTP/2
+> Host: qq.com
+> User-Agent: curl/7.64.1
+> accept: application/json
+>
+* Connection state changed (MAX_CONCURRENT_STREAMS == 128)!
+< HTTP/2 302
+< server: ias/1.4.2.3_1.17.3
+< date: Wed, 12 Jan 2022 10:11:55 GMT
+< content-type: text/html
+< content-length: 151
+< location: https://www.qq.com/healthcheck
+<
+<html>
+<head><title>302 Found</title></head>
+<body>
+<center><h1>302 Found</h1></center>
+<hr><center>ias/1.4.2.3_1.17.3</center>
+</body>
+</html>
+* Connection #0 to host qq.com left intact
+* Closing connection 0
+
+```
+
 ### pass 
 
 [The Missing Semester of Your CS Education](https://missing.csail.mit.edu/)的[中文版本](https://github.com/missing-semester-cn/missing-semester-cn.github.io)，提到安全相关的应用：

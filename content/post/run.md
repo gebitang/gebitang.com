@@ -60,45 +60,23 @@ toc=true
 
 “背单词和跑步提供了每天的【确定性】”——拓词CEO薛淡表达过这样的观点，参加了拓词背单词之后发现CEO还经常跑步
 
-![](https://upload-images.jianshu.io/upload_images/3296949-85daef78ea6b17b0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
 正好那段时间感觉自己有变胖的趋势，也顺道开始使用悦跑圈跑步
-
-![](https://upload-images.jianshu.io/upload_images/3296949-736580871be610cc.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
 
 第一年相当于只跑了两个月多一点
 
-![](https://upload-images.jianshu.io/upload_images/3296949-e38015c2b6446acd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
-
 
 2020年打算好好跑起来，后来的事注定写进历史，一场疫情，至今未息。挡不住开始的热情，过年在家，不让下楼之后，甚至跑得楼顶慢跑，惹得顶楼住户上来反对。三月底母亲去世，又回家一趟。一直到四月都没怎么跑，眼看着年度计划完成无望，五月开始每天走路的时段也开着App记录……所以20年配速整体不好看，反而是年度挑战完成得更快
-
-![](https://upload-images.jianshu.io/upload_images/3296949-a0980e1d9fbbaa23.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
-
-![](https://upload-images.jianshu.io/upload_images/3296949-2fe51476ced3f0bd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
-
-![](https://upload-images.jianshu.io/upload_images/3296949-6edf7ea1bdd268e7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
-
 
 ---
 
 2021年重新继续开跑，这次决定“每一步都算数”。当时怎么也没想到直到2022年元旦了，疫情还没结束。
 
-![](https://upload-images.jianshu.io/upload_images/3296949-c8eef01bd469eb41.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
-
-![](https://upload-images.jianshu.io/upload_images/3296949-327e904e1d593b66.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
-
-![](https://upload-images.jianshu.io/upload_images/3296949-61916f7c0f37f758.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
 一月、二月依然延续着跑步的热情。三月先回老家看姥姥——没想到居然是见她的最后一面，四月姥姥去世——然后回新疆祭奠母亲去世一周年；重新回京没多久，听闻“树”也走了，后来我们想着在蚂蚁森林大家以他的名义攒一年能量种树；彼时“狐狸”还跟我们一起贡献能量，谁知道八月份他也离开了大家……二位群里的位置挨着，灰的
 
 人到中年，慢慢会面对更多地生老病死。跑步，渐渐也没有那么大的热情，健康跑到老最重要。即使不跑步的日子，也坚持每天走至少一万步，四月开始记录，已经连续260天。
-
-![](https://upload-images.jianshu.io/upload_images/3296949-b1d6290d4a981bd5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
-
-
-![](https://upload-images.jianshu.io/upload_images/3296949-cc229eeebfe134d6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
 ---
 

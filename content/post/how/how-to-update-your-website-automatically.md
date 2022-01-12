@@ -27,6 +27,27 @@ toc = true
 - Hugo安装和基础操作：完成站点创建
 - Wrecker配置
 
+
+Update: github支持action操作，可以放弃wercker的内容了，备份一下——
+
+```
+box: debian
+build:
+  steps:
+    - arjen/hugo-build:
+        version: "0.74.3"
+        theme: blackburn
+        flags: --buildDrafts=true
+deploy:
+  steps:
+    - install-packages:
+        packages: git ssh-client
+    - lukevivier/gh-pages@0.2.1:
+        token: $GIT_TOKEN
+        domain: gebitang.com
+        basedir: public
+```
+
 ## update config
 
 写的时候Hugo版本还是0.34，现在最新版本已经是0.76。升级后生成的静态站点主页一直未空，log提示下面两个问题——

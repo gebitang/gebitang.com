@@ -43,6 +43,41 @@ Mac端开源通过Ctrl+C停止转发
 
 **异常现象**  使用jwt认证后，证书信息不再是必须的(配置为空时会提醒报错，但实际可以随意填写)
 
+>server端：echo: http: TLS handshake error from 82.129.30.127:54584: remote error: tls: unknown certificate如果证书错误，将连续报六次相同的错误；证书正确时，会报错一次(因为使用的是自定义证书的原因？)。
+>client端：net::ERR_CERT_AUTHORITY_INVALID 证书错误时，收到此消息；证书正确时建立TLS链接
+
+### TLS 
+
+[TLS握手是如何建立的](https://www.cloudflare.com/learning/ssl/what-happens-in-a-tls-handshake/)
+
+- **[时机]** TCP握手建立后就开始进行TLS握手过程(先建立TCP握手之后有了通道之后才能进行TLS握手) 
+- **[内容]** 握手要确定是事情包括：1)使用哪个版本的TLS；2)使用什么密码套件(cipher suites，即使用什么算法)；3)验证服务器的身份(通过服务器的公钥和SSL证书机构的签名)
+
+**RSA key** 握手交换过程具体如下—— 
+
+1. 客户端“hello”信息。客户端发起请求，包括三项内容：TLS版本、支持的密码套件组(供服务端进行选择)、随机字符串(client random，这项内容最后会参与生成秘钥session key)
+2. 服务端“hello”信息。服务端回应请求，包括三项内容：服务端的SSL证书、选择的密码套件、随机字符串(server random，作用同上)
+3. 验证。客户端验证SSL证书(确认访问的域名是证书所声明的域名)
+4. 预密码(premaster secret)。客户端使用收到的SSL证书中的公钥签名一段随机字符串作为预密码(premaster secret)发送给服务端(只有服务端的私钥才能解密)
+5. 解密。服务端解密预密码
+6. 创建Session key。使用client random、server random、premaster secret创建session key。双方将产生相同的结果
+7. 客户端使用session key签名发送“finished”消息
+8. 服务端做相同的动作
+9. 握手完成。对称加密通道建立
+
+
+**DH秘钥**握手交换具体如下——(DH秘钥不同之处是Server端和Client端使用不同的DH参数，但双方依然可以获得相同的结果。)
+
+1. 相同
+2. 相同+Server端使用私钥对client random, server random和DH参数进行加密生成自身的签名
+3. 客户端使用公钥解密收到的签名，验证服务端拥有对应的私钥(解密信息包括client random、server random，后者本身也会被单独收到)
+4. 客户端发送自己选择的DH参数
+5. 客户端不需要签名生成premaster secret，并发送给服务端。此时双方可以根据DH参数各自独立计算出premaster secret  
+
+后续动作一样。使用client random、server random、premaster secret创建session key……发送finish消息……建立对称加密安全通道
+
+通道建立后，后续每次通信都将使用不同的session key进行签名，同时TLS通过MAC(message authentication code)确保每次发送的信息没有被篡改。[参考how-does-ssl-work](https://www.cloudflare.com/learning/ssl/how-does-ssl-work/)
+
 ### pass 
 
 [The Missing Semester of Your CS Education](https://missing.csail.mit.edu/)的[中文版本](https://github.com/missing-semester-cn/missing-semester-cn.github.io)，提到安全相关的应用：

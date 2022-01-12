@@ -1,349 +1,162 @@
-<!DOCTYPE html>
-<html xmlns:wb="http://open.weibo.com/wb" lang="en" >
-
+<!doctype html><html xmlns:wb=http://open.weibo.com/wb lang=en>
 <head>
-  <meta http-equiv="content-type" content="text/html; charset=utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Everything about Git">
-  <meta name="generator" content="Hugo 0.74.3" />
-
-  <title>Git &middot; 戈壁堂</title>
-
-    
-
-  
-  
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/pure-min.css">
-
-  <!--[if lte IE 8]>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-old-ie-min.css">
-  <![endif]-->
-  <!--[if gt IE 8]><!-->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-min.css">
-  <!--<![endif]-->
-
-  <!--[if lte IE 8]>
-  <link rel="stylesheet" href="http://gebitang.com/css/side-menu-old-ie.css">
-  <![endif]-->
-  <!--[if gt IE 8]><!-->
-  <link rel="stylesheet" href="http://gebitang.com/css/side-menu.css">
-  <!--<![endif]-->
-
-  <link rel="stylesheet" href="http://gebitang.com/css/blackburn.css">
-
-  
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.9.0/css/all.css">
-
-  
-  <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet" type="text/css">
-
-  
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-
- 
-  
-
-  
-  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/androidstudio.min.css">
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
-  
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
-  
-  <script>hljs.initHighlightingOnLoad();</script>
-  
-
-  <link rel="shortcut icon" href="http://gebitang.com/img/favicon.ico" type="image/x-icon" />
-
-  
-    
-        <link rel="stylesheet" href="http://gebitang.com/css/my.css">
-    
-  
-  
-    
-        <script src="http://gebitang.com/js/my.js"></script>
-    
-  
-
+<meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<meta name=description content="Everything about Git">
+<meta name=generator content="Hugo 0.91.2">
+<title>Git &#183; 戈壁堂</title>
+<link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/pure-min.css><!--[if lte IE 8]><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-old-ie-min.css><![endif]--><!--[if gt IE 8]><!-->
+<link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-min.css><!--<![endif]--><!--[if lte IE 8]><link rel=stylesheet href=http://gebitang.com/css/side-menu-old-ie.css><![endif]--><!--[if gt IE 8]><!-->
+<link rel=stylesheet href=http://gebitang.com/css/side-menu.css><!--<![endif]-->
+<link rel=stylesheet href=http://gebitang.com/css/blackburn.css>
+<link rel=stylesheet href=https://use.fontawesome.com/releases/v5.9.0/css/all.css>
+<link href="https://fonts.googleapis.com/css?family=Raleway" rel=stylesheet type=text/css>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<link rel=stylesheet href=//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/androidstudio.min.css>
+<script src=//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js></script>
+<script src=//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js></script>
+<script>hljs.initHighlightingOnLoad()</script>
+<link rel="shortcut icon" href=http://gebitang.com/img/favicon.ico type=image/x-icon>
+<link rel=stylesheet href=http://gebitang.com/css/my.css>
+<script src=http://gebitang.com/js/my.js></script>
 </head>
-
-
 <body>
-<div id="layout">
-
-  
-<a href="#menu" id="menuLink" class="menu-link">
-  
-  <span></span>
+<div id=layout>
+<a href=#menu id=menuLink class=menu-link>
+<span></span>
 </a>
-<div id="menu">
-
-  
-  <a class="pure-menu-heading brand" href="http://gebitang.com/">Gebitang</a>
-
-
-  <div class="pure-menu">
-    <ul class="pure-menu-list">
-      
-      
-        <li class="pure-menu-item">
-          <a class="pure-menu-link" href="http://gebitang.com/"><i class='fa fa-home fa-fw'></i>Home</a>
-      
-        </li>
-      
-      
-        <li class="pure-menu-item">
-          <a class="pure-menu-link" href="http://gebitang.com/post/"><i class='fa fa-list fa-fw'></i>Posts</a>
-      
-        </li>
-      
-      
-        <li class="pure-menu-item">
-          <a class="pure-menu-link" href="http://gebitang.com/about/"><i class='fa fa-user fa-fw'></i>About</a>
-      
-        </li>
-      
-      
-        <li class="pure-menu-item">
-          <a class="pure-menu-link" href="http://gebitang.com/contact/"><i class='fa fa-phone fa-fw'></i>Contact</a>
-      
-        </li>
-      
-      
-        <li class="pure-menu-item">
-          <a class="pure-menu-link" href="http://gebitang.com/tags/"><i class='fa fa-tags fa-fw'></i>Tags</a>
-      
-        </li>
-      
-      
-        <li class="pure-menu-item">
-          <a class="pure-menu-link" href="http://gebitang.com/topics/"><i class='fa fa-folder fa-fw'></i>Topics</a>
-      
-        </li>
-      
-    </ul>
-  </div>
-
-  <div class="pure-menu social">
-  <ul class="pure-menu-list">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-  </ul>
+<div id=menu>
+<a class="pure-menu-heading brand" href=http://gebitang.com/>Gebitang</a>
+<div class=pure-menu>
+<ul class=pure-menu-list>
+<li class=pure-menu-item>
+<a class=pure-menu-link href=http://gebitang.com/><i class="fa fa-home fa-fw"></i>Home</a>
+</li>
+<li class=pure-menu-item>
+<a class=pure-menu-link href=http://gebitang.com/post/><i class="fa fa-list fa-fw"></i>Posts</a>
+</li>
+<li class=pure-menu-item>
+<a class=pure-menu-link href=http://gebitang.com/about/><i class="fa fa-user fa-fw"></i>About</a>
+</li>
+<li class=pure-menu-item>
+<a class=pure-menu-link href=http://gebitang.com/contact/><i class="fa fa-phone fa-fw"></i>Contact</a>
+</li>
+<li class=pure-menu-item>
+<a class=pure-menu-link href=http://gebitang.com/tags/><i class="fa fa-tags fa-fw"></i>Tags</a>
+</li>
+<li class=pure-menu-item>
+<a class=pure-menu-link href=http://gebitang.com/topics/><i class="fa fa-folder fa-fw"></i>Topics</a>
+</li>
+</ul>
 </div>
-
-
-  <div>
-
-  <div class="small-print">
-  	<small>
-    <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="知识共享许可协议" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/80x15.png" /></a><br/>本<span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" rel="dct:type">作品</span>由<a xmlns:cc="http://creativecommons.org/ns#" href="http://gebitang.com" property="cc:attributionName" rel="cc:attributionURL">&nbsp;Gebitang&nbsp;&nbsp;</a>采用<a rel="license" href="http://creativecommons.org/licenses/by/4.0/">知识共享署名 4.0 国际许可协议</a>进行许可&nbsp;&copy; 2018
-    </small>
-
-  </div>
-
-  <div class="small-print">
-    <small></small>
-  </div>
-  <div class="small-print">
-    <small>Built with&nbsp;<a href="https://gohugo.io/" target="_blank">Hugo</a></small>
-    <small>Theme&nbsp;<a href="https://github.com/yoshiharuyamashita/blackburn" target="_blank">Blackburn</a></small>
-  </div>
-
-  <div style="display:none">
-  <div class="small-print">
-    <small>
-    <wb:follow-button uid="2446212465" type="red_1" width="67" height="24"></wb:follow-button>
-  </small>
-  </div>
-  </div>
-
+<div class="pure-menu social">
+<ul class=pure-menu-list>
+</ul>
 </div>
-
+<div>
+<div class=small-print>
+<small>
+<a rel=license href=http://creativecommons.org/licenses/by/4.0/><img alt=知识共享许可协议 style=border-width:0 src=https://i.creativecommons.org/l/by/4.0/80x15.png></a><br>本<span xmlns:dct=http://purl.org/dc/terms/ href=http://purl.org/dc/dcmitype/Text rel=dct:type>作品</span>由<a xmlns:cc=http://creativecommons.org/ns# href=http://gebitang.com property="cc:attributionName" rel=cc:attributionurl>&nbsp;Gebitang&nbsp;&nbsp;</a>采用<a rel=license href=http://creativecommons.org/licenses/by/4.0/>知识共享署名 4.0 国际许可协议</a>进行许可&nbsp;&copy; 2018
+</small>
 </div>
-
-
-  <div id="main">
-
-
-<div class="header">
-  <h1>Git</h1>
-  <h2>Everything about Git</h2>
+<div class=small-print>
+<small></small>
 </div>
-<div class="content">
-
-  <div class="post-meta">
-
-  <div>
-    <i class="fa fa-calendar fa-fw"></i>
-    <time>2021-01-07</time>
-  </div>
-
-  
-
-  
-  
-  
-  <div>
-    <i class="fa fa-folder fa-fw"></i>
-    
-      <a class="post-taxonomy-topic" href="http://gebitang.com/topics/git">git</a>
-    
-  </div>
-  
-  
-
-  
-  
-  
-  <div>
-    <i class="fa fa-tags fa-fw"></i>
-    
-      <a class="post-taxonomy-tag" href="http://gebitang.com/tags/git">git</a>
-    
-  </div>
-  
-  
-
+<div class=small-print>
+<small>Built with&nbsp;<a href=https://gohugo.io/ target=_blank>Hugo</a></small>
+<small>Theme&nbsp;<a href=https://github.com/yoshiharuyamashita/blackburn target=_blank>Blackburn</a></small>
 </div>
-
-  
-	<nav id="TableOfContents">
-  <ul>
-    <li><a href="#git-pro">Git Pro</a>
-      <ul>
-        <li><a href="#获取commit的代码变动">获取commit的代码变动</a></li>
-        <li><a href="#复现commit-id">复现commit id</a></li>
-        <li><a href="#git-tree-object">git tree object</a></li>
-      </ul>
-    </li>
-    <li><a href="#git命令使用">Git命令使用</a>
-      <ul>
-        <li><a href="#filename-too-long-in-git-for-windows">Filename too long in Git for Windows</a></li>
-        <li><a href="#git-http-clone方式报错">git http clone方式报错：</a></li>
-        <li><a href="#git-clone-with-token-in-command-line">git clone with token in command line</a></li>
-        <li><a href="#change-remote-url">change remote url</a></li>
-        <li><a href="#use-token-from-command-line">use token from command line</a></li>
-        <li><a href="#fatal-unable-to-create-pathmy_projectgitindexlock-file-exists">fatal: Unable to create &lsquo;/path/my_project/.git/index.lock&rsquo;: File exists</a></li>
-        <li><a href="#修改commit工具-vim">修改commit工具 vim</a></li>
-        <li><a href="#查找rep中特定用户的提交记录">查找rep中特定用户的提交记录</a></li>
-        <li><a href="#ssh-variant-simple-does-not-support-setting-port">ssh variant &lsquo;simple&rsquo; does not support setting port</a></li>
-        <li><a href="#git-bash-could-not-open-a-connection-to-your-authentication-agent">Git Bash: Could not open a connection to your authentication agent</a></li>
-        <li><a href="#permission-denied-publickey">Permission denied (publickey).</a></li>
-        <li><a href="#fork-and-sync-repo">Fork and Sync Repo</a></li>
-        <li><a href="#指定branch-clone">指定branch clone</a></li>
-        <li><a href="#git-checkout">git checkout</a></li>
-        <li><a href="#0x0-命令行单独对不同的文件进行commit操作">0x0. 命令行单独对不同的文件进行commit操作</a></li>
-        <li><a href="#0x1-配置github账号">0x1. 配置github账号</a></li>
-        <li><a href="#ssh-config-示例-多个rsa文件时">ssh config 示例 多个rsa文件时</a></li>
-        <li><a href="#0x2-commit-amend修改commit">0x2. commit amend修改commit</a></li>
-        <li><a href="#0x3-permission-denied-publickey问题">0x3. Permission denied (publickey)问题</a></li>
-        <li><a href="#0x4-合并commits">0x4. 合并commits</a></li>
-        <li><a href="#0x5-清理合并操作">0x5. 清理、合并操作</a></li>
-        <li><a href="#0x6-重新添加已经忽略的文件">0x6. 重新添加已经忽略的文件</a></li>
-        <li><a href="#git-rm">git rm</a></li>
-        <li><a href="#更新mac后默认自带的git无法使用">更新mac后默认自带的git无法使用</a></li>
-        <li><a href="#clang-issue">Clang issue</a></li>
-        <li><a href="#升级到big-sur之后git无法使用">升级到Big Sur之后git无法使用</a></li>
-        <li><a href="#git-log历史">git log历史</a></li>
-        <li><a href="#项目初始化">项目初始化</a></li>
-        <li><a href="#指定branch复制">指定branch复制</a></li>
-        <li><a href="#修改忽略撤销删除更新url">修改、忽略、撤销、删除、更新url</a></li>
-        <li><a href="#basic-command-line-instructions">Basic Command line instructions</a></li>
-        <li><a href="#删除本地远程分支">删除本地、远程分支</a></li>
-        <li><a href="#显示分支branch的关系">显示分支branch的关系</a></li>
-        <li><a href="#git-tag">git tag</a></li>
-        <li><a href="#git更新历史commit中的author信息">git更新历史commit中的author信息</a></li>
-      </ul>
-    </li>
-  </ul>
+<div style=display:none>
+<div class=small-print>
+<small>
+<wb:follow-button uid=2446212465 type=red_1 width=67 height=24></wb:follow-button>
+</small>
+</div>
+</div>
+</div>
+</div>
+<div id=main>
+<div class=header>
+<h1>Git</h1>
+<h2>Everything about Git</h2>
+</div>
+<div class=content>
+<div class=post-meta>
+<div>
+<i class="fa fa-calendar fa-fw"></i>
+<time>2021-01-07</time>
+</div>
+<div>
+<i class="fa fa-folder fa-fw"></i>
+<a class=post-taxonomy-topic href=http://gebitang.com/topics/git>git</a>
+</div>
+<div>
+<i class="fa fa-tags fa-fw"></i>
+<a class=post-taxonomy-tag href=http://gebitang.com/tags/git>git</a>
+</div>
+</div>
+<nav id=TableOfContents>
+<ul>
+<li><a href=#git-pro>Git Pro</a>
+<ul>
+<li><a href=#获取commit的代码变动>获取commit的代码变动</a></li>
+<li><a href=#复现commit-id>复现commit id</a></li>
+<li><a href=#git-tree-object>git tree object</a></li>
+</ul>
+</li>
+<li><a href=#git命令使用>Git命令使用</a>
+<ul>
+<li><a href=#filename-too-long-in-git-for-windows>Filename too long in Git for Windows</a></li>
+<li><a href=#git-http-clone方式报错>git http clone方式报错：</a></li>
+<li><a href=#git-clone-with-token-in-command-line>git clone with token in command line</a></li>
+<li><a href=#change-remote-url>change remote url</a></li>
+<li><a href=#use-token-from-command-line>use token from command line</a></li>
+<li><a href=#fatal-unable-to-create-pathmy_projectgitindexlock-file-exists>fatal: Unable to create &lsquo;/path/my_project/.git/index.lock&rsquo;: File exists</a></li>
+<li><a href=#修改commit工具-vim>修改commit工具 vim</a></li>
+<li><a href=#查找rep中特定用户的提交记录>查找rep中特定用户的提交记录</a></li>
+<li><a href=#ssh-variant-simple-does-not-support-setting-port>ssh variant &lsquo;simple&rsquo; does not support setting port</a></li>
+<li><a href=#git-bash-could-not-open-a-connection-to-your-authentication-agent>Git Bash: Could not open a connection to your authentication agent</a></li>
+<li><a href=#permission-denied-publickey>Permission denied (publickey).</a></li>
+<li><a href=#fork-and-sync-repo>Fork and Sync Repo</a></li>
+<li><a href=#指定branch-clone>指定branch clone</a></li>
+<li><a href=#git-checkout>git checkout</a></li>
+<li><a href=#0x0-命令行单独对不同的文件进行commit操作>0x0. 命令行单独对不同的文件进行commit操作</a></li>
+<li><a href=#0x1-配置github账号>0x1. 配置github账号</a></li>
+<li><a href=#ssh-config-示例-多个rsa文件时>ssh config 示例 多个rsa文件时</a></li>
+<li><a href=#0x2-commit-amend修改commit>0x2. commit amend修改commit</a></li>
+<li><a href=#0x3-permission-denied-publickey问题>0x3. Permission denied (publickey)问题</a></li>
+<li><a href=#0x4-合并commits>0x4. 合并commits</a></li>
+<li><a href=#0x5-清理合并操作>0x5. 清理、合并操作</a></li>
+<li><a href=#0x6-重新添加已经忽略的文件>0x6. 重新添加已经忽略的文件</a></li>
+<li><a href=#git-rm>git rm</a></li>
+<li><a href=#更新mac后默认自带的git无法使用>更新mac后默认自带的git无法使用</a></li>
+<li><a href=#clang-issue>Clang issue</a></li>
+<li><a href=#升级到big-sur之后git无法使用>升级到Big Sur之后git无法使用</a></li>
+<li><a href=#git-log历史>git log历史</a></li>
+<li><a href=#项目初始化>项目初始化</a></li>
+<li><a href=#指定branch复制>指定branch复制</a></li>
+<li><a href=#修改忽略撤销删除更新url>修改、忽略、撤销、删除、更新url</a></li>
+<li><a href=#basic-command-line-instructions>Basic Command line instructions</a></li>
+<li><a href=#删除本地远程分支>删除本地、远程分支</a></li>
+<li><a href=#显示分支branch的关系>显示分支branch的关系</a></li>
+<li><a href=#git-tag>git tag</a></li>
+<li><a href=#git更新历史commit中的author信息>git更新历史commit中的author信息</a></li>
+</ul>
+</li>
+</ul>
 </nav>
-  
-
-  <h2 id="git-pro">Git Pro</h2>
-<h3 id="获取commit的代码变动">获取commit的代码变动</h3>
-<p><a href="https://stackoverflow.com/questions/42249174/how-to-count-the-lines-changed-between-two-commits-in-gitlab/42254042">How to count the lines changed between two commits in gitlab?</a></p>
-<p><a href="https://docs.gitlab.com/ee/api/commits.html#get-a-single-commit">gitlab commit api</a>默认的<code>stats</code>参数为true，会返回类似如下数据。使用sdk时需要注意传递指定参数，否则这个字段不会返回</p>
-<pre><code>stats: {
+<h2 id=git-pro>Git Pro</h2>
+<h3 id=获取commit的代码变动>获取commit的代码变动</h3>
+<p><a href=https://stackoverflow.com/questions/42249174/how-to-count-the-lines-changed-between-two-commits-in-gitlab/42254042>How to count the lines changed between two commits in gitlab?</a></p>
+<p><a href=https://docs.gitlab.com/ee/api/commits.html#get-a-single-commit>gitlab commit api</a>默认的<code>stats</code>参数为true，会返回类似如下数据。使用sdk时需要注意传递指定参数，否则这个字段不会返回</p>
+<pre tabindex=0><code>stats: {
     additions: 2,
     deletions: 3,
     total: 5
 },
-</code></pre><p>commit涉及到的每个具体文件的变更，需要调用<a href="https://docs.gitlab.com/ee/api/commits.html#get-the-diff-of-a-commit">commit diff api</a>，再重新解析diff字段进行判断。</p>
-<h3 id="复现commit-id">复现commit id</h3>
-<p><a href="https://stackoverflow.com/questions/34764195/how-does-git-create-unique-commit-hashes-mainly-the-first-few-characters">How does Git create unique commit hashes, mainly the first few characters?</a></p>
+</code></pre><p>commit涉及到的每个具体文件的变更，需要调用<a href=https://docs.gitlab.com/ee/api/commits.html#get-the-diff-of-a-commit>commit diff api</a>，再重新解析diff字段进行判断。</p>
+<h3 id=复现commit-id>复现commit id</h3>
+<p><a href=https://stackoverflow.com/questions/34764195/how-does-git-create-unique-commit-hashes-mainly-the-first-few-characters>How does Git create unique commit hashes, mainly the first few characters?</a></p>
 <p>Git uses the following information to generate the sha-1:</p>
 <ul>
 <li>The source tree of the commit (which unravels to all the subtrees and blobs)</li>
@@ -352,16 +165,16 @@
 <li>The committer info (right, those are different!, also with timestamp)</li>
 <li>The commit message</li>
 </ul>
-<p><a href="https://gist.github.com/masak/2415865">完整说明</a>，另外可参考<a href="https://blog.thoughtram.io/git/2014/11/18/the-anatomy-of-a-git-commit.html">The anatomy of a Git commit</a>，和 <a href="https://git-scm.com/book/zh/v2/Git-%E5%86%85%E9%83%A8%E5%8E%9F%E7%90%86-%E5%BA%95%E5%B1%82%E5%91%BD%E4%BB%A4%E4%B8%8E%E4%B8%8A%E5%B1%82%E5%91%BD%E4%BB%A4">10.1 Git 内部原理 - 底层命令与上层命令</a>对应的英文版本——<a href="https://git-scm.com/book/en/v2/Git-Internals-Plumbing-and-Porcelain">10.1 Git Internals - Plumbing and Porcelain</a></p>
+<p><a href=https://gist.github.com/masak/2415865>完整说明</a>，另外可参考<a href=https://blog.thoughtram.io/git/2014/11/18/the-anatomy-of-a-git-commit.html>The anatomy of a Git commit</a>，和 <a href=https://git-scm.com/book/zh/v2/Git-%E5%86%85%E9%83%A8%E5%8E%9F%E7%90%86-%E5%BA%95%E5%B1%82%E5%91%BD%E4%BB%A4%E4%B8%8E%E4%B8%8A%E5%B1%82%E5%91%BD%E4%BB%A4>10.1 Git 内部原理 - 底层命令与上层命令</a>对应的英文版本——<a href=https://git-scm.com/book/en/v2/Git-Internals-Plumbing-and-Porcelain>10.1 Git Internals - Plumbing and Porcelain</a></p>
 <p>执行以下步骤可以复现commit id——</p>
 <ul>
 <li><code>git show</code> 获得当前最新的commit信息</li>
 <li><code>git cat-file commit HEAD</code></li>
-<li><code>printf &quot;commit %s\0&quot; $(git cat-file commit HEAD | wc -c)</code> 在开头增加<code>commit len\0</code> 文本，长度，NUL-terminated header</li>
-<li><code>(printf &quot;commit %s\0&quot; $(git cat-file commit HEAD | wc -c); git cat-file commit HEAD) | sha1sum</code>组合上面两步的内容作为SHA1算法的输入，计算获得的40个字符长度文本就是commitid信息——复现成功</li>
+<li><code>printf "commit %s\0" $(git cat-file commit HEAD | wc -c)</code> 在开头增加<code>commit len\0</code> 文本，长度，NUL-terminated header</li>
+<li><code>(printf "commit %s\0" $(git cat-file commit HEAD | wc -c); git cat-file commit HEAD) | sha1sum</code>组合上面两步的内容作为SHA1算法的输入，计算获得的40个字符长度文本就是commitid信息——复现成功</li>
 </ul>
 <p>第二步的结构化信息——</p>
-<pre><code>sha1(
+<pre tabindex=0><code>sha1(
     tree            =&gt; 9c435a86e664be00db0d973e981425e4a3ef3f8d （对所有tree对象的递归计算到root节点）
     parents         =&gt; [0d973e9c4353ef3f8ddb98a86e664be001425e4a]
     author(with timestamp)          =&gt; Christoph Burgdorf &lt;christoph.burgdorf@gmail.com&gt; Sat Nov 8 11:13:49 2014 +0100
@@ -369,47 +182,35 @@
     commit message  =&gt; &quot;second commit&quot;
 )
 </code></pre><p>理解Git中的对象概念：Tree Object（对目录、或目录和文件的SHA-1描述。如何获取的？）</p>
-<pre><code>.
+<pre tabindex=0><code>.
 ├── .git (contents left out)
 ├── assets
 |   ├── logo.png
 |   └── app.css
 └── app.js
 </code></pre>
-
-<div class="pure-g">
-
-  
-  
-  
-  
-  <div class="pure-u-1-">
-    <div style="padding: 0 .2em">
-      <a href="https://upload-images.jianshu.io/upload_images/3296949-8bdd5ebafaecf4c1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" target="_blank" >
-      <img
-        class="pure-img-responsive"
-        src="https://upload-images.jianshu.io/upload_images/3296949-8bdd5ebafaecf4c1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"
-        alt title="demo">
-      </a>
-    </div>
-  </div>
-  
-
+<div class=pure-g>
+<div class=pure-u-1->
+<div style="padding:0 .2em">
+<a href=https://upload-images.jianshu.io/upload_images/3296949-8bdd5ebafaecf4c1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240 target=_blank>
+<img class=pure-img-responsive src=https://upload-images.jianshu.io/upload_images/3296949-8bdd5ebafaecf4c1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240 alt title=demo>
+</a>
 </div>
-
-<h3 id="git-tree-object">git tree object</h3>
+</div>
+</div>
+<h3 id=git-tree-object>git tree object</h3>
 <ul>
-<li><a href="http://shafiul.github.io/gitbook/1_the_git_object_model.html">The Git Object Model</a></li>
-<li><a href="https://stackoverflow.com/questions/14790681/what-is-the-internal-format-of-a-git-tree-object">tree object格式</a></li>
-<li><a href="https://git-scm.com/book/en/v2/Git-Internals-Git-Objects">Git Internals - Git Objects</a></li>
-<li><a href="https://git-scm.com/book/zh/v2/Git-%E5%86%85%E9%83%A8%E5%8E%9F%E7%90%86-Git-%E5%AF%B9%E8%B1%A1">Git 内部原理 - Git 对象</a></li>
+<li><a href=http://shafiul.github.io/gitbook/1_the_git_object_model.html>The Git Object Model</a></li>
+<li><a href=https://stackoverflow.com/questions/14790681/what-is-the-internal-format-of-a-git-tree-object>tree object格式</a></li>
+<li><a href=https://git-scm.com/book/en/v2/Git-Internals-Git-Objects>Git Internals - Git Objects</a></li>
+<li><a href=https://git-scm.com/book/zh/v2/Git-%E5%86%85%E9%83%A8%E5%8E%9F%E7%90%86-Git-%E5%AF%B9%E8%B1%A1>Git 内部原理 - Git 对象</a></li>
 </ul>
 <p>键值数据库文件系统；使用zlib进行压缩存储对象；SHA1摘要算法</p>
 <p>Every object consists of three things - a <code>type</code>, a <code>size</code> and <code>content</code>. The size is simply the size of the contents, the contents depend on what type of object it is, and there are four different types of objects: &ldquo;blob&rdquo;, &ldquo;tree&rdquo;, &ldquo;commit&rdquo;, and &ldquo;tag&rdquo;.</p>
 <p><code>git write-tree</code> Create a tree object from the current index. returns the hash of the top level tree.</p>
 <p><code>git ls-tree</code> List the contents of a tree object. 可以使用 <code>git cat-file -p treehash</code>起到同样的作用</p>
 <p><code>git cat-file</code> Provide content or type and size information for repository objects</p>
-<pre><code>joechin@Gebitang MINGW64 /e/0daywork/gitinit (master)
+<pre tabindex=0><code>joechin@Gebitang MINGW64 /e/0daywork/gitinit (master)
 $ git status
 On branch master
 
@@ -436,10 +237,10 @@ $ git cat-file tree f6da736647be31514378f51704936fcf40171a07
 100644 h.txt▒6%
                ▒۩▒V▒▒▒▒▒FJ40000 lib]▒m▒*q▒C▒▒u?▒▒▒▒▒
 
-</code></pre><h2 id="git命令使用">Git命令使用</h2>
+</code></pre><h2 id=git命令使用>Git命令使用</h2>
 <p>可配合GUI工具和命令行工具参考。</p>
-<h3 id="filename-too-long-in-git-for-windows">Filename too long in Git for Windows</h3>
-<p><a href="https://stackoverflow.com/questions/22575662/filename-too-long-in-git-for-windows">Filename too long in Git for Windows</a></p>
+<h3 id=filename-too-long-in-git-for-windows>Filename too long in Git for Windows</h3>
+<p><a href=https://stackoverflow.com/questions/22575662/filename-too-long-in-git-for-windows>Filename too long in Git for Windows</a></p>
 <p>使用管理员权限执行<code>git config --system core.longpaths true</code>修复此问题。</p>
 <p>error: could not lock config file C:/Program Files/Git/mingw64/etc/gitconfig: Permission denied</p>
 <p>git clone sonarqube源码时，提示</p>
@@ -451,18 +252,18 @@ You can inspect what was checked out with &lsquo;git status&rsquo;
 and retry the checkout with &lsquo;git checkout -f HEAD&rsquo;</p>
 </blockquote>
 <p>然后再执行<code>git checkout -f HEAD</code>。今天我守着不完整的代码找半天webhook相关的内容</p>
-<h3 id="git-http-clone方式报错">git http clone方式报错：</h3>
-<p><a href="https://stackoverflow.com/questions/38618885/error-rpc-failed-curl-transfer-closed-with-outstanding-read-data-remaining">error: RPC failed; curl transfer closed with outstanding read data remaining</a></p>
+<h3 id=git-http-clone方式报错>git http clone方式报错：</h3>
+<p><a href=https://stackoverflow.com/questions/38618885/error-rpc-failed-curl-transfer-closed-with-outstanding-read-data-remaining>error: RPC failed; curl transfer closed with outstanding read data remaining</a></p>
 <ul>
 <li><code>$ git clone http://github.com/large-repository --depth 1</code></li>
 <li><code>cd large-repository</code></li>
 <li><code>git fetch --unshallow</code></li>
 </ul>
-<h3 id="git-clone-with-token-in-command-line">git clone with token in command line</h3>
+<h3 id=git-clone-with-token-in-command-line>git clone with token in command line</h3>
 <p>work for gitlab at list:</p>
 <p><code>git clone https://oauth2:ACCESS_TOKEN@somegitlab.com/vendor/package.git</code></p>
-<h3 id="change-remote-url">change remote url</h3>
-<pre><code>git remote -v
+<h3 id=change-remote-url>change remote url</h3>
+<pre tabindex=0><code>git remote -v
 # View existing remotes
 
 git remote set-url origin https://github.com/user/repo2.git
@@ -470,33 +271,33 @@ git remote set-url origin https://github.com/user/repo2.git
 
 git remote -v
 # Verify new remote URL
-</code></pre><h3 id="use-token-from-command-line">use token from command line</h3>
-<p><a href="https://help.github.com/en/github/authenticating-to-github/creating-a-personal-access-token-for-the-command-line">use token from command line</a></p>
-<pre><code>$ git clone https://github.com/username/repo.git
+</code></pre><h3 id=use-token-from-command-line>use token from command line</h3>
+<p><a href=https://help.github.com/en/github/authenticating-to-github/creating-a-personal-access-token-for-the-command-line>use token from command line</a></p>
+<pre tabindex=0><code>$ git clone https://github.com/username/repo.git
 Username: your_username
 Password: your_token
-</code></pre><h3 id="fatal-unable-to-create-pathmy_projectgitindexlock-file-exists">fatal: Unable to create &lsquo;/path/my_project/.git/index.lock&rsquo;: File exists</h3>
-<p><a href="https://stackoverflow.com/a/7860765/1087122">sto</a>: <code>rm -f ./.git/index.lock</code></p>
-<h3 id="修改commit工具-vim">修改commit工具 vim</h3>
+</code></pre><h3 id=fatal-unable-to-create-pathmy_projectgitindexlock-file-exists>fatal: Unable to create &lsquo;/path/my_project/.git/index.lock&rsquo;: File exists</h3>
+<p><a href=https://stackoverflow.com/a/7860765/1087122>sto</a>: <code>rm -f ./.git/index.lock</code></p>
+<h3 id=修改commit工具-vim>修改commit工具 vim</h3>
 <p>提交说明信息的时候, linux默认是 nano 编辑器<br>
 nano 这个编辑器使用 ctrl + x 来退出</p>
-<pre><code># global
+<pre tabindex=0><code># global
 git config --global core.editor vim
 
 # project update: .git/config add--
 editor=vim
-</code></pre><h3 id="查找rep中特定用户的提交记录">查找rep中特定用户的提交记录</h3>
-<p><a href="https://git-scm.com/docs/git-log">official doc</a>, <a href="https://stackoverflow.com/a/2954501">from Stackoverflow</a></p>
-<pre><code>git log --since=2018-01-01  --pretty=oneline --author=uername --author=gebitang |wc -l
-</code></pre><h3 id="ssh-variant-simple-does-not-support-setting-port">ssh variant &lsquo;simple&rsquo; does not support setting port</h3>
+</code></pre><h3 id=查找rep中特定用户的提交记录>查找rep中特定用户的提交记录</h3>
+<p><a href=https://git-scm.com/docs/git-log>official doc</a>, <a href=https://stackoverflow.com/a/2954501>from Stackoverflow</a></p>
+<pre tabindex=0><code>git log --since=2018-01-01  --pretty=oneline --author=uername --author=gebitang |wc -l
+</code></pre><h3 id=ssh-variant-simple-does-not-support-setting-port>ssh variant &lsquo;simple&rsquo; does not support setting port</h3>
 <p>update setting for git： <code>git config --global ssh.variant ssh</code></p>
-<h3 id="git-bash-could-not-open-a-connection-to-your-authentication-agent">Git Bash: Could not open a connection to your authentication agent</h3>
+<h3 id=git-bash-could-not-open-a-connection-to-your-authentication-agent>Git Bash: Could not open a connection to your authentication agent</h3>
 <p>生成公钥添加到对应的网站后，直接clone时，可能提示无法验证。</p>
-<pre><code># need to start ssh-agent first.
+<pre tabindex=0><code># need to start ssh-agent first.
 eval `ssh-agent -s`
-</code></pre><h3 id="permission-denied-publickey">Permission denied (publickey).</h3>
+</code></pre><h3 id=permission-denied-publickey>Permission denied (publickey).</h3>
 <p>添加公钥之后，测试验证时会提示“Permission denied (publickey).”。这是因为还没有将生成的对应的key添加到ssh管理中（默认生成的会自动添加，后续生成的多个rsa文件需要手动添加）</p>
-<pre><code># step 1 start agent first.  &quot;ssh-agent bash&quot; or &quot; eval `ssh-agent` &quot;
+<pre tabindex=0><code># step 1 start agent first.  &quot;ssh-agent bash&quot; or &quot; eval `ssh-agent` &quot;
 
 joechin@Gebitang MINGW64 ~/.ssh
 $ ssh-agent bash
@@ -513,8 +314,8 @@ ssh-add coding_id_rsa
 # &quot; Could not open a connection to your authentication agent&quot; show, go to step 1
 
 # then it could be cloned normaly.
-</code></pre><h3 id="fork-and-sync-repo">Fork and Sync Repo</h3>
-<pre><code>1. git remote add upstream  https://github.com/url/project.git
+</code></pre><h3 id=fork-and-sync-repo>Fork and Sync Repo</h3>
+<pre tabindex=0><code>1. git remote add upstream  https://github.com/url/project.git
 2. git fetch upstream //download objects and refs from another repository 
 3. git merge upstream/master //merge upstream/master to current branch
 
@@ -524,9 +325,9 @@ git merge origin/master //将origin上的master分支 merge 到当前 branch 上
 </code></pre><ul>
 <li>从其他人的Repo中fork分支到自己的Repo下</li>
 <li>clone当前工程到本地</li>
-<li><a href="https://help.github.com/articles/fork-a-repo/">添加远程跟踪源(需要以http的方式添加)</a></li>
+<li><a href=https://help.github.com/articles/fork-a-repo/>添加远程跟踪源(需要以http的方式添加)</a></li>
 </ul>
-<pre><code>$ git remote add upstream  https://github.com/b3log/pipe.git
+<pre tabindex=0><code>$ git remote add upstream  https://github.com/b3log/pipe.git
 
 #查看添加结果
 $ git remote -v
@@ -536,36 +337,36 @@ upstream        https://github.com/b3log/pipe.git (fetch)
 upstream        https://github.com/b3log/pipe.git (push)
 
 </code></pre><ul>
-<li><a href="https://help.github.com/articles/syncing-a-fork/">同步远程的跟踪源并合并到本地分支下</a></li>
+<li><a href=https://help.github.com/articles/syncing-a-fork/>同步远程的跟踪源并合并到本地分支下</a></li>
 </ul>
-<pre><code>$ git fetch upstream
+<pre tabindex=0><code>$ git fetch upstream
 
 $ git merge upstream/master
-</code></pre><h3 id="指定branch-clone">指定branch clone</h3>
+</code></pre><h3 id=指定branch-clone>指定branch clone</h3>
 <p><code> git clone -b dawn-2.x git@github.com:EOSIO/eos.git</code></p>
-<h3 id="git-checkout">git checkout</h3>
-<pre><code>test@test~$git checkout -b upcoming origin/upcoming
+<h3 id=git-checkout>git checkout</h3>
+<pre tabindex=0><code>test@test~$git checkout -b upcoming origin/upcoming
 正在检出文件: 100% (1718/1718), 完成.
 分支 'upcoming' 设置为跟踪来自 'origin' 的远程分支 'upcoming'。
 切换到一个新分支 'upcoming'
 test@test~$
-</code></pre><h3 id="0x0-命令行单独对不同的文件进行commit操作">0x0. 命令行单独对不同的文件进行commit操作</h3>
-<pre><code>#理解暂存区的概念，多个文件即可分别处理
+</code></pre><h3 id=0x0-命令行单独对不同的文件进行commit操作>0x0. 命令行单独对不同的文件进行commit操作</h3>
+<pre tabindex=0><code>#理解暂存区的概念，多个文件即可分别处理
 git add new.file/modified.file
 #然后进行commit，即完成分别进行commit的动作
 git commit 
 
 #-a参数对所有工作区的文件都有效，未添加到跟踪区的文件除外
 git commit -a 
-</code></pre><h3 id="0x1-配置github账号">0x1. 配置github账号</h3>
-<p>注意事项：<a href="https://help.github.com/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent/">source</a></p>
+</code></pre><h3 id=0x1-配置github账号>0x1. 配置github账号</h3>
+<p>注意事项：<a href=https://help.github.com/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent/>source</a></p>
 <ol>
 <li>生成rsa文件时可以指定不同的名称，以保证可以生成使用多个</li>
 <li>需要输入passphrase，否则系统认定不够安全，不允许添加到ssh-agent中</li>
-<li>配置config 文件，<a href="https://my.oschina.net/csensix/blog/184434">支持多个git账号</a></li>
+<li>配置config 文件，<a href=https://my.oschina.net/csensix/blog/184434>支持多个git账号</a></li>
 <li>如果不进行config的配置，在添加ssh key之后，将统一使用global的设置</li>
 </ol>
-<h3 id="ssh-config-示例-多个rsa文件时">ssh config 示例 多个rsa文件时</h3>
+<h3 id=ssh-config-示例-多个rsa文件时>ssh config 示例 多个rsa文件时</h3>
 <p>ssh登录远程机器：</p>
 <ul>
 <li>server端不允许密码登录， <code>/etc/ssh/sshd_config</code>配置中<code>PasswordAuthentication no</code></li>
@@ -573,13 +374,13 @@ git commit -a
 <li>将对应的public key的内容追加到server端对应用户的<code>/home/user/.ssh/authorized_keys</code>文件中</li>
 <li>client端配置<code>.ssh/config</code>内容，指定登录server时使用对应的秘钥</li>
 </ul>
-<p>配置好之后，可以声明对应的alias，例如<code>alias geb=&quot;ssh ubuntu@xx.xxx.xx.xx&quot;</code></p>
-<p><a href="https://www.ssh.com/ssh/config/">SSH CONFIG FILE</a><!-- raw HTML omitted -->
-<a href="https://www.cyberciti.biz/faq/create-ssh-config-file-on-linux-unix/">OpenSSH Config File Examples</a></p>
+<p>配置好之后，可以声明对应的alias，例如<code>alias geb="ssh ubuntu@xx.xxx.xx.xx"</code></p>
+<p><a href=https://www.ssh.com/ssh/config/>SSH CONFIG FILE</a>
+<a href=https://www.cyberciti.biz/faq/create-ssh-config-file-on-linux-unix/>OpenSSH Config File Examples</a></p>
 <p>配置了多个公钥后，需要针对不同的站点进行配置，否则会在git clone等交互操作时依然提示需要输入秘密。</p>
-<p>配置了config文件后，idea中会根据这个配置文件使用对应的key<a href="https://www.jetbrains.com/help/idea/using-git-integration.html#SSH-access">Using Git integration</a></p>
-<p>提交commit时，依然需要至少有<strong><code>user.name</code></strong>和<strong><code>user.email</code></strong>信息</p>
-<pre><code># 对于ssh的配置
+<p>配置了config文件后，idea中会根据这个配置文件使用对应的key<a href=https://www.jetbrains.com/help/idea/using-git-integration.html#SSH-access>Using Git integration</a></p>
+<p>提交commit时，依然需要至少有**<code>user.name</code><strong>和</strong><code>user.email</code>**信息</p>
+<pre tabindex=0><code># 对于ssh的配置
 # Defines for which host or hosts the configuration section applies. 
 # The section ends with a new Host section or the end of the file. 
 # A single * as a pattern can be used to provide global defaults for all hosts.
@@ -603,7 +404,7 @@ Host bitbucket
     HostName bitbucket.org
     IdentityFile ~/.ssh/bitbucket_id_rsa
 
-</code></pre><p><a href="https://git-scm.com/book/en/v2/Git-on-the-Server-The-Protocols">The SSH Protocol</a></p>
+</code></pre><p><a href=https://git-scm.com/book/en/v2/Git-on-the-Server-The-Protocols>The SSH Protocol</a></p>
 <p>To clone a Git repository over SSH, you can specify an <code>ssh://</code> URL like this:</p>
 <p><code>$ git clone ssh://[user@]server/project.git</code></p>
 <p>Or you can use the shorter scp-like syntax for the SSH protocol:</p>
@@ -612,22 +413,22 @@ Host bitbucket
 <li>ssh配置</li>
 </ul>
 <p>生成ssh-key</p>
-<pre><code>ssh-keygen -t rsa -b 4096 -C &quot;email@address.com&quot;
+<pre tabindex=0><code>ssh-keygen -t rsa -b 4096 -C &quot;email@address.com&quot;
 </code></pre><blockquote>
-<p>添加ssh key（id_rsa_xxx、id_rsa_xxx.pub）到对应的repository，如github、gitlab，即可保证可以从对应的设备上就可以访问对应的repository。<!-- raw HTML omitted --></p>
+<p>添加ssh key（id_rsa_xxx、id_rsa_xxx.pub）到对应的repository，如github、gitlab，即可保证可以从对应的设备上就可以访问对应的repository。</p>
 </blockquote>
 <ul>
 <li>git配置</li>
 </ul>
 <blockquote>
-<p>git config 配置完全局的 <code>--global user.name</code> 和 <code>--global  user.email</code>之后，可以在对应的仓库下，配置当前仓库使用的user.name 和user.email</p>
+<p>git config 配置完全局的 <code>--global user.name</code> 和 <code>--global user.email</code>之后，可以在对应的仓库下，配置当前仓库使用的user.name 和user.email</p>
 </blockquote>
-<h3 id="0x2-commit-amend修改commit">0x2. commit amend修改commit</h3>
-<p>使用 git commit &ndash;amend 参数可以对最近的提交进行修改。<!-- raw HTML omitted -->
+<h3 id=0x2-commit-amend修改commit>0x2. commit amend修改commit</h3>
+<p>使用 git commit &ndash;amend 参数可以对最近的提交进行修改。
 作用相当于新提交了一个commit。
 如果修改前的commit已经被同步过，需要先进行拉取 git pull的操作
 否则在推送amend之后的commit时会提示:</p>
-<pre><code>$ git push origin master
+<pre tabindex=0><code>$ git push origin master
 To git@github.com:gebitang/gebitang.com.git
  ! [rejected]        master -&gt; master (non-fast-forward)
 error: failed to push some refs to 'git@github.com:gebitang/gebitang.com.git'
@@ -635,47 +436,47 @@ hint: Updates were rejected because the tip of your current branch is behind
 hint: its remote counterpart. Integrate the remote changes (e.g.
 hint: 'git pull ...') before pushing again.
 hint: See the 'Note about fast-forwards' in 'git push --help' for details.
-</code></pre><h3 id="0x3-permission-denied-publickey问题">0x3. Permission denied (publickey)问题</h3>
-<p><a href="http://blog.itpub.net/25851087/viewspace-1262468/">原因：SSH的配置文件ssh_config中的“IdentityFile“ 与实际情况不相符</a><!-- raw HTML omitted -->
+</code></pre><h3 id=0x3-permission-denied-publickey问题>0x3. Permission denied (publickey)问题</h3>
+<p><a href=http://blog.itpub.net/25851087/viewspace-1262468/>原因：SSH的配置文件ssh_config中的“IdentityFile“ 与实际情况不相符</a>
 生成的一对秘钥，公钥上传到对应的站点后，使用-vt参数进行调试验证</p>
-<pre><code>#测试连接情况
+<pre tabindex=0><code>#测试连接情况
 # v for verbose mode, V for version
 ssh -vT git@git.coding.net 
 </code></pre><blockquote>
 <p>如果clone时使用了https格式，则再次推送时总是会提示输入用户名密码，可以通过<code>git config --list</code>查看，然后修改<code>remote.origin.url</code>的值</p>
 </blockquote>
-<h3 id="0x4-合并commits">0x4. 合并commits</h3>
-<p><a href="http://www.jianshu.com/p/964de879904a">参考</a></p>
-<pre><code># -i for interactive, 而不是指 其中，-i 的参数是不需要合并的 commit 的 hash 值 
+<h3 id=0x4-合并commits>0x4. 合并commits</h3>
+<p><a href=http://www.jianshu.com/p/964de879904a>参考</a></p>
+<pre tabindex=0><code># -i for interactive, 而不是指 其中，-i 的参数是不需要合并的 commit 的 hash 值 
 # commitid 可理解为在此commit上进行rebase。即此commit之后的commit都可以进行rebase:)
 git rebase -i commitid
 </code></pre><p>原理：选择要rebase的基础commit，进入交互模式，根据提示对不同的commit处理为pick或squash</p>
-<h3 id="0x5-清理合并操作">0x5. 清理、合并操作</h3>
+<h3 id=0x5-清理合并操作>0x5. 清理、合并操作</h3>
 <blockquote>
 <p>Your local changes to the following files would be overwritten by merge</p>
 </blockquote>
 <p>提示上述错误信息时，可以使用下面的命令清理</p>
-<pre><code>git clean -d -fx
+<pre tabindex=0><code>git clean -d -fx
 </code></pre><p>注意：会导致工程的所有配置都会丢失</p>
-<pre><code>git merge branch.name
-</code></pre><h3 id="0x6-重新添加已经忽略的文件">0x6. 重新添加已经忽略的文件</h3>
-<pre><code>#添加已经忽略的文件 
+<pre tabindex=0><code>git merge branch.name
+</code></pre><h3 id=0x6-重新添加已经忽略的文件>0x6. 重新添加已经忽略的文件</h3>
+<pre tabindex=0><code>#添加已经忽略的文件 
 git add -f ignored/file/name
 #忽略已经添加的文件 
 git rm --cached file/want/to/be/ignore
-</code></pre><p><a href="http://blog.csdn.net/cyxlzzs/article/details/61422214">参考</a></p>
-<h3 id="git-rm">git rm</h3>
-<p><a href="https://www.liaoxuefeng.com/wiki/896043488029600/900002180232448">删除文件</a></p>
-<pre><code># 先本地删除
+</code></pre><p><a href=http://blog.csdn.net/cyxlzzs/article/details/61422214>参考</a></p>
+<h3 id=git-rm>git rm</h3>
+<p><a href=https://www.liaoxuefeng.com/wiki/896043488029600/900002180232448>删除文件</a></p>
+<pre tabindex=0><code># 先本地删除
 rm test.txt
 # 在从git删除
 git rm test.txt 
 # 然后commit提交
 git commit &quot;delete test.txt file.&quot;
 # 本地需要的话，可以更新到gitignore文件中
-</code></pre><h3 id="更新mac后默认自带的git无法使用">更新mac后默认自带的git无法使用</h3>
-<p><a href="https://stackoverflow.com/questions/32661484/os-x-cant-start-git-usr-bin-git-probably-the-path-to-git-executable-is-not">StackOverFlow</a></p>
-<pre><code>➜  gebitang.com git status
+</code></pre><h3 id=更新mac后默认自带的git无法使用>更新mac后默认自带的git无法使用</h3>
+<p><a href=https://stackoverflow.com/questions/32661484/os-x-cant-start-git-usr-bin-git-probably-the-path-to-git-executable-is-not>StackOverFlow</a></p>
+<pre tabindex=0><code>➜  gebitang.com git status
 xcrun: error: invalid active developer path (/Library/Developer/CommandLineTools), missing xcrun at: /Library/Developer/CommandLineTools/usr/bin/xcrun
 ➜  gebitang.com sudo xcodebuild -license
 Password:
@@ -687,31 +488,31 @@ xcode-select: note: install requested for command line developer tools
 ➜  gebitang.com
 ➜  gebitang.com git:(master) ✗
 ➜  gebitang.com git:(master) ✗
-</code></pre><h3 id="clang-issue">Clang issue</h3>
+</code></pre><h3 id=clang-issue>Clang issue</h3>
 <p>执行<code>go run main.go</code>提示如下错误，找不到clang环境。</p>
-<pre><code> go run main.go
+<pre tabindex=0><code> go run main.go
 # runtime/cgo
 sh: line 1: 52743 Bus error: 10           /Applications/Xcode.app/Contents/Developer/usr/bin/xcodebuild -sdk /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk -find clang 2&gt; /dev/null
 clang: error: unable to find utility &quot;clang&quot;, not a developer tool or in PATH
 </code></pre><p>需要先安装<code>CommandLineTools</code>，可以先检查<code>xcode-select --print-path</code>安装路径，如果不是<code>/Library/Developer/CommandLineTools</code>，则需要先安装<code>xcode-select --install</code>，然后修改路径<code>sudo xcode-select --switch /Library/Developer/CommandLineTools</code>。正常情况下，此时环境恢复正常。</p>
-<p>通过命令行更新xcode版本：检查配套版本：<code>softwareupdate --list</code>。参考<a href="https://stackoverflow.com/questions/34617452/how-to-update-xcode-from-command-line">How to update Xcode from command line</a>老版本可参考此操作。</p>
-<h3 id="升级到big-sur之后git无法使用">升级到Big Sur之后git无法使用</h3>
-<p>到git仓库下执行<code>git status</code>检查时提示找不到git，not a developer tool or in PATH。 搜索了一圈，只有这个<a href="https://timemachine.icu/posts/9894dc13/">比较靠谱</a></p>
+<p>通过命令行更新xcode版本：检查配套版本：<code>softwareupdate --list</code>。参考<a href=https://stackoverflow.com/questions/34617452/how-to-update-xcode-from-command-line>How to update Xcode from command line</a>老版本可参考此操作。</p>
+<h3 id=升级到big-sur之后git无法使用>升级到Big Sur之后git无法使用</h3>
+<p>到git仓库下执行<code>git status</code>检查时提示找不到git，not a developer tool or in PATH。 搜索了一圈，只有这个<a href=https://timemachine.icu/posts/9894dc13/>比较靠谱</a></p>
 <p>检查了一下<code>/Applications/Xcode.app/Contents/Developer/usr/bin</code>这个目录下有git，暂时将这个目录手动添加到环境变量后，问题解决。</p>
-<pre><code>sh: line 1:  3799 Bus error: 10           /Applications/Xcode.app/Contents/Developer/usr/bin/xcodebuild -sdk /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk -find git 2&gt; /dev/null
+<pre tabindex=0><code>sh: line 1:  3799 Bus error: 10           /Applications/Xcode.app/Contents/Developer/usr/bin/xcodebuild -sdk /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk -find git 2&gt; /dev/null
 git: error: unable to find utility &quot;git&quot;, not a developer tool or in PATH
-</code></pre><h3 id="git-log历史">git log历史</h3>
-<pre><code>git log --oneline # show all logs line by line
+</code></pre><h3 id=git-log历史>git log历史</h3>
+<pre tabindex=0><code>git log --oneline # show all logs line by line
 git show commit # show the commit detail 
 
 git log commit 　　# 查询commit之前的记录，包含commit
 git log commit1 commit2  # 查询commit1与commit2之间的记录，包括commit1和commit2
 git log commit1..commit2 # 同上，但是不包括commit1
-</code></pre><h3 id="项目初始化">项目初始化</h3>
+</code></pre><h3 id=项目初始化>项目初始化</h3>
 <ul>
 <li>create empty project</li>
 </ul>
-<pre><code># from 0 to 1
+<pre tabindex=0><code># from 0 to 1
 mkdir gotourgo
 cd gotourgo
 git init
@@ -724,12 +525,12 @@ git push -u origin master
 </code></pre><ul>
 <li>add existed one</li>
 </ul>
-<pre><code>git remote add origin git@git.coding.net:gebitang/gotourgo.git
+<pre tabindex=0><code>git remote add origin git@git.coding.net:gebitang/gotourgo.git
 git push -u origin master
-</code></pre><h3 id="指定branch复制">指定branch复制</h3>
-<pre><code>git clone git@192.168.1.93:Automation/project.git -b next next
-</code></pre><h3 id="修改忽略撤销删除更新url">修改、忽略、撤销、删除、更新url</h3>
-<pre><code># 修改已提交的commit
+</code></pre><h3 id=指定branch复制>指定branch复制</h3>
+<pre tabindex=0><code>git clone git@192.168.1.93:Automation/project.git -b next next
+</code></pre><h3 id=修改忽略撤销删除更新url>修改、忽略、撤销、删除、更新url</h3>
+<pre tabindex=0><code># 修改已提交的commit
 git commit --amend
 #忽略已跟踪的文件
 git update-index --assume-unchanged filename
@@ -748,8 +549,8 @@ git remote set-url origin new-url
 
 #rebase
 git rebase -i base-commit-hash
-</code></pre><h3 id="basic-command-line-instructions">Basic Command line instructions</h3>
-<pre><code>Git global setup
+</code></pre><h3 id=basic-command-line-instructions>Basic Command line instructions</h3>
+<pre tabindex=0><code>Git global setup
 git config --global user.name &quot;gebitang&quot;
 git config --global user.email &quot;gebitang@hotmail.com&quot;
 
@@ -775,39 +576,39 @@ git remote rename origin old-origin
 git remote add origin git@gitlab.com:gebitang/simpleweb.git
 git push -u origin --all
 git push -u origin --tags
-</code></pre><h3 id="删除本地远程分支">删除本地、远程分支</h3>
-<pre><code># 删除本地
+</code></pre><h3 id=删除本地远程分支>删除本地、远程分支</h3>
+<pre tabindex=0><code># 删除本地
 git branch -d local_branch
 
 # 删除远程 
 git push --delete remote_branch_name
-</code></pre><h3 id="显示分支branch的关系">显示分支branch的关系</h3>
-<p><a href="https://stackoverflow.com/questions/5298972/relationship-between-n-git-branches">STO</a></p>
-<pre><code># branch A B C
+</code></pre><h3 id=显示分支branch的关系>显示分支branch的关系</h3>
+<p><a href=https://stackoverflow.com/questions/5298972/relationship-between-n-git-branches>STO</a></p>
+<pre tabindex=0><code># branch A B C
 git log --graph --decorate --oneline --simplify-by-decoration A B C
 # all 
 git log --graph --decorate --oneline --simplify-by-decoration --all
-</code></pre><h3 id="git-tag">git tag</h3>
-<p>tag默认是按照字母顺序排列的。<a href="https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000/001376951758572072ce1dc172b4178b910d31bc7521ee4000">tag操作</a></p>
-<pre><code># 查看所以tag  -l 注意是字母&quot;L&quot;,以列表形式列出所有tag的版本号. -n 显示出每个版本号对应的附加说明.
+</code></pre><h3 id=git-tag>git tag</h3>
+<p>tag默认是按照字母顺序排列的。<a href=https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000/001376951758572072ce1dc172b4178b910d31bc7521ee4000>tag操作</a></p>
+<pre tabindex=0><code># 查看所以tag  -l 注意是字母&quot;L&quot;,以列表形式列出所有tag的版本号. -n 显示出每个版本号对应的附加说明.
 git tag -l -n
 # 显示时间
 git log --tags --simplify-by-decoration --pretty=&quot;format:%ci %d &quot;
 # 一行显示
 git log --tags --simplify-by-decoration --pretty=&quot;format:%ci %d &quot;
-</code></pre><h3 id="git更新历史commit中的author信息">git更新历史commit中的author信息</h3>
-<p><a href="https://help.github.com/en/github/using-git/changing-author-info">https://help.github.com/en/github/using-git/changing-author-info</a></p>
-<p><a href="https://www.git-tower.com/learn/git/faq/change-author-name-email">https://www.git-tower.com/learn/git/faq/change-author-name-email</a></p>
+</code></pre><h3 id=git更新历史commit中的author信息>git更新历史commit中的author信息</h3>
+<p><a href=https://help.github.com/en/github/using-git/changing-author-info>https://help.github.com/en/github/using-git/changing-author-info</a></p>
+<p><a href=https://www.git-tower.com/learn/git/faq/change-author-name-email>https://www.git-tower.com/learn/git/faq/change-author-name-email</a></p>
 <p>更新最近一次commit的committer：</p>
-<p><code>git commit --amend --author=&quot;John Doe &lt;john@doe.org&gt;&quot;</code></p>
-<p><a href="https://blog.tinned-software.net/rewrite-author-of-entire-git-repository/">https://blog.tinned-software.net/rewrite-author-of-entire-git-repository/</a></p>
-<p>Rewriting the history is done with “<a href="https://git-scm.com/docs/git-filter-branch">git filter-branch</a>” by walking through the complete history. For each commit, filters are applied after which the changes are re-committed. The different filters allow modifying different parts of the commit.</p>
-<p>The following uses “<a href="https://git-scm.com/docs/git-filter-branch">git filter-branch</a>” to filter the history. Instead of manipulating the files to be recommitted like explained in <a href="https://blog.tinned-software.net/remove-files-from-git-history/">Remove files from git history</a>, this command uses the “–env-filter” to alter the environment in which the re-committing statement takes place.</p>
+<p><code>git commit --amend --author="John Doe &lt;john@doe.org>"</code></p>
+<p><a href=https://blog.tinned-software.net/rewrite-author-of-entire-git-repository/>https://blog.tinned-software.net/rewrite-author-of-entire-git-repository/</a></p>
+<p>Rewriting the history is done with “<a href=https://git-scm.com/docs/git-filter-branch>git filter-branch</a>” by walking through the complete history. For each commit, filters are applied after which the changes are re-committed. The different filters allow modifying different parts of the commit.</p>
+<p>The following uses “<a href=https://git-scm.com/docs/git-filter-branch>git filter-branch</a>” to filter the history. Instead of manipulating the files to be recommitted like explained in <a href=https://blog.tinned-software.net/remove-files-from-git-history/>Remove files from git history</a>, this command uses the “–env-filter” to alter the environment in which the re-committing statement takes place.</p>
 <p>单独clone出来当前repo</p>
-<pre><code>git clone --bare https://github.com/user/repo.git
+<pre tabindex=0><code>git clone --bare https://github.com/user/repo.git
 cd repo.git
 </code></pre><p>执行修改动作</p>
-<pre><code>#!/bin/sh
+<pre tabindex=0><code>#!/bin/sh
 # -f to force rewrite, such as git filter-branch -f --env-filter
 git filter-branch --env-filter '
 
@@ -828,90 +629,39 @@ fi
 ' --tag-name-filter cat -- --branches --tags
 </code></pre><p>这样修改后，会导致远端与本地所有替换的内容都认为不同，需要重新先 &lsquo;git pull&rsquo; 获取一次，当出现&rsquo;fatal: refusing to merge unrelated histories&rsquo;的提示时，需要执行&rsquo;git pull origin master &ndash;allow-unrelated-histories&rsquo;命令，然后修改可能的冲突即可。</p>
 <p>更新修改后的repo</p>
-<pre><code>git push --force --tags origin 'refs/heads/*'
+<pre tabindex=0><code>git push --force --tags origin 'refs/heads/*'
 </code></pre><p>最后可以删除临时的repo</p>
-
-  
-  
-
-  
 <div class="prev-next-post pure-g">
-  <div class="pure-u-1-24" style="text-align: left;">
-    
-    <a href="http://gebitang.com/post/2020/nov-and-dec/"><i class="fa fa-chevron-left"></i></a>
-    
-  </div>
-  <div class="pure-u-10-24">
-    
-    <nav class="prev">
-      <a href="http://gebitang.com/post/2020/nov-and-dec/">November and December Run</a>
-    </nav>
-    
-  </div>
-  <div class="pure-u-2-24">
-    &nbsp;
-  </div>
-  <div class="pure-u-10-24">
-    
-    <nav class="next">
-      <a href="http://gebitang.com/post/what/ham/">HAM</a>
-    </nav>
-    
-  </div>
-  <div class="pure-u-1-24" style="text-align: right;">
-    
-    <a href="http://gebitang.com/post/what/ham/"><i class="fa fa-chevron-right"></i></a>
-    
-  </div>
+<div class=pure-u-1-24 style=text-align:left>
+<a href=http://gebitang.com/post/2020/nov-and-dec/><i class="fa fa-chevron-left"></i></a>
 </div>
-
-
-
-  
-<div id="disqus_thread"></div>
-<script type="text/javascript">
-
-(function() {
-    
-    
-    if (window.location.hostname == "localhost")
-        return;
-
-    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-    var disqus_shortname = 'gebitang';
-    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-})();
-</script>
-<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="http://disqus.com/" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
-
-
+<div class=pure-u-10-24>
+<nav class=prev>
+<a href=http://gebitang.com/post/2020/nov-and-dec/>November and December Run</a>
+</nav>
 </div>
-
+<div class=pure-u-2-24>
+&nbsp;
+</div>
+<div class=pure-u-10-24>
+<nav class=next>
+<a href=http://gebitang.com/post/what/ham/>HAM</a>
+</nav>
+</div>
+<div class=pure-u-1-24 style=text-align:right>
+<a href=http://gebitang.com/post/what/ham/><i class="fa fa-chevron-right"></i></a>
 </div>
 </div>
-<script src="http://gebitang.com/js/ui.js"></script>
-<script src="http://gebitang.com/js/menus.js"></script>
-
-
-<script>
-  
-  if (window.location.hostname != "localhost") {
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-    ga('create', 'UA-34303694-1', 'auto');
-    ga('send', 'pageview');
-  }
-</script>
-
-
-
-
-<button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
+<div id=disqus_thread></div>
+<script type=text/javascript>(function(){var a,b;if(window.location.hostname=="localhost")return;a=document.createElement('script'),a.type='text/javascript',a.async=!0,b='gebitang',a.src='//'+b+'.disqus.com/embed.js',(document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(a)})()</script>
+<noscript>Please enable JavaScript to view the <a href=http://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript>
+<a href=http://disqus.com/ class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a>
+</div>
+</div>
+</div>
+<script src=http://gebitang.com/js/ui.js></script>
+<script src=http://gebitang.com/js/menus.js></script>
+<script>window.location.hostname!="localhost"&&(function(a,e,f,g,b,c,d){a.GoogleAnalyticsObject=b,a[b]=a[b]||function(){(a[b].q=a[b].q||[]).push(arguments)},a[b].l=1*new Date,c=e.createElement(f),d=e.getElementsByTagName(f)[0],c.async=1,c.src=g,d.parentNode.insertBefore(c,d)}(window,document,'script','//www.google-analytics.com/analytics.js','ga'),ga('create','UA-34303694-1','auto'),ga('send','pageview'))</script>
+<button onclick=topFunction() id=myBtn title="Go to top">Top</button>
 </body>
 </html>
-

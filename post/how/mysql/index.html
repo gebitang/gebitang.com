@@ -1,330 +1,142 @@
-<!DOCTYPE html>
-<html xmlns:wb="http://open.weibo.com/wb" lang="en" >
-
+<!doctype html><html xmlns:wb=http://open.weibo.com/wb lang=en>
 <head>
-  <meta http-equiv="content-type" content="text/html; charset=utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="mysql on ubuntu">
-  <meta name="generator" content="Hugo 0.74.3" />
-
-  <title>Mysql &middot; 戈壁堂</title>
-
-    
-
-  
-  
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/pure-min.css">
-
-  <!--[if lte IE 8]>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-old-ie-min.css">
-  <![endif]-->
-  <!--[if gt IE 8]><!-->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-min.css">
-  <!--<![endif]-->
-
-  <!--[if lte IE 8]>
-  <link rel="stylesheet" href="http://gebitang.com/css/side-menu-old-ie.css">
-  <![endif]-->
-  <!--[if gt IE 8]><!-->
-  <link rel="stylesheet" href="http://gebitang.com/css/side-menu.css">
-  <!--<![endif]-->
-
-  <link rel="stylesheet" href="http://gebitang.com/css/blackburn.css">
-
-  
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.9.0/css/all.css">
-
-  
-  <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet" type="text/css">
-
-  
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-
- 
-  
-
-  
-  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/androidstudio.min.css">
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
-  
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
-  
-  <script>hljs.initHighlightingOnLoad();</script>
-  
-
-  <link rel="shortcut icon" href="http://gebitang.com/img/favicon.ico" type="image/x-icon" />
-
-  
-    
-        <link rel="stylesheet" href="http://gebitang.com/css/my.css">
-    
-  
-  
-    
-        <script src="http://gebitang.com/js/my.js"></script>
-    
-  
-
+<meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<meta name=description content="mysql on ubuntu">
+<meta name=generator content="Hugo 0.91.2">
+<title>Mysql &#183; 戈壁堂</title>
+<link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/pure-min.css><!--[if lte IE 8]><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-old-ie-min.css><![endif]--><!--[if gt IE 8]><!-->
+<link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-min.css><!--<![endif]--><!--[if lte IE 8]><link rel=stylesheet href=http://gebitang.com/css/side-menu-old-ie.css><![endif]--><!--[if gt IE 8]><!-->
+<link rel=stylesheet href=http://gebitang.com/css/side-menu.css><!--<![endif]-->
+<link rel=stylesheet href=http://gebitang.com/css/blackburn.css>
+<link rel=stylesheet href=https://use.fontawesome.com/releases/v5.9.0/css/all.css>
+<link href="https://fonts.googleapis.com/css?family=Raleway" rel=stylesheet type=text/css>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<link rel=stylesheet href=//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/androidstudio.min.css>
+<script src=//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js></script>
+<script src=//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js></script>
+<script>hljs.initHighlightingOnLoad()</script>
+<link rel="shortcut icon" href=http://gebitang.com/img/favicon.ico type=image/x-icon>
+<link rel=stylesheet href=http://gebitang.com/css/my.css>
+<script src=http://gebitang.com/js/my.js></script>
 </head>
-
-
 <body>
-<div id="layout">
-
-  
-<a href="#menu" id="menuLink" class="menu-link">
-  
-  <span></span>
+<div id=layout>
+<a href=#menu id=menuLink class=menu-link>
+<span></span>
 </a>
-<div id="menu">
-
-  
-  <a class="pure-menu-heading brand" href="http://gebitang.com/">Gebitang</a>
-
-
-  <div class="pure-menu">
-    <ul class="pure-menu-list">
-      
-      
-        <li class="pure-menu-item">
-          <a class="pure-menu-link" href="http://gebitang.com/"><i class='fa fa-home fa-fw'></i>Home</a>
-      
-        </li>
-      
-      
-        <li class="pure-menu-item">
-          <a class="pure-menu-link" href="http://gebitang.com/post/"><i class='fa fa-list fa-fw'></i>Posts</a>
-      
-        </li>
-      
-      
-        <li class="pure-menu-item">
-          <a class="pure-menu-link" href="http://gebitang.com/about/"><i class='fa fa-user fa-fw'></i>About</a>
-      
-        </li>
-      
-      
-        <li class="pure-menu-item">
-          <a class="pure-menu-link" href="http://gebitang.com/contact/"><i class='fa fa-phone fa-fw'></i>Contact</a>
-      
-        </li>
-      
-      
-        <li class="pure-menu-item">
-          <a class="pure-menu-link" href="http://gebitang.com/tags/"><i class='fa fa-tags fa-fw'></i>Tags</a>
-      
-        </li>
-      
-      
-        <li class="pure-menu-item">
-          <a class="pure-menu-link" href="http://gebitang.com/topics/"><i class='fa fa-folder fa-fw'></i>Topics</a>
-      
-        </li>
-      
-    </ul>
-  </div>
-
-  <div class="pure-menu social">
-  <ul class="pure-menu-list">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-  </ul>
+<div id=menu>
+<a class="pure-menu-heading brand" href=http://gebitang.com/>Gebitang</a>
+<div class=pure-menu>
+<ul class=pure-menu-list>
+<li class=pure-menu-item>
+<a class=pure-menu-link href=http://gebitang.com/><i class="fa fa-home fa-fw"></i>Home</a>
+</li>
+<li class=pure-menu-item>
+<a class=pure-menu-link href=http://gebitang.com/post/><i class="fa fa-list fa-fw"></i>Posts</a>
+</li>
+<li class=pure-menu-item>
+<a class=pure-menu-link href=http://gebitang.com/about/><i class="fa fa-user fa-fw"></i>About</a>
+</li>
+<li class=pure-menu-item>
+<a class=pure-menu-link href=http://gebitang.com/contact/><i class="fa fa-phone fa-fw"></i>Contact</a>
+</li>
+<li class=pure-menu-item>
+<a class=pure-menu-link href=http://gebitang.com/tags/><i class="fa fa-tags fa-fw"></i>Tags</a>
+</li>
+<li class=pure-menu-item>
+<a class=pure-menu-link href=http://gebitang.com/topics/><i class="fa fa-folder fa-fw"></i>Topics</a>
+</li>
+</ul>
 </div>
-
-
-  <div>
-
-  <div class="small-print">
-  	<small>
-    <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="知识共享许可协议" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/80x15.png" /></a><br/>本<span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" rel="dct:type">作品</span>由<a xmlns:cc="http://creativecommons.org/ns#" href="http://gebitang.com" property="cc:attributionName" rel="cc:attributionURL">&nbsp;Gebitang&nbsp;&nbsp;</a>采用<a rel="license" href="http://creativecommons.org/licenses/by/4.0/">知识共享署名 4.0 国际许可协议</a>进行许可&nbsp;&copy; 2018
-    </small>
-
-  </div>
-
-  <div class="small-print">
-    <small></small>
-  </div>
-  <div class="small-print">
-    <small>Built with&nbsp;<a href="https://gohugo.io/" target="_blank">Hugo</a></small>
-    <small>Theme&nbsp;<a href="https://github.com/yoshiharuyamashita/blackburn" target="_blank">Blackburn</a></small>
-  </div>
-
-  <div style="display:none">
-  <div class="small-print">
-    <small>
-    <wb:follow-button uid="2446212465" type="red_1" width="67" height="24"></wb:follow-button>
-  </small>
-  </div>
-  </div>
-
+<div class="pure-menu social">
+<ul class=pure-menu-list>
+</ul>
 </div>
-
+<div>
+<div class=small-print>
+<small>
+<a rel=license href=http://creativecommons.org/licenses/by/4.0/><img alt=知识共享许可协议 style=border-width:0 src=https://i.creativecommons.org/l/by/4.0/80x15.png></a><br>本<span xmlns:dct=http://purl.org/dc/terms/ href=http://purl.org/dc/dcmitype/Text rel=dct:type>作品</span>由<a xmlns:cc=http://creativecommons.org/ns# href=http://gebitang.com property="cc:attributionName" rel=cc:attributionurl>&nbsp;Gebitang&nbsp;&nbsp;</a>采用<a rel=license href=http://creativecommons.org/licenses/by/4.0/>知识共享署名 4.0 国际许可协议</a>进行许可&nbsp;&copy; 2018
+</small>
 </div>
-
-
-  <div id="main">
-
-
-<div class="header">
-  <h1>Mysql</h1>
-  <h2>mysql on ubuntu</h2>
+<div class=small-print>
+<small></small>
 </div>
-<div class="content">
-
-  <div class="post-meta">
-
-  <div>
-    <i class="fa fa-calendar fa-fw"></i>
-    <time>2019-12-24</time>
-  </div>
-
-  
-
-  
-  
-  
-  <div>
-    <i class="fa fa-folder fa-fw"></i>
-    
-      <a class="post-taxonomy-topic" href="http://gebitang.com/topics/work">work</a>
-    
-  </div>
-  
-  
-
-  
-  
-  
-  <div>
-    <i class="fa fa-tags fa-fw"></i>
-    
-      <a class="post-taxonomy-tag" href="http://gebitang.com/tags/mysql">mysql</a>&nbsp;&#47;
-    
-      <a class="post-taxonomy-tag" href="http://gebitang.com/tags/tech">tech</a>
-    
-  </div>
-  
-  
-
+<div class=small-print>
+<small>Built with&nbsp;<a href=https://gohugo.io/ target=_blank>Hugo</a></small>
+<small>Theme&nbsp;<a href=https://github.com/yoshiharuyamashita/blackburn target=_blank>Blackburn</a></small>
 </div>
-
-  
-	<nav id="TableOfContents">
-  <ul>
-    <li>
-      <ul>
-        <li><a href="#limit-offset">limit offset</a></li>
-        <li><a href="#sql-joins">SQL Joins</a></li>
-        <li><a href="#设置servertimezone">设置serverTimeZone</a></li>
-        <li><a href="#创建index">创建index</a></li>
-        <li><a href="#常用函数">常用函数</a></li>
-        <li><a href="#实现主从备份">实现主从备份</a></li>
-        <li><a href="#查看数据库大小">查看数据库大小</a></li>
-        <li><a href="#查看具体的数据库中的表大小">查看具体的数据库中的表大小</a></li>
-        <li><a href="#查看当前数据库都有哪些人在连接">查看当前数据库都有哪些人在连接</a></li>
-        <li><a href="#install-on-ubuntu-1804">install on Ubuntu 18.04</a></li>
-        <li><a href="#重置auto_increment初始值">重置auto_increment初始值</a></li>
-        <li><a href="#复制表结构">复制表结构</a></li>
-        <li><a href="#查询数据库大小">查询数据库大小</a></li>
-        <li><a href="#查看表结构">查看表结构</a></li>
-        <li><a href="#查询数据库版本号-select-version">查询数据库版本号 select @@Version</a></li>
-        <li><a href="#client_plugin_auth-is-required-报错">CLIENT_PLUGIN_AUTH is required 报错</a></li>
-        <li><a href="#运行远程访问">运行远程访问</a></li>
-        <li><a href="#备份数据库表结构">备份数据库表结构</a></li>
-        <li><a href="#导入数据">导入数据</a></li>
-        <li><a href="#数据库查询时间转换">数据库查询时间转换</a></li>
-        <li><a href="#新增修改表名列名">新增/修改表名、列名</a></li>
-        <li><a href="#拼接字段concat">拼接字段concat</a></li>
-        <li><a href="#命令行">命令行</a>
-          <ul>
-            <li><a href="#登录远程数据库">登录远程数据库</a></li>
-            <li><a href="#查看表结构-1">查看表结构</a></li>
-            <li><a href="#查看记录">查看记录</a></li>
-          </ul>
-        </li>
-      </ul>
-    </li>
-  </ul>
+<div style=display:none>
+<div class=small-print>
+<small>
+<wb:follow-button uid=2446212465 type=red_1 width=67 height=24></wb:follow-button>
+</small>
+</div>
+</div>
+</div>
+</div>
+<div id=main>
+<div class=header>
+<h1>Mysql</h1>
+<h2>mysql on ubuntu</h2>
+</div>
+<div class=content>
+<div class=post-meta>
+<div>
+<i class="fa fa-calendar fa-fw"></i>
+<time>2019-12-24</time>
+</div>
+<div>
+<i class="fa fa-folder fa-fw"></i>
+<a class=post-taxonomy-topic href=http://gebitang.com/topics/work>work</a>
+</div>
+<div>
+<i class="fa fa-tags fa-fw"></i>
+<a class=post-taxonomy-tag href=http://gebitang.com/tags/mysql>mysql</a>&nbsp;/
+<a class=post-taxonomy-tag href=http://gebitang.com/tags/tech>tech</a>
+</div>
+</div>
+<nav id=TableOfContents>
+<ul>
+<li>
+<ul>
+<li><a href=#limit-offset>limit offset</a></li>
+<li><a href=#sql-joins>SQL Joins</a></li>
+<li><a href=#设置servertimezone>设置serverTimeZone</a></li>
+<li><a href=#创建index>创建index</a></li>
+<li><a href=#常用函数>常用函数</a></li>
+<li><a href=#实现主从备份>实现主从备份</a></li>
+<li><a href=#查看数据库大小>查看数据库大小</a></li>
+<li><a href=#查看具体的数据库中的表大小>查看具体的数据库中的表大小</a></li>
+<li><a href=#查看当前数据库都有哪些人在连接>查看当前数据库都有哪些人在连接</a></li>
+<li><a href=#install-on-ubuntu-1804>install on Ubuntu 18.04</a></li>
+<li><a href=#重置auto_increment初始值>重置auto_increment初始值</a></li>
+<li><a href=#复制表结构>复制表结构</a></li>
+<li><a href=#查询数据库大小>查询数据库大小</a></li>
+<li><a href=#查看表结构>查看表结构</a></li>
+<li><a href=#查询数据库版本号-select-version>查询数据库版本号 select @@Version</a></li>
+<li><a href=#client_plugin_auth-is-required-报错>CLIENT_PLUGIN_AUTH is required 报错</a></li>
+<li><a href=#运行远程访问>运行远程访问</a></li>
+<li><a href=#备份数据库表结构>备份数据库表结构</a></li>
+<li><a href=#导入数据>导入数据</a></li>
+<li><a href=#数据库查询时间转换>数据库查询时间转换</a></li>
+<li><a href=#新增修改表名列名>新增/修改表名、列名</a></li>
+<li><a href=#拼接字段concat>拼接字段concat</a></li>
+<li><a href=#命令行>命令行</a>
+<ul>
+<li><a href=#登录远程数据库>登录远程数据库</a></li>
+<li><a href=#查看表结构-1>查看表结构</a></li>
+<li><a href=#查看记录>查看记录</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 </nav>
-  
-
-  <h3 id="limit-offset">limit offset</h3>
+<h3 id=limit-offset>limit offset</h3>
 <p><code>select * from talbe order by orderedColumn desc limit 2, 1</code>表示查找的结果列表里，先偏移2个之后第1行。</p>
-<h3 id="sql-joins">SQL Joins</h3>
-<p><a href="https://stackoverflow.com/questions/5706437/whats-the-difference-between-inner-join-left-join-right-join-and-full-join">What&rsquo;s the difference between INNER JOIN, LEFT JOIN, RIGHT JOIN and FULL JOIN? </a></p>
+<h3 id=sql-joins>SQL Joins</h3>
+<p><a href=https://stackoverflow.com/questions/5706437/whats-the-difference-between-inner-join-left-join-right-join-and-full-join>What&rsquo;s the difference between INNER JOIN, LEFT JOIN, RIGHT JOIN and FULL JOIN? </a></p>
 <p>An SQL JOIN clause is used to combine rows from two or more tables, based on a common field between them.</p>
 <p>There are different types of joins available in SQL:</p>
 <p>INNER JOIN: returns rows when there is a match in both tables.</p>
@@ -334,20 +146,20 @@
 <p>The joined table will contain all records from both the tables and fill in NULLs for missing matches on either side.</p>
 <p>SELF JOIN: is used to join a table to itself as if the table were two tables, temporarily renaming at least one table in the SQL statement.</p>
 <p>CARTESIAN JOIN: returns the Cartesian product of the sets of records from the two or more joined tables.</p>
-<p><img src="https://i.stack.imgur.com/VQ5XP.png" alt=""></p>
-<h3 id="设置servertimezone">设置serverTimeZone</h3>
+<p><img src=https://i.stack.imgur.com/VQ5XP.png alt></p>
+<h3 id=设置servertimezone>设置serverTimeZone</h3>
 <p>Q：遗留问题一直没处理。测试环境mysql的默认timestamp值总是跟北京时间相差了10+小时，没定位清楚原因是什么。<br>
 A： 系统默认的时区为<code>CST</code>（utc-6），使用北京时间(utc+8)插入时，默认会进行转换。可通过jdbc的url链接参数进行指定<code>serverTimezone=Asia/Shanghai</code></p>
-<p><a href="https://www.mysqltutorial.org/mysql-timestamp.aspx">MySQL TIMESTAMP</a></p>
+<p><a href=https://www.mysqltutorial.org/mysql-timestamp.aspx>MySQL TIMESTAMP</a></p>
 <blockquote>
-<p>The MySQL <code>TIMESTAMP</code> is a temporal <a href="https://www.mysqltutorial.org/mysql-data-types.aspx" title="MySQL Data Types">data type</a> that holds the combination of <a href="https://www.mysqltutorial.org/mysql-date/">date</a> and <a href="https://www.mysqltutorial.org/mysql-time/">time</a>. The <a href="https://www.mysqltutorial.org/mysql-date_format/" title="MySQL DATE_FORMAT function">format </a>of a <code>TIMESTAMP</code> is <code>YYYY-MM-DD HH:MM:SS</code> which is fixed at 19 characters.</p>
+<p>The MySQL <code>TIMESTAMP</code> is a temporal <a href=https://www.mysqltutorial.org/mysql-data-types.aspx title="MySQL Data Types">data type</a> that holds the combination of <a href=https://www.mysqltutorial.org/mysql-date/>date</a> and <a href=https://www.mysqltutorial.org/mysql-time/>time</a>. The <a href=https://www.mysqltutorial.org/mysql-date_format/ title="MySQL DATE_FORMAT function">format </a>of a <code>TIMESTAMP</code> is <code>YYYY-MM-DD HH:MM:SS</code> which is fixed at 19 characters.</p>
 <p>The <code>TIMESTAMP</code> value has a range from <code>'1970-01-01 00:00:01' UTC</code> to <code>'2038-01-19 03:14:07' UTC</code>.</p>
-<p>When you <a href="https://www.mysqltutorial.org/mysql-insert-statement.aspx" title="MySQL INSERT statement">insert </a>a <code>TIMESTAMP</code> value into a table, MySQL converts it from your connection’s time zone to UTC for storing.</p>
+<p>When you <a href=https://www.mysqltutorial.org/mysql-insert-statement.aspx title="MySQL INSERT statement">insert </a>a <code>TIMESTAMP</code> value into a table, MySQL converts it from your connection’s time zone to UTC for storing.</p>
 </blockquote>
-<p>官方文档<a href="https://dev.mysql.com/doc/refman/8.0/en/datetime.html">11.2.2 The DATE, DATETIME, and TIMESTAMP Types</a></p>
+<p>官方文档<a href=https://dev.mysql.com/doc/refman/8.0/en/datetime.html>11.2.2 The DATE, DATETIME, and TIMESTAMP Types</a></p>
 <p>查看系统/当前session的时区：<code>SELECT @@GLOBAL.time_zone, @@SESSION.time_zone;</code>值为<code>system</code>；<br>
 查看system对应的时区：<code>SELECT @@system_time_zone;</code></p>
-<p><a href="https://dev.mysql.com/doc/refman/8.0/en/time-zone-support.html">5.1.15 MySQL Server Time Zone Support</a></p>
+<p><a href=https://dev.mysql.com/doc/refman/8.0/en/time-zone-support.html>5.1.15 MySQL Server Time Zone Support</a></p>
 <blockquote>
 <p><code>timezone</code> values can be given in several formats, none of which are case-sensitive:</p>
 <ul>
@@ -362,24 +174,24 @@ A： 系统默认的时区为<code>CST</code>（utc-6），使用北京时间(ut
 </li>
 </ul>
 </blockquote>
-<p>系统设置可参考 <a href="https://stackoverflow.com/questions/930900/how-do-i-set-the-time-zone-of-mysql">How do I set the time zone of MySQL?</a></p>
-<p>建立mysql的url链接时可以指定serverTimeZone——<code>jdbc:mysql://localhost:3306/test?serverTimezone=Asia/Shanghai&amp;useLegacyDatetimeCode=false</code></p>
-<p>参考<a href="https://www.baeldung.com/mysql-jdbc-timezone-spring-boot">Setting the MySQL JDBC Timezone Using Spring Boot Configuration</a>，或<a href="https://stackoverflow.com/a/7610174/1087122">这里</a>，<a href="https://stackoverflow.com/a/19075291/1087122">更详细的问题说明</a></p>
-<p><a href="https://www.timeanddate.com/time/map/">Time Zone Map</a></p>
-<p><img src="https://upload-images.jianshu.io/upload_images/3296949-3f4652dff8c7eba0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
-<h3 id="创建index">创建index</h3>
-<p><a href="https://www.tutorialspoint.com/mysql/mysql-indexes.htm">mysql index</a></p>
+<p>系统设置可参考 <a href=https://stackoverflow.com/questions/930900/how-do-i-set-the-time-zone-of-mysql>How do I set the time zone of MySQL?</a></p>
+<p>建立mysql的url链接时可以指定serverTimeZone——<code>jdbc:mysql://localhost:3306/test?serverTimezone=Asia/Shanghai&useLegacyDatetimeCode=false</code></p>
+<p>参考<a href=https://www.baeldung.com/mysql-jdbc-timezone-spring-boot>Setting the MySQL JDBC Timezone Using Spring Boot Configuration</a>，或<a href=https://stackoverflow.com/a/7610174/1087122>这里</a>，<a href=https://stackoverflow.com/a/19075291/1087122>更详细的问题说明</a></p>
+<p><a href=https://www.timeanddate.com/time/map/>Time Zone Map</a></p>
+<p><img src=https://upload-images.jianshu.io/upload_images/3296949-3f4652dff8c7eba0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240 alt></p>
+<h3 id=创建index>创建index</h3>
+<p><a href=https://www.tutorialspoint.com/mysql/mysql-indexes.htm>mysql index</a></p>
 <p>A unique index means that two rows cannot have the same index value. Here is the syntax to create an Index on a table.</p>
 <p><code>CREATE UNIQUE INDEX index_name ON table_name ( column1, column2,...);</code></p>
 <p>omit the UNIQUE keyword from the query to create a simple index. A Simple index allows duplicate values in a table.</p>
-<h3 id="常用函数">常用函数</h3>
-<p><a href="https://www.w3resource.com/mysql/mysql-functions-and-operators.php">mysql resources</a>，五星推荐：gif演示 &amp;&amp; 视频演示。</p>
+<h3 id=常用函数>常用函数</h3>
+<p><a href=https://www.w3resource.com/mysql/mysql-functions-and-operators.php>mysql resources</a>，五星推荐：gif演示 && 视频演示。</p>
 <ul>
 <li>
 <p>拼接字段：<code>CONCAT</code>,例如<code>select CONCAT(git_group ,'/', project_name) as name , ut_block.* from ut_block ;</code></p>
 </li>
 <li>
-<p>计算平均值：<code>avg</code>，例如<code>select avg(total_time) from su_result where id &gt; 9000;</code></p>
+<p>计算平均值：<code>avg</code>，例如<code>select avg(total_time) from su_result where id > 9000;</code></p>
 </li>
 <li>
 <p>时间戳转换：<code>unix_timestamp</code>将时间格式转换为秒/毫秒，例如<code>unix_timestamp('2020-05-20 13:14:00') * 1000</code></p>
@@ -394,94 +206,94 @@ A： 系统默认的时区为<code>CST</code>（utc-6），使用北京时间(ut
 <p>设置变量： <code>set @start = '2020-05-06 00:00:00'</code>，使用时使用<code>start_time &lt; unix_timestamp(@start) * 1000</code>方式</p>
 </li>
 </ul>
-<p><a href="https://database.guide/from_unixtime-examples-mysql/">FROM_UNIXTIME() Examples</a> Available Specifiers</p>
-<p><a href="https://explainextended.com/2009/07/24/mysql-grouping-continuous-ranges/">MySQL: grouping continuous ranges</a></p>
-<p><a href="https://snipplr.com/view/41322">Group by price range</a> <a href="https://stackoverflow.com/questions/6687534/group-by-range-in-mysql">Group by range</a></p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">set</span> <span style="color:#f92672">@</span><span style="color:#66d9ef">start</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;2020-06-12 00:00:00&#39;</span>;
-<span style="color:#66d9ef">set</span> <span style="color:#f92672">@</span><span style="color:#66d9ef">end</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;2020-06-13 00:00:00&#39;</span>;
+<p><a href=https://database.guide/from_unixtime-examples-mysql/>FROM_UNIXTIME() Examples</a> Available Specifiers</p>
+<p><a href=https://explainextended.com/2009/07/24/mysql-grouping-continuous-ranges/>MySQL: grouping continuous ranges</a></p>
+<p><a href=https://snipplr.com/view/41322>Group by price range</a> <a href=https://stackoverflow.com/questions/6687534/group-by-range-in-mysql>Group by range</a></p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sql data-lang=sql><span style=color:#66d9ef>set</span> <span style=color:#f92672>@</span><span style=color:#66d9ef>start</span> <span style=color:#f92672>=</span> <span style=color:#e6db74>&#39;2020-06-12 00:00:00&#39;</span>;
+<span style=color:#66d9ef>set</span> <span style=color:#f92672>@</span><span style=color:#66d9ef>end</span> <span style=color:#f92672>=</span> <span style=color:#e6db74>&#39;2020-06-13 00:00:00&#39;</span>;
 
-<span style="color:#75715e">-- 语言分布
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">SELECT</span> <span style="color:#66d9ef">count</span>(<span style="color:#ae81ff">1</span>) <span style="color:#66d9ef">as</span> num , lang_type
-<span style="color:#66d9ef">FROM</span> su_result
-<span style="color:#66d9ef">WHERE</span> (id <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">150000</span>
-    <span style="color:#66d9ef">AND</span> start_time <span style="color:#f92672">&gt;</span> unix_timestamp(<span style="color:#f92672">@</span><span style="color:#66d9ef">start</span>) <span style="color:#f92672">*</span> <span style="color:#ae81ff">1000</span> <span style="color:#66d9ef">and</span> start_time <span style="color:#f92672">&lt;</span> unix_timestamp(<span style="color:#f92672">@</span><span style="color:#66d9ef">end</span>) <span style="color:#f92672">*</span> <span style="color:#ae81ff">1000</span>)
+<span style=color:#75715e>-- 语言分布
+</span><span style=color:#75715e></span><span style=color:#66d9ef>SELECT</span> <span style=color:#66d9ef>count</span>(<span style=color:#ae81ff>1</span>) <span style=color:#66d9ef>as</span> num , lang_type
+<span style=color:#66d9ef>FROM</span> su_result
+<span style=color:#66d9ef>WHERE</span> (id <span style=color:#f92672>&gt;</span> <span style=color:#ae81ff>150000</span>
+    <span style=color:#66d9ef>AND</span> start_time <span style=color:#f92672>&gt;</span> unix_timestamp(<span style=color:#f92672>@</span><span style=color:#66d9ef>start</span>) <span style=color:#f92672>*</span> <span style=color:#ae81ff>1000</span> <span style=color:#66d9ef>and</span> start_time <span style=color:#f92672>&lt;</span> unix_timestamp(<span style=color:#f92672>@</span><span style=color:#66d9ef>end</span>) <span style=color:#f92672>*</span> <span style=color:#ae81ff>1000</span>)
 
-<span style="color:#66d9ef">group</span> <span style="color:#66d9ef">by</span> lang_type;
+<span style=color:#66d9ef>group</span> <span style=color:#66d9ef>by</span> lang_type;
 
-<span style="color:#75715e">-- ut result
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">SELECT</span>  <span style="color:#66d9ef">count</span>(<span style="color:#ae81ff">1</span>) <span style="color:#66d9ef">as</span> num,  ut_result
-<span style="color:#66d9ef">FROM</span> su_result
-<span style="color:#66d9ef">WHERE</span> (id <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">150000</span> <span style="color:#66d9ef">and</span> ut_block <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>
-    <span style="color:#66d9ef">AND</span> start_time <span style="color:#f92672">&gt;</span> unix_timestamp(<span style="color:#f92672">@</span><span style="color:#66d9ef">start</span>) <span style="color:#f92672">*</span> <span style="color:#ae81ff">1000</span> <span style="color:#66d9ef">and</span> start_time <span style="color:#f92672">&lt;</span> unix_timestamp(<span style="color:#f92672">@</span><span style="color:#66d9ef">end</span>) <span style="color:#f92672">*</span> <span style="color:#ae81ff">1000</span>)
+<span style=color:#75715e>-- ut result
+</span><span style=color:#75715e></span><span style=color:#66d9ef>SELECT</span>  <span style=color:#66d9ef>count</span>(<span style=color:#ae81ff>1</span>) <span style=color:#66d9ef>as</span> num,  ut_result
+<span style=color:#66d9ef>FROM</span> su_result
+<span style=color:#66d9ef>WHERE</span> (id <span style=color:#f92672>&gt;</span> <span style=color:#ae81ff>150000</span> <span style=color:#66d9ef>and</span> ut_block <span style=color:#f92672>=</span> <span style=color:#ae81ff>1</span>
+    <span style=color:#66d9ef>AND</span> start_time <span style=color:#f92672>&gt;</span> unix_timestamp(<span style=color:#f92672>@</span><span style=color:#66d9ef>start</span>) <span style=color:#f92672>*</span> <span style=color:#ae81ff>1000</span> <span style=color:#66d9ef>and</span> start_time <span style=color:#f92672>&lt;</span> unix_timestamp(<span style=color:#f92672>@</span><span style=color:#66d9ef>end</span>) <span style=color:#f92672>*</span> <span style=color:#ae81ff>1000</span>)
 
-<span style="color:#66d9ef">group</span> <span style="color:#66d9ef">by</span> ut_result;
-
-
-<span style="color:#75715e">-- 等待分布
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">select</span> <span style="color:#66d9ef">case</span> <span style="color:#66d9ef">when</span> wait_duration <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">1800000</span> <span style="color:#66d9ef">then</span> <span style="color:#e6db74">&#39;1 30m以上&#39;</span>
-            <span style="color:#66d9ef">when</span> wait_duration <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">1800000</span> <span style="color:#66d9ef">and</span> wait_duration <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">600000</span> <span style="color:#66d9ef">then</span> <span style="color:#e6db74">&#39;2 10~30m&#39;</span>
-            <span style="color:#66d9ef">when</span> wait_duration <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">600000</span> <span style="color:#66d9ef">and</span> wait_duration <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">60000</span> <span style="color:#66d9ef">then</span> <span style="color:#e6db74">&#39;3 1~10m&#39;</span>
-            <span style="color:#66d9ef">else</span> <span style="color:#e6db74">&#39;4 1m以下&#39;</span>
-    <span style="color:#66d9ef">end</span> <span style="color:#66d9ef">as</span> wsec, <span style="color:#66d9ef">count</span>(<span style="color:#f92672">*</span>) <span style="color:#66d9ef">AS</span> num
-<span style="color:#66d9ef">from</span> su_result
-<span style="color:#66d9ef">WHERE</span> (id <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">150000</span>
-    <span style="color:#66d9ef">AND</span> start_time <span style="color:#f92672">&gt;</span> unix_timestamp(<span style="color:#f92672">@</span><span style="color:#66d9ef">start</span>) <span style="color:#f92672">*</span> <span style="color:#ae81ff">1000</span> <span style="color:#66d9ef">and</span> start_time <span style="color:#f92672">&lt;</span> unix_timestamp(<span style="color:#f92672">@</span><span style="color:#66d9ef">end</span>) <span style="color:#f92672">*</span> <span style="color:#ae81ff">1000</span>)
-<span style="color:#66d9ef">group</span> <span style="color:#66d9ef">by</span> wsec;
+<span style=color:#66d9ef>group</span> <span style=color:#66d9ef>by</span> ut_result;
 
 
-<span style="color:#75715e">-- sonar耗时分布
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">select</span> <span style="color:#66d9ef">case</span> <span style="color:#66d9ef">when</span> sonar_duration <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">600000</span> <span style="color:#66d9ef">then</span> <span style="color:#e6db74">&#39;1 10m以上&#39;</span>
-            <span style="color:#66d9ef">when</span> sonar_duration <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">600000</span> <span style="color:#66d9ef">and</span> sonar_duration <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">60000</span> <span style="color:#66d9ef">then</span> <span style="color:#e6db74">&#39;2 1~10m&#39;</span>
-            <span style="color:#66d9ef">when</span> sonar_duration <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">60000</span> <span style="color:#66d9ef">and</span> sonar_duration <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">30000</span> <span style="color:#66d9ef">then</span> <span style="color:#e6db74">&#39;3 30~60s&#39;</span>
-            <span style="color:#66d9ef">when</span> sonar_duration <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">30000</span> <span style="color:#66d9ef">and</span> sonar_duration <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">10000</span> <span style="color:#66d9ef">then</span> <span style="color:#e6db74">&#39;4 10~30s&#39;</span>
-            <span style="color:#66d9ef">else</span> <span style="color:#e6db74">&#39;5 10s以下&#39;</span>
-           <span style="color:#66d9ef">end</span> <span style="color:#66d9ef">as</span> wsec, <span style="color:#66d9ef">count</span>(<span style="color:#f92672">*</span>) <span style="color:#66d9ef">AS</span> num
-<span style="color:#66d9ef">from</span> su_result
-<span style="color:#66d9ef">WHERE</span> (id <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">150000</span>
-    <span style="color:#66d9ef">AND</span> start_time <span style="color:#f92672">&gt;</span> unix_timestamp(<span style="color:#f92672">@</span><span style="color:#66d9ef">start</span>) <span style="color:#f92672">*</span> <span style="color:#ae81ff">1000</span> <span style="color:#66d9ef">and</span> start_time <span style="color:#f92672">&lt;</span> unix_timestamp(<span style="color:#f92672">@</span><span style="color:#66d9ef">end</span>) <span style="color:#f92672">*</span> <span style="color:#ae81ff">1000</span>)
-<span style="color:#66d9ef">group</span> <span style="color:#66d9ef">by</span> wsec;
+<span style=color:#75715e>-- 等待分布
+</span><span style=color:#75715e></span><span style=color:#66d9ef>select</span> <span style=color:#66d9ef>case</span> <span style=color:#66d9ef>when</span> wait_duration <span style=color:#f92672>&gt;</span> <span style=color:#ae81ff>1800000</span> <span style=color:#66d9ef>then</span> <span style=color:#e6db74>&#39;1 30m以上&#39;</span>
+            <span style=color:#66d9ef>when</span> wait_duration <span style=color:#f92672>&lt;=</span> <span style=color:#ae81ff>1800000</span> <span style=color:#66d9ef>and</span> wait_duration <span style=color:#f92672>&gt;</span> <span style=color:#ae81ff>600000</span> <span style=color:#66d9ef>then</span> <span style=color:#e6db74>&#39;2 10~30m&#39;</span>
+            <span style=color:#66d9ef>when</span> wait_duration <span style=color:#f92672>&lt;=</span> <span style=color:#ae81ff>600000</span> <span style=color:#66d9ef>and</span> wait_duration <span style=color:#f92672>&gt;</span> <span style=color:#ae81ff>60000</span> <span style=color:#66d9ef>then</span> <span style=color:#e6db74>&#39;3 1~10m&#39;</span>
+            <span style=color:#66d9ef>else</span> <span style=color:#e6db74>&#39;4 1m以下&#39;</span>
+    <span style=color:#66d9ef>end</span> <span style=color:#66d9ef>as</span> wsec, <span style=color:#66d9ef>count</span>(<span style=color:#f92672>*</span>) <span style=color:#66d9ef>AS</span> num
+<span style=color:#66d9ef>from</span> su_result
+<span style=color:#66d9ef>WHERE</span> (id <span style=color:#f92672>&gt;</span> <span style=color:#ae81ff>150000</span>
+    <span style=color:#66d9ef>AND</span> start_time <span style=color:#f92672>&gt;</span> unix_timestamp(<span style=color:#f92672>@</span><span style=color:#66d9ef>start</span>) <span style=color:#f92672>*</span> <span style=color:#ae81ff>1000</span> <span style=color:#66d9ef>and</span> start_time <span style=color:#f92672>&lt;</span> unix_timestamp(<span style=color:#f92672>@</span><span style=color:#66d9ef>end</span>) <span style=color:#f92672>*</span> <span style=color:#ae81ff>1000</span>)
+<span style=color:#66d9ef>group</span> <span style=color:#66d9ef>by</span> wsec;
 
 
-<span style="color:#75715e">-- week
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">SELECT</span> <span style="color:#66d9ef">CASE</span>
-           <span style="color:#66d9ef">WHEN</span> num <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">100</span> <span style="color:#66d9ef">THEN</span> <span style="color:#e6db74">&#39;1 100次以上&#39;</span>
-           <span style="color:#66d9ef">WHEN</span> num <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">100</span>
-               <span style="color:#66d9ef">AND</span> num <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">50</span> <span style="color:#66d9ef">THEN</span> <span style="color:#e6db74">&#39;2 50~100次&#39;</span>
-           <span style="color:#66d9ef">WHEN</span> num <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">50</span>
-               <span style="color:#66d9ef">AND</span> num <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">10</span> <span style="color:#66d9ef">THEN</span> <span style="color:#e6db74">&#39;3 10~50次&#39;</span>
-           <span style="color:#66d9ef">ELSE</span> <span style="color:#e6db74">&#39;4 10次以下&#39;</span>
-           <span style="color:#66d9ef">END</span> <span style="color:#66d9ef">AS</span> Number, <span style="color:#66d9ef">COUNT</span>(<span style="color:#f92672">*</span>) <span style="color:#66d9ef">AS</span> num
-<span style="color:#66d9ef">FROM</span> (
-         <span style="color:#66d9ef">SELECT</span> project_name, group_name, <span style="color:#66d9ef">COUNT</span>(<span style="color:#ae81ff">1</span>) <span style="color:#66d9ef">AS</span> num
-         <span style="color:#66d9ef">FROM</span> su_result
-         <span style="color:#66d9ef">WHERE</span> (id <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">100000</span>
-             <span style="color:#66d9ef">AND</span> start_time <span style="color:#f92672">&gt;</span> unix_timestamp(<span style="color:#e6db74">&#39;2020-06-01 00:00:00&#39;</span>) <span style="color:#f92672">*</span> <span style="color:#ae81ff">1000</span>
-             <span style="color:#66d9ef">AND</span> start_time <span style="color:#f92672">&lt;</span> unix_timestamp(<span style="color:#e6db74">&#39;2020-06-08 00:00:00&#39;</span>) <span style="color:#f92672">*</span> <span style="color:#ae81ff">1000</span>)
-         <span style="color:#66d9ef">GROUP</span> <span style="color:#66d9ef">BY</span> project_name
-         <span style="color:#66d9ef">ORDER</span> <span style="color:#66d9ef">BY</span> num <span style="color:#66d9ef">DESC</span>
+<span style=color:#75715e>-- sonar耗时分布
+</span><span style=color:#75715e></span><span style=color:#66d9ef>select</span> <span style=color:#66d9ef>case</span> <span style=color:#66d9ef>when</span> sonar_duration <span style=color:#f92672>&gt;</span> <span style=color:#ae81ff>600000</span> <span style=color:#66d9ef>then</span> <span style=color:#e6db74>&#39;1 10m以上&#39;</span>
+            <span style=color:#66d9ef>when</span> sonar_duration <span style=color:#f92672>&lt;=</span> <span style=color:#ae81ff>600000</span> <span style=color:#66d9ef>and</span> sonar_duration <span style=color:#f92672>&gt;</span> <span style=color:#ae81ff>60000</span> <span style=color:#66d9ef>then</span> <span style=color:#e6db74>&#39;2 1~10m&#39;</span>
+            <span style=color:#66d9ef>when</span> sonar_duration <span style=color:#f92672>&lt;=</span> <span style=color:#ae81ff>60000</span> <span style=color:#66d9ef>and</span> sonar_duration <span style=color:#f92672>&gt;</span> <span style=color:#ae81ff>30000</span> <span style=color:#66d9ef>then</span> <span style=color:#e6db74>&#39;3 30~60s&#39;</span>
+            <span style=color:#66d9ef>when</span> sonar_duration <span style=color:#f92672>&lt;=</span> <span style=color:#ae81ff>30000</span> <span style=color:#66d9ef>and</span> sonar_duration <span style=color:#f92672>&gt;</span> <span style=color:#ae81ff>10000</span> <span style=color:#66d9ef>then</span> <span style=color:#e6db74>&#39;4 10~30s&#39;</span>
+            <span style=color:#66d9ef>else</span> <span style=color:#e6db74>&#39;5 10s以下&#39;</span>
+           <span style=color:#66d9ef>end</span> <span style=color:#66d9ef>as</span> wsec, <span style=color:#66d9ef>count</span>(<span style=color:#f92672>*</span>) <span style=color:#66d9ef>AS</span> num
+<span style=color:#66d9ef>from</span> su_result
+<span style=color:#66d9ef>WHERE</span> (id <span style=color:#f92672>&gt;</span> <span style=color:#ae81ff>150000</span>
+    <span style=color:#66d9ef>AND</span> start_time <span style=color:#f92672>&gt;</span> unix_timestamp(<span style=color:#f92672>@</span><span style=color:#66d9ef>start</span>) <span style=color:#f92672>*</span> <span style=color:#ae81ff>1000</span> <span style=color:#66d9ef>and</span> start_time <span style=color:#f92672>&lt;</span> unix_timestamp(<span style=color:#f92672>@</span><span style=color:#66d9ef>end</span>) <span style=color:#f92672>*</span> <span style=color:#ae81ff>1000</span>)
+<span style=color:#66d9ef>group</span> <span style=color:#66d9ef>by</span> wsec;
+
+
+<span style=color:#75715e>-- week
+</span><span style=color:#75715e></span><span style=color:#66d9ef>SELECT</span> <span style=color:#66d9ef>CASE</span>
+           <span style=color:#66d9ef>WHEN</span> num <span style=color:#f92672>&gt;</span> <span style=color:#ae81ff>100</span> <span style=color:#66d9ef>THEN</span> <span style=color:#e6db74>&#39;1 100次以上&#39;</span>
+           <span style=color:#66d9ef>WHEN</span> num <span style=color:#f92672>&lt;=</span> <span style=color:#ae81ff>100</span>
+               <span style=color:#66d9ef>AND</span> num <span style=color:#f92672>&gt;</span> <span style=color:#ae81ff>50</span> <span style=color:#66d9ef>THEN</span> <span style=color:#e6db74>&#39;2 50~100次&#39;</span>
+           <span style=color:#66d9ef>WHEN</span> num <span style=color:#f92672>&lt;=</span> <span style=color:#ae81ff>50</span>
+               <span style=color:#66d9ef>AND</span> num <span style=color:#f92672>&gt;</span> <span style=color:#ae81ff>10</span> <span style=color:#66d9ef>THEN</span> <span style=color:#e6db74>&#39;3 10~50次&#39;</span>
+           <span style=color:#66d9ef>ELSE</span> <span style=color:#e6db74>&#39;4 10次以下&#39;</span>
+           <span style=color:#66d9ef>END</span> <span style=color:#66d9ef>AS</span> Number, <span style=color:#66d9ef>COUNT</span>(<span style=color:#f92672>*</span>) <span style=color:#66d9ef>AS</span> num
+<span style=color:#66d9ef>FROM</span> (
+         <span style=color:#66d9ef>SELECT</span> project_name, group_name, <span style=color:#66d9ef>COUNT</span>(<span style=color:#ae81ff>1</span>) <span style=color:#66d9ef>AS</span> num
+         <span style=color:#66d9ef>FROM</span> su_result
+         <span style=color:#66d9ef>WHERE</span> (id <span style=color:#f92672>&gt;</span> <span style=color:#ae81ff>100000</span>
+             <span style=color:#66d9ef>AND</span> start_time <span style=color:#f92672>&gt;</span> unix_timestamp(<span style=color:#e6db74>&#39;2020-06-01 00:00:00&#39;</span>) <span style=color:#f92672>*</span> <span style=color:#ae81ff>1000</span>
+             <span style=color:#66d9ef>AND</span> start_time <span style=color:#f92672>&lt;</span> unix_timestamp(<span style=color:#e6db74>&#39;2020-06-08 00:00:00&#39;</span>) <span style=color:#f92672>*</span> <span style=color:#ae81ff>1000</span>)
+         <span style=color:#66d9ef>GROUP</span> <span style=color:#66d9ef>BY</span> project_name
+         <span style=color:#66d9ef>ORDER</span> <span style=color:#66d9ef>BY</span> num <span style=color:#66d9ef>DESC</span>
      ) week
-<span style="color:#66d9ef">GROUP</span> <span style="color:#66d9ef">BY</span> Number;
+<span style=color:#66d9ef>GROUP</span> <span style=color:#66d9ef>BY</span> Number;
 
-<span style="color:#75715e">-- times
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">SELECT</span> group_name, project_name, <span style="color:#66d9ef">COUNT</span>(<span style="color:#ae81ff">1</span>) <span style="color:#66d9ef">AS</span> num
-<span style="color:#66d9ef">FROM</span> su_result
-<span style="color:#66d9ef">WHERE</span> (id <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">100000</span>
-    <span style="color:#66d9ef">AND</span> start_time <span style="color:#f92672">&gt;</span> unix_timestamp(<span style="color:#e6db74">&#39;2020-06-01 00:00:00&#39;</span>) <span style="color:#f92672">*</span> <span style="color:#ae81ff">1000</span>
-    <span style="color:#66d9ef">AND</span> start_time <span style="color:#f92672">&lt;</span> unix_timestamp(<span style="color:#e6db74">&#39;2020-06-08 00:00:00&#39;</span>) <span style="color:#f92672">*</span> <span style="color:#ae81ff">1000</span>)
-<span style="color:#66d9ef">GROUP</span> <span style="color:#66d9ef">BY</span> project_name
-<span style="color:#66d9ef">ORDER</span> <span style="color:#66d9ef">BY</span> num <span style="color:#66d9ef">DESC</span>;
+<span style=color:#75715e>-- times
+</span><span style=color:#75715e></span><span style=color:#66d9ef>SELECT</span> group_name, project_name, <span style=color:#66d9ef>COUNT</span>(<span style=color:#ae81ff>1</span>) <span style=color:#66d9ef>AS</span> num
+<span style=color:#66d9ef>FROM</span> su_result
+<span style=color:#66d9ef>WHERE</span> (id <span style=color:#f92672>&gt;</span> <span style=color:#ae81ff>100000</span>
+    <span style=color:#66d9ef>AND</span> start_time <span style=color:#f92672>&gt;</span> unix_timestamp(<span style=color:#e6db74>&#39;2020-06-01 00:00:00&#39;</span>) <span style=color:#f92672>*</span> <span style=color:#ae81ff>1000</span>
+    <span style=color:#66d9ef>AND</span> start_time <span style=color:#f92672>&lt;</span> unix_timestamp(<span style=color:#e6db74>&#39;2020-06-08 00:00:00&#39;</span>) <span style=color:#f92672>*</span> <span style=color:#ae81ff>1000</span>)
+<span style=color:#66d9ef>GROUP</span> <span style=color:#66d9ef>BY</span> project_name
+<span style=color:#66d9ef>ORDER</span> <span style=color:#66d9ef>BY</span> num <span style=color:#66d9ef>DESC</span>;
 
 
-</code></pre></div><h3 id="实现主从备份">实现主从备份</h3>
-<p><a href="https://www.cnblogs.com/eric-fang/p/9285093.html">MySQL主从备份配置</a>、 <a href="https://www.cnblogs.com/baoyi/p/mysql_master_slave.html">mysql实现主从备份</a></p>
-<h3 id="查看数据库大小">查看数据库大小</h3>
-<p><a href="https://chartio.com/resources/tutorials/how-to-get-the-size-of-a-table-in-mysql/">refer</a><br>
-<a href="https://dev.mysql.com/doc/refman/8.0/en/tables-table.html">official documentation</a></p>
+</code></pre></div><h3 id=实现主从备份>实现主从备份</h3>
+<p><a href=https://www.cnblogs.com/eric-fang/p/9285093.html>MySQL主从备份配置</a>、 <a href=https://www.cnblogs.com/baoyi/p/mysql_master_slave.html>mysql实现主从备份</a></p>
+<h3 id=查看数据库大小>查看数据库大小</h3>
+<p><a href=https://chartio.com/resources/tutorials/how-to-get-the-size-of-a-table-in-mysql/>refer</a><br>
+<a href=https://dev.mysql.com/doc/refman/8.0/en/tables-table.html>official documentation</a></p>
 <ul>
 <li><code>DATA_LENGTH</code> is the length (or size) of all data in the table (in <code>bytes</code>).</li>
 <li><code>INDEX_LENGTH</code> is the length (or size) of the index file for the table (also in <code>bytes</code>).</li>
 </ul>
-<pre><code>SELECT table_schema AS &quot;Database&quot;,
+<pre tabindex=0><code>SELECT table_schema AS &quot;Database&quot;,
        ROUND(SUM(data_length + index_length) / 1024 / 1024, 2) AS &quot;Size (MB)&quot;
 FROM information_schema.TABLES
 GROUP BY table_schema;
@@ -495,8 +307,8 @@ performance_schema	0.00
 sonar_db	36.00
 stfmonkey	1.86
 sys	0.02
-</code></pre><h3 id="查看具体的数据库中的表大小">查看具体的数据库中的表大小</h3>
-<pre><code>SELECT table_name AS &quot;Table&quot;,
+</code></pre><h3 id=查看具体的数据库中的表大小>查看具体的数据库中的表大小</h3>
+<pre tabindex=0><code>SELECT table_name AS &quot;Table&quot;,
        ROUND(((data_length + index_length) / 1024 / 1024), 2) AS &quot;Size (MB)&quot;
 FROM information_schema.TABLES
 WHERE table_schema = 'sonar_db' 
@@ -508,31 +320,31 @@ ORDER BY (data_length + index_length) DESC;
 Table           Size(MB)
 live_measures	17.41
 
-</code></pre><h3 id="查看当前数据库都有哪些人在连接">查看当前数据库都有哪些人在连接</h3>
-<p><a href="https://stackoverflow.com/questions/5575347/list-of-users-accessing-database">List of users accessing database</a></p>
+</code></pre><h3 id=查看当前数据库都有哪些人在连接>查看当前数据库都有哪些人在连接</h3>
+<p><a href=https://stackoverflow.com/questions/5575347/list-of-users-accessing-database>List of users accessing database</a></p>
 <p><code>SHOW PROCESSLIST</code> or <code>select * from information_schema.processlist</code></p>
-<pre><code>&quot;ID&quot;,&quot;USER&quot;,&quot;HOST&quot;,&quot;DB&quot;,&quot;COMMAND&quot;,&quot;TIME&quot;,&quot;STATE&quot;,&quot;INFO&quot;,&quot;TIME_MS&quot;,&quot;ROWS_SENT&quot;,&quot;ROWS_EXAMINED&quot;
-</code></pre><p><a href="https://stackoverflow.com/questions/2578194/what-is-ddl-and-dml">DDL VS. DML</a></p>
+<pre tabindex=0><code>&quot;ID&quot;,&quot;USER&quot;,&quot;HOST&quot;,&quot;DB&quot;,&quot;COMMAND&quot;,&quot;TIME&quot;,&quot;STATE&quot;,&quot;INFO&quot;,&quot;TIME_MS&quot;,&quot;ROWS_SENT&quot;,&quot;ROWS_EXAMINED&quot;
+</code></pre><p><a href=https://stackoverflow.com/questions/2578194/what-is-ddl-and-dml>DDL VS. DML</a></p>
 <p><strong>DDL</strong> is Data Definition Language : it is used to define data structures.</p>
-<p>For example, with SQL, it would be instructions such as <code>create table</code>, <code>alter table</code>, &hellip;</p>
+<p>For example, with SQL, it would be instructions such as <code>create table</code>, <code>alter table</code>, &mldr;</p>
 <p><strong>DML</strong> is Data Manipulation Language : it is used to manipulate data itself.</p>
-<p>For example, with SQL, it would be instructions such as <code>insert</code>,<code>update</code>, <code>delete</code>, &hellip;</p>
-<h3 id="install-on-ubuntu-1804">install on Ubuntu 18.04</h3>
-<p><a href="https://linuxize.com/post/how-to-install-mysql-on-ubuntu-18-04/">How to Install MySQL on Ubuntu 18.04
+<p>For example, with SQL, it would be instructions such as <code>insert</code>,<code>update</code>, <code>delete</code>, &mldr;</p>
+<h3 id=install-on-ubuntu-1804>install on Ubuntu 18.04</h3>
+<p><a href=https://linuxize.com/post/how-to-install-mysql-on-ubuntu-18-04/>How to Install MySQL on Ubuntu 18.04
 This tutorial is also available for:</a></p>
-<pre><code>GRANT ALL PRIVILEGES ON *.* TO 'admin'@'localhost' IDENTIFIED BY 'very_strong_password';
-</code></pre><h3 id="重置auto_increment初始值">重置auto_increment初始值</h3>
-<p><a href="https://blog.csdn.net/weixin_36210698/article/details/70176652">TRUNCATE TABLE 语法</a></p>
-<pre><code>-- 1. 将数据全部删除，而且重新定位自增的字段
+<pre tabindex=0><code>GRANT ALL PRIVILEGES ON *.* TO 'admin'@'localhost' IDENTIFIED BY 'very_strong_password';
+</code></pre><h3 id=重置auto_increment初始值>重置auto_increment初始值</h3>
+<p><a href=https://blog.csdn.net/weixin_36210698/article/details/70176652>TRUNCATE TABLE 语法</a></p>
+<pre tabindex=0><code>-- 1. 将数据全部删除，而且重新定位自增的字段
 truncate table 你的表名
 
 -- 2. 直接重置autoIncrement的值
 ALTER TABLE table_name AUTO_INCREMENT = 1;
 -- 可以先删除表内容 
 delete from table_name;
-</code></pre><h3 id="复制表结构">复制表结构</h3>
-<p><a href="https://www.cnblogs.com/chenmh/p/5644644.html">复制表结构</a></p>
-<pre><code>-- like方法能一模一样的将一个表的结果复制生成一个新表，
+</code></pre><h3 id=复制表结构>复制表结构</h3>
+<p><a href=https://www.cnblogs.com/chenmh/p/5644644.html>复制表结构</a></p>
+<pre tabindex=0><code>-- like方法能一模一样的将一个表的结果复制生成一个新表，
 -- 包括复制表的备注、索引、主键外键、存储引擎等。
 CREATE TABLE IF NOT EXISTS taskInterveneData LIKE taskRecord;
 
@@ -542,9 +354,9 @@ CREATE TABLE IF NOT EXISTS tb_base_select
 AS
 SELECT *
 FROM tb_base;
-</code></pre><h3 id="查询数据库大小">查询数据库大小</h3>
-<p><a href="https://blog.csdn.net/atec2000/article/details/7041352">SQL命令查看Mysql数据库大小</a></p>
-<pre><code>1、进入information_schema 数据库（存放了其他的数据库的信息）
+</code></pre><h3 id=查询数据库大小>查询数据库大小</h3>
+<p><a href=https://blog.csdn.net/atec2000/article/details/7041352>SQL命令查看Mysql数据库大小</a></p>
+<pre tabindex=0><code>1、进入information_schema 数据库（存放了其他的数据库的信息）
 use information_schema;
 
 2、查询所有数据的大小：
@@ -563,17 +375,17 @@ SELECT concat(round(SUM(data_length / 1024 / 1024), 2), 'MB') AS data
 FROM tables
 WHERE table_schema = 'home'
     AND table_name = 'members';
-</code></pre><h3 id="查看表结构">查看表结构</h3>
-<pre><code>desc `tableName`
+</code></pre><h3 id=查看表结构>查看表结构</h3>
+<pre tabindex=0><code>desc `tableName`
 
 desc 表名;
 show columns from 表名;
 describe 表名;
 show create table 表名;
-</code></pre><h3 id="查询数据库版本号-select-version">查询数据库版本号 select @@Version</h3>
-<h3 id="client_plugin_auth-is-required-报错">CLIENT_PLUGIN_AUTH is required 报错</h3>
+</code></pre><h3 id=查询数据库版本号-select-version>查询数据库版本号 select @@Version</h3>
+<h3 id=client_plugin_auth-is-required-报错>CLIENT_PLUGIN_AUTH is required 报错</h3>
 <p>版本过高，降低mysql-connector-java的版本。</p>
-<pre><code># 6.0.6 com.mysql.cj.jdbc.Driver
+<pre tabindex=0><code># 6.0.6 com.mysql.cj.jdbc.Driver
 String driver = &quot;com.mysql.jdbc.Driver&quot;; //
 String url = &quot;jdbc:mysql://&quot; + DB_ADDRESS + &quot;:&quot; + DB_PORT + &quot;/&quot; + DB_NAME
         + &quot;?connectTimeout=10000&amp;characterEncoding=UTF-8&quot;;
@@ -589,8 +401,8 @@ try {
 } catch (SQLException e) {
     e.printStackTrace();
 }
-</code></pre><h3 id="运行远程访问">运行远程访问</h3>
-<pre><code>
+</code></pre><h3 id=运行远程访问>运行远程访问</h3>
+<pre tabindex=0><code>
 # 安装 
 apt-get install mysql-server mysql-client
 
@@ -612,9 +424,9 @@ service mysqld restart
 
 #或者使用 
 sudo /etc/init.d/mysql restart
-</code></pre><h3 id="备份数据库表结构">备份数据库表结构</h3>
-<p>命令行下具体用法如下：  mysqldump -u用戶名 -p密码 -d 数据库名 表名 脚本名;</p>
-<pre><code>	# 1.导出整个数据库  
+</code></pre><h3 id=备份数据库表结构>备份数据库表结构</h3>
+<p>命令行下具体用法如下： mysqldump -u用戶名 -p密码 -d 数据库名 表名 脚本名;</p>
+<pre tabindex=0><code>	# 1.导出整个数据库  
     # mysqldump -u用户名 -p密码  数据库名 &gt; 导出的文件名 
 　　mysqldump -uroot -pmysql sva_rec  &gt; e:\sva_rec.sql 
 
@@ -630,22 +442,22 @@ sudo /etc/init.d/mysql restart
 
 　　mysqldump -u用户名 -p 密码 -d数据库名  表名&gt; 导出的文件名 
 　　mysqldump -uroot -pmysql -d sva_rec date_rec_drv&gt; e:\date_rec_drv.sql 
-</code></pre><h3 id="导入数据">导入数据</h3>
-<p><a href="https://www.cnblogs.com/zcw-ios/articles/3319480.html">导入\导出表结构或数据</a>
-<a href="https://www.cnblogs.com/yuwensong/p/3955834.html">mysql导入导出sql文件</a></p>
-<pre><code>#常用source 命令
+</code></pre><h3 id=导入数据>导入数据</h3>
+<p><a href=https://www.cnblogs.com/zcw-ios/articles/3319480.html>导入\导出表结构或数据</a>
+<a href=https://www.cnblogs.com/yuwensong/p/3955834.html>mysql导入导出sql文件</a></p>
+<pre tabindex=0><code>#常用source 命令
 #进入mysql数据库控制台，如
 mysql -u root -p
 mysql&gt;use 数据库
 # 然后使用source命令，后面参数为脚本文件(如这里用到的.sql)
 mysql&gt;source path/to/dbname.sql
-</code></pre><h3 id="数据库查询时间转换">数据库查询时间转换</h3>
+</code></pre><h3 id=数据库查询时间转换>数据库查询时间转换</h3>
 <p>FROM_UNIXTIME</p>
-<pre><code>SELECT FROM_UNIXTIME(ii.match_time/1000), ii.* FROM `intervene_info` as ii 
+<pre tabindex=0><code>SELECT FROM_UNIXTIME(ii.match_time/1000), ii.* FROM `intervene_info` as ii 
 	where ii.adapt_id in('xxx') and ii.tindex&gt;0 and ii.swj_email='intervene.109@xxx.cn';
-</code></pre><h3 id="新增修改表名列名">新增/修改表名、列名</h3>
-<p><a href="https://blog.csdn.net/ws84643557/article/details/6939846">添加列，修改列，删除列</a></p>
-<pre><code>--修改表名 
+</code></pre><h3 id=新增修改表名列名>新增/修改表名、列名</h3>
+<p><a href=https://blog.csdn.net/ws84643557/article/details/6939846>添加列，修改列，删除列</a></p>
+<pre tabindex=0><code>--修改表名 
 alter table test rename test1; 
 
 --添加表列 
@@ -684,104 +496,53 @@ DELETE [LOW_PRIORITY] [QUICK] [IGNORE] FROM tbl_name
 [LIMIT row_count] 
 
 delete from friends;
-</code></pre><h3 id="拼接字段concat">拼接字段concat</h3>
-<p><a href="https://blog.csdn.net/u012260238/article/details/70245452">参考</a></p>
-<pre><code>#将多个字段值拼接为新的值
+</code></pre><h3 id=拼接字段concat>拼接字段concat</h3>
+<p><a href=https://blog.csdn.net/u012260238/article/details/70245452>参考</a></p>
+<pre tabindex=0><code>#将多个字段值拼接为新的值
 select *, CONCAT(git_group ,'/', project_name) as name from ut_block where git_group = 'nr';
-</code></pre><h3 id="命令行">命令行</h3>
-<h4 id="登录远程数据库">登录远程数据库</h4>
+</code></pre><h3 id=命令行>命令行</h3>
+<h4 id=登录远程数据库>登录远程数据库</h4>
 <p>mysql -P 3306 -h 192.168.1.104 -u root -p</p>
-<h4 id="查看表结构-1">查看表结构</h4>
+<h4 id=查看表结构-1>查看表结构</h4>
 <p>show columns from customers;</p>
-<h4 id="查看记录">查看记录</h4>
+<h4 id=查看记录>查看记录</h4>
 <ul>
 <li>select count(1) from table; 忽略所有列</li>
 <li>select count('') from table;-返回表的记录数</li>
 <li>select count(0) from table;-返回表的记录数</li>
 <li>select count(null) from table;-返回0</li>
 </ul>
-
-  
-  
-
-  
 <div class="prev-next-post pure-g">
-  <div class="pure-u-1-24" style="text-align: left;">
-    
-    <a href="http://gebitang.com/post/algo/algo-linked-list/"><i class="fa fa-chevron-left"></i></a>
-    
-  </div>
-  <div class="pure-u-10-24">
-    
-    <nav class="prev">
-      <a href="http://gebitang.com/post/algo/algo-linked-list/">Linked list problems solution</a>
-    </nav>
-    
-  </div>
-  <div class="pure-u-2-24">
-    &nbsp;
-  </div>
-  <div class="pure-u-10-24">
-    
-    <nav class="next">
-      <a href="http://gebitang.com/post/jiansh/us/%E8%BF%9B%E7%A8%8B%E4%BF%A1%E6%81%AF%E8%B7%9F%E8%B8%AAtop-jps-jstack/">进程信息跟踪：top-jps-jstack</a>
-    </nav>
-    
-  </div>
-  <div class="pure-u-1-24" style="text-align: right;">
-    
-    <a href="http://gebitang.com/post/jiansh/us/%E8%BF%9B%E7%A8%8B%E4%BF%A1%E6%81%AF%E8%B7%9F%E8%B8%AAtop-jps-jstack/"><i class="fa fa-chevron-right"></i></a>
-    
-  </div>
+<div class=pure-u-1-24 style=text-align:left>
+<a href=http://gebitang.com/post/how/apple-dev/><i class="fa fa-chevron-left"></i></a>
 </div>
-
-
-
-  
-<div id="disqus_thread"></div>
-<script type="text/javascript">
-
-(function() {
-    
-    
-    if (window.location.hostname == "localhost")
-        return;
-
-    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-    var disqus_shortname = 'gebitang';
-    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-})();
-</script>
-<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="http://disqus.com/" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
-
-
+<div class=pure-u-10-24>
+<nav class=prev>
+<a href=http://gebitang.com/post/how/apple-dev/>How to develop on MacOS for Apple platform</a>
+</nav>
 </div>
-
+<div class=pure-u-2-24>
+&nbsp;
+</div>
+<div class=pure-u-10-24>
+<nav class=next>
+<a href=http://gebitang.com/post/jiansh/us/%E8%BF%9B%E7%A8%8B%E4%BF%A1%E6%81%AF%E8%B7%9F%E8%B8%AAtop-jps-jstack/>进程信息跟踪：top-jps-jstack</a>
+</nav>
+</div>
+<div class=pure-u-1-24 style=text-align:right>
+<a href=http://gebitang.com/post/jiansh/us/%E8%BF%9B%E7%A8%8B%E4%BF%A1%E6%81%AF%E8%B7%9F%E8%B8%AAtop-jps-jstack/><i class="fa fa-chevron-right"></i></a>
 </div>
 </div>
-<script src="http://gebitang.com/js/ui.js"></script>
-<script src="http://gebitang.com/js/menus.js"></script>
-
-
-<script>
-  
-  if (window.location.hostname != "localhost") {
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-    ga('create', 'UA-34303694-1', 'auto');
-    ga('send', 'pageview');
-  }
-</script>
-
-
-
-
-<button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
+<div id=disqus_thread></div>
+<script type=text/javascript>(function(){var a,b;if(window.location.hostname=="localhost")return;a=document.createElement('script'),a.type='text/javascript',a.async=!0,b='gebitang',a.src='//'+b+'.disqus.com/embed.js',(document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(a)})()</script>
+<noscript>Please enable JavaScript to view the <a href=http://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript>
+<a href=http://disqus.com/ class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a>
+</div>
+</div>
+</div>
+<script src=http://gebitang.com/js/ui.js></script>
+<script src=http://gebitang.com/js/menus.js></script>
+<script>window.location.hostname!="localhost"&&(function(a,e,f,g,b,c,d){a.GoogleAnalyticsObject=b,a[b]=a[b]||function(){(a[b].q=a[b].q||[]).push(arguments)},a[b].l=1*new Date,c=e.createElement(f),d=e.getElementsByTagName(f)[0],c.async=1,c.src=g,d.parentNode.insertBefore(c,d)}(window,document,'script','//www.google-analytics.com/analytics.js','ga'),ga('create','UA-34303694-1','auto'),ga('send','pageview'))</script>
+<button onclick=topFunction() id=myBtn title="Go to top">Top</button>
 </body>
 </html>
-

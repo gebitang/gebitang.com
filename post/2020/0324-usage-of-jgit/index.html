@@ -1,288 +1,105 @@
-<!DOCTYPE html>
-<html xmlns:wb="http://open.weibo.com/wb" lang="en" >
-
+<!doctype html><html xmlns:wb=http://open.weibo.com/wb lang=en>
 <head>
-  <meta http-equiv="content-type" content="text/html; charset=utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Usage of JGit">
-  <meta name="generator" content="Hugo 0.74.3" />
-
-  <title>JGit 支持推送 &middot; 戈壁堂</title>
-
-    
-
-  
-  
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/pure-min.css">
-
-  <!--[if lte IE 8]>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-old-ie-min.css">
-  <![endif]-->
-  <!--[if gt IE 8]><!-->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-min.css">
-  <!--<![endif]-->
-
-  <!--[if lte IE 8]>
-  <link rel="stylesheet" href="http://gebitang.com/css/side-menu-old-ie.css">
-  <![endif]-->
-  <!--[if gt IE 8]><!-->
-  <link rel="stylesheet" href="http://gebitang.com/css/side-menu.css">
-  <!--<![endif]-->
-
-  <link rel="stylesheet" href="http://gebitang.com/css/blackburn.css">
-
-  
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.9.0/css/all.css">
-
-  
-  <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet" type="text/css">
-
-  
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-
- 
-  
-
-  
-  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/androidstudio.min.css">
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
-  
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
-  
-  <script>hljs.initHighlightingOnLoad();</script>
-  
-
-  <link rel="shortcut icon" href="http://gebitang.com/img/favicon.ico" type="image/x-icon" />
-
-  
-    
-        <link rel="stylesheet" href="http://gebitang.com/css/my.css">
-    
-  
-  
-    
-        <script src="http://gebitang.com/js/my.js"></script>
-    
-  
-
+<meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<meta name=description content="Usage of JGit">
+<meta name=generator content="Hugo 0.91.2">
+<title>JGit 支持推送 &#183; 戈壁堂</title>
+<link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/pure-min.css><!--[if lte IE 8]><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-old-ie-min.css><![endif]--><!--[if gt IE 8]><!-->
+<link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-min.css><!--<![endif]--><!--[if lte IE 8]><link rel=stylesheet href=http://gebitang.com/css/side-menu-old-ie.css><![endif]--><!--[if gt IE 8]><!-->
+<link rel=stylesheet href=http://gebitang.com/css/side-menu.css><!--<![endif]-->
+<link rel=stylesheet href=http://gebitang.com/css/blackburn.css>
+<link rel=stylesheet href=https://use.fontawesome.com/releases/v5.9.0/css/all.css>
+<link href="https://fonts.googleapis.com/css?family=Raleway" rel=stylesheet type=text/css>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<link rel=stylesheet href=//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/androidstudio.min.css>
+<script src=//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js></script>
+<script src=//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js></script>
+<script>hljs.initHighlightingOnLoad()</script>
+<link rel="shortcut icon" href=http://gebitang.com/img/favicon.ico type=image/x-icon>
+<link rel=stylesheet href=http://gebitang.com/css/my.css>
+<script src=http://gebitang.com/js/my.js></script>
 </head>
-
-
 <body>
-<div id="layout">
-
-  
-<a href="#menu" id="menuLink" class="menu-link">
-  
-  <span></span>
+<div id=layout>
+<a href=#menu id=menuLink class=menu-link>
+<span></span>
 </a>
-<div id="menu">
-
-  
-  <a class="pure-menu-heading brand" href="http://gebitang.com/">Gebitang</a>
-
-
-  <div class="pure-menu">
-    <ul class="pure-menu-list">
-      
-      
-        <li class="pure-menu-item">
-          <a class="pure-menu-link" href="http://gebitang.com/"><i class='fa fa-home fa-fw'></i>Home</a>
-      
-        </li>
-      
-      
-        <li class="pure-menu-item">
-          <a class="pure-menu-link" href="http://gebitang.com/post/"><i class='fa fa-list fa-fw'></i>Posts</a>
-      
-        </li>
-      
-      
-        <li class="pure-menu-item">
-          <a class="pure-menu-link" href="http://gebitang.com/about/"><i class='fa fa-user fa-fw'></i>About</a>
-      
-        </li>
-      
-      
-        <li class="pure-menu-item">
-          <a class="pure-menu-link" href="http://gebitang.com/contact/"><i class='fa fa-phone fa-fw'></i>Contact</a>
-      
-        </li>
-      
-      
-        <li class="pure-menu-item">
-          <a class="pure-menu-link" href="http://gebitang.com/tags/"><i class='fa fa-tags fa-fw'></i>Tags</a>
-      
-        </li>
-      
-      
-        <li class="pure-menu-item">
-          <a class="pure-menu-link" href="http://gebitang.com/topics/"><i class='fa fa-folder fa-fw'></i>Topics</a>
-      
-        </li>
-      
-    </ul>
-  </div>
-
-  <div class="pure-menu social">
-  <ul class="pure-menu-list">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-  </ul>
+<div id=menu>
+<a class="pure-menu-heading brand" href=http://gebitang.com/>Gebitang</a>
+<div class=pure-menu>
+<ul class=pure-menu-list>
+<li class=pure-menu-item>
+<a class=pure-menu-link href=http://gebitang.com/><i class="fa fa-home fa-fw"></i>Home</a>
+</li>
+<li class=pure-menu-item>
+<a class=pure-menu-link href=http://gebitang.com/post/><i class="fa fa-list fa-fw"></i>Posts</a>
+</li>
+<li class=pure-menu-item>
+<a class=pure-menu-link href=http://gebitang.com/about/><i class="fa fa-user fa-fw"></i>About</a>
+</li>
+<li class=pure-menu-item>
+<a class=pure-menu-link href=http://gebitang.com/contact/><i class="fa fa-phone fa-fw"></i>Contact</a>
+</li>
+<li class=pure-menu-item>
+<a class=pure-menu-link href=http://gebitang.com/tags/><i class="fa fa-tags fa-fw"></i>Tags</a>
+</li>
+<li class=pure-menu-item>
+<a class=pure-menu-link href=http://gebitang.com/topics/><i class="fa fa-folder fa-fw"></i>Topics</a>
+</li>
+</ul>
 </div>
-
-
-  <div>
-
-  <div class="small-print">
-  	<small>
-    <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="知识共享许可协议" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/80x15.png" /></a><br/>本<span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" rel="dct:type">作品</span>由<a xmlns:cc="http://creativecommons.org/ns#" href="http://gebitang.com" property="cc:attributionName" rel="cc:attributionURL">&nbsp;Gebitang&nbsp;&nbsp;</a>采用<a rel="license" href="http://creativecommons.org/licenses/by/4.0/">知识共享署名 4.0 国际许可协议</a>进行许可&nbsp;&copy; 2018
-    </small>
-
-  </div>
-
-  <div class="small-print">
-    <small></small>
-  </div>
-  <div class="small-print">
-    <small>Built with&nbsp;<a href="https://gohugo.io/" target="_blank">Hugo</a></small>
-    <small>Theme&nbsp;<a href="https://github.com/yoshiharuyamashita/blackburn" target="_blank">Blackburn</a></small>
-  </div>
-
-  <div style="display:none">
-  <div class="small-print">
-    <small>
-    <wb:follow-button uid="2446212465" type="red_1" width="67" height="24"></wb:follow-button>
-  </small>
-  </div>
-  </div>
-
+<div class="pure-menu social">
+<ul class=pure-menu-list>
+</ul>
 </div>
-
+<div>
+<div class=small-print>
+<small>
+<a rel=license href=http://creativecommons.org/licenses/by/4.0/><img alt=知识共享许可协议 style=border-width:0 src=https://i.creativecommons.org/l/by/4.0/80x15.png></a><br>本<span xmlns:dct=http://purl.org/dc/terms/ href=http://purl.org/dc/dcmitype/Text rel=dct:type>作品</span>由<a xmlns:cc=http://creativecommons.org/ns# href=http://gebitang.com property="cc:attributionName" rel=cc:attributionurl>&nbsp;Gebitang&nbsp;&nbsp;</a>采用<a rel=license href=http://creativecommons.org/licenses/by/4.0/>知识共享署名 4.0 国际许可协议</a>进行许可&nbsp;&copy; 2018
+</small>
 </div>
-
-
-  <div id="main">
-
-
-<div class="header">
-  <h1>JGit 支持推送</h1>
-  <h2>Usage of JGit</h2>
+<div class=small-print>
+<small></small>
 </div>
-<div class="content">
-
-  <div class="post-meta">
-
-  <div>
-    <i class="fa fa-calendar fa-fw"></i>
-    <time>2020-03-24</time>
-  </div>
-
-  
-
-  
-  
-  
-  <div>
-    <i class="fa fa-folder fa-fw"></i>
-    
-      <a class="post-taxonomy-topic" href="http://gebitang.com/topics/git">git</a>
-    
-  </div>
-  
-  
-
-  
-  
-  
-  
-
+<div class=small-print>
+<small>Built with&nbsp;<a href=https://gohugo.io/ target=_blank>Hugo</a></small>
+<small>Theme&nbsp;<a href=https://github.com/yoshiharuyamashita/blackburn target=_blank>Blackburn</a></small>
 </div>
-
-  
-
-  <blockquote>
-<p><a href="https://www.eclipse.org/jgit">JGit</a> is a pure Java library implementing the Git version control system. It is an Eclipse project and started out as the Git library for EGit, which provides a Git integration into the Eclipse IDE.</p>
+<div style=display:none>
+<div class=small-print>
+<small>
+<wb:follow-button uid=2446212465 type=red_1 width=67 height=24></wb:follow-button>
+</small>
+</div>
+</div>
+</div>
+</div>
+<div id=main>
+<div class=header>
+<h1>JGit 支持推送</h1>
+<h2>Usage of JGit</h2>
+</div>
+<div class=content>
+<div class=post-meta>
+<div>
+<i class="fa fa-calendar fa-fw"></i>
+<time>2020-03-24</time>
+</div>
+<div>
+<i class="fa fa-folder fa-fw"></i>
+<a class=post-taxonomy-topic href=http://gebitang.com/topics/git>git</a>
+</div>
+</div>
+<blockquote>
+<p><a href=https://www.eclipse.org/jgit>JGit</a> is a pure Java library implementing the Git version control system. It is an Eclipse project and started out as the Git library for EGit, which provides a Git integration into the Eclipse IDE.</p>
 </blockquote>
-<p><a href="https://www.baeldung.com/jgit">A Guide to JGit</a><br>
-<a href="https://www.vogella.com/tutorials/JGit/article.html#opening-a-local-repository-with-jgit">JGit - Tutorial</a><br>
-<a href="https://wiki.eclipse.org/JGit/User_Guide">JGit User Guide</a></p>
+<p><a href=https://www.baeldung.com/jgit>A Guide to JGit</a><br>
+<a href=https://www.vogella.com/tutorials/JGit/article.html#opening-a-local-repository-with-jgit>JGit - Tutorial</a><br>
+<a href=https://wiki.eclipse.org/JGit/User_Guide>JGit User Guide</a></p>
 <p>基础的流程包括：clone、更新内容、提交commit、推送。教程通常缺少最后一步：推送更新到远端。</p>
-<p>使用<a href="https://stackoverflow.com/a/47458653/1087122">用户名、密码方式</a>——</p>
-<pre><code>   Git git = Git.open(localPath); 
+<p>使用<a href=https://stackoverflow.com/a/47458653/1087122>用户名、密码方式</a>——</p>
+<pre tabindex=0><code>   Git git = Git.open(localPath); 
 
     // add remote repo:
     RemoteAddCommand remoteAddCommand = git.remoteAdd();
@@ -296,24 +113,24 @@
     pushCommand.setCredentialsProvider(new UsernamePasswordCredentialsProvider(&quot;username&quot;, &quot;password&quot;));
     // you can add more settings here if needed
     pushCommand.call();    
-</code></pre><p>针对<strong>github</strong>可优化未token方式，从<a href="https://github.com/settings/tokens">github tokens</a>这里新建一个自己的token，然后上面的Credential Provider可以直接使用<code>new UsernamePasswordCredentialsProvider(&quot;token&quot;, &quot;&quot;</code>即可。</p>
+</code></pre><p>针对<strong>github</strong>可优化未token方式，从<a href=https://github.com/settings/tokens>github tokens</a>这里新建一个自己的token，然后上面的Credential Provider可以直接使用<code>new UsernamePasswordCredentialsProvider("token", ""</code>即可。</p>
 <p>上面的内容亲测可用。</p>
 <blockquote>
 <p>GitHub uses password authentication for https URLs and public-key authentication for SSH URLs</p>
 </blockquote>
 <hr>
-<p>使用public key时需要注意：Windows环境下生成的私钥默认无法识别（因为head行不兼容，<a href="https://stackoverflow.com/a/55740276/1087122">参考这里</a>）使用<code>ssh-keygen -p -f file -m pem -P passphrase -N passphrase</code>进行重置（如果创建时passphrase没有设置，使用&quot;&ldquo;代替即可）</p>
-<p><a href="https://www.codeaffine.com/2014/12/09/jgit-authentication/">JGit Authentication Explained</a>这里提到了各个不同协议使用的区别。使用SSH的方式暂未验证。</p>
-<p><a href="https://github.com/eclipse/jgit/tree/master/org.eclipse.jgit.test">org.eclipse.jgit.test</a>官方测试库里有对应的代码。</p>
+<p>使用public key时需要注意：Windows环境下生成的私钥默认无法识别（因为head行不兼容，<a href=https://stackoverflow.com/a/55740276/1087122>参考这里</a>）使用<code>ssh-keygen -p -f file -m pem -P passphrase -N passphrase</code>进行重置（如果创建时passphrase没有设置，使用"&ldquo;代替即可）</p>
+<p><a href=https://www.codeaffine.com/2014/12/09/jgit-authentication/>JGit Authentication Explained</a>这里提到了各个不同协议使用的区别。使用SSH的方式暂未验证。</p>
+<p><a href=https://github.com/eclipse/jgit/tree/master/org.eclipse.jgit.test>org.eclipse.jgit.test</a>官方测试库里有对应的代码。</p>
 <p>通常使用的两种方式——</p>
 <ul>
 <li><code>https://github.com/username/project.git</code>需要使用用户名+密码登录</li>
 <li><code>git@github.com:username/project.git</code>表示SSH方式登录</li>
 </ul>
-<p><a href="https://gist.github.com/grawity/4392747">这里</a>对各个协议类型做了详细的说明。备份如下——</p>
+<p><a href=https://gist.github.com/grawity/4392747>这里</a>对各个协议类型做了详细的说明。备份如下——</p>
 <hr>
 <p>Primary differences between SSH and HTTPS. This post is specifically about accessing Git repositories on GitHub.</p>
-<h2 id="protocols-to-choose-from-when-cloning">Protocols to choose from when cloning:</h2>
+<h2 id=protocols-to-choose-from-when-cloning>Protocols to choose from when cloning:</h2>
 <p><strong>plain Git</strong>, aka <code>git://github.com/</code></p>
 <ul>
 <li>
@@ -336,10 +153,10 @@
 <p>Uses <strong>password</strong> authentication for pushing, and still allows anonymous pull.</p>
 </li>
 <li>
-<p>Downside: You have to enter your GitHub password every time you push. <a href="https://help.github.com/articles/set-up-git#password-caching">Git can remember passwords</a> for a few minutes, but you need to be careful when storing the password permanently – since it can be used to change anything in your GitHub account.</p>
+<p>Downside: You have to enter your GitHub password every time you push. <a href=https://help.github.com/articles/set-up-git#password-caching>Git can remember passwords</a> for a few minutes, but you need to be careful when storing the password permanently – since it can be used to change anything in your GitHub account.</p>
 </li>
 <li>
-<p>If you have two-factor authentication enabled, you will have to use a <a href="https://help.github.com/articles/creating-an-access-token-for-command-line-use">personal access token</a> instead of your regular password.</p>
+<p>If you have two-factor authentication enabled, you will have to use a <a href=https://help.github.com/articles/creating-an-access-token-for-command-line-use>personal access token</a> instead of your regular password.</p>
 </li>
 <li>
 <p>HTTPS <strong>works practically everywhere</strong>, even in places which block SSH and plain-Git protocols. In some cases, it can even be <strong>a little faster</strong> than SSH, especially over high-latency connections.</p>
@@ -360,7 +177,7 @@
 <p><strong>SSH</strong>, aka <code>git@github.com:</code> or <code>ssh://git@github.com/</code></p>
 <ul>
 <li>
-<p>Uses <strong>public-key</strong> authentication. You have to <a href="https://help.github.com/articles/generating-ssh-keys">generate a <strong>keypair</strong></a> (or &ldquo;public key&rdquo;), then add it to your GitHub account.</p>
+<p>Uses <strong>public-key</strong> authentication. You have to <a href=https://help.github.com/articles/generating-ssh-keys>generate a <strong>keypair</strong></a> (or &ldquo;public key&rdquo;), then add it to your GitHub account.</p>
 </li>
 <li>
 <p>Using keys is <strong>more secure than passwords</strong>, since you can add many to the same account (for example, a key for every computer you use GitHub from). The private keys on your computer can be protected with passphrases.</p>
@@ -381,8 +198,8 @@
 <p>(Note: This description is about GitHub. On personal servers, SSH can use passwords, anonymous access, or various other mechanisms.)</p>
 </li>
 </ul>
-<h2 id="mixing-protocols">Mixing protocols</h2>
-<h3 id="globally">Globally</h3>
+<h2 id=mixing-protocols>Mixing protocols</h2>
+<h3 id=globally>Globally</h3>
 <p>You can clone everything over <code>git://</code>, but tell Git to push over HTTPS.</p>
 <pre><code>[url &quot;https://github.com/&quot;]
     pushInsteadOf = git://github.com/
@@ -393,14 +210,14 @@
     pushInsteadOf = https://github.com/
 </code></pre>
 <p>These go to your <em>git</em> config file – sometimes <code>~/.config/git/config</code>, or <code>~/.gitconfig</code>, or just run <code>git config --edit --global</code>.</p>
-<h3 id="per-repository">Per-repository</h3>
-<p>You can also set different pull and push URLs for every remote separately, by changing <!-- raw HTML omitted -->remote.<!-- raw HTML omitted -->name<!-- raw HTML omitted -->.pushUrl<!-- raw HTML omitted --> in the repository&rsquo;s own <code>.git/config</code>:</p>
+<h3 id=per-repository>Per-repository</h3>
+<p>You can also set different pull and push URLs for every remote separately, by changing remote.name.pushUrl in the repository&rsquo;s own <code>.git/config</code>:</p>
 <pre><code>[remote &quot;origin&quot;]
     url = git://nullroute.eu.org/~grawity/rwho.git
     pushUrl = ssh://sine/pub/git/rwho.git
 </code></pre>
-<h3 id="jgit-拉取代码逻辑">JGit 拉取代码逻辑</h3>
-<p>默认clone方法，将默认的远端分支clone到本地。假设远端默认分支为master。则本地跟踪的最新分支为<code>HEAD -&gt; master, origin/master</code></p>
+<h3 id=jgit-拉取代码逻辑>JGit 拉取代码逻辑</h3>
+<p>默认clone方法，将默认的远端分支clone到本地。假设远端默认分支为master。则本地跟踪的最新分支为<code>HEAD -> master, origin/master</code></p>
 <p>这几个概念要理解清楚——</p>
 <ul>
 <li><code>master</code> is a local branch</li>
@@ -411,7 +228,7 @@ One remote:</li>
 <blockquote>
 <p><code>HEAD</code>: the current commit your repo is on. Most of the time HEAD points to the latest commit in your current branch, but that doesn&rsquo;t have to be the case. HEAD really just means &ldquo;what is my repo currently pointing at&rdquo;.</p>
 </blockquote>
-<pre><code>git = Git.cloneRepository()
+<pre tabindex=0><code>git = Git.cloneRepository()
                         .setURI(urlPath)
                         .setBranch(branch)
                         .setDirectory(localFile)
@@ -419,21 +236,21 @@ One remote:</li>
                         .call();
 </code></pre><p>相当于本地clone远端分支<code>origin/master</code>到本地<code>master</code>分支，当前最新<code>HEAD</code>执行<code>master</code>分支</p>
 <p>拉取代码是使用类似如下代码——</p>
-<pre><code>PullResult result = git.pull()
+<pre tabindex=0><code>PullResult result = git.pull()
     .setCredentialsProvider(user)
     .setRemote(&quot;origin&quot;)
     .setRemoteBranchName(&quot;dev&quot;)
     .call();
-</code></pre><p>这样操作的结果比较“诡异”——<code>HEAD -&gt; master, origin/dev</code>。相当于本地master分支重新跟踪了远端的<code>origin/dev</code>分支。</p>
+</code></pre><p>这样操作的结果比较“诡异”——<code>HEAD -> master, origin/dev</code>。相当于本地master分支重新跟踪了远端的<code>origin/dev</code>分支。</p>
 <p>命令行操作可以使用<code>git checkout -B master origin/master</code>重置。主要<code>-b|-B</code>的区别。</p>
 <blockquote>
-<p>-B &lt;new_branch&gt; is created if it doesn’t exist; otherwise, it is reset.</p>
+<p>-B &lt;new_branch> is created if it doesn’t exist; otherwise, it is reset.</p>
 </blockquote>
 <p>拉取前配合stash操作——<code>git.stashCreate().call();</code> 倒是可以满足“拉取指定分支最新代码”的需求。</p>
-<p><a href="https://github.com/centic9/jgit-cookbook">JGit使用示例</a>, Please make sure to take a look at the nicely written <a href="http://www.codeaffine.com/2015/12/15/getting-started-with-jgit/">introduction</a> and also use the existing <a href="http://download.eclipse.org/jgit/site/5.5.0.201909110433-r/apidocs/">JavaDoc</a> and the <a href="http://wiki.eclipse.org/JGit/User_Guide">User Guide</a> as well.</p>
-<p><a href="https://stackoverflow.com/questions/8196544/what-are-the-git-concepts-of-head-master-origin">What are the git concepts of HEAD, master, origin?</a></p>
+<p><a href=https://github.com/centic9/jgit-cookbook>JGit使用示例</a>, Please make sure to take a look at the nicely written <a href=http://www.codeaffine.com/2015/12/15/getting-started-with-jgit/>introduction</a> and also use the existing <a href=http://download.eclipse.org/jgit/site/5.5.0.201909110433-r/apidocs/>JavaDoc</a> and the <a href=http://wiki.eclipse.org/JGit/User_Guide>User Guide</a> as well.</p>
+<p><a href=https://stackoverflow.com/questions/8196544/what-are-the-git-concepts-of-head-master-origin>What are the git concepts of HEAD, master, origin?</a></p>
 <blockquote>
-<p>I highly recommend the book <a href="http://git-scm.com/book">&ldquo;Pro Git&rdquo; by Scott Chacon</a>. Take time and really read it, while exploring an actual git repo as you do.</p>
+<p>I highly recommend the book <a href=http://git-scm.com/book>&ldquo;Pro Git&rdquo; by Scott Chacon</a>. Take time and really read it, while exploring an actual git repo as you do.</p>
 </blockquote>
 <blockquote>
 <p><strong>HEAD</strong>: the current commit your repo is on. Most of the time <code>HEAD</code> points to the latest commit in your current branch, but that doesn&rsquo;t have to be the case. <code>HEAD</code> really just means &ldquo;what is my repo currently pointing at&rdquo;.</p>
@@ -451,19 +268,19 @@ One remote:</li>
 <p><code>HEAD</code> is an official notion in git. <code>HEAD</code> always has a well-defined meaning. <code>master</code> and <code>origin</code> are common names usually used in git, but they don&rsquo;t have to be.</p>
 </blockquote>
 <p>查看<code>.git/config</code>文件可以看到具体对应的分支，类似——</p>
-<pre><code>[remote &quot;origin&quot;]
+<pre tabindex=0><code>[remote &quot;origin&quot;]
         url = git@github.com:gebitang/gebitang.com.git
         fetch = +refs/heads/*:refs/remotes/origin/*
 [branch &quot;master&quot;]
         remote = origin
         merge = refs/heads/master
-</code></pre><p>“refs/heads/master” and “refs/remotes/origin/master”  are two different symbolic names that can point to different things. <code>refs/heads/master</code> is a branch in your working copy named <code>master</code>. Frequently that is a tracking branch of <code>refs/remotes/origin/master</code> because <code>origin</code> is the default name for the remote created by git clone and its primary branch is usually also named <code>master</code>.</p>
+</code></pre><p>“refs/heads/master” and “refs/remotes/origin/master” are two different symbolic names that can point to different things. <code>refs/heads/master</code> is a branch in your working copy named <code>master</code>. Frequently that is a tracking branch of <code>refs/remotes/origin/master</code> because <code>origin</code> is the default name for the remote created by git clone and its primary branch is usually also named <code>master</code>.</p>
 <p>You can see the difference between them with <code>git rev-list refs/heads/master..refs/remotes/origin/master</code> which will be empty if they are the same and will otherwise list the commits between them.</p>
-<h3 id="gitopennew-filelocalpath-报错">Git.open(new File(localPath)) 报错</h3>
+<h3 id=gitopennew-filelocalpath-报错>Git.open(new File(localPath)) 报错</h3>
 <p>先说结论：最大支持<strong>5</strong>个对象同时处理<code>Git git = Git.open(new File(localPath));</code> 的逻辑。提交的代码可以参考这里: <a href="https://git.eclipse.org/c/jgit/jgit.git/commit/?id=097f01bfb65dd8f7b3d562bbd1713ecf4be5675e">fixed threadpool up to 5 threads with LinkedBlockingQueue of unlimited queue size</a></p>
 <p>JGit工具可以使用类型如下代码创建<code>Git git = Git.open(new File(localPath));</code></p>
 <p>实际使用中遇到多个项目并行更新时报错，详情如下——</p>
-<pre><code>java.util.concurrent.RejectedExecutionException: Task java.util.concurrent.CompletableFuture$AsyncSupply@46cc6ff9 rejected from java.util.concurrent.ThreadPoolExecutor@5c820ea8[Running, pool size = 5, active threads = 5, queued tasks = 0, completed tasks = 0]
+<pre tabindex=0><code>java.util.concurrent.RejectedExecutionException: Task java.util.concurrent.CompletableFuture$AsyncSupply@46cc6ff9 rejected from java.util.concurrent.ThreadPoolExecutor@5c820ea8[Running, pool size = 5, active threads = 5, queued tasks = 0, completed tasks = 0]
         at java.util.concurrent.ThreadPoolExecutor$AbortPolicy.rejectedExecution(ThreadPoolExecutor.java:2063) ~[?:1.8.0_231]
         at java.util.concurrent.ThreadPoolExecutor.reject(ThreadPoolExecutor.java:830) ~[?:1.8.0_231]
         at java.util.concurrent.ThreadPoolExecutor.execute(ThreadPoolExecutor.java:1379) ~[?:1.8.0_231]
@@ -482,11 +299,11 @@ One remote:</li>
         at com.stf.web.service.GitService.openGitPull(GitService.java:124) [sharestf.20200916162334.jar:?]
 
 </code></pre><p>按图索骥即可，在<code>BaseRepositoryBuilder</code>的<code>build</code>方法中会新建<code>R repo = (R) new FileRepository(setup());</code>在<code>FileRepository</code>的构造方法中会进入<code> FileSnapshot.save(getIndexFile());</code>的逻辑——对于已存在的git仓库来说，代码——</p>
-<pre><code>if (!isBare()) {
+<pre tabindex=0><code>if (!isBare()) {
 			snapshot = FileSnapshot.save(getIndexFile());
 		}
 </code></pre><p>最终在读取FileStoreAttributes的方法<code>getFileStoreAttributes(Path dir) </code>中有异步调用——只有默认定义的Executor <code>FUTURE_RUNNER</code>进行执行操作。这个执行器的配置如下——</p>
-<pre><code>private static final Executor FUTURE_RUNNER = new ThreadPoolExecutor(0,
+<pre tabindex=0><code>private static final Executor FUTURE_RUNNER = new ThreadPoolExecutor(0,
 	5, 30L, TimeUnit.SECONDS, new SynchronousQueue&lt;Runnable&gt;(),
 	runnable -&gt; {
 		Thread t = new Thread(runnable, &quot;FileStoreAttributeReader-&quot; //$NON-NLS-1$
@@ -498,88 +315,37 @@ One remote:</li>
 	});
 </code></pre><p>这也是报错的原因：线程池中只有5个线程，都已经被占有<code>Running, pool size = 5, active threads = 5, queued tasks = 0, completed tasks = 0</code></p>
 <p>JGit中对Git的抽象需要研究下，为什么这里需要做一个<code> FileSnapshot.save</code>的动作？<code>FileStore</code>和<code>FileStoreAttributes</code>都代表什么含义？</p>
-
-  
-  
-
-  
 <div class="prev-next-post pure-g">
-  <div class="pure-u-1-24" style="text-align: left;">
-    
-    <a href="http://gebitang.com/post/how/learn-docker/"><i class="fa fa-chevron-left"></i></a>
-    
-  </div>
-  <div class="pure-u-10-24">
-    
-    <nav class="prev">
-      <a href="http://gebitang.com/post/how/learn-docker/">docker practice</a>
-    </nav>
-    
-  </div>
-  <div class="pure-u-2-24">
-    &nbsp;
-  </div>
-  <div class="pure-u-10-24">
-    
-    <nav class="next">
-      <a href="http://gebitang.com/post/2020/0325-hubble-30th-anniversary/">N44F</a>
-    </nav>
-    
-  </div>
-  <div class="pure-u-1-24" style="text-align: right;">
-    
-    <a href="http://gebitang.com/post/2020/0325-hubble-30th-anniversary/"><i class="fa fa-chevron-right"></i></a>
-    
-  </div>
+<div class=pure-u-1-24 style=text-align:left>
+<a href=http://gebitang.com/post/how/learn-docker/><i class="fa fa-chevron-left"></i></a>
 </div>
-
-
-
-  
-<div id="disqus_thread"></div>
-<script type="text/javascript">
-
-(function() {
-    
-    
-    if (window.location.hostname == "localhost")
-        return;
-
-    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-    var disqus_shortname = 'gebitang';
-    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-})();
-</script>
-<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="http://disqus.com/" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
-
-
+<div class=pure-u-10-24>
+<nav class=prev>
+<a href=http://gebitang.com/post/how/learn-docker/>docker practice</a>
+</nav>
 </div>
-
+<div class=pure-u-2-24>
+&nbsp;
+</div>
+<div class=pure-u-10-24>
+<nav class=next>
+<a href=http://gebitang.com/post/2020/0325-hubble-30th-anniversary/>N44F</a>
+</nav>
+</div>
+<div class=pure-u-1-24 style=text-align:right>
+<a href=http://gebitang.com/post/2020/0325-hubble-30th-anniversary/><i class="fa fa-chevron-right"></i></a>
 </div>
 </div>
-<script src="http://gebitang.com/js/ui.js"></script>
-<script src="http://gebitang.com/js/menus.js"></script>
-
-
-<script>
-  
-  if (window.location.hostname != "localhost") {
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-    ga('create', 'UA-34303694-1', 'auto');
-    ga('send', 'pageview');
-  }
-</script>
-
-
-
-
-<button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
+<div id=disqus_thread></div>
+<script type=text/javascript>(function(){var a,b;if(window.location.hostname=="localhost")return;a=document.createElement('script'),a.type='text/javascript',a.async=!0,b='gebitang',a.src='//'+b+'.disqus.com/embed.js',(document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(a)})()</script>
+<noscript>Please enable JavaScript to view the <a href=http://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript>
+<a href=http://disqus.com/ class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a>
+</div>
+</div>
+</div>
+<script src=http://gebitang.com/js/ui.js></script>
+<script src=http://gebitang.com/js/menus.js></script>
+<script>window.location.hostname!="localhost"&&(function(a,e,f,g,b,c,d){a.GoogleAnalyticsObject=b,a[b]=a[b]||function(){(a[b].q=a[b].q||[]).push(arguments)},a[b].l=1*new Date,c=e.createElement(f),d=e.getElementsByTagName(f)[0],c.async=1,c.src=g,d.parentNode.insertBefore(c,d)}(window,document,'script','//www.google-analytics.com/analytics.js','ga'),ga('create','UA-34303694-1','auto'),ga('send','pageview'))</script>
+<button onclick=topFunction() id=myBtn title="Go to top">Top</button>
 </body>
 </html>
-

@@ -1,294 +1,106 @@
-<!DOCTYPE html>
-<html xmlns:wb="http://open.weibo.com/wb" lang="en" >
-
+<!doctype html><html xmlns:wb=http://open.weibo.com/wb lang=en>
 <head>
-  <meta http-equiv="content-type" content="text/html; charset=utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="">
-  <meta name="generator" content="Hugo 0.74.3" />
-
-  <title>STF之Yarn二 &middot; 戈壁堂</title>
-
-    
-
-  
-  
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/pure-min.css">
-
-  <!--[if lte IE 8]>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-old-ie-min.css">
-  <![endif]-->
-  <!--[if gt IE 8]><!-->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-min.css">
-  <!--<![endif]-->
-
-  <!--[if lte IE 8]>
-  <link rel="stylesheet" href="http://gebitang.com/css/side-menu-old-ie.css">
-  <![endif]-->
-  <!--[if gt IE 8]><!-->
-  <link rel="stylesheet" href="http://gebitang.com/css/side-menu.css">
-  <!--<![endif]-->
-
-  <link rel="stylesheet" href="http://gebitang.com/css/blackburn.css">
-
-  
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.9.0/css/all.css">
-
-  
-  <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet" type="text/css">
-
-  
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-
- 
-  
-
-  
-  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/androidstudio.min.css">
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
-  
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
-  
-  <script>hljs.initHighlightingOnLoad();</script>
-  
-
-  <link rel="shortcut icon" href="http://gebitang.com/img/favicon.ico" type="image/x-icon" />
-
-  
-    
-        <link rel="stylesheet" href="http://gebitang.com/css/my.css">
-    
-  
-  
-    
-        <script src="http://gebitang.com/js/my.js"></script>
-    
-  
-
+<meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<meta name=description content>
+<meta name=generator content="Hugo 0.91.2">
+<title>STF之Yarn二 &#183; 戈壁堂</title>
+<link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/pure-min.css><!--[if lte IE 8]><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-old-ie-min.css><![endif]--><!--[if gt IE 8]><!-->
+<link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-min.css><!--<![endif]--><!--[if lte IE 8]><link rel=stylesheet href=http://gebitang.com/css/side-menu-old-ie.css><![endif]--><!--[if gt IE 8]><!-->
+<link rel=stylesheet href=http://gebitang.com/css/side-menu.css><!--<![endif]-->
+<link rel=stylesheet href=http://gebitang.com/css/blackburn.css>
+<link rel=stylesheet href=https://use.fontawesome.com/releases/v5.9.0/css/all.css>
+<link href="https://fonts.googleapis.com/css?family=Raleway" rel=stylesheet type=text/css>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<link rel=stylesheet href=//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/androidstudio.min.css>
+<script src=//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js></script>
+<script src=//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js></script>
+<script>hljs.initHighlightingOnLoad()</script>
+<link rel="shortcut icon" href=http://gebitang.com/img/favicon.ico type=image/x-icon>
+<link rel=stylesheet href=http://gebitang.com/css/my.css>
+<script src=http://gebitang.com/js/my.js></script>
 </head>
-
-
 <body>
-<div id="layout">
-
-  
-<a href="#menu" id="menuLink" class="menu-link">
-  
-  <span></span>
+<div id=layout>
+<a href=#menu id=menuLink class=menu-link>
+<span></span>
 </a>
-<div id="menu">
-
-  
-  <a class="pure-menu-heading brand" href="http://gebitang.com/">Gebitang</a>
-
-
-  <div class="pure-menu">
-    <ul class="pure-menu-list">
-      
-      
-        <li class="pure-menu-item">
-          <a class="pure-menu-link" href="http://gebitang.com/"><i class='fa fa-home fa-fw'></i>Home</a>
-      
-        </li>
-      
-      
-        <li class="pure-menu-item">
-          <a class="pure-menu-link" href="http://gebitang.com/post/"><i class='fa fa-list fa-fw'></i>Posts</a>
-      
-        </li>
-      
-      
-        <li class="pure-menu-item">
-          <a class="pure-menu-link" href="http://gebitang.com/about/"><i class='fa fa-user fa-fw'></i>About</a>
-      
-        </li>
-      
-      
-        <li class="pure-menu-item">
-          <a class="pure-menu-link" href="http://gebitang.com/contact/"><i class='fa fa-phone fa-fw'></i>Contact</a>
-      
-        </li>
-      
-      
-        <li class="pure-menu-item">
-          <a class="pure-menu-link" href="http://gebitang.com/tags/"><i class='fa fa-tags fa-fw'></i>Tags</a>
-      
-        </li>
-      
-      
-        <li class="pure-menu-item">
-          <a class="pure-menu-link" href="http://gebitang.com/topics/"><i class='fa fa-folder fa-fw'></i>Topics</a>
-      
-        </li>
-      
-    </ul>
-  </div>
-
-  <div class="pure-menu social">
-  <ul class="pure-menu-list">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-  </ul>
+<div id=menu>
+<a class="pure-menu-heading brand" href=http://gebitang.com/>Gebitang</a>
+<div class=pure-menu>
+<ul class=pure-menu-list>
+<li class=pure-menu-item>
+<a class=pure-menu-link href=http://gebitang.com/><i class="fa fa-home fa-fw"></i>Home</a>
+</li>
+<li class=pure-menu-item>
+<a class=pure-menu-link href=http://gebitang.com/post/><i class="fa fa-list fa-fw"></i>Posts</a>
+</li>
+<li class=pure-menu-item>
+<a class=pure-menu-link href=http://gebitang.com/about/><i class="fa fa-user fa-fw"></i>About</a>
+</li>
+<li class=pure-menu-item>
+<a class=pure-menu-link href=http://gebitang.com/contact/><i class="fa fa-phone fa-fw"></i>Contact</a>
+</li>
+<li class=pure-menu-item>
+<a class=pure-menu-link href=http://gebitang.com/tags/><i class="fa fa-tags fa-fw"></i>Tags</a>
+</li>
+<li class=pure-menu-item>
+<a class=pure-menu-link href=http://gebitang.com/topics/><i class="fa fa-folder fa-fw"></i>Topics</a>
+</li>
+</ul>
 </div>
-
-
-  <div>
-
-  <div class="small-print">
-  	<small>
-    <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="知识共享许可协议" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/80x15.png" /></a><br/>本<span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" rel="dct:type">作品</span>由<a xmlns:cc="http://creativecommons.org/ns#" href="http://gebitang.com" property="cc:attributionName" rel="cc:attributionURL">&nbsp;Gebitang&nbsp;&nbsp;</a>采用<a rel="license" href="http://creativecommons.org/licenses/by/4.0/">知识共享署名 4.0 国际许可协议</a>进行许可&nbsp;&copy; 2018
-    </small>
-
-  </div>
-
-  <div class="small-print">
-    <small></small>
-  </div>
-  <div class="small-print">
-    <small>Built with&nbsp;<a href="https://gohugo.io/" target="_blank">Hugo</a></small>
-    <small>Theme&nbsp;<a href="https://github.com/yoshiharuyamashita/blackburn" target="_blank">Blackburn</a></small>
-  </div>
-
-  <div style="display:none">
-  <div class="small-print">
-    <small>
-    <wb:follow-button uid="2446212465" type="red_1" width="67" height="24"></wb:follow-button>
-  </small>
-  </div>
-  </div>
-
+<div class="pure-menu social">
+<ul class=pure-menu-list>
+</ul>
 </div>
-
+<div>
+<div class=small-print>
+<small>
+<a rel=license href=http://creativecommons.org/licenses/by/4.0/><img alt=知识共享许可协议 style=border-width:0 src=https://i.creativecommons.org/l/by/4.0/80x15.png></a><br>本<span xmlns:dct=http://purl.org/dc/terms/ href=http://purl.org/dc/dcmitype/Text rel=dct:type>作品</span>由<a xmlns:cc=http://creativecommons.org/ns# href=http://gebitang.com property="cc:attributionName" rel=cc:attributionurl>&nbsp;Gebitang&nbsp;&nbsp;</a>采用<a rel=license href=http://creativecommons.org/licenses/by/4.0/>知识共享署名 4.0 国际许可协议</a>进行许可&nbsp;&copy; 2018
+</small>
 </div>
-
-
-  <div id="main">
-
-
-<div class="header">
-  <h1>STF之Yarn二</h1>
-  <h2></h2>
+<div class=small-print>
+<small></small>
 </div>
-<div class="content">
-
-  <div class="post-meta">
-
-  <div>
-    <i class="fa fa-calendar fa-fw"></i>
-    <time>2020-03-07</time>
-  </div>
-
-  
-
-  
-  
-  
-  <div>
-    <i class="fa fa-folder fa-fw"></i>
-    
-      <a class="post-taxonomy-topic" href="http://gebitang.com/topics/jiansh">jiansh</a>&nbsp;&#47;
-    
-      <a class="post-taxonomy-topic" href="http://gebitang.com/topics/stf">STF</a>
-    
-  </div>
-  
-  
-
-  
-  
-  
-  <div>
-    <i class="fa fa-tags fa-fw"></i>
-    
-      <a class="post-taxonomy-tag" href="http://gebitang.com/tags/jiansh">jiansh</a>
-    
-  </div>
-  
-  
-
+<div class=small-print>
+<small>Built with&nbsp;<a href=https://gohugo.io/ target=_blank>Hugo</a></small>
+<small>Theme&nbsp;<a href=https://github.com/yoshiharuyamashita/blackburn target=_blank>Blackburn</a></small>
 </div>
-
-  
-	<nav id="TableOfContents"></nav>
-  
-
-  <p><a href="https://www.jianshu.com/p/9c92020e854d">link on JianShu</a></p>
-<p>yarn的确会快得飞起。 <a href="https://www.jianshu.com/p/7201f9ba28c3">STF之Yarn一</a>中简单使用后，从头开始使用yarn安装STF。</p>
+<div style=display:none>
+<div class=small-print>
+<small>
+<wb:follow-button uid=2446212465 type=red_1 width=67 height=24></wb:follow-button>
+</small>
+</div>
+</div>
+</div>
+</div>
+<div id=main>
+<div class=header>
+<h1>STF之Yarn二</h1>
+<h2></h2>
+</div>
+<div class=content>
+<div class=post-meta>
+<div>
+<i class="fa fa-calendar fa-fw"></i>
+<time>2020-03-07</time>
+</div>
+<div>
+<i class="fa fa-folder fa-fw"></i>
+<a class=post-taxonomy-topic href=http://gebitang.com/topics/jiansh>jiansh</a>&nbsp;/
+<a class=post-taxonomy-topic href=http://gebitang.com/topics/stf>STF</a>
+</div>
+<div>
+<i class="fa fa-tags fa-fw"></i>
+<a class=post-taxonomy-tag href=http://gebitang.com/tags/jiansh>jiansh</a>
+</div>
+</div>
+<nav id=TableOfContents></nav>
+<p><a href=https://www.jianshu.com/p/9c92020e854d>link on JianShu</a></p>
+<p>yarn的确会快得飞起。 <a href=https://www.jianshu.com/p/7201f9ba28c3>STF之Yarn一</a>中简单使用后，从头开始使用yarn安装STF。</p>
 <p>进入到bower安装前端模块时，会遇到一些问题，类似——</p>
-<pre><code>➜  RemoteDevice git:(master) yarn install
+<pre tabindex=0><code>➜  RemoteDevice git:(master) yarn install
 yarn install v1.17.3
 [1/5] 🔍  Validating package.json...
 [2/5] 🔍  Resolving packages...
@@ -308,13 +120,13 @@ bower ng-context-menu#~1.0.5                                                vali
 bower ng-table#~1.0.0-beta.9                                                 EINVRES Request to https://bower.herokuapp.com/packages/ng-table failed with 502
 ✨  Done in 194.98s.
 </code></pre><p>第一次只注意到了 <code>Done </code>，没注意到<code>failed with 502</code>，直接启动，会遇到<code>Module not found: Error: Cannot resolve module 'angular' </code> 这是因为bower没有安装完整前端需要到模块。</p>
-<p>参考<a href="https://github.com/MicrosoftDocs/azure-docs/issues/10859">Bower installation of Angular fails due to use of deprecated Bower registry on Heroku </a> ，修改工程下到 .bowerrc 文件——</p>
-<pre><code>{
+<p>参考<a href=https://github.com/MicrosoftDocs/azure-docs/issues/10859>Bower installation of Angular fails due to use of deprecated Bower registry on Heroku </a> ，修改工程下到 .bowerrc 文件——</p>
+<pre tabindex=0><code>{
  &quot;directory&quot;: &quot;res/bower_components&quot;,
   &quot;registry&quot;: &quot;https://registry.bower.io&quot;
 }
 </code></pre><p>还是可能出现其他安装错误，因为要从github验证并下载模块。 多试几次<code>yarn install</code>，最后出现树状输出则表示安装成功。</p>
-<pre><code>doc-ready#1.0.4 res/bower_components/doc-ready
+<pre tabindex=0><code>doc-ready#1.0.4 res/bower_components/doc-ready
 └── eventie#1.0.6
 
 fizzy-ui-utils#1.0.1 res/bower_components/fizzy-ui-utils
@@ -325,90 +137,39 @@ matches-selector#1.0.3 res/bower_components/matches-selector
 
 lodash#3.10.1 res/bower_components/lodash
 ✨  Done in 76.18s.
-</code></pre><p><a href="https://stackoverflow.com/questions/40317578/yarn-global-command-not-working">Yarn global command not working</a>
-使用yarn安装到global的应用未生效问题 <a href="https://github.com/yarnpkg/yarn/issues/1321">yarn issues 1321</a></p>
-
-  
-  
-
-  
+</code></pre><p><a href=https://stackoverflow.com/questions/40317578/yarn-global-command-not-working>Yarn global command not working</a>
+使用yarn安装到global的应用未生效问题 <a href=https://github.com/yarnpkg/yarn/issues/1321>yarn issues 1321</a></p>
 <div class="prev-next-post pure-g">
-  <div class="pure-u-1-24" style="text-align: left;">
-    
-    <a href="http://gebitang.com/post/jiansh/stf/stf%E4%B9%8Bzeromq/"><i class="fa fa-chevron-left"></i></a>
-    
-  </div>
-  <div class="pure-u-10-24">
-    
-    <nav class="prev">
-      <a href="http://gebitang.com/post/jiansh/stf/stf%E4%B9%8Bzeromq/">STF之ZeroMQ</a>
-    </nav>
-    
-  </div>
-  <div class="pure-u-2-24">
-    &nbsp;
-  </div>
-  <div class="pure-u-10-24">
-    
-    <nav class="next">
-      <a href="http://gebitang.com/post/jiansh/stf/stf%E4%B9%8Byarn%E4%B8%80/">STF之Yarn一</a>
-    </nav>
-    
-  </div>
-  <div class="pure-u-1-24" style="text-align: right;">
-    
-    <a href="http://gebitang.com/post/jiansh/stf/stf%E4%B9%8Byarn%E4%B8%80/"><i class="fa fa-chevron-right"></i></a>
-    
-  </div>
+<div class=pure-u-1-24 style=text-align:left>
+<a href=http://gebitang.com/post/jiansh/stf/stf%E4%B9%8Bzeromq/><i class="fa fa-chevron-left"></i></a>
 </div>
-
-
-
-  
-<div id="disqus_thread"></div>
-<script type="text/javascript">
-
-(function() {
-    
-    
-    if (window.location.hostname == "localhost")
-        return;
-
-    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-    var disqus_shortname = 'gebitang';
-    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-})();
-</script>
-<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="http://disqus.com/" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
-
-
+<div class=pure-u-10-24>
+<nav class=prev>
+<a href=http://gebitang.com/post/jiansh/stf/stf%E4%B9%8Bzeromq/>STF之ZeroMQ</a>
+</nav>
 </div>
-
+<div class=pure-u-2-24>
+&nbsp;
+</div>
+<div class=pure-u-10-24>
+<nav class=next>
+<a href=http://gebitang.com/post/jiansh/stf/stf%E4%B9%8Byarn%E4%B8%80/>STF之Yarn一</a>
+</nav>
+</div>
+<div class=pure-u-1-24 style=text-align:right>
+<a href=http://gebitang.com/post/jiansh/stf/stf%E4%B9%8Byarn%E4%B8%80/><i class="fa fa-chevron-right"></i></a>
 </div>
 </div>
-<script src="http://gebitang.com/js/ui.js"></script>
-<script src="http://gebitang.com/js/menus.js"></script>
-
-
-<script>
-  
-  if (window.location.hostname != "localhost") {
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-    ga('create', 'UA-34303694-1', 'auto');
-    ga('send', 'pageview');
-  }
-</script>
-
-
-
-
-<button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
+<div id=disqus_thread></div>
+<script type=text/javascript>(function(){var a,b;if(window.location.hostname=="localhost")return;a=document.createElement('script'),a.type='text/javascript',a.async=!0,b='gebitang',a.src='//'+b+'.disqus.com/embed.js',(document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(a)})()</script>
+<noscript>Please enable JavaScript to view the <a href=http://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript>
+<a href=http://disqus.com/ class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a>
+</div>
+</div>
+</div>
+<script src=http://gebitang.com/js/ui.js></script>
+<script src=http://gebitang.com/js/menus.js></script>
+<script>window.location.hostname!="localhost"&&(function(a,e,f,g,b,c,d){a.GoogleAnalyticsObject=b,a[b]=a[b]||function(){(a[b].q=a[b].q||[]).push(arguments)},a[b].l=1*new Date,c=e.createElement(f),d=e.getElementsByTagName(f)[0],c.async=1,c.src=g,d.parentNode.insertBefore(c,d)}(window,document,'script','//www.google-analytics.com/analytics.js','ga'),ga('create','UA-34303694-1','auto'),ga('send','pageview'))</script>
+<button onclick=topFunction() id=myBtn title="Go to top">Top</button>
 </body>
 </html>
-

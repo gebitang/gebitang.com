@@ -1,36 +1,13 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>vim on 戈壁堂</title>
-    <link>http://gebitang.com/tags/vim/</link>
-    <description>Recent content in vim on 戈壁堂</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
-    <lastBuildDate>Mon, 16 Oct 2017 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="http://gebitang.com/tags/vim/index.xml" rel="self" type="application/rss+xml" />
-    
-    
-    <item>
-      <title>Learn Vim Progressively</title>
-      <link>http://gebitang.com/post/how/learn-vim-progressively/</link>
-      <pubDate>Mon, 16 Oct 2017 00:00:00 +0000</pubDate>
-      
-      <guid>http://gebitang.com/post/how/learn-vim-progressively/</guid>
-      <description>&lt;p&gt;鼓足了多次勇气，一直没有拿下这个神器。今天(2017-10-16)立个Flag：每天晚饭后至少练习30分钟，两个月后熟练使用VIM。&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Level Up&lt;/strong&gt;&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;ul&gt;
-&lt;li&gt;一、1st Level – Survive&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/blockquote&gt;
-&lt;ul&gt;
-&lt;li&gt;二、2nd Level – Feel comfortable&lt;/li&gt;
-&lt;li&gt;三、3rd Level – Better. Stronger. Faster.&lt;/li&gt;
-&lt;li&gt;四、4th Level – Vim Superpowers&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;现有水平：一&lt;/p&gt;</description>
-    </item>
-    
-  </channel>
-</rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>vim on 戈壁堂</title><link>http://gebitang.com/tags/vim/</link><description>Recent content in vim on 戈壁堂</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Mon, 16 Oct 2017 00:00:00 +0000</lastBuildDate><atom:link href="http://gebitang.com/tags/vim/index.xml" rel="self" type="application/rss+xml"/><item><title>Learn Vim Progressively</title><link>http://gebitang.com/post/how/learn-vim-progressively/</link><pubDate>Mon, 16 Oct 2017 00:00:00 +0000</pubDate><guid>http://gebitang.com/post/how/learn-vim-progressively/</guid><description>&lt;p>鼓足了多次勇气，一直没有拿下这个神器。今天(2017-10-16)立个Flag：每天晚饭后至少练习30分钟，两个月后熟练使用VIM。&lt;/p>
+&lt;p>&lt;strong>Level Up&lt;/strong>&lt;/p>
+&lt;blockquote>
+&lt;ul>
+&lt;li>一、1st Level – Survive&lt;/li>
+&lt;/ul>
+&lt;/blockquote>
+&lt;ul>
+&lt;li>二、2nd Level – Feel comfortable&lt;/li>
+&lt;li>三、3rd Level – Better. Stronger. Faster.&lt;/li>
+&lt;li>四、4th Level – Vim Superpowers&lt;/li>
+&lt;/ul>
+&lt;p>现有水平：一&lt;/p></description></item></channel></rss>

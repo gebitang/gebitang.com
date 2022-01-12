@@ -1,327 +1,140 @@
-<!DOCTYPE html>
-<html xmlns:wb="http://open.weibo.com/wb" lang="en" >
-
+<!doctype html><html xmlns:wb=http://open.weibo.com/wb lang=en>
 <head>
-  <meta http-equiv="content-type" content="text/html; charset=utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Lean Rust">
-  <meta name="generator" content="Hugo 0.74.3" />
-
-  <title>Rust &middot; 戈壁堂</title>
-
-    
-
-  
-  
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/pure-min.css">
-
-  <!--[if lte IE 8]>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-old-ie-min.css">
-  <![endif]-->
-  <!--[if gt IE 8]><!-->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-min.css">
-  <!--<![endif]-->
-
-  <!--[if lte IE 8]>
-  <link rel="stylesheet" href="http://gebitang.com/css/side-menu-old-ie.css">
-  <![endif]-->
-  <!--[if gt IE 8]><!-->
-  <link rel="stylesheet" href="http://gebitang.com/css/side-menu.css">
-  <!--<![endif]-->
-
-  <link rel="stylesheet" href="http://gebitang.com/css/blackburn.css">
-
-  
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.9.0/css/all.css">
-
-  
-  <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet" type="text/css">
-
-  
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-
- 
-  
-
-  
-  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/androidstudio.min.css">
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
-  
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
-  
-  <script>hljs.initHighlightingOnLoad();</script>
-  
-
-  <link rel="shortcut icon" href="http://gebitang.com/img/favicon.ico" type="image/x-icon" />
-
-  
-    
-        <link rel="stylesheet" href="http://gebitang.com/css/my.css">
-    
-  
-  
-    
-        <script src="http://gebitang.com/js/my.js"></script>
-    
-  
-
+<meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<meta name=description content="Lean Rust">
+<meta name=generator content="Hugo 0.91.2">
+<title>Rust &#183; 戈壁堂</title>
+<link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/pure-min.css><!--[if lte IE 8]><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-old-ie-min.css><![endif]--><!--[if gt IE 8]><!-->
+<link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-min.css><!--<![endif]--><!--[if lte IE 8]><link rel=stylesheet href=http://gebitang.com/css/side-menu-old-ie.css><![endif]--><!--[if gt IE 8]><!-->
+<link rel=stylesheet href=http://gebitang.com/css/side-menu.css><!--<![endif]-->
+<link rel=stylesheet href=http://gebitang.com/css/blackburn.css>
+<link rel=stylesheet href=https://use.fontawesome.com/releases/v5.9.0/css/all.css>
+<link href="https://fonts.googleapis.com/css?family=Raleway" rel=stylesheet type=text/css>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<link rel=stylesheet href=//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/androidstudio.min.css>
+<script src=//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js></script>
+<script src=//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js></script>
+<script>hljs.initHighlightingOnLoad()</script>
+<link rel="shortcut icon" href=http://gebitang.com/img/favicon.ico type=image/x-icon>
+<link rel=stylesheet href=http://gebitang.com/css/my.css>
+<script src=http://gebitang.com/js/my.js></script>
 </head>
-
-
 <body>
-<div id="layout">
-
-  
-<a href="#menu" id="menuLink" class="menu-link">
-  
-  <span></span>
+<div id=layout>
+<a href=#menu id=menuLink class=menu-link>
+<span></span>
 </a>
-<div id="menu">
-
-  
-  <a class="pure-menu-heading brand" href="http://gebitang.com/">Gebitang</a>
-
-
-  <div class="pure-menu">
-    <ul class="pure-menu-list">
-      
-      
-        <li class="pure-menu-item">
-          <a class="pure-menu-link" href="http://gebitang.com/"><i class='fa fa-home fa-fw'></i>Home</a>
-      
-        </li>
-      
-      
-        <li class="pure-menu-item">
-          <a class="pure-menu-link" href="http://gebitang.com/post/"><i class='fa fa-list fa-fw'></i>Posts</a>
-      
-        </li>
-      
-      
-        <li class="pure-menu-item">
-          <a class="pure-menu-link" href="http://gebitang.com/about/"><i class='fa fa-user fa-fw'></i>About</a>
-      
-        </li>
-      
-      
-        <li class="pure-menu-item">
-          <a class="pure-menu-link" href="http://gebitang.com/contact/"><i class='fa fa-phone fa-fw'></i>Contact</a>
-      
-        </li>
-      
-      
-        <li class="pure-menu-item">
-          <a class="pure-menu-link" href="http://gebitang.com/tags/"><i class='fa fa-tags fa-fw'></i>Tags</a>
-      
-        </li>
-      
-      
-        <li class="pure-menu-item">
-          <a class="pure-menu-link" href="http://gebitang.com/topics/"><i class='fa fa-folder fa-fw'></i>Topics</a>
-      
-        </li>
-      
-    </ul>
-  </div>
-
-  <div class="pure-menu social">
-  <ul class="pure-menu-list">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-  </ul>
+<div id=menu>
+<a class="pure-menu-heading brand" href=http://gebitang.com/>Gebitang</a>
+<div class=pure-menu>
+<ul class=pure-menu-list>
+<li class=pure-menu-item>
+<a class=pure-menu-link href=http://gebitang.com/><i class="fa fa-home fa-fw"></i>Home</a>
+</li>
+<li class=pure-menu-item>
+<a class=pure-menu-link href=http://gebitang.com/post/><i class="fa fa-list fa-fw"></i>Posts</a>
+</li>
+<li class=pure-menu-item>
+<a class=pure-menu-link href=http://gebitang.com/about/><i class="fa fa-user fa-fw"></i>About</a>
+</li>
+<li class=pure-menu-item>
+<a class=pure-menu-link href=http://gebitang.com/contact/><i class="fa fa-phone fa-fw"></i>Contact</a>
+</li>
+<li class=pure-menu-item>
+<a class=pure-menu-link href=http://gebitang.com/tags/><i class="fa fa-tags fa-fw"></i>Tags</a>
+</li>
+<li class=pure-menu-item>
+<a class=pure-menu-link href=http://gebitang.com/topics/><i class="fa fa-folder fa-fw"></i>Topics</a>
+</li>
+</ul>
 </div>
-
-
-  <div>
-
-  <div class="small-print">
-  	<small>
-    <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="知识共享许可协议" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/80x15.png" /></a><br/>本<span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" rel="dct:type">作品</span>由<a xmlns:cc="http://creativecommons.org/ns#" href="http://gebitang.com" property="cc:attributionName" rel="cc:attributionURL">&nbsp;Gebitang&nbsp;&nbsp;</a>采用<a rel="license" href="http://creativecommons.org/licenses/by/4.0/">知识共享署名 4.0 国际许可协议</a>进行许可&nbsp;&copy; 2018
-    </small>
-
-  </div>
-
-  <div class="small-print">
-    <small></small>
-  </div>
-  <div class="small-print">
-    <small>Built with&nbsp;<a href="https://gohugo.io/" target="_blank">Hugo</a></small>
-    <small>Theme&nbsp;<a href="https://github.com/yoshiharuyamashita/blackburn" target="_blank">Blackburn</a></small>
-  </div>
-
-  <div style="display:none">
-  <div class="small-print">
-    <small>
-    <wb:follow-button uid="2446212465" type="red_1" width="67" height="24"></wb:follow-button>
-  </small>
-  </div>
-  </div>
-
+<div class="pure-menu social">
+<ul class=pure-menu-list>
+</ul>
 </div>
-
+<div>
+<div class=small-print>
+<small>
+<a rel=license href=http://creativecommons.org/licenses/by/4.0/><img alt=知识共享许可协议 style=border-width:0 src=https://i.creativecommons.org/l/by/4.0/80x15.png></a><br>本<span xmlns:dct=http://purl.org/dc/terms/ href=http://purl.org/dc/dcmitype/Text rel=dct:type>作品</span>由<a xmlns:cc=http://creativecommons.org/ns# href=http://gebitang.com property="cc:attributionName" rel=cc:attributionurl>&nbsp;Gebitang&nbsp;&nbsp;</a>采用<a rel=license href=http://creativecommons.org/licenses/by/4.0/>知识共享署名 4.0 国际许可协议</a>进行许可&nbsp;&copy; 2018
+</small>
 </div>
-
-
-  <div id="main">
-
-
-<div class="header">
-  <h1>Rust</h1>
-  <h2>Lean Rust</h2>
+<div class=small-print>
+<small></small>
 </div>
-<div class="content">
-
-  <div class="post-meta">
-
-  <div>
-    <i class="fa fa-calendar fa-fw"></i>
-    <time>2021-05-27</time>
-  </div>
-
-  
-
-  
-  
-  
-  <div>
-    <i class="fa fa-folder fa-fw"></i>
-    
-      <a class="post-taxonomy-topic" href="http://gebitang.com/topics/rust">rust</a>
-    
-  </div>
-  
-  
-
-  
-  
-  
-  <div>
-    <i class="fa fa-tags fa-fw"></i>
-    
-      <a class="post-taxonomy-tag" href="http://gebitang.com/tags/rust">rust</a>
-    
-  </div>
-  
-  
-
+<div class=small-print>
+<small>Built with&nbsp;<a href=https://gohugo.io/ target=_blank>Hugo</a></small>
+<small>Theme&nbsp;<a href=https://github.com/yoshiharuyamashita/blackburn target=_blank>Blackburn</a></small>
 </div>
-
-  
-	<nav id="TableOfContents">
-  <ul>
-    <li>
-      <ul>
-        <li><a href="#安装">安装</a>
-          <ul>
-            <li><a href="#hello-world">Hello World</a></li>
-          </ul>
-        </li>
-        <li><a href="#ownership">Ownership</a></li>
-      </ul>
-    </li>
-  </ul>
+<div style=display:none>
+<div class=small-print>
+<small>
+<wb:follow-button uid=2446212465 type=red_1 width=67 height=24></wb:follow-button>
+</small>
+</div>
+</div>
+</div>
+</div>
+<div id=main>
+<div class=header>
+<h1>Rust</h1>
+<h2>Lean Rust</h2>
+</div>
+<div class=content>
+<div class=post-meta>
+<div>
+<i class="fa fa-calendar fa-fw"></i>
+<time>2021-05-27</time>
+</div>
+<div>
+<i class="fa fa-folder fa-fw"></i>
+<a class=post-taxonomy-topic href=http://gebitang.com/topics/rust>rust</a>
+</div>
+<div>
+<i class="fa fa-tags fa-fw"></i>
+<a class=post-taxonomy-tag href=http://gebitang.com/tags/rust>rust</a>
+</div>
+</div>
+<nav id=TableOfContents>
+<ul>
+<li>
+<ul>
+<li><a href=#安装>安装</a>
+<ul>
+<li><a href=#hello-world>Hello World</a></li>
+</ul>
+</li>
+<li><a href=#ownership>Ownership</a></li>
+</ul>
+</li>
+</ul>
 </nav>
-  
-
-  <p>受<a href="https://mp.weixin.qq.com/s/jaKjzc_1rkDe67rfpnFTgg">#本原 系列</a>吸引，安装了rust的windows开发环境，然后就没有然后了。现在有机会跟作者<a href="https://mp.weixin.qq.com/s/tkH6zZt5vsDL2gld6ufk2w">学习一下</a></p>
-<p>先看看<a href="https://tyrchen.github.io/rust-training/rust-training-all-in-one.html">slides</a>，补补基础课——好些简称我不知道啥含义:)</p>
+<p>受<a href=https://mp.weixin.qq.com/s/jaKjzc_1rkDe67rfpnFTgg>#本原 系列</a>吸引，安装了rust的windows开发环境，然后就没有然后了。现在有机会跟作者<a href=https://mp.weixin.qq.com/s/tkH6zZt5vsDL2gld6ufk2w>学习一下</a></p>
+<p>先看看<a href=https://tyrchen.github.io/rust-training/rust-training-all-in-one.html>slides</a>，补补基础课——好些简称我不知道啥含义:)</p>
 <ul>
 <li>GIL (Global interpreter lock)</li>
-<li>CSP (Communicating Sequential Processes) <a href="https://www.cs.cmu.edu/~crary/819-f09/Hoare78.pdf">原始论文</a></li>
+<li>CSP (Communicating Sequential Processes) <a href=https://www.cs.cmu.edu/~crary/819-f09/Hoare78.pdf>原始论文</a></li>
 <li>Duck Typing (动态类型)</li>
 <li>RAII (Resource Acquisition Is Initialization)</li>
 <li>FFI (Foreign Function Interface)</li>
 <li>MRC (manual reference counting)</li>
 <li>ARC (automatic reference counting)</li>
 </ul>
-<p><a href="https://coolshell.cn/articles/20845.html">RUST语言的编程范式</a>这篇之前看的时候早早就被劝退了，今天重读至少看完没晕。学习一段时间的Rust之后再重新去读这一篇:)</p>
-<p>学习Rust会“面对编译器编程”，需要一开始就面对所有的基础知识。<a href="https://lisha.ufsc.br/teaching/os/exercise/hello.html">The True Story of Hello World</a> 介绍“hello world”的一生。涉及到<a href="https://stackoverflow.com/questions/2223261/bss-stack-heap-data-code-text-where-each-of-these-start-in-memory">BSS, Stack, Heap, Data, Code/Text - Where each of these start in memory?</a>，<a href="https://imgur.com/a/JEObT">图片说明</a></p>
-<h3 id="安装">安装</h3>
-<p><a href="https://www.rust-lang.org/tools/install">rust 安装</a>——</p>
+<p><a href=https://coolshell.cn/articles/20845.html>RUST语言的编程范式</a>这篇之前看的时候早早就被劝退了，今天重读至少看完没晕。学习一段时间的Rust之后再重新去读这一篇:)</p>
+<p>学习Rust会“面对编译器编程”，需要一开始就面对所有的基础知识。<a href=https://lisha.ufsc.br/teaching/os/exercise/hello.html>The True Story of Hello World</a> 介绍“hello world”的一生。涉及到<a href=https://stackoverflow.com/questions/2223261/bss-stack-heap-data-code-text-where-each-of-these-start-in-memory>BSS, Stack, Heap, Data, Code/Text - Where each of these start in memory?</a>，<a href=https://imgur.com/a/JEObT>图片说明</a></p>
+<h3 id=安装>安装</h3>
+<p><a href=https://www.rust-lang.org/tools/install>rust 安装</a>——</p>
 <ul>
 <li>Windows: 下载<code>rusti-init.ext</code>进行安装，默认选项，安装完毕就可以使用</li>
 <li>类Unix平台：执行<code>curl https://sh.rustup.rs -sSf | sh</code></li>
 </ul>
 <p>安装完成后，添加环境变量。其中<code>.cargo/bin</code>目录包含所有的工具——</p>
 <ul>
-<li><code>rustup</code>管理rust工具本身：<a href="https://github.com/rust-lang/rustup">rustup</a>是一个<code>the rust toolchain installer</code> 用来安装rust以及对于的工具组件。更详细内容参考<a href="https://rust-lang.github.io/rustup/installation/index.html">rustup book</a></li>
+<li><code>rustup</code>管理rust工具本身：<a href=https://github.com/rust-lang/rustup>rustup</a>是一个<code>the rust toolchain installer</code> 用来安装rust以及对于的工具组件。更详细内容参考<a href=https://rust-lang.github.io/rustup/installation/index.html>rustup book</a></li>
 <li><code>rustc</code>相当于类似gcc的编译器，单个文件编译</li>
 <li><code>Cargo</code> 是 rust 的构建系统和包管理器，相当于工程抓手</li>
 </ul>
-<h4 id="hello-world">Hello World</h4>
+<h4 id=hello-world>Hello World</h4>
 <ul>
 <li>单个无依赖的rust文件可以使用<code>rustc main.rs</code>进行编译，生成可执行文件</li>
 <li>项目管理使用<code>cargo</code>(不同平台下，命令相同)：
@@ -334,7 +147,7 @@
 </ul>
 </li>
 </ul>
-<p><a href="https://doc.rust-lang.org/cargo/">cargo 官方文档</a></p>
+<p><a href=https://doc.rust-lang.org/cargo/>cargo 官方文档</a></p>
 <ul>
 <li>两类数据类型子集：标量（scalar）和复合（compound）
 <ul>
@@ -343,143 +156,143 @@
 </ul>
 </li>
 </ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust">
-<span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">main</span>() {
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-rust data-lang=rust>
+<span style=color:#66d9ef>fn</span> <span style=color:#a6e22e>main</span>() {
 
-    <span style="color:#75715e">//let x = 5;
-</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">let</span> <span style="color:#66d9ef">mut</span> x <span style="color:#f92672">=</span> <span style="color:#ae81ff">5</span>;
-    println<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;the value of x is {}&#34;</span>, x);
+    <span style=color:#75715e>//let x = 5;
+</span><span style=color:#75715e></span>    <span style=color:#66d9ef>let</span> <span style=color:#66d9ef>mut</span> x <span style=color:#f92672>=</span> <span style=color:#ae81ff>5</span>;
+    println!(<span style=color:#e6db74>&#34;the value of x is {}&#34;</span>, x);
 
-    x <span style="color:#f92672">=</span> <span style="color:#ae81ff">6</span>;
-    println<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;the value of x is {}&#34;</span>, x);
+    x <span style=color:#f92672>=</span> <span style=color:#ae81ff>6</span>;
+    println!(<span style=color:#e6db74>&#34;the value of x is {}&#34;</span>, x);
 
-    <span style="color:#66d9ef">const</span> MAX_POINT: <span style="color:#66d9ef">u32</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">100_000</span>;
+    <span style=color:#66d9ef>const</span> MAX_POINT: <span style=color:#66d9ef>u32</span> <span style=color:#f92672>=</span> <span style=color:#ae81ff>100_000</span>;
 
-    println<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;max point is {}&#34;</span>, MAX_POINT);
+    println!(<span style=color:#e6db74>&#34;max point is {}&#34;</span>, MAX_POINT);
 
-    <span style="color:#66d9ef">let</span> y <span style="color:#f92672">=</span> <span style="color:#ae81ff">5</span>;
-    <span style="color:#66d9ef">let</span> y <span style="color:#f92672">=</span> y <span style="color:#f92672">+</span> <span style="color:#ae81ff">2</span>;
-    <span style="color:#66d9ef">let</span> y <span style="color:#f92672">=</span> y <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>;
-    println<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;now the value of y is {}&#34;</span>, y);
+    <span style=color:#66d9ef>let</span> y <span style=color:#f92672>=</span> <span style=color:#ae81ff>5</span>;
+    <span style=color:#66d9ef>let</span> y <span style=color:#f92672>=</span> y <span style=color:#f92672>+</span> <span style=color:#ae81ff>2</span>;
+    <span style=color:#66d9ef>let</span> y <span style=color:#f92672>=</span> y <span style=color:#f92672>+</span> <span style=color:#ae81ff>1</span>;
+    println!(<span style=color:#e6db74>&#34;now the value of y is {}&#34;</span>, y);
 
-    <span style="color:#66d9ef">let</span> space <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;abc&#34;</span>;
-    <span style="color:#66d9ef">let</span> space <span style="color:#f92672">=</span> space.len();
-    println<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;the length of space is {}&#34;</span>, space);
+    <span style=color:#66d9ef>let</span> space <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;abc&#34;</span>;
+    <span style=color:#66d9ef>let</span> space <span style=color:#f92672>=</span> space.len();
+    println!(<span style=color:#e6db74>&#34;the length of space is {}&#34;</span>, space);
 
-    <span style="color:#75715e">// 加法
-</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">let</span> sum <span style="color:#f92672">=</span> <span style="color:#ae81ff">5</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">10</span>;
-    <span style="color:#75715e">// 减法
-</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">let</span> difference <span style="color:#f92672">=</span> <span style="color:#ae81ff">95.5</span> <span style="color:#f92672">-</span> <span style="color:#ae81ff">4.3</span>;
-    <span style="color:#75715e">// 乘法
-</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">let</span> product <span style="color:#f92672">=</span> <span style="color:#ae81ff">4</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">30</span>;
-    <span style="color:#75715e">// 除法
-</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">let</span> quotient <span style="color:#f92672">=</span> <span style="color:#ae81ff">56.7</span> <span style="color:#f92672">/</span> <span style="color:#ae81ff">32.2</span>;
-    <span style="color:#75715e">// 取余
-</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">let</span> remainder <span style="color:#f92672">=</span> <span style="color:#ae81ff">43</span> <span style="color:#f92672">%</span> <span style="color:#ae81ff">5</span>;
+    <span style=color:#75715e>// 加法
+</span><span style=color:#75715e></span>    <span style=color:#66d9ef>let</span> sum <span style=color:#f92672>=</span> <span style=color:#ae81ff>5</span> <span style=color:#f92672>+</span> <span style=color:#ae81ff>10</span>;
+    <span style=color:#75715e>// 减法
+</span><span style=color:#75715e></span>    <span style=color:#66d9ef>let</span> difference <span style=color:#f92672>=</span> <span style=color:#ae81ff>95.5</span> <span style=color:#f92672>-</span> <span style=color:#ae81ff>4.3</span>;
+    <span style=color:#75715e>// 乘法
+</span><span style=color:#75715e></span>    <span style=color:#66d9ef>let</span> product <span style=color:#f92672>=</span> <span style=color:#ae81ff>4</span> <span style=color:#f92672>*</span> <span style=color:#ae81ff>30</span>;
+    <span style=color:#75715e>// 除法
+</span><span style=color:#75715e></span>    <span style=color:#66d9ef>let</span> quotient <span style=color:#f92672>=</span> <span style=color:#ae81ff>56.7</span> <span style=color:#f92672>/</span> <span style=color:#ae81ff>32.2</span>;
+    <span style=color:#75715e>// 取余
+</span><span style=color:#75715e></span>    <span style=color:#66d9ef>let</span> remainder <span style=color:#f92672>=</span> <span style=color:#ae81ff>43</span> <span style=color:#f92672>%</span> <span style=color:#ae81ff>5</span>;
 
-    println<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;sum:{} difference:{} product:{}, quatient:{} remainder:{}&#34;</span>, sum, difference, product, quotient, remainder);
+    println!(<span style=color:#e6db74>&#34;sum:{} difference:{} product:{}, quatient:{} remainder:{}&#34;</span>, sum, difference, product, quotient, remainder);
 
-    <span style="color:#75715e">// char 类型的大小为四个字节(four bytes)，并代表了一个 Unicode 标量值（Unicode Scalar Value)
-</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">let</span> c <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;z&#39;</span>;
-    <span style="color:#66d9ef">let</span> z <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;ℤ&#39;</span>;
-    <span style="color:#66d9ef">let</span> heart_eyed_cat <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;😻&#39;</span>;
-    println<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;c:{} z:{} hec:{}&#34;</span>, c, z, heart_eyed_cat);
+    <span style=color:#75715e>// char 类型的大小为四个字节(four bytes)，并代表了一个 Unicode 标量值（Unicode Scalar Value)
+</span><span style=color:#75715e></span>    <span style=color:#66d9ef>let</span> c <span style=color:#f92672>=</span> <span style=color:#e6db74>&#39;z&#39;</span>;
+    <span style=color:#66d9ef>let</span> z <span style=color:#f92672>=</span> <span style=color:#e6db74>&#39;ℤ&#39;</span>;
+    <span style=color:#66d9ef>let</span> heart_eyed_cat <span style=color:#f92672>=</span> <span style=color:#e6db74>&#39;😻&#39;</span>;
+    println!(<span style=color:#e6db74>&#34;c:{} z:{} hec:{}&#34;</span>, c, z, heart_eyed_cat);
 
-    <span style="color:#75715e">//元组长度固定：一旦声明，其长度不会增大或缩小
-</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">let</span> tup: (<span style="color:#66d9ef">i32</span>, <span style="color:#66d9ef">f64</span>, <span style="color:#66d9ef">u8</span>) <span style="color:#f92672">=</span> (<span style="color:#ae81ff">500</span>, <span style="color:#ae81ff">6.4</span>, <span style="color:#ae81ff">1</span>);
-    <span style="color:#66d9ef">let</span> (x, y, z) <span style="color:#f92672">=</span> tup; <span style="color:#75715e">// ignore x and z
-</span><span style="color:#75715e"></span>
-    println<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;The value of x is: {} = {}&#34;</span>, tup.<span style="color:#ae81ff">0</span>, x);
-    println<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;The value of y is: {} = {}&#34;</span>, tup.<span style="color:#ae81ff">1</span>, y);
-    println<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;The value of z is: {} = {}&#34;</span>, tup.<span style="color:#ae81ff">2</span>, z);
+    <span style=color:#75715e>//元组长度固定：一旦声明，其长度不会增大或缩小
+</span><span style=color:#75715e></span>    <span style=color:#66d9ef>let</span> tup: (<span style=color:#66d9ef>i32</span>, <span style=color:#66d9ef>f64</span>, <span style=color:#66d9ef>u8</span>) <span style=color:#f92672>=</span> (<span style=color:#ae81ff>500</span>, <span style=color:#ae81ff>6.4</span>, <span style=color:#ae81ff>1</span>);
+    <span style=color:#66d9ef>let</span> (x, y, z) <span style=color:#f92672>=</span> tup; <span style=color:#75715e>// ignore x and z
+</span><span style=color:#75715e></span>
+    println!(<span style=color:#e6db74>&#34;The value of x is: {} = {}&#34;</span>, tup.<span style=color:#ae81ff>0</span>, x);
+    println!(<span style=color:#e6db74>&#34;The value of y is: {} = {}&#34;</span>, tup.<span style=color:#ae81ff>1</span>, y);
+    println!(<span style=color:#e6db74>&#34;The value of z is: {} = {}&#34;</span>, tup.<span style=color:#ae81ff>2</span>, z);
 
-    <span style="color:#66d9ef">let</span> tup <span style="color:#f92672">=</span> (<span style="color:#e6db74">&#34;abc&#34;</span>, <span style="color:#ae81ff">1</span>);
-    println<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;the first tuple value: {}&#34;</span>, tup.<span style="color:#ae81ff">0</span>);
+    <span style=color:#66d9ef>let</span> tup <span style=color:#f92672>=</span> (<span style=color:#e6db74>&#34;abc&#34;</span>, <span style=color:#ae81ff>1</span>);
+    println!(<span style=color:#e6db74>&#34;the first tuple value: {}&#34;</span>, tup.<span style=color:#ae81ff>0</span>);
 
-    <span style="color:#75715e">// Rust 中的数组是固定长度的：一旦声明，它们的长度不能增长或缩小。
-</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">let</span> months <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#34;January&#34;</span>, <span style="color:#e6db74">&#34;February&#34;</span>, <span style="color:#e6db74">&#34;March&#34;</span>, <span style="color:#e6db74">&#34;April&#34;</span>, <span style="color:#e6db74">&#34;May&#34;</span>, <span style="color:#e6db74">&#34;June&#34;</span>, <span style="color:#e6db74">&#34;July&#34;</span>,
-              <span style="color:#e6db74">&#34;August&#34;</span>, <span style="color:#e6db74">&#34;September&#34;</span>, <span style="color:#e6db74">&#34;October&#34;</span>, <span style="color:#e6db74">&#34;November&#34;</span>, <span style="color:#e6db74">&#34;December&#34;</span>];
+    <span style=color:#75715e>// Rust 中的数组是固定长度的：一旦声明，它们的长度不能增长或缩小。
+</span><span style=color:#75715e></span>    <span style=color:#66d9ef>let</span> months <span style=color:#f92672>=</span> [<span style=color:#e6db74>&#34;January&#34;</span>, <span style=color:#e6db74>&#34;February&#34;</span>, <span style=color:#e6db74>&#34;March&#34;</span>, <span style=color:#e6db74>&#34;April&#34;</span>, <span style=color:#e6db74>&#34;May&#34;</span>, <span style=color:#e6db74>&#34;June&#34;</span>, <span style=color:#e6db74>&#34;July&#34;</span>,
+              <span style=color:#e6db74>&#34;August&#34;</span>, <span style=color:#e6db74>&#34;September&#34;</span>, <span style=color:#e6db74>&#34;October&#34;</span>, <span style=color:#e6db74>&#34;November&#34;</span>, <span style=color:#e6db74>&#34;December&#34;</span>];
 
-    <span style="color:#66d9ef">let</span> a: [<span style="color:#66d9ef">i32</span>; <span style="color:#ae81ff">5</span>] <span style="color:#f92672">=</span> [<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">4</span>, <span style="color:#ae81ff">5</span>];
+    <span style=color:#66d9ef>let</span> a: [<span style=color:#66d9ef>i32</span>; <span style=color:#ae81ff>5</span>] <span style=color:#f92672>=</span> [<span style=color:#ae81ff>1</span>, <span style=color:#ae81ff>2</span>, <span style=color:#ae81ff>3</span>, <span style=color:#ae81ff>4</span>, <span style=color:#ae81ff>5</span>];
 
-    println<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;print a: {}&#34;</span>, a[<span style="color:#ae81ff">2</span>]);
-    println<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;print month {}&#34;</span>, months[<span style="color:#ae81ff">3</span>]);
+    println!(<span style=color:#e6db74>&#34;print a: {}&#34;</span>, a[<span style=color:#ae81ff>2</span>]);
+    println!(<span style=color:#e6db74>&#34;print month {}&#34;</span>, months[<span style=color:#ae81ff>3</span>]);
 
-    <span style="color:#75715e">// 包含 5 个元素，这些元素的值最初都将被设置为 3
-</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">let</span> a <span style="color:#f92672">=</span> [<span style="color:#ae81ff">3</span>; <span style="color:#ae81ff">5</span>];
-    println<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;len: {}&#34;</span>, a.len());
+    <span style=color:#75715e>// 包含 5 个元素，这些元素的值最初都将被设置为 3
+</span><span style=color:#75715e></span>    <span style=color:#66d9ef>let</span> a <span style=color:#f92672>=</span> [<span style=color:#ae81ff>3</span>; <span style=color:#ae81ff>5</span>];
+    println!(<span style=color:#e6db74>&#34;len: {}&#34;</span>, a.len());
 
-    <span style="color:#75715e">// let a = [1, 2, 3, 4, 5];
-</span><span style="color:#75715e"></span>    <span style="color:#75715e">// let index = 10;
-</span><span style="color:#75715e"></span>    <span style="color:#75715e">// let element = a[index];
-</span><span style="color:#75715e"></span>    <span style="color:#75715e">// println!(&#34;The value of element is: {}&#34;, element);
-</span><span style="color:#75715e"></span>
-    another_function(<span style="color:#ae81ff">5</span>);
+    <span style=color:#75715e>// let a = [1, 2, 3, 4, 5];
+</span><span style=color:#75715e></span>    <span style=color:#75715e>// let index = 10;
+</span><span style=color:#75715e></span>    <span style=color:#75715e>// let element = a[index];
+</span><span style=color:#75715e></span>    <span style=color:#75715e>// println!(&#34;The value of element is: {}&#34;, element);
+</span><span style=color:#75715e></span>
+    another_function(<span style=color:#ae81ff>5</span>);
 
-    <span style="color:#66d9ef">let</span> x <span style="color:#f92672">=</span> <span style="color:#ae81ff">5</span>;
+    <span style=color:#66d9ef>let</span> x <span style=color:#f92672>=</span> <span style=color:#ae81ff>5</span>;
 
-    <span style="color:#66d9ef">let</span> y <span style="color:#f92672">=</span> {
-        <span style="color:#66d9ef">let</span> x <span style="color:#f92672">=</span> <span style="color:#ae81ff">3</span>;
-        x <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span> <span style="color:#75715e">//表达式的结尾加上分号，它就变成了语句，而语句不会返回值
-</span><span style="color:#75715e"></span>    };
+    <span style=color:#66d9ef>let</span> y <span style=color:#f92672>=</span> {
+        <span style=color:#66d9ef>let</span> x <span style=color:#f92672>=</span> <span style=color:#ae81ff>3</span>;
+        x <span style=color:#f92672>+</span> <span style=color:#ae81ff>1</span> <span style=color:#75715e>//表达式的结尾加上分号，它就变成了语句，而语句不会返回值
+</span><span style=color:#75715e></span>    };
 
-    println<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;The value of y is: {} x:{}&#34;</span>, y, x);
+    println!(<span style=color:#e6db74>&#34;The value of y is: {} x:{}&#34;</span>, y, x);
 
-    println<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;five func return {}&#34;</span>, five());
+    println!(<span style=color:#e6db74>&#34;five func return {}&#34;</span>, five());
 
-    println<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;plus one func return {}&#34;</span>, plus_one(<span style="color:#ae81ff">7</span>));
+    println!(<span style=color:#e6db74>&#34;plus one func return {}&#34;</span>, plus_one(<span style=color:#ae81ff>7</span>));
 
 
-    <span style="color:#66d9ef">let</span> condition <span style="color:#f92672">=</span> <span style="color:#66d9ef">true</span>;
-    <span style="color:#66d9ef">let</span> number <span style="color:#f92672">=</span> <span style="color:#66d9ef">if</span> condition {
-        <span style="color:#ae81ff">5</span>
-    } <span style="color:#66d9ef">else</span> {
-        <span style="color:#ae81ff">6</span>
+    <span style=color:#66d9ef>let</span> condition <span style=color:#f92672>=</span> <span style=color:#66d9ef>true</span>;
+    <span style=color:#66d9ef>let</span> number <span style=color:#f92672>=</span> <span style=color:#66d9ef>if</span> condition {
+        <span style=color:#ae81ff>5</span>
+    } <span style=color:#66d9ef>else</span> {
+        <span style=color:#ae81ff>6</span>
     };
 
-    println<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;The value of number is: {}&#34;</span>, number);
+    println!(<span style=color:#e6db74>&#34;The value of number is: {}&#34;</span>, number);
 
-    <span style="color:#66d9ef">let</span> <span style="color:#66d9ef">mut</span> counter <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+    <span style=color:#66d9ef>let</span> <span style=color:#66d9ef>mut</span> counter <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>;
 
-    <span style="color:#66d9ef">let</span> result <span style="color:#f92672">=</span> <span style="color:#66d9ef">loop</span> {
-        counter <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>;
+    <span style=color:#66d9ef>let</span> result <span style=color:#f92672>=</span> <span style=color:#66d9ef>loop</span> {
+        counter <span style=color:#f92672>+=</span> <span style=color:#ae81ff>1</span>;
 
-        <span style="color:#66d9ef">if</span> counter <span style="color:#f92672">==</span> <span style="color:#ae81ff">10</span> {
-            <span style="color:#66d9ef">break</span> counter <span style="color:#f92672">*</span> <span style="color:#ae81ff">2</span>;
+        <span style=color:#66d9ef>if</span> counter <span style=color:#f92672>==</span> <span style=color:#ae81ff>10</span> {
+            <span style=color:#66d9ef>break</span> counter <span style=color:#f92672>*</span> <span style=color:#ae81ff>2</span>;
         }
     };
 
-    println<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;The result is {}&#34;</span>, result);
+    println!(<span style=color:#e6db74>&#34;The result is {}&#34;</span>, result);
 
 
-    <span style="color:#75715e">// for 循环
-</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">let</span> a <span style="color:#f92672">=</span> [<span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">20</span>, <span style="color:#ae81ff">30</span>, <span style="color:#ae81ff">40</span>, <span style="color:#ae81ff">50</span>];
+    <span style=color:#75715e>// for 循环
+</span><span style=color:#75715e></span>    <span style=color:#66d9ef>let</span> a <span style=color:#f92672>=</span> [<span style=color:#ae81ff>10</span>, <span style=color:#ae81ff>20</span>, <span style=color:#ae81ff>30</span>, <span style=color:#ae81ff>40</span>, <span style=color:#ae81ff>50</span>];
 
-    <span style="color:#66d9ef">for</span> element <span style="color:#66d9ef">in</span> a.iter() {
-        println<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;the value is: {}&#34;</span>, element);
+    <span style=color:#66d9ef>for</span> element <span style=color:#66d9ef>in</span> a.iter() {
+        println!(<span style=color:#e6db74>&#34;the value is: {}&#34;</span>, element);
     }
 
-    <span style="color:#66d9ef">for</span> number <span style="color:#66d9ef">in</span> (<span style="color:#ae81ff">1</span>..<span style="color:#ae81ff">4</span>).rev() {
-        println<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;{}!&#34;</span>, number);
+    <span style=color:#66d9ef>for</span> number <span style=color:#66d9ef>in</span> (<span style=color:#ae81ff>1</span><span style=color:#f92672>..</span><span style=color:#ae81ff>4</span>).rev() {
+        println!(<span style=color:#e6db74>&#34;{}!&#34;</span>, number);
     }
-    println<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;LIFTOFF!!!&#34;</span>);
+    println!(<span style=color:#e6db74>&#34;LIFTOFF!!!&#34;</span>);
 }
 
-<span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">another_function</span>(x: <span style="color:#66d9ef">i32</span>) {
-    println<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#34;this is another function. {}&#34;</span>, x);
+<span style=color:#66d9ef>fn</span> <span style=color:#a6e22e>another_function</span>(x: <span style=color:#66d9ef>i32</span>) {
+    println!(<span style=color:#e6db74>&#34;this is another function. {}&#34;</span>, x);
 }
 
-<span style="color:#75715e">// 没有函数调用、宏、甚至没有 let 语句——只有数字 5。这在 Rust 中是一个完全有效的函数
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">five</span>() -&gt;<span style="color:#66d9ef">i32</span> {
-    <span style="color:#ae81ff">5</span>
+<span style=color:#75715e>// 没有函数调用、宏、甚至没有 let 语句——只有数字 5。这在 Rust 中是一个完全有效的函数
+</span><span style=color:#75715e></span><span style=color:#66d9ef>fn</span> <span style=color:#a6e22e>five</span>() -&gt;<span style=color:#66d9ef>i32</span> {
+    <span style=color:#ae81ff>5</span>
 }
 
-<span style="color:#75715e">// 包含 x + 1 的行尾加上一个分号，把它从表达式变成语句，将是一个错误。mismatched types
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">plus_one</span>(x: <span style="color:#66d9ef">i32</span>) -&gt; <span style="color:#66d9ef">i32</span> {
-    x <span style="color:#f92672">+</span><span style="color:#ae81ff">1</span> 
+<span style=color:#75715e>// 包含 x + 1 的行尾加上一个分号，把它从表达式变成语句，将是一个错误。mismatched types
+</span><span style=color:#75715e></span><span style=color:#66d9ef>fn</span> <span style=color:#a6e22e>plus_one</span>(x: <span style=color:#66d9ef>i32</span>) -&gt; <span style=color:#66d9ef>i32</span> {
+    x <span style=color:#f92672>+</span><span style=color:#ae81ff>1</span> 
 }
 
-</code></pre></div><h3 id="ownership">Ownership</h3>
+</code></pre></div><h3 id=ownership>Ownership</h3>
 <p>所有权（系统）是 Rust 最为与众不同的特性，它让 Rust 无需垃圾回收（garbage collector）即可保障内存安全。相关功能包括：借用、slice 以及 Rust 如何在内存中布局数据。</p>
 <p>程序管理使用计算机内存的方式：</p>
 <ul>
@@ -509,93 +322,43 @@
 <li>值在任一时刻有且只有一个所有者。There can only be one owner at a time.</li>
 <li>当所有者（变量）离开作用域，这个值将被丢弃。When the owner goes out of scope, the value will be dropped.</li>
 </ol>
-<pre><code>let s1 = String::from(&quot;hello&quot;);
+<pre tabindex=0><code>let s1 = String::from(&quot;hello&quot;);
 let s2 = s1;
 
 println!(&quot;{}, world!&quot;, s1); // 无效
 println!(&quot;{}, world!&quot;, s2);
 </code></pre>
-  
-  
-
-  
 <div class="prev-next-post pure-g">
-  <div class="pure-u-1-24" style="text-align: left;">
-    
-    <a href="http://gebitang.com/post/notes/"><i class="fa fa-chevron-left"></i></a>
-    
-  </div>
-  <div class="pure-u-10-24">
-    
-    <nav class="prev">
-      <a href="http://gebitang.com/post/notes/">Reading Notes</a>
-    </nav>
-    
-  </div>
-  <div class="pure-u-2-24">
-    &nbsp;
-  </div>
-  <div class="pure-u-10-24">
-    
-    <nav class="next">
-      <a href="http://gebitang.com/post/2021/may-and-june/">May and June Run</a>
-    </nav>
-    
-  </div>
-  <div class="pure-u-1-24" style="text-align: right;">
-    
-    <a href="http://gebitang.com/post/2021/may-and-june/"><i class="fa fa-chevron-right"></i></a>
-    
-  </div>
+<div class=pure-u-1-24 style=text-align:left>
+<a href=http://gebitang.com/post/2021/march-and-april/><i class="fa fa-chevron-left"></i></a>
 </div>
-
-
-
-  
-<div id="disqus_thread"></div>
-<script type="text/javascript">
-
-(function() {
-    
-    
-    if (window.location.hostname == "localhost")
-        return;
-
-    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-    var disqus_shortname = 'gebitang';
-    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-})();
-</script>
-<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="http://disqus.com/" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
-
-
+<div class=pure-u-10-24>
+<nav class=prev>
+<a href=http://gebitang.com/post/2021/march-and-april/>March and April Run</a>
+</nav>
 </div>
-
+<div class=pure-u-2-24>
+&nbsp;
+</div>
+<div class=pure-u-10-24>
+<nav class=next>
+<a href=http://gebitang.com/post/2021/may-and-june/>May and June Run</a>
+</nav>
+</div>
+<div class=pure-u-1-24 style=text-align:right>
+<a href=http://gebitang.com/post/2021/may-and-june/><i class="fa fa-chevron-right"></i></a>
 </div>
 </div>
-<script src="http://gebitang.com/js/ui.js"></script>
-<script src="http://gebitang.com/js/menus.js"></script>
-
-
-<script>
-  
-  if (window.location.hostname != "localhost") {
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-    ga('create', 'UA-34303694-1', 'auto');
-    ga('send', 'pageview');
-  }
-</script>
-
-
-
-
-<button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
+<div id=disqus_thread></div>
+<script type=text/javascript>(function(){var a,b;if(window.location.hostname=="localhost")return;a=document.createElement('script'),a.type='text/javascript',a.async=!0,b='gebitang',a.src='//'+b+'.disqus.com/embed.js',(document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(a)})()</script>
+<noscript>Please enable JavaScript to view the <a href=http://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript>
+<a href=http://disqus.com/ class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a>
+</div>
+</div>
+</div>
+<script src=http://gebitang.com/js/ui.js></script>
+<script src=http://gebitang.com/js/menus.js></script>
+<script>window.location.hostname!="localhost"&&(function(a,e,f,g,b,c,d){a.GoogleAnalyticsObject=b,a[b]=a[b]||function(){(a[b].q=a[b].q||[]).push(arguments)},a[b].l=1*new Date,c=e.createElement(f),d=e.getElementsByTagName(f)[0],c.async=1,c.src=g,d.parentNode.insertBefore(c,d)}(window,document,'script','//www.google-analytics.com/analytics.js','ga'),ga('create','UA-34303694-1','auto'),ga('send','pageview'))</script>
+<button onclick=topFunction() id=myBtn title="Go to top">Top</button>
 </body>
 </html>
-

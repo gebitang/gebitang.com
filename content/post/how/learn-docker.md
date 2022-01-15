@@ -45,6 +45,70 @@ toc = true
 
 ```
 
+### docker使用代理
+
+[Configure Docker to use a proxy server](https://docs.docker.com/network/proxy/)，windows下需要注意的是：配置的宿主机代理时，ip地址需要使用vEthernet(WSL)虚拟网卡对应的IP+宿主机端口
+
+登录hub.docker.com，可以先logout，会提示出准确的登录ulr: `https://index.docker.io/v1/`，将对应的image重新打tag，然后推送到公共仓库
+
+```shell
+#设置好代理之后
+docker pull us-docker.pkg.dev/google-samples/containers/gke/hello-app:1.0
+docker pull us-docker.pkg.dev/google-samples/containers/gke/hello-app:2.0
+
+# 去除代理，登录到hub.com:  docker login https://index.docker.io/v1/
+E:\tempd>docker images
+REPOSITORY                                                  TAG       IMAGE ID       CREATED        SIZE
+us-docker.pkg.dev/google-samples/containers/gke/hello-app   2.0       7318b44bb289   4 weeks ago    11.5MB
+us-docker.pkg.dev/google-samples/containers/gke/hello-app   1.0       33daf70e7689   4 weeks ago    11.5MB
+kindest/node                                                <none>    32b8b755dee8   7 months ago   1.12GB
+
+# 生成新镜像  docker tag image_id tag_name
+E:\tempd>docker tag 7318b44bb289 gebitang/hello:1.0
+
+E:\tempd>docker images
+REPOSITORY                                                  TAG       IMAGE ID       CREATED        SIZE
+gebitang/hello                                              1.0       7318b44bb289   4 weeks ago    11.5MB
+us-docker.pkg.dev/google-samples/containers/gke/hello-app   2.0       7318b44bb289   4 weeks ago    11.5MB
+us-docker.pkg.dev/google-samples/containers/gke/hello-app   1.0       33daf70e7689   4 weeks ago    11.5MB
+kindest/node                                                <none>    32b8b755dee8   7 months ago   1.12GB
+
+#推送镜像
+E:\tempd>docker push gebitang/hello:1.0
+The push refers to repository [docker.io/gebitang/hello]
+382df8daaccb: Pushed
+8d3ac3489996: Pushed
+1.0: digest: sha256:7d98c53d7b133ed40b7fcc55dd5d2cff62d1ee81035de6e693dfba6cadfad2b3 size: 739
+
+E:\tempd>docker tag 33daf70e7689 gebitang/hello:2.0
+
+E:\tempd>docker push gebitang/hello:2.0
+The push refers to repository [docker.io/gebitang/hello]
+856dd7b64f3c: Pushed
+8d3ac3489996: Layer already exists
+2.0: digest: sha256:e7389f0a331243818bc5ad057e8de0c797fe368f3076b173d6f573477bad3fc1 size: 739
+
+E:\tempd>docker images
+REPOSITORY                                                  TAG       IMAGE ID       CREATED        SIZE
+gebitang/hello                                              1.0       7318b44bb289   4 weeks ago    11.5MB
+us-docker.pkg.dev/google-samples/containers/gke/hello-app   2.0       7318b44bb289   4 weeks ago    11.5MB
+gebitang/hello                                              2.0       33daf70e7689   4 weeks ago    11.5MB
+us-docker.pkg.dev/google-samples/containers/gke/hello-app   1.0       33daf70e7689   4 weeks ago    11.5MB
+kindest/node                                                <none>    32b8b755dee8   7 months ago   1.12GB
+
+```
+
+[Pull an Image from a Private Registry](https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/) k8s中使用这个镜像需要验证。需要创建secret，然后指定这个secret
+
+如果选择为公开镜像，则可以直接拉取。
+
+- 部署失败后，可以删除`k delete -f xx.yaml`，或者查看部署内容，然后指定部署名称
+
+```
+kubectl get deploy
+kubectl delete deploy xxx-name
+```
+
 ### Sonar支持go工程覆盖率
 
 [Sonar实践问题：支持go工程的覆盖率](../../../post/2020/0319-sonar-go-with-coverage/)本地执行跑完了简易流程。线上使用时要求：Java环境+Go环境

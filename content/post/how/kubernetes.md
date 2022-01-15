@@ -225,11 +225,11 @@ nodes:
   - role: worker
 EOF
 # 使用配置文件创建新的集群
-kind create cluster --name wslkindmultinodes --config ./kind-3nodes.yaml
+kind create cluster --name k3s --config ./kind-3nodes.yaml
 # 获取集群节点
 kubectl get nodes
 # 删除集群
-kind delete cluster --name wslkindmultinodess
+kind delete cluster --name k3s
 ```
 
 跟着[演示](https://www.qikqiak.com/post/deploy-k8s-on-win-use-wsl2)直到部署三个节点的cluster都正常，安装一个 Kubernetes Dashboard时(`kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.0.1/aio/deploy/recommended.yaml`)，`kubectl get all -n kubernetes-dashboard`命令显示，一直处于"ContainerCreating"状态。感觉应该是我本地网络原因？ [issue 2863](https://github.com/kubernetes/dashboard/issues/2863)

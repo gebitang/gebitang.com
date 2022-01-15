@@ -111,6 +111,7 @@
 <li><a href=#kubernetes-tutorial>Kubernetes Tutorial</a></li>
 <li><a href=#k8s中的crd开发>K8S中的CRD开发</a></li>
 <li><a href=#setup-with-dashboard>setup with dashboard</a></li>
+<li><a href=#wsldocker的限制>WSL+Docker的限制</a></li>
 </ul>
 </li>
 <li><a href=#archive>archive</a>
@@ -278,7 +279,24 @@ kind create cluster --name k3s --config ./kind-3nodes.yaml
 kubectl get nodes
 <span style=color:#75715e># 删除集群</span>
 kind delete cluster --name k3s
-</code></pre></div><p>跟着<a href=https://www.qikqiak.com/post/deploy-k8s-on-win-use-wsl2>演示</a>直到部署三个节点的cluster都正常，安装一个 Kubernetes Dashboard时(<code>kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.0.1/aio/deploy/recommended.yaml</code>)，<code>kubectl get all -n kubernetes-dashboard</code>命令显示，一直处于"ContainerCreating"状态。感觉应该是我本地网络原因？ <a href=https://github.com/kubernetes/dashboard/issues/2863>issue 2863</a></p>
+</code></pre></div><h3 id=wsldocker的限制>WSL+Docker的限制</h3>
+<p><a href=https://kubernetes.io/blog/2020/05/21/wsl-docker-kubernetes-on-the-windows-desktop/>WSL+Docker: Kubernetes on the Windows Desktop</a></p>
+<p>从WSL2里的ubuntu20.04镜像里使用kind创建的k8s cluster，无法cluster的node的ip，网络不通。——这看起来是个已知的问题：<a href=https://docs.docker.com/desktop/windows/networking/>Networking features in Docker Desktop for Windows</a>——</p>
+<ul>
+<li>
+<p><strong>There is no docker0 bridge on Windows</strong><br>
+Because of the way networking is implemented in Docker Desktop for Windows, you cannot see a docker0 interface on the host. This interface is actually within the virtual machine.</p>
+</li>
+<li>
+<p><strong>I cannot ping my containers</strong><br>
+Docker Desktop for Windows can’t route traffic to Linux containers. However, you can ping the Windows containers.</p>
+</li>
+<li>
+<p><strong>Per-container IP addressing is not possible</strong>
+The docker (Linux) bridge network is not reachable from the Windows host. However, it works with Windows containers.</p>
+</li>
+</ul>
+<p>跟着<a href=https://www.qikqiak.com/post/deploy-k8s-on-win-use-wsl2>演示</a>直到部署三个节点的cluster都正常，安装一个 Kubernetes Dashboard时(<code>kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.0.1/aio/deploy/recommended.yaml</code>)，<code>kubectl get all -n kubernetes-dashboard</code>命令显示，一直处于"ContainerCreating"状态。感觉应该是我本地网络原因？ <a href=https://github.com/kubernetes/dashboard/issues/2863>issue 2863</a></p>
 <p>多个配置文件切换<a href=https://kubernetes.io/docs/tasks/access-application-cluster/configure-access-multiple-clusters/>Configure Access to Multiple Clusters</a></p>
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=color:#75715e># online.config.yaml for pro, dev.config.yaml for dev</span>
 kubectl config --kubeconfig<span style=color:#f92672>=</span>online.config.yaml view

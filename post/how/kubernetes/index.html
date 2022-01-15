@@ -3,7 +3,7 @@
 <meta charset=utf-8>
 <meta name=viewport content="width=device-width,initial-scale=1">
 <meta name=description content="the way to kubernetes">
-<meta name=generator content="Hugo 0.91.2">
+<meta name=generator content="Hugo 0.92.0">
 <title>k8s practice &#183; 戈壁堂</title>
 <link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/pure-min.css><!--[if lte IE 8]><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-old-ie-min.css><![endif]--><!--[if gt IE 8]><!-->
 <link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-min.css><!--<![endif]--><!--[if lte IE 8]><link rel=stylesheet href=http://gebitang.com/css/side-menu-old-ie.css><![endif]--><!--[if gt IE 8]><!-->
@@ -273,11 +273,11 @@ cat <span style=color:#e6db74>&lt;&lt; EOF &gt; kind-3nodes.yaml
 </span><span style=color:#e6db74>  - role: worker
 </span><span style=color:#e6db74>EOF</span>
 <span style=color:#75715e># 使用配置文件创建新的集群</span>
-kind create cluster --name wslkindmultinodes --config ./kind-3nodes.yaml
+kind create cluster --name k3s --config ./kind-3nodes.yaml
 <span style=color:#75715e># 获取集群节点</span>
 kubectl get nodes
 <span style=color:#75715e># 删除集群</span>
-kind delete cluster --name wslkindmultinodess
+kind delete cluster --name k3s
 </code></pre></div><p>跟着<a href=https://www.qikqiak.com/post/deploy-k8s-on-win-use-wsl2>演示</a>直到部署三个节点的cluster都正常，安装一个 Kubernetes Dashboard时(<code>kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.0.1/aio/deploy/recommended.yaml</code>)，<code>kubectl get all -n kubernetes-dashboard</code>命令显示，一直处于"ContainerCreating"状态。感觉应该是我本地网络原因？ <a href=https://github.com/kubernetes/dashboard/issues/2863>issue 2863</a></p>
 <p>多个配置文件切换<a href=https://kubernetes.io/docs/tasks/access-application-cluster/configure-access-multiple-clusters/>Configure Access to Multiple Clusters</a></p>
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=color:#75715e># online.config.yaml for pro, dev.config.yaml for dev</span>

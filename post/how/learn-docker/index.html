@@ -3,7 +3,7 @@
 <meta charset=utf-8>
 <meta name=viewport content="width=device-width,initial-scale=1">
 <meta name=description content="the way to docker">
-<meta name=generator content="Hugo 0.91.2">
+<meta name=generator content="Hugo 0.92.0">
 <title>docker practice &#183; 戈壁堂</title>
 <link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/pure-min.css><!--[if lte IE 8]><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-old-ie-min.css><![endif]--><!--[if gt IE 8]><!-->
 <link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-min.css><!--<![endif]--><!--[if lte IE 8]><link rel=stylesheet href=http://gebitang.com/css/side-menu-old-ie.css><![endif]--><!--[if gt IE 8]><!-->
@@ -102,6 +102,7 @@
 <li>
 <ul>
 <li><a href=#配置docker-engine>配置docker engine</a></li>
+<li><a href=#docker使用代理>docker使用代理</a></li>
 <li><a href=#sonar支持go工程覆盖率>Sonar支持go工程覆盖率</a></li>
 <li><a href=#系统环境变量>系统环境变量</a></li>
 <li><a href=#go-env变量>go env变量</a></li>
@@ -144,6 +145,60 @@
   ]
 }
 
+</code></pre><h3 id=docker使用代理>docker使用代理</h3>
+<p><a href=https://docs.docker.com/network/proxy/>Configure Docker to use a proxy server</a>，windows下需要注意的是：配置的宿主机代理时，ip地址需要使用vEthernet(WSL)虚拟网卡对应的IP+宿主机端口</p>
+<p>登录hub.docker.com，可以先logout，会提示出准确的登录ulr: <code>https://index.docker.io/v1/</code>，将对应的image重新打tag，然后推送到公共仓库</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=color:#75715e>#设置好代理之后</span>
+docker pull us-docker.pkg.dev/google-samples/containers/gke/hello-app:1.0
+docker pull us-docker.pkg.dev/google-samples/containers/gke/hello-app:2.0
+
+<span style=color:#75715e># 去除代理，登录到hub.com:  docker login https://index.docker.io/v1/</span>
+E:<span style=color:#ae81ff>\t</span>empd&gt;docker images
+REPOSITORY                                                  TAG       IMAGE ID       CREATED        SIZE
+us-docker.pkg.dev/google-samples/containers/gke/hello-app   2.0       7318b44bb289   <span style=color:#ae81ff>4</span> weeks ago    11.5MB
+us-docker.pkg.dev/google-samples/containers/gke/hello-app   1.0       33daf70e7689   <span style=color:#ae81ff>4</span> weeks ago    11.5MB
+kindest/node                                                &lt;none&gt;    32b8b755dee8   <span style=color:#ae81ff>7</span> months ago   1.12GB
+
+<span style=color:#75715e># 生成新镜像  docker tag image_id tag_name</span>
+E:<span style=color:#ae81ff>\t</span>empd&gt;docker tag 7318b44bb289 gebitang/hello:1.0
+
+E:<span style=color:#ae81ff>\t</span>empd&gt;docker images
+REPOSITORY                                                  TAG       IMAGE ID       CREATED        SIZE
+gebitang/hello                                              1.0       7318b44bb289   <span style=color:#ae81ff>4</span> weeks ago    11.5MB
+us-docker.pkg.dev/google-samples/containers/gke/hello-app   2.0       7318b44bb289   <span style=color:#ae81ff>4</span> weeks ago    11.5MB
+us-docker.pkg.dev/google-samples/containers/gke/hello-app   1.0       33daf70e7689   <span style=color:#ae81ff>4</span> weeks ago    11.5MB
+kindest/node                                                &lt;none&gt;    32b8b755dee8   <span style=color:#ae81ff>7</span> months ago   1.12GB
+
+<span style=color:#75715e>#推送镜像</span>
+E:<span style=color:#ae81ff>\t</span>empd&gt;docker push gebitang/hello:1.0
+The push refers to repository <span style=color:#f92672>[</span>docker.io/gebitang/hello<span style=color:#f92672>]</span>
+382df8daaccb: Pushed
+8d3ac3489996: Pushed
+1.0: digest: sha256:7d98c53d7b133ed40b7fcc55dd5d2cff62d1ee81035de6e693dfba6cadfad2b3 size: <span style=color:#ae81ff>739</span>
+
+E:<span style=color:#ae81ff>\t</span>empd&gt;docker tag 33daf70e7689 gebitang/hello:2.0
+
+E:<span style=color:#ae81ff>\t</span>empd&gt;docker push gebitang/hello:2.0
+The push refers to repository <span style=color:#f92672>[</span>docker.io/gebitang/hello<span style=color:#f92672>]</span>
+856dd7b64f3c: Pushed
+8d3ac3489996: Layer already exists
+2.0: digest: sha256:e7389f0a331243818bc5ad057e8de0c797fe368f3076b173d6f573477bad3fc1 size: <span style=color:#ae81ff>739</span>
+
+E:<span style=color:#ae81ff>\t</span>empd&gt;docker images
+REPOSITORY                                                  TAG       IMAGE ID       CREATED        SIZE
+gebitang/hello                                              1.0       7318b44bb289   <span style=color:#ae81ff>4</span> weeks ago    11.5MB
+us-docker.pkg.dev/google-samples/containers/gke/hello-app   2.0       7318b44bb289   <span style=color:#ae81ff>4</span> weeks ago    11.5MB
+gebitang/hello                                              2.0       33daf70e7689   <span style=color:#ae81ff>4</span> weeks ago    11.5MB
+us-docker.pkg.dev/google-samples/containers/gke/hello-app   1.0       33daf70e7689   <span style=color:#ae81ff>4</span> weeks ago    11.5MB
+kindest/node                                                &lt;none&gt;    32b8b755dee8   <span style=color:#ae81ff>7</span> months ago   1.12GB
+
+</code></pre></div><p><a href=https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/>Pull an Image from a Private Registry</a> k8s中使用这个镜像需要验证。需要创建secret，然后指定这个secret</p>
+<p>如果选择为公开镜像，则可以直接拉取。</p>
+<ul>
+<li>部署失败后，可以删除<code>k delete -f xx.yaml</code>，或者查看部署内容，然后指定部署名称</li>
+</ul>
+<pre tabindex=0><code>kubectl get deploy
+kubectl delete deploy xxx-name
 </code></pre><h3 id=sonar支持go工程覆盖率>Sonar支持go工程覆盖率</h3>
 <p><a href=../../../post/2020/0319-sonar-go-with-coverage/>Sonar实践问题：支持go工程的覆盖率</a>本地执行跑完了简易流程。线上使用时要求：Java环境+Go环境</p>
 <p>Go环境的配置比较简单，所以就Java的环境上新做一个镜像。</p>

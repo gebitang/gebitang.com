@@ -231,6 +231,21 @@ kubectl get nodes
 # 删除集群
 kind delete cluster --name k3s
 ```
+### WSL+Docker的限制
+
+[WSL+Docker: Kubernetes on the Windows Desktop](https://kubernetes.io/blog/2020/05/21/wsl-docker-kubernetes-on-the-windows-desktop/) 
+
+从WSL2里的ubuntu20.04镜像里使用kind创建的k8s cluster，无法cluster的node的ip，网络不通。——这看起来是个已知的问题：[Networking features in Docker Desktop for Windows](https://docs.docker.com/desktop/windows/networking/)——
+
+- **There is no docker0 bridge on Windows**  
+Because of the way networking is implemented in Docker Desktop for Windows, you cannot see a docker0 interface on the host. This interface is actually within the virtual machine.
+
+- **I cannot ping my containers**  
+Docker Desktop for Windows can’t route traffic to Linux containers. However, you can ping the Windows containers.
+
+- **Per-container IP addressing is not possible** 
+The docker (Linux) bridge network is not reachable from the Windows host. However, it works with Windows containers.
+
 
 跟着[演示](https://www.qikqiak.com/post/deploy-k8s-on-win-use-wsl2)直到部署三个节点的cluster都正常，安装一个 Kubernetes Dashboard时(`kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.0.1/aio/deploy/recommended.yaml`)，`kubectl get all -n kubernetes-dashboard`命令显示，一直处于"ContainerCreating"状态。感觉应该是我本地网络原因？ [issue 2863](https://github.com/kubernetes/dashboard/issues/2863)
 

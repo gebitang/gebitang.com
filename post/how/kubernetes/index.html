@@ -518,7 +518,129 @@ runtime.goexit
 	/usr/local/go/src/runtime/asm_amd64.s:1581
 ➜  ~
 </code></pre><p><a href=https://stackoverflow.com/questions/52119985/kubeadm-init-shows-kubelet-isnt-running-or-healthy>kubeadm init shows kubelet isn&rsquo;t running or healthy</a></p>
-<h3 id=wsl2-时间同步>wsl2 时间同步</h3>
+<pre tabindex=0><code># create file /etc/docker/daemon.json with 
+{
+    &quot;exec-opts&quot;: [&quot;native.cgroupdriver=systemd&quot;]
+}
+# do the following commands
+ sudo systemctl daemon-reload
+ sudo systemctl restart docker
+ sudo systemctl restart kubelet
+</code></pre><p>提示Port 6443 is in use。需要先执行<code>sudo kubeadm reset</code>，重新执行init命令。终于OK了</p>
+<pre tabindex=0><code>[certs] Using certificateDir folder &quot;/etc/kubernetes/pki&quot;
+I0116 13:13:30.061835    4969 certs.go:112] creating a new certificate authority for ca
+[certs] Generating &quot;ca&quot; certificate and key
+I0116 13:13:30.309186    4969 certs.go:522] validating certificate period for ca certificate
+[certs] Generating &quot;apiserver&quot; certificate and key
+[certs] apiserver serving cert is signed for DNS names [kubernetes kubernetes.default kubernetes.default.svc kubernetes.default.svc.cluster.local lee] and IPs [10.96.0.1 192.168.10.101]
+[certs] Generating &quot;apiserver-kubelet-client&quot; certificate and key
+I0116 13:13:30.726508    4969 certs.go:112] creating a new certificate authority for front-proxy-ca
+[certs] Generating &quot;front-proxy-ca&quot; certificate and key
+I0116 13:13:30.913920    4969 certs.go:522] validating certificate period for front-proxy-ca certificate
+[certs] Generating &quot;front-proxy-client&quot; certificate and key
+I0116 13:13:31.049464    4969 certs.go:112] creating a new certificate authority for etcd-ca
+[certs] Generating &quot;etcd/ca&quot; certificate and key
+I0116 13:13:31.233385    4969 certs.go:522] validating certificate period for etcd/ca certificate
+[certs] Generating &quot;etcd/server&quot; certificate and key
+[certs] etcd/server serving cert is signed for DNS names [lee localhost] and IPs [192.168.10.101 127.0.0.1 ::1]
+[certs] Generating &quot;etcd/peer&quot; certificate and key
+[certs] etcd/peer serving cert is signed for DNS names [lee localhost] and IPs [192.168.10.101 127.0.0.1 ::1]
+[certs] Generating &quot;etcd/healthcheck-client&quot; certificate and key
+[certs] Generating &quot;apiserver-etcd-client&quot; certificate and key
+I0116 13:13:32.462845    4969 certs.go:78] creating new public/private key files for signing service account users
+[certs] Generating &quot;sa&quot; key and public key
+[kubeconfig] Using kubeconfig folder &quot;/etc/kubernetes&quot;
+I0116 13:13:32.535549    4969 kubeconfig.go:103] creating kubeconfig file for admin.conf
+[kubeconfig] Writing &quot;admin.conf&quot; kubeconfig file
+I0116 13:13:32.680926    4969 kubeconfig.go:103] creating kubeconfig file for kubelet.conf
+[kubeconfig] Writing &quot;kubelet.conf&quot; kubeconfig file
+I0116 13:13:32.758276    4969 kubeconfig.go:103] creating kubeconfig file for controller-manager.conf
+[kubeconfig] Writing &quot;controller-manager.conf&quot; kubeconfig file
+I0116 13:13:32.880393    4969 kubeconfig.go:103] creating kubeconfig file for scheduler.conf
+[kubeconfig] Writing &quot;scheduler.conf&quot; kubeconfig file
+I0116 13:13:32.957077    4969 kubelet.go:65] Stopping the kubelet
+[kubelet-start] Writing kubelet environment file with flags to file &quot;/var/lib/kubelet/kubeadm-flags.env&quot;
+[kubelet-start] Writing kubelet configuration to file &quot;/var/lib/kubelet/config.yaml&quot;
+[kubelet-start] Starting the kubelet
+[control-plane] Using manifest folder &quot;/etc/kubernetes/manifests&quot;
+[control-plane] Creating static Pod manifest for &quot;kube-apiserver&quot;
+I0116 13:13:33.422382    4969 manifests.go:99] [control-plane] getting StaticPodSpecs
+I0116 13:13:33.422598    4969 certs.go:522] validating certificate period for CA certificate
+I0116 13:13:33.422669    4969 manifests.go:125] [control-plane] adding volume &quot;ca-certs&quot; for component &quot;kube-apiserver&quot;
+I0116 13:13:33.422680    4969 manifests.go:125] [control-plane] adding volume &quot;etc-ca-certificates&quot; for component &quot;kube-apiserver&quot;
+I0116 13:13:33.422686    4969 manifests.go:125] [control-plane] adding volume &quot;etc-pki&quot; for component &quot;kube-apiserver&quot;
+I0116 13:13:33.422691    4969 manifests.go:125] [control-plane] adding volume &quot;k8s-certs&quot; for component &quot;kube-apiserver&quot;
+I0116 13:13:33.422696    4969 manifests.go:125] [control-plane] adding volume &quot;usr-local-share-ca-certificates&quot; for component &quot;kube-apiserver&quot;
+I0116 13:13:33.422702    4969 manifests.go:125] [control-plane] adding volume &quot;usr-share-ca-certificates&quot; for component &quot;kube-apiserver&quot;
+I0116 13:13:33.424792    4969 manifests.go:154] [control-plane] wrote static Pod manifest for component &quot;kube-apiserver&quot; to &quot;/etc/kubernetes/manifests/kube-apiserver.yaml&quot;
+[control-plane] Creating static Pod manifest for &quot;kube-controller-manager&quot;
+I0116 13:13:33.424817    4969 manifests.go:99] [control-plane] getting StaticPodSpecs
+I0116 13:13:33.425021    4969 manifests.go:125] [control-plane] adding volume &quot;ca-certs&quot; for component &quot;kube-controller-manager&quot;
+I0116 13:13:33.425031    4969 manifests.go:125] [control-plane] adding volume &quot;etc-ca-certificates&quot; for component &quot;kube-controller-manager&quot;
+I0116 13:13:33.425037    4969 manifests.go:125] [control-plane] adding volume &quot;etc-pki&quot; for component &quot;kube-controller-manager&quot;
+I0116 13:13:33.425043    4969 manifests.go:125] [control-plane] adding volume &quot;flexvolume-dir&quot; for component &quot;kube-controller-manager&quot;
+I0116 13:13:33.425049    4969 manifests.go:125] [control-plane] adding volume &quot;k8s-certs&quot; for component &quot;kube-controller-manager&quot;
+I0116 13:13:33.425054    4969 manifests.go:125] [control-plane] adding volume &quot;kubeconfig&quot; for component &quot;kube-controller-manager&quot;
+I0116 13:13:33.425060    4969 manifests.go:125] [control-plane] adding volume &quot;usr-local-share-ca-certificates&quot; for component &quot;kube-controller-manager&quot;
+I0116 13:13:33.425066    4969 manifests.go:125] [control-plane] adding volume &quot;usr-share-ca-certificates&quot; for component &quot;kube-controller-manager&quot;
+I0116 13:13:33.425761    4969 manifests.go:154] [control-plane] wrote static Pod manifest for component &quot;kube-controller-manager&quot; to &quot;/etc/kubernetes/manifests/kube-controller-manager.yaml&quot;
+[control-plane] Creating static Pod manifest for &quot;kube-scheduler&quot;
+I0116 13:13:33.425780    4969 manifests.go:99] [control-plane] getting StaticPodSpecs
+I0116 13:13:33.425961    4969 manifests.go:125] [control-plane] adding volume &quot;kubeconfig&quot; for component &quot;kube-scheduler&quot;
+I0116 13:13:33.428424    4969 manifests.go:154] [control-plane] wrote static Pod manifest for component &quot;kube-scheduler&quot; to &quot;/etc/kubernetes/manifests/kube-scheduler.yaml&quot;
+[etcd] Creating static Pod manifest for local etcd in &quot;/etc/kubernetes/manifests&quot;
+I0116 13:13:33.429151    4969 local.go:65] [etcd] wrote Static Pod manifest for a local etcd member to &quot;/etc/kubernetes/manifests/etcd.yaml&quot;
+I0116 13:13:33.429175    4969 waitcontrolplane.go:91] [wait-control-plane] Waiting for the API server to be healthy
+[wait-control-plane] Waiting for the kubelet to boot up the control plane as static Pods from directory &quot;/etc/kubernetes/manifests&quot;. This can take up to 4m0s
+[apiclient] All control plane components are healthy after 15.501883 seconds
+I0116 13:13:48.932031    4969 uploadconfig.go:110] [upload-config] Uploading the kubeadm ClusterConfiguration to a ConfigMap
+[upload-config] Storing the configuration used in ConfigMap &quot;kubeadm-config&quot; in the &quot;kube-system&quot; Namespace
+I0116 13:13:48.954852    4969 uploadconfig.go:124] [upload-config] Uploading the kubelet component config to a ConfigMap
+[kubelet] Creating a ConfigMap &quot;kubelet-config-1.23&quot; in namespace kube-system with the configuration for the kubelets in the cluster
+NOTE: The &quot;kubelet-config-1.23&quot; naming of the kubelet ConfigMap is deprecated. Once the UnversionedKubeletConfigMap feature gate graduates to Beta the default name will become just &quot;kubelet-config&quot;. Kubeadm upgrade will handle this transition transparently.
+I0116 13:13:49.004597    4969 uploadconfig.go:129] [upload-config] Preserving the CRISocket information for the control-plane node
+I0116 13:13:49.004634    4969 patchnode.go:31] [patchnode] Uploading the CRI Socket information &quot;/var/run/dockershim.sock&quot; to the Node API object &quot;lee&quot; as an annotation
+[upload-certs] Skipping phase. Please see --upload-certs
+[mark-control-plane] Marking the node lee as control-plane by adding the labels: [node-role.kubernetes.io/master(deprecated) node-role.kubernetes.io/control-plane node.kubernetes.io/exclude-from-external-load-balancers]
+[mark-control-plane] Marking the node lee as control-plane by adding the taints [node-role.kubernetes.io/master:NoSchedule]
+[bootstrap-token] Using token: sb4nsd.o4c2svxc6ey18vzv
+[bootstrap-token] Configuring bootstrap tokens, cluster-info ConfigMap, RBAC Roles
+[bootstrap-token] configured RBAC rules to allow Node Bootstrap tokens to get nodes
+[bootstrap-token] configured RBAC rules to allow Node Bootstrap tokens to post CSRs in order for nodes to get long term certificate credentials
+[bootstrap-token] configured RBAC rules to allow the csrapprover controller automatically approve CSRs from a Node Bootstrap Token
+[bootstrap-token] configured RBAC rules to allow certificate rotation for all node client certificates in the cluster
+[bootstrap-token] Creating the &quot;cluster-info&quot; ConfigMap in the &quot;kube-public&quot; namespace
+I0116 13:13:50.288207    4969 clusterinfo.go:47] [bootstrap-token] loading admin kubeconfig
+I0116 13:13:50.288795    4969 clusterinfo.go:58] [bootstrap-token] copying the cluster from admin.conf to the bootstrap kubeconfig
+I0116 13:13:50.289032    4969 clusterinfo.go:70] [bootstrap-token] creating/updating ConfigMap in kube-public namespace
+I0116 13:13:50.295851    4969 clusterinfo.go:84] creating the RBAC rules for exposing the cluster-info ConfigMap in the kube-public namespace
+I0116 13:13:50.336758    4969 kubeletfinalize.go:90] [kubelet-finalize] Assuming that kubelet client certificate rotation is enabled: found &quot;/var/lib/kubelet/pki/kubelet-client-current.pem&quot;
+[kubelet-finalize] Updating &quot;/etc/kubernetes/kubelet.conf&quot; to point to a rotatable kubelet client certificate and key
+I0116 13:13:50.338234    4969 kubeletfinalize.go:134] [kubelet-finalize] Restarting the kubelet to enable client certificate rotation
+[addons] Applied essential addon: CoreDNS
+[addons] Applied essential addon: kube-proxy
+
+Your Kubernetes control-plane has initialized successfully!
+
+To start using your cluster, you need to run the following as a regular user:
+
+  mkdir -p $HOME/.kube
+  sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+  sudo chown $(id -u):$(id -g) $HOME/.kube/config
+
+Alternatively, if you are the root user, you can run:
+
+  export KUBECONFIG=/etc/kubernetes/admin.conf
+
+You should now deploy a pod network to the cluster.
+Run &quot;kubectl apply -f [podnetwork].yaml&quot; with one of the options listed at:
+  https://kubernetes.io/docs/concepts/cluster-administration/addons/
+
+Then you can join any number of worker nodes by running the following on each as root:
+
+kubeadm join 192.168.10.101:6443 --token sb4nsd.o4c2svxc6ey18vzv \
+	--discovery-token-ca-cert-hash sha256:a21fa42fb12f65c33dab7dd37cc2341c07ba4b90675500a76b52a39e1507e082
+</code></pre><h3 id=wsl2-时间同步>wsl2 时间同步</h3>
 <p>按照<a href=https://auth0.com/blog/kubernetes-tutorial-step-by-step-introduction-to-basic-concepts/>Kubernetes Tutorial - Step by Step Introduction to Basic Concepts</a>介绍在DO上创建免费的k8s集群，在wsl2里进行访问时提示错误：<code>Unable to connect to the server: x509: certificate has expired or is not yet valid: current time 2021-11-09T02:59:51+08:00 is before 2021-11-09T07:47:25Z</code>查看本地时间，显示比实际实际慢</p>
 <p>执行<code>sudo hwclock -s </code>同步时间依然没有变化，官方<a href=https://github.com/microsoft/WSL/issues/4149>issue 4149</a>中提供了临时解决方案——netdate。立即生效，不影响任何进程</p>
 <pre tabindex=0><code># 按照ntpdate set the date and time via  Network Time Protocol (NTP)

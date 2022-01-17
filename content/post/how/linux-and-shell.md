@@ -2090,8 +2090,16 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/mas
 
 # wget 方式
 sh -c "$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
+# 忽略证书检查
+wget --no-check-certificate https://example.com
 
 ```
+
+### 关闭swap功能
+
+- 临时关闭`sudo swapoff -a`
+- 永久关闭 `sudo vi /etc/fstab`编辑swap相关的配置，注释之即可
+- 检查swap状态 `systemctl --type swap`
 
 ### 端口占用
 利用netstat 或fuser 命令查找

@@ -154,6 +154,7 @@ curl -k -H "Content-Type: application/json" -X PUT --data-binary @temp.json 127.
 - 先确保kubelet[正常启动](https://stackoverflow.com/questions/52119985/kubeadm-init-shows-kubelet-isnt-running-or-healthy)
 
 ```
+# work on ubuntu, debian, and centos 7
 # create file /etc/docker/daemon.json with 
 {
     "exec-opts": ["native.cgroupdriver=systemd"]

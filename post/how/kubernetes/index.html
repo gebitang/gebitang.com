@@ -236,7 +236,8 @@ curl -k -H <span style=color:#e6db74>&#34;Content-Type: application/json&#34;</s
 <li>安装三件套<code>kubeadm kubelet kubectl</code></li>
 <li>先确保kubelet<a href=https://stackoverflow.com/questions/52119985/kubeadm-init-shows-kubelet-isnt-running-or-healthy>正常启动</a></li>
 </ul>
-<pre tabindex=0><code># create file /etc/docker/daemon.json with 
+<pre tabindex=0><code># work on ubuntu, debian, and centos 7
+# create file /etc/docker/daemon.json with 
 {
     &quot;exec-opts&quot;: [&quot;native.cgroupdriver=systemd&quot;]
 }

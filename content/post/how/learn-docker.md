@@ -379,11 +379,14 @@ redis
 ```
 
 
-### 删除container
+### 删除container，删除images
 
 [docker rm](https://docs.docker.com/engine/reference/commandline/rm/) 
 
 [Remove Docker Containers, Images, Volumes, and Networks](https://linuxize.com/post/how-to-remove-docker-images-containers-volumes-and-networks)
+
+- `docker rm -vf $(docker ps -aq)` To delete all containers including its volumes use
+- `docker rmi -f $(docker images -aq)` To delete all the images 
 
 ```
 # list all containers 

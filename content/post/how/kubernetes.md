@@ -132,6 +132,42 @@ curl -k -H "Content-Type: application/json" -X PUT --data-binary @temp.json 127.
 
 ## start over 
 
+### 虚拟机环境
+
+- centOS7 http://isoredirect.centos.org/centos/7/isos/x86_64/
+- debian11 https://www.debian.org/distrib/netinst
+- ubuntu20.04 https://ubuntu.com/download/server
+
+**其他事项** 
+- 旧的vmware player无法支撑debian11版本，重新下载安装player 16，分别创建三个虚拟机系统
+- 国内镜像源：阿里 https://developer.aliyun.com/mirror/， 清华 https://mirrors.tuna.tsinghua.edu.cn/， 163 http://mirrors.163.com/ ， 中科大 https://mirrors.ustc.edu.cn/
+- 不同类型的镜像介绍： [Differences between distribution types](https://superuser.com/questions/968889/what-is-the-difference-between-live-bin-minimal-and-netinstall-versions-of-ce)
+  - **Live** 类似可直接使用的USB系统
+  - **Bin** 桌面版。包含了GUI环境和其他软件
+  - **Minimal** 不包含GUI的版本
+  - **Netinstall** 需要从镜像站下载安装的版本
+
+纯手工搭建还是比较费劲，添加镜像源之后通过命令行搭建比较靠谱。
+
+- [安装docker环境](https://docs.docker.com/engine/install/debian/)： 配置好源之后；安装工具；添加GPG key；添加stable源；安装8个包
+- 安装三件套`kubeadm kubelet kubectl`
+- 先确保kubelet[正常启动](https://stackoverflow.com/questions/52119985/kubeadm-init-shows-kubelet-isnt-running-or-healthy)
+
+```
+# create file /etc/docker/daemon.json with 
+{
+    "exec-opts": ["native.cgroupdriver=systemd"]
+}
+# do the following commands
+ sudo systemctl daemon-reload
+ sudo systemctl restart docker
+ sudo systemctl restart kubelet
+```
+
+- 执行`sudo kubeadm init --v=5`开始安装
+- 安装成功后，master节点会显示为NotReady状态，查看后因为没有CNI插件，可以安装[Deploying flannel manually](https://github.com/flannel-io/flannel#deploying-flannel-manually)，稍后恢复为ready状态
+
+
 ### 纯手工搭建环境
 
 目前只有一台ubuntu 20.04的server机器。
@@ -146,9 +182,9 @@ curl -k -H "Content-Type: application/json" -X PUT --data-binary @temp.json 127.
 
 **docker-ce** : [docker](https://docs.docker.com/get-docker/) engine, community edition. Requires docker-ce-cli.
 
->containerd.io_1.4.12-1_amd64.deb 2021-12-11 23:03:31 22.6 MiB
->docker-ce-cli_20.10.12~3-0~ubuntu-focal_amd64.deb  2021-12-13 14:38:46 38.8 MiB
->docker-ce_20.10.12~3-0~ubuntu-focal_amd64.deb  2021-12-13 14:38:48 20.3 MiB
+>[containerd.io_1.4.12-1_amd64.deb](https://download.docker.com/linux/ubuntu/dists/focal/pool/stable/amd64/containerd.io_1.4.12-1_amd64.deb) 2021-12-11 23:03:31 22.6 MiB  
+>[docker-ce-cli_20.10.12~3-0~ubuntu-focal_amd64.deb](https://download.docker.com/linux/ubuntu/dists/focal/pool/stable/amd64/docker-ce-cli_20.10.12~3-0~ubuntu-focal_amd64.deb)  2021-12-13 14:38:46 38.8 MiB  
+>[docker-ce_20.10.12~3-0~ubuntu-focal_amd64.deb](https://download.docker.com/linux/ubuntu/dists/focal/pool/stable/amd64/docker-ce_20.10.12~3-0~ubuntu-focal_amd64.deb)  2021-12-13 14:38:48 20.3 MiB  
 
 注意安装顺序——安装完成后会自动创建对应的systemd services
 
@@ -280,7 +316,13 @@ I0116 11:24:45.383728   83074 checks.go:859] pulling: k8s.gcr.io/coredns/coredns
 
 下载clash，`gunzip clashxx.gz`解压；下载配置文件；[下载mmdb](https://github.com/Dreamacro/clash/issues/854)；启动` ./clash -d conf -f clash.yml`走代理下载镜像；关闭swap `sudo swapoff -a` 还是提示超时。[参考](https://zhuanlan.zhihu.com/p/46341911)
 
-执行`kubeadm config image list`获取需要安装的镜像列表，然后从国内站点拉取
+执行`kubeadm config images list`获取需要安装的镜像列表，然后从国内站点拉取。更方便的方式是init时指定repository的地址`sudo kubeadm init --image-repository=registry.cn-hangzhou.aliyuncs.com/google_containers`，更多[参数参考](https://kubernetes.io/zh/docs/reference/setup-tools/kubeadm/kubeadm-init/) 
+
+- --pod-network-cidr string， 指明 pod 网络可以使用的 IP 地址段。如果设置了这个参数，控制平面将会为每一个节点自动分配 CIDRs。
+- --service-cidr string     默认值："10.96.0.0/12"。为服务的虚拟 IP 地址另外指定 IP 地址段
+
+[关于CIDR](https://www.jianshu.com/p/71220cbcf86e)——Classless Inter-Domain Routing, 无类域间路由。基于变长子网掩码([VLSM](https://www.techtarget.com/searchnetworking/definition/variable-length-subnet-mask))，举例，IP4由32位组成，则`192.255.255.255/12`前12位是地址的网络部分，而最后20位是主机地址。[计算器](https://www.ipaddressguide.com/cidr)可计算合适的ip范围
+
 
 ```
 #!/bin/bash
@@ -469,18 +511,6 @@ runtime.goexit
 
 [kubeadm init shows kubelet isn't running or healthy](https://stackoverflow.com/questions/52119985/kubeadm-init-shows-kubelet-isnt-running-or-healthy)
 
-```
-# create file /etc/docker/daemon.json with 
-{
-    "exec-opts": ["native.cgroupdriver=systemd"]
-}
-# do the following commands
- sudo systemctl daemon-reload
- sudo systemctl restart docker
- sudo systemctl restart kubelet
-```
-
-
 提示Port 6443 is in use。需要先执行`sudo kubeadm reset`，重新执行init命令。终于OK了
 
 ```
@@ -597,6 +627,13 @@ Then you can join any number of worker nodes by running the following on each as
 
 kubeadm join 192.168.10.101:6443 --token sb4nsd.o4c2svxc6ey18vzv \
 	--discovery-token-ca-cert-hash sha256:a21fa42fb12f65c33dab7dd37cc2341c07ba4b90675500a76b52a39e1507e082
+```
+
+默认添加的node节点没有roles的描述信息，可以通过`label`命令指定或重新，[参考](https://stackoverflow.com/questions/48854905/how-to-add-roles-to-nodes-in-kubernetes)
+
+```
+kubectl label nodes <your_node> kubernetes.io/role=<your_label>
+kubectl label --overwrite nodes <your_node> kubernetes.io/role=<your_new_label>
 ```
 
 ### wsl2 时间同步

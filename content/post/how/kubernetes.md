@@ -323,6 +323,11 @@ I0116 11:24:45.383728   83074 checks.go:859] pulling: k8s.gcr.io/coredns/coredns
 
 [关于CIDR](https://www.jianshu.com/p/71220cbcf86e)——Classless Inter-Domain Routing, 无类域间路由。基于变长子网掩码([VLSM](https://www.techtarget.com/searchnetworking/definition/variable-length-subnet-mask))，举例，IP4由32位组成，则`192.255.255.255/12`前12位是地址的网络部分，而最后20位是主机地址。[计算器](https://www.ipaddressguide.com/cidr)可计算合适的ip范围
 
+可避免使用固定的私有地址——RFC1918规定的三类私有地址如下：
+
+- A类：10.0.0.0 - 10.255.255.255（10.0.0.0/8）
+- B类：172.16.0.0 - 172.31.255.255（172.16.0.0/12）
+- C类：192.168.0.0 - 192.168.255.255（192.168.0.0/16）
 
 ```
 #!/bin/bash

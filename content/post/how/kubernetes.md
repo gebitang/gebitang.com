@@ -153,10 +153,11 @@ curl -k -H "Content-Type: application/json" -X PUT --data-binary @temp.json 127.
 - 安装三件套`kubeadm kubelet kubectl`
 - 先确保kubelet[正常启动](https://stackoverflow.com/questions/52119985/kubeadm-init-shows-kubelet-isnt-running-or-healthy)
 - 执行`sudo kubeadm init --image-repository registry.aliyuncs.com/google_containers --service-cidr=10.96.0.0/12 --pod-network-cidr=192.168.0.0/16 --v=5`开始安装
-- 安装成功后，master节点会显示为NotReady状态，查看后因为没有CNI插件，可以安装[Deploying flannel manually](https://github.com/flannel-io/flannel#deploying-flannel-manually)，稍后恢复为ready状态
+- 安装成功后，master节点会显示为NotReady状态，查看后因为没有CNI插件，可以安装[Deploying flannel manually](https://github.com/flannel-io/flannel#deploying-flannel-manually)，稍后恢复为ready状态。或者使用[Calico插件](https://projectcalico.docs.tigera.io/getting-started/kubernetes/self-managed-onprem/onpremises)
 - 确保宿主机上服务正常启动，如下操作
 - 确保swap关闭`sudo swapoff -a`
 - join后，部署kube-proxy时提示找不到`/run/systemd/resolve/resolv.conf`文件，从master节点复制一份
+- 更多相关信息，参考[官方手册](https://kubernetes.io/zh/docs/setup/production-environment/tools/kubeadm/create-cluster-kubeadm/)
 
 ```
 # work on ubuntu, debian, and centos 7

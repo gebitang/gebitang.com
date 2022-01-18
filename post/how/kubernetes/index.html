@@ -386,6 +386,12 @@ I0116 11:24:45.383728   83074 checks.go:859] pulling: k8s.gcr.io/coredns/coredns
 <li>&ndash;service-cidr string 默认值：&ldquo;10.96.0.0/12&rdquo;。为服务的虚拟 IP 地址另外指定 IP 地址段</li>
 </ul>
 <p><a href=https://www.jianshu.com/p/71220cbcf86e>关于CIDR</a>——Classless Inter-Domain Routing, 无类域间路由。基于变长子网掩码(<a href=https://www.techtarget.com/searchnetworking/definition/variable-length-subnet-mask>VLSM</a>)，举例，IP4由32位组成，则<code>192.255.255.255/12</code>前12位是地址的网络部分，而最后20位是主机地址。<a href=https://www.ipaddressguide.com/cidr>计算器</a>可计算合适的ip范围</p>
+<p>可避免使用固定的私有地址——RFC1918规定的三类私有地址如下：</p>
+<ul>
+<li>A类：10.0.0.0 - 10.255.255.255（10.0.0.0/8）</li>
+<li>B类：172.16.0.0 - 172.31.255.255（172.16.0.0/12）</li>
+<li>C类：192.168.0.0 - 192.168.255.255（192.168.0.0/16）</li>
+</ul>
 <pre tabindex=0><code>#!/bin/bash
 
 images=(  # 下面的镜像应该去除&quot;k8s.gcr.io/&quot;的前缀，版本换成上面获取到的版本

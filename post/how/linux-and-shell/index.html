@@ -208,6 +208,7 @@
 <li><a href=#devnull-21含义>/dev/null 2>&1含义</a></li>
 <li><a href=#split--cat使用>split & cat使用</a></li>
 <li><a href=#使用zsh>使用zsh</a></li>
+<li><a href=#关闭swap功能>关闭swap功能</a></li>
 <li><a href=#端口占用>端口占用</a></li>
 <li><a href=#0x1-等待>0x1. 等待</a></li>
 <li><a href=#0x2-日期>0x2. 日期</a></li>
@@ -1821,8 +1822,16 @@ sh -c &quot;$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zs
 
 # wget 方式
 sh -c &quot;$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)&quot;
+# 忽略证书检查
+wget --no-check-certificate https://example.com
 
-</code></pre><h3 id=端口占用>端口占用</h3>
+</code></pre><h3 id=关闭swap功能>关闭swap功能</h3>
+<ul>
+<li>临时关闭<code>sudo swapoff -a</code></li>
+<li>永久关闭 <code>sudo vi /etc/fstab</code>编辑swap相关的配置，注释之即可</li>
+<li>检查swap状态 <code>systemctl --type swap</code></li>
+</ul>
+<h3 id=端口占用>端口占用</h3>
 <p>利用netstat 或fuser 命令查找</p>
 <pre tabindex=0><code>netstat -ano |grep 9988
 # -k 参数可以kill相应的进程

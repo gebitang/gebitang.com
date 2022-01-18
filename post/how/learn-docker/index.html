@@ -114,7 +114,7 @@
 <li><a href=#调用链>调用链</a></li>
 </ul>
 </li>
-<li><a href=#删除container>删除container</a></li>
+<li><a href=#删除container删除images>删除container，删除images</a></li>
 <li><a href=#cannot-create-container-for-service-filebeat-drive-has-not-been-shared>Cannot create container for service filebeat: Drive has not been shared</a></li>
 <li><a href=#slow-on-windows>slow on Windows</a></li>
 </ul>
@@ -425,9 +425,13 @@ etcd
 elasticsearch
 filebeat
 redis
-</code></pre><h3 id=删除container>删除container</h3>
+</code></pre><h3 id=删除container删除images>删除container，删除images</h3>
 <p><a href=https://docs.docker.com/engine/reference/commandline/rm/>docker rm</a></p>
 <p><a href=https://linuxize.com/post/how-to-remove-docker-images-containers-volumes-and-networks>Remove Docker Containers, Images, Volumes, and Networks</a></p>
+<ul>
+<li><code>docker rm -vf $(docker ps -aq)</code> To delete all containers including its volumes use</li>
+<li><code>docker rmi -f $(docker images -aq)</code> To delete all the images</li>
+</ul>
 <pre tabindex=0><code># list all containers 
 docker container ls -a
 

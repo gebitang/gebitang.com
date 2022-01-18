@@ -107,6 +107,7 @@
 </li>
 <li><a href=#start-over>start over</a>
 <ul>
+<li><a href=#虚拟机环境>虚拟机环境</a></li>
 <li><a href=#纯手工搭建环境>纯手工搭建环境</a></li>
 <li><a href=#wsl2-时间同步>wsl2 时间同步</a></li>
 <li><a href=#kubernetes-tutorial>Kubernetes Tutorial</a></li>
@@ -210,6 +211,43 @@ curl -k -H <span style=color:#e6db74>&#34;Content-Type: application/json&#34;</s
 <span style=color:#75715e># 再查看空间时，此空间被彻底删除</span>
 </code></pre></div><p>其他资源类似</p>
 <h2 id=start-over>start over</h2>
+<h3 id=虚拟机环境>虚拟机环境</h3>
+<ul>
+<li>centOS7 <a href=http://isoredirect.centos.org/centos/7/isos/x86_64/>http://isoredirect.centos.org/centos/7/isos/x86_64/</a></li>
+<li>debian11 <a href=https://www.debian.org/distrib/netinst>https://www.debian.org/distrib/netinst</a></li>
+<li>ubuntu20.04 <a href=https://ubuntu.com/download/server>https://ubuntu.com/download/server</a></li>
+</ul>
+<p><strong>其他事项</strong></p>
+<ul>
+<li>旧的vmware player无法支撑debian11版本，重新下载安装player 16，分别创建三个虚拟机系统</li>
+<li>国内镜像源：阿里 <a href=https://developer.aliyun.com/mirror/>https://developer.aliyun.com/mirror/</a>， 清华 <a href=https://mirrors.tuna.tsinghua.edu.cn/>https://mirrors.tuna.tsinghua.edu.cn/</a>， 163 <a href=http://mirrors.163.com/>http://mirrors.163.com/</a> ， 中科大 <a href=https://mirrors.ustc.edu.cn/>https://mirrors.ustc.edu.cn/</a></li>
+<li>不同类型的镜像介绍： <a href=https://superuser.com/questions/968889/what-is-the-difference-between-live-bin-minimal-and-netinstall-versions-of-ce>Differences between distribution types</a>
+<ul>
+<li><strong>Live</strong> 类似可直接使用的USB系统</li>
+<li><strong>Bin</strong> 桌面版。包含了GUI环境和其他软件</li>
+<li><strong>Minimal</strong> 不包含GUI的版本</li>
+<li><strong>Netinstall</strong> 需要从镜像站下载安装的版本</li>
+</ul>
+</li>
+</ul>
+<p>纯手工搭建还是比较费劲，添加镜像源之后通过命令行搭建比较靠谱。</p>
+<ul>
+<li><a href=https://docs.docker.com/engine/install/debian/>安装docker环境</a>： 配置好源之后；安装工具；添加GPG key；添加stable源；安装8个包</li>
+<li>安装三件套<code>kubeadm kubelet kubectl</code></li>
+<li>先确保kubelet<a href=https://stackoverflow.com/questions/52119985/kubeadm-init-shows-kubelet-isnt-running-or-healthy>正常启动</a></li>
+</ul>
+<pre tabindex=0><code># create file /etc/docker/daemon.json with 
+{
+    &quot;exec-opts&quot;: [&quot;native.cgroupdriver=systemd&quot;]
+}
+# do the following commands
+ sudo systemctl daemon-reload
+ sudo systemctl restart docker
+ sudo systemctl restart kubelet
+</code></pre><ul>
+<li>执行<code>sudo kubeadm init --v=5</code>开始安装</li>
+<li>安装成功后，master节点会显示为NotReady状态，查看后因为没有CNI插件，可以安装<a href=https://github.com/flannel-io/flannel#deploying-flannel-manually>Deploying flannel manually</a>，稍后恢复为ready状态</li>
+</ul>
 <h3 id=纯手工搭建环境>纯手工搭建环境</h3>
 <p>目前只有一台ubuntu 20.04的server机器。</p>
 <p>先收工<a href=https://docs.docker.com/engine/install/ubuntu/>安装docker环境</a>，从<a href=https://download.docker.com/linux/ubuntu/dists/focal/pool/stable/amd64/>下载页面</a>下载docker-ce docker-ce-cli containerd.io</p>
@@ -220,9 +258,9 @@ curl -k -H <span style=color:#e6db74>&#34;Content-Type: application/json&#34;</s
 <p><strong>docker-ce-cli</strong> : command line interface for docker engine, community edition</p>
 <p><strong>docker-ce</strong> : <a href=https://docs.docker.com/get-docker/>docker</a> engine, community edition. Requires docker-ce-cli.</p>
 <blockquote>
-<p>containerd.io_1.4.12-1_amd64.deb 2021-12-11 23:03:31 22.6 MiB
-docker-ce-cli_20.10.12~3-0~ubuntu-focal_amd64.deb 2021-12-13 14:38:46 38.8 MiB
-docker-ce_20.10.12~3-0~ubuntu-focal_amd64.deb 2021-12-13 14:38:48 20.3 MiB</p>
+<p><a href=https://download.docker.com/linux/ubuntu/dists/focal/pool/stable/amd64/containerd.io_1.4.12-1_amd64.deb>containerd.io_1.4.12-1_amd64.deb</a> 2021-12-11 23:03:31 22.6 MiB<br>
+<a href=https://download.docker.com/linux/ubuntu/dists/focal/pool/stable/amd64/docker-ce-cli_20.10.12~3-0~ubuntu-focal_amd64.deb>docker-ce-cli_20.10.12~3-0~ubuntu-focal_amd64.deb</a> 2021-12-13 14:38:46 38.8 MiB<br>
+<a href=https://download.docker.com/linux/ubuntu/dists/focal/pool/stable/amd64/docker-ce_20.10.12~3-0~ubuntu-focal_amd64.deb>docker-ce_20.10.12~3-0~ubuntu-focal_amd64.deb</a> 2021-12-13 14:38:48 20.3 MiB</p>
 </blockquote>
 <p>注意安装顺序——安装完成后会自动创建对应的systemd services</p>
 <pre tabindex=0><code>➜  deps sudo dpkg -i containerd.io_1.4.12-1_amd64.deb
@@ -342,7 +380,12 @@ I0116 11:24:45.383728   83074 checks.go:859] pulling: k8s.gcr.io/coredns/coredns
 
 
 </code></pre><p>下载clash，<code>gunzip clashxx.gz</code>解压；下载配置文件；<a href=https://github.com/Dreamacro/clash/issues/854>下载mmdb</a>；启动<code> ./clash -d conf -f clash.yml</code>走代理下载镜像；关闭swap <code>sudo swapoff -a</code> 还是提示超时。<a href=https://zhuanlan.zhihu.com/p/46341911>参考</a></p>
-<p>执行<code>kubeadm config image list</code>获取需要安装的镜像列表，然后从国内站点拉取</p>
+<p>执行<code>kubeadm config images list</code>获取需要安装的镜像列表，然后从国内站点拉取。更方便的方式是init时指定repository的地址<code>sudo kubeadm init --image-repository=registry.cn-hangzhou.aliyuncs.com/google_containers</code>，更多<a href=https://kubernetes.io/zh/docs/reference/setup-tools/kubeadm/kubeadm-init/>参数参考</a></p>
+<ul>
+<li>&ndash;pod-network-cidr string， 指明 pod 网络可以使用的 IP 地址段。如果设置了这个参数，控制平面将会为每一个节点自动分配 CIDRs。</li>
+<li>&ndash;service-cidr string 默认值：&ldquo;10.96.0.0/12&rdquo;。为服务的虚拟 IP 地址另外指定 IP 地址段</li>
+</ul>
+<p><a href=https://www.jianshu.com/p/71220cbcf86e>关于CIDR</a>——Classless Inter-Domain Routing, 无类域间路由。基于变长子网掩码(<a href=https://www.techtarget.com/searchnetworking/definition/variable-length-subnet-mask>VLSM</a>)，举例，IP4由32位组成，则<code>192.255.255.255/12</code>前12位是地址的网络部分，而最后20位是主机地址。<a href=https://www.ipaddressguide.com/cidr>计算器</a>可计算合适的ip范围</p>
 <pre tabindex=0><code>#!/bin/bash
 
 images=(  # 下面的镜像应该去除&quot;k8s.gcr.io/&quot;的前缀，版本换成上面获取到的版本
@@ -518,15 +561,7 @@ runtime.goexit
 	/usr/local/go/src/runtime/asm_amd64.s:1581
 ➜  ~
 </code></pre><p><a href=https://stackoverflow.com/questions/52119985/kubeadm-init-shows-kubelet-isnt-running-or-healthy>kubeadm init shows kubelet isn&rsquo;t running or healthy</a></p>
-<pre tabindex=0><code># create file /etc/docker/daemon.json with 
-{
-    &quot;exec-opts&quot;: [&quot;native.cgroupdriver=systemd&quot;]
-}
-# do the following commands
- sudo systemctl daemon-reload
- sudo systemctl restart docker
- sudo systemctl restart kubelet
-</code></pre><p>提示Port 6443 is in use。需要先执行<code>sudo kubeadm reset</code>，重新执行init命令。终于OK了</p>
+<p>提示Port 6443 is in use。需要先执行<code>sudo kubeadm reset</code>，重新执行init命令。终于OK了</p>
 <pre tabindex=0><code>[certs] Using certificateDir folder &quot;/etc/kubernetes/pki&quot;
 I0116 13:13:30.061835    4969 certs.go:112] creating a new certificate authority for ca
 [certs] Generating &quot;ca&quot; certificate and key
@@ -640,6 +675,9 @@ Then you can join any number of worker nodes by running the following on each as
 
 kubeadm join 192.168.10.101:6443 --token sb4nsd.o4c2svxc6ey18vzv \
 	--discovery-token-ca-cert-hash sha256:a21fa42fb12f65c33dab7dd37cc2341c07ba4b90675500a76b52a39e1507e082
+</code></pre><p>默认添加的node节点没有roles的描述信息，可以通过<code>label</code>命令指定或重新，<a href=https://stackoverflow.com/questions/48854905/how-to-add-roles-to-nodes-in-kubernetes>参考</a></p>
+<pre tabindex=0><code>kubectl label nodes &lt;your_node&gt; kubernetes.io/role=&lt;your_label&gt;
+kubectl label --overwrite nodes &lt;your_node&gt; kubernetes.io/role=&lt;your_new_label&gt;
 </code></pre><h3 id=wsl2-时间同步>wsl2 时间同步</h3>
 <p>按照<a href=https://auth0.com/blog/kubernetes-tutorial-step-by-step-introduction-to-basic-concepts/>Kubernetes Tutorial - Step by Step Introduction to Basic Concepts</a>介绍在DO上创建免费的k8s集群，在wsl2里进行访问时提示错误：<code>Unable to connect to the server: x509: certificate has expired or is not yet valid: current time 2021-11-09T02:59:51+08:00 is before 2021-11-09T07:47:25Z</code>查看本地时间，显示比实际实际慢</p>
 <p>执行<code>sudo hwclock -s </code>同步时间依然没有变化，官方<a href=https://github.com/microsoft/WSL/issues/4149>issue 4149</a>中提供了临时解决方案——netdate。立即生效，不影响任何进程</p>

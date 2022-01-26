@@ -19,6 +19,23 @@ toc = true
 
 <!-- more -->
 
+## Windows Terminal + Oh my posh
+
+- 源码：[oh-my-posh](https://github.com/JanDeDobbeleer/oh-my-posh)，golang实现
+- 推广：[My Ultimate PowerShell prompt with Oh My Posh and the Windows Terminal](https://www.hanselman.com/blog/my-ultimate-powershell-prompt-with-oh-my-posh-and-the-windows-terminal)；
+- 安装：[for windows](https://ohmyposh.dev/docs/windows)，需要额外安装一下“nerd fonts”，从这里[下载](https://www.nerdfonts.com/font-downloads)，解压，选中，右键安装即可。
+- 配置：选择对应的主题，可以进行定制化编辑
+
+```
+# 在powershell中查看$PROFILE的文件位置，编辑如下内容
+Import-Module posh-git
+Import-Module oh-my-posh
+Set-PoshPrompt -Theme JanDeDobbeleer
+
+# 执行Get-PoshThemes可以看到有哪些主题可选，根据提示进行设置即可
+```
+
+
 ## MAS
 
 [Microsoft-Activation-Scripts](https://github.com/massgravel/Microsoft-Activation-Scripts)，纯batchfile语言实现——

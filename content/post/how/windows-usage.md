@@ -36,6 +36,7 @@ Set-PoshPrompt -Theme JanDeDobbeleer
 ```
 
 VSCODE中的powershell主题如果现实乱码，需要在设置里对terminal进行设置：打开设置，搜索`Integrated:Font Family`，在输入框中输入下载的字体名称，例如`DejaVuSansMono Nerd Font`
+Idea和goland中的terminal目前无法正常显示，看起来是个已知问题，参考[bug262116](https://youtrack.jetbrains.com/issue/IDEA-262116)
 
 ## MAS
 

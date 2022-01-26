@@ -99,6 +99,7 @@
 </div>
 <nav id=TableOfContents>
 <ul>
+<li><a href=#windows-terminal--oh-my-posh>Windows Terminal + Oh my posh</a></li>
 <li><a href=#mas>MAS</a></li>
 <li><a href=#禁止chrome自动更新>禁止chrome自动更新</a></li>
 <li><a href=#electron-devtools>Electron devTools</a></li>
@@ -157,7 +158,20 @@
 </ul>
 </nav>
 <p>重新整理日常工作中Windows环境下的配置以及使用技巧。默认最前面的内容为最新的内容。</p>
-<h2 id=mas>MAS</h2>
+<h2 id=windows-terminal--oh-my-posh>Windows Terminal + Oh my posh</h2>
+<ul>
+<li>源码：<a href=https://github.com/JanDeDobbeleer/oh-my-posh>oh-my-posh</a>，golang实现</li>
+<li>推广：<a href=https://www.hanselman.com/blog/my-ultimate-powershell-prompt-with-oh-my-posh-and-the-windows-terminal>My Ultimate PowerShell prompt with Oh My Posh and the Windows Terminal</a>；</li>
+<li>安装：<a href=https://ohmyposh.dev/docs/windows>for windows</a>，需要额外安装一下“nerd fonts”，从这里<a href=https://www.nerdfonts.com/font-downloads>下载</a>，解压，选中，右键安装即可。</li>
+<li>配置：选择对应的主题，可以进行定制化编辑</li>
+</ul>
+<pre tabindex=0><code># 在powershell中查看$PROFILE的文件位置，编辑如下内容
+Import-Module posh-git
+Import-Module oh-my-posh
+Set-PoshPrompt -Theme JanDeDobbeleer
+
+# 执行Get-PoshThemes可以看到有哪些主题可选，根据提示进行设置即可
+</code></pre><h2 id=mas>MAS</h2>
 <p><a href=https://github.com/massgravel/Microsoft-Activation-Scripts>Microsoft-Activation-Scripts</a>，纯batchfile语言实现——</p>
 <blockquote>
 <p>A collection of scripts for activating Microsoft products using HWID / KMS38 / Online KMS activation methods with a focus on open-source code, less antivirus detection and user-friendliness.</p>

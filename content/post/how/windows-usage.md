@@ -35,6 +35,7 @@ Set-PoshPrompt -Theme JanDeDobbeleer
 # 执行Get-PoshThemes可以看到有哪些主题可选，根据提示进行设置即可
 ```
 
+VSCODE中的powershell主题如果现实乱码，需要在设置里对terminal进行设置：打开设置，搜索`Integrated:Font Family`，在输入框中输入下载的字体名称，例如`DejaVuSansMono Nerd Font`
 
 ## MAS
 

@@ -1481,6 +1481,13 @@ chmod 400 path_to_rsa_file
 chmod 0600 path_to_rsa_file
 ```
 
+本质上——
+
+- 创建一对秘钥`ssh-keygen `，可以使用密码保护，也可以不使用(Enter passphrase (empty for no passphrase):)
+- 本地保存私钥，然后将公钥上传到远程机器的对应用户地址(可以使用ssh-copy-it，也可以手动添加)
+
+例如，将公钥保存在 `/home/vip/.ssh/authorized_keys`里，则可以使用`vip`这个用户登录。保存在其他用户目录下对应文件，则可以使用其他用户登录。每行保存一个公钥信息，可保存多个。
+
 ### SSH Server安装
 1. 先创建一个root账号，命令：
 sudo passwd root

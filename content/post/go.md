@@ -48,7 +48,7 @@ Mac端开源通过Ctrl+C停止转发
 
 ### TLS 
 
-[TLS握手是如何建立的](https://www.cloudflare.com/learning/ssl/what-happens-in-a-tls-handshake/)
+[TLS握手是如何建立的](https://www.cloudflare.com/learning/ssl/what-happens-in-a-tls-handshake/)，更系统的解释参考[TLS1.2连接过程解析](https://time.geekbang.org/column/article/110354)
 
 - **[时机]** TCP握手建立后就开始进行TLS握手过程(先建立TCP握手之后有了通道之后才能进行TLS握手) 
 - **[内容]** 握手要确定是事情包括：1)使用哪个版本的TLS；2)使用什么密码套件(cipher suites，即使用什么算法)；3)验证服务器的身份(通过服务器的公钥和SSL证书机构的签名)

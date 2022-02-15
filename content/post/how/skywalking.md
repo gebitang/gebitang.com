@@ -21,6 +21,11 @@ toc = true
 - 搭建SkyWalking UI服务
 - 测试SkyWalking Agent
 
+[集群搭建：](https://skywalking.apache.org/docs/main/latest/en/setup/backend/backend-storage/) 从8.8.0开始storage不再区分es6、es7、openSearch(因从es7.11开始，es协议更新为SSPL，其不兼容apache2.0)
+
+- 搭建Elasticsearch 服务的集群 for Storage
+- 搭建注册中心集群 for cluster 
+- 搭建SkyWalking OAP 服务的集群，同时将其注册到注册中心上
 
 ### 搭建ES服务
 

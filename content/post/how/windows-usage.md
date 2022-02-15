@@ -19,6 +19,18 @@ toc = true
 
 <!-- more -->
 
+## 用Calibre给txt文件生成目录
+
+[来源](https://blog.csdn.net/qq_33957603/article/details/106988424)——
+
+- txt不带目录
+- [calibre-ebook](https://github.com/kovidgoyal/calibre)安装
+- 添加txt到calibre
+- 转换书籍 --> 结构检测 --> xpath表达式。使用如下转换正则表达式
+
+```
+//*[re:test(., "^\s*[第卷][0123456789一二三四五六七八九十零〇百千两]*[章回部节集卷].*", "i")]
+```
 ## Windows Terminal + Oh my posh
 
 - 源码：[oh-my-posh](https://github.com/JanDeDobbeleer/oh-my-posh)，golang实现

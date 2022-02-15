@@ -159,6 +159,8 @@ PS: 也可以将导入的jar包直接导入GSB的lib目录，通常为 `%HOME_US
 
  Help/Find action, type 'registry' (it's IDE's internal registry (hidden settings, if you wish)), search the registry for `terminal.buffer.max.lines.count`.
 
+[goland: Override console cycle buffer size](https://www.jetbrains.com/help/go/settings-console-folding.html)
+
 ### "find usages" not working
 
 import异常"cannot resolve symbol"；方法、变量的调用不再有效；所有方法认为“never used”。 原因：异常关闭导致的工程的index错乱

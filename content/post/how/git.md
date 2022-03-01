@@ -13,6 +13,10 @@ toc = true
 
 ## Git Pro
 
+### 推送tag
+
+`git push origin <tag_name>` [推送单一tag到remote](https://stackoverflow.com/a/5195913/1087122)
+
 ### 获取commit的代码变动
 
 [How to count the lines changed between two commits in gitlab?](https://stackoverflow.com/questions/42249174/how-to-count-the-lines-changed-between-two-commits-in-gitlab/42254042)

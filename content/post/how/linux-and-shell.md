@@ -138,6 +138,14 @@ Root can run commands as other users via the "su" command. I believe if you crea
 
 `su -c /path/to/your/script username`
 
+### 如果Make命令运行时没有指定目标，默认会执行Makefile文件的第一个目标
+
+[Make 命令教程](https://www.ruanyifeng.com/blog/2015/02/make.html)
+
+### BASH_SOURCE[0]参数表示脚本自身
+
+[DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )" How does that work?](https://stackoverflow.com/questions/39340169/dir-cd-dirname-bash-source0-pwd-how-does-that-work)
+
 ### htop 
 
 [htop official site](https://htop.dev/downloads.html), [htop explained](https://peteris.rocks/blog/htop/#htop-on-ubuntu-server-16-04-x64), Explanation of everything you can see in htop/top on Linux.

@@ -14,6 +14,12 @@ toc = true
 
 ## IDEA
 
+### ignored pom.xml
+
+[Maven创建module出现Ignored pom.xml文件](https://blog.csdn.net/weixin_43901865/article/details/112596443)
+
+module创建后被删除，再次创建**同名**module时提示对应的pom.xml被忽略。在 `settings-->Building-->Build Tools-->Maven`查看菜单下的ignored files的列表。从列表中移除即可
+
 ### 异常断电导致无法启动
 
 重启PC后报错`Internal error. Please refer to https://jb.gg/ide/critical-startup-errors`，`Caused by: java.net.BindException: Address already in use: bind`，`java.util.concurrent.CompletionException: java.net.BindException: Address already in use: bind`，详细报错——

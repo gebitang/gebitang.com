@@ -1,141 +1,33 @@
-<!doctype html><html xmlns:wb=http://open.weibo.com/wb lang=en>
-<head>
-<meta charset=utf-8>
-<meta name=viewport content="width=device-width,initial-scale=1">
-<meta name=description content>
-<meta name=generator content="Hugo 0.92.0">
-<title>STF之Provider一键部署一 &#183; 戈壁堂</title>
-<link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/pure-min.css><!--[if lte IE 8]><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-old-ie-min.css><![endif]--><!--[if gt IE 8]><!-->
-<link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-min.css><!--<![endif]--><!--[if lte IE 8]><link rel=stylesheet href=http://gebitang.com/css/side-menu-old-ie.css><![endif]--><!--[if gt IE 8]><!-->
-<link rel=stylesheet href=http://gebitang.com/css/side-menu.css><!--<![endif]-->
-<link rel=stylesheet href=http://gebitang.com/css/blackburn.css>
-<link rel=stylesheet href=https://use.fontawesome.com/releases/v5.9.0/css/all.css>
-<link href="https://fonts.googleapis.com/css?family=Raleway" rel=stylesheet type=text/css>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-<link rel=stylesheet href=//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/androidstudio.min.css>
-<script src=//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js></script>
+<!doctype html><html xmlns:wb=http://open.weibo.com/wb lang=en><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content><meta name=generator content="Hugo 0.94.2"><title>STF之Provider一键部署一 &#183; 戈壁堂</title><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/pure-min.css><!--[if lte IE 8]><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-old-ie-min.css><![endif]--><!--[if gt IE 8]><!--><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-min.css><!--<![endif]--><!--[if lte IE 8]><link rel=stylesheet href=http://gebitang.com/css/side-menu-old-ie.css><![endif]--><!--[if gt IE 8]><!--><link rel=stylesheet href=http://gebitang.com/css/side-menu.css><!--<![endif]--><link rel=stylesheet href=http://gebitang.com/css/blackburn.css><link rel=stylesheet href=https://use.fontawesome.com/releases/v5.9.0/css/all.css><link href="https://fonts.googleapis.com/css?family=Raleway" rel=stylesheet type=text/css><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<link rel=stylesheet href=//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/androidstudio.min.css><script src=//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js></script>
 <script src=//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js></script>
-<script>hljs.initHighlightingOnLoad()</script>
-<link rel="shortcut icon" href=http://gebitang.com/img/favicon.ico type=image/x-icon>
-<link rel=stylesheet href=http://gebitang.com/css/my.css>
-<script src=http://gebitang.com/js/my.js></script>
-</head>
-<body>
-<div id=layout>
-<a href=#menu id=menuLink class=menu-link>
-<span></span>
-</a>
-<div id=menu>
-<a class="pure-menu-heading brand" href=http://gebitang.com/>Gebitang</a>
-<div class=pure-menu>
-<ul class=pure-menu-list>
-<li class=pure-menu-item>
-<a class=pure-menu-link href=http://gebitang.com/><i class="fa fa-home fa-fw"></i>Home</a>
-</li>
-<li class=pure-menu-item>
-<a class=pure-menu-link href=http://gebitang.com/post/><i class="fa fa-list fa-fw"></i>Posts</a>
-</li>
-<li class=pure-menu-item>
-<a class=pure-menu-link href=http://gebitang.com/about/><i class="fa fa-user fa-fw"></i>About</a>
-</li>
-<li class=pure-menu-item>
-<a class=pure-menu-link href=http://gebitang.com/contact/><i class="fa fa-phone fa-fw"></i>Contact</a>
-</li>
-<li class=pure-menu-item>
-<a class=pure-menu-link href=http://gebitang.com/tags/><i class="fa fa-tags fa-fw"></i>Tags</a>
-</li>
-<li class=pure-menu-item>
-<a class=pure-menu-link href=http://gebitang.com/topics/><i class="fa fa-folder fa-fw"></i>Topics</a>
-</li>
-</ul>
-</div>
-<div class="pure-menu social">
-<ul class=pure-menu-list>
-</ul>
-</div>
-<div>
-<div class=small-print>
-<small>
-<a rel=license href=http://creativecommons.org/licenses/by/4.0/><img alt=知识共享许可协议 style=border-width:0 src=https://i.creativecommons.org/l/by/4.0/80x15.png></a><br>本<span xmlns:dct=http://purl.org/dc/terms/ href=http://purl.org/dc/dcmitype/Text rel=dct:type>作品</span>由<a xmlns:cc=http://creativecommons.org/ns# href=http://gebitang.com property="cc:attributionName" rel=cc:attributionurl>&nbsp;Gebitang&nbsp;&nbsp;</a>采用<a rel=license href=http://creativecommons.org/licenses/by/4.0/>知识共享署名 4.0 国际许可协议</a>进行许可&nbsp;&copy; 2018
-</small>
-</div>
-<div class=small-print>
-<small></small>
-</div>
-<div class=small-print>
-<small>Built with&nbsp;<a href=https://gohugo.io/ target=_blank>Hugo</a></small>
-<small>Theme&nbsp;<a href=https://github.com/yoshiharuyamashita/blackburn target=_blank>Blackburn</a></small>
-</div>
-<div style=display:none>
-<div class=small-print>
-<small>
-<wb:follow-button uid=2446212465 type=red_1 width=67 height=24></wb:follow-button>
-</small>
-</div>
-</div>
-</div>
-</div>
-<div id=main>
-<div class=header>
-<h1>STF之Provider一键部署一</h1>
-<h2></h2>
-</div>
-<div class=content>
-<div class=post-meta>
-<div>
-<i class="fa fa-calendar fa-fw"></i>
-<time>2020-03-07</time>
-</div>
-<div>
-<i class="fa fa-folder fa-fw"></i>
+<script>hljs.initHighlightingOnLoad()</script><link rel="shortcut icon" href=http://gebitang.com/img/favicon.ico type=image/x-icon><link rel=stylesheet href=http://gebitang.com/css/my.css><script src=http://gebitang.com/js/my.js></script></head><body><div id=layout><a href=#menu id=menuLink class=menu-link><span></span></a><div id=menu><a class="pure-menu-heading brand" href=http://gebitang.com/>Gebitang</a><div class=pure-menu><ul class=pure-menu-list><li class=pure-menu-item><a class=pure-menu-link href=http://gebitang.com/><i class="fa fa-home fa-fw"></i>Home</a></li><li class=pure-menu-item><a class=pure-menu-link href=http://gebitang.com/post/><i class="fa fa-list fa-fw"></i>Posts</a></li><li class=pure-menu-item><a class=pure-menu-link href=http://gebitang.com/about/><i class="fa fa-user fa-fw"></i>About</a></li><li class=pure-menu-item><a class=pure-menu-link href=http://gebitang.com/contact/><i class="fa fa-phone fa-fw"></i>Contact</a></li><li class=pure-menu-item><a class=pure-menu-link href=http://gebitang.com/tags/><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class=pure-menu-item><a class=pure-menu-link href=http://gebitang.com/topics/><i class="fa fa-folder fa-fw"></i>Topics</a></li></ul></div><div class="pure-menu social"><ul class=pure-menu-list></ul></div><div><div class=small-print><small><a rel=license href=http://creativecommons.org/licenses/by/4.0/><img alt=知识共享许可协议 style=border-width:0 src=https://i.creativecommons.org/l/by/4.0/80x15.png></a><br>本<span xmlns:dct=http://purl.org/dc/terms/ href=http://purl.org/dc/dcmitype/Text rel=dct:type>作品</span>由<a xmlns:cc=http://creativecommons.org/ns# href=http://gebitang.com property="cc:attributionName" rel=cc:attributionurl>&nbsp;Gebitang&nbsp;&nbsp;</a>采用<a rel=license href=http://creativecommons.org/licenses/by/4.0/>知识共享署名 4.0 国际许可协议</a>进行许可&nbsp;&copy; 2018</small></div><div class=small-print><small></small></div><div class=small-print><small>Built with&nbsp;<a href=https://gohugo.io/ target=_blank>Hugo</a></small>
+<small>Theme&nbsp;<a href=https://github.com/yoshiharuyamashita/blackburn target=_blank>Blackburn</a></small></div><div style=display:none><div class=small-print><small><wb:follow-button uid=2446212465 type=red_1 width=67 height=24></wb:follow-button></small></div></div></div></div><div id=main><div class=header><h1>STF之Provider一键部署一</h1><h2></h2></div><div class=content><div class=post-meta><div><i class="fa fa-calendar fa-fw"></i>
+<time>2020-03-07</time></div><div><i class="fa fa-folder fa-fw"></i>
 <a class=post-taxonomy-topic href=http://gebitang.com/topics/jiansh>jiansh</a>&nbsp;/
-<a class=post-taxonomy-topic href=http://gebitang.com/topics/stf>STF</a>
-</div>
-<div>
-<i class="fa fa-tags fa-fw"></i>
-<a class=post-taxonomy-tag href=http://gebitang.com/tags/jiansh>jiansh</a>
-</div>
-</div>
-<nav id=TableOfContents></nav>
-<p><a href=https://www.jianshu.com/p/86e493ccf13a>link on JianShu</a></p>
-<p><a href=https://www.jianshu.com/p/a358dbb7c05d>STF之Provider系列五</a>里的前提条件是已经获取到里源码。在源码目录执行上面到脚本。</p>
-<p>问题：</p>
-<ul>
-<li>需要有获取到源码到权限</li>
-<li>公司网络使用brew安装依赖时过慢，可能导致安装失败</li>
-<li>npm install时bower获取github上到资源时大概率会遇到失败情况，需要多次执行</li>
-</ul>
-<p><a href=https://www.jianshu.com/p/1a52b09203b9>STF之Provider系列六：brew</a>里提到brew可以支持本地安装，以及如何获取brew应用到安装包、依赖包到方法。</p>
-<p>方案：</p>
-<ul>
-<li>提供依赖包的合集压缩包<code>stftools.tar.gz</code></li>
-<li>编译后的STF项目压缩包<code>remoteDevice.tar.gz </code></li>
-<li>使用线上脚本方式 <code>oneshell.sh</code></li>
-</ul>
-<p>这种条件下，Mac环境下只需要执行<code>curl -o- http://inner.domain.com/path/oneshell.sh | bash</code> 就可以完成Provider的一键部署工作。</p>
-<p>依赖包大概57MB + 通过 <code>npm install</code>直接安装的话包大概600MB
+<a class=post-taxonomy-topic href=http://gebitang.com/topics/stf>STF</a></div><div><i class="fa fa-tags fa-fw"></i>
+<a class=post-taxonomy-tag href=http://gebitang.com/tags/jiansh>jiansh</a></div></div><nav id=TableOfContents></nav><p><a href=https://www.jianshu.com/p/86e493ccf13a>link on JianShu</a></p><p><a href=https://www.jianshu.com/p/a358dbb7c05d>STF之Provider系列五</a>里的前提条件是已经获取到里源码。在源码目录执行上面到脚本。</p><p>问题：</p><ul><li>需要有获取到源码到权限</li><li>公司网络使用brew安装依赖时过慢，可能导致安装失败</li><li>npm install时bower获取github上到资源时大概率会遇到失败情况，需要多次执行</li></ul><p><a href=https://www.jianshu.com/p/1a52b09203b9>STF之Provider系列六：brew</a>里提到brew可以支持本地安装，以及如何获取brew应用到安装包、依赖包到方法。</p><p>方案：</p><ul><li>提供依赖包的合集压缩包<code>stftools.tar.gz</code></li><li>编译后的STF项目压缩包<code>remoteDevice.tar.gz</code></li><li>使用线上脚本方式 <code>oneshell.sh</code></li></ul><p>这种条件下，Mac环境下只需要执行<code>curl -o- http://inner.domain.com/path/oneshell.sh | bash</code> 就可以完成Provider的一键部署工作。</p><p>依赖包大概57MB + 通过 <code>npm install</code>直接安装的话包大概600MB
 依赖包大概57MB + 编译好的STF项目压缩后大概220MB
-这样整体下载的内容更小，并且只依赖本地网络。</p>
-<pre tabindex=0><code>#!/bin/bash
+这样整体下载的内容更小，并且只依赖本地网络。</p><pre tabindex=0><code>#!/bin/bash
 
 # download dependencies
 brewCache() {
 	if [ -f stftools.tar.gz ]
 	then
-		echo &quot;stftools.tar.gz exist&quot;
+		echo &#34;stftools.tar.gz exist&#34;
 		rm stftools.tar.gz
 	else
-		echo &quot;no stftools.tar.gz, download first.&quot;
+		echo &#34;no stftools.tar.gz, download first.&#34;
 	fi
 
 	curl http://inner.domain.com/path/stftools.tar.gz -o stftools.tar.gz
 
 	if [ -d stftools ]
 	then
-		echo &quot;stftools dir exist&quot;
+		echo &#34;stftools dir exist&#34;
 		rm -rf stftools
 	else
-		echo &quot;no stftools dir&quot;
+		echo &#34;no stftools dir&#34;
 	fi
 
 	tar -zxvf stftools.tar.gz
@@ -145,10 +37,10 @@ brewCache() {
 		dorf=`pwd`/stftools/$f
 		if [  -f $dorf ]
 		then
-			echo &quot;file: &quot; $f
+			echo &#34;file: &#34; $f
 			mv $dorf $(brew --cache)
 		else
-			echo &quot;ignore dir: &quot; $f
+			echo &#34;ignore dir: &#34; $f
 		fi
 	done
         rm -rf stftools
@@ -157,17 +49,17 @@ brewCache() {
 
 homebrew() {
 
-	# $() is for command substitution, commands don't _return_ values, they _capture_ them
+	# $() is for command substitution, commands don&#39;t _return_ values, they _capture_ them
 	# more here: https://stackoverflow.com/a/12137501/890814
 	# [[ ]] is the newer _test command_ for evaluations, is more literal
 	# more here: http://mywiki.wooledge.org/BashFAQ/031
 	# the double [[ ]], and $() is important
 	# `command -v brew` will output nothing if Homebrew is not installed
-	if [[ $(command -v brew) == &quot;&quot; ]]; then
-		echo &quot;Installing Homebrew.. &quot;
-		ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&quot;
+	if [[ $(command -v brew) == &#34;&#34; ]]; then
+		echo &#34;Installing Homebrew.. &#34;
+		ruby -e &#34;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&#34;
 	else
-		echo &quot;Homebrew installed. &quot;
+		echo &#34;Homebrew installed. &#34;
 	fi
 }
 
@@ -176,20 +68,20 @@ brewcheck() {
 
 	for i in 1 2 3 4 5
 	do
-		echo &quot;Looping ... number $i&quot;
+		echo &#34;Looping ... number $i&#34;
 		if brew list $1 &gt;/dev/null ; then
-			echo &quot;$1 installed&quot;
+			echo &#34;$1 installed&#34;
 			break
 		else
-			echo &quot;$1 not installed &quot;
+			echo &#34;$1 not installed &#34;
 			brew install $1
 		fi
 	done
 
 	if brew list $1 &gt;/dev/null ; then
-		echo &quot;final check: $1 installed. good \n&quot;
+		echo &#34;final check: $1 installed. good \n&#34;
 	else
-		echo &quot;\n\n $1 cannot be installed. make sure your network condition is good enough and try it later... \n\n&quot;
+		echo &#34;\n\n $1 cannot be installed. make sure your network condition is good enough and try it later... \n\n&#34;
 		exit 0
 	fi
 
@@ -198,11 +90,11 @@ brewcheck() {
 # check adb and link
 adbcheck() {
 	adbversion=`adb version`
-	if [[ $adbversion == *&quot;version 1.0.40&quot;* ]]; then
+	if [[ $adbversion == *&#34;version 1.0.40&#34;* ]]; then
 		echo $adbversion
 	else
 		currentdir=`pwd`
-		echo &quot;use custom adb &quot; $currentdir
+		echo &#34;use custom adb &#34; $currentdir
 		if [[ -f /usr/local/bin/adb ]]; then
 			rm /usr/local/bin/adb
 		fi
@@ -213,9 +105,9 @@ adbcheck() {
 # update environment file if exist
 updateEnvFile() {
 	if [[ -f $HOME/$1 ]]; then
-		echo -e &quot;export NVM_DIR=\&quot;\$HOME/.nvm\&quot;&quot; &gt;&gt; $HOME/$1
-		# echo -e &quot;[ -s \&quot;\$NVM_DIR/nvm.sh\&quot; ] &amp;&amp; . \&quot;\$NVM_DIR/nvm.sh\&quot; &quot; &gt;&gt; $HOME/$1
-		# echo -e &quot;[ -s \&quot;\$NVM_DIR/bash_completion\&quot; ] &amp;&amp; . \&quot;\$NVM_DIR/bash_completion\&quot; &quot; &gt;&gt; $HOME/$1
+		echo -e &#34;export NVM_DIR=\&#34;\$HOME/.nvm\&#34;&#34; &gt;&gt; $HOME/$1
+		# echo -e &#34;[ -s \&#34;\$NVM_DIR/nvm.sh\&#34; ] &amp;&amp; . \&#34;\$NVM_DIR/nvm.sh\&#34; &#34; &gt;&gt; $HOME/$1
+		# echo -e &#34;[ -s \&#34;\$NVM_DIR/bash_completion\&#34; ] &amp;&amp; . \&#34;\$NVM_DIR/bash_completion\&#34; &#34; &gt;&gt; $HOME/$1
 		source $HOME/$1
 	fi
 }
@@ -223,22 +115,22 @@ updateEnvFile() {
 # node check
 nodecheck() {
 	nodeversion=`node -v`
-	if [[ $nodeversion == &quot;v8&quot;* ]]; then
+	if [[ $nodeversion == &#34;v8&#34;* ]]; then
 		echo $nodeversion
 	else
-		echo &quot;install node carbon&quot;
-		if [[ $(command -v nvm) == &quot;&quot; ]]; then
-			echo &quot;Installing nvm first. &quot;
+		echo &#34;install node carbon&#34;
+		if [[ $(command -v nvm) == &#34;&#34; ]]; then
+			echo &#34;Installing nvm first. &#34;
 			curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.2/install.sh | bash
-			export NVM_DIR=&quot;$HOME/.nvm&quot;
-			[ -s &quot;$NVM_DIR/nvm.sh&quot; ] &amp;&amp; \. &quot;$NVM_DIR/nvm.sh&quot;  # This loads nvm
-			[ -s &quot;$NVM_DIR/bash_completion&quot; ] &amp;&amp; \. &quot;$NVM_DIR/bash_completion&quot;  # This loads nvm bash_completion
-			updateEnvFile &quot;.zshrc&quot;
-			updateEnvFile &quot;.bashrc&quot;
-			updateEnvFile &quot;.bash_profile&quot;
+			export NVM_DIR=&#34;$HOME/.nvm&#34;
+			[ -s &#34;$NVM_DIR/nvm.sh&#34; ] &amp;&amp; \. &#34;$NVM_DIR/nvm.sh&#34;  # This loads nvm
+			[ -s &#34;$NVM_DIR/bash_completion&#34; ] &amp;&amp; \. &#34;$NVM_DIR/bash_completion&#34;  # This loads nvm bash_completion
+			updateEnvFile &#34;.zshrc&#34;
+			updateEnvFile &#34;.bashrc&#34;
+			updateEnvFile &#34;.bash_profile&#34;
 
 		else
-			echo &quot;nvm already installed. &quot;
+			echo &#34;nvm already installed. &#34;
 		fi
 
 		nvm install v8.16.0
@@ -252,7 +144,7 @@ getSourceCode () {
 
 	if [ -f remoteDevice.tar.gz ]
 	then
-		echo &quot;remoteDevice.tar.gz file exist&quot;
+		echo &#34;remoteDevice.tar.gz file exist&#34;
 		rm remoteDevice.tar.gz
 	fi
 
@@ -260,7 +152,7 @@ getSourceCode () {
 
 	if [ -d RemoteDevice ]
 	then
-		echo &quot;RemoteDevice dir exist&quot;
+		echo &#34;RemoteDevice dir exist&#34;
 		rm -rf RemoteDevice
 	fi
 
@@ -271,20 +163,20 @@ getSourceCode () {
 # check brew
 brewCheckAgain() {
 
-	if [[ $(command -v brew) == &quot;&quot; ]]; then
-		echo &quot;\n\n brew cannot be installed. make sure your network condition is good enough and try it later... \n\n&quot;
+	if [[ $(command -v brew) == &#34;&#34; ]]; then
+		echo &#34;\n\n brew cannot be installed. make sure your network condition is good enough and try it later... \n\n&#34;
 		exit 0
 	else
-		echo &quot;Homebrew already installed. &quot;
+		echo &#34;Homebrew already installed. &#34;
 	fi
 
 }
 
 # start here
 if xcode-select -p &gt; /dev/null ; then
-	echo &quot;XCode installed.&quot;
+	echo &#34;XCode installed.&#34;
 else
-	echo &quot;need xcode, please install XCode first. &quot;
+	echo &#34;need xcode, please install XCode first. &#34;
 	exit 0
 fi
 
@@ -296,7 +188,7 @@ brewCache
 declare -a array=(graphicsmagick zeromq protobuf yasm pkg-config)
 
 # Install dependencies
-for e in &quot;${array[@]}&quot;
+for e in &#34;${array[@]}&#34;
 do
 	brewcheck $e
 done
@@ -306,7 +198,7 @@ getSourceCode
 
 if [ -d RemoteDevice ]
 then
-	echo &quot;go to RemoteDevice dir &quot;
+	echo &#34;go to RemoteDevice dir &#34;
 	cd  RemoteDevice
 
         # check adb version and link adb 
@@ -314,57 +206,25 @@ then
 	# check node version
 	nodecheck
 
-	echo &quot;current node:&quot; `node -v` &quot; npm:&quot; `npm -v`
+	echo &#34;current node:&#34; `node -v` &#34; npm:&#34; `npm -v`
 
 	nodeversion=`node -v`
-	if [[ $nodeversion == &quot;v8&quot;* ]]; then
+	if [[ $nodeversion == &#34;v8&#34;* ]]; then
 
 		adbversion=`adb version`
-		if [[ $adbversion == *&quot;version 1.0.40&quot;* ]]; then
+		if [[ $adbversion == *&#34;version 1.0.40&#34;* ]]; then
 			./provider.sh
 		else
-			echo &quot;adb version: &quot; $adbversion
+			echo &#34;adb version: &#34; $adbversion
 		fi
 	else
-		echo &quot;environment not fit. current node:&quot; `node -v` &quot; npm:&quot; `npm -v`
+		echo &#34;environment not fit. current node:&#34; `node -v` &#34; npm:&#34; `npm -v`
 		cd ..
 
 	fi
 else 
-       echo &quot;RemoteDevice dir not found.&quot;
+       echo &#34;RemoteDevice dir not found.&#34;
 fi
-</code></pre>
-<div class="prev-next-post pure-g">
-<div class=pure-u-1-24 style=text-align:left>
-<a href=http://gebitang.com/post/jiansh/stf/stf%E4%B9%8Bprovider%E4%B8%80%E9%94%AE%E9%83%A8%E7%BD%B2%E4%BA%8C/><i class="fa fa-chevron-left"></i></a>
-</div>
-<div class=pure-u-10-24>
-<nav class=prev>
-<a href=http://gebitang.com/post/jiansh/stf/stf%E4%B9%8Bprovider%E4%B8%80%E9%94%AE%E9%83%A8%E7%BD%B2%E4%BA%8C/>STF之Provider一键部署二</a>
-</nav>
-</div>
-<div class=pure-u-2-24>
-&nbsp;
-</div>
-<div class=pure-u-10-24>
-<nav class=next>
-<a href=http://gebitang.com/post/jiansh/stf/stf%E4%B9%8Boauth%E6%8E%A2%E7%B4%A2%E4%BA%8C/>STF之OAuth探索二</a>
-</nav>
-</div>
-<div class=pure-u-1-24 style=text-align:right>
-<a href=http://gebitang.com/post/jiansh/stf/stf%E4%B9%8Boauth%E6%8E%A2%E7%B4%A2%E4%BA%8C/><i class="fa fa-chevron-right"></i></a>
-</div>
-</div>
-<div id=disqus_thread></div>
-<script type=text/javascript>(function(){var a,b;if(window.location.hostname=="localhost")return;a=document.createElement('script'),a.type='text/javascript',a.async=!0,b='gebitang',a.src='//'+b+'.disqus.com/embed.js',(document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(a)})()</script>
-<noscript>Please enable JavaScript to view the <a href=http://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript>
-<a href=http://disqus.com/ class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a>
-</div>
-</div>
-</div>
-<script src=http://gebitang.com/js/ui.js></script>
+</code></pre><div class="prev-next-post pure-g"><div class=pure-u-1-24 style=text-align:left><a href=http://gebitang.com/post/jiansh/stf/stf%E4%B9%8Bprovider%E4%B8%80%E9%94%AE%E9%83%A8%E7%BD%B2%E4%BA%8C/><i class="fa fa-chevron-left"></i></a></div><div class=pure-u-10-24><nav class=prev><a href=http://gebitang.com/post/jiansh/stf/stf%E4%B9%8Bprovider%E4%B8%80%E9%94%AE%E9%83%A8%E7%BD%B2%E4%BA%8C/>STF之Provider一键部署二</a></nav></div><div class=pure-u-2-24>&nbsp;</div><div class=pure-u-10-24><nav class=next><a href=http://gebitang.com/post/jiansh/stf/stf%E4%B9%8Boauth%E6%8E%A2%E7%B4%A2%E4%BA%8C/>STF之OAuth探索二</a></nav></div><div class=pure-u-1-24 style=text-align:right><a href=http://gebitang.com/post/jiansh/stf/stf%E4%B9%8Boauth%E6%8E%A2%E7%B4%A2%E4%BA%8C/><i class="fa fa-chevron-right"></i></a></div></div><div id=disqus_thread></div><script type=text/javascript>(function(){if(window.location.hostname=="localhost")return;var e=document.createElement("script"),t;e.type="text/javascript",e.async=!0,t="gebitang",e.src="//"+t+".disqus.com/embed.js",(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(e)})()</script><noscript>Please enable JavaScript to view the <a href=http://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript><a href=http://disqus.com/ class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a></div></div></div><script src=http://gebitang.com/js/ui.js></script>
 <script src=http://gebitang.com/js/menus.js></script>
-<script>window.location.hostname!="localhost"&&(function(a,e,f,g,b,c,d){a.GoogleAnalyticsObject=b,a[b]=a[b]||function(){(a[b].q=a[b].q||[]).push(arguments)},a[b].l=1*new Date,c=e.createElement(f),d=e.getElementsByTagName(f)[0],c.async=1,c.src=g,d.parentNode.insertBefore(c,d)}(window,document,'script','//www.google-analytics.com/analytics.js','ga'),ga('create','UA-34303694-1','auto'),ga('send','pageview'))</script>
-<button onclick=topFunction() id=myBtn title="Go to top">Top</button>
-</body>
-</html>
+<script>window.location.hostname!="localhost"&&(function(e,o,i,a,t,n,s){e.GoogleAnalyticsObject=t,e[t]=e[t]||function(){(e[t].q=e[t].q||[]).push(arguments)},e[t].l=1*new Date,n=o.createElement(i),s=o.getElementsByTagName(i)[0],n.async=1,n.src=a,s.parentNode.insertBefore(n,s)}(window,document,"script","//www.google-analytics.com/analytics.js","ga"),ga("create","UA-34303694-1","auto"),ga("send","pageview"))</script><button onclick=topFunction() id=myBtn title="Go to top">Top</button></body></html>

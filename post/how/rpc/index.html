@@ -1,135 +1,13 @@
-<!doctype html><html xmlns:wb=http://open.weibo.com/wb lang=en>
-<head>
-<meta charset=utf-8>
-<meta name=viewport content="width=device-width,initial-scale=1">
-<meta name=description content="Leaning about RPC">
-<meta name=generator content="Hugo 0.92.0">
-<title>RPC &#183; 戈壁堂</title>
-<link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/pure-min.css><!--[if lte IE 8]><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-old-ie-min.css><![endif]--><!--[if gt IE 8]><!-->
-<link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-min.css><!--<![endif]--><!--[if lte IE 8]><link rel=stylesheet href=http://gebitang.com/css/side-menu-old-ie.css><![endif]--><!--[if gt IE 8]><!-->
-<link rel=stylesheet href=http://gebitang.com/css/side-menu.css><!--<![endif]-->
-<link rel=stylesheet href=http://gebitang.com/css/blackburn.css>
-<link rel=stylesheet href=https://use.fontawesome.com/releases/v5.9.0/css/all.css>
-<link href="https://fonts.googleapis.com/css?family=Raleway" rel=stylesheet type=text/css>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-<link rel=stylesheet href=//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/androidstudio.min.css>
-<script src=//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js></script>
+<!doctype html><html xmlns:wb=http://open.weibo.com/wb lang=en><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="Leaning about RPC"><meta name=generator content="Hugo 0.94.2"><title>RPC &#183; 戈壁堂</title><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/pure-min.css><!--[if lte IE 8]><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-old-ie-min.css><![endif]--><!--[if gt IE 8]><!--><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-min.css><!--<![endif]--><!--[if lte IE 8]><link rel=stylesheet href=http://gebitang.com/css/side-menu-old-ie.css><![endif]--><!--[if gt IE 8]><!--><link rel=stylesheet href=http://gebitang.com/css/side-menu.css><!--<![endif]--><link rel=stylesheet href=http://gebitang.com/css/blackburn.css><link rel=stylesheet href=https://use.fontawesome.com/releases/v5.9.0/css/all.css><link href="https://fonts.googleapis.com/css?family=Raleway" rel=stylesheet type=text/css><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<link rel=stylesheet href=//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/androidstudio.min.css><script src=//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js></script>
 <script src=//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js></script>
-<script>hljs.initHighlightingOnLoad()</script>
-<link rel="shortcut icon" href=http://gebitang.com/img/favicon.ico type=image/x-icon>
-<link rel=stylesheet href=http://gebitang.com/css/my.css>
-<script src=http://gebitang.com/js/my.js></script>
-</head>
-<body>
-<div id=layout>
-<a href=#menu id=menuLink class=menu-link>
-<span></span>
-</a>
-<div id=menu>
-<a class="pure-menu-heading brand" href=http://gebitang.com/>Gebitang</a>
-<div class=pure-menu>
-<ul class=pure-menu-list>
-<li class=pure-menu-item>
-<a class=pure-menu-link href=http://gebitang.com/><i class="fa fa-home fa-fw"></i>Home</a>
-</li>
-<li class=pure-menu-item>
-<a class=pure-menu-link href=http://gebitang.com/post/><i class="fa fa-list fa-fw"></i>Posts</a>
-</li>
-<li class=pure-menu-item>
-<a class=pure-menu-link href=http://gebitang.com/about/><i class="fa fa-user fa-fw"></i>About</a>
-</li>
-<li class=pure-menu-item>
-<a class=pure-menu-link href=http://gebitang.com/contact/><i class="fa fa-phone fa-fw"></i>Contact</a>
-</li>
-<li class=pure-menu-item>
-<a class=pure-menu-link href=http://gebitang.com/tags/><i class="fa fa-tags fa-fw"></i>Tags</a>
-</li>
-<li class=pure-menu-item>
-<a class=pure-menu-link href=http://gebitang.com/topics/><i class="fa fa-folder fa-fw"></i>Topics</a>
-</li>
-</ul>
-</div>
-<div class="pure-menu social">
-<ul class=pure-menu-list>
-</ul>
-</div>
-<div>
-<div class=small-print>
-<small>
-<a rel=license href=http://creativecommons.org/licenses/by/4.0/><img alt=知识共享许可协议 style=border-width:0 src=https://i.creativecommons.org/l/by/4.0/80x15.png></a><br>本<span xmlns:dct=http://purl.org/dc/terms/ href=http://purl.org/dc/dcmitype/Text rel=dct:type>作品</span>由<a xmlns:cc=http://creativecommons.org/ns# href=http://gebitang.com property="cc:attributionName" rel=cc:attributionurl>&nbsp;Gebitang&nbsp;&nbsp;</a>采用<a rel=license href=http://creativecommons.org/licenses/by/4.0/>知识共享署名 4.0 国际许可协议</a>进行许可&nbsp;&copy; 2018
-</small>
-</div>
-<div class=small-print>
-<small></small>
-</div>
-<div class=small-print>
-<small>Built with&nbsp;<a href=https://gohugo.io/ target=_blank>Hugo</a></small>
-<small>Theme&nbsp;<a href=https://github.com/yoshiharuyamashita/blackburn target=_blank>Blackburn</a></small>
-</div>
-<div style=display:none>
-<div class=small-print>
-<small>
-<wb:follow-button uid=2446212465 type=red_1 width=67 height=24></wb:follow-button>
-</small>
-</div>
-</div>
-</div>
-</div>
-<div id=main>
-<div class=header>
-<h1>RPC</h1>
-<h2>Leaning about RPC</h2>
-</div>
-<div class=content>
-<div class=post-meta>
-<div>
-<i class="fa fa-calendar fa-fw"></i>
-<time>2020-12-21</time>
-</div>
-<div>
-<i class="fa fa-folder fa-fw"></i>
+<script>hljs.initHighlightingOnLoad()</script><link rel="shortcut icon" href=http://gebitang.com/img/favicon.ico type=image/x-icon><link rel=stylesheet href=http://gebitang.com/css/my.css><script src=http://gebitang.com/js/my.js></script></head><body><div id=layout><a href=#menu id=menuLink class=menu-link><span></span></a><div id=menu><a class="pure-menu-heading brand" href=http://gebitang.com/>Gebitang</a><div class=pure-menu><ul class=pure-menu-list><li class=pure-menu-item><a class=pure-menu-link href=http://gebitang.com/><i class="fa fa-home fa-fw"></i>Home</a></li><li class=pure-menu-item><a class=pure-menu-link href=http://gebitang.com/post/><i class="fa fa-list fa-fw"></i>Posts</a></li><li class=pure-menu-item><a class=pure-menu-link href=http://gebitang.com/about/><i class="fa fa-user fa-fw"></i>About</a></li><li class=pure-menu-item><a class=pure-menu-link href=http://gebitang.com/contact/><i class="fa fa-phone fa-fw"></i>Contact</a></li><li class=pure-menu-item><a class=pure-menu-link href=http://gebitang.com/tags/><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class=pure-menu-item><a class=pure-menu-link href=http://gebitang.com/topics/><i class="fa fa-folder fa-fw"></i>Topics</a></li></ul></div><div class="pure-menu social"><ul class=pure-menu-list></ul></div><div><div class=small-print><small><a rel=license href=http://creativecommons.org/licenses/by/4.0/><img alt=知识共享许可协议 style=border-width:0 src=https://i.creativecommons.org/l/by/4.0/80x15.png></a><br>本<span xmlns:dct=http://purl.org/dc/terms/ href=http://purl.org/dc/dcmitype/Text rel=dct:type>作品</span>由<a xmlns:cc=http://creativecommons.org/ns# href=http://gebitang.com property="cc:attributionName" rel=cc:attributionurl>&nbsp;Gebitang&nbsp;&nbsp;</a>采用<a rel=license href=http://creativecommons.org/licenses/by/4.0/>知识共享署名 4.0 国际许可协议</a>进行许可&nbsp;&copy; 2018</small></div><div class=small-print><small></small></div><div class=small-print><small>Built with&nbsp;<a href=https://gohugo.io/ target=_blank>Hugo</a></small>
+<small>Theme&nbsp;<a href=https://github.com/yoshiharuyamashita/blackburn target=_blank>Blackburn</a></small></div><div style=display:none><div class=small-print><small><wb:follow-button uid=2446212465 type=red_1 width=67 height=24></wb:follow-button></small></div></div></div></div><div id=main><div class=header><h1>RPC</h1><h2>Leaning about RPC</h2></div><div class=content><div class=post-meta><div><i class="fa fa-calendar fa-fw"></i>
+<time>2020-12-21</time></div><div><i class="fa fa-folder fa-fw"></i>
 <a class=post-taxonomy-topic href=http://gebitang.com/topics/rpc>rpc</a>&nbsp;/
-<a class=post-taxonomy-topic href=http://gebitang.com/topics/tech>tech</a>
-</div>
-<div>
-<i class="fa fa-tags fa-fw"></i>
-<a class=post-taxonomy-tag href=http://gebitang.com/tags/rpc>rpc</a>
-</div>
-</div>
-<nav id=TableOfContents>
-<ul>
-<li>
-<ul>
-<li><a href=#打包dorado>打包Dorado</a></li>
-</ul>
-</li>
-</ul>
-</nav>
-<p>推荐<a href=https://ketao1989.github.io/2016/12/10/rpc-theory-in-action/#%E9%80%9A%E7%94%A8rpc%E6%9E%B6%E6%9E%84>深入浅出RPC原理</a></p>
-<p>RMI: Remote Method Invocation，远程方法调用 ——RPC界的原型机</p>
-<p><img src=https://upload-images.jianshu.io/upload_images/3296949-68c8a9173348f901.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240 alt=RMI></p>
-<blockquote>
-<p><strong>stub(桩)：</strong> stub实际上就是远程过程在客户端上面的一个代理proxy。当我们的客户端代码调用API接口提供的方法的时候，RMI生成的stub代码块会将请求数据序列化，交给远程服务端处理，然后将结果反序列化之后返回给客户端的代码。这些处理过程，对于客户端来说，基本是透明无感知的。</p>
-<p><strong>remote：</strong> 这层就是底层网络处理了，RMI对用户来说，屏蔽了这层细节。stub通过remote来和远程服务端进行通信。</p>
-<p><strong>skeleton(骨架)：</strong> 和stub相似，skeleton则是服务端生成的一个代理proxy。当客户端通过stub发送请求到服务端，则交给skeleton来处理，其会根据指定的服务方法来反序列化请求，然后调用具体方法执行，最后将结果返回给客户端。</p>
-<p><strong>registry(服务发现)：</strong> rmi服务，在服务端实现之后需要注册到rmi server上，然后客户端从指定的rmi地址上lookup服务，调用该服务对应的方法即可完成远程方法调用。registry是个很重要的功能，当服务端开发完服务之后，要对外暴露，如果没有服务注册，则客户端是无从调用的，即使服务端的服务就在那里。</p>
-</blockquote>
-<p><img src=https://upload-images.jianshu.io/upload_images/3296949-4fd6050485200f02.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240 alt></p>
-<blockquote>
-<p><strong>serviceClient：</strong> 这个模块主要是封装服务端对外提供的API，让客户端像使用本地API接口一样调用远程服务。一般，我们使用动态代理机制，当客户端调用api的方法时，serviceClient会走代理逻辑，去远程服务器请求真正的执行方法，然后将响应结果作为本地的api方法执行结果返回给客户端应用。类似RMI的stub模块。</p>
-<p><strong>processor：</strong> 在服务端存在很多方法，当客户端请求过来，服务端需要定位到具体对象的具体方法，然后执行该方法，这个功能就由processor模块来完成。一般这个操作需要使用反射机制来获取用来执行真实处理逻辑的方法，当然，有的RPC直接在server初始化的时候，将一定规则写进Map映射中，这样直接获取对象即可。类似RMI的skeleton模块。</p>
-<p><strong>protocol：</strong> 协议层，这是每个RPC组件的核心技术所在。一般，协议层包括编码/解码，或者说序列化和反序列化工作；当然，有的时候编解码不仅仅是对象序列化的工作，还有一些通信相关的字节流的额外解析部分。序列化工具有：hessian，protobuf，avro,thrift，json系，xml系等等。在RMI中这块是直接使用JDK自身的序列化组件。</p>
-<p><strong>transport：</strong> 传输层，主要是服务端和客户端网络通信相关的功能。这里和下面的IO层区分开，主要是因为传输层处理server/client的网络通信交互，而不涉及具体底层处理连接请求和响应相关的逻辑。</p>
-<p><strong>I/O：</strong> 这个模块主要是为了提高性能可能采用不同的IO模型和线程模型，当然，一般我们可能和上面的transport层联系的比较紧密，统一称为remote模块。</p>
-</blockquote>
-<p>生产级别的RPC实例——美团<a href=https://github.com/Meituan-Dianping/octo-rpc/wiki/OCTO-Dorado%E9%80%9A%E4%BF%A1%E6%A1%86%E6%9E%B6%E4%BB%8B%E7%BB%8D>OCTO Dorado通信框架介绍</a></p>
-<p><img src=https://upload-images.jianshu.io/upload_images/3296949-a5b8f904d051b180.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240 alt>
-<a href=https://raw.githubusercontent.com/Meituan-Dianping/octo-rpc/master/dorado/dorado-doc/img/FrameworkDesign.svg>svg原图</a></p>
-<p>导入项目后，在demo模块下可以直接进行验证，例如执行 <code>ThriftProvider </code>和<code>ThriftConsumer</code>的main方法。就完成了一次完整的RPC调用。其中，使用测试的ZooKeeperServerMain作为注册中心；发布HelloService；远程调用此服务。</p>
-<p>使用xml定义的方式参考<a href=https://github.com/Meituan-Dianping/octo-rpc/blob/master/dorado/dorado-doc/Manual.md>手册</a></p>
-<p>在windows环境下，注意本地网络环境。本地包含多个虚拟网卡时，查找的服务地址有问题，导致执行失败——</p>
-<p>发布服务时，注册的信息包括<code>info.setIp(NetUtil.getLocalHost());</code>其中com.meituan.dorado.common.util.NetUtil的<code>getLocalHost()</code>方法在获取本地IP时，只排除了回送地址</p>
-<pre tabindex=0><code>2020/12/21 14:46:18.982 NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2200 [INFO] NIOServerCnxnFactory (NIOServerCnxnFactory.java:215) Accepted socket connection from /127.0.0.1:6543
+<a class=post-taxonomy-topic href=http://gebitang.com/topics/tech>tech</a></div><div><i class="fa fa-tags fa-fw"></i>
+<a class=post-taxonomy-tag href=http://gebitang.com/tags/rpc>rpc</a></div></div><nav id=TableOfContents><ul><li><ul><li><a href=#打包dorado>打包Dorado</a></li></ul></li></ul></nav><p>推荐<a href=https://ketao1989.github.io/2016/12/10/rpc-theory-in-action/#%E9%80%9A%E7%94%A8rpc%E6%9E%B6%E6%9E%84>深入浅出RPC原理</a></p><p>RMI: Remote Method Invocation，远程方法调用 ——RPC界的原型机</p><p><img src=https://upload-images.jianshu.io/upload_images/3296949-68c8a9173348f901.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240 alt=RMI></p><blockquote><p><strong>stub(桩)：</strong> stub实际上就是远程过程在客户端上面的一个代理proxy。当我们的客户端代码调用API接口提供的方法的时候，RMI生成的stub代码块会将请求数据序列化，交给远程服务端处理，然后将结果反序列化之后返回给客户端的代码。这些处理过程，对于客户端来说，基本是透明无感知的。</p><p><strong>remote：</strong> 这层就是底层网络处理了，RMI对用户来说，屏蔽了这层细节。stub通过remote来和远程服务端进行通信。</p><p><strong>skeleton(骨架)：</strong> 和stub相似，skeleton则是服务端生成的一个代理proxy。当客户端通过stub发送请求到服务端，则交给skeleton来处理，其会根据指定的服务方法来反序列化请求，然后调用具体方法执行，最后将结果返回给客户端。</p><p><strong>registry(服务发现)：</strong> rmi服务，在服务端实现之后需要注册到rmi server上，然后客户端从指定的rmi地址上lookup服务，调用该服务对应的方法即可完成远程方法调用。registry是个很重要的功能，当服务端开发完服务之后，要对外暴露，如果没有服务注册，则客户端是无从调用的，即使服务端的服务就在那里。</p></blockquote><p><img src=https://upload-images.jianshu.io/upload_images/3296949-4fd6050485200f02.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240 alt></p><blockquote><p><strong>serviceClient：</strong> 这个模块主要是封装服务端对外提供的API，让客户端像使用本地API接口一样调用远程服务。一般，我们使用动态代理机制，当客户端调用api的方法时，serviceClient会走代理逻辑，去远程服务器请求真正的执行方法，然后将响应结果作为本地的api方法执行结果返回给客户端应用。类似RMI的stub模块。</p><p><strong>processor：</strong> 在服务端存在很多方法，当客户端请求过来，服务端需要定位到具体对象的具体方法，然后执行该方法，这个功能就由processor模块来完成。一般这个操作需要使用反射机制来获取用来执行真实处理逻辑的方法，当然，有的RPC直接在server初始化的时候，将一定规则写进Map映射中，这样直接获取对象即可。类似RMI的skeleton模块。</p><p><strong>protocol：</strong> 协议层，这是每个RPC组件的核心技术所在。一般，协议层包括编码/解码，或者说序列化和反序列化工作；当然，有的时候编解码不仅仅是对象序列化的工作，还有一些通信相关的字节流的额外解析部分。序列化工具有：hessian，protobuf，avro,thrift，json系，xml系等等。在RMI中这块是直接使用JDK自身的序列化组件。</p><p><strong>transport：</strong> 传输层，主要是服务端和客户端网络通信相关的功能。这里和下面的IO层区分开，主要是因为传输层处理server/client的网络通信交互，而不涉及具体底层处理连接请求和响应相关的逻辑。</p><p><strong>I/O：</strong> 这个模块主要是为了提高性能可能采用不同的IO模型和线程模型，当然，一般我们可能和上面的transport层联系的比较紧密，统一称为remote模块。</p></blockquote><p>生产级别的RPC实例——美团<a href=https://github.com/Meituan-Dianping/octo-rpc/wiki/OCTO-Dorado%E9%80%9A%E4%BF%A1%E6%A1%86%E6%9E%B6%E4%BB%8B%E7%BB%8D>OCTO Dorado通信框架介绍</a></p><p><img src=https://upload-images.jianshu.io/upload_images/3296949-a5b8f904d051b180.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240 alt>
+<a href=https://raw.githubusercontent.com/Meituan-Dianping/octo-rpc/master/dorado/dorado-doc/img/FrameworkDesign.svg>svg原图</a></p><p>导入项目后，在demo模块下可以直接进行验证，例如执行 <code>ThriftProvider </code>和<code>ThriftConsumer</code>的main方法。就完成了一次完整的RPC调用。其中，使用测试的ZooKeeperServerMain作为注册中心；发布HelloService；远程调用此服务。</p><p>使用xml定义的方式参考<a href=https://github.com/Meituan-Dianping/octo-rpc/blob/master/dorado/dorado-doc/Manual.md>手册</a></p><p>在windows环境下，注意本地网络环境。本地包含多个虚拟网卡时，查找的服务地址有问题，导致执行失败——</p><p>发布服务时，注册的信息包括<code>info.setIp(NetUtil.getLocalHost());</code>其中com.meituan.dorado.common.util.NetUtil的<code>getLocalHost()</code>方法在获取本地IP时，只排除了回送地址</p><pre tabindex=0><code>2020/12/21 14:46:18.982 NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2200 [INFO] NIOServerCnxnFactory (NIOServerCnxnFactory.java:215) Accepted socket connection from /127.0.0.1:6543
 2020/12/21 14:46:18.991 NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2200 [INFO] ZooKeeperServer (ZooKeeperServer.java:948) Client attempting to establish new session at /127.0.0.1:6543
 2020/12/21 14:46:19.022 SyncThread:0 [INFO] ZooKeeperServer (ZooKeeperServer.java:693) Established session 0x1001fd7146f0001 with negotiated timeout 6000 for client /127.0.0.1:6543
 2020/12/21 14:46:20.462 ProcessThread(sid:0 cport:2200): [INFO] PrepRequestProcessor (PrepRequestProcessor.java:487) Processed session termination for sessionid: 0x1001fd7146f0001
@@ -160,8 +38,7 @@ java.io.IOException: 远程主机强迫关闭了一个现有的连接。
 	at io.netty.util.concurrent.SingleThreadEventExecutor$5.run(SingleThreadEventExecutor.java:884) [netty-common-4.1.25.Final.jar:4.1.25.Final]
 	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30) [netty-common-4.1.25.Final.jar:4.1.25.Final]
 	at java.lang.Thread.run(Thread.java:748) [?:1.8.0_181]
-</code></pre><p>调用端报错类似——</p>
-<pre tabindex=0><code>2020/12/21 14:46:19.293 main [INFO] ZookeeperDiscoveryService (ZookeeperDiscoveryService.java:79) Subscribe on zookeeper[127.0.0.1:2200]: remoteAppkey=com.meituan.octo.dorado.server, serviceName=com.meituan.dorado.test.thrift.api.HelloService
+</code></pre><p>调用端报错类似——</p><pre tabindex=0><code>2020/12/21 14:46:19.293 main [INFO] ZookeeperDiscoveryService (ZookeeperDiscoveryService.java:79) Subscribe on zookeeper[127.0.0.1:2200]: remoteAppkey=com.meituan.octo.dorado.server, serviceName=com.meituan.dorado.test.thrift.api.HelloService
 2020/12/21 14:46:19.293 main [INFO] RegistryPolicy (RegistryPolicy.java:72) Subscribe SubscribeInfo:{localAppkey=com.meituan.octo.dorado.client,remoteAppkey=com.meituan.octo.dorado.server,serviceName=com.meituan.dorado.test.thrift.api.HelloService,protocol=thrift,serialize=thriftCodec,env=test,attachments={registryWay=zookeeper, registryAddress=127.0.0.1:2200}} by com.meituan.dorado.registry.zookeeper.ZookeeperDiscoveryService
 com.meituan.dorado.common.exception.TimeoutException: GetRequest timeout, timeout:1000, interface=com.meituan.dorado.test.thrift.api.HelloService$Iface|method=sayHello|provider=192.168.194.1:9001
 	at com.meituan.dorado.rpc.handler.invoker.AbstractInvoker$1.handle(AbstractInvoker.java:134)
@@ -178,12 +55,7 @@ com.meituan.dorado.common.exception.TimeoutException: GetRequest timeout, timeou
 2020/12/21 14:46:20.459 Curator-Framework-0 [INFO] CuratorFrameworkImpl (CuratorFrameworkImpl.java:937) backgroundOperationsLoop exiting
 2020/12/21 14:46:20.485 main-EventThread [INFO] ClientCnxn (ClientCnxn.java:521) EventThread shut down for session: 0x1001fd7146f0001
 2020/12/21 14:46:20.485 main [INFO] ZooKeeper (ZooKeeper.java:687) Session: 0x1001fd7146f0001 closed
-</code></pre><p>组件的默认实现已经<a href=https://github.com/Meituan-Dianping/octo-rpc/blob/master/dorado/dorado-doc/manual-developer/Extension.md>扩展</a></p>
-<h3 id=打包dorado>打包Dorado</h3>
-<p>根据<a href=https://github.com/Meituan-Dianping/octo-rpc/blob/master/dorado/dorado-doc/manual-developer/Compile.md>Dorado打包说明</a></p>
-<p>直接打包，执行后在octo-rpc/dorado/dorado-build/target/ 下可以找到dorado的jar</p>
-<p>在octo-rpc/dorado 目录下执行<code>mvn clean package -Dmaven.test.skip=true</code>，提示—— 找不到 <code>com.meituan.octo:mns-invoker:jar:1.0.0</code>组件</p>
-<pre tabindex=0><code>[INFO] BUILD FAILURE
+</code></pre><p>组件的默认实现已经<a href=https://github.com/Meituan-Dianping/octo-rpc/blob/master/dorado/dorado-doc/manual-developer/Extension.md>扩展</a></p><h3 id=打包dorado>打包Dorado</h3><p>根据<a href=https://github.com/Meituan-Dianping/octo-rpc/blob/master/dorado/dorado-doc/manual-developer/Compile.md>Dorado打包说明</a></p><p>直接打包，执行后在octo-rpc/dorado/dorado-build/target/ 下可以找到dorado的jar</p><p>在octo-rpc/dorado 目录下执行<code>mvn clean package -Dmaven.test.skip=true</code>，提示—— 找不到 <code>com.meituan.octo:mns-invoker:jar:1.0.0</code>组件</p><pre tabindex=0><code>[INFO] BUILD FAILURE
 [INFO] ------------------------------------------------------------------------
 [INFO] Total time:  15.915 s
 [INFO] Finished at: 2020-12-22T10:28:13+08:00
@@ -193,19 +65,13 @@ epository, resolution will not be reattempted until the update interval of centr
 [ERROR]
 [ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
 [ERROR] Re-run Maven using the -X switch to enable full debug logging.
-</code></pre><blockquote>
-<p>请到<a href=https://github.com/Meituan-Dianping/octo-ns/blob/master/mns-invoker/README.md>OCTO-NS</a>获取依赖mns-invoker依赖</p>
-</blockquote>
-<p>文档错误，上面的模块<code>mns-invoker</code>目录现在已更改到<code>https://github.com/Meituan-Dianping/octo-ns/tree/master/sdk/mns-invoker</code> 下载octo-ns模块后，编译 <code>mns-invoker</code>模块，提示缺少 <code>com.meituan.octo:idl-common:jar:1.0.0 </code></p>
-<pre tabindex=0><code>[INFO] BUILD FAILURE
+</code></pre><blockquote><p>请到<a href=https://github.com/Meituan-Dianping/octo-ns/blob/master/mns-invoker/README.md>OCTO-NS</a>获取依赖mns-invoker依赖</p></blockquote><p>文档错误，上面的模块<code>mns-invoker</code>目录现在已更改到<code>https://github.com/Meituan-Dianping/octo-ns/tree/master/sdk/mns-invoker</code> 下载octo-ns模块后，编译 <code>mns-invoker</code>模块，提示缺少 <code>com.meituan.octo:idl-common:jar:1.0.0</code></p><pre tabindex=0><code>[INFO] BUILD FAILURE
 [INFO] ------------------------------------------------------------------------
 [INFO] Total time:  6.412 s
 [INFO] Finished at: 2020-12-22T10:37:34+08:00
 [INFO] ------------------------------------------------------------------------
 [ERROR] Failed to execute goal on project mns-invoker: Could not resolve dependencies for project com.meituan.octo:mns-invoker:jar:1.0.0: Could not find artifact com.meituan.octo:idl-common:jar:1.0.0 in central (https://repo.maven.apache.org/maven2) -&gt; [Help 1]
-</code></pre><p>先编译 <code>idl-comman</code>模块：需要本地有thrift执行环境，并在pom文件中指定执行文件的目录。</p>
-<p>安装thrift参考 <a href=https://thrift.apache.org/docs/install/>官方安装说明</a>，</p>
-<pre tabindex=0><code>&lt;dependencies&gt;
+</code></pre><p>先编译 <code>idl-comman</code>模块：需要本地有thrift执行环境，并在pom文件中指定执行文件的目录。</p><p>安装thrift参考 <a href=https://thrift.apache.org/docs/install/>官方安装说明</a>，</p><pre tabindex=0><code>&lt;dependencies&gt;
 	&lt;dependency&gt;
 		&lt;groupId&gt;org.apache.thrift&lt;/groupId&gt;
 		&lt;artifactId&gt;libthrift&lt;/artifactId&gt;
@@ -234,16 +100,9 @@ epository, resolution will not be reattempted until the update interval of centr
 		&lt;/execution&gt;
 	&lt;/executions&gt;
 &lt;/plugin&gt;
-</code></pre><p>目前thrift的最新版本为 <code>0.13.0</code>，直接使用这个版本，会提示错误——<code>unknown option java:hashcode</code> 似乎是个<a href=https://github.com/pauldeschacht/impala-java-client/issues/6>兼容性问题</a>，降级之后编译成功</p>
-<pre tabindex=0><code>[ERROR] thrift failed output: [WARNING:D:/openSources/gitee/octo-ns/common/idl-mns/idl-common/src/main/thrift/unified_protocol.thrift:35] The &quot;byte&quot; type is a compatibility alias for &quot;i8&quot;. Use &quot;i8&quot; to emphasize the signedness of this type.
+</code></pre><p>目前thrift的最新版本为 <code>0.13.0</code>，直接使用这个版本，会提示错误——<code>unknown option java:hashcode</code> 似乎是个<a href=https://github.com/pauldeschacht/impala-java-client/issues/6>兼容性问题</a>，降级之后编译成功</p><pre tabindex=0><code>[ERROR] thrift failed output: [WARNING:D:/openSources/gitee/octo-ns/common/idl-mns/idl-common/src/main/thrift/unified_protocol.thrift:35] The &#34;byte&#34; type is a compatibility alias for &#34;i8&#34;. Use &#34;i8&#34; to emphasize the signedness of this type.
 [ERROR] thrift failed error: [FAILURE:generation:1] Error: unknown option java:hashcode
-</code></pre><p>到<a href=http://archive.apache.org/dist/thrift/>存档地址</a>下载<code>0.9.3</code>版本，编译成功。</p>
-<ul>
-<li>编译安装 <code>idl-common</code>模块</li>
-<li>编译安装 <code>mns-invoder</code>模块</li>
-<li>编译打包<code>Dorado</code>工程， 在<code>dorado-build</code>模块的target目录下生成dorado的jar包</li>
-</ul>
-<pre tabindex=0><code>[INFO] dorado-registry-mns 1.0.0 .......................... SUCCESS [  0.295 s]
+</code></pre><p>到<a href=http://archive.apache.org/dist/thrift/>存档地址</a>下载<code>0.9.3</code>版本，编译成功。</p><ul><li>编译安装 <code>idl-common</code>模块</li><li>编译安装 <code>mns-invoder</code>模块</li><li>编译打包<code>Dorado</code>工程， 在<code>dorado-build</code>模块的target目录下生成dorado的jar包</li></ul><pre tabindex=0><code>[INFO] dorado-registry-mns 1.0.0 .......................... SUCCESS [  0.295 s]
 [INFO] dorado-trace 1.0.0 ................................. SUCCESS [  0.030 s]
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD SUCCESS
@@ -251,38 +110,6 @@ epository, resolution will not be reattempted until the update interval of centr
 [INFO] Total time:  19.953 s
 [INFO] Finished at: 2020-12-22T11:25:26+08:00
 [INFO] ------------------------------------------------------------------------
-</code></pre>
-<div class="prev-next-post pure-g">
-<div class=pure-u-1-24 style=text-align:left>
-<a href=http://gebitang.com/post/how/service-mesh/><i class="fa fa-chevron-left"></i></a>
-</div>
-<div class=pure-u-10-24>
-<nav class=prev>
-<a href=http://gebitang.com/post/how/service-mesh/>Service Mesh</a>
-</nav>
-</div>
-<div class=pure-u-2-24>
-&nbsp;
-</div>
-<div class=pure-u-10-24>
-<nav class=next>
-<a href=http://gebitang.com/post/what/effective-java/>Effective Java</a>
-</nav>
-</div>
-<div class=pure-u-1-24 style=text-align:right>
-<a href=http://gebitang.com/post/what/effective-java/><i class="fa fa-chevron-right"></i></a>
-</div>
-</div>
-<div id=disqus_thread></div>
-<script type=text/javascript>(function(){var a,b;if(window.location.hostname=="localhost")return;a=document.createElement('script'),a.type='text/javascript',a.async=!0,b='gebitang',a.src='//'+b+'.disqus.com/embed.js',(document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(a)})()</script>
-<noscript>Please enable JavaScript to view the <a href=http://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript>
-<a href=http://disqus.com/ class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a>
-</div>
-</div>
-</div>
-<script src=http://gebitang.com/js/ui.js></script>
+</code></pre><div class="prev-next-post pure-g"><div class=pure-u-1-24 style=text-align:left><a href=http://gebitang.com/post/how/service-mesh/><i class="fa fa-chevron-left"></i></a></div><div class=pure-u-10-24><nav class=prev><a href=http://gebitang.com/post/how/service-mesh/>Service Mesh</a></nav></div><div class=pure-u-2-24>&nbsp;</div><div class=pure-u-10-24><nav class=next><a href=http://gebitang.com/post/what/effective-java/>Effective Java</a></nav></div><div class=pure-u-1-24 style=text-align:right><a href=http://gebitang.com/post/what/effective-java/><i class="fa fa-chevron-right"></i></a></div></div><div id=disqus_thread></div><script type=text/javascript>(function(){if(window.location.hostname=="localhost")return;var e=document.createElement("script"),t;e.type="text/javascript",e.async=!0,t="gebitang",e.src="//"+t+".disqus.com/embed.js",(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(e)})()</script><noscript>Please enable JavaScript to view the <a href=http://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript><a href=http://disqus.com/ class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a></div></div></div><script src=http://gebitang.com/js/ui.js></script>
 <script src=http://gebitang.com/js/menus.js></script>
-<script>window.location.hostname!="localhost"&&(function(a,e,f,g,b,c,d){a.GoogleAnalyticsObject=b,a[b]=a[b]||function(){(a[b].q=a[b].q||[]).push(arguments)},a[b].l=1*new Date,c=e.createElement(f),d=e.getElementsByTagName(f)[0],c.async=1,c.src=g,d.parentNode.insertBefore(c,d)}(window,document,'script','//www.google-analytics.com/analytics.js','ga'),ga('create','UA-34303694-1','auto'),ga('send','pageview'))</script>
-<button onclick=topFunction() id=myBtn title="Go to top">Top</button>
-</body>
-</html>
+<script>window.location.hostname!="localhost"&&(function(e,o,i,a,t,n,s){e.GoogleAnalyticsObject=t,e[t]=e[t]||function(){(e[t].q=e[t].q||[]).push(arguments)},e[t].l=1*new Date,n=o.createElement(i),s=o.getElementsByTagName(i)[0],n.async=1,n.src=a,s.parentNode.insertBefore(n,s)}(window,document,"script","//www.google-analytics.com/analytics.js","ga"),ga("create","UA-34303694-1","auto"),ga("send","pageview"))</script><button onclick=topFunction() id=myBtn title="Go to top">Top</button></body></html>

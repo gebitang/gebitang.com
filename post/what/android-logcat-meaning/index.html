@@ -1,129 +1,28 @@
-<!doctype html><html xmlns:wb=http://open.weibo.com/wb lang=en>
-<head>
-<meta charset=utf-8>
-<meta name=viewport content="width=device-width,initial-scale=1">
-<meta name=description content="android logcat 内容释义">
-<meta name=generator content="Hugo 0.92.0">
-<title>Android EventLogTags &#183; 戈壁堂</title>
-<link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/pure-min.css><!--[if lte IE 8]><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-old-ie-min.css><![endif]--><!--[if gt IE 8]><!-->
-<link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-min.css><!--<![endif]--><!--[if lte IE 8]><link rel=stylesheet href=http://gebitang.com/css/side-menu-old-ie.css><![endif]--><!--[if gt IE 8]><!-->
-<link rel=stylesheet href=http://gebitang.com/css/side-menu.css><!--<![endif]-->
-<link rel=stylesheet href=http://gebitang.com/css/blackburn.css>
-<link rel=stylesheet href=https://use.fontawesome.com/releases/v5.9.0/css/all.css>
-<link href="https://fonts.googleapis.com/css?family=Raleway" rel=stylesheet type=text/css>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-<link rel=stylesheet href=//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/androidstudio.min.css>
-<script src=//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js></script>
+<!doctype html><html xmlns:wb=http://open.weibo.com/wb lang=en><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="android logcat 内容释义"><meta name=generator content="Hugo 0.94.2"><title>Android EventLogTags &#183; 戈壁堂</title><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/pure-min.css><!--[if lte IE 8]><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-old-ie-min.css><![endif]--><!--[if gt IE 8]><!--><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-min.css><!--<![endif]--><!--[if lte IE 8]><link rel=stylesheet href=http://gebitang.com/css/side-menu-old-ie.css><![endif]--><!--[if gt IE 8]><!--><link rel=stylesheet href=http://gebitang.com/css/side-menu.css><!--<![endif]--><link rel=stylesheet href=http://gebitang.com/css/blackburn.css><link rel=stylesheet href=https://use.fontawesome.com/releases/v5.9.0/css/all.css><link href="https://fonts.googleapis.com/css?family=Raleway" rel=stylesheet type=text/css><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<link rel=stylesheet href=//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/androidstudio.min.css><script src=//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js></script>
 <script src=//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js></script>
-<script>hljs.initHighlightingOnLoad()</script>
-<link rel="shortcut icon" href=http://gebitang.com/img/favicon.ico type=image/x-icon>
-<link rel=stylesheet href=http://gebitang.com/css/my.css>
-<script src=http://gebitang.com/js/my.js></script>
-</head>
-<body>
-<div id=layout>
-<a href=#menu id=menuLink class=menu-link>
-<span></span>
-</a>
-<div id=menu>
-<a class="pure-menu-heading brand" href=http://gebitang.com/>Gebitang</a>
-<div class=pure-menu>
-<ul class=pure-menu-list>
-<li class=pure-menu-item>
-<a class=pure-menu-link href=http://gebitang.com/><i class="fa fa-home fa-fw"></i>Home</a>
-</li>
-<li class=pure-menu-item>
-<a class=pure-menu-link href=http://gebitang.com/post/><i class="fa fa-list fa-fw"></i>Posts</a>
-</li>
-<li class=pure-menu-item>
-<a class=pure-menu-link href=http://gebitang.com/about/><i class="fa fa-user fa-fw"></i>About</a>
-</li>
-<li class=pure-menu-item>
-<a class=pure-menu-link href=http://gebitang.com/contact/><i class="fa fa-phone fa-fw"></i>Contact</a>
-</li>
-<li class=pure-menu-item>
-<a class=pure-menu-link href=http://gebitang.com/tags/><i class="fa fa-tags fa-fw"></i>Tags</a>
-</li>
-<li class=pure-menu-item>
-<a class=pure-menu-link href=http://gebitang.com/topics/><i class="fa fa-folder fa-fw"></i>Topics</a>
-</li>
-</ul>
-</div>
-<div class="pure-menu social">
-<ul class=pure-menu-list>
-</ul>
-</div>
-<div>
-<div class=small-print>
-<small>
-<a rel=license href=http://creativecommons.org/licenses/by/4.0/><img alt=知识共享许可协议 style=border-width:0 src=https://i.creativecommons.org/l/by/4.0/80x15.png></a><br>本<span xmlns:dct=http://purl.org/dc/terms/ href=http://purl.org/dc/dcmitype/Text rel=dct:type>作品</span>由<a xmlns:cc=http://creativecommons.org/ns# href=http://gebitang.com property="cc:attributionName" rel=cc:attributionurl>&nbsp;Gebitang&nbsp;&nbsp;</a>采用<a rel=license href=http://creativecommons.org/licenses/by/4.0/>知识共享署名 4.0 国际许可协议</a>进行许可&nbsp;&copy; 2018
-</small>
-</div>
-<div class=small-print>
-<small></small>
-</div>
-<div class=small-print>
-<small>Built with&nbsp;<a href=https://gohugo.io/ target=_blank>Hugo</a></small>
-<small>Theme&nbsp;<a href=https://github.com/yoshiharuyamashita/blackburn target=_blank>Blackburn</a></small>
-</div>
-<div style=display:none>
-<div class=small-print>
-<small>
-<wb:follow-button uid=2446212465 type=red_1 width=67 height=24></wb:follow-button>
-</small>
-</div>
-</div>
-</div>
-</div>
-<div id=main>
-<div class=header>
-<h1>Android EventLogTags</h1>
-<h2>android logcat 内容释义</h2>
-</div>
-<div class=content>
-<div class=post-meta>
-<div>
-<i class="fa fa-calendar fa-fw"></i>
-<time>2018-04-01</time>
-</div>
-<div>
-<i class="fa fa-folder fa-fw"></i>
+<script>hljs.initHighlightingOnLoad()</script><link rel="shortcut icon" href=http://gebitang.com/img/favicon.ico type=image/x-icon><link rel=stylesheet href=http://gebitang.com/css/my.css><script src=http://gebitang.com/js/my.js></script></head><body><div id=layout><a href=#menu id=menuLink class=menu-link><span></span></a><div id=menu><a class="pure-menu-heading brand" href=http://gebitang.com/>Gebitang</a><div class=pure-menu><ul class=pure-menu-list><li class=pure-menu-item><a class=pure-menu-link href=http://gebitang.com/><i class="fa fa-home fa-fw"></i>Home</a></li><li class=pure-menu-item><a class=pure-menu-link href=http://gebitang.com/post/><i class="fa fa-list fa-fw"></i>Posts</a></li><li class=pure-menu-item><a class=pure-menu-link href=http://gebitang.com/about/><i class="fa fa-user fa-fw"></i>About</a></li><li class=pure-menu-item><a class=pure-menu-link href=http://gebitang.com/contact/><i class="fa fa-phone fa-fw"></i>Contact</a></li><li class=pure-menu-item><a class=pure-menu-link href=http://gebitang.com/tags/><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class=pure-menu-item><a class=pure-menu-link href=http://gebitang.com/topics/><i class="fa fa-folder fa-fw"></i>Topics</a></li></ul></div><div class="pure-menu social"><ul class=pure-menu-list></ul></div><div><div class=small-print><small><a rel=license href=http://creativecommons.org/licenses/by/4.0/><img alt=知识共享许可协议 style=border-width:0 src=https://i.creativecommons.org/l/by/4.0/80x15.png></a><br>本<span xmlns:dct=http://purl.org/dc/terms/ href=http://purl.org/dc/dcmitype/Text rel=dct:type>作品</span>由<a xmlns:cc=http://creativecommons.org/ns# href=http://gebitang.com property="cc:attributionName" rel=cc:attributionurl>&nbsp;Gebitang&nbsp;&nbsp;</a>采用<a rel=license href=http://creativecommons.org/licenses/by/4.0/>知识共享署名 4.0 国际许可协议</a>进行许可&nbsp;&copy; 2018</small></div><div class=small-print><small></small></div><div class=small-print><small>Built with&nbsp;<a href=https://gohugo.io/ target=_blank>Hugo</a></small>
+<small>Theme&nbsp;<a href=https://github.com/yoshiharuyamashita/blackburn target=_blank>Blackburn</a></small></div><div style=display:none><div class=small-print><small><wb:follow-button uid=2446212465 type=red_1 width=67 height=24></wb:follow-button></small></div></div></div></div><div id=main><div class=header><h1>Android EventLogTags</h1><h2>android logcat 内容释义</h2></div><div class=content><div class=post-meta><div><i class="fa fa-calendar fa-fw"></i>
+<time>2018-04-01</time></div><div><i class="fa fa-folder fa-fw"></i>
 <a class=post-taxonomy-topic href=http://gebitang.com/topics/android>android</a>&nbsp;/
-<a class=post-taxonomy-topic href=http://gebitang.com/topics/tech>tech</a>
-</div>
-<div>
-<i class="fa fa-tags fa-fw"></i>
+<a class=post-taxonomy-topic href=http://gebitang.com/topics/tech>tech</a></div><div><i class="fa fa-tags fa-fw"></i>
 <a class=post-taxonomy-tag href=http://gebitang.com/tags/android>android</a>&nbsp;/
-<a class=post-taxonomy-tag href=http://gebitang.com/tags/tech>tech</a>
-</div>
-</div>
-<nav id=TableOfContents>
-<ul>
-<li><a href=#eventlogtags>event.logtags</a></li>
-<li><a href=#eventlogtagslogtags>EventLogTags.logtags</a></li>
-</ul>
-</nav>
-<p>Android logcat中event信息的含义说明。</p>
-<p><a href=https://android.googlesource.com/platform/frameworks/base/+/master/services/core/java/com/android/server/am/EventLogTags.logtags>official doc</a></p>
-<p><a href=https://blog.csdn.net/darkengine/article/details/8477502>EventLog分析</a>提到的<a href=https://android.googlesource.com/platform/system/core/+/669ecc2f5e80ff924fa20ce7445354a7c5bcfd98/logcat/event.logtags>文档</a></p>
-<p><a href=https://blog.csdn.net/yaowei514473839/article/details/53513435>Android event日志打印原理</a></p>
-<h2 id=eventlogtags>event.logtags</h2>
-<pre tabindex=0><code>logcat / event.logtags
+<a class=post-taxonomy-tag href=http://gebitang.com/tags/tech>tech</a></div></div><nav id=TableOfContents><ul><li><a href=#eventlogtags>event.logtags</a></li><li><a href=#eventlogtagslogtags>EventLogTags.logtags</a></li></ul></nav><p>Android logcat中event信息的含义说明。</p><p><a href=https://android.googlesource.com/platform/frameworks/base/+/master/services/core/java/com/android/server/am/EventLogTags.logtags>official doc</a></p><p><a href=https://blog.csdn.net/darkengine/article/details/8477502>EventLog分析</a>提到的<a href=https://android.googlesource.com/platform/system/core/+/669ecc2f5e80ff924fa20ce7445354a7c5bcfd98/logcat/event.logtags>文档</a></p><p><a href=https://blog.csdn.net/yaowei514473839/article/details/53513435>Android event日志打印原理</a></p><h2 id=eventlogtags>event.logtags</h2><pre tabindex=0><code>logcat / event.logtags
 android / platform / system / core / 669ecc2f5e80ff924fa20ce7445354a7c5bcfd98 / . / logcat / event.logtags
 frameworks/base/services/core/java/com/android/server/am/EventLogTags.logtags
 
 # The entries in this file map a sparse set of log tag numbers to tag names.
 # This is installed on the device, in /system/etc, and parsed by logcat.
 #
-# Tag numbers are decimal integers, from 0 to 2^31.  (Let's leave the
+# Tag numbers are decimal integers, from 0 to 2^31.  (Let&#39;s leave the
 # negative values alone for now.)
 #
 # Tag names are one or more ASCII letters and numbers or underscores, i.e.
-# &quot;[A-Z][a-z][0-9]_&quot;.  Do not include spaces or punctuation (the former
+# &#34;[A-Z][a-z][0-9]_&#34;.  Do not include spaces or punctuation (the former
 # impacts log readability, the latter makes regex searches more annoying).
 #
 # Tag numbers and names are separated by whitespace.  Blank lines and lines
-# starting with '#' are ignored.
+# starting with &#39;#&#39; are ignored.
 #
 # Optionally, after the tag names can be put a description for the value(s)
 # of the tag. Description are in the format
@@ -145,13 +44,13 @@ frameworks/base/services/core/java/com/android/server/am/EventLogTags.logtags
 # 6: Percent
 # Default value for data of type int/long is 2 (bytes).
 #
-# TODO: generate &quot;.java&quot; and &quot;.h&quot; files with integer constants from this file.
+# TODO: generate &#34;.java&#34; and &#34;.h&#34; files with integer constants from this file.
 # These are used for testing, do not modify without updating
 # tests/framework-tests/src/android/util/EventLogFunctionalTest.java.
 42    answer (to life the universe etc|3)
 314   pi
 2718  e
-# &quot;account&quot; is the java hash of the account name
+# &#34;account&#34; is the java hash of the account name
 2720 sync (id|3),(event|1|5),(source|1|5),(account|1|5)
 # This event is logged when the location service uploads location data.
 2740 location_controller
@@ -198,7 +97,7 @@ frameworks/base/services/core/java/com/android/server/am/EventLogTags.logtags
 # db: the filename of the database
 # sql: the executed query (without query args)
 # time: cpu time millis (not wall time), including lock acquisition
-# blocking_package: if this is on a main thread, the package name, otherwise &quot;&quot;
+# blocking_package: if this is on a main thread, the package name, otherwise &#34;&#34;
 # sample_percent: the percent likelihood this query was logged
 52000 db_sample (db|3),(sql|3),(time|1|3),(blocking_package|3),(sample_percent|1|6)
 # http request/response stats
@@ -232,8 +131,7 @@ frameworks/base/services/core/java/com/android/server/am/EventLogTags.logtags
 1397638484 snet_event_log (subtag|3) (uid|1) (message|3)
 # NOTE - the range 1000000-2000000 is reserved for partners and others who
 # want to define their own log tags without conflicting with the core platform.
-</code></pre><h2 id=eventlogtagslogtags>EventLogTags.logtags</h2>
-<pre tabindex=0><code>https://android.googlesource.com/platform/frameworks/base/+/master/services/core/java/com/android/server/am/EventLogTags.logtags
+</code></pre><h2 id=eventlogtagslogtags>EventLogTags.logtags</h2><pre tabindex=0><code>https://android.googlesource.com/platform/frameworks/base/+/master/services/core/java/com/android/server/am/EventLogTags.logtags
 
 frameworks/base/services/core/java/com/android/server/am/EventLogTags.logtags
 
@@ -288,9 +186,9 @@ option java_package com.android.server.am
 30019 am_relaunch_resume_activity (User|1|5),(Token|1|5),(Task ID|1|5),(Component Name|3)
 # An activity has been relaunched:
 30020 am_relaunch_activity (User|1|5),(Token|1|5),(Task ID|1|5),(Component Name|3)
-# The activity's onPause has been called.
+# The activity&#39;s onPause has been called.
 30021 am_on_paused_called (User|1|5),(Component Name|3),(Reason|3)
-# The activity's onResume has been called.
+# The activity&#39;s onResume has been called.
 30022 am_on_resume_called (User|1|5),(Component Name|3),(Reason|3)
 # Kill a process to reclaim memory.
 30023 am_kill (User|1|5),(PID|1|5),(Process Name|3),(OomAdj|1|5),(Reason|3)
@@ -333,7 +231,7 @@ option java_package com.android.server.am
 30047 am_pss (Pid|1|5),(UID|1|5),(Process Name|3),(Pss|2|2),(Uss|2|2),(SwapPss|2|2)
 # Attempting to stop an activity
 30048 am_stop_activity (User|1|5),(Token|1|5),(Component Name|3)
-# The activity's onStop has been called.
+# The activity&#39;s onStop has been called.
 30049 am_on_stop_called (User|1|5),(Component Name|3),(Reason|3)
 # Report changing memory conditions (Values are ProcessStats.ADJ_MEM_FACTOR* constants)
 30050 am_mem_factor (Current|1|5),(Previous|1|5)
@@ -349,38 +247,6 @@ option java_package com.android.server.am
 30055 am_uid_idle (UID|1|5)
 # Note when a service is being forcibly stopped because its app went idle.
 30056 am_stop_idle_service (UID|1|5),(Component Name|3)
-</code></pre>
-<div class="prev-next-post pure-g">
-<div class=pure-u-1-24 style=text-align:left>
-<a href=http://gebitang.com/post/what/book-reading-recorder/><i class="fa fa-chevron-left"></i></a>
-</div>
-<div class=pure-u-10-24>
-<nav class=prev>
-<a href=http://gebitang.com/post/what/book-reading-recorder/>Book Reading Recorder</a>
-</nav>
-</div>
-<div class=pure-u-2-24>
-&nbsp;
-</div>
-<div class=pure-u-10-24>
-<nav class=next>
-<a href=http://gebitang.com/post/what/the-road-to-handstand/>The Road To Handstand</a>
-</nav>
-</div>
-<div class=pure-u-1-24 style=text-align:right>
-<a href=http://gebitang.com/post/what/the-road-to-handstand/><i class="fa fa-chevron-right"></i></a>
-</div>
-</div>
-<div id=disqus_thread></div>
-<script type=text/javascript>(function(){var a,b;if(window.location.hostname=="localhost")return;a=document.createElement('script'),a.type='text/javascript',a.async=!0,b='gebitang',a.src='//'+b+'.disqus.com/embed.js',(document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(a)})()</script>
-<noscript>Please enable JavaScript to view the <a href=http://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript>
-<a href=http://disqus.com/ class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a>
-</div>
-</div>
-</div>
-<script src=http://gebitang.com/js/ui.js></script>
+</code></pre><div class="prev-next-post pure-g"><div class=pure-u-1-24 style=text-align:left><a href=http://gebitang.com/post/what/book-reading-recorder/><i class="fa fa-chevron-left"></i></a></div><div class=pure-u-10-24><nav class=prev><a href=http://gebitang.com/post/what/book-reading-recorder/>Book Reading Recorder</a></nav></div><div class=pure-u-2-24>&nbsp;</div><div class=pure-u-10-24><nav class=next><a href=http://gebitang.com/post/what/the-road-to-handstand/>The Road To Handstand</a></nav></div><div class=pure-u-1-24 style=text-align:right><a href=http://gebitang.com/post/what/the-road-to-handstand/><i class="fa fa-chevron-right"></i></a></div></div><div id=disqus_thread></div><script type=text/javascript>(function(){if(window.location.hostname=="localhost")return;var e=document.createElement("script"),t;e.type="text/javascript",e.async=!0,t="gebitang",e.src="//"+t+".disqus.com/embed.js",(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(e)})()</script><noscript>Please enable JavaScript to view the <a href=http://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript><a href=http://disqus.com/ class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a></div></div></div><script src=http://gebitang.com/js/ui.js></script>
 <script src=http://gebitang.com/js/menus.js></script>
-<script>window.location.hostname!="localhost"&&(function(a,e,f,g,b,c,d){a.GoogleAnalyticsObject=b,a[b]=a[b]||function(){(a[b].q=a[b].q||[]).push(arguments)},a[b].l=1*new Date,c=e.createElement(f),d=e.getElementsByTagName(f)[0],c.async=1,c.src=g,d.parentNode.insertBefore(c,d)}(window,document,'script','//www.google-analytics.com/analytics.js','ga'),ga('create','UA-34303694-1','auto'),ga('send','pageview'))</script>
-<button onclick=topFunction() id=myBtn title="Go to top">Top</button>
-</body>
-</html>
+<script>window.location.hostname!="localhost"&&(function(e,o,i,a,t,n,s){e.GoogleAnalyticsObject=t,e[t]=e[t]||function(){(e[t].q=e[t].q||[]).push(arguments)},e[t].l=1*new Date,n=o.createElement(i),s=o.getElementsByTagName(i)[0],n.async=1,n.src=a,s.parentNode.insertBefore(n,s)}(window,document,"script","//www.google-analytics.com/analytics.js","ga"),ga("create","UA-34303694-1","auto"),ga("send","pageview"))</script><button onclick=topFunction() id=myBtn title="Go to top">Top</button></body></html>

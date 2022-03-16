@@ -1,128 +1,19 @@
-<!doctype html><html xmlns:wb=http://open.weibo.com/wb lang=en>
-<head>
-<meta charset=utf-8>
-<meta name=viewport content="width=device-width,initial-scale=1">
-<meta name=description content>
-<meta name=generator content="Hugo 0.92.0">
-<title>进程信息跟踪：top-jps-jstack &#183; 戈壁堂</title>
-<link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/pure-min.css><!--[if lte IE 8]><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-old-ie-min.css><![endif]--><!--[if gt IE 8]><!-->
-<link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-min.css><!--<![endif]--><!--[if lte IE 8]><link rel=stylesheet href=http://gebitang.com/css/side-menu-old-ie.css><![endif]--><!--[if gt IE 8]><!-->
-<link rel=stylesheet href=http://gebitang.com/css/side-menu.css><!--<![endif]-->
-<link rel=stylesheet href=http://gebitang.com/css/blackburn.css>
-<link rel=stylesheet href=https://use.fontawesome.com/releases/v5.9.0/css/all.css>
-<link href="https://fonts.googleapis.com/css?family=Raleway" rel=stylesheet type=text/css>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-<link rel=stylesheet href=//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/androidstudio.min.css>
-<script src=//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js></script>
+<!doctype html><html xmlns:wb=http://open.weibo.com/wb lang=en><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content><meta name=generator content="Hugo 0.94.2"><title>进程信息跟踪：top-jps-jstack &#183; 戈壁堂</title><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/pure-min.css><!--[if lte IE 8]><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-old-ie-min.css><![endif]--><!--[if gt IE 8]><!--><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-min.css><!--<![endif]--><!--[if lte IE 8]><link rel=stylesheet href=http://gebitang.com/css/side-menu-old-ie.css><![endif]--><!--[if gt IE 8]><!--><link rel=stylesheet href=http://gebitang.com/css/side-menu.css><!--<![endif]--><link rel=stylesheet href=http://gebitang.com/css/blackburn.css><link rel=stylesheet href=https://use.fontawesome.com/releases/v5.9.0/css/all.css><link href="https://fonts.googleapis.com/css?family=Raleway" rel=stylesheet type=text/css><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<link rel=stylesheet href=//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/androidstudio.min.css><script src=//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js></script>
 <script src=//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js></script>
-<script>hljs.initHighlightingOnLoad()</script>
-<link rel="shortcut icon" href=http://gebitang.com/img/favicon.ico type=image/x-icon>
-<link rel=stylesheet href=http://gebitang.com/css/my.css>
-<script src=http://gebitang.com/js/my.js></script>
-</head>
-<body>
-<div id=layout>
-<a href=#menu id=menuLink class=menu-link>
-<span></span>
-</a>
-<div id=menu>
-<a class="pure-menu-heading brand" href=http://gebitang.com/>Gebitang</a>
-<div class=pure-menu>
-<ul class=pure-menu-list>
-<li class=pure-menu-item>
-<a class=pure-menu-link href=http://gebitang.com/><i class="fa fa-home fa-fw"></i>Home</a>
-</li>
-<li class=pure-menu-item>
-<a class=pure-menu-link href=http://gebitang.com/post/><i class="fa fa-list fa-fw"></i>Posts</a>
-</li>
-<li class=pure-menu-item>
-<a class=pure-menu-link href=http://gebitang.com/about/><i class="fa fa-user fa-fw"></i>About</a>
-</li>
-<li class=pure-menu-item>
-<a class=pure-menu-link href=http://gebitang.com/contact/><i class="fa fa-phone fa-fw"></i>Contact</a>
-</li>
-<li class=pure-menu-item>
-<a class=pure-menu-link href=http://gebitang.com/tags/><i class="fa fa-tags fa-fw"></i>Tags</a>
-</li>
-<li class=pure-menu-item>
-<a class=pure-menu-link href=http://gebitang.com/topics/><i class="fa fa-folder fa-fw"></i>Topics</a>
-</li>
-</ul>
-</div>
-<div class="pure-menu social">
-<ul class=pure-menu-list>
-</ul>
-</div>
-<div>
-<div class=small-print>
-<small>
-<a rel=license href=http://creativecommons.org/licenses/by/4.0/><img alt=知识共享许可协议 style=border-width:0 src=https://i.creativecommons.org/l/by/4.0/80x15.png></a><br>本<span xmlns:dct=http://purl.org/dc/terms/ href=http://purl.org/dc/dcmitype/Text rel=dct:type>作品</span>由<a xmlns:cc=http://creativecommons.org/ns# href=http://gebitang.com property="cc:attributionName" rel=cc:attributionurl>&nbsp;Gebitang&nbsp;&nbsp;</a>采用<a rel=license href=http://creativecommons.org/licenses/by/4.0/>知识共享署名 4.0 国际许可协议</a>进行许可&nbsp;&copy; 2018
-</small>
-</div>
-<div class=small-print>
-<small></small>
-</div>
-<div class=small-print>
-<small>Built with&nbsp;<a href=https://gohugo.io/ target=_blank>Hugo</a></small>
-<small>Theme&nbsp;<a href=https://github.com/yoshiharuyamashita/blackburn target=_blank>Blackburn</a></small>
-</div>
-<div style=display:none>
-<div class=small-print>
-<small>
-<wb:follow-button uid=2446212465 type=red_1 width=67 height=24></wb:follow-button>
-</small>
-</div>
-</div>
-</div>
-</div>
-<div id=main>
-<div class=header>
-<h1>进程信息跟踪：top-jps-jstack</h1>
-<h2></h2>
-</div>
-<div class=content>
-<div class=post-meta>
-<div>
-<i class="fa fa-calendar fa-fw"></i>
-<time>2020-03-07</time>
-</div>
-<div>
-<i class="fa fa-folder fa-fw"></i>
+<script>hljs.initHighlightingOnLoad()</script><link rel="shortcut icon" href=http://gebitang.com/img/favicon.ico type=image/x-icon><link rel=stylesheet href=http://gebitang.com/css/my.css><script src=http://gebitang.com/js/my.js></script></head><body><div id=layout><a href=#menu id=menuLink class=menu-link><span></span></a><div id=menu><a class="pure-menu-heading brand" href=http://gebitang.com/>Gebitang</a><div class=pure-menu><ul class=pure-menu-list><li class=pure-menu-item><a class=pure-menu-link href=http://gebitang.com/><i class="fa fa-home fa-fw"></i>Home</a></li><li class=pure-menu-item><a class=pure-menu-link href=http://gebitang.com/post/><i class="fa fa-list fa-fw"></i>Posts</a></li><li class=pure-menu-item><a class=pure-menu-link href=http://gebitang.com/about/><i class="fa fa-user fa-fw"></i>About</a></li><li class=pure-menu-item><a class=pure-menu-link href=http://gebitang.com/contact/><i class="fa fa-phone fa-fw"></i>Contact</a></li><li class=pure-menu-item><a class=pure-menu-link href=http://gebitang.com/tags/><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class=pure-menu-item><a class=pure-menu-link href=http://gebitang.com/topics/><i class="fa fa-folder fa-fw"></i>Topics</a></li></ul></div><div class="pure-menu social"><ul class=pure-menu-list></ul></div><div><div class=small-print><small><a rel=license href=http://creativecommons.org/licenses/by/4.0/><img alt=知识共享许可协议 style=border-width:0 src=https://i.creativecommons.org/l/by/4.0/80x15.png></a><br>本<span xmlns:dct=http://purl.org/dc/terms/ href=http://purl.org/dc/dcmitype/Text rel=dct:type>作品</span>由<a xmlns:cc=http://creativecommons.org/ns# href=http://gebitang.com property="cc:attributionName" rel=cc:attributionurl>&nbsp;Gebitang&nbsp;&nbsp;</a>采用<a rel=license href=http://creativecommons.org/licenses/by/4.0/>知识共享署名 4.0 国际许可协议</a>进行许可&nbsp;&copy; 2018</small></div><div class=small-print><small></small></div><div class=small-print><small>Built with&nbsp;<a href=https://gohugo.io/ target=_blank>Hugo</a></small>
+<small>Theme&nbsp;<a href=https://github.com/yoshiharuyamashita/blackburn target=_blank>Blackburn</a></small></div><div style=display:none><div class=small-print><small><wb:follow-button uid=2446212465 type=red_1 width=67 height=24></wb:follow-button></small></div></div></div></div><div id=main><div class=header><h1>进程信息跟踪：top-jps-jstack</h1><h2></h2></div><div class=content><div class=post-meta><div><i class="fa fa-calendar fa-fw"></i>
+<time>2020-03-07</time></div><div><i class="fa fa-folder fa-fw"></i>
 <a class=post-taxonomy-topic href=http://gebitang.com/topics/jiansh>jiansh</a>&nbsp;/
-<a class=post-taxonomy-topic href=http://gebitang.com/topics/us>US</a>
-</div>
-<div>
-<i class="fa fa-tags fa-fw"></i>
-<a class=post-taxonomy-tag href=http://gebitang.com/tags/jiansh>jiansh</a>
-</div>
-</div>
-<nav id=TableOfContents>
-<ul>
-<li>
-<ul>
-<li><a href=#top>Top</a></li>
-<li><a href=#jps>JPS</a></li>
-<li><a href=#jstack>Jstack</a></li>
-</ul>
-</li>
-</ul>
-</nav>
-<p><a href=https://www.jianshu.com/p/0c784a89c427>link on JianShu</a></p>
-<p>万事多用Man</p>
-<h3 id=top>Top</h3>
-<p><a href=https://blog.csdn.net/liubin1991liubin/article/details/79702640>Top命令含义</a></p>
-<p><a href=https://unix.stackexchange.com/questions/18918/linux-top-command-what-are-us-sy-ni-id-wa-hi-si-and-st-for-cpu-usage>What are us, sy, ni, id, wa, hi, si and st (for CPU usage)?</a></p>
-<blockquote>
-<p>us: user cpu time (or) % CPU time spent in user space
+<a class=post-taxonomy-topic href=http://gebitang.com/topics/us>US</a></div><div><i class="fa fa-tags fa-fw"></i>
+<a class=post-taxonomy-tag href=http://gebitang.com/tags/jiansh>jiansh</a></div></div><nav id=TableOfContents><ul><li><ul><li><a href=#top>Top</a></li><li><a href=#jps>JPS</a></li><li><a href=#jstack>Jstack</a></li></ul></li></ul></nav><p><a href=https://www.jianshu.com/p/0c784a89c427>link on JianShu</a></p><p>万事多用Man</p><h3 id=top>Top</h3><p><a href=https://blog.csdn.net/liubin1991liubin/article/details/79702640>Top命令含义</a></p><p><a href=https://unix.stackexchange.com/questions/18918/linux-top-command-what-are-us-sy-ni-id-wa-hi-si-and-st-for-cpu-usage>What are us, sy, ni, id, wa, hi, si and st (for CPU usage)?</a></p><blockquote><p>us: user cpu time (or) % CPU time spent in user space
 sy: system cpu time (or) % CPU time spent in kernel space
 ni: user nice cpu time (or) % CPU time spent on low priority processes
 id: idle cpu time (or) % CPU time spent idle
 wa: io wait cpu time (or) % CPU time spent in wait (on disk)
 hi: hardware irq (or) % CPU time spent servicing/handling hardware interrupts
 si: software irq (or) % CPU time spent servicing/handling software interrupts
-st: steal time - - % CPU time in involuntary wait by virtual cpu while hypervisor is servicing another processor (or) % CPU time stolen from a virtual machine</p>
-</blockquote>
-<pre tabindex=0><code>top - 14:54:28 up 13 days, 13 min,  0 users,  load average: 19.41, 13.56, 9.74
+st: steal time - - % CPU time in involuntary wait by virtual cpu while hypervisor is servicing another processor (or) % CPU time stolen from a virtual machine</p></blockquote><pre tabindex=0><code>top - 14:54:28 up 13 days, 13 min,  0 users,  load average: 19.41, 13.56, 9.74
 Tasks:   5 total,   1 running,   4 sleeping,   0 stopped,   0 zombie
 %Cpu(s): 46.2 us,  5.0 sy,  0.4 ni, 47.9 id,  0.0 wa,  0.0 hi,  0.5 si,  0.0 st
 KiB Mem : 15625000 total,  2836444 free,  8893532 used,  3895024 buff/cache
@@ -136,46 +27,24 @@ KiB Swap:        0 total,        0 free,        0 used.  2836444 avail Mem
                                                                                                                                                                                                                                   
                                                             
 20942 root      20   0   13380   1872   1436 S   0.0  0.0   0:00.02 sh                                                                                                                                                            
-</code></pre><p><code>top - 14:54:28 up 13 days, 13 min, 0 users, load average: 19.41, 13.56, 9.74</code></p>
-<blockquote>
-<p>第一块：当前系统时间
+</code></pre><p><code>top - 14:54:28 up 13 days, 13 min, 0 users, load average: 19.41, 13.56, 9.74</code></p><blockquote><p>第一块：当前系统时间
 第二块：系统已经运行了13天13分
 第三块：当前有0个用户登录系统(docker中启动的会有这种情况？)
-第四块：load average后面的三个数分别是1分钟、5分钟、15分钟的负载情况。load average数据是每隔5秒钟检查一次活跃的进程数，然后按特定算法计算出的数值。如果这个数除以逻辑CPU的数量，结果高于5的时候就表明系统在超负荷运转</p>
-</blockquote>
-<p><code>Tasks: 5 total, 1 running, 4 sleeping, 0 stopped, 0 zombie</code></p>
-<blockquote>
-<p>第一块：系统现在有5个进程
+第四块：load average后面的三个数分别是1分钟、5分钟、15分钟的负载情况。load average数据是每隔5秒钟检查一次活跃的进程数，然后按特定算法计算出的数值。如果这个数除以逻辑CPU的数量，结果高于5的时候就表明系统在超负荷运转</p></blockquote><p><code>Tasks: 5 total, 1 running, 4 sleeping, 0 stopped, 0 zombie</code></p><blockquote><p>第一块：系统现在有5个进程
 第二块：有一个进程处于运行状态
 第三块：4个进程处于休眠状态
 第四块：0个进程处于stopped状态
-第五块：0个进程处于zombie状态</p>
-</blockquote>
-<p><code>%Cpu(s): 46.2 us, 5.0 sy, 0.4 ni, 47.9 id, 0.0 wa, 0.0 hi, 0.5 si, 0.0 st</code></p>
-<blockquote>
-<p>46.2 us — 用户空间占用CPU的百分比。user space
+第五块：0个进程处于zombie状态</p></blockquote><p><code>%Cpu(s): 46.2 us, 5.0 sy, 0.4 ni, 47.9 id, 0.0 wa, 0.0 hi, 0.5 si, 0.0 st</code></p><blockquote><p>46.2 us — 用户空间占用CPU的百分比。user space
 5 sy — 内核空间占用CPU的百分比。 system
 0.4 ni — 改变过优先级的进程占用CPU的百分比
 47.9 id — 空闲CPU百分比
 0.0 wa — IO等待占用CPU的百分比
 0.0 hi — 硬中断（Hardware IRQ）占用CPU的百分比
 0.5 si — 软中断（Software Interrupts）占用CPU的百分比
-用户空间就是用户进程所在的内存区域，相对的，系统空间就是操作系统占据的内存区域。用户进程和系统进程的所有数据都在内存中。</p>
-</blockquote>
-<p><code>KiB Mem : 15625000 total, 2836444 free, 8893532 used, 3895024 buff/cache</code></p>
-<blockquote>
-<p>15625000 total — 物理内存总量（16GB）
+用户空间就是用户进程所在的内存区域，相对的，系统空间就是操作系统占据的内存区域。用户进程和系统进程的所有数据都在内存中。</p></blockquote><p><code>KiB Mem : 15625000 total, 2836444 free, 8893532 used, 3895024 buff/cache</code></p><blockquote><p>15625000 total — 物理内存总量（16GB）
 8893532 used — 使用中的内存总量（8.9GB）
 2836444 free — 空闲内存总量（2.8G）
-3895024 buffers — 缓存的内存量 （3.6G）</p>
-</blockquote>
-<p><code>KiB Swap: 0 total, 0 free, 0 used. 2836444 avail Mem </code></p>
-<blockquote>
-<p>Swap分区：swap（类似于虚拟内存）交换分区的used，如果这个数值在不断的变化，说明内核在不断进行内存和swap的数据交换，这是可以判定服务器的内存不够用了。</p>
-</blockquote>
-<p>看起来docker启动的没有分配任何的swap分区</p>
-<p><code>PID USER PR NI VIRT RES SHR S %CPU %MEM TIME+ COMMAND </code></p>
-<p>PID — 进程id
+3895024 buffers — 缓存的内存量 （3.6G）</p></blockquote><p><code>KiB Swap: 0 total, 0 free, 0 used. 2836444 avail Mem</code></p><blockquote><p>Swap分区：swap（类似于虚拟内存）交换分区的used，如果这个数值在不断的变化，说明内核在不断进行内存和swap的数据交换，这是可以判定服务器的内存不够用了。</p></blockquote><p>看起来docker启动的没有分配任何的swap分区</p><p><code>PID USER PR NI VIRT RES SHR S %CPU %MEM TIME+ COMMAND</code></p><p>PID — 进程id
 USER — 进程所有者
 PR — 进程优先级
 NI — nice值。负值表示高优先级，正值表示低优先级
@@ -186,49 +55,9 @@ S — 进程状态。D=不可中断的睡眠状态 R=运行 S=睡眠 T=跟踪/�
 %CPU — 上次更新到现在的CPU时间占用百分比
 %MEM — 进程使用的物理内存百分比
 TIME+ — 进程使用的CPU时间总计，单位1/100秒
-COMMAND — 进程名称（命令名/命令行）</p>
-<p><code>top -Hp pid</code> 列出进程pid所有的线程信息 类似于 <code>ps -T -p pid</code></p>
-<p><code>ps -mp pid -o THREAD,tid,time</code>
-通过%CPU和 TIME，判断占用的线程TID</p>
-<p>-m Show threads after processes.
+COMMAND — 进程名称（命令名/命令行）</p><p><code>top -Hp pid</code> 列出进程pid所有的线程信息 类似于 <code>ps -T -p pid</code></p><p><code>ps -mp pid -o THREAD,tid,time</code>
+通过%CPU和 TIME，判断占用的线程TID</p><p>-m Show threads after processes.
 -p Select by PID
--o format. 自定义输出格式，例如 THREAD,tid,time</p>
-<hr>
-<h3 id=jps>JPS</h3>
-<p>jps - Lists the instrumented Java Virtual Machines (JVMs) on the target system. This command is experimental and unsupported.</p>
-<h3 id=jstack>Jstack</h3>
-<p><code>jstack pid > pid.txt </code> 查看具体的信息</p>
-<div class="prev-next-post pure-g">
-<div class=pure-u-1-24 style=text-align:left>
-<a href=http://gebitang.com/post/how/mysql/><i class="fa fa-chevron-left"></i></a>
-</div>
-<div class=pure-u-10-24>
-<nav class=prev>
-<a href=http://gebitang.com/post/how/mysql/>Mysql</a>
-</nav>
-</div>
-<div class=pure-u-2-24>
-&nbsp;
-</div>
-<div class=pure-u-10-24>
-<nav class=next>
-<a href=http://gebitang.com/post/jiansh/im/%E8%AF%B4%E4%B8%89%E9%81%93%E5%9B%9B%E8%AF%9D%E5%B9%B3%E7%94%9F/>说三道四话平生</a>
-</nav>
-</div>
-<div class=pure-u-1-24 style=text-align:right>
-<a href=http://gebitang.com/post/jiansh/im/%E8%AF%B4%E4%B8%89%E9%81%93%E5%9B%9B%E8%AF%9D%E5%B9%B3%E7%94%9F/><i class="fa fa-chevron-right"></i></a>
-</div>
-</div>
-<div id=disqus_thread></div>
-<script type=text/javascript>(function(){var a,b;if(window.location.hostname=="localhost")return;a=document.createElement('script'),a.type='text/javascript',a.async=!0,b='gebitang',a.src='//'+b+'.disqus.com/embed.js',(document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(a)})()</script>
-<noscript>Please enable JavaScript to view the <a href=http://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript>
-<a href=http://disqus.com/ class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a>
-</div>
-</div>
-</div>
-<script src=http://gebitang.com/js/ui.js></script>
+-o format. 自定义输出格式，例如 THREAD,tid,time</p><hr><h3 id=jps>JPS</h3><p>jps - Lists the instrumented Java Virtual Machines (JVMs) on the target system. This command is experimental and unsupported.</p><h3 id=jstack>Jstack</h3><p><code>jstack pid > pid.txt</code> 查看具体的信息</p><div class="prev-next-post pure-g"><div class=pure-u-1-24 style=text-align:left><a href=http://gebitang.com/post/how/mysql/><i class="fa fa-chevron-left"></i></a></div><div class=pure-u-10-24><nav class=prev><a href=http://gebitang.com/post/how/mysql/>Mysql</a></nav></div><div class=pure-u-2-24>&nbsp;</div><div class=pure-u-10-24><nav class=next><a href=http://gebitang.com/post/jiansh/im/%E8%AF%B4%E4%B8%89%E9%81%93%E5%9B%9B%E8%AF%9D%E5%B9%B3%E7%94%9F/>说三道四话平生</a></nav></div><div class=pure-u-1-24 style=text-align:right><a href=http://gebitang.com/post/jiansh/im/%E8%AF%B4%E4%B8%89%E9%81%93%E5%9B%9B%E8%AF%9D%E5%B9%B3%E7%94%9F/><i class="fa fa-chevron-right"></i></a></div></div><div id=disqus_thread></div><script type=text/javascript>(function(){if(window.location.hostname=="localhost")return;var e=document.createElement("script"),t;e.type="text/javascript",e.async=!0,t="gebitang",e.src="//"+t+".disqus.com/embed.js",(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(e)})()</script><noscript>Please enable JavaScript to view the <a href=http://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript><a href=http://disqus.com/ class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a></div></div></div><script src=http://gebitang.com/js/ui.js></script>
 <script src=http://gebitang.com/js/menus.js></script>
-<script>window.location.hostname!="localhost"&&(function(a,e,f,g,b,c,d){a.GoogleAnalyticsObject=b,a[b]=a[b]||function(){(a[b].q=a[b].q||[]).push(arguments)},a[b].l=1*new Date,c=e.createElement(f),d=e.getElementsByTagName(f)[0],c.async=1,c.src=g,d.parentNode.insertBefore(c,d)}(window,document,'script','//www.google-analytics.com/analytics.js','ga'),ga('create','UA-34303694-1','auto'),ga('send','pageview'))</script>
-<button onclick=topFunction() id=myBtn title="Go to top">Top</button>
-</body>
-</html>
+<script>window.location.hostname!="localhost"&&(function(e,o,i,a,t,n,s){e.GoogleAnalyticsObject=t,e[t]=e[t]||function(){(e[t].q=e[t].q||[]).push(arguments)},e[t].l=1*new Date,n=o.createElement(i),s=o.getElementsByTagName(i)[0],n.async=1,n.src=a,s.parentNode.insertBefore(n,s)}(window,document,"script","//www.google-analytics.com/analytics.js","ga"),ga("create","UA-34303694-1","auto"),ga("send","pageview"))</script><button onclick=topFunction() id=myBtn title="Go to top">Top</button></body></html>

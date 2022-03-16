@@ -1,157 +1,16 @@
-<!doctype html><html xmlns:wb=http://open.weibo.com/wb lang=en>
-<head>
-<meta charset=utf-8>
-<meta name=viewport content="width=device-width,initial-scale=1">
-<meta name=description content="How to update your personal website automatically">
-<meta name=generator content="Hugo 0.92.0">
-<title>Hugo, Github & Wercker &#183; 戈壁堂</title>
-<link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/pure-min.css><!--[if lte IE 8]><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-old-ie-min.css><![endif]--><!--[if gt IE 8]><!-->
-<link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-min.css><!--<![endif]--><!--[if lte IE 8]><link rel=stylesheet href=http://gebitang.com/css/side-menu-old-ie.css><![endif]--><!--[if gt IE 8]><!-->
-<link rel=stylesheet href=http://gebitang.com/css/side-menu.css><!--<![endif]-->
-<link rel=stylesheet href=http://gebitang.com/css/blackburn.css>
-<link rel=stylesheet href=https://use.fontawesome.com/releases/v5.9.0/css/all.css>
-<link href="https://fonts.googleapis.com/css?family=Raleway" rel=stylesheet type=text/css>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-<link rel=stylesheet href=//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/androidstudio.min.css>
-<script src=//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js></script>
+<!doctype html><html xmlns:wb=http://open.weibo.com/wb lang=en><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="How to update your personal website automatically"><meta name=generator content="Hugo 0.94.2"><title>Hugo, Github & Wercker &#183; 戈壁堂</title><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/pure-min.css><!--[if lte IE 8]><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-old-ie-min.css><![endif]--><!--[if gt IE 8]><!--><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-min.css><!--<![endif]--><!--[if lte IE 8]><link rel=stylesheet href=http://gebitang.com/css/side-menu-old-ie.css><![endif]--><!--[if gt IE 8]><!--><link rel=stylesheet href=http://gebitang.com/css/side-menu.css><!--<![endif]--><link rel=stylesheet href=http://gebitang.com/css/blackburn.css><link rel=stylesheet href=https://use.fontawesome.com/releases/v5.9.0/css/all.css><link href="https://fonts.googleapis.com/css?family=Raleway" rel=stylesheet type=text/css><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<link rel=stylesheet href=//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/androidstudio.min.css><script src=//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js></script>
 <script src=//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js></script>
-<script>hljs.initHighlightingOnLoad()</script>
-<link rel="shortcut icon" href=http://gebitang.com/img/favicon.ico type=image/x-icon>
-<link rel=stylesheet href=http://gebitang.com/css/my.css>
-<script src=http://gebitang.com/js/my.js></script>
-</head>
-<body>
-<div id=layout>
-<a href=#menu id=menuLink class=menu-link>
-<span></span>
-</a>
-<div id=menu>
-<a class="pure-menu-heading brand" href=http://gebitang.com/>Gebitang</a>
-<div class=pure-menu>
-<ul class=pure-menu-list>
-<li class=pure-menu-item>
-<a class=pure-menu-link href=http://gebitang.com/><i class="fa fa-home fa-fw"></i>Home</a>
-</li>
-<li class=pure-menu-item>
-<a class=pure-menu-link href=http://gebitang.com/post/><i class="fa fa-list fa-fw"></i>Posts</a>
-</li>
-<li class=pure-menu-item>
-<a class=pure-menu-link href=http://gebitang.com/about/><i class="fa fa-user fa-fw"></i>About</a>
-</li>
-<li class=pure-menu-item>
-<a class=pure-menu-link href=http://gebitang.com/contact/><i class="fa fa-phone fa-fw"></i>Contact</a>
-</li>
-<li class=pure-menu-item>
-<a class=pure-menu-link href=http://gebitang.com/tags/><i class="fa fa-tags fa-fw"></i>Tags</a>
-</li>
-<li class=pure-menu-item>
-<a class=pure-menu-link href=http://gebitang.com/topics/><i class="fa fa-folder fa-fw"></i>Topics</a>
-</li>
-</ul>
-</div>
-<div class="pure-menu social">
-<ul class=pure-menu-list>
-</ul>
-</div>
-<div>
-<div class=small-print>
-<small>
-<a rel=license href=http://creativecommons.org/licenses/by/4.0/><img alt=知识共享许可协议 style=border-width:0 src=https://i.creativecommons.org/l/by/4.0/80x15.png></a><br>本<span xmlns:dct=http://purl.org/dc/terms/ href=http://purl.org/dc/dcmitype/Text rel=dct:type>作品</span>由<a xmlns:cc=http://creativecommons.org/ns# href=http://gebitang.com property="cc:attributionName" rel=cc:attributionurl>&nbsp;Gebitang&nbsp;&nbsp;</a>采用<a rel=license href=http://creativecommons.org/licenses/by/4.0/>知识共享署名 4.0 国际许可协议</a>进行许可&nbsp;&copy; 2018
-</small>
-</div>
-<div class=small-print>
-<small></small>
-</div>
-<div class=small-print>
-<small>Built with&nbsp;<a href=https://gohugo.io/ target=_blank>Hugo</a></small>
-<small>Theme&nbsp;<a href=https://github.com/yoshiharuyamashita/blackburn target=_blank>Blackburn</a></small>
-</div>
-<div style=display:none>
-<div class=small-print>
-<small>
-<wb:follow-button uid=2446212465 type=red_1 width=67 height=24></wb:follow-button>
-</small>
-</div>
-</div>
-</div>
-</div>
-<div id=main>
-<div class=header>
-<h1>Hugo, Github & Wercker</h1>
-<h2>How to update your personal website automatically</h2>
-</div>
-<div class=content>
-<div class=post-meta>
-<div>
-<i class="fa fa-calendar fa-fw"></i>
-<time>2018-01-27</time>
-</div>
-<div>
-<i class="fa fa-folder fa-fw"></i>
+<script>hljs.initHighlightingOnLoad()</script><link rel="shortcut icon" href=http://gebitang.com/img/favicon.ico type=image/x-icon><link rel=stylesheet href=http://gebitang.com/css/my.css><script src=http://gebitang.com/js/my.js></script></head><body><div id=layout><a href=#menu id=menuLink class=menu-link><span></span></a><div id=menu><a class="pure-menu-heading brand" href=http://gebitang.com/>Gebitang</a><div class=pure-menu><ul class=pure-menu-list><li class=pure-menu-item><a class=pure-menu-link href=http://gebitang.com/><i class="fa fa-home fa-fw"></i>Home</a></li><li class=pure-menu-item><a class=pure-menu-link href=http://gebitang.com/post/><i class="fa fa-list fa-fw"></i>Posts</a></li><li class=pure-menu-item><a class=pure-menu-link href=http://gebitang.com/about/><i class="fa fa-user fa-fw"></i>About</a></li><li class=pure-menu-item><a class=pure-menu-link href=http://gebitang.com/contact/><i class="fa fa-phone fa-fw"></i>Contact</a></li><li class=pure-menu-item><a class=pure-menu-link href=http://gebitang.com/tags/><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class=pure-menu-item><a class=pure-menu-link href=http://gebitang.com/topics/><i class="fa fa-folder fa-fw"></i>Topics</a></li></ul></div><div class="pure-menu social"><ul class=pure-menu-list></ul></div><div><div class=small-print><small><a rel=license href=http://creativecommons.org/licenses/by/4.0/><img alt=知识共享许可协议 style=border-width:0 src=https://i.creativecommons.org/l/by/4.0/80x15.png></a><br>本<span xmlns:dct=http://purl.org/dc/terms/ href=http://purl.org/dc/dcmitype/Text rel=dct:type>作品</span>由<a xmlns:cc=http://creativecommons.org/ns# href=http://gebitang.com property="cc:attributionName" rel=cc:attributionurl>&nbsp;Gebitang&nbsp;&nbsp;</a>采用<a rel=license href=http://creativecommons.org/licenses/by/4.0/>知识共享署名 4.0 国际许可协议</a>进行许可&nbsp;&copy; 2018</small></div><div class=small-print><small></small></div><div class=small-print><small>Built with&nbsp;<a href=https://gohugo.io/ target=_blank>Hugo</a></small>
+<small>Theme&nbsp;<a href=https://github.com/yoshiharuyamashita/blackburn target=_blank>Blackburn</a></small></div><div style=display:none><div class=small-print><small><wb:follow-button uid=2446212465 type=red_1 width=67 height=24></wb:follow-button></small></div></div></div></div><div id=main><div class=header><h1>Hugo, Github & Wercker</h1><h2>How to update your personal website automatically</h2></div><div class=content><div class=post-meta><div><i class="fa fa-calendar fa-fw"></i>
+<time>2018-01-27</time></div><div><i class="fa fa-folder fa-fw"></i>
 <a class=post-taxonomy-topic href=http://gebitang.com/topics/hugo>hugo</a>&nbsp;/
-<a class=post-taxonomy-topic href=http://gebitang.com/topics/wercker>wercker</a>
-</div>
-<div>
-<i class="fa fa-tags fa-fw"></i>
-<a class=post-taxonomy-tag href=http://gebitang.com/tags/hugo>hugo</a>
-</div>
-</div>
-<nav id=TableOfContents>
-<ul>
-<li><a href=#update-config>update config</a></li>
-<li><a href=#git安装使用>Git安装、使用</a>
-<ul>
-<li><a href=#git基本使用>Git基本使用</a></li>
-</ul>
-</li>
-<li><a href=#github账号仓库>Github账号、仓库</a>
-<ul>
-<li><a href=#本地创建仓库使用这个新建的仓库作为远程仓库>本地创建仓库，使用这个新建的仓库作为远程仓库</a></li>
-</ul>
-</li>
-<li><a href=#hugo安装生成站点>Hugo安装、生成站点</a>
-<ul>
-<li><a href=#新建站点>新建站点</a></li>
-<li><a href=#为新站点添加主题>为新站点添加主题</a></li>
-<li><a href=#添加内容>添加内容</a></li>
-<li><a href=#本地启动server>本地启动server</a></li>
-<li><a href=#配置化>配置化</a></li>
-</ul>
-</li>
-<li><a href=#wercker配置使用>Wercker配置使用</a>
-<ul>
-<li><a href=#准备工作>准备工作</a></li>
-<li><a href=#配置github仓库>配置github仓库</a></li>
-<li><a href=#更新远程分支>更新远程分支</a></li>
-<li><a href=#配置wercker>配置wercker</a></li>
-<li><a href=#配置域名>配置域名</a></li>
-<li><a href=#为wercker配置token>为wercker配置token</a></li>
-<li><a href=#重置远程分支>重置远程分支</a></li>
-<li><a href=#配置pipeline>配置pipeline</a></li>
-</ul>
-</li>
-</ul>
-</nav>
-<p>“自留地里写东西。”</p>
-<ol>
-<li>使用Hugo生成静态网站</li>
-<li>使用Github pages部署网站</li>
-<li>利用Wercker完成自动更新部署</li>
-</ol>
-<p>写完，commit到仓库，同步本地仓库到github即完成了网站的自动更新。<a href=https://gohugo.io/hosting-and-deployment/deployment-with-wercker/>Official Doc</a></p>
-<p>最少必要知识：</p>
-<ul>
-<li>Git安装和基础操作</li>
-<li>Github注册和使用：github page服务</li>
-<li>Hugo安装和基础操作：完成站点创建</li>
-<li>Wrecker配置</li>
-</ul>
-<p>Update: github支持action操作，可以放弃wercker的内容了，备份一下——</p>
-<pre tabindex=0><code>box: debian
+<a class=post-taxonomy-topic href=http://gebitang.com/topics/wercker>wercker</a></div><div><i class="fa fa-tags fa-fw"></i>
+<a class=post-taxonomy-tag href=http://gebitang.com/tags/hugo>hugo</a></div></div><nav id=TableOfContents><ul><li><a href=#update-config>update config</a></li><li><a href=#git安装使用>Git安装、使用</a><ul><li><a href=#git基本使用>Git基本使用</a></li></ul></li><li><a href=#github账号仓库>Github账号、仓库</a><ul><li><a href=#本地创建仓库使用这个新建的仓库作为远程仓库>本地创建仓库，使用这个新建的仓库作为远程仓库</a></li></ul></li><li><a href=#hugo安装生成站点>Hugo安装、生成站点</a><ul><li><a href=#新建站点>新建站点</a></li><li><a href=#为新站点添加主题>为新站点添加主题</a></li><li><a href=#添加内容>添加内容</a></li><li><a href=#本地启动server>本地启动server</a></li><li><a href=#配置化>配置化</a></li></ul></li><li><a href=#wercker配置使用>Wercker配置使用</a><ul><li><a href=#准备工作>准备工作</a></li><li><a href=#配置github仓库>配置github仓库</a></li><li><a href=#更新远程分支>更新远程分支</a></li><li><a href=#配置wercker>配置wercker</a></li><li><a href=#配置域名>配置域名</a></li><li><a href=#为wercker配置token>为wercker配置token</a></li><li><a href=#重置远程分支>重置远程分支</a></li><li><a href=#配置pipeline>配置pipeline</a></li></ul></li></ul></nav><p>“自留地里写东西。”</p><ol><li>使用Hugo生成静态网站</li><li>使用Github pages部署网站</li><li>利用Wercker完成自动更新部署</li></ol><p>写完，commit到仓库，同步本地仓库到github即完成了网站的自动更新。<a href=https://gohugo.io/hosting-and-deployment/deployment-with-wercker/>Official Doc</a></p><p>最少必要知识：</p><ul><li>Git安装和基础操作</li><li>Github注册和使用：github page服务</li><li>Hugo安装和基础操作：完成站点创建</li><li>Wrecker配置</li></ul><p>Update: github支持action操作，可以放弃wercker的内容了，备份一下——</p><pre tabindex=0><code>box: debian
 build:
   steps:
     - arjen/hugo-build:
-        version: &quot;0.74.3&quot;
+        version: &#34;0.74.3&#34;
         theme: blackburn
         flags: --buildDrafts=true
 deploy:
@@ -162,59 +21,28 @@ deploy:
         token: $GIT_TOKEN
         domain: gebitang.com
         basedir: public
-</code></pre><h2 id=update-config>update config</h2>
-<p>写的时候Hugo版本还是0.34，现在最新版本已经是0.76。升级后生成的静态站点主页一直未空，log提示下面两个问题——</p>
-<ul>
-<li>
-<p>Page.Hugo is deprecated and will be removed in a future release. Use the global hugo function.</p>
-</li>
-<li>
-<p>Page.RSSLink is deprecated and will be removed in a future release. Use the Output Format&rsquo;s link, e.g. something like: <code>{{ with .OutputFormats.Get "RSS" }}{{ .RelPermalink }}{{ end }}</code></p>
-</li>
-</ul>
-<p>在论坛和github issue里都可以查到对应的问题。</p>
-<p>第一个问题：<a href=https://github.com/wowchemy/wowchemy-hugo-modules/issues/1017>issues #1017</a>，<a href=https://discourse.gohugo.io/t/pages-hugo-is-deprecated-as-of-0-55-0/17991>Page’s .Hugo is deprecated as of 0.55.0</a></p>
-<p>第二个问题：<a href=https://github.com/gohugoio/hugo/issues/4427>issue #4427</a>，<a href=https://discourse.gohugo.io/t/page-hugo-is-deprecated-page-rsslink-is-deprecated/27037>Page.Hugo is deprecated / Page.RSSLink is deprecated</a></p>
-<p>都指向同一个文件：<code>head.huml</code></p>
-<p>删除<code>{{.Hugo.Generator}}</code>，或修改为<code> {{hugo.Generator}}</code>以解决第一个问题；</p>
-<p>第二个问题针对<code>RSSLink</code>的定义，例如——</p>
-<pre tabindex=0><code>  {{ if .RSSLink }}
-  &lt;link rel=&quot;alternate&quot; type=&quot;application/rss+xml&quot; title=&quot;{{ .Site.Title }}&quot; href=&quot;{{ .RSSLink }}&quot; /&gt;
+</code></pre><h2 id=update-config>update config</h2><p>写的时候Hugo版本还是0.34，现在最新版本已经是0.76。升级后生成的静态站点主页一直未空，log提示下面两个问题——</p><ul><li><p>Page.Hugo is deprecated and will be removed in a future release. Use the global hugo function.</p></li><li><p>Page.RSSLink is deprecated and will be removed in a future release. Use the Output Format&rsquo;s link, e.g. something like: <code>{{ with .OutputFormats.Get "RSS" }}{{ .RelPermalink }}{{ end }}</code></p></li></ul><p>在论坛和github issue里都可以查到对应的问题。</p><p>第一个问题：<a href=https://github.com/wowchemy/wowchemy-hugo-modules/issues/1017>issues #1017</a>，<a href=https://discourse.gohugo.io/t/pages-hugo-is-deprecated-as-of-0-55-0/17991>Page’s .Hugo is deprecated as of 0.55.0</a></p><p>第二个问题：<a href=https://github.com/gohugoio/hugo/issues/4427>issue #4427</a>，<a href=https://discourse.gohugo.io/t/page-hugo-is-deprecated-page-rsslink-is-deprecated/27037>Page.Hugo is deprecated / Page.RSSLink is deprecated</a></p><p>都指向同一个文件：<code>head.huml</code></p><p>删除<code>{{.Hugo.Generator}}</code>，或修改为<code> {{hugo.Generator}}</code>以解决第一个问题；</p><p>第二个问题针对<code>RSSLink</code>的定义，例如——</p><pre tabindex=0><code>  {{ if .RSSLink }}
+  &lt;link rel=&#34;alternate&#34; type=&#34;application/rss+xml&#34; title=&#34;{{ .Site.Title }}&#34; href=&#34;{{ .RSSLink }}&#34; /&gt;
   {{ end }}
-</code></pre><p>修改为——</p>
-<pre tabindex=0><code>  {{ if .OutputFormats.Get &quot;RSS&quot; }}
-  &lt;link rel=&quot;alternate&quot; type=&quot;application/rss+xml&quot; title=&quot;{{ .Site.Title }}&quot;
-    href='{{ with .OutputFormats.Get &quot;RSS&quot; }}{{ .RelPermalink }}{{ end }}' /&gt;
+</code></pre><p>修改为——</p><pre tabindex=0><code>  {{ if .OutputFormats.Get &#34;RSS&#34; }}
+  &lt;link rel=&#34;alternate&#34; type=&#34;application/rss+xml&#34; title=&#34;{{ .Site.Title }}&#34;
+    href=&#39;{{ with .OutputFormats.Get &#34;RSS&#34; }}{{ .RelPermalink }}{{ end }}&#39; /&gt;
   {{ end }}
-</code></pre><p><code>social.html</code>文件中也涉及到第二个问题的处理——</p>
-<pre tabindex=0><code>{{ if .RSSLink }}
-    &lt;li class=&quot;pure-menu-item&quot;&gt;
-      &lt;a class=&quot;pure-menu-link&quot; href=&quot;{{ .RSSLink }}&quot;&gt;&lt;i class=&quot;fa fa-rss fa-fw&quot;&gt;&lt;/i&gt;RSS&lt;/a&gt;
+</code></pre><p><code>social.html</code>文件中也涉及到第二个问题的处理——</p><pre tabindex=0><code>{{ if .RSSLink }}
+    &lt;li class=&#34;pure-menu-item&#34;&gt;
+      &lt;a class=&#34;pure-menu-link&#34; href=&#34;{{ .RSSLink }}&#34;&gt;&lt;i class=&#34;fa fa-rss fa-fw&#34;&gt;&lt;/i&gt;RSS&lt;/a&gt;
     &lt;/li&gt;
     {{ end }}
-</code></pre><p>修改为——</p>
-<pre tabindex=0><code>    {{ if .OutputFormats.Get &quot;RSS&quot; }}
-    &lt;li class=&quot;pure-menu-item&quot;&gt;
-      &lt;a class=&quot;pure-menu-link&quot; href='{{ with .OutputFormats.Get &quot;RSS&quot; }}{{ .RelPermalink }}{{ end }}'&gt;&lt;i
-          class=&quot;fas fa-rss&quot;&gt;&lt;/i&gt;RSS&lt;/a&gt;
+</code></pre><p>修改为——</p><pre tabindex=0><code>    {{ if .OutputFormats.Get &#34;RSS&#34; }}
+    &lt;li class=&#34;pure-menu-item&#34;&gt;
+      &lt;a class=&#34;pure-menu-link&#34; href=&#39;{{ with .OutputFormats.Get &#34;RSS&#34; }}{{ .RelPermalink }}{{ end }}&#39;&gt;&lt;i
+          class=&#34;fas fa-rss&#34;&gt;&lt;/i&gt;RSS&lt;/a&gt;
     &lt;/li&gt;
     {{ end }}
-</code></pre><p>另外一个更简单的版本就是：升级使用的主题（例如我使用的这个blackburn主题的最新版本已经针对新版hugo做了优化处理）</p>
-<p>升级后对应的CI文件<code>wrecker.yml</code>中使用的版本也需要做对应的更新，最新版本为<a href=https://app.wercker.com/steps/arjen/hugo-build><code>0.74.3</code></a></p>
-<p>处理完还能继续支持一段时间，Github Action再议:(</p>
-<h2 id=git安装使用>Git安装、使用</h2>
-<p><a href=https://git-scm.com/downloads>官网下载</a>安装对应平台的应用程序。</p>
-<h3 id=git基本使用>Git基本使用</h3>
-<p><a href=https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000>史上最浅显易懂的Git教程</a></p>
-<h2 id=github账号仓库>Github账号、仓库</h2>
-<p>创建账号：略。</p>
-<p>登录后访问<a href=https://github.com/new>创建仓库</a>，新建一个自己命名的，如geb.im的空仓库，不包括readme、不添加license、不添加gitignore文件。</p>
-<p>场景成功后，系统会自动提示你如何进行下一步的操作。</p>
-<h3 id=本地创建仓库使用这个新建的仓库作为远程仓库>本地创建仓库，使用这个新建的仓库作为远程仓库</h3>
-<pre tabindex=0><code># 命令行操作
+</code></pre><p>另外一个更简单的版本就是：升级使用的主题（例如我使用的这个blackburn主题的最新版本已经针对新版hugo做了优化处理）</p><p>升级后对应的CI文件<code>wrecker.yml</code>中使用的版本也需要做对应的更新，最新版本为<a href=https://app.wercker.com/steps/arjen/hugo-build><code>0.74.3</code></a></p><p>处理完还能继续支持一段时间，Github Action再议:(</p><h2 id=git安装使用>Git安装、使用</h2><p><a href=https://git-scm.com/downloads>官网下载</a>安装对应平台的应用程序。</p><h3 id=git基本使用>Git基本使用</h3><p><a href=https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000>史上最浅显易懂的Git教程</a></p><h2 id=github账号仓库>Github账号、仓库</h2><p>创建账号：略。</p><p>登录后访问<a href=https://github.com/new>创建仓库</a>，新建一个自己命名的，如geb.im的空仓库，不包括readme、不添加license、不添加gitignore文件。</p><p>场景成功后，系统会自动提示你如何进行下一步的操作。</p><h3 id=本地创建仓库使用这个新建的仓库作为远程仓库>本地创建仓库，使用这个新建的仓库作为远程仓库</h3><pre tabindex=0><code># 命令行操作
 
 # 添加一个README.md文件并写入 # geb.im 作为内容
-echo &quot;# geb.im&quot; &gt;&gt; README.md
+echo &#34;# geb.im&#34; &gt;&gt; README.md
 
 # 初始化本地仓库
 git init
@@ -223,34 +51,29 @@ git init
 git add README.md
 
 # 提交commit信息，
-git commit -m &quot;first commit&quot;
+git commit -m &#34;first commit&#34;
 
 # 将 git@github.com:gebitang/geb.im.git作为本地仓库的远程仓库
 git remote add origin git@github.com:gebitang/geb.im.git
 
 # 推送本地仓库到远程仓库
 git push -u origin master
-</code></pre><h2 id=hugo安装生成站点>Hugo安装、生成站点</h2>
-<p><a href=https://gohugo.io/>官网</a>
-<a href=https://github.com/gohugoio/hugo/releases>下载安装</a>。选择Hugo是因为安装完立即即可使用，三种主流平台全支持，傻瓜式默认安装即可。windows用户实际上只有一个.exe文件，将其所在的目录添加到系统的环境变量Path中即可使用。</p>
-<p>验证</p>
-<pre tabindex=0><code># 命令行执行，目前最新的为v0.34版本
+</code></pre><h2 id=hugo安装生成站点>Hugo安装、生成站点</h2><p><a href=https://gohugo.io/>官网</a>
+<a href=https://github.com/gohugoio/hugo/releases>下载安装</a>。选择Hugo是因为安装完立即即可使用，三种主流平台全支持，傻瓜式默认安装即可。windows用户实际上只有一个.exe文件，将其所在的目录添加到系统的环境变量Path中即可使用。</p><p>验证</p><pre tabindex=0><code># 命令行执行，目前最新的为v0.34版本
  ~ hugo version
 Hugo Static Site Generator v0.26 darwin/amd64 BuildDate: 2017-08-17T21:50:17+08:00
-</code></pre><h3 id=新建站点>新建站点</h3>
-<p>hugo是命令行可识别的命令，可使用<code>hugo --help</code>查看帮助；支持二级命令帮助，如<code>hugo new --help</code>表示new这个二级命令如何使用。<code>hugo new sit your.site.name</code> 就是新建一个hugo站点。</p>
-<pre tabindex=0><code># 新建一个名称叫 geb.im的站点
+</code></pre><h3 id=新建站点>新建站点</h3><p>hugo是命令行可识别的命令，可使用<code>hugo --help</code>查看帮助；支持二级命令帮助，如<code>hugo new --help</code>表示new这个二级命令如何使用。<code>hugo new sit your.site.name</code> 就是新建一个hugo站点。</p><pre tabindex=0><code># 新建一个名称叫 geb.im的站点
 ➜  github hugo new site geb.im
 Congratulations! Your new Hugo site is created in /Users/gebitang/github/geb.im.
 
-Just a few more steps and you're ready to go:
+Just a few more steps and you&#39;re ready to go:
 
 1. Download a theme into the same-named folder.
    Choose a theme from https://themes.gohugo.io/, or
-   create your own with the &quot;hugo new theme &lt;THEMENAME&gt;&quot; command.
+   create your own with the &#34;hugo new theme &lt;THEMENAME&gt;&#34; command.
 2. Perhaps you want to add some content. You can add single files
-   with &quot;hugo new &lt;SECTIONNAME&gt;/&lt;FILENAME&gt;.&lt;FORMAT&gt;&quot;.
-3. Start the built-in live server via &quot;hugo server&quot;.
+   with &#34;hugo new &lt;SECTIONNAME&gt;/&lt;FILENAME&gt;.&lt;FORMAT&gt;&#34;.
+3. Start the built-in live server via &#34;hugo server&#34;.
 
 Visit https://gohugo.io/ for quickstart guide and full documentation.
 ➜
@@ -258,50 +81,37 @@ Visit https://gohugo.io/ for quickstart guide and full documentation.
 ➜  geb.im ls
 archetypes  config.toml content     data        layouts     static      themes
 ➜  geb.im
-</code></pre><h3 id=为新站点添加主题>为新站点添加主题</h3>
-<p>到<a href=https://themes.gohugo.io/>主题区</a>选择自己喜欢的主题进行下载安装。随时可以修改主题内容或自己创作主题。</p>
-<p>下载<a href=https://themes.gohugo.io/purehugo/>purehugo主题</a>，Download按钮对应的是下载地址，类似 <a href=https://github.com/dplesca/purehugo.git>https://github.com/dplesca/purehugo.git</a></p>
-<pre tabindex=0><code>#进入到 themes目录执行
+</code></pre><h3 id=为新站点添加主题>为新站点添加主题</h3><p>到<a href=https://themes.gohugo.io/>主题区</a>选择自己喜欢的主题进行下载安装。随时可以修改主题内容或自己创作主题。</p><p>下载<a href=https://themes.gohugo.io/purehugo/>purehugo主题</a>，Download按钮对应的是下载地址，类似 <a href=https://github.com/dplesca/purehugo.git>https://github.com/dplesca/purehugo.git</a></p><pre tabindex=0><code>#进入到 themes目录执行
 ➜  geb.im cd themes
 ➜  themes ls
 ➜  themes git clone https://github.com/dplesca/purehugo.git
-Cloning into 'purehugo'...
+Cloning into &#39;purehugo&#39;...
 remote: Counting objects: 430, done.
 remote: Total 430 (delta 0), reused 0 (delta 0), pack-reused 430
 Receiving objects: 100% (430/430), 457.17 KiB | 67.00 KiB/s, done.
 Resolving deltas: 100% (219/219), done.
 ➜  themes ls
 purehugo
-
-</code></pre><h3 id=添加内容>添加内容</h3>
-<p>删除不需要的文件 .git ，这个文件夹保存了git版本管理的所有相关内容</p>
-<p>使用 <code>hugo new about.md</code>添加内容</p>
-<pre tabindex=0><code>➜  themes rm -rf purehugo/.git/
+</code></pre><h3 id=添加内容>添加内容</h3><p>删除不需要的文件 .git ，这个文件夹保存了git版本管理的所有相关内容</p><p>使用 <code>hugo new about.md</code>添加内容</p><pre tabindex=0><code>➜  themes rm -rf purehugo/.git/
 ## 回到主目录，添加 about.md文件
 ➜  geb.im hugo new about.md
 /Users/gebitang/github/geb.im/content/about.md created
 ➜  geb.im
-</code></pre><p>文件默认状态是draft即草稿形式，不会被显示出来，将对于的值设置为false即可</p>
-<pre tabindex=0><code>---
-title: &quot;About&quot;
+</code></pre><p>文件默认状态是draft即草稿形式，不会被显示出来，将对于的值设置为false即可</p><pre tabindex=0><code>---
+title: &#34;About&#34;
 date: 2018-01-28T14:47:49+08:00
 draft: false
 ---
 
 上面的内容为hugo支持的markdown格式的meta信息。draft值默认为true，修改为false。否则hugo server启动时无法生产页面。
 this is a test file.
-</code></pre><h3 id=本地启动server>本地启动server</h3>
-<pre tabindex=0><code>#执行 hugo server --watch 命令可以实时监控内容更新；--theme参数知道使用什么主题
+</code></pre><h3 id=本地启动server>本地启动server</h3><pre tabindex=0><code>#执行 hugo server --watch 命令可以实时监控内容更新；--theme参数知道使用什么主题
 hugo server --watch --theme=purehugo
-</code></pre><p>启动完成后可以在浏览器访问 localhost:1313，就可以看到自己的博客了。</p>
-<h3 id=配置化>配置化</h3>
-<p>实际上hugo启动的配置都在工作根目录下的config.toml文件中，默认如下面前三行内容；如启动使用的主题可以在这个文件中配置，添加第四行的内容即可。此时启动时就不需要再直接指定所使用的主题了</p>
-<pre tabindex=0><code>baseURL = &quot;http://example.org/&quot;
-languageCode = &quot;en-us&quot;
-title = &quot;My New Hugo Site&quot;
-theme = &quot;purehugo&quot;
-</code></pre><p>另外，hugo支持多个server同时使用，会自动分配端口，如第一个使用了默认的端口1313，第二个会使用类似63044</p>
-<pre tabindex=0><code>➜  geb.im hugo server --watch
+</code></pre><p>启动完成后可以在浏览器访问 localhost:1313，就可以看到自己的博客了。</p><h3 id=配置化>配置化</h3><p>实际上hugo启动的配置都在工作根目录下的config.toml文件中，默认如下面前三行内容；如启动使用的主题可以在这个文件中配置，添加第四行的内容即可。此时启动时就不需要再直接指定所使用的主题了</p><pre tabindex=0><code>baseURL = &#34;http://example.org/&#34;
+languageCode = &#34;en-us&#34;
+title = &#34;My New Hugo Site&#34;
+theme = &#34;purehugo&#34;
+</code></pre><p>另外，hugo支持多个server同时使用，会自动分配端口，如第一个使用了默认的端口1313，第二个会使用类似63044</p><pre tabindex=0><code>➜  geb.im hugo server --watch
 ERROR 2018/01/28 15:40:31 port 1313 already in use, attempting to use an available port
 Started building sites ...
 Built site for language en:
@@ -319,23 +129,12 @@ Watching for changes in /Users/gebitang/github/geb.im/{data,content,layouts,stat
 Serving pages from memory
 Web Server is available at http://localhost:63044/ (bind address 127.0.0.1)
 Press Ctrl+C to stop
-</code></pre><p>可以使用Ctrl+C随时结束server。</p>
-<p>到此为止，本地的静态博客系统就可以随意使用了</p>
-<h2 id=wercker配置使用>Wercker配置使用</h2>
-<h3 id=准备工作>准备工作</h3>
-<p>为了使用Wercker，需要对本地站点目录进行一些配置操作。</p>
-<ul>
-<li>初始化本地目录</li>
-<li>添加.gitignore文件</li>
-<li>添加静态文件robots.txt</li>
-</ul>
-<p><code>git init</code>初始化本地目录；在根目录下添加.gitignore文件并写入<code>/public</code>内容，表示public这个目录下的文件不进行版本维护；在static目录下添加robots.txt文件，并写入以下内容，表示运行所有的蜘蛛进行抓取页面内容。</p>
-<pre tabindex=0><code>User-agent: *
+</code></pre><p>可以使用Ctrl+C随时结束server。</p><p>到此为止，本地的静态博客系统就可以随意使用了</p><h2 id=wercker配置使用>Wercker配置使用</h2><h3 id=准备工作>准备工作</h3><p>为了使用Wercker，需要对本地站点目录进行一些配置操作。</p><ul><li>初始化本地目录</li><li>添加.gitignore文件</li><li>添加静态文件robots.txt</li></ul><p><code>git init</code>初始化本地目录；在根目录下添加.gitignore文件并写入<code>/public</code>内容，表示public这个目录下的文件不进行版本维护；在static目录下添加robots.txt文件，并写入以下内容，表示运行所有的蜘蛛进行抓取页面内容。</p><pre tabindex=0><code>User-agent: *
 Disallow:
 </code></pre><pre tabindex=0><code>➜  geb.im git init
 Initialized empty Git repository in /Users/gebitang/github/geb.im/.git/
-➜  geb.im git:(master) ✗ echo &quot;/public&quot; &gt;&gt; .gitignore
-➜  geb.im git:(master) ✗ echo &quot;User-agent: *\nDisallow:&quot; &gt; static/robots.txt
+➜  geb.im git:(master) ✗ echo &#34;/public&#34; &gt;&gt; .gitignore
+➜  geb.im git:(master) ✗ echo &#34;User-agent: *\nDisallow:&#34; &gt; static/robots.txt
 ➜  geb.im git:(master) ✗ ls
 archetypes  config.toml content     layouts     static      themes
 ➜  geb.im git:(master) ✗ ls static
@@ -345,8 +144,7 @@ robots.txt
 
 # 将当前目录所以文件添加到仓库工作区
 ➜  geb.im git:(master) ✗ git add .
-</code></pre><p>提交内容到本地仓库并为本地仓库添加远程仓库连接</p>
-<pre tabindex=0><code>➜  geb.im git:(master) ✗ git commit -a -m 'init commit'
+</code></pre><p>提交内容到本地仓库并为本地仓库添加远程仓库连接</p><pre tabindex=0><code>➜  geb.im git:(master) ✗ git commit -a -m &#39;init commit&#39;
 [master (root-commit) c582ca6] init commit
  31 files changed, 794 insertions(+)
  create mode 100644 .gitignore
@@ -384,8 +182,7 @@ robots.txt
 On branch master
 nothing to commit, working tree clean
 ➜  geb.im git:(master)
-</code></pre><p>为本地仓库添加远程连接并推送</p>
-<pre tabindex=0><code>➜  geb.im git:(master) git remote add origin git@github.com:gebitang/geb.im.git
+</code></pre><p>为本地仓库添加远程连接并推送</p><pre tabindex=0><code>➜  geb.im git:(master) git remote add origin git@github.com:gebitang/geb.im.git
 ➜  geb.im git:(master) git push origin master
 Counting objects: 50, done.
 Writing objects: 100% (50/50), 278.52 KiB | 1.49 MiB/s, done.
@@ -393,24 +190,18 @@ Total 50 (delta 0), reused 0 (delta 0)
 To github.com:gebitang/geb.im.git
  * [new branch]      master -&gt; master
 ➜  geb.im git:(master)
-
-</code></pre><p>出现上面的类似内容，则可以在github上看到推送的内容了。</p>
-<h3 id=配置github仓库>配置github仓库</h3>
-<p>使用master分支维护代码，使用 gh-pages分支进行发布，所以需要先新建一个gh-pages分支并推送到远端。</p>
-<p>在对应仓库的setting中选择启用github pages服务并使用gh-pages分支</p>
-<pre tabindex=0><code>git branch gh-pages
+</code></pre><p>出现上面的类似内容，则可以在github上看到推送的内容了。</p><h3 id=配置github仓库>配置github仓库</h3><p>使用master分支维护代码，使用 gh-pages分支进行发布，所以需要先新建一个gh-pages分支并推送到远端。</p><p>在对应仓库的setting中选择启用github pages服务并使用gh-pages分支</p><pre tabindex=0><code>git branch gh-pages
 ➜  geb.im git:(master) git branch -a
   gh-pages
 * master
   remotes/origin/master
 ➜  geb.im git:(master) git checkout gh-pages
-Switched to branch 'gh-pages'
+Switched to branch &#39;gh-pages&#39;
 ➜  geb.im git:(gh-pages) git push origin gh-pages
 Total 0 (delta 0), reused 0 (delta 0)
 To github.com:gebitang/geb.im.git
  * [new branch]      gh-pages -&gt; gh-pages
-</code></pre><p>在github对应仓库的settings下设置CNAME，或直接手动添加一个CNAME文件，内容为注册的域名</p>
-<pre tabindex=0><code>➜  geb.im git:(gh-pages) echo &quot;geb.im&quot;&gt;CNAME
+</code></pre><p>在github对应仓库的settings下设置CNAME，或直接手动添加一个CNAME文件，内容为注册的域名</p><pre tabindex=0><code>➜  geb.im git:(gh-pages) echo &#34;geb.im&#34;&gt;CNAME
 ➜  geb.im git:(gh-pages) ✗ git add CNAME
 ➜  geb.im git:(gh-pages) ✗ git commit -a
 [gh-pages d1c0ae0] add CNAME file.
@@ -423,14 +214,7 @@ Total 3 (delta 0), reused 0 (delta 0)
 To github.com:gebitang/geb.im.git
    c582ca6..d1c0ae0  gh-pages -&gt; gh-pages
 ➜  geb.im git:(gh-pages)
-</code></pre><h3 id=更新远程分支>更新远程分支</h3>
-<p>当gh-pages分支已经在远端存切与本地有关联时。</p>
-<ul>
-<li>删除远程分支</li>
-<li>重置本地的跟踪</li>
-<li>重新推送到远端</li>
-</ul>
-<pre tabindex=0><code># 删除远端分支
+</code></pre><h3 id=更新远程分支>更新远程分支</h3><p>当gh-pages分支已经在远端存切与本地有关联时。</p><ul><li>删除远程分支</li><li>重置本地的跟踪</li><li>重新推送到远端</li></ul><pre tabindex=0><code># 删除远端分支
 
 ➜  geb.im git:(master) git push origin :gh-pages
 To github.com:gebitang/geb.im.git
@@ -438,9 +222,9 @@ To github.com:gebitang/geb.im.git
 
 # unset跟踪关系
  geb.im git:(master) git checkout gh-pages
-Switched to branch 'gh-pages'
-Your branch is based on 'origin/gh-pages', but the upstream is gone.
-  (use &quot;git branch --unset-upstream&quot; to fixup)
+Switched to branch &#39;gh-pages&#39;
+Your branch is based on &#39;origin/gh-pages&#39;, but the upstream is gone.
+  (use &#34;git branch --unset-upstream&#34; to fixup)
 ➜  geb.im git:(gh-pages) git branch --unset-upstream
 ➜  geb.im git:(gh-pages) gi
 
@@ -452,56 +236,26 @@ Total 33 (delta 0), reused 0 (delta 0)
 To github.com:gebitang/geb.im.git
  * [new branch]      gh-pages -&gt; gh-pages
 ➜  geb.im git:(gh-pages)
-</code></pre><h3 id=配置wercker>配置wercker</h3>
-<ul>
-<li>
-<p>使用github账户登录wercter站点: Login with github</p>
-</li>
-<li>
-<p><a href=https://app.wercker.com/applications/create>新建Application</a></p>
-</li>
-</ul>
-<p>配置一共分四步：</p>
-<ol>
-<li>Select SCM，使用github登录后，会自动识别出使用的是github</li>
-<li>Select a Repository</li>
-<li>Configure Access</li>
-<li>Review</li>
-</ol>
-<p>将生成的wrecker.yml文件内容修改如下并保存在根目录：</p>
-<ul>
-<li>可以在Step Repository中搜索<code>hugo build</code></li>
-</ul>
-<p><a href=https://app.wercker.com/steps/arjen/hugo-build>hugo-build</a>，升级到最新版本为0.40.3，测试可用。<del>0.17的旧版本不可用</del></p>
-<pre tabindex=0><code>box: wercker/default
+</code></pre><h3 id=配置wercker>配置wercker</h3><ul><li><p>使用github账户登录wercter站点: Login with github</p></li><li><p><a href=https://app.wercker.com/applications/create>新建Application</a></p></li></ul><p>配置一共分四步：</p><ol><li>Select SCM，使用github登录后，会自动识别出使用的是github</li><li>Select a Repository</li><li>Configure Access</li><li>Review</li></ol><p>将生成的wrecker.yml文件内容修改如下并保存在根目录：</p><ul><li>可以在Step Repository中搜索<code>hugo build</code></li></ul><p><a href=https://app.wercker.com/steps/arjen/hugo-build>hugo-build</a>，升级到最新版本为0.40.3，测试可用。<del>0.17的旧版本不可用</del></p><pre tabindex=0><code>box: wercker/default
 build:
   steps:
     - arjen/hugo-build:
-        version: &quot;0.40.3&quot;
+        version: &#34;0.40.3&#34;
         theme: purehugo
-</code></pre><ul>
-<li>搜索<code>gh-pages</code>可以得到部署相关的step</li>
-</ul>
-<pre tabindex=0><code>deploy:
+</code></pre><ul><li>搜索<code>gh-pages</code>可以得到部署相关的step</li></ul><pre tabindex=0><code>deploy:
   steps:
     - gh-pages:
         token: $GIT_TOKEN
         domain: gem.im
         basedir: public
-</code></pre><p>其中使用的变量GIT_TOKEN需要在wercker上对应的Application的<a href=https://app.wercker.com/gebitang/geb.im/environment>Environment</a>选项下进行设置。</p>
-<ul>
-<li>指定pipeline内容，在</li>
-</ul>
-<pre tabindex=0><code>➜  geb.im git:(gh-pages) vi wercker.yml
+</code></pre><p>其中使用的变量GIT_TOKEN需要在wercker上对应的Application的<a href=https://app.wercker.com/gebitang/geb.im/environment>Environment</a>选项下进行设置。</p><ul><li>指定pipeline内容，在</li></ul><pre tabindex=0><code>➜  geb.im git:(gh-pages) vi wercker.yml
 ➜  geb.im git:(gh-pages) ✗ git add wercker.yml
-➜  geb.im git:(gh-pages) ✗ git commit -a -m 'add wercker file.'
+➜  geb.im git:(gh-pages) ✗ git commit -a -m &#39;add wercker file.&#39;
 [gh-pages 2d720f1] add wercker file.
  1 file changed, 6 insertions(+)
  create mode 100644 wercker.yml
 ➜  geb.im git:(gh-pages)
-</code></pre><h3 id=配置域名>配置域名</h3>
-<p>找域名服务提供上给自定义域名添加A记录执行github的ip</p>
-<pre tabindex=0><code>192.30.252.153
+</code></pre><h3 id=配置域名>配置域名</h3><p>找域名服务提供上给自定义域名添加A记录执行github的ip</p><pre tabindex=0><code>192.30.252.153
 192.30.252.154
 
 # 利用dig查看设置的A记录是否起效
@@ -516,49 +270,7 @@ geb.im.			82175	IN	NS	f1g1ns1.dnspod.net.
 f1g1ns1.dnspod.net.	64252	IN	A	180.163.19.15
 f1g1ns1.dnspod.net.	64252	IN	A	182.140.167.166
 ...
-</code></pre><h3 id=为wercker配置token>为wercker配置token</h3>
-<ul>
-<li><a href=https://github.com/settings/tokens>生成tokens</a>
-为了在wercer.yaml文件中使用变量而不是直接暴露自己的token</li>
-</ul>
-<h3 id=重置远程分支>重置远程分支</h3>
-<p>删除远程分支；<code>git push original :gh-pages</code></p>
-<p>如果出错，先清理远程分支，再重新同步远程分支</p>
-<h3 id=配置pipeline>配置pipeline</h3>
-<p>在对应的workflow tab页下配置需要的pipeline，然后编辑整个的workflow过程</p>
-<p><a href=https://help.github.com/articles/setting-up-an-apex-domain/>https://help.github.com/articles/setting-up-an-apex-domain/</a></p>
-<p>搭建——应该交配置——好这个网站后一直想总结一下流程，一直拖延到今天。还是跟LP立了军令状之后才动手的:( 这样交差还行吧:)</p>
-<div class="prev-next-post pure-g">
-<div class=pure-u-1-24 style=text-align:left>
-<a href=http://gebitang.com/post/what/no05-invest-read-write/><i class="fa fa-chevron-left"></i></a>
-</div>
-<div class=pure-u-10-24>
-<nav class=prev>
-<a href=http://gebitang.com/post/what/no05-invest-read-write/>Read and Write</a>
-</nav>
-</div>
-<div class=pure-u-2-24>
-&nbsp;
-</div>
-<div class=pure-u-10-24>
-<nav class=next>
-<a href=http://gebitang.com/post/what/book-reading-recorder/>Book Reading Recorder</a>
-</nav>
-</div>
-<div class=pure-u-1-24 style=text-align:right>
-<a href=http://gebitang.com/post/what/book-reading-recorder/><i class="fa fa-chevron-right"></i></a>
-</div>
-</div>
-<div id=disqus_thread></div>
-<script type=text/javascript>(function(){var a,b;if(window.location.hostname=="localhost")return;a=document.createElement('script'),a.type='text/javascript',a.async=!0,b='gebitang',a.src='//'+b+'.disqus.com/embed.js',(document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(a)})()</script>
-<noscript>Please enable JavaScript to view the <a href=http://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript>
-<a href=http://disqus.com/ class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a>
-</div>
-</div>
-</div>
-<script src=http://gebitang.com/js/ui.js></script>
+</code></pre><h3 id=为wercker配置token>为wercker配置token</h3><ul><li><a href=https://github.com/settings/tokens>生成tokens</a>
+为了在wercer.yaml文件中使用变量而不是直接暴露自己的token</li></ul><h3 id=重置远程分支>重置远程分支</h3><p>删除远程分支；<code>git push original :gh-pages</code></p><p>如果出错，先清理远程分支，再重新同步远程分支</p><h3 id=配置pipeline>配置pipeline</h3><p>在对应的workflow tab页下配置需要的pipeline，然后编辑整个的workflow过程</p><p><a href=https://help.github.com/articles/setting-up-an-apex-domain/>https://help.github.com/articles/setting-up-an-apex-domain/</a></p><p>搭建——应该交配置——好这个网站后一直想总结一下流程，一直拖延到今天。还是跟LP立了军令状之后才动手的:( 这样交差还行吧:)</p><div class="prev-next-post pure-g"><div class=pure-u-1-24 style=text-align:left><a href=http://gebitang.com/post/what/no05-invest-read-write/><i class="fa fa-chevron-left"></i></a></div><div class=pure-u-10-24><nav class=prev><a href=http://gebitang.com/post/what/no05-invest-read-write/>Read and Write</a></nav></div><div class=pure-u-2-24>&nbsp;</div><div class=pure-u-10-24><nav class=next><a href=http://gebitang.com/post/what/book-reading-recorder/>Book Reading Recorder</a></nav></div><div class=pure-u-1-24 style=text-align:right><a href=http://gebitang.com/post/what/book-reading-recorder/><i class="fa fa-chevron-right"></i></a></div></div><div id=disqus_thread></div><script type=text/javascript>(function(){if(window.location.hostname=="localhost")return;var e=document.createElement("script"),t;e.type="text/javascript",e.async=!0,t="gebitang",e.src="//"+t+".disqus.com/embed.js",(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(e)})()</script><noscript>Please enable JavaScript to view the <a href=http://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript><a href=http://disqus.com/ class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a></div></div></div><script src=http://gebitang.com/js/ui.js></script>
 <script src=http://gebitang.com/js/menus.js></script>
-<script>window.location.hostname!="localhost"&&(function(a,e,f,g,b,c,d){a.GoogleAnalyticsObject=b,a[b]=a[b]||function(){(a[b].q=a[b].q||[]).push(arguments)},a[b].l=1*new Date,c=e.createElement(f),d=e.getElementsByTagName(f)[0],c.async=1,c.src=g,d.parentNode.insertBefore(c,d)}(window,document,'script','//www.google-analytics.com/analytics.js','ga'),ga('create','UA-34303694-1','auto'),ga('send','pageview'))</script>
-<button onclick=topFunction() id=myBtn title="Go to top">Top</button>
-</body>
-</html>
+<script>window.location.hostname!="localhost"&&(function(e,o,i,a,t,n,s){e.GoogleAnalyticsObject=t,e[t]=e[t]||function(){(e[t].q=e[t].q||[]).push(arguments)},e[t].l=1*new Date,n=o.createElement(i),s=o.getElementsByTagName(i)[0],n.async=1,n.src=a,s.parentNode.insertBefore(n,s)}(window,document,"script","//www.google-analytics.com/analytics.js","ga"),ga("create","UA-34303694-1","auto"),ga("send","pageview"))</script><button onclick=topFunction() id=myBtn title="Go to top">Top</button></body></html>

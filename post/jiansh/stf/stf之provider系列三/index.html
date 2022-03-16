@@ -1,196 +1,52 @@
-<!doctype html><html xmlns:wb=http://open.weibo.com/wb lang=en>
-<head>
-<meta charset=utf-8>
-<meta name=viewport content="width=device-width,initial-scale=1">
-<meta name=description content>
-<meta name=generator content="Hugo 0.92.0">
-<title>STF之Provider系列三 &#183; 戈壁堂</title>
-<link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/pure-min.css><!--[if lte IE 8]><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-old-ie-min.css><![endif]--><!--[if gt IE 8]><!-->
-<link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-min.css><!--<![endif]--><!--[if lte IE 8]><link rel=stylesheet href=http://gebitang.com/css/side-menu-old-ie.css><![endif]--><!--[if gt IE 8]><!-->
-<link rel=stylesheet href=http://gebitang.com/css/side-menu.css><!--<![endif]-->
-<link rel=stylesheet href=http://gebitang.com/css/blackburn.css>
-<link rel=stylesheet href=https://use.fontawesome.com/releases/v5.9.0/css/all.css>
-<link href="https://fonts.googleapis.com/css?family=Raleway" rel=stylesheet type=text/css>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-<link rel=stylesheet href=//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/androidstudio.min.css>
-<script src=//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js></script>
+<!doctype html><html xmlns:wb=http://open.weibo.com/wb lang=en><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content><meta name=generator content="Hugo 0.94.2"><title>STF之Provider系列三 &#183; 戈壁堂</title><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/pure-min.css><!--[if lte IE 8]><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-old-ie-min.css><![endif]--><!--[if gt IE 8]><!--><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-min.css><!--<![endif]--><!--[if lte IE 8]><link rel=stylesheet href=http://gebitang.com/css/side-menu-old-ie.css><![endif]--><!--[if gt IE 8]><!--><link rel=stylesheet href=http://gebitang.com/css/side-menu.css><!--<![endif]--><link rel=stylesheet href=http://gebitang.com/css/blackburn.css><link rel=stylesheet href=https://use.fontawesome.com/releases/v5.9.0/css/all.css><link href="https://fonts.googleapis.com/css?family=Raleway" rel=stylesheet type=text/css><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<link rel=stylesheet href=//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/androidstudio.min.css><script src=//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js></script>
 <script src=//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js></script>
-<script>hljs.initHighlightingOnLoad()</script>
-<link rel="shortcut icon" href=http://gebitang.com/img/favicon.ico type=image/x-icon>
-<link rel=stylesheet href=http://gebitang.com/css/my.css>
-<script src=http://gebitang.com/js/my.js></script>
-</head>
-<body>
-<div id=layout>
-<a href=#menu id=menuLink class=menu-link>
-<span></span>
-</a>
-<div id=menu>
-<a class="pure-menu-heading brand" href=http://gebitang.com/>Gebitang</a>
-<div class=pure-menu>
-<ul class=pure-menu-list>
-<li class=pure-menu-item>
-<a class=pure-menu-link href=http://gebitang.com/><i class="fa fa-home fa-fw"></i>Home</a>
-</li>
-<li class=pure-menu-item>
-<a class=pure-menu-link href=http://gebitang.com/post/><i class="fa fa-list fa-fw"></i>Posts</a>
-</li>
-<li class=pure-menu-item>
-<a class=pure-menu-link href=http://gebitang.com/about/><i class="fa fa-user fa-fw"></i>About</a>
-</li>
-<li class=pure-menu-item>
-<a class=pure-menu-link href=http://gebitang.com/contact/><i class="fa fa-phone fa-fw"></i>Contact</a>
-</li>
-<li class=pure-menu-item>
-<a class=pure-menu-link href=http://gebitang.com/tags/><i class="fa fa-tags fa-fw"></i>Tags</a>
-</li>
-<li class=pure-menu-item>
-<a class=pure-menu-link href=http://gebitang.com/topics/><i class="fa fa-folder fa-fw"></i>Topics</a>
-</li>
-</ul>
-</div>
-<div class="pure-menu social">
-<ul class=pure-menu-list>
-</ul>
-</div>
-<div>
-<div class=small-print>
-<small>
-<a rel=license href=http://creativecommons.org/licenses/by/4.0/><img alt=知识共享许可协议 style=border-width:0 src=https://i.creativecommons.org/l/by/4.0/80x15.png></a><br>本<span xmlns:dct=http://purl.org/dc/terms/ href=http://purl.org/dc/dcmitype/Text rel=dct:type>作品</span>由<a xmlns:cc=http://creativecommons.org/ns# href=http://gebitang.com property="cc:attributionName" rel=cc:attributionurl>&nbsp;Gebitang&nbsp;&nbsp;</a>采用<a rel=license href=http://creativecommons.org/licenses/by/4.0/>知识共享署名 4.0 国际许可协议</a>进行许可&nbsp;&copy; 2018
-</small>
-</div>
-<div class=small-print>
-<small></small>
-</div>
-<div class=small-print>
-<small>Built with&nbsp;<a href=https://gohugo.io/ target=_blank>Hugo</a></small>
-<small>Theme&nbsp;<a href=https://github.com/yoshiharuyamashita/blackburn target=_blank>Blackburn</a></small>
-</div>
-<div style=display:none>
-<div class=small-print>
-<small>
-<wb:follow-button uid=2446212465 type=red_1 width=67 height=24></wb:follow-button>
-</small>
-</div>
-</div>
-</div>
-</div>
-<div id=main>
-<div class=header>
-<h1>STF之Provider系列三</h1>
-<h2></h2>
-</div>
-<div class=content>
-<div class=post-meta>
-<div>
-<i class="fa fa-calendar fa-fw"></i>
-<time>2020-03-07</time>
-</div>
-<div>
-<i class="fa fa-folder fa-fw"></i>
+<script>hljs.initHighlightingOnLoad()</script><link rel="shortcut icon" href=http://gebitang.com/img/favicon.ico type=image/x-icon><link rel=stylesheet href=http://gebitang.com/css/my.css><script src=http://gebitang.com/js/my.js></script></head><body><div id=layout><a href=#menu id=menuLink class=menu-link><span></span></a><div id=menu><a class="pure-menu-heading brand" href=http://gebitang.com/>Gebitang</a><div class=pure-menu><ul class=pure-menu-list><li class=pure-menu-item><a class=pure-menu-link href=http://gebitang.com/><i class="fa fa-home fa-fw"></i>Home</a></li><li class=pure-menu-item><a class=pure-menu-link href=http://gebitang.com/post/><i class="fa fa-list fa-fw"></i>Posts</a></li><li class=pure-menu-item><a class=pure-menu-link href=http://gebitang.com/about/><i class="fa fa-user fa-fw"></i>About</a></li><li class=pure-menu-item><a class=pure-menu-link href=http://gebitang.com/contact/><i class="fa fa-phone fa-fw"></i>Contact</a></li><li class=pure-menu-item><a class=pure-menu-link href=http://gebitang.com/tags/><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class=pure-menu-item><a class=pure-menu-link href=http://gebitang.com/topics/><i class="fa fa-folder fa-fw"></i>Topics</a></li></ul></div><div class="pure-menu social"><ul class=pure-menu-list></ul></div><div><div class=small-print><small><a rel=license href=http://creativecommons.org/licenses/by/4.0/><img alt=知识共享许可协议 style=border-width:0 src=https://i.creativecommons.org/l/by/4.0/80x15.png></a><br>本<span xmlns:dct=http://purl.org/dc/terms/ href=http://purl.org/dc/dcmitype/Text rel=dct:type>作品</span>由<a xmlns:cc=http://creativecommons.org/ns# href=http://gebitang.com property="cc:attributionName" rel=cc:attributionurl>&nbsp;Gebitang&nbsp;&nbsp;</a>采用<a rel=license href=http://creativecommons.org/licenses/by/4.0/>知识共享署名 4.0 国际许可协议</a>进行许可&nbsp;&copy; 2018</small></div><div class=small-print><small></small></div><div class=small-print><small>Built with&nbsp;<a href=https://gohugo.io/ target=_blank>Hugo</a></small>
+<small>Theme&nbsp;<a href=https://github.com/yoshiharuyamashita/blackburn target=_blank>Blackburn</a></small></div><div style=display:none><div class=small-print><small><wb:follow-button uid=2446212465 type=red_1 width=67 height=24></wb:follow-button></small></div></div></div></div><div id=main><div class=header><h1>STF之Provider系列三</h1><h2></h2></div><div class=content><div class=post-meta><div><i class="fa fa-calendar fa-fw"></i>
+<time>2020-03-07</time></div><div><i class="fa fa-folder fa-fw"></i>
 <a class=post-taxonomy-topic href=http://gebitang.com/topics/jiansh>jiansh</a>&nbsp;/
-<a class=post-taxonomy-topic href=http://gebitang.com/topics/stf>STF</a>
-</div>
-<div>
-<i class="fa fa-tags fa-fw"></i>
-<a class=post-taxonomy-tag href=http://gebitang.com/tags/jiansh>jiansh</a>
-</div>
-</div>
-<nav id=TableOfContents>
-<ul>
-<li>
-<ul>
-<li><a href=#websocket的连接问题还没有解决>websocket的连接问题还没有解决。</a></li>
-</ul>
-</li>
-</ul>
-</nav>
-<p><a href=https://www.jianshu.com/p/c956e0ca5163>link on JianShu</a></p>
-<h3 id=websocket的连接问题还没有解决>websocket的连接问题<del>还没有</del>解决。</h3>
-<p>昨天出现的现象是连接设备时，图像连接到了“其他”设备上。 ——今天定位到是因为独立到provider提供设备时，分配到ws连接地址与也有设备重复。</p>
-<p>并没有一个沟通机制决定当前provider到设备端口应该如何分配，需要指定起始大小</p>
-<pre tabindex=0><code># 根据已有设备数量进行调整min-port到指，每个设备占据4个端口
+<a class=post-taxonomy-topic href=http://gebitang.com/topics/stf>STF</a></div><div><i class="fa fa-tags fa-fw"></i>
+<a class=post-taxonomy-tag href=http://gebitang.com/tags/jiansh>jiansh</a></div></div><nav id=TableOfContents><ul><li><ul><li><a href=#websocket的连接问题还没有解决>websocket的连接问题还没有解决。</a></li></ul></li></ul></nav><p><a href=https://www.jianshu.com/p/c956e0ca5163>link on JianShu</a></p><h3 id=websocket的连接问题还没有解决>websocket的连接问题<del>还没有</del>解决。</h3><p>昨天出现的现象是连接设备时，图像连接到了“其他”设备上。 ——今天定位到是因为独立到provider提供设备时，分配到ws连接地址与也有设备重复。</p><p>并没有一个沟通机制决定当前provider到设备端口应该如何分配，需要指定起始大小</p><pre tabindex=0><code># 根据已有设备数量进行调整min-port到指，每个设备占据4个端口
 --min-port 7416 --max-port 7700 
-</code></pre><p>这样可以保证分配的端口是正确的——</p>
-<pre tabindex=0><code># r.db('stf').table('devices').withFields('serial', 'display','manufacturer') 
+</code></pre><p>这样可以保证分配的端口是正确的——</p><pre tabindex=0><code># r.db(&#39;stf&#39;).table(&#39;devices&#39;).withFields(&#39;serial&#39;, &#39;display&#39;,&#39;manufacturer&#39;) 
 {
 
-    &quot;display&quot;: {
-        &quot;density&quot;: 3 ,
-        &quot;fps&quot;: 60.000003814697266 ,
-        &quot;height&quot;: 1920 ,
-        &quot;id&quot;: 0 ,
-        &quot;rotation&quot;: 0 ,
-        &quot;secure&quot;: true ,
-        &quot;size&quot;: 5.147105693817139 ,
-        &quot;url&quot;: &quot;ws://test.stf.com:7416&quot; ,
-        &quot;width&quot;: 1080 ,
-        &quot;xdpi&quot;: 428.625 ,
-        &quot;ydpi&quot;: 427.78900146484375
+    &#34;display&#34;: {
+        &#34;density&#34;: 3 ,
+        &#34;fps&#34;: 60.000003814697266 ,
+        &#34;height&#34;: 1920 ,
+        &#34;id&#34;: 0 ,
+        &#34;rotation&#34;: 0 ,
+        &#34;secure&#34;: true ,
+        &#34;size&#34;: 5.147105693817139 ,
+        &#34;url&#34;: &#34;ws://test.stf.com:7416&#34; ,
+        &#34;width&#34;: 1080 ,
+        &#34;xdpi&#34;: 428.625 ,
+        &#34;ydpi&#34;: 427.78900146484375
     } ,
-    &quot;manufacturer&quot;: &quot;XIAOMI&quot; ,
-    &quot;serial&quot;: &quot;7bf567ed&quot;
+    &#34;manufacturer&#34;: &#34;XIAOMI&#34; ,
+    &#34;serial&#34;: &#34;7bf567ed&#34;
 
 }
 {
 
-    &quot;display&quot;: {
-        &quot;density&quot;: 2.75 ,
-        &quot;fps&quot;: 60.000003814697266 ,
-        &quot;height&quot;: 1920 ,
-        &quot;id&quot;: 0 ,
-        &quot;rotation&quot;: 0 ,
-        &quot;secure&quot;: true ,
-        &quot;size&quot;: 6.416727542877197 ,
-        &quot;url&quot;: &quot;ws://test.stf.com:7408&quot; ,
-        &quot;width&quot;: 1080 ,
-        &quot;xdpi&quot;: 342.8999938964844 ,
-        &quot;ydpi&quot;: 343.4360046386719
+    &#34;display&#34;: {
+        &#34;density&#34;: 2.75 ,
+        &#34;fps&#34;: 60.000003814697266 ,
+        &#34;height&#34;: 1920 ,
+        &#34;id&#34;: 0 ,
+        &#34;rotation&#34;: 0 ,
+        &#34;secure&#34;: true ,
+        &#34;size&#34;: 6.416727542877197 ,
+        &#34;url&#34;: &#34;ws://test.stf.com:7408&#34; ,
+        &#34;width&#34;: 1080 ,
+        &#34;xdpi&#34;: 342.8999938964844 ,
+        &#34;ydpi&#34;: 343.4360046386719
     } ,
-    &quot;manufacturer&quot;: &quot;XIAOMI&quot; ,
-    &quot;serial&quot;: &quot;5cc1d6ae&quot;
+    &#34;manufacturer&#34;: &#34;XIAOMI&#34; ,
+    &#34;serial&#34;: &#34;5cc1d6ae&#34;
 
 } 
-</code></pre><p>但这样独立但provider提供的设备出现 无法建立websock连接的问题： <code>Firefox can’t establish a connection to the server at ws://test.stf.com:7416/.</code></p>
-<p>这个端口实际上是远程的provider设备提供的服务；对应的主站上当然没有这个服务。</p>
-<p>不经过转发显然是无法连接。STF是如何处理这个场景的？还是我哪里没有设置正确？</p>
-<p>这块相关的代码一直还没定位到- -||</p>
-<hr>
-<p>provider的启动参数里到 &ndash;public-ip 针对的是 <a href=https://github.com/openstf/stf/issues/84#issuecomment-141104579>当前provider的ip</a></p>
-<blockquote>
-<p>even though the option is called &ndash;public-ip, it actually means &ldquo;public within your network&rdquo; (i.e. an internal IP all of your users are able to access).</p>
-</blockquote>
-<div class="prev-next-post pure-g">
-<div class=pure-u-1-24 style=text-align:left>
-<a href=http://gebitang.com/post/jiansh/stf/stf%E4%B9%8Bprovider%E7%B3%BB%E5%88%97%E4%BA%8C/><i class="fa fa-chevron-left"></i></a>
-</div>
-<div class=pure-u-10-24>
-<nav class=prev>
-<a href=http://gebitang.com/post/jiansh/stf/stf%E4%B9%8Bprovider%E7%B3%BB%E5%88%97%E4%BA%8C/>STF之Provider系列二</a>
-</nav>
-</div>
-<div class=pure-u-2-24>
-&nbsp;
-</div>
-<div class=pure-u-10-24>
-<nav class=next>
-<a href=http://gebitang.com/post/jiansh/stf/stf%E4%B9%8Bprovider%E7%B3%BB%E5%88%97%E4%B8%83%E8%AE%BE%E5%A4%87%E5%85%B1%E4%BA%AB%E4%B8%8E%E8%BF%87%E6%BB%A4/>STF之Provider系列七：设备共享与过滤</a>
-</nav>
-</div>
-<div class=pure-u-1-24 style=text-align:right>
-<a href=http://gebitang.com/post/jiansh/stf/stf%E4%B9%8Bprovider%E7%B3%BB%E5%88%97%E4%B8%83%E8%AE%BE%E5%A4%87%E5%85%B1%E4%BA%AB%E4%B8%8E%E8%BF%87%E6%BB%A4/><i class="fa fa-chevron-right"></i></a>
-</div>
-</div>
-<div id=disqus_thread></div>
-<script type=text/javascript>(function(){var a,b;if(window.location.hostname=="localhost")return;a=document.createElement('script'),a.type='text/javascript',a.async=!0,b='gebitang',a.src='//'+b+'.disqus.com/embed.js',(document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(a)})()</script>
-<noscript>Please enable JavaScript to view the <a href=http://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript>
-<a href=http://disqus.com/ class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a>
-</div>
-</div>
-</div>
-<script src=http://gebitang.com/js/ui.js></script>
+</code></pre><p>但这样独立但provider提供的设备出现 无法建立websock连接的问题： <code>Firefox can’t establish a connection to the server at ws://test.stf.com:7416/.</code></p><p>这个端口实际上是远程的provider设备提供的服务；对应的主站上当然没有这个服务。</p><p>不经过转发显然是无法连接。STF是如何处理这个场景的？还是我哪里没有设置正确？</p><p>这块相关的代码一直还没定位到- -||</p><hr><p>provider的启动参数里到 &ndash;public-ip 针对的是 <a href=https://github.com/openstf/stf/issues/84#issuecomment-141104579>当前provider的ip</a></p><blockquote><p>even though the option is called &ndash;public-ip, it actually means &ldquo;public within your network&rdquo; (i.e. an internal IP all of your users are able to access).</p></blockquote><div class="prev-next-post pure-g"><div class=pure-u-1-24 style=text-align:left><a href=http://gebitang.com/post/jiansh/stf/stf%E4%B9%8Bprovider%E7%B3%BB%E5%88%97%E4%BA%8C/><i class="fa fa-chevron-left"></i></a></div><div class=pure-u-10-24><nav class=prev><a href=http://gebitang.com/post/jiansh/stf/stf%E4%B9%8Bprovider%E7%B3%BB%E5%88%97%E4%BA%8C/>STF之Provider系列二</a></nav></div><div class=pure-u-2-24>&nbsp;</div><div class=pure-u-10-24><nav class=next><a href=http://gebitang.com/post/jiansh/stf/stf%E4%B9%8Bprovider%E7%B3%BB%E5%88%97%E4%B8%83%E8%AE%BE%E5%A4%87%E5%85%B1%E4%BA%AB%E4%B8%8E%E8%BF%87%E6%BB%A4/>STF之Provider系列七：设备共享与过滤</a></nav></div><div class=pure-u-1-24 style=text-align:right><a href=http://gebitang.com/post/jiansh/stf/stf%E4%B9%8Bprovider%E7%B3%BB%E5%88%97%E4%B8%83%E8%AE%BE%E5%A4%87%E5%85%B1%E4%BA%AB%E4%B8%8E%E8%BF%87%E6%BB%A4/><i class="fa fa-chevron-right"></i></a></div></div><div id=disqus_thread></div><script type=text/javascript>(function(){if(window.location.hostname=="localhost")return;var e=document.createElement("script"),t;e.type="text/javascript",e.async=!0,t="gebitang",e.src="//"+t+".disqus.com/embed.js",(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(e)})()</script><noscript>Please enable JavaScript to view the <a href=http://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript><a href=http://disqus.com/ class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a></div></div></div><script src=http://gebitang.com/js/ui.js></script>
 <script src=http://gebitang.com/js/menus.js></script>
-<script>window.location.hostname!="localhost"&&(function(a,e,f,g,b,c,d){a.GoogleAnalyticsObject=b,a[b]=a[b]||function(){(a[b].q=a[b].q||[]).push(arguments)},a[b].l=1*new Date,c=e.createElement(f),d=e.getElementsByTagName(f)[0],c.async=1,c.src=g,d.parentNode.insertBefore(c,d)}(window,document,'script','//www.google-analytics.com/analytics.js','ga'),ga('create','UA-34303694-1','auto'),ga('send','pageview'))</script>
-<button onclick=topFunction() id=myBtn title="Go to top">Top</button>
-</body>
-</html>
+<script>window.location.hostname!="localhost"&&(function(e,o,i,a,t,n,s){e.GoogleAnalyticsObject=t,e[t]=e[t]||function(){(e[t].q=e[t].q||[]).push(arguments)},e[t].l=1*new Date,n=o.createElement(i),s=o.getElementsByTagName(i)[0],n.async=1,n.src=a,s.parentNode.insertBefore(n,s)}(window,document,"script","//www.google-analytics.com/analytics.js","ga"),ga("create","UA-34303694-1","auto"),ga("send","pageview"))</script><button onclick=topFunction() id=myBtn title="Go to top">Top</button></body></html>

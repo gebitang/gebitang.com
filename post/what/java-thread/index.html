@@ -1,106 +1,11 @@
-<!doctype html><html xmlns:wb=http://open.weibo.com/wb lang=en>
-<head>
-<meta charset=utf-8>
-<meta name=viewport content="width=device-width,initial-scale=1">
-<meta name=description content="2nd Edition and 3rd Edition">
-<meta name=generator content="Hugo 0.92.0">
-<title>Java Thread &#183; 戈壁堂</title>
-<link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/pure-min.css><!--[if lte IE 8]><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-old-ie-min.css><![endif]--><!--[if gt IE 8]><!-->
-<link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-min.css><!--<![endif]--><!--[if lte IE 8]><link rel=stylesheet href=http://gebitang.com/css/side-menu-old-ie.css><![endif]--><!--[if gt IE 8]><!-->
-<link rel=stylesheet href=http://gebitang.com/css/side-menu.css><!--<![endif]-->
-<link rel=stylesheet href=http://gebitang.com/css/blackburn.css>
-<link rel=stylesheet href=https://use.fontawesome.com/releases/v5.9.0/css/all.css>
-<link href="https://fonts.googleapis.com/css?family=Raleway" rel=stylesheet type=text/css>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-<link rel=stylesheet href=//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/androidstudio.min.css>
-<script src=//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js></script>
+<!doctype html><html xmlns:wb=http://open.weibo.com/wb lang=en><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="2nd Edition and 3rd Edition"><meta name=generator content="Hugo 0.94.2"><title>Java Thread &#183; 戈壁堂</title><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/pure-min.css><!--[if lte IE 8]><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-old-ie-min.css><![endif]--><!--[if gt IE 8]><!--><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-min.css><!--<![endif]--><!--[if lte IE 8]><link rel=stylesheet href=http://gebitang.com/css/side-menu-old-ie.css><![endif]--><!--[if gt IE 8]><!--><link rel=stylesheet href=http://gebitang.com/css/side-menu.css><!--<![endif]--><link rel=stylesheet href=http://gebitang.com/css/blackburn.css><link rel=stylesheet href=https://use.fontawesome.com/releases/v5.9.0/css/all.css><link href="https://fonts.googleapis.com/css?family=Raleway" rel=stylesheet type=text/css><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<link rel=stylesheet href=//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/androidstudio.min.css><script src=//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js></script>
 <script src=//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js></script>
-<script>hljs.initHighlightingOnLoad()</script>
-<link rel="shortcut icon" href=http://gebitang.com/img/favicon.ico type=image/x-icon>
-<link rel=stylesheet href=http://gebitang.com/css/my.css>
-<script src=http://gebitang.com/js/my.js></script>
-</head>
-<body>
-<div id=layout>
-<a href=#menu id=menuLink class=menu-link>
-<span></span>
-</a>
-<div id=menu>
-<a class="pure-menu-heading brand" href=http://gebitang.com/>Gebitang</a>
-<div class=pure-menu>
-<ul class=pure-menu-list>
-<li class=pure-menu-item>
-<a class=pure-menu-link href=http://gebitang.com/><i class="fa fa-home fa-fw"></i>Home</a>
-</li>
-<li class=pure-menu-item>
-<a class=pure-menu-link href=http://gebitang.com/post/><i class="fa fa-list fa-fw"></i>Posts</a>
-</li>
-<li class=pure-menu-item>
-<a class=pure-menu-link href=http://gebitang.com/about/><i class="fa fa-user fa-fw"></i>About</a>
-</li>
-<li class=pure-menu-item>
-<a class=pure-menu-link href=http://gebitang.com/contact/><i class="fa fa-phone fa-fw"></i>Contact</a>
-</li>
-<li class=pure-menu-item>
-<a class=pure-menu-link href=http://gebitang.com/tags/><i class="fa fa-tags fa-fw"></i>Tags</a>
-</li>
-<li class=pure-menu-item>
-<a class=pure-menu-link href=http://gebitang.com/topics/><i class="fa fa-folder fa-fw"></i>Topics</a>
-</li>
-</ul>
-</div>
-<div class="pure-menu social">
-<ul class=pure-menu-list>
-</ul>
-</div>
-<div>
-<div class=small-print>
-<small>
-<a rel=license href=http://creativecommons.org/licenses/by/4.0/><img alt=知识共享许可协议 style=border-width:0 src=https://i.creativecommons.org/l/by/4.0/80x15.png></a><br>本<span xmlns:dct=http://purl.org/dc/terms/ href=http://purl.org/dc/dcmitype/Text rel=dct:type>作品</span>由<a xmlns:cc=http://creativecommons.org/ns# href=http://gebitang.com property="cc:attributionName" rel=cc:attributionurl>&nbsp;Gebitang&nbsp;&nbsp;</a>采用<a rel=license href=http://creativecommons.org/licenses/by/4.0/>知识共享署名 4.0 国际许可协议</a>进行许可&nbsp;&copy; 2018
-</small>
-</div>
-<div class=small-print>
-<small></small>
-</div>
-<div class=small-print>
-<small>Built with&nbsp;<a href=https://gohugo.io/ target=_blank>Hugo</a></small>
-<small>Theme&nbsp;<a href=https://github.com/yoshiharuyamashita/blackburn target=_blank>Blackburn</a></small>
-</div>
-<div style=display:none>
-<div class=small-print>
-<small>
-<wb:follow-button uid=2446212465 type=red_1 width=67 height=24></wb:follow-button>
-</small>
-</div>
-</div>
-</div>
-</div>
-<div id=main>
-<div class=header>
-<h1>Java Thread</h1>
-<h2>2nd Edition and 3rd Edition</h2>
-</div>
-<div class=content>
-<div class=post-meta>
-<div>
-<i class="fa fa-calendar fa-fw"></i>
-<time>2021-04-25</time>
-</div>
-<div>
-<i class="fa fa-folder fa-fw"></i>
-<a class=post-taxonomy-topic href=http://gebitang.com/topics/java>java</a>
-</div>
-<div>
-<i class="fa fa-tags fa-fw"></i>
-<a class=post-taxonomy-tag href=http://gebitang.com/tags/java>java</a>
-</div>
-</div>
-<nav id=TableOfContents></nav>
-<p><a href=https://2lib.org/book/490277/32b999>第二版，1999年</a>、<a href=https://2lib.org/book/11045353/7ad5ea>第三版，2004年</a>，可对照看。</p>
-<p>一个类中的多个<code>synchronized</code>的方法：针对当前对象，同一时间多个线程只能执行其中的一个<code>synchronized</code>的方法。因为锁是针对对象的，并且每个对象只有一个锁token。</p>
-<p>静态方法的<code>synchronized</code>同步锁被称为<code>class lock</code>(只是一种概念，实际上加锁的是一个静态对象？)：静态方法中传入实例对象引用，依然可以继续调用对应实例的同步方法。因为这是两把不同的锁。</p>
-<p>第一版本BusyFlag——</p>
-<pre tabindex=0><code>public class BusyFlag {
+<script>hljs.initHighlightingOnLoad()</script><link rel="shortcut icon" href=http://gebitang.com/img/favicon.ico type=image/x-icon><link rel=stylesheet href=http://gebitang.com/css/my.css><script src=http://gebitang.com/js/my.js></script></head><body><div id=layout><a href=#menu id=menuLink class=menu-link><span></span></a><div id=menu><a class="pure-menu-heading brand" href=http://gebitang.com/>Gebitang</a><div class=pure-menu><ul class=pure-menu-list><li class=pure-menu-item><a class=pure-menu-link href=http://gebitang.com/><i class="fa fa-home fa-fw"></i>Home</a></li><li class=pure-menu-item><a class=pure-menu-link href=http://gebitang.com/post/><i class="fa fa-list fa-fw"></i>Posts</a></li><li class=pure-menu-item><a class=pure-menu-link href=http://gebitang.com/about/><i class="fa fa-user fa-fw"></i>About</a></li><li class=pure-menu-item><a class=pure-menu-link href=http://gebitang.com/contact/><i class="fa fa-phone fa-fw"></i>Contact</a></li><li class=pure-menu-item><a class=pure-menu-link href=http://gebitang.com/tags/><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class=pure-menu-item><a class=pure-menu-link href=http://gebitang.com/topics/><i class="fa fa-folder fa-fw"></i>Topics</a></li></ul></div><div class="pure-menu social"><ul class=pure-menu-list></ul></div><div><div class=small-print><small><a rel=license href=http://creativecommons.org/licenses/by/4.0/><img alt=知识共享许可协议 style=border-width:0 src=https://i.creativecommons.org/l/by/4.0/80x15.png></a><br>本<span xmlns:dct=http://purl.org/dc/terms/ href=http://purl.org/dc/dcmitype/Text rel=dct:type>作品</span>由<a xmlns:cc=http://creativecommons.org/ns# href=http://gebitang.com property="cc:attributionName" rel=cc:attributionurl>&nbsp;Gebitang&nbsp;&nbsp;</a>采用<a rel=license href=http://creativecommons.org/licenses/by/4.0/>知识共享署名 4.0 国际许可协议</a>进行许可&nbsp;&copy; 2018</small></div><div class=small-print><small></small></div><div class=small-print><small>Built with&nbsp;<a href=https://gohugo.io/ target=_blank>Hugo</a></small>
+<small>Theme&nbsp;<a href=https://github.com/yoshiharuyamashita/blackburn target=_blank>Blackburn</a></small></div><div style=display:none><div class=small-print><small><wb:follow-button uid=2446212465 type=red_1 width=67 height=24></wb:follow-button></small></div></div></div></div><div id=main><div class=header><h1>Java Thread</h1><h2>2nd Edition and 3rd Edition</h2></div><div class=content><div class=post-meta><div><i class="fa fa-calendar fa-fw"></i>
+<time>2021-04-25</time></div><div><i class="fa fa-folder fa-fw"></i>
+<a class=post-taxonomy-topic href=http://gebitang.com/topics/java>java</a></div><div><i class="fa fa-tags fa-fw"></i>
+<a class=post-taxonomy-tag href=http://gebitang.com/tags/java>java</a></div></div><nav id=TableOfContents></nav><p><a href=https://2lib.org/book/490277/32b999>第二版，1999年</a>、<a href=https://2lib.org/book/11045353/7ad5ea>第三版，2004年</a>，可对照看。</p><p>一个类中的多个<code>synchronized</code>的方法：针对当前对象，同一时间多个线程只能执行其中的一个<code>synchronized</code>的方法。因为锁是针对对象的，并且每个对象只有一个锁token。</p><p>静态方法的<code>synchronized</code>同步锁被称为<code>class lock</code>(只是一种概念，实际上加锁的是一个静态对象？)：静态方法中传入实例对象引用，依然可以继续调用对应实例的同步方法。因为这是两把不同的锁。</p><p>第一版本BusyFlag——</p><pre tabindex=0><code>public class BusyFlag {
 
     protected Thread busyflag = null;
     protected int busycount = 0;
@@ -136,16 +41,8 @@
         return busyflag;
     }
 }
-</code></pre><ul>
-<li><code>synchronized</code>关键字可以赋予整个方法，也可以赋予代码块——使用哪种方式取决于个人选择，只要避免死锁问题即可</li>
-<li><code>freeBusyFlag()</code>方法和<code>getBusyFlagOwner()</code>方法都添加了<code>synchronized</code>关键字；并且前者方法体中还调用了后者。</li>
-</ul>
-<blockquote>
-<p>这种情况并不会造成死锁(后者不需要等待前者释放锁之后再执行)。实际上，如果当前线程已经获取了锁，是不需要在等待锁被释放，然后再去获取一次。所以从<code>freeBusyFlag()</code>方法中调用<code>getBusyFlagOwner()</code>方法没有问题。
-引申含义是，如果开始执行同步方法时没有进行获取锁的操作的话，执行完同步方法也就不存在释放锁的动作。</p>
-</blockquote>
-<p>上述版本中使用<code>sleep</code>方法进行等待，造成了CPU的浪费。使用<code>wait()</code>和<code>notify()</code>机制优化如下——</p>
-<pre tabindex=0><code>public class BusyFlag {
+</code></pre><ul><li><code>synchronized</code>关键字可以赋予整个方法，也可以赋予代码块——使用哪种方式取决于个人选择，只要避免死锁问题即可</li><li><code>freeBusyFlag()</code>方法和<code>getBusyFlagOwner()</code>方法都添加了<code>synchronized</code>关键字；并且前者方法体中还调用了后者。</li></ul><blockquote><p>这种情况并不会造成死锁(后者不需要等待前者释放锁之后再执行)。实际上，如果当前线程已经获取了锁，是不需要在等待锁被释放，然后再去获取一次。所以从<code>freeBusyFlag()</code>方法中调用<code>getBusyFlagOwner()</code>方法没有问题。
+引申含义是，如果开始执行同步方法时没有进行获取锁的操作的话，执行完同步方法也就不存在释放锁的动作。</p></blockquote><p>上述版本中使用<code>sleep</code>方法进行等待，造成了CPU的浪费。使用<code>wait()</code>和<code>notify()</code>机制优化如下——</p><pre tabindex=0><code>public class BusyFlag {
 
     protected Thread busyflag = null;
     protected int busycount = 0;
@@ -185,17 +82,7 @@
         return busyflag;
     }
 }
-
-</code></pre><ul>
-<li><code>getBusyFlagOwner()</code>方法也添加了同步操作，因为<code>wait()</code>方法必须在同步方法中调用</li>
-<li><code>wait()</code>和<code>notify()</code>方法都必须要在同步方法中调用(或使用相同锁对象的同步代码块)。前者表示“需要等待某个条件发生”；后者表示“等待的条件已经发生”</li>
-<li><code>wait()</code>在同步方法中调用，似乎永远占据了对象锁，导致其他同步方法无法执行。实际上，在执行<code>wait()</code>前，将释放锁，然后进入wait状态；条件满足后(<code>notify()</code>调用后，)<code>wait</code>方法返回前，重新获取到对象锁。</li>
-<li>实际上，Java并没有提供获取锁、释放锁的API，<code>wait()</code>方法是本地方法，与同步操作紧密结合。这样从外部看，似乎是<code>wait()</code>方法一直占据着锁</li>
-<li>如果<code>notify()</code>方法调用时，没有<code>wait()</code>方法调用，立即返回即可，不会有副作用</li>
-</ul>
-<p>在内部实现上，<code>wait()</code>和<code>notify()</code>通常都是通过控制变量来实现的。所以这要求对这两个方法的调用需要加锁，确保内部对变量的操作是原子的。</p>
-<p>另外需要注意的是<code>getBusyFlag()</code>方法需要在循环中进行检查，如果采用如下方式，<code>wait()</code>结束后直接进行获取，依然可能无法得到flag——</p>
-<pre tabindex=0><code>public synchronized void  getBusyFlag() {
+</code></pre><ul><li><code>getBusyFlagOwner()</code>方法也添加了同步操作，因为<code>wait()</code>方法必须在同步方法中调用</li><li><code>wait()</code>和<code>notify()</code>方法都必须要在同步方法中调用(或使用相同锁对象的同步代码块)。前者表示“需要等待某个条件发生”；后者表示“等待的条件已经发生”</li><li><code>wait()</code>在同步方法中调用，似乎永远占据了对象锁，导致其他同步方法无法执行。实际上，在执行<code>wait()</code>前，将释放锁，然后进入wait状态；条件满足后(<code>notify()</code>调用后，)<code>wait</code>方法返回前，重新获取到对象锁。</li><li>实际上，Java并没有提供获取锁、释放锁的API，<code>wait()</code>方法是本地方法，与同步操作紧密结合。这样从外部看，似乎是<code>wait()</code>方法一直占据着锁</li><li>如果<code>notify()</code>方法调用时，没有<code>wait()</code>方法调用，立即返回即可，不会有副作用</li></ul><p>在内部实现上，<code>wait()</code>和<code>notify()</code>通常都是通过控制变量来实现的。所以这要求对这两个方法的调用需要加锁，确保内部对变量的操作是原子的。</p><p>另外需要注意的是<code>getBusyFlag()</code>方法需要在循环中进行检查，如果采用如下方式，<code>wait()</code>结束后直接进行获取，依然可能无法得到flag——</p><pre tabindex=0><code>public synchronized void  getBusyFlag() {
     if (!tryGetBusyFlag()) {
         try {
             wait();
@@ -203,20 +90,7 @@
         } catch (Exception e) {}
     }
 }
-</code></pre><ol>
-<li>第一个线程获取到<code>busyflag</code></li>
-<li>第二个线程调用<code>tryGetBusyFlag()</code>：返回false</li>
-<li>第二个线程执行<code>wait()</code>方法：释放同步锁</li>
-<li>第一个线程进入<code>freeBusyFlag()</code>方法：获取到同步锁</li>
-<li>第一个线程调用<code>notify()</code>方法</li>
-<li>第三个线程尝试调用<code>getBusyFlag()</code>方法，等待获取到锁对象</li>
-<li>第一个线程退出<code>freeBusyFlag()</code>方法，释放了锁对象</li>
-<li>第三个线程获取到锁对象，进入<code>getBusyFlag()</code>方法。此时busyflag被释放，这第三线程获取到busgflag并退出<code>getBusyFlag()</code>方法，同时释放锁</li>
-<li>第二个线程收到了来自第一个线程的<code>notify</code>的通知，从<code>wait()</code>方法返回并获取到同步锁</li>
-<li>第二个线程再次调用<code>tryGetBusyFlag()</code>方法，busgflag被占有，再次进入<code>wait</code>状态——如果采用上面的实现，这一步实际上无法获取到busyflag</li>
-</ol>
-<p>利用锁对象的同步块例子——</p>
-<pre tabindex=0><code>public class ExampleBlockLock {
+</code></pre><ol><li>第一个线程获取到<code>busyflag</code></li><li>第二个线程调用<code>tryGetBusyFlag()</code>：返回false</li><li>第二个线程执行<code>wait()</code>方法：释放同步锁</li><li>第一个线程进入<code>freeBusyFlag()</code>方法：获取到同步锁</li><li>第一个线程调用<code>notify()</code>方法</li><li>第三个线程尝试调用<code>getBusyFlag()</code>方法，等待获取到锁对象</li><li>第一个线程退出<code>freeBusyFlag()</code>方法，释放了锁对象</li><li>第三个线程获取到锁对象，进入<code>getBusyFlag()</code>方法。此时busyflag被释放，这第三线程获取到busgflag并退出<code>getBusyFlag()</code>方法，同时释放锁</li><li>第二个线程收到了来自第一个线程的<code>notify</code>的通知，从<code>wait()</code>方法返回并获取到同步锁</li><li>第二个线程再次调用<code>tryGetBusyFlag()</code>方法，busgflag被占有，再次进入<code>wait</code>状态——如果采用上面的实现，这一步实际上无法获取到busyflag</li></ol><p>利用锁对象的同步块例子——</p><pre tabindex=0><code>public class ExampleBlockLock {
     private StringBuffer sb = new StringBuffer();
     public void getLock() {
         doSomething(sb);
@@ -233,17 +107,7 @@
         }
     }
 }
-</code></pre><hr>
-<p>假设有多个线程都处于<code>wait()</code>状态。</p>
-<p><code>notify()</code>是无法知道<strong>应该</strong>通知哪一个线程。所以可以调用<code>notifyAll()</code>，所有的等待线程都会收到通知。</p>
-<p>但并不是所有的等待线程都并行执行。因为从wait()状态返回后，还是要重新获取到对象锁才能继续执行，然后每个线程可以根据自己的情况判断：是继续执行；还是需要再次进入等待状态。</p>
-<p>这样有个好处是：</p>
-<ul>
-<li>系统释放的资源可能无法满足某一个wait的线程；但可能满足另外一个wait的线程</li>
-<li>甚至：释放的总资源，可能满足多个wait的线程（这需要程序员设计机制来进行资源分配，例如优先让需要资源较小的线程收到通知后继续执行）</li>
-</ul>
-<p>如果需要“精确”控制哪一个线程接收到通知，可以设计一个类似如下的类——</p>
-<pre tabindex=0><code>public class TargetNotify {
+</code></pre><hr><p>假设有多个线程都处于<code>wait()</code>状态。</p><p><code>notify()</code>是无法知道<strong>应该</strong>通知哪一个线程。所以可以调用<code>notifyAll()</code>，所有的等待线程都会收到通知。</p><p>但并不是所有的等待线程都并行执行。因为从wait()状态返回后，还是要重新获取到对象锁才能继续执行，然后每个线程可以根据自己的情况判断：是继续执行；还是需要再次进入等待状态。</p><p>这样有个好处是：</p><ul><li>系统释放的资源可能无法满足某一个wait的线程；但可能满足另外一个wait的线程</li><li>甚至：释放的总资源，可能满足多个wait的线程（这需要程序员设计机制来进行资源分配，例如优先让需要资源较小的线程收到通知后继续执行）</li></ul><p>如果需要“精确”控制哪一个线程接收到通知，可以设计一个类似如下的类——</p><pre tabindex=0><code>public class TargetNotify {
     private Object Targets[] = null;
     public TargetNotify (int numberOfTargets) {
         Targets = new Object[numberOfTargets];
@@ -264,38 +128,6 @@
         }
     }
 }
-</code></pre>
-<div class="prev-next-post pure-g">
-<div class=pure-u-1-24 style=text-align:left>
-<a href=http://gebitang.com/post/jiansh/bb/%E4%B8%80%E5%8A%A0%E4%B8%80%E5%88%B7%E6%9C%BA%E5%B0%8F%E7%8E%8B%E5%AD%90/><i class="fa fa-chevron-left"></i></a>
-</div>
-<div class=pure-u-10-24>
-<nav class=prev>
-<a href=http://gebitang.com/post/jiansh/bb/%E4%B8%80%E5%8A%A0%E4%B8%80%E5%88%B7%E6%9C%BA%E5%B0%8F%E7%8E%8B%E5%AD%90/>一加一刷机小王子</a>
-</nav>
-</div>
-<div class=pure-u-2-24>
-&nbsp;
-</div>
-<div class=pure-u-10-24>
-<nav class=next>
-<a href=http://gebitang.com/post/2021/march-and-april/>March and April Run</a>
-</nav>
-</div>
-<div class=pure-u-1-24 style=text-align:right>
-<a href=http://gebitang.com/post/2021/march-and-april/><i class="fa fa-chevron-right"></i></a>
-</div>
-</div>
-<div id=disqus_thread></div>
-<script type=text/javascript>(function(){var a,b;if(window.location.hostname=="localhost")return;a=document.createElement('script'),a.type='text/javascript',a.async=!0,b='gebitang',a.src='//'+b+'.disqus.com/embed.js',(document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(a)})()</script>
-<noscript>Please enable JavaScript to view the <a href=http://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript>
-<a href=http://disqus.com/ class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a>
-</div>
-</div>
-</div>
-<script src=http://gebitang.com/js/ui.js></script>
+</code></pre><div class="prev-next-post pure-g"><div class=pure-u-1-24 style=text-align:left><a href=http://gebitang.com/post/jiansh/bb/%E4%B8%80%E5%8A%A0%E4%B8%80%E5%88%B7%E6%9C%BA%E5%B0%8F%E7%8E%8B%E5%AD%90/><i class="fa fa-chevron-left"></i></a></div><div class=pure-u-10-24><nav class=prev><a href=http://gebitang.com/post/jiansh/bb/%E4%B8%80%E5%8A%A0%E4%B8%80%E5%88%B7%E6%9C%BA%E5%B0%8F%E7%8E%8B%E5%AD%90/>一加一刷机小王子</a></nav></div><div class=pure-u-2-24>&nbsp;</div><div class=pure-u-10-24><nav class=next><a href=http://gebitang.com/post/2021/march-and-april/>March and April Run</a></nav></div><div class=pure-u-1-24 style=text-align:right><a href=http://gebitang.com/post/2021/march-and-april/><i class="fa fa-chevron-right"></i></a></div></div><div id=disqus_thread></div><script type=text/javascript>(function(){if(window.location.hostname=="localhost")return;var e=document.createElement("script"),t;e.type="text/javascript",e.async=!0,t="gebitang",e.src="//"+t+".disqus.com/embed.js",(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(e)})()</script><noscript>Please enable JavaScript to view the <a href=http://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript><a href=http://disqus.com/ class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a></div></div></div><script src=http://gebitang.com/js/ui.js></script>
 <script src=http://gebitang.com/js/menus.js></script>
-<script>window.location.hostname!="localhost"&&(function(a,e,f,g,b,c,d){a.GoogleAnalyticsObject=b,a[b]=a[b]||function(){(a[b].q=a[b].q||[]).push(arguments)},a[b].l=1*new Date,c=e.createElement(f),d=e.getElementsByTagName(f)[0],c.async=1,c.src=g,d.parentNode.insertBefore(c,d)}(window,document,'script','//www.google-analytics.com/analytics.js','ga'),ga('create','UA-34303694-1','auto'),ga('send','pageview'))</script>
-<button onclick=topFunction() id=myBtn title="Go to top">Top</button>
-</body>
-</html>
+<script>window.location.hostname!="localhost"&&(function(e,o,i,a,t,n,s){e.GoogleAnalyticsObject=t,e[t]=e[t]||function(){(e[t].q=e[t].q||[]).push(arguments)},e[t].l=1*new Date,n=o.createElement(i),s=o.getElementsByTagName(i)[0],n.async=1,n.src=a,s.parentNode.insertBefore(n,s)}(window,document,"script","//www.google-analytics.com/analytics.js","ga"),ga("create","UA-34303694-1","auto"),ga("send","pageview"))</script><button onclick=topFunction() id=myBtn title="Go to top">Top</button></body></html>

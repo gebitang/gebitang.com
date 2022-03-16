@@ -1,208 +1,32 @@
-<!doctype html><html xmlns:wb=http://open.weibo.com/wb lang=en>
-<head>
-<meta charset=utf-8>
-<meta name=viewport content="width=device-width,initial-scale=1">
-<meta name=description content>
-<meta name=generator content="Hugo 0.92.0">
-<title>STF-集成-iOS之五：部署总结 &#183; 戈壁堂</title>
-<link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/pure-min.css><!--[if lte IE 8]><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-old-ie-min.css><![endif]--><!--[if gt IE 8]><!-->
-<link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-min.css><!--<![endif]--><!--[if lte IE 8]><link rel=stylesheet href=http://gebitang.com/css/side-menu-old-ie.css><![endif]--><!--[if gt IE 8]><!-->
-<link rel=stylesheet href=http://gebitang.com/css/side-menu.css><!--<![endif]-->
-<link rel=stylesheet href=http://gebitang.com/css/blackburn.css>
-<link rel=stylesheet href=https://use.fontawesome.com/releases/v5.9.0/css/all.css>
-<link href="https://fonts.googleapis.com/css?family=Raleway" rel=stylesheet type=text/css>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-<link rel=stylesheet href=//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/androidstudio.min.css>
-<script src=//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js></script>
+<!doctype html><html xmlns:wb=http://open.weibo.com/wb lang=en><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content><meta name=generator content="Hugo 0.94.2"><title>STF-集成-iOS之五：部署总结 &#183; 戈壁堂</title><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/pure-min.css><!--[if lte IE 8]><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-old-ie-min.css><![endif]--><!--[if gt IE 8]><!--><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-min.css><!--<![endif]--><!--[if lte IE 8]><link rel=stylesheet href=http://gebitang.com/css/side-menu-old-ie.css><![endif]--><!--[if gt IE 8]><!--><link rel=stylesheet href=http://gebitang.com/css/side-menu.css><!--<![endif]--><link rel=stylesheet href=http://gebitang.com/css/blackburn.css><link rel=stylesheet href=https://use.fontawesome.com/releases/v5.9.0/css/all.css><link href="https://fonts.googleapis.com/css?family=Raleway" rel=stylesheet type=text/css><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<link rel=stylesheet href=//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/androidstudio.min.css><script src=//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js></script>
 <script src=//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js></script>
-<script>hljs.initHighlightingOnLoad()</script>
-<link rel="shortcut icon" href=http://gebitang.com/img/favicon.ico type=image/x-icon>
-<link rel=stylesheet href=http://gebitang.com/css/my.css>
-<script src=http://gebitang.com/js/my.js></script>
-</head>
-<body>
-<div id=layout>
-<a href=#menu id=menuLink class=menu-link>
-<span></span>
-</a>
-<div id=menu>
-<a class="pure-menu-heading brand" href=http://gebitang.com/>Gebitang</a>
-<div class=pure-menu>
-<ul class=pure-menu-list>
-<li class=pure-menu-item>
-<a class=pure-menu-link href=http://gebitang.com/><i class="fa fa-home fa-fw"></i>Home</a>
-</li>
-<li class=pure-menu-item>
-<a class=pure-menu-link href=http://gebitang.com/post/><i class="fa fa-list fa-fw"></i>Posts</a>
-</li>
-<li class=pure-menu-item>
-<a class=pure-menu-link href=http://gebitang.com/about/><i class="fa fa-user fa-fw"></i>About</a>
-</li>
-<li class=pure-menu-item>
-<a class=pure-menu-link href=http://gebitang.com/contact/><i class="fa fa-phone fa-fw"></i>Contact</a>
-</li>
-<li class=pure-menu-item>
-<a class=pure-menu-link href=http://gebitang.com/tags/><i class="fa fa-tags fa-fw"></i>Tags</a>
-</li>
-<li class=pure-menu-item>
-<a class=pure-menu-link href=http://gebitang.com/topics/><i class="fa fa-folder fa-fw"></i>Topics</a>
-</li>
-</ul>
-</div>
-<div class="pure-menu social">
-<ul class=pure-menu-list>
-</ul>
-</div>
-<div>
-<div class=small-print>
-<small>
-<a rel=license href=http://creativecommons.org/licenses/by/4.0/><img alt=知识共享许可协议 style=border-width:0 src=https://i.creativecommons.org/l/by/4.0/80x15.png></a><br>本<span xmlns:dct=http://purl.org/dc/terms/ href=http://purl.org/dc/dcmitype/Text rel=dct:type>作品</span>由<a xmlns:cc=http://creativecommons.org/ns# href=http://gebitang.com property="cc:attributionName" rel=cc:attributionurl>&nbsp;Gebitang&nbsp;&nbsp;</a>采用<a rel=license href=http://creativecommons.org/licenses/by/4.0/>知识共享署名 4.0 国际许可协议</a>进行许可&nbsp;&copy; 2018
-</small>
-</div>
-<div class=small-print>
-<small></small>
-</div>
-<div class=small-print>
-<small>Built with&nbsp;<a href=https://gohugo.io/ target=_blank>Hugo</a></small>
-<small>Theme&nbsp;<a href=https://github.com/yoshiharuyamashita/blackburn target=_blank>Blackburn</a></small>
-</div>
-<div style=display:none>
-<div class=small-print>
-<small>
-<wb:follow-button uid=2446212465 type=red_1 width=67 height=24></wb:follow-button>
-</small>
-</div>
-</div>
-</div>
-</div>
-<div id=main>
-<div class=header>
-<h1>STF-集成-iOS之五：部署总结</h1>
-<h2></h2>
-</div>
-<div class=content>
-<div class=post-meta>
-<div>
-<i class="fa fa-calendar fa-fw"></i>
-<time>2020-03-07</time>
-</div>
-<div>
-<i class="fa fa-folder fa-fw"></i>
+<script>hljs.initHighlightingOnLoad()</script><link rel="shortcut icon" href=http://gebitang.com/img/favicon.ico type=image/x-icon><link rel=stylesheet href=http://gebitang.com/css/my.css><script src=http://gebitang.com/js/my.js></script></head><body><div id=layout><a href=#menu id=menuLink class=menu-link><span></span></a><div id=menu><a class="pure-menu-heading brand" href=http://gebitang.com/>Gebitang</a><div class=pure-menu><ul class=pure-menu-list><li class=pure-menu-item><a class=pure-menu-link href=http://gebitang.com/><i class="fa fa-home fa-fw"></i>Home</a></li><li class=pure-menu-item><a class=pure-menu-link href=http://gebitang.com/post/><i class="fa fa-list fa-fw"></i>Posts</a></li><li class=pure-menu-item><a class=pure-menu-link href=http://gebitang.com/about/><i class="fa fa-user fa-fw"></i>About</a></li><li class=pure-menu-item><a class=pure-menu-link href=http://gebitang.com/contact/><i class="fa fa-phone fa-fw"></i>Contact</a></li><li class=pure-menu-item><a class=pure-menu-link href=http://gebitang.com/tags/><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class=pure-menu-item><a class=pure-menu-link href=http://gebitang.com/topics/><i class="fa fa-folder fa-fw"></i>Topics</a></li></ul></div><div class="pure-menu social"><ul class=pure-menu-list></ul></div><div><div class=small-print><small><a rel=license href=http://creativecommons.org/licenses/by/4.0/><img alt=知识共享许可协议 style=border-width:0 src=https://i.creativecommons.org/l/by/4.0/80x15.png></a><br>本<span xmlns:dct=http://purl.org/dc/terms/ href=http://purl.org/dc/dcmitype/Text rel=dct:type>作品</span>由<a xmlns:cc=http://creativecommons.org/ns# href=http://gebitang.com property="cc:attributionName" rel=cc:attributionurl>&nbsp;Gebitang&nbsp;&nbsp;</a>采用<a rel=license href=http://creativecommons.org/licenses/by/4.0/>知识共享署名 4.0 国际许可协议</a>进行许可&nbsp;&copy; 2018</small></div><div class=small-print><small></small></div><div class=small-print><small>Built with&nbsp;<a href=https://gohugo.io/ target=_blank>Hugo</a></small>
+<small>Theme&nbsp;<a href=https://github.com/yoshiharuyamashita/blackburn target=_blank>Blackburn</a></small></div><div style=display:none><div class=small-print><small><wb:follow-button uid=2446212465 type=red_1 width=67 height=24></wb:follow-button></small></div></div></div></div><div id=main><div class=header><h1>STF-集成-iOS之五：部署总结</h1><h2></h2></div><div class=content><div class=post-meta><div><i class="fa fa-calendar fa-fw"></i>
+<time>2020-03-07</time></div><div><i class="fa fa-folder fa-fw"></i>
 <a class=post-taxonomy-topic href=http://gebitang.com/topics/jiansh>jiansh</a>&nbsp;/
-<a class=post-taxonomy-topic href=http://gebitang.com/topics/apple>Apple</a>
-</div>
-<div>
-<i class="fa fa-tags fa-fw"></i>
-<a class=post-taxonomy-tag href=http://gebitang.com/tags/jiansh>jiansh</a>
-</div>
-</div>
-<nav id=TableOfContents></nav>
-<p><a href=https://www.jianshu.com/p/35b390b2c409>link on JianShu</a></p>
-<p>在测试旧的MacPro机器上搭建正式的部署环境。</p>
-<p>Mac系统为13.3 + Xcode9.4。 根据测试环境搭建的经验，选择Xcode10.1</p>
-<p>###系统环境
-苹果的开发者网站可以正常访问，但下载Xcode时却需要翻墙，文件过大<a href=https://download.developer.apple.com/Developer_Tools/Xcode_10.1/Xcode_10.1.xip>Xcode 10.1</a>有5.6GB，chrome下载过程中，多次出现下载失败情况，resume后无法续传。网上的旧方案为使用wget+localCookie，但目前有人反馈也不好使。</p>
-<ul>
-<li>
-<p>最终方案为：使用Safari进行下载，Safari下载Xcode支持续传功能。</p>
-</li>
-<li>
-<p>Mac系统需要升级到10.14 Mojave才可以使用Xcode10.1</p>
-</li>
-</ul>
-<p>这基本就折腾了一天。</p>
-<p>###iOS-STF环境</p>
-<p>好在环境比较干净，执行下面的安装比较正常。依赖环境安装——</p>
-<pre tabindex=0><code>    brew install --HEAD usbmuxd
+<a class=post-taxonomy-topic href=http://gebitang.com/topics/apple>Apple</a></div><div><i class="fa fa-tags fa-fw"></i>
+<a class=post-taxonomy-tag href=http://gebitang.com/tags/jiansh>jiansh</a></div></div><nav id=TableOfContents></nav><p><a href=https://www.jianshu.com/p/35b390b2c409>link on JianShu</a></p><p>在测试旧的MacPro机器上搭建正式的部署环境。</p><p>Mac系统为13.3 + Xcode9.4。 根据测试环境搭建的经验，选择Xcode10.1</p><p>###系统环境
+苹果的开发者网站可以正常访问，但下载Xcode时却需要翻墙，文件过大<a href=https://download.developer.apple.com/Developer_Tools/Xcode_10.1/Xcode_10.1.xip>Xcode 10.1</a>有5.6GB，chrome下载过程中，多次出现下载失败情况，resume后无法续传。网上的旧方案为使用wget+localCookie，但目前有人反馈也不好使。</p><ul><li><p>最终方案为：使用Safari进行下载，Safari下载Xcode支持续传功能。</p></li><li><p>Mac系统需要升级到10.14 Mojave才可以使用Xcode10.1</p></li></ul><p>这基本就折腾了一天。</p><p>###iOS-STF环境</p><p>好在环境比较干净，执行下面的安装比较正常。依赖环境安装——</p><pre tabindex=0><code>    brew install --HEAD usbmuxd
     brew unlink usbmuxd
     brew link usbmuxd
     brew install --HEAD libimobiledevice
     brew install --HEAD ideviceinstaller
     brew install carthage
     brew install socat
-</code></pre><p>brew安装时，会检查Xcode版本，可能问题——</p>
-<ol>
-<li>需要执行<code>xcdoe-select --install</code>安装对应的Develop Command tools；</li>
-<li>提示Xcode过时。</li>
-</ol>
-<blockquote>
-<p>Error: Your Xcode (10.1) is too outdated. Please update to Xcode 10.2.1 (or delete it). Xcode can be updated from the App Store.</p>
-</blockquote>
-<p><a href=http://gebitang.com/post/how/apple-dev/#brew-%E5%AE%89%E8%A3%85%E6%8F%90%E7%A4%BAxcode-outdated>Xcode outdated</a>问题：编辑brew对应的配置脚本，删除对xcode版本的检查。</p>
-<ol start=3>
-<li>Xcod10.1默认不支持12.3.1系统的iOS文件，需要找个Xcode10.3的版本，复制对应版本的支持文件： <code>/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/DeviceSupport/xxversion</code></li>
-</ol>
-<p>###WDA环境</p>
-<ul>
-<li>clone项目<a href=https://github.com/mrx1203/stf.git>https://github.com/mrx1203/stf.git</a>到本地，执行<code>./Scripts/bootstrap.sh</code>进行编译安装。</li>
-<li>使用Xcode打开此项目，登录Apple ID，将几个对应工程（lib、runner、test&mldr;）下的签名方案选择为自动签名（目前Xcode都可以自动识别账户+设备添加）</li>
-<li>项目根目录下执行<code>xcodebuild -project WebDriverAgent.xcodeproj -scheme WebDriverAgentRunner -destination 'id=ed042146799cb2d009e4a05d9215f5f30f446d98' test</code> 进行，详细过程可参考<a href=https://www.jianshu.com/p/4cceb043107b>这里</a></li>
-</ul>
-<p>###源码环境
-集成<a href=https://github.com/mrx1203/stf.git>https://github.com/mrx1203/stf.git</a>到现有的STF工程下，使用现有的前端规范</p>
-<p>package更新了以下npm包：</p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell>npm install --save android-device-list@^1.1.85 
-npm install --save bplist@0.0.4
-npm install --save images@^3.0.2
-npm install --save plist@^3.0.1
-npm install --save request-promise@^4.2.4
-npm install --save sharp@^0.22.0
-npm install --save sleep@^6.0.0
-npm install --save teen_process@^1.14.1
-npm install --save unzip2@^0.2.5
-npm install --save xml2js@^0.4.19
-npm install --save xml2map@^1.0.2
-npm install --save xutil@1
-</code></pre></div><p>后端部分——</p>
-<ul>
-<li>拷贝lib/cli下的ios-device,ios-provider,local三个文件夹，local文件夹可以直接覆盖（新增参数+ios-provider线程）</li>
-<li>拷贝lib/cli下的index.js文件，直接覆盖（只是增加了新的依赖）</li>
-<li>拷贝lib/units下的ios-device,ios-provider文件夹；覆盖lib/units/storage/plugins/apk/task/manifest.js文件（支持ipa类型）</li>
-<li>拷贝lib/util下的ipareader.js和download.js文件；ipa文件解析和下载</li>
-<li>拷贝res/app/components/stf/install/install-service.js文件；ipa文件的安装</li>
-<li>拷贝res/app/components/stf/storage/storage-service.js文件；上传ipa文件</li>
-<li>拷贝lib/wire/wire.proto文件；加了消息</li>
-</ul>
-<p>前端部分——</p>
-<ul>
-<li><code>res/app/components/stf/control/control-service.js</code>新增加了 <code>screendump</code>方法发送zmq消息通知，</li>
-<li><code>lib/units/device/plugins/screen/dump.js</code>，接收到消息后完成截图动作。</li>
-</ul>
-<hr>
-<p>正常情况下，完成上面的动作之后，执行<code>npm install</code>，然后执行 <code>stf local --wda-path /Users/gebitang/projects/tryout/WebDriverAgent/ --wda-port 8100</code> 之后就可以识别iOS设备了</p>
-<p>以provider方式启动——</p>
-<p><code>bin/stf ios-provider --no-cleanup --name $localIp.local --min-port 7400 --max-port 7700 --connect-sub tcp://$serverip:7114 --connect-push tcp://$serverip:7116 --group-timeout 10000 --public-ip $localIp --storage-url http://$serverip:$serverport --wda-path /Users/gebitang/projects/tryout/WebDriverAgent/ --wda-port 8100 --vnc-initial-size 600x800 --mute-master never --allow-remote </code></p>
-<div class="prev-next-post pure-g">
-<div class=pure-u-1-24 style=text-align:left>
-<a href=http://gebitang.com/post/jiansh/apple/stf-%E9%9B%86%E6%88%90-ios%E4%B9%8B%E5%9B%9B%E5%AE%8C%E6%88%90/><i class="fa fa-chevron-left"></i></a>
-</div>
-<div class=pure-u-10-24>
-<nav class=prev>
-<a href=http://gebitang.com/post/jiansh/apple/stf-%E9%9B%86%E6%88%90-ios%E4%B9%8B%E5%9B%9B%E5%AE%8C%E6%88%90/>STF-集成-iOS之四：完成</a>
-</nav>
-</div>
-<div class=pure-u-2-24>
-&nbsp;
-</div>
-<div class=pure-u-10-24>
-<nav class=next>
-<a href=http://gebitang.com/post/jiansh/apple/stf-%E9%9B%86%E6%88%90-ios%E4%B9%8B%E4%BA%8C%E9%9B%86%E6%88%90%E9%97%AE%E9%A2%98/>STF-集成-iOS之二：集成问题</a>
-</nav>
-</div>
-<div class=pure-u-1-24 style=text-align:right>
-<a href=http://gebitang.com/post/jiansh/apple/stf-%E9%9B%86%E6%88%90-ios%E4%B9%8B%E4%BA%8C%E9%9B%86%E6%88%90%E9%97%AE%E9%A2%98/><i class="fa fa-chevron-right"></i></a>
-</div>
-</div>
-<div id=disqus_thread></div>
-<script type=text/javascript>(function(){var a,b;if(window.location.hostname=="localhost")return;a=document.createElement('script'),a.type='text/javascript',a.async=!0,b='gebitang',a.src='//'+b+'.disqus.com/embed.js',(document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(a)})()</script>
-<noscript>Please enable JavaScript to view the <a href=http://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript>
-<a href=http://disqus.com/ class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a>
-</div>
-</div>
-</div>
-<script src=http://gebitang.com/js/ui.js></script>
+</code></pre><p>brew安装时，会检查Xcode版本，可能问题——</p><ol><li>需要执行<code>xcdoe-select --install</code>安装对应的Develop Command tools；</li><li>提示Xcode过时。</li></ol><blockquote><p>Error: Your Xcode (10.1) is too outdated. Please update to Xcode 10.2.1 (or delete it). Xcode can be updated from the App Store.</p></blockquote><p><a href=http://gebitang.com/post/how/apple-dev/#brew-%E5%AE%89%E8%A3%85%E6%8F%90%E7%A4%BAxcode-outdated>Xcode outdated</a>问题：编辑brew对应的配置脚本，删除对xcode版本的检查。</p><ol start=3><li>Xcod10.1默认不支持12.3.1系统的iOS文件，需要找个Xcode10.3的版本，复制对应版本的支持文件： <code>/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/DeviceSupport/xxversion</code></li></ol><p>###WDA环境</p><ul><li>clone项目<a href=https://github.com/mrx1203/stf.git>https://github.com/mrx1203/stf.git</a>到本地，执行<code>./Scripts/bootstrap.sh</code>进行编译安装。</li><li>使用Xcode打开此项目，登录Apple ID，将几个对应工程（lib、runner、test&mldr;）下的签名方案选择为自动签名（目前Xcode都可以自动识别账户+设备添加）</li><li>项目根目录下执行<code>xcodebuild -project WebDriverAgent.xcodeproj -scheme WebDriverAgentRunner -destination 'id=ed042146799cb2d009e4a05d9215f5f30f446d98' test</code> 进行，详细过程可参考<a href=https://www.jianshu.com/p/4cceb043107b>这里</a></li></ul><p>###源码环境
+集成<a href=https://github.com/mrx1203/stf.git>https://github.com/mrx1203/stf.git</a>到现有的STF工程下，使用现有的前端规范</p><p>package更新了以下npm包：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=display:flex><span>npm install --save android-device-list@^1.1.85 
+</span></span><span style=display:flex><span>npm install --save bplist@0.0.4
+</span></span><span style=display:flex><span>npm install --save images@^3.0.2
+</span></span><span style=display:flex><span>npm install --save plist@^3.0.1
+</span></span><span style=display:flex><span>npm install --save request-promise@^4.2.4
+</span></span><span style=display:flex><span>npm install --save sharp@^0.22.0
+</span></span><span style=display:flex><span>npm install --save sleep@^6.0.0
+</span></span><span style=display:flex><span>npm install --save teen_process@^1.14.1
+</span></span><span style=display:flex><span>npm install --save unzip2@^0.2.5
+</span></span><span style=display:flex><span>npm install --save xml2js@^0.4.19
+</span></span><span style=display:flex><span>npm install --save xml2map@^1.0.2
+</span></span><span style=display:flex><span>npm install --save xutil@1
+</span></span></code></pre></div><p>后端部分——</p><ul><li>拷贝lib/cli下的ios-device,ios-provider,local三个文件夹，local文件夹可以直接覆盖（新增参数+ios-provider线程）</li><li>拷贝lib/cli下的index.js文件，直接覆盖（只是增加了新的依赖）</li><li>拷贝lib/units下的ios-device,ios-provider文件夹；覆盖lib/units/storage/plugins/apk/task/manifest.js文件（支持ipa类型）</li><li>拷贝lib/util下的ipareader.js和download.js文件；ipa文件解析和下载</li><li>拷贝res/app/components/stf/install/install-service.js文件；ipa文件的安装</li><li>拷贝res/app/components/stf/storage/storage-service.js文件；上传ipa文件</li><li>拷贝lib/wire/wire.proto文件；加了消息</li></ul><p>前端部分——</p><ul><li><code>res/app/components/stf/control/control-service.js</code>新增加了 <code>screendump</code>方法发送zmq消息通知，</li><li><code>lib/units/device/plugins/screen/dump.js</code>，接收到消息后完成截图动作。</li></ul><hr><p>正常情况下，完成上面的动作之后，执行<code>npm install</code>，然后执行 <code>stf local --wda-path /Users/gebitang/projects/tryout/WebDriverAgent/ --wda-port 8100</code> 之后就可以识别iOS设备了</p><p>以provider方式启动——</p><p><code>bin/stf ios-provider --no-cleanup --name $localIp.local --min-port 7400 --max-port 7700 --connect-sub tcp://$serverip:7114 --connect-push tcp://$serverip:7116 --group-timeout 10000 --public-ip $localIp --storage-url http://$serverip:$serverport --wda-path /Users/gebitang/projects/tryout/WebDriverAgent/ --wda-port 8100 --vnc-initial-size 600x800 --mute-master never --allow-remote</code></p><div class="prev-next-post pure-g"><div class=pure-u-1-24 style=text-align:left><a href=http://gebitang.com/post/jiansh/apple/stf-%E9%9B%86%E6%88%90-ios%E4%B9%8B%E5%9B%9B%E5%AE%8C%E6%88%90/><i class="fa fa-chevron-left"></i></a></div><div class=pure-u-10-24><nav class=prev><a href=http://gebitang.com/post/jiansh/apple/stf-%E9%9B%86%E6%88%90-ios%E4%B9%8B%E5%9B%9B%E5%AE%8C%E6%88%90/>STF-集成-iOS之四：完成</a></nav></div><div class=pure-u-2-24>&nbsp;</div><div class=pure-u-10-24><nav class=next><a href=http://gebitang.com/post/jiansh/apple/stf-%E9%9B%86%E6%88%90-ios%E4%B9%8B%E4%BA%8C%E9%9B%86%E6%88%90%E9%97%AE%E9%A2%98/>STF-集成-iOS之二：集成问题</a></nav></div><div class=pure-u-1-24 style=text-align:right><a href=http://gebitang.com/post/jiansh/apple/stf-%E9%9B%86%E6%88%90-ios%E4%B9%8B%E4%BA%8C%E9%9B%86%E6%88%90%E9%97%AE%E9%A2%98/><i class="fa fa-chevron-right"></i></a></div></div><div id=disqus_thread></div><script type=text/javascript>(function(){if(window.location.hostname=="localhost")return;var e=document.createElement("script"),t;e.type="text/javascript",e.async=!0,t="gebitang",e.src="//"+t+".disqus.com/embed.js",(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(e)})()</script><noscript>Please enable JavaScript to view the <a href=http://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript><a href=http://disqus.com/ class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a></div></div></div><script src=http://gebitang.com/js/ui.js></script>
 <script src=http://gebitang.com/js/menus.js></script>
-<script>window.location.hostname!="localhost"&&(function(a,e,f,g,b,c,d){a.GoogleAnalyticsObject=b,a[b]=a[b]||function(){(a[b].q=a[b].q||[]).push(arguments)},a[b].l=1*new Date,c=e.createElement(f),d=e.getElementsByTagName(f)[0],c.async=1,c.src=g,d.parentNode.insertBefore(c,d)}(window,document,'script','//www.google-analytics.com/analytics.js','ga'),ga('create','UA-34303694-1','auto'),ga('send','pageview'))</script>
-<button onclick=topFunction() id=myBtn title="Go to top">Top</button>
-</body>
-</html>
+<script>window.location.hostname!="localhost"&&(function(e,o,i,a,t,n,s){e.GoogleAnalyticsObject=t,e[t]=e[t]||function(){(e[t].q=e[t].q||[]).push(arguments)},e[t].l=1*new Date,n=o.createElement(i),s=o.getElementsByTagName(i)[0],n.async=1,n.src=a,s.parentNode.insertBefore(n,s)}(window,document,"script","//www.google-analytics.com/analytics.js","ga"),ga("create","UA-34303694-1","auto"),ga("send","pageview"))</script><button onclick=topFunction() id=myBtn title="Go to top">Top</button></body></html>

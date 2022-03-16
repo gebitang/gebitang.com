@@ -14,6 +14,24 @@ draft = false
 toc = true
 +++
 
+学习要扎实，知识点要进行应用才能被真正的理解。自己体悟出来的知识才是属于自己的知识。学习实践基础知识。如下每一个知识点准确理解后就构建了自己的Docker知识库
+
+- [DOCKER基础技术：LINUX NAMESPACE（上）](https://coolshell.cn/articles/17010.html)
+- [DOCKER基础技术：LINUX NAMESPACE（下）](https://coolshell.cn/articles/17029.html)
+- [DOCKER基础技术：LINUX CGROUP](https://coolshell.cn/articles/17049.html)
+- [DOCKER基础技术：AUFS](https://coolshell.cn/articles/17061.html)
+- [DOCKER基础技术：DEVICEMAPPER](https://coolshell.cn/articles/17200.html) 
+
+- [GO语言、DOCKER 和新技术](https://coolshell.cn/articles/18190.html)十年
+- [记一次KUBERNETES/DOCKER网络排障](https://coolshell.cn/articles/18654.html)
+
+
+- JavaAgent
+
+
+--- 
+
+
 [Docker — 从入门到实践](https://docker_practice.gitee.io/), [Source](https://github.com/gebitang/docker_practice)
 
 

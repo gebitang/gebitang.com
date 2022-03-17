@@ -14,6 +14,30 @@ draft = false
 toc = true
 +++
 
+
+
+{{< fluid_imgs
+  "pure-u-1-1|https://static001.geekbang.org/resource/image/8e/67/8ee9f2fa987eccb490cfaa91c6484f67.png|Kubernetes项目架构|https://time.geekbang.org/column/article/23132"
+>}}
+
+- OCI: Open Container Initiative
+- CNI: Container Network Interface
+- CRI: Container Runtime Interface
+- CSI: Container Storage Interface
+
+[OCI运行时规范](https://mp.weixin.qq.com/s/NYhUQqaN9v1s36EHqpw-kA)
+
+- 符合 CRI 标准的 containerd，以及底层的 runC，都是从Docker 项目中分拆出来。
+  - 2015 年OCI成立之初，Docker 的 libcontainer 项目被捐赠给OCI，成为独立的容器运行时项目 runC
+  - 2017年，Docker公司高层容器运行时的功能集中到containerd项目里，捐赠给云原生计算基金会。
+  - Docker 引擎在发布时是一个单体应用，后来按功能分拆成 runC 和 containerd 两个不同层次的运行时。
+- CRI-O是替代Docker或者containerd的高效且轻量级的容器运行时方案，是CRI的一个实现，能够运行符合OCI规范的容器，所以被称为CRI-O。
+
+{{< fluid_imgs
+  "pure-u-1-1|https://s3-img.meituan.net/v1/mss_3d027b52ec5a4d589e68050845611e68/ff/n0/0n/34/dp_301168.jpg|OCI"
+>}}
+
+
 ## Tasks
 
 练习记录，[官方Tasks](https://kubernetes.io/docs/tasks/)，[中文版本对照](https://kubernetes.io/zh/docs/tasks/)跟着练习一遍之后，各个概念就清楚了。
@@ -596,17 +620,6 @@ kind get cluster
 kind delete cluster --name wslkindmultinodes
 ```
 ## archive 
-### 术语列表
-
-
-{{< fluid_imgs
-  "pure-u-1-1|https://static001.geekbang.org/resource/image/8e/67/8ee9f2fa987eccb490cfaa91c6484f67.png|Kubernetes项目架构|https://time.geekbang.org/column/article/23132"
->}}
-
-- OCI: Open Container Initiative
-- CNI: Container Network Interface
-- CRI: Container Runtime Interface
-- CSI: Container Storage Interface
 
 使用环境Windows。
 

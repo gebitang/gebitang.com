@@ -12,6 +12,79 @@ draft = false
 toc = true
 +++
 
+## 云原生制品那些事(artifact)
+
+[Harbor权威指南：容器镜像、Helm Chart等云原生制品的管理与实践](https://book.douban.com/subject/35220390/)，2020年11月出版
+
+- 第一篇：容器镜像的结构(=1.4.1~1.4.4)
+- 第二篇：OCI 镜像规范(=1.4.5)
+- 第三篇：OCI 制品(=1.5.2~1.5.3)
+- 第四篇：Registry 的作用原理(=1.6.1)
+
+- [云原生制品那些事(1)：容器镜像](https://mp.weixin.qq.com/s/ScEw2-y7Gea01pEekYXkgw)
+- [云原生制品那些事(2)：OCI 镜像规范](https://mp.weixin.qq.com/s/TVIz8p8nOj4ffYaECW7gVg)
+- [云原生制品那些事(3)：OCI 制品Artifact](https://mp.weixin.qq.com/s/okFbunMWFLWfjwCjFbceZw)
+- [云原生制品那些事(4)：Registry作用原理](https://mp.weixin.qq.com/s/r3xNEw6tT34TB_1Qr_z9lQ)
+
+OCI 定义的镜像包括4个部分—— 
+- 镜像索引（Image Index）：可选内容，指向镜像不同平台的版本，如 i386 和 arm64v8、Linux 和Windows
+- 清单（Manifest）：说明镜像包含的配置和内容的文件
+- 配置（Configuration）：描述容器的根文件系统和容器运行时使用的执行参数，还有一些镜像的元数据。
+- 层文件（Layers）： 镜像的根文件系统由多个层文件叠加而成。每个层文件在分发时都必须被打包成一个tar文件，可选择压缩或者非压缩的方式，压缩工具可以是gzip或者zstd。
+
+
+
+```
+# docker manifest inspect hello-world
+{
+	"schemaVersion": 2,
+	"mediaType": "application/vnd.docker.distribution.manifest.v2+json",
+	"config": {
+			"mediaType": "application/vnd.docker.container.image.v1+json",
+			"size": 1520,
+			"digest": "sha256:1815c82652c03bfd8644afda26fb184f2ed891d921b20a0703b46768f9755c57"
+	},
+	"layers": [
+			{
+				"mediaType": "application/vnd.docker.image.rootfs.diff.tar.gzip",
+				"size": 972,
+				"digest": "sha256:b04784fba78d739b526e27edc02a5a8cd07b1052e9283f5fc155828f4b614c28"
+			}
+	]
+}
+
+# Image Index example
+{
+
+  "schemaVersion": 2,
+  "manifests": [
+    {
+      "mediaType": "application/vnd.oci.image.manifest.v1+json",
+      "size": 8342,
+      "digest": "sha256:d81ae89b30523f5152fe646c1f9d178e5d10f28d00b70294fca965b7b96aa3db",
+      "platform": {
+        "architecture": "arm64v8",
+        "os": "linux"
+      }
+    },
+    {
+      "mediaType": "application/vnd.oci.image.manifest.v1+json",
+      "size": 6439,
+      "digest": "sha256:2ef4e3904905353a0c4544913bc0caa48d95b746ef1f2fe9b7c85b3badff987e",
+      "platform": {
+        "architecture": "amd64",
+        "os": "linux"
+      }
+    }
+  ],
+  "annotations": {
+    "io.harbor.key1": "value1",
+    "io.harbor.key2": "value2"
+  }
+}
+# annotations 键值对形式的附加信息（可选项）。
+```
+## harbor系统
 ### 前世今生
 
 Harbor Registry（又称 Harbor 云原生制品仓库或 Harbor 镜像仓库）由 VMware 公司中国研发中心云原生实验室原创，并于 2016 年 3 月开源。确切说是中心的[ATC团队(Advanced Technology Center)](https://mp.weixin.qq.com/s/26HiJb300yHFAbrLxBo6EQ)发起，由张海宁带队发起。满足核心功能MVP：镜像pull && push。然后添加了四个核心功能——

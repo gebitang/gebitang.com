@@ -58,6 +58,13 @@ Idea和goland中的terminal目前无法正常显示，看起来是个已知问�
 
 G出来[这篇文章](https://www.bilibili.com/read/cv3048559)，使用的还是1.0版本，测试可用。强悍
 
+
+## chrome强制同步
+
+[Pushing on Chrome Sync](https://groups.google.com/a/chromium.org/g/chromium-extensions/c/e9Axc1vp3Y0)，实测可行。访问`chrome://sync`，查看各个部分的状态，如果`Local State`显示Server connection认证失败。可以点击`Stop Sync(Keep Data)`按钮，会自动触发同步更新。或者点击`Trigger GetUpdates`按钮。
+
+Mac上点击trigger按钮没生效，Local State显示认证失败。折腾半天，最后点击`Stop Sync`反而触发了同步机制
+
 ## 禁止chrome自动更新
 
 [How to disable Google Chrome auto update?](https://stackoverflow.com/questions/18483087/how-to-disable-google-chrome-auto-update)，高大上的方法不用使用。找到chrome安装目录，对应的文件夹下有个`Update`文件夹，将此文件夹重新命名即可。即使修改了一堆注册表，实际执行升级动作是还是需要有对应的程序，这个思路就是：“你找不到做升级动作的程序，看你还怎么升级”LOL 

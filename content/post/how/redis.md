@@ -17,14 +17,21 @@ Rdis基础
 
 当调用方发起注册请求时，注册中心会将当前的调用方IP与第一步生成的客户端实例绑定，同时在redis中增加调用方IP信息，将调用方IP信息以及service+method+branch组成的api信息记录到redis中；
 
+### ZADD 
+
 ZADD： 将一个或多个成员元素及其分数值加入到有序集当中   
 https://www.runoob.com/redis/sorted-sets-zadd.html  
 Zcard 命令用于计算集合中元素的数量。  
 ZRANGE myzset 0 -1 WITHSCORES 返回key有序集中满足分数值区间的所有value  
 
+### SADD 
+
 Sadd 命令将一个或多个成员元素加入到集合中(添加成功返回1 )，已经存在于集合的成员元素将被忽略（返回0 ）。  
 假如集合 key 不存在，则创建一个只包含添加的元素作成员的集合。  
 https://www.runoob.com/redis/sets-sadd.html   
+
+### SMEMBERS 
+
 SMEMBERS 可以查看对应key下的集合中有哪些具体的值 对应于query逻辑  
 
 Srem 命令用于移除集合中的一个或多个成员元素，不存在的成员元素会被忽略。  
@@ -90,4 +97,12 @@ SMEMBERS  api:loancommon.LoanList/AuditList/stable
 # 订阅 api
 SUBSCRIBE loancommon.LoanList/AuditList/stable
 
+```
+
+### LRANGE 
+
+Redis Lrange 返回列表中指定区间内的元素，区间以偏移量 START 和 END 指定。 其中 0 表示列表的第一个元素， 1 表示列表的第二个元素，以此类推。 你也可以使用负数下标，以 -1 表示列表的最后一个元素， -2 表示列表的倒数第二个元素，以此类推。
+
+```
+redis 127.0.0.1:6379> LRANGE KEY_NAME START END
 ```

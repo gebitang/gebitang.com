@@ -112,3 +112,65 @@ test
 1. 启动zkserver  `zkserver` （独立安装zookeeper之后）
 2. 启动kafka broker ` .\bin\windows\kafka-server-start.bat .\config\server.properties `
 3. 启动producer和consumer
+
+### 获取topic的所有consumer信息
+
+[参考](https://stackoverflow.com/a/55938325/1087122)，或者这里[Kafka获取订阅某topic的所有consumer group](https://www.cnblogs.com/huxi2b/p/10638008.html)
+
+```java
+Properties props = ...//here you put your properties
+AdminClient kafkaClient = AdminClient.create(props);
+
+//Here you get all the consumer groups
+List<String> groupIds = kafkaClient.listConsumerGroups().all().get().
+                       stream().map(s -> s.groupId()).collect(Collectors.toList()); 
+
+//Here you get all the descriptions for the groups
+Map<String, ConsumerGroupDescription> groups = kafkaClient.
+                                               describeConsumerGroups(groupIds).all().get();
+for (final String groupId : groupIds) {
+    ConsumerGroupDescription descr = groups.get(groupId);
+    //find if any description is connected to the topic with topicName
+    Optional<TopicPartition> tp = descr.members().stream().
+                                  map(s -> s.assignment().topicPartitions()).
+                                  flatMap(coll -> coll.stream()).
+                                  filter(s -> s.topic().equals(topicName)).findAny();
+            if (tp.isPresent()) {
+                //you found the consumer, so collect the group id somewhere
+            }
+} 
+```
+
+### header信息会被保存
+
+[源码 @param headers the headers that will be included in the record](https://github.com/apache/kafka/blob/trunk/clients/src/main/java/org/apache/kafka/clients/producer/ProducerRecord.java#L67)
+
+```java
+ /**
+     * Creates a record with a specified timestamp to be sent to a specified topic and partition
+     * 
+     * @param topic The topic the record will be appended to
+     * @param partition The partition to which the record should be sent
+     * @param timestamp The timestamp of the record, in milliseconds since epoch. If null, the producer will assign
+     *                  the timestamp using System.currentTimeMillis().
+     * @param key The key that will be included in the record
+     * @param value The record contents
+     * @param headers the headers that will be included in the record
+     */
+    public ProducerRecord(String topic, Integer partition, Long timestamp, K key, V value, Iterable<Header> headers) {
+        if (topic == null)
+            throw new IllegalArgumentException("Topic cannot be null.");
+        if (timestamp != null && timestamp < 0)
+            throw new IllegalArgumentException(
+                    String.format("Invalid timestamp: %d. Timestamp should always be non-negative or null.", timestamp));
+        if (partition != null && partition < 0)
+            throw new IllegalArgumentException(
+                    String.format("Invalid partition: %d. Partition number should always be non-negative or null.", partition));
+        this.topic = topic;
+        this.partition = partition;
+        this.key = key;
+        this.value = value;
+        this.timestamp = timestamp;
+        this.headers = new RecordHeaders(headers);
+    }
+```

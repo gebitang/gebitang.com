@@ -184,6 +184,91 @@ cache set to 16384 KB
 
 两种方式：一是打开wheel组设置，将用户添加到wheel组；二是编辑`/etc/sudoers`文件，为新用户添加权限`UserName ALL=(ALL) ALL`
 
+### 使用openssl生成秘钥
+
+
+```shell
+#!/usr/bin/env bash
+
+set -e
+set -o pipefail
+
+workdir="$1"
+format="$2"
+
+if [ ! -d "$workdir" ]; then
+  printf >&2 'Error: "%s" is not a directory.\nUsage: %s WORKDIR\n' "$workdir" "$0"
+  exit 2
+fi
+
+if [ ! -f "$workdir/ecdsa.key" ]; then
+  (umask 0177 &&
+    openssl ecparam -name prime256v1 -genkey -noout -out "$workdir/ecdsa.ec.key" &&
+    openssl pkcs8 -topk8 -in "$workdir/ecdsa.ec.key" -nocrypt -out "$workdir/ecdsa.key")
+  rm -f "$workdir/ecdsa.ec.key"
+fi
+
+if [ ! -f "$workdir/ecdsa.pem" ]; then
+  openssl ec -in "$workdir/ecdsa.key" -pubout -out "$workdir/ecdsa.pem"
+fi
+
+if [ "$format" == "hex" ]; then
+  openssl ec -in "$workdir/ecdsa.key" -outform DER \
+    | openssl pkcs8 -topk8 -nocrypt -inform DER -outform DER \
+    | python -c 'import sys; print("".join(r"\x%.2x" % ord(x) for x in sys.stdin.read()))'
+else
+  openssl ec -in "$workdir/ecdsa.key" -outform DER \
+    | openssl pkcs8 -topk8 -nocrypt -inform DER -outform DER \
+    | base64
+fi
+
+```
+
+#### umask 设置用户创建文件的默认权限
+
+[umask](https://blog.csdn.net/qq_19923217/article/details/81189681) 显示、设置文件的缺省权限即默认权限。 [umask介绍及设置](https://www.cnblogs.com/relax1949/p/8783305.html)
+
+#### 生成私钥
+生成一个prime256v1的私钥文件 
+```
+ecparam
+          EC parameter manipulation and generation.
+
+ -name val           Use the ec parameters with specified 'short name'
+ -genkey             Generate ec key
+ -noout              Do not print the ec parameter
+ openssl ecparam -list_curves #查看支持的curves，其中包括 prime256v1 (X9.62/SECG curve over a 256 bit prime field)
+```
+		   
+#### 格式化处理私钥
+将私钥格式化处理为 ecdsa.key
+
+```
+ pkcs8
+           PKCS#8 format private key conversion tool.		   
+ -topk8              Output PKCS8 file
+ -nocrypt            Use or expect unencrypted private key
+ -in infile          Input file
+ -out outfile        Output file
+```
+
+#### 从私钥中提取公钥
+
+```
+ec  EC (Elliptic curve) key processing. 
+-pubout           Output public key, not private
+-outform PEM|DER  Output format - DER or PEM
+```
+
+[格式区别](https://blog.csdn.net/hqy1719239337/article/details/88896074)  
+- DER：用二进制DER编码的证书
+- PEM：用ASCLL(BASE64)编码的证书
+- CER：存放公钥，没有私钥
+- PFX：存放公钥和私钥
+
+>（pem 后缀的证书都是base64编码；der   后缀的证书都是二进制格式；crt    .cer    后缀的文件都是证书文件（编码方式不一定，有可能是.pem,也有可能是.der）；.pfx 主要用于windows平台，浏览器可以使用，也是包含证书和私钥，获取私钥需要密码才可以）
+
+
 
 ### 使用opensll加解密压缩文件
 

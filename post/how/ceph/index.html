@@ -6,19 +6,29 @@
 <time>2022-02-22</time></div><div><i class="fa fa-folder fa-fw"></i>
 <a class=post-taxonomy-topic href=http://gebitang.com/topics/ceph>ceph</a>&nbsp;/
 <a class=post-taxonomy-topic href=http://gebitang.com/topics/tech>tech</a></div><div><i class="fa fa-tags fa-fw"></i>
-<a class=post-taxonomy-tag href=http://gebitang.com/tags/ceph>ceph</a></div></div><nav id=TableOfContents></nav><pre tabindex=0><code># 查看bucket详细信息
-radosgw-admin bucket stats --bucket=harbor-dev
-
-# 查看pool副本数量
+<a class=post-taxonomy-tag href=http://gebitang.com/tags/ceph>ceph</a></div></div><nav id=TableOfContents><ul><li><ul><li><a href=#ceph>ceph</a></li><li><a href=#radosgw-admin>radosgw-admin</a></li><li><a href=#rados>rados</a></li><li><a href=#s3cmd>s3cmd</a></li></ul></li></ul></nav><h3 id=ceph>ceph</h3><p>多看man手册</p><pre tabindex=0><code># 查看pool副本数量
 ceph osd pool get default.rgw.buckets.test-data size
-
-#查看用户信息
-radosgw-admin user info --uid=npm
 
 # 查看集群信息
 ceph df
+</code></pre><p><a href=https://blog.csdn.net/a13568hki/article/details/119600249>基础操作参考</a></p><h3 id=radosgw-admin>radosgw-admin</h3><p>多看man手册</p><pre tabindex=0><code># 出当前系统下所有的bucket信息
+radosgw-admin bucket list
 
-# 配置s3cmd
+# 查看bucket详细信息
+radosgw-admin bucket stats --bucket=harbor-dev
+
+# 查看BUCKET的名称，所在的data pool, index pool. BUCKET ID.
+radosgw-admin zone get
+zone get
+        Show zone cluster params.
+zone set
+        Set zone cluster params (requires infile).
+zone list
+        List all zones set on this cluster.
+
+#查看用户信息
+radosgw-admin user info --uid=npm
+</code></pre><h3 id=rados>rados</h3><p>rados - rados object storage utility</p><h3 id=s3cmd>s3cmd</h3><p>多看man手册</p><pre tabindex=0><code># 配置s3cmd
 s3cmd --configure
 </code></pre><div class="prev-next-post pure-g"><div class=pure-u-1-24 style=text-align:left><a href=http://gebitang.com/post/how/redis/><i class="fa fa-chevron-left"></i></a></div><div class=pure-u-10-24><nav class=prev><a href=http://gebitang.com/post/how/redis/>Redis Basic</a></nav></div><div class=pure-u-2-24>&nbsp;</div><div class=pure-u-10-24><nav class=next><a href=http://gebitang.com/post/how/harbor/>harbor basic</a></nav></div><div class=pure-u-1-24 style=text-align:right><a href=http://gebitang.com/post/how/harbor/><i class="fa fa-chevron-right"></i></a></div></div><div id=disqus_thread></div><script type=text/javascript>(function(){if(window.location.hostname=="localhost")return;var e=document.createElement("script"),t;e.type="text/javascript",e.async=!0,t="gebitang",e.src="//"+t+".disqus.com/embed.js",(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(e)})()</script><noscript>Please enable JavaScript to view the <a href=http://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript><a href=http://disqus.com/ class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a></div></div></div><script src=http://gebitang.com/js/ui.js></script>
 <script src=http://gebitang.com/js/menus.js></script>

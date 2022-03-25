@@ -5,7 +5,7 @@ tags = [
     "kubernetes",
     "k8s"
 ]
-date = "2020-08-23"
+date = "2022-03-25"
 topics = [
     "kubernetes",
     "k8s"
@@ -37,8 +37,117 @@ toc = true
   "pure-u-1-1|https://s3-img.meituan.net/v1/mss_3d027b52ec5a4d589e68050845611e68/ff/n0/0n/34/dp_301168.jpg|OCI"
 >}}
 
+## k8s practice
 
-## Tasks
+### 问题排查流程
+
+- 获取非running状态的pod   
+`kc get pods -n qa-test |grep -v Running`
+
+- 查看问题pod状态：查看对应事件  
+`kc describe pod pod-name -n group-name `
+
+- 查看pod的log信息  
+`kc logs pod-name -n group-name `
+
+- 删除问题pod  
+`kc delete pod pod-name -n group-name`
+
+
+
+```shell
+kc get pod -n medusa |grep oops
+kc get daemonset -n medusa-system
+kc get daemonset secrets-daemon -n medusa-system -o yaml
+kc get daemonset -n medusa-system -o wide
+kc get pods -n medusa-system -o wide | grep secrets-daemon
+kc get daemonset secrets-daemon -n medusa-system -o yaml 
+kc exec -it secrets-daemon-zrg5w -n medusa-system /bin/bash
+kc get pod secrets-daemon-zrg5w -n medusa-system -o yaml
+kc describe pod secrets-daemon-zrg5w -n medusa-system
+kc logs secrets-daemon-zrg5w -n medusa-system  --tail=10
+
+history 10
+```
+
+### kubectl cp --help
+
+Copy files and directories to and from containers.
+
+### 获取网关信息： 
+
+kc get pod -n istio-system -o wide | grep frontier
+kc get pod -n medusa-system -o wide | grep nginx
+
+
+### deployment
+
+平台上的实例名对应集群中的 deployment的name；
+
+`kc describe deployment unit-test-platform -n qa-test`
+
+### display all kubernetes objects
+
+- 列出所有对象 `kubectl api-resources -o wide`
+- 查看对象信息 `kc explain name-of-object`
+- 常用手册查询： [kubectl cheat sheet](https://kubernetes.io/docs/reference/kubectl/cheatsheet/)
+- [k8s API Conventions](https://github.com/kubernetes/community/blob/master/contributors/devel/sig-architecture/api-conventions.md)
+- [ingress](https://kubernetes.io/zh/docs/concepts/services-networking/ingress/)
+
+### 部署ingress-nginx
+
+- [工作原理官方介绍](https://kubernetes.github.io/ingress-nginx/developer-guide/code-overview/)
+- [工作原理](https://kubernetes.github.io/ingress-nginx/how-it-works/)，这里提到的 “同步循环模式”(synchronization loop pattern)，对应文档为 [replication-controller](https://github.com/coreos/docs/blob/master/kubernetes/replication-controller.md)
+- [Nginx-Ingress-Controller启动流程](https://zou.cool/2021/11/24/ingress-nginx-read/)
+- [如何编写正确且高效的 OpenResty 应用](https://segmentfault.com/a/1190000017563487)，配合代码理解nginx.conf的内容执行逻辑
+- [OpenResty最佳实践](https://moonbingbing.gitbooks.io/openresty-best-practices/content/lua/FFI.html)
+
+
+#### 1.x VS. 0.x Branch 
+
+This is a breaking change between previous v0.X branch
+
+This release only supports Kubernetes versions >= v1.19. The support for Ingress Object in networking.k8s.io/v1beta is being dropped and manifests should now use networking.k8s.io/v1.
+
+
+
+```
+
+# online:
+NGINX Ingress controller
+  Release:       v0.42.0
+  Build:         e98e48d99abd6e65b761a66ed3a6a093f1ed16ec
+  Repository:    https://github.com/kubernetes/ingress-nginx
+  nginx version: nginx/1.19.6
+
+Prepare for release v0.42.0 Manuel Alejandro de Brito Fontes 2020/12/24 22:47
+e98e48d99abd6e65b761a66ed3a6a093f1ed16ec
+
+=======================
+
+# dev 
+NGINX Ingress controller
+  Release:       v0.49.3
+  Build:         7ee28f431ccddc4997ab088eff2698b94a8918a0
+  Repository:    https://github.com/kubernetes/ingress-nginx
+  nginx version: nginx/1.19.9
+
+Prepare for v0.49.3 release (#7742) Ricardo Katz* 2021/10/4 9:37
+7ee28f431ccddc4997ab088eff2698b94a8918a0
+
+```
+
+### informers 
+
+- [client-go](https://github.com/kubernetes/client-go)源码informer文件夹下对应的实现
+- [Kubernetes Informer 详解](https://www.kubernetes.org.cn/2693.html)，[informer详解](https://zhuanlan.zhihu.com/p/59660536)——这两篇类似，可以看做入门。说明了整体的实现逻辑。做法使用方式的了解，完全足够。
+- [如何高效掌控K8s资源变化？K8s Informer实现机制浅析](https://www.cnblogs.com/tencent-cloud-native/p/15268959.html)最新代码解析
+- [informer源码分析](https://jimmysong.io/kubernetes-handbook/develop/client-go-informer-sourcecode-analyse.html)，未读，可参考
+
+
+
+
+## tasks
 
 练习记录，[官方Tasks](https://kubernetes.io/docs/tasks/)，[中文版本对照](https://kubernetes.io/zh/docs/tasks/)跟着练习一遍之后，各个概念就清楚了。
 

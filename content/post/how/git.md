@@ -11,13 +11,28 @@ topics = [
 toc = true
 +++
 
-## github 查看first commit
+## github 
+
+### 查看repo的first commit
 
 [参考](https://stackoverflow.com/a/49647826/1087122)，执行——
 
 - 在repo的主页查看commit的次数，例如1567
 - 进入commit页面，点击older按钮将获取类似`commits/main?after=69d0500a1b4eeaa5c3b8e2df05d7a285b1231a3b+34&branch=main`
 - 这里的`+34`表示commit向前走34次。根据第一步的commits次数就可以从UI上获取到最古老的commit
+
+### 查看repo的创建时间 
+
+[参考](https://stackoverflow.com/a/23612723/1087122)，直接通过get api即可，例如`https://api.github.com/repos/{:owner}/{:repository}`
+
+使用代理可能ip会被限制，提示：
+
+```
+{
+    message: "API rate limit exceeded for xx.xx.xx.90. (But here's the good news: Authenticated requests get a higher rate limit. Check out the documentation for more details.)",
+    documentation_url: "https://docs.github.com/rest/overview/resources-in-the-rest-api#rate-limiting"
+}
+```
 
 ## Git Pro
 

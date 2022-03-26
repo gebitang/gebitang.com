@@ -11,6 +11,14 @@ topics = [
 toc = true
 +++
 
+## github 查看first commit
+
+[参考](https://stackoverflow.com/a/49647826/1087122)，执行——
+
+- 在repo的主页查看commit的次数，例如1567
+- 进入commit页面，点击older按钮将获取类似`commits/main?after=69d0500a1b4eeaa5c3b8e2df05d7a285b1231a3b+34&branch=main`
+- 这里的`+34`表示commit向前走34次。根据第一步的commits次数就可以从UI上获取到最古老的commit
+
 ## Git Pro
 
 ### 推送tag

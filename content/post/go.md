@@ -186,6 +186,90 @@ Mac端开源通过Ctrl+C停止转发
 
 ```
 
+#### mTLS (Mutual TLS)
+
+- [What is mutual TLS (mTLS)?](https://www.cloudflare.com/learning/access-management/what-is-mutual-tls/)
+- [HTTPS双向认证（Mutual TLS authentication)](https://help.aliyun.com/document_detail/160093.html)客户端和服务器端都需要验证对方的身份。
+
+
+```shell
+#--cert指定客户端公钥证书的路径
+#--key指定客户端私钥文件的路径
+#-k 使用本参数不校验证书的合法性，因为我们用的是自签名证书
+#可以使用-v来观察具体的SSL握手过程
+curl --cert ./client.crt --key ./client.key https://integration-fred2.fredhuang.com -k -v
+* Rebuilt URL to: https://47.93.XX.XX/
+*   Trying 47.93.XX.XX...
+* TCP_NODELAY set
+* Connected to 47.93.XX.XX (47.93.XX.XX) port 443 (#0)
+* ALPN, offering h2
+* ALPN, offering http/1.1
+* Cipher selection: ALL:!EXPORT:!EXPORT40:!EXPORT56:!aNULL:!LOW:!RC4:@STRENGTH
+* successfully set certificate verify locations:
+*   CAfile: /etc/ssl/cert.pem
+  CApath: none
+* TLSv1.2 (OUT), TLS handshake, Client hello (1):
+* TLSv1.2 (IN), TLS handshake, Server hello (2):
+* TLSv1.2 (IN), TLS handshake, Certificate (11):
+* TLSv1.2 (IN), TLS handshake, Server key exchange (12):
+* TLSv1.2 (IN), TLS handshake, Request CERT (13):
+* TLSv1.2 (IN), TLS handshake, Server finished (14):
+* TLSv1.2 (OUT), TLS handshake, Certificate (11):
+* TLSv1.2 (OUT), TLS handshake, Client key exchange (16):
+* TLSv1.2 (OUT), TLS handshake, CERT verify (15):
+* TLSv1.2 (OUT), TLS change cipher, Client hello (1):
+* TLSv1.2 (OUT), TLS handshake, Finished (20):
+* TLSv1.2 (IN), TLS change cipher, Client hello (1):
+* TLSv1.2 (IN), TLS handshake, Finished (20):
+* SSL connection using TLSv1.2 / ECDHE-RSA-AES256-GCM-SHA384
+* ALPN, server accepted to use http/1.1
+* Server certificate:
+*  subject: C=CN; ST=BJ; L=BJ; O=Alibaba; OU=Test; CN=integration-fred2.fredhuang.com; emailAddress=a@alibaba.com
+*  start date: Nov  2 01:01:34 2019 GMT
+*  expire date: Oct 30 01:01:34 2029 GMT
+*  issuer: C=CN; ST=BJ; L=BJ; O=Alibaba; OU=Test; CN=root; emailAddress=a@alibaba.com
+*  SSL certificate verify result: unable to get local issuer certificate (20), continuing anyway.
+> GET / HTTP/1.1
+> host:integration-fred2.fredhuang.com
+> User-Agent: curl/7.54.0
+> Accept: */*
+>
+< HTTP/1.1 200 OK
+< Server: nginx/1.17.5
+< Date: Sat, 02 Nov 2019 02:39:43 GMT
+< Content-Type: text/html
+< Content-Length: 612
+< Last-Modified: Wed, 30 Oct 2019 11:29:45 GMT
+< Connection: keep-alive
+< ETag: "5db97429-264"
+< Accept-Ranges: bytes
+<
+<!DOCTYPE html>
+<html>
+<head>
+<title>Welcome to nginx!</title>
+<style>
+    body {
+        width: 35em;
+        margin: 0 auto;
+        font-family: Tahoma, Verdana, Arial, sans-serif;
+    }
+</style>
+</head>
+<body>
+<h1>Welcome to nginx!</h1>
+<p>If you see this page, the nginx web server is successfully installed and
+working. Further configuration is required.</p>
+<p>For online documentation and support please refer to
+<a href="http://nginx.org/">nginx.org</a>.<br/>
+Commercial support is available at
+<a href="http://nginx.com/">nginx.com</a>.</p>
+<p><em>Thank you for using nginx.</em></p>
+</body>
+</html>
+* Connection #0 to host 47.93.XX.XX left intact
+```
+
 ### pass 
 
 [The Missing Semester of Your CS Education](https://missing.csail.mit.edu/)的[中文版本](https://github.com/missing-semester-cn/missing-semester-cn.github.io)，提到安全相关的应用：

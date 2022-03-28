@@ -169,6 +169,54 @@ PS C:\Users\joechin> dism.exe /online /enable-feature /featurename:VirtualMachin
 PS C:\Users\joechin>
 ```
 
+可以使用相同的逻辑转移默认的docker desktop data信息[change the location of docker images](https://stackoverflow.com/a/63752264/1087122)
+
+```
+# 确保wsl关闭 
+wsl  --shutdown
+#查看所有的wsl
+wsl --list -v
+
+# 导出docker-desktop-data
+wsl --export docker-desktop-data "D:\docker-desktop-data.tar"
+# 取消注册
+wsl --unregister docker-desktop-data
+#重新导入
+wsl --import docker-desktop-data "D:\wsl\docker-data" "D:\docker-desktop-data.tar" --version 2
+```
+
+### 转移chrome的user data数据
+
+清理C盘的另外一个动作——
+
+- 修改android sdk位置(将C盘的文件移到D盘并修改环境变量) 11GB+
+- 修改go build的地址(修改GOCACHE的env值) 700MB+
+- 移动docker-desktop-data的值，见上。 11GB
+- 修改chrome的user data值 3GB+
+- 清理jetbrain应用 `C:\Users\{username}\AppData\Local\JetBrains` 10GB+
+
+[终极方案，修改注册表信息](https://admx.help/?Category=Chrome&Policy=Google.Policies.Chrome::UserDataDir) ——这个注册项在win 10下好像找不到了- -|| `HKEY_LOCAL_MACHINE or HKEY_CURRENT_USER\Software\Policies\Google\Chrome\UserDataDir`
+
+[使用快捷方式](https://www.neowin.net/forum/topic/1044311-easier-way-to-move-the-location-of-google-chrome-cache-user-profile/)
+
+```shell
+# 检查chrome的各项环境
+chrome://version/
+
+# 启动chrome时指定user data目录
+chrome.exe  –user-data-dir="D:\AppData\Chrome"
+
+# 使用admin进入chrome用户目录
+cd  C:\Users\{username}\AppData\Local\Google\Chrome\User Data
+
+# 为 user data目录创建连接 mklink --help查看帮助
+mklink /J "C:\Users\{username}\AppData\Local\Google\Chrome\User Data" "d:\chrome\User Data"
+mklink /D "User Data" "d:\AppData\chrome\UserData"
+```
+
+[启动命令指定](https://www.windowscrush.com/chome-how-to-change-user-data-directory.html)
+
+
 ### 插件Remote-WSL登录问题
 
 [wsl: allow to run with a non-default user ](https://github.com/microsoft/vscode-remote-release/issues/286)看起来目前无法做到使用“非默认用户root”登录的要求。[官方文档所谓“specific settings”](http://code.visualstudio.com/docs/remote/wsl)指的时连接到wsl之后针对编辑器、命令行等工具的配置。

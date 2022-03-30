@@ -23,6 +23,37 @@ mvn命令是一段脚本程序。
 
 <!--more-->
 
+## scope范围
+
+[dependency scope](https://maven.apache.org/guides/introduction/introduction-to-dependency-mechanism.html#dependency-scope) 
+
+- compile：默认的依赖有效范围。编译、运行、测试时均有效
+- provided：在编译、测试时有效，在运行时无效
+- runtime：在运行、测试时有效，但是在编译代码时无效
+- test：只在测试时有效
+- system：在编译、测试时有效，但是在运行时无效。和provided的区别是，使用system范围的依赖时必须通过systemPath元素显式地指定依赖文件的路径 
+- import：只对pom类型有效，表示所有的依赖都需要使用pom模块中的定义进行替代
+
+```
+# system example
+<dependency>
+    <groupId>javax.sql</groupId>
+    <artifactId>jdbc-stdext</artifactId>
+    <version>2.0</version>
+    <scope>system</scope>
+    <systemPath>${java.home}/lib/rt.jar</systemPath>
+</dependency>
+
+# import example
+<dependency>
+    <groupId>com.baeldung</groupId>
+    <artifactId>custom-project</artifactId>
+    <version>1.3.2</version>
+    <type>pom</type>
+    <scope>import</scope>
+</dependency>
+```
+
 ## 混合编译java和scala
 
 参考[Scala in a Java Maven Project](https://dzone.com/articles/scala-in-java-maven-project)。项目中包含scala和java混合代码时，需要添加对应的maven插件:[scala-maven-plugin](https://github.com/davidB/scala-maven-plugin)即可(不需要安装scala环境)。

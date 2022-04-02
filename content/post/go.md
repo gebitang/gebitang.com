@@ -11,6 +11,17 @@ topics = [
 toc = true
 +++
 
+## 2022
+
+### go1.18 insecure
+
+在go1.17版本下废弃了insecure flag，需要显示声明两个环境变量才能继续使用——
+
+```
+go env -w GOPRIVATE=git.xxx.com
+go env -w GOINSECURE=git.xxx.com
+```
+
 ## 2021 
 
 ### quorum 
@@ -853,6 +864,8 @@ GetDB(ctx).Model(dbmodel.PoolApp{}).Joins(leftJoin).Select(dbSelect).Where(where
 ```
 unrecognized import path "git.xxx.com/medusa/crd": https fetch: Get "https://git.xxx.com/medusa/crd?go-get=1": dial tcp 10.16.210.58:443: connect: connection refused
 ```
+
+在
 
 
 [Building a GraphQL API in Go using gqlgen](https://medium.com/weareservian/building-a-graphql-api-in-go-using-gqlgen-f7a42eba2193)

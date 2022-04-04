@@ -138,6 +138,26 @@ Root can run commands as other users via the "su" command. I believe if you crea
 
 `su -c /path/to/your/script username`
 
+### $符号用法
+
+```
+# http://www.codebaoku.com/it-shell/it-shell-220865.html
+$0	Shell 的命令本身
+1到9	表示 Shell 的第几个参数
+$?	显示最后命令的执行情况
+$#	传递到脚本的参数个数
+$$	脚本运行的当前进程 ID 号
+$*	以一个单字符串显示所有向脚本传递的参数
+$!	后台运行的最后一个进程的 ID 号
+$-	显示 Shell 使用的当前选项
+
+使用 ${#} 获取变量字符串长度
+[root@localhost etc]# s=helloworld
+[root@localhost etc]# echo "s.length = ${#s}"
+s.length = 10
+```
+
+
 ### 如果Make命令运行时没有指定目标，默认会执行Makefile文件的第一个目标
 
 [Make 命令教程](https://www.ruanyifeng.com/blog/2015/02/make.html)

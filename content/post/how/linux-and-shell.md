@@ -2502,11 +2502,9 @@ sed '100,$!p' path/to/filename
 
 [fork exec source](http://blog.csdn.net/l_nan/article/details/21874679)
 
-fork方式为直接执行，直接写被调用脚本的路径即可。在子命令执行完后再执行父级命令。子级的环境变量不会影响到父级。
-
-exec path/to/call/script.sh 执行子级的命令后，不再执行父级命令
-
-source path/to/call/sciprt.sh 执行子级命令后继续执行父级命令，同时子级设置的环境变量会影响到父级的环境变量。
+- `fork` 方式为直接执行，直接写被调用脚本的路径即可。在子命令执行完后再执行父级命令。子级的环境变量不会影响到父级。`./my.sh`是fork的方法
+- `exec` path/to/call/script.sh 执行子级的命令后，不再执行父级命令
+- `source` path/to/call/sciprt.sh 执行子级命令后继续执行父级命令，同时子级设置的环境变量会影响到父级的环境变量。`source my.sh`和`. my.sh`（点加空格加脚本文件）是source的方法。修改环境变量生效的原理正是利用了【子级设置的环境变量会影响到父级的环境变量】的效果。先执行`.bashrc` 脚本，然后将其中设置的环境变量信息“带回”到当前的“父级”环境中
 
 ### 0xe. awk基本使用
 

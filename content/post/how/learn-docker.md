@@ -63,6 +63,58 @@ toc = true
 
 ```
 
+### init / tini
+
+```
+"Entrypoint": [
+        "/sbin/tini",
+        "--",
+        "/entrypoint.sh"
+    ],
+```
+标准的使用tini启动业务场景：使用tini作为init系统启动镜像，实际的启动脚本为`/entrypoint.sh`的内容。
+
+- [github tini](https://github.com/krallin/tini)，其中[#issue 8](https://github.com/krallin/tini/issues/8)说明了tini的优势
+  - 作为镜像的pid 1 启动
+  - 负责传递外部发送的Signal如SIGTERM
+  - 负责回收僵尸进程
+- docker 1.3之后默认集成了tini功能，可以在`docker run `中使用参数 `--init`启用
+
+### CMD 和 Entrypoint
+
+从[docker tini](https://cloud-atlas.readthedocs.io/zh_CN/latest/docker/init/docker_tini.html)的dockerfile中可以看出区别
+
+```dockerfile 
+# Add Tini
+ENV TINI_VERSION v0.19.0
+ADD https://github.com/krallin/tini/releases/download/${TINI_VERSION}/tini /tini
+RUN chmod +x /tini
+ENTRYPOINT ["/tini", "--"]
+
+# Run your program under Tini
+CMD ["/your/program", "-and", "-its", "arguments"]
+# or docker run your-image /your/program ...
+```
+
+- 可以看到CMD的内容其实是昨晚ENTRYPOINT的参数，执行的顺序相当于`/tini -- "/your/program", "-and", "-its", "arguments"`
+- CMD的内容在执行`docker run [OPTIONS] IMAGE [COMMAND] [ARG...]`时，镜像中定义的CMD内容将被替换
+- 作为对比ENTRYPOINT的内容将始终会被执行，上一步的COMMAND命令将会在其之后被执行
+
+[参考一](https://system51.github.io/2020/09/17/docker-need-to-know/)，参考[Docker CMD vs ENTRYPOINT: What’s The Difference & How To Choose](https://www.bmc.com/blogs/docker-cmd-vs-entrypoint)
+
+另外， CMD和ENTRYPOINT都有`exec`和`shell`两种模式——
+
+```shell
+# exec模式，推荐模式
+CMD ["executable", "param1", "param2"] 
+# shell模式 
+CMD command param1 param2
+
+# exec模式，推荐模式
+ENTRYPOINT ["executable", "param1", "param2"]
+# shell模式 在shell环境下执行command
+ENTRYPOINT command param1 param2
+```
 ### docker使用代理
 
 [Configure Docker to use a proxy server](https://docs.docker.com/network/proxy/)，windows下需要注意的是：配置的宿主机代理时，ip地址需要使用vEthernet(WSL)虚拟网卡对应的IP+宿主机端口

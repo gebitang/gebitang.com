@@ -94,6 +94,14 @@ kc get pod -n medusa-system -o wide | grep nginx
 - [k8s API Conventions](https://github.com/kubernetes/community/blob/master/contributors/devel/sig-architecture/api-conventions.md)
 - [ingress](https://kubernetes.io/zh/docs/concepts/services-networking/ingress/)
 
+获取 `api-resources`时，提示`error: unable to retrieve the complete list of server APIs: metrics.k8s.io/v1beta1: the server is currently unable to handle the request`，相当于对于`metrics.k8s.io/v1beta1`这个apigroup无法返回对应的类型。其中包含`nodes`和`pods`
+
+```
+NAME                              SHORTNAMES     APIGROUP                       NAMESPACED   KIND
+nodes                                            metrics.k8s.io                 false        NodeMetrics
+pods                                             metrics.k8s.io                 true         PodMetrics
+```
+
 ### 部署ingress-nginx
 
 - [工作原理官方介绍](https://kubernetes.github.io/ingress-nginx/developer-guide/code-overview/)

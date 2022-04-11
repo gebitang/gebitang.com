@@ -1542,6 +1542,39 @@ Codename:       bionic
 - [CentOS7] 3.10.x-x
 - [CentOS8] 4.18.0-x
 
+### CentOS 7虚拟机修改IP地址
+
+```shell
+# root 权限
+#修改 /etc/sysconfig/network-scripts目录下的 ifcfg-ens33文件，内容类似——
+TYPE=Ethernet
+PROXY_METHOD=none
+BROWSER_ONLY=no
+#BOOTPROTO=dhcp
+BOOTPROTO=static
+DEFROUTE=yes
+IPV4_FAILURE_FATAL=no
+IPV6INIT=yes
+IPV6_AUTOCONF=yes
+IPV6_DEFROUTE=yes
+IPV6_FAILURE_FATAL=no
+IPV6_ADDR_GEN_MODE=stable-privacy
+
+
+NAME=ens33
+DEVICE=ens33
+ONBOOT=yes
+# 指定修改后的ip地址
+IPADDR=192.168.50.200
+PREFIX=24
+GATEWAY=192.168.50.2
+DNS1=10.112.61.90
+
+# 重启服务生效
+service network restart
+# ip addr 查看信息
+```
+
 ### 测试I/O数据 dd
 
 ```

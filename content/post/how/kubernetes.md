@@ -39,6 +39,16 @@ toc = true
 
 ## k8s practice
 
+### 拉取镜像卡住
+
+[Pods get stuck in ContainerCreating state when pulling image takes long #83471](https://github.com/kubernetes/kubernetes/issues/83471) 看起来都遇到过这个问题。现象为kubelet一直处于拉取镜像状态。
+
+- 手动在对应的node节点上使用docker pull拉取对应的镜像OK
+- 在对应的node上检查kubelet对应时段的log信息`journalctl -u kubelet --since "2022-04-12 14:00" --until "2022-04-12 14:20"`
+- 检查对应的镜像是否过大
+- kubelet开启并行下载，同时部署其他的镜像是否也会出现卡住现象？`--serialize-image-pulls=false`
+
+
 ### 问题排查流程
 
 - 获取非running状态的pod   

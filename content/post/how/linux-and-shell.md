@@ -157,6 +157,11 @@ $-	显示 Shell 使用的当前选项
 s.length = 10
 ```
 
+### journalctl 查询log
+
+[How To Use Journalctl to View and Manipulate Systemd Logs](https://www.digitalocean.com/community/tutorials/how-to-use-journalctl-to-view-and-manipulate-systemd-logs)
+
+systemd环境下的集中管理log的组件：`journalctl`
 
 ### 如果Make命令运行时没有指定目标，默认会执行Makefile文件的第一个目标
 

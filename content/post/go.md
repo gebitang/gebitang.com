@@ -38,7 +38,7 @@ API文档查看，依赖[swaggo](https://github.com/swaggo/swag)，启动swagger
 - 远程使用rum-app节点模式连接时，需要在本地做接口映射，否则需要提供jwt信息
 - 可以先通过api生成token，则不需要进行端口转发 `curl -k -X POST "https://127.0.0.1:8002/app/api/v1/token/apply" -H "accept: application/json"`
 
-接口转发Fow Windows，使用`netsh`，使用管理员权限执行
+接口转发Fow Windows，使用`netsh`，使用管理员权限执行（多个网卡的情况下，需要明确指定针对哪个ip提供转发，这样可以让其他PC访问当前PC。127.0.0.1相当于只针对本机启动的服务请求进行转发）
 
 `netsh interface portproxy add v4tov4 listenport=8002 listenaddress=127.0.0.1 connectport=8002 connectaddress=public.ip.xx.xx`
 

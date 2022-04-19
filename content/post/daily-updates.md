@@ -26,6 +26,18 @@ toc = true
 
 将本地调用拆分为远程调用
 
+## 独立安装 windows terminal 
+
+[参考](https://hackmd.io/@ss14/windows-terminal)——
+
+- 从github下载[最新版本.msixbundle文件])(https://github.com/microsoft/terminal/releases/latest)
+- 使用powershell命令行，执行`Add-AppxPackage path/to/msixbundlefile`
+
+优化——
+
+- 使用tw打开默认的bat脚本，使用管理员权限执行cmd命令：`ftype batfile="%LOCALAPPDATA%\Microsoft\WindowsApps\wt.exe" "%1" %*`
+- 在新tab中打开bat脚本`ftype batfile="%LOCALAPPDATA%\Microsoft\WindowsApps\wt.exe" -w 0 "%1" %*`
+
 ## windows terminal 字体问题
 
 打开提示——找不到所选字体“Cascadia Mono“。 改为选择“Consolas“。

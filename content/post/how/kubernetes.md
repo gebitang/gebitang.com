@@ -39,6 +39,20 @@ toc = true
 
 ## k8s practice
 
+### 强制删除pod 
+
+[Pods stuck in Terminating status](https://stackoverflow.com/questions/35453792/pods-stuck-in-terminating-status)，状态一直处于Terminating，强制删除
+
+```shell
+# 配合必要的 ns参数 -n kube-system
+ns=kube-system
+for p in $(kubectl get pods -n $ns | grep Terminating | awk '{print $1}'); do kubectl delete pod $p -n $ns --grace-period=0 --force;done
+```
+
+提示告警：
+>warning: Immediate deletion does not wait for confirmation that the running resource has been terminated. The resource may continue to run on the cluster indefinitely.
+
+
 ### 拉取镜像卡住
 
 [Pods get stuck in ContainerCreating state when pulling image takes long #83471](https://github.com/kubernetes/kubernetes/issues/83471) 看起来都遇到过这个问题。现象为kubelet一直处于拉取镜像状态。

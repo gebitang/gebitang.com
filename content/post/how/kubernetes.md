@@ -39,6 +39,26 @@ toc = true
 
 ## k8s practice
 
+### 
+
+```shell
+# 安装
+wget --no-check-certificate https://copr-be.cloud.fedoraproject.org/results/ganto/lxc3/epel-7-x86_64/01041891-lxcfs/lxcfs-3.1.2-0.2.el7.x86_64.rpm
+rpm -ivh lxcfs-3.1.2-0.2.el7.x86_64.rpm --force --nodeps
+
+systemctl enable lxcfs
+systemctl start lxcfs
+# 运⾏lxcfs命令，指定 /proc ⽬录所在位置：
+sudo mkdir -p /var/lib/lxcfs
+sudo lxcfs /var/lib/lxcfs
+
+systemctl enable lxcfs && systemctl start lxcfs &&  mkdir -p /var/lib/lxcfs && lxcfs /var/lib/lxcfs
+
+# 需要确保lxcfs服务正常启动
+systemctl status lxcfs 
+
+```
+
 ### 强制删除pod 
 
 [Pods stuck in Terminating status](https://stackoverflow.com/questions/35453792/pods-stuck-in-terminating-status)，状态一直处于Terminating，强制删除
@@ -52,6 +72,36 @@ for p in $(kubectl get pods -n $ns | grep Terminating | awk '{print $1}'); do ku
 提示告警：
 >warning: Immediate deletion does not wait for confirmation that the running resource has been terminated. The resource may continue to run on the cluster indefinitely.
 
+
+### deployment的字段含义
+
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-nginx
+  labels:
+    app: my-nginx # LABEL-A: <--this label is to manage the deployment itself. this may be used to filter the deployment based on this label. 
+spec:              
+  replicas: 2
+  selector:
+    matchLabels:
+      app: my-nginx    #LABEL-B:  <--  field defines how the Deployment finds which Pods to manage.
+  template:
+    metadata:
+      labels:
+        app: my-nginx   #LABEL-C: <--this is the label of the pod, this must be same as LABEL-B
+    spec:                
+      containers:
+      - name: my-nginx
+        image: nginx:alpine
+        ports:
+        - containerPort: 80
+        resources:
+          limits:
+            memory: "128Mi" #128 MB
+            cpu: "200m" #200 millicpu (.2 cpu or 20% of the cpu)
+```
 
 ### 拉取镜像卡住
 

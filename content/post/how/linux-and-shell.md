@@ -1969,6 +1969,12 @@ sed -i "s/GRUB_CMDLINE_LINUX=\"\"/GRUB_CMDLINE_LINUX=\"net.ifnames=0 biosdevname
 
 ```
 
+### 列出子目录内容 
+
+`ls -lR `递归显示所有所有文件、文件夹内容 display all files, directories and sub directories of the current directory
+
+`ls -d * */*`只展示两层深度，-d参数防止进行递归
+
 ### 清除“^M”
 
 使用sed命令。和vi的用法相似：

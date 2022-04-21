@@ -138,3 +138,48 @@ sudo gitlab-runner start
 建议是Gitlab和Gitlab Runner分离，但不考虑安全、性能的情况下，同时在一台机器上跑没有问题。参考 [CI runner on same server of GitLab?](https://softwareengineering.stackexchange.com/questions/237238/ci-runner-on-same-server-of-gitlab)，或者 [Setting up GitLab CI on server with GitLab already installed](https://stackoverflow.com/questions/26466692/setting-up-gitlab-ci-on-server-with-gitlab-already-installed)
 
 
+### 注册runner
+
+```shell
+#拉取gitlab-runner镜像  
+docker pull hub.xxx-cloud.com/library/gitlab-runner 
+# 创建后台运行的容器   
+docker run -it -d -v /var/run/docker.sock:/var/run/docker.sock image_id_hash
+# 进入容器。
+docker exec -it container_id_hash bash 
+# 注册runner到gitlab-ce里，使用交互式注册 
+gitlab-runner register 
+
+######交互过程
+gitlab-runner register
+Runtime platform                                    arch=amd64 os=linux pid=45 revision=4745a6f3 version=11.8.0
+Running in system-mode.
+
+Please enter the gitlab-ci coordinator URL (e.g. https://gitlab.com/):
+http://git.xxx-corp.com/
+Please enter the gitlab-ci token for this runner:
+91WAmfZyLYYRkvD8vR7B
+Please enter the gitlab-ci description for this runner:
+[02f73eb2bdc7]: local-runner-on-windows-pc-for-test
+Please enter the gitlab-ci tags for this runner (comma separated):
+med-geb,med-test
+Registering runner... succeeded                     runner=91WAmfZy
+Please enter the executor: docker+machine, kubernetes, docker, parallels, shell, ssh, virtualbox, docker-ssh, docker-ssh+machine:
+docker
+Please enter the default Docker image (e.g. ruby:2.1):
+hub.xxx-cloud.com/medusa/med-test:latest
+Runner registered successfully. Feel free to start it, but if it's running already the config should be automatically reloaded!
+
+#######交互过程结束
+
+# 查看  /etc/gitlab-runner/config.toml 文件内容，可以看到详细的配置信息
+
+#启动runner   
+gitlab-runner start
+
+# 查看帮助
+gitlab-runner --help
+
+# 查看注册帮助
+gitlab-runner register --help
+```

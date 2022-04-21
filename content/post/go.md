@@ -13,6 +13,48 @@ toc = true
 
 ## 2022
 
+### gin 路由信息
+
+[简明教程](https://geektutu.com/post/quick-go-gin.html)
+
+`/user/:name/*role`，`*`代表可选。
+
+```go
+// 匹配 /user/geektutu
+r.GET("/user/:name", func(c *gin.Context) {
+	name := c.Param("name")
+	c.String(http.StatusOK, "Hello %s", name)
+})
+
+// GET 和 POST 混合
+r.POST("/posts", func(c *gin.Context) {
+	id := c.Query("id")
+	page := c.DefaultQuery("page", "0")
+	username := c.PostForm("username")
+	password := c.DefaultPostForm("username", "000000") // 可设置默认值
+
+	c.JSON(http.StatusOK, gin.H{
+		"id":       id,
+		"page":     page,
+		"username": username,
+		"password": password,
+	})
+})
+//分组路由
+// group: v1
+v1 := r.Group("/v1")
+{
+	v1.GET("/posts", defaultHandler)
+	v1.GET("/series", defaultHandler)
+}
+// group: v2
+v2 := r.Group("/v2")
+{
+	v2.GET("/posts", defaultHandler)
+	v2.GET("/series", defaultHandler)
+}
+```
+
 ### go1.18 insecure
 
 在go1.17版本下废弃了insecure flag，需要显示声明两个环境变量才能继续使用——

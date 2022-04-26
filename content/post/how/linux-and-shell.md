@@ -1547,7 +1547,7 @@ Codename:       bionic
 - [CentOS7] 3.10.x-x
 - [CentOS8] 4.18.0-x
 
-### CentOS 7虚拟机修改IP地址
+### CentOS 7虚拟机修改静态IP地址
 
 ```shell
 # root 权限

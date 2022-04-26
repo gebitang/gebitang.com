@@ -2591,6 +2591,18 @@ test@pp:/data/itestin-m# du -h --max-depth=1 .
 29G	.
 ```
 
+### soft lockup
+
+>Message from syslogd@master at Apr 24 23:57:33 ...
+> kernel:watchdog: BUG: soft lockup - CPU#1 stuck for 1747s! [kube-apiserver:22771]
+
+原因：CPU陷入内核模式超过10秒没有跳出执行其他任务，watchdog将发生这个消息。
+
+>A 'soft lockup' is defined as a bug that causes the kernel to loop in kernel mode for more than 20 seconds without giving other tasks a chance to run.
+>The watchdog daemon will send an non-maskable interrupt (NMI) to all CPUs in the system who, in turn, print the stack traces of their currently running tasks.
+
+[参考](https://www.suse.com/support/kb/doc/?id=000018705)
+
 ### grep 之后只显示部分行数 grep '' | head -200
 
 ### 处理 Binary file xxx.log matches

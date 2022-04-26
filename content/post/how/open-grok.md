@@ -388,6 +388,13 @@ server {
 
 [Opengrok SSO configuration: issue #3189](https://github.com/oracle/opengrok/issues/3189)
 
+
+如果提示`nginx: [error] invalid PID number in "/run/nginx.pid"`——
+
+- 重新指定配置项 `nginx -c /etc/nginx/nginx.conf`
+- 检查配置项有效性`nginx -t`
+- 重新加载配置`nginx -s reload`
+
 ### 使用API搜索
 
 - 配置了nginx的basic认证时，可以通过url传递认证参数调用实际的search请求

@@ -571,9 +571,48 @@ ingress-nginx-controller-5c8d66c76d-fgvpb   1/1     Running     0          90s
 
 CRD: `CustomResourceDefinition`, Custom code that defines a resource to add to your Kubernetes API server without building a complete custom server.
 
-[2021-05-04版本](http://bingerambo.com/posts/2021/05/k8s%E4%B8%AD%E7%9A%84crd%E5%BC%80%E5%8F%91)流程。依赖[code-generator](https://github.com/kubernetes/code-generator)，官方示例[sample-controller](https://github.com/kubernetes/sample-controller)，也可以参考[K8s Client代码自动生成](http://ljchen.net/2019/06/14/K8s-client%E4%BB%A3%E7%A0%81%E8%87%AA%E5%8A%A8%E7%94%9F%E6%88%90/)
+官方[sample-controller](https://github.com/kubernetes/sample-controller)有针对各个时期的版本说明。
+
+[2021-05-04版本](http://bingerambo.com/posts/2021/05/k8s%E4%B8%AD%E7%9A%84crd%E5%BC%80%E5%8F%91)流程。依赖[code-generator](https://github.com/kubernetes/code-generator)，也可以参考[K8s Client代码自动生成](http://ljchen.net/2019/06/14/K8s-client%E4%BB%A3%E7%A0%81%E8%87%AA%E5%8A%A8%E7%94%9F%E6%88%90/)
 
 使用代码生成器生成的api兼容标准的k8s api，操作动作相同。
+
+流程概述——自定义资源文件之后，利用`code-generator`生成客户端代码（处理成类似client-go封装标准资源的逻辑，例如可以get、list、watch等）  
+
+第一、 生成框架代码结构。 
+
+- 最顶层的register.go定义了groupName；
+- 在版本号目录下又有三个文件：
+  - doc.go定义了版本的包名；
+  - types.go定义资源的数据结构；
+  - register.go真正用于注册该版本下的资源。
+
+第二、 使用`code-generator`提供的脚本生成客户端代码，后续自己的controller逻辑就可以直接调用这个客户端代码。
+
+```shell
+~/gopath/src/k8s.io/project> tree
+.
+└── pkg
+    └── apis
+        └── controller
+            ├── register.go
+            └── v1
+                ├── doc.go
+                ├── register.go
+                └── types.go
+# 生成代码   
+~$ pwd
+~$ /gopath/src/k8s.io
+~$ $GOPATH/src/k8s.io/code-generator/generate-groups.sh all \ 
+   k8s.io/project/pkg/generated \  # 注意路径
+   k8s.io/project/pkg/apis \  
+   controller:v1
+
+Generating deepcopy funcs
+Generating clientset for controller:v1 at k8s.io/project/pkg/generated/clientset
+Generating listers for controller:v1 at k8s.io/project/pkg/generated/listers
+Generating informers for controller:v1 at k8s.io/project/pkg/generated/informers             
+```
 
 
 ### setup with dashboard

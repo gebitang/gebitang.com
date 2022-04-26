@@ -48,7 +48,7 @@ zone set
 zone list
         List all zones set on this cluster.
 
-#查看用户信息
+#查看用户信息，包含了用户的认证信息
 radosgw-admin user info --uid=npm
 
 ```

@@ -39,7 +39,15 @@ toc = true
 
 ## k8s practice
 
-### 
+### 证书管理
+
+通过 kubeadm 安装的 Kubernetes，所有证书都存放在 `/etc/kubernetes/pki` 目录下
+
+- [手动轮换 CA 证书](https://kubernetes.io/zh/docs/tasks/tls/manual-rotation-of-ca-certificates/)
+- [PKI 证书和要求](https://kubernetes.io/zh/docs/setup/best-practices/certificates)
+
+
+### 安装lxcfs服务
 
 ```shell
 # 安装
@@ -525,10 +533,15 @@ kubeadm join 192.168.10.101:6443 --token sb4nsd.o4c2svxc6ey18vzv \
 
 默认添加的node节点没有roles的描述信息，可以通过`label`命令指定或重新，[参考](https://stackoverflow.com/questions/48854905/how-to-add-roles-to-nodes-in-kubernetes)
 
-```
+```shell
 kubectl label nodes <your_node> kubernetes.io/role=<your_label>
 kubectl label --overwrite nodes <your_node> kubernetes.io/role=<your_new_label>
+
+# To print a join command for worker/slave node
+kubeadm token create --print-join-command
 ```
+
+[worker节点加入集群](https://stackoverflow.com/questions/51126164/how-do-i-find-the-join-command-for-kubeadm-on-the-master)
 
 ### wsl2 时间同步
 

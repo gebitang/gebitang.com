@@ -39,6 +39,18 @@ toc = true
 
 ## k8s practice
 
+### 创建configMap 
+
+
+```shell
+# kc create configmap --help查看
+# 生成configmap文件
+kubectl create configmap --dry-run=true saber.yml --from-file=./saber.yml --output yaml
+
+kubectl create configmap --dry-run=true pool.conf --from-file=./nginx.conf --output yaml > bridgeconfig.yml
+```
+
+
 ### 证书管理
 
 通过 kubeadm 安装的 Kubernetes，所有证书都存放在 `/etc/kubernetes/pki` 目录下

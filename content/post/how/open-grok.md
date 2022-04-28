@@ -395,6 +395,19 @@ server {
 - 检查配置项有效性`nginx -t`
 - 重新加载配置`nginx -s reload`
 
+### nginx 报错
+
+`websocket wss failed: Error during WebSocket handshake: Unexpected response code: 403`
+
+对应的server项目配置添加
+```
+proxy_set_header Origin '';
+proxy_http_version 1.1;
+proxy_set_header Upgrade $http_upgrade;
+proxy_set_header Connection "upgrade";
+
+```
+
 ### 使用API搜索
 
 - 配置了nginx的basic认证时，可以通过url传递认证参数调用实际的search请求

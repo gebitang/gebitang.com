@@ -1601,6 +1601,22 @@ sys     0m0.940s
 - 可以使用yes命令，`yes | cp -rf xxx yyy`
 - 或者使用绝对路径 `/bin/cp -rf xxx yyy`
 
+### nohup 与 & 
+
+[What's the difference between nohup and ampersand](https://stackoverflow.com/questions/15595374/whats-the-difference-between-nohup-and-ampersand) 
+
+- 使用&执行命令，当命令行退出时，当前shell执行的所有命令都将收到挂断(hangup,`SIGHUP`)信号。即执行的脚本会被强制退出
+- 使用nohub执行时，挂断信号被nohub接受并忽略掉，所有执行的shell命令不会被挂断。除非被调用的进程重新连接了HANGUP信号(the called process reconnects the HANGUP signal)[参考说明](https://stackoverflow.com/questions/12486691/how-do-i-get-my-golang-web-server-to-run-in-the-background/12486810#12486810)
+
+但是，如果shell命令配置了`huponexit off`的选项，那么使用&执行的命令并不会在shell窗口退出后被中断。
+
+- `shopt`是内置的shell配置选项。直接执行可以看到当前shell有多少个选项。或通过`shopt |wc`查看
+- 可以通过`shopt -s huponexit`即`-s set or enable`选项打开对应的选项。`shopt -s`查看所有打开的选项
+- 可以通过`shopt -u huponexit`即`-u unset or disable`选项关闭对应的选项。`shotp -u`查看所有关闭的选项
+- 直接跟选项名称则查看当前选项的状态，例如`shopt huponexit`
+
+更多shopt参考[How to Customize the Bash Shell With shopt](https://www.howtogeek.com/691980/how-to-customize-the-bash-shell-with-shopt/)
+
 ### 查找网站ip 
 
 ```

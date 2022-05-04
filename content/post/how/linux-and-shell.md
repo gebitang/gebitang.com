@@ -1617,6 +1617,11 @@ sys     0m0.940s
 
 更多shopt参考[How to Customize the Bash Shell With shopt](https://www.howtogeek.com/691980/how-to-customize-the-bash-shell-with-shopt/)
 
+看手册，看手册，看手册。 
+
+- nohup - run a command immune to hangups, with output to a non-tty
+- tty - print the file name of the terminal connected to standard input
+
 ### 查找网站ip 
 
 ```

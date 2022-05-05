@@ -37,7 +37,264 @@ toc = true
   "pure-u-1-1|https://s3-img.meituan.net/v1/mss_3d027b52ec5a4d589e68050845611e68/ff/n0/0n/34/dp_301168.jpg|OCI"
 >}}
 
+## k8s 搭建
+
+{{< fluid_imgs
+  "pure-u-1-1|https://s3-img.meituan.net/v1/mss_3d027b52ec5a4d589e68050845611e68/ff/n0/0n/5f/sa_507404.jpg|kubernetes"
+>}}
+
+在CentOS机器上安装，配置1个master+2个node机器
+
+### 前置配置
+
+- 关闭防火墙 （保证网络通畅）
+- 关闭`swap`分区（防止kubelet重启失败）
+- 设置主机名（master节点可识别到各个node名称）
+- 添加hosts解析 （将集群所有的ip和对应的主机名添加到各自的hosts文件中国）
+- 打开`ipv6`流量转发
+- 配置国内镜像源
+- 时间同步服务
+
+操作过程——
+
+```shell
+# close firewall
+systemctl disable --now firewalld
+setenforce 0
+sed -i 's/enforcing/disabled/' /etc/selinux/config 
+
+# close swap 
+# comment the line contain swap config in 
+swapoff -a
+sed -i.bak 's/^.*centos-swap/#&/g' /etc/fstab
+
+# set host name
+hostnamectl set-hostname master
+
+# add file /etc/sysctl.d/k8s.conf  with following content
+net.ipv4.ip_forward = 1
+net.bridge.bridge-nf-call-ip6tables = 1
+net.bridge.bridge-nf-call-iptables = 1
+# make it work at once
+sysctl --system 
+
+# config native yum repo.
+mv /etc/yum.repos.d/* /tmp # back up first
+curl -o /etc/yum.repos.d/CentOS-Base.repo https://mirrors.aliyun.com/repo/Centos-7.repo
+curl -o /etc/yum.repos.d/epel.repo http://mirrors.aliyun.com/repo/epel-7.repo
+
+# sync time
+ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
+yum install dnf ntpdate -y # install dnf 
+dnf makecache
+ntpdate ntp.aliyun.com
+```
+
+#### dnf 
+
+DNF(Dandified Yum)是新一代的RPM软件包管理器
+
+```
+# 列出所有 RPM 包
+dnf list
+
+# 安装软件包
+dnf install wget
+
+# 删除软件包
+dnf remove wget
+
+# 查看所有的软件包组
+dnf grouplist
+
+# 安装一个软件包组
+dnf groupinstall ‘安全性工具’
+
+# 查看系统中可用的 DNF 软件库
+dnf repolist
+
+# 查看系统中可用和不可用的所有的 DNF 软件库
+dnf repolist all
+
+# 列出所有安装了的 RPM 包
+dnf list installed
+
+# 列出所有可供安装的 RPM 包
+dnf list available
+
+# 搜索软件库中的 RPM 包
+dnf search wget
+
+# 查找某一文件的提供者
+dnf provides /bin/bash
+
+# 查看软件包详情
+dnf info wget
+
+# 删除无用孤立的软件包
+dnf autoremove
+
+# 删除缓存的无用软件包
+dnf clean all
+
+# 获取有关某条命令的使用帮助
+dnf help clean
+
+# 查看 DNF 命令的执行历史
+dnf history
+
+# 从特定的软件包库安装特定的软件
+dnf -enablerepo=epel install nginx
+
+# 重新安装特定软件包
+dnf reinstall wget
+```
+
+### 安装docker服务
+
+- 配置国内源
+- 安装并设置开机启动
+- 检查版本
+- 配置docker的镜像仓库
+
+```shell
+# add native repo
+curl -o /etc/yum.repos.d/docker-ce.repo https://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo
+
+# install by dnf 
+dnf install -y  docker-ce docker-ce-cli
+
+# config auto start
+systemctl enable --now docker
+
+#check version
+docker --version 
+
+# add customed repo for docker. 
+cat > /etc/docker/daemon.json << EOF
+{
+  "registry-mirrors": ["https://f1bhsuge.mirror.aliyuncs.com"]
+}
+EOF
+
+systemctl restart docker
+```
+
+### 安装kubernetes服务
+
+- 配置国内源
+- 安装组件kubeadm、kubelet、kubectl
+- 设置开始启动 `systemctl enable kubelet`
+
+```shell
+cat > /etc/yum.repos.d/kubernetes.repo << EOF
+[kubernetes]
+name=Kubernetes
+baseurl=https://mirrors.aliyun.com/kubernetes/yum/repos/kubernetes-el7-x86_64
+enabled=1
+gpgcheck=0
+repo_gpgcheck=0
+gpgkey=https://mirrors.aliyun.com/kubernetes/yum/doc/yum-key.gpg https://mirrors.aliyun.com/kubernetes/yum/doc/rpm-package-key.gpg
+EOF
+
+# show version
+dnf list kubeadm --showduplicates
+# packename+version name
+dnf install -y kubelet-1.20.10 kubeadm-1.20.10 kubectl-1.20.10
+
+# auto start
+systemctl enable kubelet
+```
+
+### 部署集群
+
+- 生成预处理文件
+- 预拉取镜像
+- 部署主节点
+- 生成加入节点命令
+
+```shell
+# pre-config 
+kubeadm config print init-defaults > kubeadm-init.yaml
+
+# pull image first 
+kubeadm config images pull --config kubeadm-init.yaml
+
+# start buildup master
+kubeadm init --config kubeadm-init.yaml
+
+# To print a join command for worker/slave node
+kubeadm token create --print-join-command
+```
+
+```yaml
+apiVersion: kubeadm.k8s.io/v1beta2
+bootstrapTokens:
+- groups:
+  - system:bootstrappers:kubeadm:default-node-token
+  token: abcdef.0123456789abcdef
+  ttl: 24h0m0s
+  usages:
+  - signing
+  - authentication
+kind: InitConfiguration
+localAPIEndpoint:
+  advertiseAddress: 192.168.50.200 #address						     
+  bindPort:  6443 #port
+nodeRegistration:
+  criSocket: /var/run/dockershim.sock
+  name: master
+  taints:
+  - effect: NoSchedule
+    key: node-role.kubernetes.io/master
+---
+apiServer:
+  timeoutForControlPlane: 4m0s
+apiVersion: kubeadm.k8s.io/v1beta2
+certificatesDir: /etc/kubernetes/pki
+clusterName: kubernetes
+controllerManager: {}
+dns:
+  type: CoreDNS
+etcd:
+  local:
+    dataDir: /var/lib/etcd
+imageRepository: registry.cn-hangzhou.aliyuncs.com/google_containers   #阿里云的镜像站点
+kind: ClusterConfiguration
+kubernetesVersion: v1.20.10			#kubernetes版本号
+networking:
+  dnsDomain: cluster.local	
+  serviceSubnet: 192.168.99.0/24		#选择默认即可，当然也可以自定义CIDR
+  podSubnet: 192.168.98.0/24			#添加pod网段
+scheduler: {}
+```
+
+### 后置检查检查
+
+确保对应点docker、kubelet服务正常启动，防火墙关闭，swap分区关闭(防止kubelet启动失败)、端口没有占用。查看对应服务日志，例如`journalctl -xeu kubelet`
+
+### 删除集群
+
+- 重置集群
+- 删除对应配置
+
+```shell
+# reset 
+kubeadm reset
+
+# delete related files
+rm -rf /var/lib/kubelet
+rm -rf /etc/kubernetes
+```
+
+
 ## k8s practice
+
+### 断电重启问题
+
+表明上提示`The connection to the server master:6443 was refused - did you specify the right host or port?`
+
+
 
 ### 创建configMap 
 
@@ -548,9 +805,6 @@ kubeadm join 192.168.10.101:6443 --token sb4nsd.o4c2svxc6ey18vzv \
 ```shell
 kubectl label nodes <your_node> kubernetes.io/role=<your_label>
 kubectl label --overwrite nodes <your_node> kubernetes.io/role=<your_new_label>
-
-# To print a join command for worker/slave node
-kubeadm token create --print-join-command
 ```
 
 [worker节点加入集群](https://stackoverflow.com/questions/51126164/how-do-i-find-the-join-command-for-kubeadm-on-the-master)

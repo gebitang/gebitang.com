@@ -269,6 +269,58 @@ networking:
 scheduler: {}
 ```
 
+### 安装网络插件
+
+没有网络插件的集群基本不可用，通常使用calico，测试集群node小于50可直接使用[官方手册](https://projectcalico.docs.tigera.io/getting-started/kubernetes/self-managed-onprem/onpremises)
+
+```shell
+# download
+curl https://projectcalico.docs.tigera.io/manifests/calico.yaml -O
+# apply
+kubectl apply -f calico.yaml
+```
+
+### 架构检查
+
+安装完成后，集群中启动的容器大概包括以下内容——除了网络相关的内容，可以看到架构图上的内容都有对应的容器
+
+```shell
+# docker images 
+calico/kube-controllers      v3.22.1   c0c6672a66a5   2 months ago   132MB
+calico/cni                   v3.22.1   2a8ef6985a3e   2 months ago   236MB
+calico/pod2daemon-flexvol    v3.22.1   17300d20daf9   2 months ago   19.7MB
+calico/node                  v3.22.1   7a71aca7b60f   2 months ago   198MB
+kube-proxy                   v1.17.0   7d54289267dc   2 years ago    116MB
+kube-scheduler               v1.17.0   78c190f736b1   2 years ago    94.4MB
+kube-apiserver               v1.17.0   0cae8d5cc64c   2 years ago    171MB
+kube-controller-manager      v1.17.0   5eb3b7486872   2 years ago    161MB
+coredns                      1.6.5     70f311871ae1   2 years ago    41.6MB
+etcd                         3.4.3-0   303ce5db0e90   2 years ago    288MB
+pause                        3.1       da86e6ba6ca1   4 years ago    742kB
+
+# docker ps = docker container ls
+CONTAINER ID   IMAGE                                                           COMMAND                  CREATED       STATUS       PORTS     NAMES
+7681553c1375   0cae8d5cc64c                                                    "kube-apiserver --ad…"   2 hours ago   Up 2 hours             k8s_kube-apiserver_kube-apiserver-master_kube-system_3595fcec3afd46524fa623e9083e8e2b_88
+1f6af2af6504   303ce5db0e90                                                    "etcd --advertise-cl…"   2 hours ago   Up 2 hours             k8s_etcd_etcd-master_kube-system_3c0c04a4c2e1acb0e625dcf83a547310_108
+e6250d39a65c   78c190f736b1                                                    "kube-scheduler --au…"   3 hours ago   Up 3 hours             k8s_kube-scheduler_kube-scheduler-master_kube-system_75516e998e1ab97384d969d8ccd139db_55
+18c4a40b1c4f   registry.cn-hangzhou.aliyuncs.com/google_containers/pause:3.1   "/pause"                 3 hours ago   Up 3 hours             k8s_POD_kube-scheduler-master_kube-system_75516e998e1ab97384d969d8ccd139db_3
+95fb0ecc7f06   5eb3b7486872                                                    "kube-controller-man…"   3 hours ago   Up 3 hours             k8s_kube-controller-manager_kube-controller-manager-master_kube-system_ab2c4278e88f8bade2b4f3742e6fba77_57
+b7b9eb44f106   registry.cn-hangzhou.aliyuncs.com/google_containers/pause:3.1   "/pause"                 3 hours ago   Up 3 hours             k8s_POD_kube-controller-manager-master_kube-system_ab2c4278e88f8bade2b4f3742e6fba77_3
+1e5402dc33eb   registry.cn-hangzhou.aliyuncs.com/google_containers/pause:3.1   "/pause"                 3 hours ago   Up 3 hours             k8s_POD_kube-apiserver-master_kube-system_3595fcec3afd46524fa623e9083e8e2b_3
+0ae0fee45898   registry.cn-hangzhou.aliyuncs.com/google_containers/pause:3.1   "/pause"                 3 hours ago   Up 3 hours             k8s_POD_etcd-master_kube-system_3c0c04a4c2e1acb0e625dcf83a547310_3
+```
+
+#### pause容器
+
+- 镜像非常小，目前在 700KB 左右
+- 永远处于 Pause (暂停) 状态
+- 在 pod 中担任 Linux 命名空间共享的基础；
+- 启用 pid 命名空间，开启 init 进程。
+
+完成pod里的多个容器的网络共享：使用统一个网络、同一个ip
+
+参考[Pause 容器](https://jimmysong.io/kubernetes-handbook/concepts/pause-container.html)或[The Almighty Pause Container](https://www.ianlewis.org/en/almighty-pause-container)
+
 ### 后置检查检查
 
 确保对应点docker、kubelet服务正常启动，防火墙关闭，swap分区关闭(防止kubelet启动失败)、端口没有占用。查看对应服务日志，例如`journalctl -xeu kubelet`
@@ -292,7 +344,8 @@ rm -rf /etc/kubernetes
 
 ### 断电重启问题
 
-表明上提示`The connection to the server master:6443 was refused - did you specify the right host or port?`
+表明上提示`The connection to the server master:6443 was refused - did you specify the right host or port?`，最终实际上是因为apiserver无法连接etcd导致容器退出。
+
 
 
 

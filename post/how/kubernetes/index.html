@@ -7,7 +7,210 @@
 <a class=post-taxonomy-topic href=http://gebitang.com/topics/kubernetes>kubernetes</a>&nbsp;/
 <a class=post-taxonomy-topic href=http://gebitang.com/topics/k8s>k8s</a></div><div><i class="fa fa-tags fa-fw"></i>
 <a class=post-taxonomy-tag href=http://gebitang.com/tags/kubernetes>kubernetes</a>&nbsp;/
-<a class=post-taxonomy-tag href=http://gebitang.com/tags/k8s>k8s</a></div></div><nav id=TableOfContents><ul><li><a href=#k8s-practice>k8s practice</a><ul><li><a href=#创建configmap>创建configMap</a></li><li><a href=#证书管理>证书管理</a></li><li><a href=#安装lxcfs服务>安装lxcfs服务</a></li><li><a href=#强制删除pod>强制删除pod</a></li><li><a href=#deployment的字段含义>deployment的字段含义</a></li><li><a href=#拉取镜像卡住>拉取镜像卡住</a></li><li><a href=#问题排查流程>问题排查流程</a></li><li><a href=#kubectl-cp---help>kubectl cp &ndash;help</a></li><li><a href=#获取网关信息>获取网关信息：</a></li><li><a href=#deployment>deployment</a></li><li><a href=#display-all-kubernetes-objects>display all kubernetes objects</a></li><li><a href=#部署ingress-nginx>部署ingress-nginx</a><ul><li><a href=#1x-vs-0x-branch>1.x VS. 0.x Branch</a></li></ul></li><li><a href=#informers>informers</a></li></ul></li><li><a href=#tasks>tasks</a><ul><li><a href=#更新daemonset>更新DaemonSet</a></li><li><a href=#管理内存cpu配额>管理内存、CPU、配额</a></li></ul></li><li><a href=#start-over>start over</a><ul><li><a href=#虚拟机环境>虚拟机环境</a></li><li><a href=#纯手工搭建环境>纯手工搭建环境</a></li><li><a href=#wsl2-时间同步>wsl2 时间同步</a></li><li><a href=#kubernetes-tutorial>Kubernetes Tutorial</a></li><li><a href=#k8s中的crd开发>K8S中的CRD开发</a></li><li><a href=#setup-with-dashboard>setup with dashboard</a></li><li><a href=#wsldocker的限制>WSL+Docker的限制</a></li></ul></li><li><a href=#archive>archive</a><ul><li><a href=#wsl2--kubernetes>WSL2 + Kubernetes</a></li><li><a href=#errors-were-encountered-while-processing--ubuntu-advantage-tools>Errors were encountered while processing: ubuntu-advantage-tools</a></li><li><a href=#前提环境>前提环境</a></li></ul></li></ul></nav><div class=pure-g><div class=pure-u-1-1><div style="padding:0 .2em"><a href=https://time.geekbang.org/column/article/23132 target=_blank><img class=pure-img-responsive src=https://static001.geekbang.org/resource/image/8e/67/8ee9f2fa987eccb490cfaa91c6484f67.png alt title=Kubernetes项目架构></a></div></div></div><ul><li>OCI: Open Container Initiative</li><li>CNI: Container Network Interface</li><li>CRI: Container Runtime Interface</li><li>CSI: Container Storage Interface</li></ul><p><a href=https://mp.weixin.qq.com/s/NYhUQqaN9v1s36EHqpw-kA>OCI运行时规范</a></p><ul><li>符合 CRI 标准的 containerd，以及底层的 runC，都是从Docker 项目中分拆出来。<ul><li>2015 年OCI成立之初，Docker 的 libcontainer 项目被捐赠给OCI，成为独立的容器运行时项目 runC</li><li>2017年，Docker公司高层容器运行时的功能集中到containerd项目里，捐赠给云原生计算基金会。</li><li>Docker 引擎在发布时是一个单体应用，后来按功能分拆成 runC 和 containerd 两个不同层次的运行时。</li></ul></li><li>CRI-O是替代Docker或者containerd的高效且轻量级的容器运行时方案，是CRI的一个实现，能够运行符合OCI规范的容器，所以被称为CRI-O。</li></ul><div class=pure-g><div class=pure-u-1-1><div style="padding:0 .2em"><a href target=_blank><img class=pure-img-responsive src=https://s3-img.meituan.net/v1/mss_3d027b52ec5a4d589e68050845611e68/ff/n0/0n/34/dp_301168.jpg alt title=OCI></a></div></div></div><h2 id=k8s-practice>k8s practice</h2><h3 id=创建configmap>创建configMap</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=display:flex><span><span style=color:#75715e># kc create configmap --help查看</span>
+<a class=post-taxonomy-tag href=http://gebitang.com/tags/k8s>k8s</a></div></div><nav id=TableOfContents><ul><li><a href=#k8s-搭建>k8s 搭建</a><ul><li><a href=#前置配置>前置配置</a><ul><li><a href=#dnf>dnf</a></li></ul></li><li><a href=#安装docker服务>安装docker服务</a></li><li><a href=#安装kubernetes服务>安装kubernetes服务</a></li><li><a href=#部署集群>部署集群</a></li><li><a href=#安装网络插件>安装网络插件</a></li><li><a href=#架构检查>架构检查</a><ul><li><a href=#pause容器>pause容器</a></li></ul></li><li><a href=#后置检查检查>后置检查检查</a></li><li><a href=#删除集群>删除集群</a></li></ul></li><li><a href=#k8s-practice>k8s practice</a><ul><li><a href=#断电重启问题>断电重启问题</a></li><li><a href=#创建configmap>创建configMap</a></li><li><a href=#证书管理>证书管理</a></li><li><a href=#安装lxcfs服务>安装lxcfs服务</a></li><li><a href=#强制删除pod>强制删除pod</a></li><li><a href=#deployment的字段含义>deployment的字段含义</a></li><li><a href=#拉取镜像卡住>拉取镜像卡住</a></li><li><a href=#问题排查流程>问题排查流程</a></li><li><a href=#kubectl-cp---help>kubectl cp &ndash;help</a></li><li><a href=#获取网关信息>获取网关信息：</a></li><li><a href=#deployment>deployment</a></li><li><a href=#display-all-kubernetes-objects>display all kubernetes objects</a></li><li><a href=#部署ingress-nginx>部署ingress-nginx</a><ul><li><a href=#1x-vs-0x-branch>1.x VS. 0.x Branch</a></li></ul></li><li><a href=#informers>informers</a></li></ul></li><li><a href=#tasks>tasks</a><ul><li><a href=#更新daemonset>更新DaemonSet</a></li><li><a href=#管理内存cpu配额>管理内存、CPU、配额</a></li></ul></li><li><a href=#start-over>start over</a><ul><li><a href=#虚拟机环境>虚拟机环境</a></li><li><a href=#纯手工搭建环境>纯手工搭建环境</a></li><li><a href=#wsl2-时间同步>wsl2 时间同步</a></li><li><a href=#kubernetes-tutorial>Kubernetes Tutorial</a></li><li><a href=#k8s中的crd开发>K8S中的CRD开发</a></li><li><a href=#setup-with-dashboard>setup with dashboard</a></li><li><a href=#wsldocker的限制>WSL+Docker的限制</a></li></ul></li><li><a href=#archive>archive</a><ul><li><a href=#wsl2--kubernetes>WSL2 + Kubernetes</a></li><li><a href=#errors-were-encountered-while-processing--ubuntu-advantage-tools>Errors were encountered while processing: ubuntu-advantage-tools</a></li><li><a href=#前提环境>前提环境</a></li></ul></li></ul></nav><div class=pure-g><div class=pure-u-1-1><div style="padding:0 .2em"><a href=https://time.geekbang.org/column/article/23132 target=_blank><img class=pure-img-responsive src=https://static001.geekbang.org/resource/image/8e/67/8ee9f2fa987eccb490cfaa91c6484f67.png alt title=Kubernetes项目架构></a></div></div></div><ul><li>OCI: Open Container Initiative</li><li>CNI: Container Network Interface</li><li>CRI: Container Runtime Interface</li><li>CSI: Container Storage Interface</li></ul><p><a href=https://mp.weixin.qq.com/s/NYhUQqaN9v1s36EHqpw-kA>OCI运行时规范</a></p><ul><li>符合 CRI 标准的 containerd，以及底层的 runC，都是从Docker 项目中分拆出来。<ul><li>2015 年OCI成立之初，Docker 的 libcontainer 项目被捐赠给OCI，成为独立的容器运行时项目 runC</li><li>2017年，Docker公司高层容器运行时的功能集中到containerd项目里，捐赠给云原生计算基金会。</li><li>Docker 引擎在发布时是一个单体应用，后来按功能分拆成 runC 和 containerd 两个不同层次的运行时。</li></ul></li><li>CRI-O是替代Docker或者containerd的高效且轻量级的容器运行时方案，是CRI的一个实现，能够运行符合OCI规范的容器，所以被称为CRI-O。</li></ul><div class=pure-g><div class=pure-u-1-1><div style="padding:0 .2em"><a href target=_blank><img class=pure-img-responsive src=https://s3-img.meituan.net/v1/mss_3d027b52ec5a4d589e68050845611e68/ff/n0/0n/34/dp_301168.jpg alt title=OCI></a></div></div></div><h2 id=k8s-搭建>k8s 搭建</h2><div class=pure-g><div class=pure-u-1-1><div style="padding:0 .2em"><a href target=_blank><img class=pure-img-responsive src=https://s3-img.meituan.net/v1/mss_3d027b52ec5a4d589e68050845611e68/ff/n0/0n/5f/sa_507404.jpg alt title=kubernetes></a></div></div></div><p>在CentOS机器上安装，配置1个master+2个node机器</p><h3 id=前置配置>前置配置</h3><ul><li>关闭防火墙 （保证网络通畅）</li><li>关闭<code>swap</code>分区（防止kubelet重启失败）</li><li>设置主机名（master节点可识别到各个node名称）</li><li>添加hosts解析 （将集群所有的ip和对应的主机名添加到各自的hosts文件中国）</li><li>打开<code>ipv6</code>流量转发</li><li>配置国内镜像源</li><li>时间同步服务</li></ul><p>操作过程——</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=display:flex><span><span style=color:#75715e># close firewall</span>
+</span></span><span style=display:flex><span>systemctl disable --now firewalld
+</span></span><span style=display:flex><span>setenforce <span style=color:#ae81ff>0</span>
+</span></span><span style=display:flex><span>sed -i <span style=color:#e6db74>&#39;s/enforcing/disabled/&#39;</span> /etc/selinux/config 
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># close swap </span>
+</span></span><span style=display:flex><span><span style=color:#75715e># comment the line contain swap config in </span>
+</span></span><span style=display:flex><span>swapoff -a
+</span></span><span style=display:flex><span>sed -i.bak <span style=color:#e6db74>&#39;s/^.*centos-swap/#&amp;/g&#39;</span> /etc/fstab
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># set host name</span>
+</span></span><span style=display:flex><span>hostnamectl set-hostname master
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># add file /etc/sysctl.d/k8s.conf  with following content</span>
+</span></span><span style=display:flex><span>net.ipv4.ip_forward <span style=color:#f92672>=</span> <span style=color:#ae81ff>1</span>
+</span></span><span style=display:flex><span>net.bridge.bridge-nf-call-ip6tables <span style=color:#f92672>=</span> <span style=color:#ae81ff>1</span>
+</span></span><span style=display:flex><span>net.bridge.bridge-nf-call-iptables <span style=color:#f92672>=</span> <span style=color:#ae81ff>1</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># make it work at once</span>
+</span></span><span style=display:flex><span>sysctl --system 
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># config native yum repo.</span>
+</span></span><span style=display:flex><span>mv /etc/yum.repos.d/* /tmp <span style=color:#75715e># back up first</span>
+</span></span><span style=display:flex><span>curl -o /etc/yum.repos.d/CentOS-Base.repo https://mirrors.aliyun.com/repo/Centos-7.repo
+</span></span><span style=display:flex><span>curl -o /etc/yum.repos.d/epel.repo http://mirrors.aliyun.com/repo/epel-7.repo
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># sync time</span>
+</span></span><span style=display:flex><span>ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
+</span></span><span style=display:flex><span>yum install dnf ntpdate -y <span style=color:#75715e># install dnf </span>
+</span></span><span style=display:flex><span>dnf makecache
+</span></span><span style=display:flex><span>ntpdate ntp.aliyun.com
+</span></span></code></pre></div><h4 id=dnf>dnf</h4><p>DNF(Dandified Yum)是新一代的RPM软件包管理器</p><pre tabindex=0><code># 列出所有 RPM 包
+dnf list
+
+# 安装软件包
+dnf install wget
+
+# 删除软件包
+dnf remove wget
+
+# 查看所有的软件包组
+dnf grouplist
+
+# 安装一个软件包组
+dnf groupinstall ‘安全性工具’
+
+# 查看系统中可用的 DNF 软件库
+dnf repolist
+
+# 查看系统中可用和不可用的所有的 DNF 软件库
+dnf repolist all
+
+# 列出所有安装了的 RPM 包
+dnf list installed
+
+# 列出所有可供安装的 RPM 包
+dnf list available
+
+# 搜索软件库中的 RPM 包
+dnf search wget
+
+# 查找某一文件的提供者
+dnf provides /bin/bash
+
+# 查看软件包详情
+dnf info wget
+
+# 删除无用孤立的软件包
+dnf autoremove
+
+# 删除缓存的无用软件包
+dnf clean all
+
+# 获取有关某条命令的使用帮助
+dnf help clean
+
+# 查看 DNF 命令的执行历史
+dnf history
+
+# 从特定的软件包库安装特定的软件
+dnf -enablerepo=epel install nginx
+
+# 重新安装特定软件包
+dnf reinstall wget
+</code></pre><h3 id=安装docker服务>安装docker服务</h3><ul><li>配置国内源</li><li>安装并设置开机启动</li><li>检查版本</li><li>配置docker的镜像仓库</li></ul><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=display:flex><span><span style=color:#75715e># add native repo</span>
+</span></span><span style=display:flex><span>curl -o /etc/yum.repos.d/docker-ce.repo https://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># install by dnf </span>
+</span></span><span style=display:flex><span>dnf install -y  docker-ce docker-ce-cli
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># config auto start</span>
+</span></span><span style=display:flex><span>systemctl enable --now docker
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#check version</span>
+</span></span><span style=display:flex><span>docker --version 
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># add customed repo for docker. </span>
+</span></span><span style=display:flex><span>cat &gt; /etc/docker/daemon.json <span style=color:#e6db74>&lt;&lt; EOF
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>{
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>  &#34;registry-mirrors&#34;: [&#34;https://f1bhsuge.mirror.aliyuncs.com&#34;]
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>}
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>EOF</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>systemctl restart docker
+</span></span></code></pre></div><h3 id=安装kubernetes服务>安装kubernetes服务</h3><ul><li>配置国内源</li><li>安装组件kubeadm、kubelet、kubectl</li><li>设置开始启动 <code>systemctl enable kubelet</code></li></ul><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=display:flex><span>cat &gt; /etc/yum.repos.d/kubernetes.repo <span style=color:#e6db74>&lt;&lt; EOF
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>[kubernetes]
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>name=Kubernetes
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>baseurl=https://mirrors.aliyun.com/kubernetes/yum/repos/kubernetes-el7-x86_64
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>enabled=1
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>gpgcheck=0
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>repo_gpgcheck=0
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>gpgkey=https://mirrors.aliyun.com/kubernetes/yum/doc/yum-key.gpg https://mirrors.aliyun.com/kubernetes/yum/doc/rpm-package-key.gpg
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>EOF</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># show version</span>
+</span></span><span style=display:flex><span>dnf list kubeadm --showduplicates
+</span></span><span style=display:flex><span><span style=color:#75715e># packename+version name</span>
+</span></span><span style=display:flex><span>dnf install -y kubelet-1.20.10 kubeadm-1.20.10 kubectl-1.20.10
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># auto start</span>
+</span></span><span style=display:flex><span>systemctl enable kubelet
+</span></span></code></pre></div><h3 id=部署集群>部署集群</h3><ul><li>生成预处理文件</li><li>预拉取镜像</li><li>部署主节点</li><li>生成加入节点命令</li></ul><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=display:flex><span><span style=color:#75715e># pre-config </span>
+</span></span><span style=display:flex><span>kubeadm config print init-defaults &gt; kubeadm-init.yaml
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># pull image first </span>
+</span></span><span style=display:flex><span>kubeadm config images pull --config kubeadm-init.yaml
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># start buildup master</span>
+</span></span><span style=display:flex><span>kubeadm init --config kubeadm-init.yaml
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># To print a join command for worker/slave node</span>
+</span></span><span style=display:flex><span>kubeadm token create --print-join-command
+</span></span></code></pre></div><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=display:flex><span><span style=color:#f92672>apiVersion</span>: <span style=color:#ae81ff>kubeadm.k8s.io/v1beta2</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>bootstrapTokens</span>:
+</span></span><span style=display:flex><span>- <span style=color:#f92672>groups</span>:
+</span></span><span style=display:flex><span>  - <span style=color:#ae81ff>system:bootstrappers:kubeadm:default-node-token</span>
+</span></span><span style=display:flex><span>  <span style=color:#f92672>token</span>: <span style=color:#ae81ff>abcdef.0123456789abcdef</span>
+</span></span><span style=display:flex><span>  <span style=color:#f92672>ttl</span>: <span style=color:#ae81ff>24h0m0s</span>
+</span></span><span style=display:flex><span>  <span style=color:#f92672>usages</span>:
+</span></span><span style=display:flex><span>  - <span style=color:#ae81ff>signing</span>
+</span></span><span style=display:flex><span>  - <span style=color:#ae81ff>authentication</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>kind</span>: <span style=color:#ae81ff>InitConfiguration</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>localAPIEndpoint</span>:
+</span></span><span style=display:flex><span>  <span style=color:#f92672>advertiseAddress</span>: <span style=color:#ae81ff>192.168.50.200</span> <span style=color:#75715e>#address						     </span>
+</span></span><span style=display:flex><span>  <span style=color:#f92672>bindPort</span>:  <span style=color:#ae81ff>6443</span> <span style=color:#75715e>#port</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>nodeRegistration</span>:
+</span></span><span style=display:flex><span>  <span style=color:#f92672>criSocket</span>: <span style=color:#ae81ff>/var/run/dockershim.sock</span>
+</span></span><span style=display:flex><span>  <span style=color:#f92672>name</span>: <span style=color:#ae81ff>master</span>
+</span></span><span style=display:flex><span>  <span style=color:#f92672>taints</span>:
+</span></span><span style=display:flex><span>  - <span style=color:#f92672>effect</span>: <span style=color:#ae81ff>NoSchedule</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>key</span>: <span style=color:#ae81ff>node-role.kubernetes.io/master</span>
+</span></span><span style=display:flex><span>---
+</span></span><span style=display:flex><span><span style=color:#f92672>apiServer</span>:
+</span></span><span style=display:flex><span>  <span style=color:#f92672>timeoutForControlPlane</span>: <span style=color:#ae81ff>4m0s</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>apiVersion</span>: <span style=color:#ae81ff>kubeadm.k8s.io/v1beta2</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>certificatesDir</span>: <span style=color:#ae81ff>/etc/kubernetes/pki</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>clusterName</span>: <span style=color:#ae81ff>kubernetes</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>controllerManager</span>: {}
+</span></span><span style=display:flex><span><span style=color:#f92672>dns</span>:
+</span></span><span style=display:flex><span>  <span style=color:#f92672>type</span>: <span style=color:#ae81ff>CoreDNS</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>etcd</span>:
+</span></span><span style=display:flex><span>  <span style=color:#f92672>local</span>:
+</span></span><span style=display:flex><span>    <span style=color:#f92672>dataDir</span>: <span style=color:#ae81ff>/var/lib/etcd</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>imageRepository</span>: <span style=color:#ae81ff>registry.cn-hangzhou.aliyuncs.com/google_containers  </span> <span style=color:#75715e>#阿里云的镜像站点</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>kind</span>: <span style=color:#ae81ff>ClusterConfiguration</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>kubernetesVersion</span>: <span style=color:#ae81ff>v1.20.10			#kubernetes版本号</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>networking</span>:
+</span></span><span style=display:flex><span>  <span style=color:#f92672>dnsDomain</span>: <span style=color:#ae81ff>cluster.local	</span>
+</span></span><span style=display:flex><span>  <span style=color:#f92672>serviceSubnet</span>: <span style=color:#ae81ff>192.168.99.0</span><span style=color:#ae81ff>/24		#选择默认即可，当然也可以自定义CIDR</span>
+</span></span><span style=display:flex><span>  <span style=color:#f92672>podSubnet</span>: <span style=color:#ae81ff>192.168.98.0</span><span style=color:#ae81ff>/24			#添加pod网段</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>scheduler</span>: {}
+</span></span></code></pre></div><h3 id=安装网络插件>安装网络插件</h3><p>没有网络插件的集群基本不可用，通常使用calico，测试集群node小于50可直接使用<a href=https://projectcalico.docs.tigera.io/getting-started/kubernetes/self-managed-onprem/onpremises>官方手册</a></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=display:flex><span><span style=color:#75715e># download</span>
+</span></span><span style=display:flex><span>curl https://projectcalico.docs.tigera.io/manifests/calico.yaml -O
+</span></span><span style=display:flex><span><span style=color:#75715e># apply</span>
+</span></span><span style=display:flex><span>kubectl apply -f calico.yaml
+</span></span></code></pre></div><h3 id=架构检查>架构检查</h3><p>安装完成后，集群中启动的容器大概包括以下内容——除了网络相关的内容，可以看到架构图上的内容都有对应的容器</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=display:flex><span><span style=color:#75715e># docker images </span>
+</span></span><span style=display:flex><span>calico/kube-controllers      v3.22.1   c0c6672a66a5   <span style=color:#ae81ff>2</span> months ago   132MB
+</span></span><span style=display:flex><span>calico/cni                   v3.22.1   2a8ef6985a3e   <span style=color:#ae81ff>2</span> months ago   236MB
+</span></span><span style=display:flex><span>calico/pod2daemon-flexvol    v3.22.1   17300d20daf9   <span style=color:#ae81ff>2</span> months ago   19.7MB
+</span></span><span style=display:flex><span>calico/node                  v3.22.1   7a71aca7b60f   <span style=color:#ae81ff>2</span> months ago   198MB
+</span></span><span style=display:flex><span>kube-proxy                   v1.17.0   7d54289267dc   <span style=color:#ae81ff>2</span> years ago    116MB
+</span></span><span style=display:flex><span>kube-scheduler               v1.17.0   78c190f736b1   <span style=color:#ae81ff>2</span> years ago    94.4MB
+</span></span><span style=display:flex><span>kube-apiserver               v1.17.0   0cae8d5cc64c   <span style=color:#ae81ff>2</span> years ago    171MB
+</span></span><span style=display:flex><span>kube-controller-manager      v1.17.0   5eb3b7486872   <span style=color:#ae81ff>2</span> years ago    161MB
+</span></span><span style=display:flex><span>coredns                      1.6.5     70f311871ae1   <span style=color:#ae81ff>2</span> years ago    41.6MB
+</span></span><span style=display:flex><span>etcd                         3.4.3-0   303ce5db0e90   <span style=color:#ae81ff>2</span> years ago    288MB
+</span></span><span style=display:flex><span>pause                        3.1       da86e6ba6ca1   <span style=color:#ae81ff>4</span> years ago    742kB
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># docker ps = docker container ls</span>
+</span></span><span style=display:flex><span>CONTAINER ID   IMAGE                                                           COMMAND                  CREATED       STATUS       PORTS     NAMES
+</span></span><span style=display:flex><span>7681553c1375   0cae8d5cc64c                                                    <span style=color:#e6db74>&#34;kube-apiserver --ad…&#34;</span>   <span style=color:#ae81ff>2</span> hours ago   Up <span style=color:#ae81ff>2</span> hours             k8s_kube-apiserver_kube-apiserver-master_kube-system_3595fcec3afd46524fa623e9083e8e2b_88
+</span></span><span style=display:flex><span>1f6af2af6504   303ce5db0e90                                                    <span style=color:#e6db74>&#34;etcd --advertise-cl…&#34;</span>   <span style=color:#ae81ff>2</span> hours ago   Up <span style=color:#ae81ff>2</span> hours             k8s_etcd_etcd-master_kube-system_3c0c04a4c2e1acb0e625dcf83a547310_108
+</span></span><span style=display:flex><span>e6250d39a65c   78c190f736b1                                                    <span style=color:#e6db74>&#34;kube-scheduler --au…&#34;</span>   <span style=color:#ae81ff>3</span> hours ago   Up <span style=color:#ae81ff>3</span> hours             k8s_kube-scheduler_kube-scheduler-master_kube-system_75516e998e1ab97384d969d8ccd139db_55
+</span></span><span style=display:flex><span>18c4a40b1c4f   registry.cn-hangzhou.aliyuncs.com/google_containers/pause:3.1   <span style=color:#e6db74>&#34;/pause&#34;</span>                 <span style=color:#ae81ff>3</span> hours ago   Up <span style=color:#ae81ff>3</span> hours             k8s_POD_kube-scheduler-master_kube-system_75516e998e1ab97384d969d8ccd139db_3
+</span></span><span style=display:flex><span>95fb0ecc7f06   5eb3b7486872                                                    <span style=color:#e6db74>&#34;kube-controller-man…&#34;</span>   <span style=color:#ae81ff>3</span> hours ago   Up <span style=color:#ae81ff>3</span> hours             k8s_kube-controller-manager_kube-controller-manager-master_kube-system_ab2c4278e88f8bade2b4f3742e6fba77_57
+</span></span><span style=display:flex><span>b7b9eb44f106   registry.cn-hangzhou.aliyuncs.com/google_containers/pause:3.1   <span style=color:#e6db74>&#34;/pause&#34;</span>                 <span style=color:#ae81ff>3</span> hours ago   Up <span style=color:#ae81ff>3</span> hours             k8s_POD_kube-controller-manager-master_kube-system_ab2c4278e88f8bade2b4f3742e6fba77_3
+</span></span><span style=display:flex><span>1e5402dc33eb   registry.cn-hangzhou.aliyuncs.com/google_containers/pause:3.1   <span style=color:#e6db74>&#34;/pause&#34;</span>                 <span style=color:#ae81ff>3</span> hours ago   Up <span style=color:#ae81ff>3</span> hours             k8s_POD_kube-apiserver-master_kube-system_3595fcec3afd46524fa623e9083e8e2b_3
+</span></span><span style=display:flex><span>0ae0fee45898   registry.cn-hangzhou.aliyuncs.com/google_containers/pause:3.1   <span style=color:#e6db74>&#34;/pause&#34;</span>                 <span style=color:#ae81ff>3</span> hours ago   Up <span style=color:#ae81ff>3</span> hours             k8s_POD_etcd-master_kube-system_3c0c04a4c2e1acb0e625dcf83a547310_3
+</span></span></code></pre></div><h4 id=pause容器>pause容器</h4><ul><li>镜像非常小，目前在 700KB 左右</li><li>永远处于 Pause (暂停) 状态</li><li>在 pod 中担任 Linux 命名空间共享的基础；</li><li>启用 pid 命名空间，开启 init 进程。</li></ul><p>完成pod里的多个容器的网络共享：使用统一个网络、同一个ip</p><p>参考<a href=https://jimmysong.io/kubernetes-handbook/concepts/pause-container.html>Pause 容器</a>或<a href=https://www.ianlewis.org/en/almighty-pause-container>The Almighty Pause Container</a></p><h3 id=后置检查检查>后置检查检查</h3><p>确保对应点docker、kubelet服务正常启动，防火墙关闭，swap分区关闭(防止kubelet启动失败)、端口没有占用。查看对应服务日志，例如<code>journalctl -xeu kubelet</code></p><h3 id=删除集群>删除集群</h3><ul><li>重置集群</li><li>删除对应配置</li></ul><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=display:flex><span><span style=color:#75715e># reset </span>
+</span></span><span style=display:flex><span>kubeadm reset
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># delete related files</span>
+</span></span><span style=display:flex><span>rm -rf /var/lib/kubelet
+</span></span><span style=display:flex><span>rm -rf /etc/kubernetes
+</span></span></code></pre></div><h2 id=k8s-practice>k8s practice</h2><h3 id=断电重启问题>断电重启问题</h3><p>表明上提示<code>The connection to the server master:6443 was refused - did you specify the right host or port?</code>，最终实际上是因为apiserver无法连接etcd导致容器退出。</p><h3 id=创建configmap>创建configMap</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=display:flex><span><span style=color:#75715e># kc create configmap --help查看</span>
 </span></span><span style=display:flex><span><span style=color:#75715e># 生成configmap文件</span>
 </span></span><span style=display:flex><span>kubectl create configmap --dry-run<span style=color:#f92672>=</span>true saber.yml --from-file<span style=color:#f92672>=</span>./saber.yml --output yaml
 </span></span><span style=display:flex><span>
@@ -243,9 +446,6 @@ kubeadm join 192.168.10.101:6443 --token sb4nsd.o4c2svxc6ey18vzv \
 	--discovery-token-ca-cert-hash sha256:a21fa42fb12f65c33dab7dd37cc2341c07ba4b90675500a76b52a39e1507e082
 </code></pre><p>默认添加的node节点没有roles的描述信息，可以通过<code>label</code>命令指定或重新，<a href=https://stackoverflow.com/questions/48854905/how-to-add-roles-to-nodes-in-kubernetes>参考</a></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=display:flex><span>kubectl label nodes &lt;your_node&gt; kubernetes.io/role<span style=color:#f92672>=</span>&lt;your_label&gt;
 </span></span><span style=display:flex><span>kubectl label --overwrite nodes &lt;your_node&gt; kubernetes.io/role<span style=color:#f92672>=</span>&lt;your_new_label&gt;
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># To print a join command for worker/slave node</span>
-</span></span><span style=display:flex><span>kubeadm token create --print-join-command
 </span></span></code></pre></div><p><a href=https://stackoverflow.com/questions/51126164/how-do-i-find-the-join-command-for-kubeadm-on-the-master>worker节点加入集群</a></p><h3 id=wsl2-时间同步>wsl2 时间同步</h3><p>按照<a href=https://auth0.com/blog/kubernetes-tutorial-step-by-step-introduction-to-basic-concepts/>Kubernetes Tutorial - Step by Step Introduction to Basic Concepts</a>介绍在DO上创建免费的k8s集群，在wsl2里进行访问时提示错误：<code>Unable to connect to the server: x509: certificate has expired or is not yet valid: current time 2021-11-09T02:59:51+08:00 is before 2021-11-09T07:47:25Z</code>查看本地时间，显示比实际实际慢</p><p>执行<code>sudo hwclock -s </code>同步时间依然没有变化，官方<a href=https://github.com/microsoft/WSL/issues/4149>issue 4149</a>中提供了临时解决方案——netdate。立即生效，不影响任何进程</p><pre tabindex=0><code># 按照ntpdate set the date and time via  Network Time Protocol (NTP)
 sudo apt install ntpdate
 # 同步时间

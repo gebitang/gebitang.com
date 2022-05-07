@@ -208,93 +208,120 @@ systemctl enable kubelet
 
 ```shell
 #!/bin/bash
-
-systemctl disable --now firewalld
-setenforce 0
-sed -i 's/enforcing/disabled/' /etc/selinux/config
-
-# close swap 
-# comment the line contain swap config in 
-swapoff -a
-# sed -ri 's/.*swap.*/#&/' /etc/fstab
-sed -i.bak 's/^.*centos-swap/#&/g' /etc/fstab
+#!/bin/bash
 
 
-# hostnamectl set-hostname master
-echo 'net.ipv4.ip_forward = 1' >> /etc/sysctl.d/k8s.conf
-echo 'net.bridge.bridge-nf-call-ip6tables = 1' >> /etc/sysctl.d/k8s.conf
-echo 'net.bridge.bridge-nf-call-iptables = 1' >> /etc/sysctl.d/k8s.conf
-
-sysctl --system
-
-mkdir -p /home/sa/repo.bak
-mv /etc/yum.repos.d/* /home/sa/repo.bak/
-curl -o /etc/yum.repos.d/CentOS-Base.repo https://mirrors.aliyun.com/repo/Centos-7.repo
-curl -o /etc/yum.repos.d/epel.repo http://mirrors.aliyun.com/repo/epel-7.repo
-
-ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
-yum install dnf ntpdate -y # install dnf
-dnf makecache
-ntpdate ntp.aliyun.com
-
-# add native repo
-curl -o /etc/yum.repos.d/docker-ce.repo https://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo
-
-# install by dnf
-dnf install -y  docker-ce docker-ce-cli
-
-
-# add customed repo for docker.
-mkdir -p /etc/docker
-touch /etc/docker/daemon.json
-cat > /etc/docker/daemon.json << EOF
-{
-  "registry-mirrors": ["https://f1bhsuge.mirror.aliyuncs.com"]
+function closeFireWall() {
+	systemctl disable --now firewalld
+	setenforce 0
+	sed -i 's/enforcing/disabled/' /etc/selinux/config
 }
+
+function closeSwap() {
+	swapoff -a
+	# sed -ri 's/.*swap.*/#&/' /etc/fstab
+	sed -ri 's/.*swap.*/#&/' /etc/fstab 
+}
+
+function setHostName() {
+    hostnamectl set-hostname master
+}
+
+function supportIpv6Traffic() {
+	echo 'net.ipv4.ip_forward = 1' >> /etc/sysctl.d/k8s.conf
+	echo 'net.bridge.bridge-nf-call-ip6tables = 1' >> /etc/sysctl.d/k8s.conf
+	echo 'net.bridge.bridge-nf-call-iptables = 1' >> /etc/sysctl.d/k8s.conf
+	sysctl --system
+
+}
+
+function updateYumRepo() {
+	mkdir -p /home/sa/repo.bak
+	mv /etc/yum.repos.d/* /home/sa/repo.bak/
+	curl -o /etc/yum.repos.d/CentOS-Base.repo https://mirrors.aliyun.com/repo/Centos-7.repo
+	curl -o /etc/yum.repos.d/epel.repo http://mirrors.aliyun.com/repo/epel-7.repo
+}
+
+
+function syncTime() {
+	ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
+	yum install dnf ntpdate -y # install dnf
+	dnf makecache
+	ntpdate ntp.aliyun.com
+}
+
+function installDocker() {
+	# add native repo
+	curl -o /etc/yum.repos.d/docker-ce.repo https://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo
+
+	# install by dnf
+	dnf install -y  docker-ce docker-ce-cli
+
+
+	# add customed repo for docker.
+	mkdir -p /etc/docker
+	touch /etc/docker/daemon.json
+	cat > /etc/docker/daemon.json << EOF
+	{
+	  "registry-mirrors": ["https://f1bhsuge.mirror.aliyuncs.com"]
+	}
 EOF
 
-# config auto start
-systemctl enable --now docker
+	# config auto start
+	systemctl enable --now docker
 
-#check version
-docker --version
+	#check version
+	docker --version
+	systemctl restart docker
+
+}
 
 
-systemctl restart docker
-
-
-cat > /etc/yum.repos.d/kubernetes.repo << EOF
-[kubernetes]
-name=Kubernetes
-baseurl=https://mirrors.aliyun.com/kubernetes/yum/repos/kubernetes-el7-x86_64
-enabled=1
-gpgcheck=0
-repo_gpgcheck=0
-gpgkey=https://mirrors.aliyun.com/kubernetes/yum/doc/yum-key.gpg https://mirrors.aliyun.com/kubernetes/yum/doc/rpm-package-key.gpg
+function installK8sComponent() {
+	cat > /etc/yum.repos.d/kubernetes.repo << EOF
+	[kubernetes]
+	name=Kubernetes
+	baseurl=https://mirrors.aliyun.com/kubernetes/yum/repos/kubernetes-el7-x86_64
+	enabled=1
+	gpgcheck=0
+	repo_gpgcheck=0
+	gpgkey=https://mirrors.aliyun.com/kubernetes/yum/doc/yum-key.gpg https://mirrors.aliyun.com/kubernetes/yum/doc/rpm-package-key.gpg
 EOF
 
+	# show version
+	dnf list kubeadm --showduplicates
+	# packename+version name
+	dnf install -y kubelet-1.17.0 kubeadm-1.17.0 kubectl-1.17.0
+    systemctl enable kubelet
+}
 
-# show version
-dnf list kubeadm --showduplicates
-# packename+version name
-dnf install -y kubelet-1.17.0 kubeadm-1.17.0 kubectl-1.17.0
+function installLxcfs() {
+	# insall lxcfs 
+	yum -y install fuse-devel fuse  lxc-templates
+	wget  --no-check-certificate  https://copr-be.cloud.fedoraproject.org/results/ganto/lxc3/epel-7-x86_64/01041891-lxcfs/lxcfs-3.1.2-0.2.el7.x86_64.rpm
+	rpm -ivh lxcfs-3.1.2-0.2.el7.x86_64.rpm
 
-systemctl enable kubelet
+	systemctl enable lxcfs
+	systemctl start lxcfs
+	# 运⾏lxcfs命令，指定 /proc ⽬录所在位置：
+	sudo mkdir -p /var/lib/lxcfs
+	sudo lxcfs /var/lib/lxcfs
 
-# insall lxcfs 
-yum -y install fuse-devel fuse  lxc-templates
-wget  --no-check-certificate  https://copr-be.cloud.fedoraproject.org/results/ganto/lxc3/epel-7-x86_64/01041891-lxcfs/lxcfs-3.1.2-0.2.el7.x86_64.rpm
-rpm -ivh lxcfs-3.1.2-0.2.el7.x86_64.rpm
+	# 需要确保lxcfs服务正常启动
+	systemctl status lxcfs 
 
-systemctl enable lxcfs
-systemctl start lxcfs
-# 运⾏lxcfs命令，指定 /proc ⽬录所在位置：
-sudo mkdir -p /var/lib/lxcfs
-sudo lxcfs /var/lib/lxcfs
+}
 
-# 需要确保lxcfs服务正常启动
-systemctl status lxcfs 
 
+closeFireWall
+closeSwap
+# setHostName
+supportIpv6Traffic
+updateYumRepo
+syncTime
+installDocker
+installK8sComponent
+installLxcfs
 ```
 
 ### 部署集群

@@ -680,6 +680,9 @@ Copy files and directories to and from containers.
 kc get pod -n istio-system -o wide | grep frontier
 kc get pod -n medusa-system -o wide | grep nginx
 
+### exec 多容器
+
+多个容器可自定义名称，然后指定时使用`-c container-name`即可。例如`kc exec -it pod-name -c container-name -- ls /etc/`
 
 ### deployment
 

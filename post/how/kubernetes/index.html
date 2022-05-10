@@ -7,7 +7,7 @@
 <a class=post-taxonomy-topic href=http://gebitang.com/topics/kubernetes>kubernetes</a>&nbsp;/
 <a class=post-taxonomy-topic href=http://gebitang.com/topics/k8s>k8s</a></div><div><i class="fa fa-tags fa-fw"></i>
 <a class=post-taxonomy-tag href=http://gebitang.com/tags/kubernetes>kubernetes</a>&nbsp;/
-<a class=post-taxonomy-tag href=http://gebitang.com/tags/k8s>k8s</a></div></div><nav id=TableOfContents><ul><li><a href=#k8s-搭建>k8s 搭建</a><ul><li><a href=#前置配置>前置配置</a><ul><li><a href=#dnf>dnf</a></li></ul></li><li><a href=#安装docker服务>安装docker服务</a></li><li><a href=#安装kubernetes服务>安装kubernetes服务</a></li><li><a href=#准备脚本>准备脚本</a></li><li><a href=#部署集群>部署集群</a></li><li><a href=#安装网络插件>安装网络插件</a></li><li><a href=#架构检查>架构检查</a><ul><li><a href=#pause容器>pause容器</a></li></ul></li><li><a href=#后置检查检查>后置检查检查</a></li><li><a href=#删除集群>删除集群</a></li></ul></li><li><a href=#k8s-practice>k8s practice</a><ul><li><a href=#断电重启问题>断电重启问题</a></li><li><a href=#创建configmap>创建configMap</a></li><li><a href=#证书管理>证书管理</a></li><li><a href=#安装lxcfs服务>安装lxcfs服务</a></li><li><a href=#强制删除pod>强制删除pod</a></li><li><a href=#deployment的字段含义>deployment的字段含义</a></li><li><a href=#拉取镜像卡住>拉取镜像卡住</a></li><li><a href=#问题排查流程>问题排查流程</a></li><li><a href=#kubectl-cp---help>kubectl cp &ndash;help</a></li><li><a href=#获取网关信息>获取网关信息：</a></li><li><a href=#deployment>deployment</a></li><li><a href=#display-all-kubernetes-objects>display all kubernetes objects</a></li><li><a href=#部署ingress-nginx>部署ingress-nginx</a><ul><li><a href=#1x-vs-0x-branch>1.x VS. 0.x Branch</a></li></ul></li><li><a href=#informers>informers</a></li></ul></li><li><a href=#tasks>tasks</a><ul><li><a href=#更新daemonset>更新DaemonSet</a></li><li><a href=#管理内存cpu配额>管理内存、CPU、配额</a></li></ul></li><li><a href=#start-over>start over</a><ul><li><a href=#虚拟机环境>虚拟机环境</a></li><li><a href=#纯手工搭建环境>纯手工搭建环境</a></li><li><a href=#wsl2-时间同步>wsl2 时间同步</a></li><li><a href=#kubernetes-tutorial>Kubernetes Tutorial</a></li><li><a href=#k8s中的crd开发>K8S中的CRD开发</a></li><li><a href=#setup-with-dashboard>setup with dashboard</a></li><li><a href=#wsldocker的限制>WSL+Docker的限制</a></li></ul></li><li><a href=#archive>archive</a><ul><li><a href=#wsl2--kubernetes>WSL2 + Kubernetes</a></li><li><a href=#errors-were-encountered-while-processing--ubuntu-advantage-tools>Errors were encountered while processing: ubuntu-advantage-tools</a></li><li><a href=#前提环境>前提环境</a></li></ul></li></ul></nav><div class=pure-g><div class=pure-u-1-1><div style="padding:0 .2em"><a href=https://time.geekbang.org/column/article/23132 target=_blank><img class=pure-img-responsive src=https://static001.geekbang.org/resource/image/8e/67/8ee9f2fa987eccb490cfaa91c6484f67.png alt title=Kubernetes项目架构></a></div></div></div><ul><li>OCI: Open Container Initiative</li><li>CNI: Container Network Interface</li><li>CRI: Container Runtime Interface</li><li>CSI: Container Storage Interface</li></ul><p><a href=https://mp.weixin.qq.com/s/NYhUQqaN9v1s36EHqpw-kA>OCI运行时规范</a></p><ul><li>符合 CRI 标准的 containerd，以及底层的 runC，都是从Docker 项目中分拆出来。<ul><li>2015 年OCI成立之初，Docker 的 libcontainer 项目被捐赠给OCI，成为独立的容器运行时项目 runC</li><li>2017年，Docker公司高层容器运行时的功能集中到containerd项目里，捐赠给云原生计算基金会。</li><li>Docker 引擎在发布时是一个单体应用，后来按功能分拆成 runC 和 containerd 两个不同层次的运行时。</li></ul></li><li>CRI-O是替代Docker或者containerd的高效且轻量级的容器运行时方案，是CRI的一个实现，能够运行符合OCI规范的容器，所以被称为CRI-O。</li></ul><div class=pure-g><div class=pure-u-1-1><div style="padding:0 .2em"><a href target=_blank><img class=pure-img-responsive src=https://s3-img.meituan.net/v1/mss_3d027b52ec5a4d589e68050845611e68/ff/n0/0n/34/dp_301168.jpg alt title=OCI></a></div></div></div><h2 id=k8s-搭建>k8s 搭建</h2><p>在CentOS机器上安装，配置1个master+2个node机器</p><h3 id=前置配置>前置配置</h3><ul><li>关闭防火墙 （保证网络通畅）</li><li>关闭<code>swap</code>分区（防止kubelet重启失败）</li><li>设置主机名（master节点可识别到各个node名称）</li><li>添加hosts解析 （将集群所有的ip和对应的主机名添加到各自的hosts文件中国）</li><li>打开<code>ipv6</code>流量转发</li><li>配置国内镜像源</li><li>时间同步服务</li></ul><p>操作过程——</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=display:flex><span><span style=color:#75715e># close firewall</span>
+<a class=post-taxonomy-tag href=http://gebitang.com/tags/k8s>k8s</a></div></div><nav id=TableOfContents><ul><li><a href=#k8s-搭建>k8s 搭建</a><ul><li><a href=#前置配置>前置配置</a><ul><li><a href=#dnf>dnf</a></li></ul></li><li><a href=#安装docker服务>安装docker服务</a></li><li><a href=#安装kubernetes服务>安装kubernetes服务</a></li><li><a href=#准备脚本>准备脚本</a></li><li><a href=#部署集群>部署集群</a></li><li><a href=#安装网络插件>安装网络插件</a></li><li><a href=#架构检查>架构检查</a><ul><li><a href=#pause容器>pause容器</a></li></ul></li><li><a href=#后置检查检查>后置检查检查</a></li><li><a href=#删除集群>删除集群</a></li></ul></li><li><a href=#k8s-practice>k8s practice</a><ul><li><a href=#断电重启问题>断电重启问题</a></li><li><a href=#创建configmap>创建configMap</a></li><li><a href=#证书管理>证书管理</a></li><li><a href=#安装lxcfs服务>安装lxcfs服务</a></li><li><a href=#强制删除pod>强制删除pod</a></li><li><a href=#deployment的字段含义>deployment的字段含义</a></li><li><a href=#拉取镜像卡住>拉取镜像卡住</a></li><li><a href=#问题排查流程>问题排查流程</a></li><li><a href=#kubectl-cp---help>kubectl cp &ndash;help</a></li><li><a href=#获取网关信息>获取网关信息：</a></li><li><a href=#exec-多容器>exec 多容器</a></li><li><a href=#deployment>deployment</a></li><li><a href=#display-all-kubernetes-objects>display all kubernetes objects</a></li><li><a href=#部署ingress-nginx>部署ingress-nginx</a><ul><li><a href=#1x-vs-0x-branch>1.x VS. 0.x Branch</a></li></ul></li><li><a href=#informers>informers</a></li></ul></li><li><a href=#tasks>tasks</a><ul><li><a href=#更新daemonset>更新DaemonSet</a></li><li><a href=#管理内存cpu配额>管理内存、CPU、配额</a></li></ul></li><li><a href=#start-over>start over</a><ul><li><a href=#虚拟机环境>虚拟机环境</a></li><li><a href=#纯手工搭建环境>纯手工搭建环境</a></li><li><a href=#wsl2-时间同步>wsl2 时间同步</a></li><li><a href=#kubernetes-tutorial>Kubernetes Tutorial</a></li><li><a href=#k8s中的crd开发>K8S中的CRD开发</a></li><li><a href=#setup-with-dashboard>setup with dashboard</a></li><li><a href=#wsldocker的限制>WSL+Docker的限制</a></li></ul></li><li><a href=#archive>archive</a><ul><li><a href=#wsl2--kubernetes>WSL2 + Kubernetes</a></li><li><a href=#errors-were-encountered-while-processing--ubuntu-advantage-tools>Errors were encountered while processing: ubuntu-advantage-tools</a></li><li><a href=#前提环境>前提环境</a></li></ul></li></ul></nav><div class=pure-g><div class=pure-u-1-1><div style="padding:0 .2em"><a href=https://time.geekbang.org/column/article/23132 target=_blank><img class=pure-img-responsive src=https://static001.geekbang.org/resource/image/8e/67/8ee9f2fa987eccb490cfaa91c6484f67.png alt title=Kubernetes项目架构></a></div></div></div><ul><li>OCI: Open Container Initiative</li><li>CNI: Container Network Interface</li><li>CRI: Container Runtime Interface</li><li>CSI: Container Storage Interface</li></ul><p><a href=https://mp.weixin.qq.com/s/NYhUQqaN9v1s36EHqpw-kA>OCI运行时规范</a></p><ul><li>符合 CRI 标准的 containerd，以及底层的 runC，都是从Docker 项目中分拆出来。<ul><li>2015 年OCI成立之初，Docker 的 libcontainer 项目被捐赠给OCI，成为独立的容器运行时项目 runC</li><li>2017年，Docker公司高层容器运行时的功能集中到containerd项目里，捐赠给云原生计算基金会。</li><li>Docker 引擎在发布时是一个单体应用，后来按功能分拆成 runC 和 containerd 两个不同层次的运行时。</li></ul></li><li>CRI-O是替代Docker或者containerd的高效且轻量级的容器运行时方案，是CRI的一个实现，能够运行符合OCI规范的容器，所以被称为CRI-O。</li></ul><div class=pure-g><div class=pure-u-1-1><div style="padding:0 .2em"><a href target=_blank><img class=pure-img-responsive src=https://s3-img.meituan.net/v1/mss_3d027b52ec5a4d589e68050845611e68/ff/n0/0n/34/dp_301168.jpg alt title=OCI></a></div></div></div><h2 id=k8s-搭建>k8s 搭建</h2><p>在CentOS机器上安装，配置1个master+2个node机器</p><h3 id=前置配置>前置配置</h3><ul><li>关闭防火墙 （保证网络通畅）</li><li>关闭<code>swap</code>分区（防止kubelet重启失败）</li><li>设置主机名（master节点可识别到各个node名称）</li><li>添加hosts解析 （将集群所有的ip和对应的主机名添加到各自的hosts文件中国）</li><li>打开<code>ipv6</code>流量转发</li><li>配置国内镜像源</li><li>时间同步服务</li></ul><p>操作过程——</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=display:flex><span><span style=color:#75715e># close firewall</span>
 </span></span><span style=display:flex><span>systemctl disable --now firewalld
 </span></span><span style=display:flex><span>setenforce <span style=color:#ae81ff>0</span>
 </span></span><span style=display:flex><span>sed -i <span style=color:#e6db74>&#39;s/enforcing/disabled/&#39;</span> /etc/selinux/config 
@@ -128,92 +128,120 @@ dnf reinstall wget
 </span></span><span style=display:flex><span><span style=color:#75715e># auto start</span>
 </span></span><span style=display:flex><span>systemctl enable kubelet
 </span></span></code></pre></div><h3 id=准备脚本>准备脚本</h3><p>上述环境下，root用户执行如下脚步一次性完工——（除啦hosts文件未更新）</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=display:flex><span><span style=color:#75715e>#!/bin/bash
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>
-</span></span><span style=display:flex><span>systemctl disable --now firewalld
-</span></span><span style=display:flex><span>setenforce <span style=color:#ae81ff>0</span>
-</span></span><span style=display:flex><span>sed -i <span style=color:#e6db74>&#39;s/enforcing/disabled/&#39;</span> /etc/selinux/config
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># close swap </span>
-</span></span><span style=display:flex><span><span style=color:#75715e># comment the line contain swap config in </span>
-</span></span><span style=display:flex><span>swapoff -a
-</span></span><span style=display:flex><span><span style=color:#75715e># sed -ri &#39;s/.*swap.*/#&amp;/&#39; /etc/fstab</span>
-</span></span><span style=display:flex><span>sed -i.bak <span style=color:#e6db74>&#39;s/^.*centos-swap/#&amp;/g&#39;</span> /etc/fstab
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#75715e>#!/bin/bash</span>
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># hostnamectl set-hostname master</span>
-</span></span><span style=display:flex><span>echo <span style=color:#e6db74>&#39;net.ipv4.ip_forward = 1&#39;</span> &gt;&gt; /etc/sysctl.d/k8s.conf
-</span></span><span style=display:flex><span>echo <span style=color:#e6db74>&#39;net.bridge.bridge-nf-call-ip6tables = 1&#39;</span> &gt;&gt; /etc/sysctl.d/k8s.conf
-</span></span><span style=display:flex><span>echo <span style=color:#e6db74>&#39;net.bridge.bridge-nf-call-iptables = 1&#39;</span> &gt;&gt; /etc/sysctl.d/k8s.conf
+</span></span><span style=display:flex><span><span style=color:#66d9ef>function</span> closeFireWall<span style=color:#f92672>()</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>	systemctl disable --now firewalld
+</span></span><span style=display:flex><span>	setenforce <span style=color:#ae81ff>0</span>
+</span></span><span style=display:flex><span>	sed -i <span style=color:#e6db74>&#39;s/enforcing/disabled/&#39;</span> /etc/selinux/config
+</span></span><span style=display:flex><span><span style=color:#f92672>}</span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>sysctl --system
+</span></span><span style=display:flex><span><span style=color:#66d9ef>function</span> closeSwap<span style=color:#f92672>()</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>	swapoff -a
+</span></span><span style=display:flex><span>	<span style=color:#75715e># sed -ri &#39;s/.*swap.*/#&amp;/&#39; /etc/fstab</span>
+</span></span><span style=display:flex><span>	sed -ri <span style=color:#e6db74>&#39;s/.*swap.*/#&amp;/&#39;</span> /etc/fstab 
+</span></span><span style=display:flex><span><span style=color:#f92672>}</span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>mkdir -p /home/sa/repo.bak
-</span></span><span style=display:flex><span>mv /etc/yum.repos.d/* /home/sa/repo.bak/
-</span></span><span style=display:flex><span>curl -o /etc/yum.repos.d/CentOS-Base.repo https://mirrors.aliyun.com/repo/Centos-7.repo
-</span></span><span style=display:flex><span>curl -o /etc/yum.repos.d/epel.repo http://mirrors.aliyun.com/repo/epel-7.repo
+</span></span><span style=display:flex><span><span style=color:#66d9ef>function</span> setHostName<span style=color:#f92672>()</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>    hostnamectl set-hostname master
+</span></span><span style=display:flex><span><span style=color:#f92672>}</span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
-</span></span><span style=display:flex><span>yum install dnf ntpdate -y <span style=color:#75715e># install dnf</span>
-</span></span><span style=display:flex><span>dnf makecache
-</span></span><span style=display:flex><span>ntpdate ntp.aliyun.com
+</span></span><span style=display:flex><span><span style=color:#66d9ef>function</span> supportIpv6Traffic<span style=color:#f92672>()</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>	echo <span style=color:#e6db74>&#39;net.ipv4.ip_forward = 1&#39;</span> &gt;&gt; /etc/sysctl.d/k8s.conf
+</span></span><span style=display:flex><span>	echo <span style=color:#e6db74>&#39;net.bridge.bridge-nf-call-ip6tables = 1&#39;</span> &gt;&gt; /etc/sysctl.d/k8s.conf
+</span></span><span style=display:flex><span>	echo <span style=color:#e6db74>&#39;net.bridge.bridge-nf-call-iptables = 1&#39;</span> &gt;&gt; /etc/sysctl.d/k8s.conf
+</span></span><span style=display:flex><span>	sysctl --system
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># add native repo</span>
-</span></span><span style=display:flex><span>curl -o /etc/yum.repos.d/docker-ce.repo https://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo
+</span></span><span style=display:flex><span><span style=color:#f92672>}</span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># install by dnf</span>
-</span></span><span style=display:flex><span>dnf install -y  docker-ce docker-ce-cli
+</span></span><span style=display:flex><span><span style=color:#66d9ef>function</span> updateYumRepo<span style=color:#f92672>()</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>	mkdir -p /home/sa/repo.bak
+</span></span><span style=display:flex><span>	mv /etc/yum.repos.d/* /home/sa/repo.bak/
+</span></span><span style=display:flex><span>	curl -o /etc/yum.repos.d/CentOS-Base.repo https://mirrors.aliyun.com/repo/Centos-7.repo
+</span></span><span style=display:flex><span>	curl -o /etc/yum.repos.d/epel.repo http://mirrors.aliyun.com/repo/epel-7.repo
+</span></span><span style=display:flex><span><span style=color:#f92672>}</span>
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># add customed repo for docker.</span>
-</span></span><span style=display:flex><span>mkdir -p /etc/docker
-</span></span><span style=display:flex><span>touch /etc/docker/daemon.json
-</span></span><span style=display:flex><span>cat &gt; /etc/docker/daemon.json <span style=color:#e6db74>&lt;&lt; EOF
-</span></span></span><span style=display:flex><span><span style=color:#e6db74>{
-</span></span></span><span style=display:flex><span><span style=color:#e6db74>  &#34;registry-mirrors&#34;: [&#34;https://f1bhsuge.mirror.aliyuncs.com&#34;]
-</span></span></span><span style=display:flex><span><span style=color:#e6db74>}
+</span></span><span style=display:flex><span><span style=color:#66d9ef>function</span> syncTime<span style=color:#f92672>()</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>	ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
+</span></span><span style=display:flex><span>	yum install dnf ntpdate -y <span style=color:#75715e># install dnf</span>
+</span></span><span style=display:flex><span>	dnf makecache
+</span></span><span style=display:flex><span>	ntpdate ntp.aliyun.com
+</span></span><span style=display:flex><span><span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>function</span> installDocker<span style=color:#f92672>()</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>	<span style=color:#75715e># add native repo</span>
+</span></span><span style=display:flex><span>	curl -o /etc/yum.repos.d/docker-ce.repo https://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>	<span style=color:#75715e># install by dnf</span>
+</span></span><span style=display:flex><span>	dnf install -y  docker-ce docker-ce-cli
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>	<span style=color:#75715e># add customed repo for docker.</span>
+</span></span><span style=display:flex><span>	mkdir -p /etc/docker
+</span></span><span style=display:flex><span>	touch /etc/docker/daemon.json
+</span></span><span style=display:flex><span>	cat &gt; /etc/docker/daemon.json <span style=color:#e6db74>&lt;&lt; EOF
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>	{
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>	  &#34;registry-mirrors&#34;: [&#34;https://f1bhsuge.mirror.aliyuncs.com&#34;]
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>	}
 </span></span></span><span style=display:flex><span><span style=color:#e6db74>EOF</span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># config auto start</span>
-</span></span><span style=display:flex><span>systemctl enable --now docker
+</span></span><span style=display:flex><span>	<span style=color:#75715e># config auto start</span>
+</span></span><span style=display:flex><span>	systemctl enable --now docker
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e>#check version</span>
-</span></span><span style=display:flex><span>docker --version
+</span></span><span style=display:flex><span>	<span style=color:#75715e>#check version</span>
+</span></span><span style=display:flex><span>	docker --version
+</span></span><span style=display:flex><span>	systemctl restart docker
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#f92672>}</span>
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>systemctl restart docker
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>cat &gt; /etc/yum.repos.d/kubernetes.repo <span style=color:#e6db74>&lt;&lt; EOF
-</span></span></span><span style=display:flex><span><span style=color:#e6db74>[kubernetes]
-</span></span></span><span style=display:flex><span><span style=color:#e6db74>name=Kubernetes
-</span></span></span><span style=display:flex><span><span style=color:#e6db74>baseurl=https://mirrors.aliyun.com/kubernetes/yum/repos/kubernetes-el7-x86_64
-</span></span></span><span style=display:flex><span><span style=color:#e6db74>enabled=1
-</span></span></span><span style=display:flex><span><span style=color:#e6db74>gpgcheck=0
-</span></span></span><span style=display:flex><span><span style=color:#e6db74>repo_gpgcheck=0
-</span></span></span><span style=display:flex><span><span style=color:#e6db74>gpgkey=https://mirrors.aliyun.com/kubernetes/yum/doc/yum-key.gpg https://mirrors.aliyun.com/kubernetes/yum/doc/rpm-package-key.gpg
+</span></span><span style=display:flex><span><span style=color:#66d9ef>function</span> installK8sComponent<span style=color:#f92672>()</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>	cat &gt; /etc/yum.repos.d/kubernetes.repo <span style=color:#e6db74>&lt;&lt; EOF
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>	[kubernetes]
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>	name=Kubernetes
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>	baseurl=https://mirrors.aliyun.com/kubernetes/yum/repos/kubernetes-el7-x86_64
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>	enabled=1
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>	gpgcheck=0
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>	repo_gpgcheck=0
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>	gpgkey=https://mirrors.aliyun.com/kubernetes/yum/doc/yum-key.gpg https://mirrors.aliyun.com/kubernetes/yum/doc/rpm-package-key.gpg
 </span></span></span><span style=display:flex><span><span style=color:#e6db74>EOF</span>
 </span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>	<span style=color:#75715e># show version</span>
+</span></span><span style=display:flex><span>	dnf list kubeadm --showduplicates
+</span></span><span style=display:flex><span>	<span style=color:#75715e># packename+version name</span>
+</span></span><span style=display:flex><span>	dnf install -y kubelet-1.17.0 kubeadm-1.17.0 kubectl-1.17.0
+</span></span><span style=display:flex><span>    systemctl enable kubelet
+</span></span><span style=display:flex><span><span style=color:#f92672>}</span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># show version</span>
-</span></span><span style=display:flex><span>dnf list kubeadm --showduplicates
-</span></span><span style=display:flex><span><span style=color:#75715e># packename+version name</span>
-</span></span><span style=display:flex><span>dnf install -y kubelet-1.17.0 kubeadm-1.17.0 kubectl-1.17.0
+</span></span><span style=display:flex><span><span style=color:#66d9ef>function</span> installLxcfs<span style=color:#f92672>()</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>	<span style=color:#75715e># insall lxcfs </span>
+</span></span><span style=display:flex><span>	yum -y install fuse-devel fuse  lxc-templates
+</span></span><span style=display:flex><span>	wget  --no-check-certificate  https://copr-be.cloud.fedoraproject.org/results/ganto/lxc3/epel-7-x86_64/01041891-lxcfs/lxcfs-3.1.2-0.2.el7.x86_64.rpm
+</span></span><span style=display:flex><span>	rpm -ivh lxcfs-3.1.2-0.2.el7.x86_64.rpm
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>systemctl enable kubelet
+</span></span><span style=display:flex><span>	systemctl enable lxcfs
+</span></span><span style=display:flex><span>	systemctl start lxcfs
+</span></span><span style=display:flex><span>	<span style=color:#75715e># 运⾏lxcfs命令，指定 /proc ⽬录所在位置：</span>
+</span></span><span style=display:flex><span>	sudo mkdir -p /var/lib/lxcfs
+</span></span><span style=display:flex><span>	sudo lxcfs /var/lib/lxcfs
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># insall lxcfs </span>
-</span></span><span style=display:flex><span>yum -y install fuse-devel fuse  lxc-templates
-</span></span><span style=display:flex><span>wget  --no-check-certificate  https://copr-be.cloud.fedoraproject.org/results/ganto/lxc3/epel-7-x86_64/01041891-lxcfs/lxcfs-3.1.2-0.2.el7.x86_64.rpm
-</span></span><span style=display:flex><span>rpm -ivh lxcfs-3.1.2-0.2.el7.x86_64.rpm
+</span></span><span style=display:flex><span>	<span style=color:#75715e># 需要确保lxcfs服务正常启动</span>
+</span></span><span style=display:flex><span>	systemctl status lxcfs 
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>systemctl enable lxcfs
-</span></span><span style=display:flex><span>systemctl start lxcfs
-</span></span><span style=display:flex><span><span style=color:#75715e># 运⾏lxcfs命令，指定 /proc ⽬录所在位置：</span>
-</span></span><span style=display:flex><span>sudo mkdir -p /var/lib/lxcfs
-</span></span><span style=display:flex><span>sudo lxcfs /var/lib/lxcfs
+</span></span><span style=display:flex><span><span style=color:#f92672>}</span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 需要确保lxcfs服务正常启动</span>
-</span></span><span style=display:flex><span>systemctl status lxcfs 
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>closeFireWall
+</span></span><span style=display:flex><span>closeSwap
+</span></span><span style=display:flex><span><span style=color:#75715e># setHostName</span>
+</span></span><span style=display:flex><span>supportIpv6Traffic
+</span></span><span style=display:flex><span>updateYumRepo
+</span></span><span style=display:flex><span>syncTime
+</span></span><span style=display:flex><span>installDocker
+</span></span><span style=display:flex><span>installK8sComponent
+</span></span><span style=display:flex><span>installLxcfs
 </span></span></code></pre></div><h3 id=部署集群>部署集群</h3><ul><li>生成预处理文件</li><li>预拉取镜像</li><li>部署主节点</li><li>生成加入节点命令</li></ul><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=display:flex><span><span style=color:#75715e># pre-config </span>
 </span></span><span style=display:flex><span>kubeadm config print init-defaults &gt; kubeadm-init.yaml
 </span></span><span style=display:flex><span>
@@ -419,7 +447,7 @@ volumeattachments                              storage.k8s.io                 fa
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span>history <span style=color:#ae81ff>10</span>
 </span></span></code></pre></div><h3 id=kubectl-cp---help>kubectl cp &ndash;help</h3><p>Copy files and directories to and from containers.</p><h3 id=获取网关信息>获取网关信息：</h3><p>kc get pod -n istio-system -o wide | grep frontier
-kc get pod -n medusa-system -o wide | grep nginx</p><h3 id=deployment>deployment</h3><p>平台上的实例名对应集群中的 deployment的name；</p><p><code>kc describe deployment unit-test-platform -n qa-test</code></p><h3 id=display-all-kubernetes-objects>display all kubernetes objects</h3><ul><li>列出所有对象 <code>kubectl api-resources -o wide</code></li><li>查看对象信息 <code>kc explain name-of-object</code></li><li>常用手册查询： <a href=https://kubernetes.io/docs/reference/kubectl/cheatsheet/>kubectl cheat sheet</a></li><li><a href=https://github.com/kubernetes/community/blob/master/contributors/devel/sig-architecture/api-conventions.md>k8s API Conventions</a></li><li><a href=https://kubernetes.io/zh/docs/concepts/services-networking/ingress/>ingress</a></li></ul><p>获取 <code>api-resources</code>时，提示<code>error: unable to retrieve the complete list of server APIs: metrics.k8s.io/v1beta1: the server is currently unable to handle the request</code>，相当于对于<code>metrics.k8s.io/v1beta1</code>这个apigroup无法返回对应的类型。其中包含<code>nodes</code>和<code>pods</code></p><pre tabindex=0><code>NAME                              SHORTNAMES     APIGROUP                       NAMESPACED   KIND
+kc get pod -n medusa-system -o wide | grep nginx</p><h3 id=exec-多容器>exec 多容器</h3><p>多个容器可自定义名称，然后指定时使用<code>-c container-name</code>即可。例如<code>kc exec -it pod-name -c container-name -- ls /etc/</code></p><h3 id=deployment>deployment</h3><p>平台上的实例名对应集群中的 deployment的name；</p><p><code>kc describe deployment unit-test-platform -n qa-test</code></p><h3 id=display-all-kubernetes-objects>display all kubernetes objects</h3><ul><li>列出所有对象 <code>kubectl api-resources -o wide</code></li><li>查看对象信息 <code>kc explain name-of-object</code></li><li>常用手册查询： <a href=https://kubernetes.io/docs/reference/kubectl/cheatsheet/>kubectl cheat sheet</a></li><li><a href=https://github.com/kubernetes/community/blob/master/contributors/devel/sig-architecture/api-conventions.md>k8s API Conventions</a></li><li><a href=https://kubernetes.io/zh/docs/concepts/services-networking/ingress/>ingress</a></li></ul><p>获取 <code>api-resources</code>时，提示<code>error: unable to retrieve the complete list of server APIs: metrics.k8s.io/v1beta1: the server is currently unable to handle the request</code>，相当于对于<code>metrics.k8s.io/v1beta1</code>这个apigroup无法返回对应的类型。其中包含<code>nodes</code>和<code>pods</code></p><pre tabindex=0><code>NAME                              SHORTNAMES     APIGROUP                       NAMESPACED   KIND
 nodes                                            metrics.k8s.io                 false        NodeMetrics
 pods                                             metrics.k8s.io                 true         PodMetrics
 </code></pre><h3 id=部署ingress-nginx>部署ingress-nginx</h3><ul><li><a href=https://kubernetes.github.io/ingress-nginx/developer-guide/code-overview/>工作原理官方介绍</a></li><li><a href=https://kubernetes.github.io/ingress-nginx/how-it-works/>工作原理</a>，这里提到的 “同步循环模式”(synchronization loop pattern)，对应文档为 <a href=https://github.com/coreos/docs/blob/master/kubernetes/replication-controller.md>replication-controller</a></li><li><a href=https://zou.cool/2021/11/24/ingress-nginx-read/>Nginx-Ingress-Controller启动流程</a></li><li><a href=https://segmentfault.com/a/1190000017563487>如何编写正确且高效的 OpenResty 应用</a>，配合代码理解nginx.conf的内容执行逻辑</li><li><a href=https://moonbingbing.gitbooks.io/openresty-best-practices/content/lua/FFI.html>OpenResty最佳实践</a></li></ul><h4 id=1x-vs-0x-branch>1.x VS. 0.x Branch</h4><p>This is a breaking change between previous v0.X branch</p><p>This release only supports Kubernetes versions >= v1.19. The support for Ingress Object in networking.k8s.io/v1beta is being dropped and manifests should now use networking.k8s.io/v1.</p><pre tabindex=0><code>

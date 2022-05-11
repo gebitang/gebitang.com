@@ -208,7 +208,7 @@ etcd
 elasticsearch
 filebeat
 redis
-</code></pre><h3 id=删除container删除images>删除container，删除images</h3><p><a href=https://docs.docker.com/engine/reference/commandline/rm/>docker rm</a></p><p><a href=https://linuxize.com/post/how-to-remove-docker-images-containers-volumes-and-networks>Remove Docker Containers, Images, Volumes, and Networks</a></p><ul><li><code>docker rm -vf $(docker ps -aq)</code> To delete all containers including its volumes use</li><li><code>docker rmi -f $(docker images -aq)</code> To delete all the images</li></ul><pre tabindex=0><code># list all containers 
+</code></pre><h3 id=删除container删除images>删除container，删除images</h3><p><a href=https://docs.docker.com/engine/reference/commandline/rm/>docker rm</a></p><p><a href=https://linuxize.com/post/how-to-remove-docker-images-containers-volumes-and-networks>Remove Docker Containers, Images, Volumes, and Networks</a></p><ul><li><code>docker rm -vf $(docker ps -aq)</code> To delete all containers including its volumes use, or use <code>docker ps -aq |xargs docker rm -vf</code> on windows</li><li><code>docker rmi -f $(docker images -aq)</code> To delete all the images</li></ul><pre tabindex=0><code># list all containers 
 docker container ls -a
 
 # remove container id

@@ -408,6 +408,31 @@ proxy_set_header Connection "upgrade";
 
 ```
 
+### nginx 转发ssh请求
+
+注意事项[参考](https://serverfault.com/questions/858067/unknown-directive-stream-in-etc-nginx-nginx-conf86)
+
+- 需要加载`--with-stream`模块，默认不会开启。可以动态加载，或安装`nginx-mod-stream`。二选其一
+  - `yum install nginx-mod-stream` 直接安装
+  - `load_module '/usr/lib64/nginx/modules/ngx_stream_module.so';`在配置文件头添加
+- 添加对应的stream配置，类似如下——
+
+```conf
+stream {
+    upstream oops-ssh-server{
+        server 192.168.102.209:22;       #内网服务器 端口为sshd默认的22，或绑定22端口的pod服务地址
+    }
+
+    server {
+        listen 9922; # 监听端口
+        proxy_connect_timeout 10s;
+        proxy_timeout 1h;
+        proxy_pass oops-ssh-server;            #转向内网服务器
+    }
+}
+```
+
+
 ### 使用API搜索
 
 - 配置了nginx的basic认证时，可以通过url传递认证参数调用实际的search请求

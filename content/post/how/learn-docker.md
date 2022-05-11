@@ -455,7 +455,7 @@ redis
 
 [Remove Docker Containers, Images, Volumes, and Networks](https://linuxize.com/post/how-to-remove-docker-images-containers-volumes-and-networks)
 
-- `docker rm -vf $(docker ps -aq)` To delete all containers including its volumes use
+- `docker rm -vf $(docker ps -aq)` To delete all containers including its volumes use, or use `docker ps -aq |xargs docker rm -vf` on windows
 - `docker rmi -f $(docker images -aq)` To delete all the images 
 
 ```

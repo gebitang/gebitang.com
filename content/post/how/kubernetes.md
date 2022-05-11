@@ -208,8 +208,6 @@ systemctl enable kubelet
 
 ```shell
 #!/bin/bash
-#!/bin/bash
-
 
 function closeFireWall() {
 	systemctl disable --now firewalld
@@ -232,7 +230,6 @@ function supportIpv6Traffic() {
 	echo 'net.bridge.bridge-nf-call-ip6tables = 1' >> /etc/sysctl.d/k8s.conf
 	echo 'net.bridge.bridge-nf-call-iptables = 1' >> /etc/sysctl.d/k8s.conf
 	sysctl --system
-
 }
 
 function updateYumRepo() {
@@ -241,7 +238,6 @@ function updateYumRepo() {
 	curl -o /etc/yum.repos.d/CentOS-Base.repo https://mirrors.aliyun.com/repo/Centos-7.repo
 	curl -o /etc/yum.repos.d/epel.repo http://mirrors.aliyun.com/repo/epel-7.repo
 }
-
 
 function syncTime() {
 	ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
@@ -253,10 +249,8 @@ function syncTime() {
 function installDocker() {
 	# add native repo
 	curl -o /etc/yum.repos.d/docker-ce.repo https://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo
-
 	# install by dnf
 	dnf install -y  docker-ce docker-ce-cli
-
 
 	# add customed repo for docker.
 	mkdir -p /etc/docker
@@ -266,16 +260,13 @@ function installDocker() {
 	  "registry-mirrors": ["https://f1bhsuge.mirror.aliyuncs.com"]
 	}
 EOF
-
 	# config auto start
 	systemctl enable --now docker
 
 	#check version
 	docker --version
 	systemctl restart docker
-
 }
-
 
 function installK8sComponent() {
 	cat > /etc/yum.repos.d/kubernetes.repo << EOF
@@ -287,7 +278,6 @@ function installK8sComponent() {
 	repo_gpgcheck=0
 	gpgkey=https://mirrors.aliyun.com/kubernetes/yum/doc/yum-key.gpg https://mirrors.aliyun.com/kubernetes/yum/doc/rpm-package-key.gpg
 EOF
-
 	# show version
 	dnf list kubeadm --showduplicates
 	# packename+version name
@@ -309,9 +299,7 @@ function installLxcfs() {
 
 	# 需要确保lxcfs服务正常启动
 	systemctl status lxcfs 
-
 }
-
 
 closeFireWall
 closeSwap
@@ -547,7 +535,7 @@ rm -rf /etc/kubernetes
 表明上提示`The connection to the server master:6443 was refused - did you specify the right host or port?`，最终实际上是因为apiserver无法连接etcd导致容器退出。
 
 
-### 创建configMap 
+### 创建configMap 扩容deploy
 
 
 ```shell
@@ -556,8 +544,22 @@ rm -rf /etc/kubernetes
 kubectl create configmap --dry-run=true saber.yml --from-file=./saber.yml --output yaml
 
 kubectl create configmap --dry-run=true pool.conf --from-file=./nginx.conf --output yaml > bridgeconfig.yml
+
+#扩容
+kc scale deploy  nginx -n nginx-deploy --replicas=6
+
+# 编辑部署文件
+kc edit deploy nginx-deploy -n nginx-deploy
 ```
 
+### Troubleshooting a Deployment
+
+部署deployment后，pod一直未创建。处理流程——
+
+- `kc get deploy -n nspace`查看部署信息
+- `kc describe deploy deploy-name`查看描述信息，只显示` Normal  ScalingReplicaSet  8m48s  deployment-controller  Scaled up replica set oops-ssh-server-sshd-74cd68dd8 to 1`
+- `kc get replicaset -n nspace`查看对应的replicaset信息
+- `kc describe replicaset name-of-replicaset`可以从events中看到对应的提示信息，例如`serviceaccount "oops-ssh-server" not found`
 
 ### 证书管理
 

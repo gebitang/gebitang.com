@@ -356,11 +356,16 @@ iptables -A INPUT -p tcp --dport 8080 -j DROP
 
 - 安装httpd-tools以生产密码文件 `yum  -y install httpd-tools` 
 
-`htpasswd -2 -c /usr/local/src/passwd.db username` 为username生成密码，并使用SHA-256进行密码加密。保持在-c的参数文件中。
+`htpasswd -2 -c /usr/local/src/passwd.db username` 为username生成密码，并使用SHA-256进行密码加密。保存在-c的参数文件中。
 
 这个文件每行保持一组用户名密码信息。nginx的[` auth_basic_user_file`](http://nginx.org/en/docs/http/ngx_http_auth_basic_module.html)模块支持[配置多个用户](https://serverfault.com/a/896901)
 
 可以使用`htpasswd -h`查看其它参数
+
+htpasswd 没有直接修改密码的函数——
+
+- 删除指定用户 `htpasswd -D /usr/local/src/passwd.db username` 删除指定文件下的用户
+- 重新生成用户 `htpasswd -2 -c /usr/local/src/passwd.db username`
 
 - 配置nginx
 

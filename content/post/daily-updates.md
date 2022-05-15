@@ -157,7 +157,20 @@ scoop install cloc               # Windows with Scoop
 
 ffmpeg是万能的~ 
 
+## m3u8转mp4 
 
+[gist for m3u8-to-mp4](https://gist.github.com/tzmartin/fb1f4a8e95ef5fb79596bd4719671b5d)——
+
+```shell
+# 页面上获取到m3u8文件地址，不加密的情况下，直接使用下面的命令就可以进行转换
+ffmpeg -i "http://host/folder/file.m3u8" -bsf:a aac_adtstoasc -vcodec copy -c copy -crf 50 file.mp4
+```
+
+[m3u8文件](https://zh-tw.aiseesoft.com/how-to/convert-m3u8-to-mp4.html)是多媒体播放列表文件格式，基于HLS(http live stream实时流)。
+
+>The [M3U8](https://docs.fileformat.com/audio/m3u8) file format is used by audio and video playback programs to store playlists. The playlist consists of an Internet web path or URL, along with information about each track in the list (playtime duration). M3U8 files use UTF-8 character encoding as compared to M3U file types.
+
+前端至少会展示m3u8文件的地址信息。过滤获取即可。
 
 ## Mac录屏：含声音
 

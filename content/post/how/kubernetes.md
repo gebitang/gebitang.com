@@ -920,6 +920,46 @@ curl -k -H "Content-Type: application/json" -X PUT --data-binary @temp.json 127.
 
 基本上就是踩完一遍坑就可以安装成功了。
 
+#### systemd vs cgroupfs
+
+kubernetes为什么要修改使用systemd？
+
+Kubernetes 现在推荐使用 systemd 来代替 cgroupfs
+因为systemd是Kubernetes自带的cgroup管理器，负责为每个进程分配cgroups
+但docker的cgroup driver默认是cgroupfs，这样就同时运行有两个cgroup控制管理器
+当资源有压力的情况时，有可能出现不稳定的情况。
+
+如果不修改配置，会在kubeadm init时有提示:
+```
+[WARNING IsDockerSystemdCheck]: detected "cgroupfs" as the Docker cgroup driver. 
+The recommended driver is "systemd". 
+Please follow the guide at https://kubernetes.io/docs/setup/cri/
+```
+
+但[使用 systemd 作为 cgroup 驱动程序可能导致日志泛滥](https://www.ibm.com/docs/zh/cloud-private/3.2.0?topic=iu-log-flooding-when-using-systemd-as-cgroup-driver)
+
+不影响容器指标，只需配置 rsyslog 来忽略此类泛滥的日志， 在 `/etc/rsyslog.conf` 或 `/etc/rsyslog.d/*.conf`中的rule部分下配置——
+
+```
+rawmsg, contains, "libcontainer" ~
+
+# Log all kernel messages to the console.
+# Logging much else clutters up the screen.
+#kern.*                                                 /dev/console
+
+# Log anything (except mail) of level info or higher.
+# Don't log private authentication messages!
+*.info;mail.none;authpriv.none;cron.none                /var/log/messages
+
+```
+
+- 每个规则行由两部分组成，selector部分和action部分，这两部分由一个或多个空格或tab分隔，selector部分指定源和日志等级，action部分指定对应的操作。
+- selector也由两部分组成，设施和优先级，由点号.分隔。第一部分为消息源或称为日志设施，第二部分为日志级别。
+
+`rawmsg, contains, "libcontainer" ~` 波浪线表示discard丢弃。[参考](https://superuser.com/questions/1269643/why-does-mean-discard-the-messages-that-were-matched-in-the-previous-line)，[官方说明](https://www.rsyslog.com/doc/master/configuration/actions.html#discard-stop)
+
+> 1. Note that in legacy configuration the tilde character “~” can also be used instead of the word “stop”.  
+> 2. `rawmsg` is the message as it is received from the network. It has the syslog header, e.g. timestamp and tag. `msg` is just the syslog payload (the MSG field from RFC3164 and RFC5424). If your senders are RFC-compliant, both should differ.
 
 ### 纯手工搭建环境
 

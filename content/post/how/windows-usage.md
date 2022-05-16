@@ -21,6 +21,13 @@ toc = true
 
 ## 开启远程桌面连接 mstsc
 
+## 使用window defender阻止程序联网 
+
+- win+R输入`mf.msc`打开防火墙
+- 出站规则 选择 “新建规则” --> 程序 --> 添加程序的 exe地址
+- 一路默认添加必要的信息即可
+
+四哥分享的[TreeSize](https://downloads.jam-software.de/treesize_free/TreeSizeFreeSetup.exe)里提到——“有新版了，很长时间未更新。用上面这个URL直接下载，Free版就够用。用wf.msc阻止TreeSize联网，这种软件绝对不能让它联网”
 
 ## 用Calibre给txt文件生成目录
 

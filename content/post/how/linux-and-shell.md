@@ -2500,6 +2500,8 @@ netstat -ap
 lsof -i:9988
 ```
 
+[Netstat Commands for Linux Network Management](https://www.tecmint.com/20-netstat-commands-for-linux-network-management/)
+
 ### 0x7. apt-get安装卸载
 ```
 # 查看已安装应用 dpkg -l配合grep

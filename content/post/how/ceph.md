@@ -36,8 +36,11 @@ ceph df
 # 出当前系统下所有的bucket信息
 radosgw-admin bucket list
 
-# 查看bucket详细信息
+# 查看bucket详细信息，包含了对应的用户："owner": "hub_apps", 所属的pool，例如 "placement_rule": "default-placement",
 radosgw-admin bucket stats --bucket=harbor-dev
+
+#查看用户信息，包含了用户的认证信息
+radosgw-admin user info --uid=npm
 
 # 查看BUCKET的名称，所在的data pool, index pool. BUCKET ID.
 radosgw-admin zone get
@@ -48,8 +51,7 @@ zone set
 zone list
         List all zones set on this cluster.
 
-#查看用户信息，包含了用户的认证信息
-radosgw-admin user info --uid=npm
+
 
 ```
 

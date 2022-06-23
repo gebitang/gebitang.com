@@ -37,6 +37,35 @@ toc = true
   "pure-u-1-1|https://s3-img.meituan.net/v1/mss_3d027b52ec5a4d589e68050845611e68/ff/n0/0n/34/dp_301168.jpg|OCI"
 >}}
 
+## k8s 恢复
+
+[ETCD 集群的备份和恢复](https://blog.csdn.net/qq_34556414/article/details/113882631)
+
+
+
+```
+1.停止所有 Master 上 kube-apiserver 服务
+
+systemctl stop kube-apiserver
+
+2.停止集群中所有 ETCD 服务
+systemctl stop etcd
+
+3.移除所有 ETCD 存储目录下数据
+mv /etcd/data /etcd/data.bak
+
+4.从备份文件中恢复数据
+ETCDCTL_API=3 etcdctl snapshot restore /backup/etcd-snapshot-xx.db  
+
+5.启动 etcd
+systemctl start etcd
+
+6.启动 apiserver
+systemctl start kube-apiserver
+
+7.检查服务是否正常
+```
+
 ## k8s 搭建
 
 在CentOS机器上安装，配置1个master+2个node机器
@@ -622,6 +651,8 @@ systemctl status lxcfs
 [Pods stuck in Terminating status](https://stackoverflow.com/questions/35453792/pods-stuck-in-terminating-status)，状态一直处于Terminating，强制删除
 
 ```shell
+#删除单个pod
+kubectl delete pod {podname} -n {namespace}
 # 配合必要的 ns参数 -n kube-system
 ns=kube-system
 for p in $(kubectl get pods -n $ns | grep Terminating | awk '{print $1}'); do kubectl delete pod $p -n $ns --grace-period=0 --force;done

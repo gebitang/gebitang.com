@@ -802,6 +802,39 @@ func FromContext(ctx context.Context) (*User, bool) {
 这种情况下，需要将struct转换为`map[string]interface{}`之后再更新。使用`structs.Map(*struct)`将struct转换为map格式再调用`Update`方法即可，[参考这里](https://stackoverflow.com/questions/23589564/function-for-converting-a-struct-to-map-in-golang)。这个问题也是类似情况[Update method does not update zero value](https://stackoverflow.com/questions/64330504/update-method-does-not-update-zero-value)
 
 
+gorm添加数据库排他锁，for update
+
+```
+func UpdateUser(db *gorm.DB, id int64) error {
+    tx := db.Begin()
+    defer func() {
+        if r := recover(); r != nil {
+            tx.Rollback()
+        }
+    }()
+
+    if err := tx.Error; err != nil {
+        return err
+    }
+
+    user := User{}
+
+    // 锁住指定 id 的 User 记录
+    if err := tx.Set("gorm:query_option", "FOR UPDATE").First(&user, id).Error; err != nil {
+        tx.Rollback()
+        return err
+    }
+
+    // 更新操作...
+
+    // commit事务，释放锁
+    if err := tx.Commit().Error; err != nil {
+        return err
+    }
+
+    return nil
+}
+```
 ### converting argument $1 type: unsupported type []int, a slice of int
 
 [go sql报错](https://blog.csdn.net/xiaomin1328/article/details/114269917)：

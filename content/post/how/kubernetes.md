@@ -39,11 +39,26 @@ toc = true
 
 ## k8s 恢复
 
-[ETCD 集群的备份和恢复](https://blog.csdn.net/qq_34556414/article/details/113882631)
-
-
+- [ETCD 集群的备份和恢复](https://blog.csdn.net/qq_34556414/article/details/113882631)
+- [K8S 集群备份与恢复](http://www.xuyasong.com/?p=2052)
 
 ```
+# 执行备份
+date;
+CACERT="/opt/kubernetes/ssl/ca.pem"
+CERT="/opt/kubernetes/ssl/server.pem"
+EKY="/opt/kubernetes/ssl/server-key.pem"
+ENDPOINTS="127.0.0.1:2379"
+
+ETCDCTL_API=3 etcdctl \
+--cacert="${CACERT}" --cert="${CERT}" --key="${EKY}" \
+--endpoints=${ENDPOINTS} \
+snapshot save /backup/etcd-snapshot-`date +%Y%m%d`.db
+
+# 备份保留30天
+find /backup/ -name *.db -mtime +30 -exec rm -f {} \;
+
+# 恢复
 1.停止所有 Master 上 kube-apiserver 服务
 
 systemctl stop kube-apiserver
@@ -587,6 +602,40 @@ Please, check the contents of the $HOME/.kube/config file.
 ```
 
 ## k8s practice
+
+### 调度管理
+
+cordon，drain，delete
+
+cordon
+>影响最小，只会将 node 调为 SchedulingDisabled，之后再发创建 pod，不会被调度到该节点，旧有的pod不会受到影响，仍正常对外提供服务
+
+```
+kubectl cordon <node name>
+kubectl uncordon <node name>
+```
+
+drain
+> 驱逐node上的pod，其他节点重新创建；接着，将节点调为 SchedulingDisabled
+
+delete 
+> 驱逐node上的pod，其他节点重新创建； 从master节点删除该node，master对其不可见，失去对其控制，master不可对其恢复  
+> 恢复调度，需进入node节点，重启kubelet， 基于node的自注册功能，节点重新恢复使用
+
+`systemctl restart kubelet`
+
+
+```shell
+# 确定要排空的节点的名称
+kubectl get nodes 
+# 查看获取pod名字
+kubectl get po 
+# 命令node节点开始释放所有pod，并且不接收新的pod进程
+kubectl drain [node-name] --force --ignore-daemonsets --delete-local-data 
+# 这时候把需要做的事情做一下。比如上面说的更改docker文件daemon.json或者说node节点故障需要进行的处理操作 
+# 然后恢复node，恢复接收新的pod进程
+kubectl uncordon [node-name]
+```
 
 ### 断电重启问题
 

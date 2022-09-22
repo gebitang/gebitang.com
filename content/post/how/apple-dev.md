@@ -16,6 +16,50 @@ toc=true
 +++
 
 
+---
+
+下面为官方内容，研究透下面的内容，不用再搜索任何其他资料了:) 记录下链接没啥用哈，搞清楚how和what之后才能变成自己的东西
+[developer apple center](https://developer.apple.com/support/)  
+
+- [developer account](https://help.apple.com/developer-account/)
+- [xcode](https://help.apple.com/xcode/mac/current/#/devc8c2a6be1)
+- [app store connect](https://help.apple.com/app-store-connect/)
+- [topic articles](https://developer.apple.com/support/articles/)
+- [documentation](https://developer.apple.com/documentation/)
+
+
+## Current
+
+### provisioning profile
+
+[What is a provisioning profile & code signing in iOS?](https://medium.com/@abhimuralidharan/what-is-a-provisioning-profile-in-ios-77987a7c54c2)
+
+苹果要求必须签名后的应用才能安装到设备上，但开发阶段如何处理？这就是 `provisioning profile` 的作用，作为【开发者账户】和【设备】之间的纽带存在，完成“谁开发的什么应用要安装到哪些设备上”的问题？
+
+所以这个文件包含了三个部分—— 
+
+- 证书文件 Development Certificates 来自开发中账户，证明“who”的问题，通常包含一年的有效期
+- 设备列表 Unique Device Identifiers 
+- AppId 相当于包名，可以使用wild card模式支持一组app；对应于应用的  bundle identifier
+
+另外还有基础的描述部分，和权限列表(Entitlements)
+
+这个文件可以从开发中账户下载并切要打包到应用中，安装时设备将进行检查。
+
+`.p12` 本地私钥，可以从`Keychain Access`导出并导入到其他电脑。iOS平台上的签名过程可以参考下图——
+
+![](https://s3-img.meituan.net/v1/mss_3d027b52ec5a4d589e68050845611e68/ff/n0/0n/b2/02_45284.jpg)
+
+### 使用Xcode安装ipa到手机
+
+- 确保ipa已经正确打包
+- 打开Xcode，连接iPhone
+- 打开Window -> Devices and Simulators (快捷键Shift + Command + 2)
+- 把ipa文件拖拽到下图位置。或点击+选择ipa文件
+
+## Archive
+
+
 [苹果开发者账号开启双重认证教程](https://www.jianshu.com/p/20c5e199d47d)
 注册Apple账户且在iOS设备上进行登录（Phone or Pad），在账户信息页面选择 “密码与安全性”，开启双重认证。——目前，不开启双重认证的账户无法注册为开发者账户。
 
@@ -29,18 +73,6 @@ toc=true
 [iOS开发之App打包上传详细步骤](http://www.xlgz520.com/2019/02/12/iOS%E4%B9%8BApp%E6%89%93%E5%8C%85%E4%B8%8A%E4%BC%A0%E4%B8%80%E6%9D%A1%E9%BE%99/)
 其中第三方上传工具可以使用app-specific的密码 [Using app-specific passwords](https://support.apple.com/en-us/HT204397)
 
-[What is a provisioning profile & code signing in iOS?](https://medium.com/@abhimuralidharan/what-is-a-provisioning-profile-in-ios-77987a7c54c2)
-
----
-
-下面为官方内容，研究透下面的内容，不用再搜索任何其他资料了:) 
-[developer apple center](https://developer.apple.com/support/)  
-
-- [developer account](https://help.apple.com/developer-account/)
-- [xcode](https://help.apple.com/xcode/mac/current/#/devc8c2a6be1)
-- [app store connect](https://help.apple.com/app-store-connect/)
-- [topic articles](https://developer.apple.com/support/articles/)
-- [documentation](https://developer.apple.com/documentation/)
 
 ### Apple disk space issue
 

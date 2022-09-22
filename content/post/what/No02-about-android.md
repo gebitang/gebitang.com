@@ -14,7 +14,68 @@ toc = true
 
 ## Android problem
 
-### Android Studio无法启动
+### Android Studio
+
+#### setup on Mac M1
+
+```
+Preparing "Install Android SDK Build-Tools 33 (revision: 33.0.0)".
+Downloading https://dl.google.com/android/repository/build-tools_r33-macosx.zip
+"Install Android SDK Build-Tools 33 (revision: 33.0.0)" ready.
+Installing Android SDK Build-Tools 33 in /Users/geb/Library/Android/sdk/build-tools/33.0.0
+"Install Android SDK Build-Tools 33 (revision: 33.0.0)" complete.
+"Install Android SDK Build-Tools 33 (revision: 33.0.0)" finished.
+Preparing "Install Sources for Android 33 (revision: 1)".
+Downloading https://dl.google.com/android/repository/sources-33_r01.zip
+"Install Sources for Android 33 (revision: 1)" ready.
+Installing Sources for Android 33 in /Users/geb/Library/Android/sdk/sources/android-33
+"Install Sources for Android 33 (revision: 1)" complete.
+"Install Sources for Android 33 (revision: 1)" finished.
+Preparing "Install Android SDK Platform 33 (revision: 2)".
+Downloading https://dl.google.com/android/repository/platform-33_r02.zip
+"Install Android SDK Platform 33 (revision: 2)" ready.
+Installing Android SDK Platform 33 in /Users/geb/Library/Android/sdk/platforms/android-33
+"Install Android SDK Platform 33 (revision: 2)" complete.
+"Install Android SDK Platform 33 (revision: 2)" finished.
+Preparing "Install Android Emulator (revision: 31.3.10)".
+Downloading https://dl.google.com/android/repository/emulator-darwin_aarch64-8807927.zip
+"Install Android Emulator (revision: 31.3.10)" ready.
+Installing Android Emulator in /Users/geb/Library/Android/sdk/emulator
+"Install Android Emulator (revision: 31.3.10)" complete.
+"Install Android Emulator (revision: 31.3.10)" finished.
+Preparing "Install SDK Patch Applier v4 (revision: 1)".
+Downloading https://dl.google.com/android/repository/3534162-studio.sdk-patcher.zip
+"Install SDK Patch Applier v4 (revision: 1)" ready.
+Installing SDK Patch Applier v4 in /Users/geb/Library/Android/sdk/patcher/v4
+"Install SDK Patch Applier v4 (revision: 1)" complete.
+"Install SDK Patch Applier v4 (revision: 1)" finished.
+Preparing "Install Google APIs ARM 64 v8a System Image (revision: 6)".
+Downloading https://dl.google.com/android/repository/sys-img/google_apis/arm64-v8a-33_r06.zip
+"Install Google APIs ARM 64 v8a System Image (revision: 6)" ready.
+Installing Google APIs ARM 64 v8a System Image in /Users/geb/Library/Android/sdk/system-images/android-33/google_apis/arm64-v8a
+"Install Google APIs ARM 64 v8a System Image (revision: 6)" complete.
+"Install Google APIs ARM 64 v8a System Image (revision: 6)" finished.
+Preparing "Install Android SDK Platform-Tools (revision: 33.0.3)".
+Downloading https://dl.google.com/android/repository/platform-tools_r33.0.3-darwin.zip
+"Install Android SDK Platform-Tools (revision: 33.0.3)" ready.
+Installing Android SDK Platform-Tools in /Users/geb/Library/Android/sdk/platform-tools
+"Install Android SDK Platform-Tools (revision: 33.0.3)" complete.
+"Install Android SDK Platform-Tools (revision: 33.0.3)" finished.
+Parsing /Users/geb/Library/Android/sdk/build-tools/33.0.0/package.xml
+Parsing /Users/geb/Library/Android/sdk/emulator/package.xml
+Parsing /Users/geb/Library/Android/sdk/patcher/v4/package.xml
+Parsing /Users/geb/Library/Android/sdk/platform-tools/package.xml
+Parsing /Users/geb/Library/Android/sdk/platforms/android-33/package.xml
+Parsing /Users/geb/Library/Android/sdk/sources/android-33/package.xml
+Parsing /Users/geb/Library/Android/sdk/system-images/android-33/google_apis/arm64-v8a/package.xml
+Android SDK is up to date.
+Creating Android virtual device
+Android virtual device Pixel_3a_API_33_arm64-v8a was successfully created
+```
+
+https://www.cmd-ltd.com/advice-centre/usb-chargers-and-power-modules/usb-and-power-module-product-help/usb-data-transfer-guide/
+
+#### 无法启动
 
 升级之后，第一次无法启动页面，在任务管理器中显示已经启动。
 

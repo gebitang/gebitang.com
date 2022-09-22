@@ -91,6 +91,8 @@ sudo ldconfig
 [platform-tools](https://developer.android.com/studio/releases/platform-tools) 中有下载连接[https://dl.google.com/android/repository/platform-tools-latest-linux.zip](https://dl.google.com/android/repository/platform-tools-latest-linux.zip)
 解压后配置环境变量即可。
 
+[platfort-tools-latest-windows](https://dl.google.com/android/repository/platform-tools-latest-windows.zip)
+
 ### 内网环境问题解决
 因为是内网访问，机器接在了一台路由器后面，默认的网关无法解析内网域名。 
 [Ubuntu 18.04 LTS正确设置DNS服务器](https://www.feiqy.com/ubuntu-dns/)

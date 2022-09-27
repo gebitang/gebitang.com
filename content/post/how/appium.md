@@ -20,6 +20,24 @@ toc=true
 
 使用现有的环境，还没有按照上面的文档进行搭建操作。
 
+### 手动搬运Mac环境下的appium
+
+目标机器网络环境不佳，另外一台机器上有appium 1.22.3版本的环境。
+
+```shell
+# 打包appium， 目录 /usr/local/lib/node_modules
+tar -czvf appium.tar.gz appium
+
+# 解压到目标机器对应相同目录 /usr/local/lib/node_modules
+tar -zxvf appium.tar.gz -C ./
+
+# 创建软连接启动项目 目录   /usr/local/bin 
+ln -s ../lib/node_modules/appium/build/lib/main.js appium 
+
+# 检查appium版本
+appium -v 
+```
+
 ### 脚本编写
 
 - [Find Element](https://appium.io/docs/en/commands/element/find-element/)

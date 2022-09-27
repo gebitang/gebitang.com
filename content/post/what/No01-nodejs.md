@@ -385,4 +385,18 @@ npm install
 
 更详细介绍——[README.md ](https://github.com/Medium/phantomjs/blob/master/README.md)
 
-使用 `npm config list`查看配置的默认变量
+
+## npm默认安装目录
+
+使用 `npm root -g`查看默认安装目录，`/usr/local/lib/node_modules`，可以使用修改默认的安装地址
+
+```shell
+# Make directory 
+mkdir ~/.npm-global
+#Set configuration folder location
+npm config set prefix ~/.npm-global
+#Add path to user environment path
+export PATH=~/.npm-global/bin:$PATH
+```
+
+使用 `npm config list`查看配置的默认变量；使用`npm list -g`查看已安装的应用

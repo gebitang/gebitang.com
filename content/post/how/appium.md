@@ -33,6 +33,10 @@ tar -zxvf appium.tar.gz -C ./
 
 # 创建软连接启动项目 目录   /usr/local/bin 
 ln -s ../lib/node_modules/appium/build/lib/main.js appium 
+# 这里的坑是：记得前面是源地址，后面的是目标地址。 将后面的软连接连接到源地址上。一开始整错了，没修改；又重新连接了一回，结果就循环了
+# 检查方式：https://www.baeldung.com/linux/too-many-levels-of-symlinks
+find -L appium 
+file appium 
 
 # 检查appium版本
 appium -v 

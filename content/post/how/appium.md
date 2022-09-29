@@ -45,7 +45,8 @@ appium -v
 ### 脚本编写
 
 - [Find Element](https://appium.io/docs/en/commands/element/find-element/)
-- 安装对应的client端，例如 `pip install Appium-Python-Client`，安装pytest框架 `pip install pytest`
+- 安装对应的client端，例如 `pip install Appium-Python-Client`，
+- 安装pytest框架 `pip install pytest`
 - 使用appium inspector进行录制，转换为对应的脚本，再做对应的修改
 - 执行`pytest`，详情[参考](https://docs.pytest.org/en/7.1.x/getting-started.html)
 
@@ -95,6 +96,21 @@ class TestIOS:
         self.driver.quit()
 ```
 
+脚本保存到 testappium文件夹下，命名为`test.py`
+
+### 命令行方式执行
+
+```shell
+# 创建虚拟环境
+python3 -m venv testappium
+# 激活当前环境
+source testappium/bin/activate 
+# 安装依赖
+pip3 install pytest
+pip3 install Appium-Python-Client
+# 执行测试，确保已经有appium server启动
+pytest test.py
+```
 
 
 ### 打包WDA
@@ -136,3 +152,65 @@ xcodebuild -project WebDriverAgent.xcodeproj -scheme WebDriverAgentRunner -desti
 
 
 更直接的办法是升级Xcode版本:) 
+
+#### Xcode 14.0打包WDA报错
+
+遇到链接问题: ld: cannot link directly with dylib/framework, your binary is not an allowed client of /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/Library/PrivateFrameworks/XCTAutomationSupport.framework/XCTAutomationSupport for architecture arm64
+
+官方论坛[相关问题](https://developer.apple.com/forums/thread/712039)，appium的github描述了[原因](https://github.com/appium/appium/issues/17174)：苹果官方更严格的限制，导致XCTAutomationSupport问题，在appium2中修复了这个问题。Fastbot也出现类似的[问题](https://github.com/bytedance/Fastbot_iOS/issues/103)，建议使用低版本的进行代替——实操可行。
+
+替换之后，遇到的问题时之前截图的命令现在提示——
+
+```
+ Encountered internal error running command: UnableToCaptureScreen: Error Domain=XCTDaemonErrorDomain Code=39 "Legacy screen requests are no longer supported" UserInfo={NSLocalizedDescription=Legacy screen requests are no longer supported}
+[debug] [W3C (4754dddc)]     at errorFromW3CJsonCode (/usr/local/lib/node_modules/appium/node_modules/appium-base-driver/lib/protocol/errors.js:780:25)
+[debug] [W3C (4754dddc)]     at ProxyRequestError.getActualError (/usr/local/lib/node_modules/appium/node_modules/appium-base-driver/lib/protocol/errors.js:663:14)
+[debug] [W3C (4754dddc)]     at JWProxy.command (/usr/local/lib/node_modules/appium/node_modules/appium-base-driver/lib/jsonwp-proxy/proxy.js:272:19)
+[debug] [W3C (4754dddc)]     at runMicrotasks (<anonymous>)
+[debug] [W3C (4754dddc)]     at processTicksAndRejections (node:internal/process/task_queues:96:5)
+[debug] [W3C (4754dddc)]     at XCUITestDriver.proxyCommand (/usr/local/lib/node_modules/appium/node_modules/appium-xcuitest-driver/lib/commands/proxy-helper.js:96:12)
+[debug] [W3C (4754dddc)]     at getScreenshotFromWDA (/usr/local/lib/node_modules/appium/node_modules/appium-xcuitest-driver/lib/commands/screenshots.js:11:18)
+[debug] [W3C (4754dddc)]     at wrapped (/usr/local/lib/node_modules/appium/node_modules/asyncbox/lib/asyncbox.js:60:13)
+[debug] [W3C (4754dddc)]     at retry (/usr/local/lib/node_modules/appium/node_modules/asyncbox/lib/asyncbox.js:43:13)
+[debug] [W3C (4754dddc)]     at retryInterval (/usr/local/lib/node_modules/appium/node_modules/asyncbox/lib/asyncbox.js:70:10)
+[debug] [W3C (4754dddc)]     at XCUITestDriver.getScreenshot (/usr/local/lib/node_modules/appium/node_modules/appium-xcuitest-driver/lib/commands/screenshots.js:42:10)
+```
+
+
+### 现状总结
+
+使用appium 1.22.3版本，打包自带的WDA工程(位于 `/usr/local/lib/node_modules/appium/node_modules/appium-webdriveragent`)，然后写自动化脚本进行验证
+
+- Mac 12.6 + Xcode 13.4.1 + Appium 1.22.3 可以正常支持 iOS 16.0 版本，操作、截图正常
+- Mac 13.0 + Xcode 14.0 + Appium 1.22.3 由于Xcode中的XCTAutomationSupport问题导致无法正常编译；使用Xcode 13.4版本的XCTAutomationSupport替换之后，正常点击操作OK，但截图提示错误
+
+
+重新离线下载Xcode 13.4.1，但无法安装到Mac13.0 Ventura系统，[官方描述](https://developer.apple.com/forums/thread/707626)，即使使用命令行启动，依然会报错——
+
+```shell
+utfdeMini-148:~  /Applications/Xcode13.4.1.app/Contents/MacOS/Xcode 
+objc[37970]: Class ASVError is implemented in both /Applications/Xcode13.4.1.app/Contents/SharedFrameworks/GPUToolsCore.framework/Versions/A/GPUToolsCore (0x12bccf050) and /Applications/Xcode13.4.1.app/Contents/PlugIns/GPUDebugger.ideplugin/Contents/Frameworks/GPUToolsASVC.framework/Versions/A/GPUToolsASVC (0x1278b9338). One of the two will be used. Which one is undefined.
+Killed: 9
+utfdeMini-148:~ utf$ The application cannot be opened for an unexpected reason, error=Error Domain=NSOSStatusErrorDomain Code=-10664 "kLSIncompatibleApplicationVersionErr: The app is incompatible with the current OS" UserInfo={_LSLine=4047, _LSFunction=_LSOpenStuffCallLocal}
+```
+
+[Utilize a Different Xcode Version for Build Process ](https://support.macincloud.com/support/solutions/articles/8000042681-how-to-utilize-a-different-xcode-version-for-build-process-on-mac)这里的方式……好像多尝试几次之后居然成功了？
+
+```shell 
+export DEVELOPER_DIR=/Applications/Xcode13.4.1.app/Contents/Developer
+/Applications/Xcode13.4.1.app/Contents/MacOS/Xcode
+
+
+utfdeMini-148:~ utf$ export DEVELOPER_DIR=/Applications/Xcode13.4.1.app/Contents/Developer
+utfdeMini-148:~ utf$ /Applications/Xcode13.4.1.app/Contents/MacOS/Xcode 
+objc[38398]: Class ASVError is implemented in both /Applications/Xcode13.4.1.app/Contents/SharedFrameworks/GPUToolsCore.framework/Versions/A/GPUToolsCore (0x12c851050) and /Applications/Xcode13.4.1.app/Contents/PlugIns/GPUDebugger.ideplugin/Contents/Frameworks/GPUToolsASVC.framework/Versions/A/GPUToolsASVC (0x125c30338). One of the two will be used. Which one is undefined.
+objc[38398]: Class DYShaderAnalyzerNextGPU is implemented in both /Applications/Xcode13.4.1.app/Contents/SharedFrameworks/MTLToolsShaderProfiler.framework/Versions/A/MTLToolsShaderProfiler (0x12cc7ac60) and /Applications/Xcode13.4.1.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/Library/GPUTools/PlugIns/GLToolsShaderProfilerMobileSupport.gtplugin/Contents/MacOS/GLToolsShaderProfilerMobileSupport (0x12ce2a9c0). One of the two will be used. Which one is undefined.
+2022-09-29 17:36:29.376 Xcode[38398:1616211] Looking for Simulator.app in (
+    "<DVTFilePath:0x60000294bf00:'/Applications/Xcode13.4.1.app/Contents/Developer/Applications'>"
+)
+2022-09-29 17:36:33.295 Xcode[38398:1617460]  DVTPortal: Service '<DVTPortalViewDeveloperService: 0x600001a018c0; action='viewDeveloper'>' encountered an unexpected result code from the portal ('1100')
+2022-09-29 17:36:33.295 Xcode[38398:1617460]  DVTPortal: Error:
+...
+```
+
+执行`sudo xcode-select --switch /Applications/Xcode13.4.1.app`强制切换后(图标已经显示为禁止操作)。重新执行成功了(尽管命令行启动时会有报错信息)

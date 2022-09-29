@@ -30,6 +30,15 @@ toc=true
 
 ## Current
 
+
+### Operation not permitted 
+
+权限控制问题，在设置--安全和隐私--完全磁盘访问权限中将对应的程序添加即可。
+
+### Xcode清除 Report Navigator中的logs信息
+
+关闭Xcode，删除文件夹 `rm -fR ~/Library/Developer/Xcode/DerivedData`，重新打开Xcode
+
 ### provisioning profile
 
 [What is a provisioning profile & code signing in iOS?](https://medium.com/@abhimuralidharan/what-is-a-provisioning-profile-in-ios-77987a7c54c2)

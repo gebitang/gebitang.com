@@ -189,18 +189,22 @@ xcodebuild -project WebDriverAgent.xcodeproj -scheme WebDriverAgentRunner -desti
 
 ```shell
 utfdeMini-148:~  /Applications/Xcode13.4.1.app/Contents/MacOS/Xcode 
-objc[37970]: Class ASVError is implemented in both /Applications/Xcode13.4.1.app/Contents/SharedFrameworks/GPUToolsCore.framework/Versions/A/GPUToolsCore (0x12bccf050) and /Applications/Xcode13.4.1.app/Contents/PlugIns/GPUDebugger.ideplugin/Contents/Frameworks/GPUToolsASVC.framework/Versions/A/GPUToolsASVC (0x1278b9338). One of the two will be used. Which one is undefined.
 Killed: 9
 utfdeMini-148:~ utf$ The application cannot be opened for an unexpected reason, error=Error Domain=NSOSStatusErrorDomain Code=-10664 "kLSIncompatibleApplicationVersionErr: The app is incompatible with the current OS" UserInfo={_LSLine=4047, _LSFunction=_LSOpenStuffCallLocal}
 ```
 
 [Utilize a Different Xcode Version for Build Process ](https://support.macincloud.com/support/solutions/articles/8000042681-how-to-utilize-a-different-xcode-version-for-build-process-on-mac)这里的方式……好像多尝试几次之后居然成功了？
 
+需要先设置变量
+
 ```shell 
-export DEVELOPER_DIR=/Applications/Xcode13.4.1.app/Contents/Developer
+export DEVELOPER_DIR=/Applications/Xcode13.4.1.app/Contents/Developer # make sure set this value first， or else the Xcode cann't open. 
 /Applications/Xcode13.4.1.app/Contents/MacOS/Xcode
+```
 
-
+效果验证
+```shell 
+# example
 utfdeMini-148:~ utf$ export DEVELOPER_DIR=/Applications/Xcode13.4.1.app/Contents/Developer
 utfdeMini-148:~ utf$ /Applications/Xcode13.4.1.app/Contents/MacOS/Xcode 
 objc[38398]: Class ASVError is implemented in both /Applications/Xcode13.4.1.app/Contents/SharedFrameworks/GPUToolsCore.framework/Versions/A/GPUToolsCore (0x12c851050) and /Applications/Xcode13.4.1.app/Contents/PlugIns/GPUDebugger.ideplugin/Contents/Frameworks/GPUToolsASVC.framework/Versions/A/GPUToolsASVC (0x125c30338). One of the two will be used. Which one is undefined.

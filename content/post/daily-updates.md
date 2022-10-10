@@ -195,6 +195,8 @@ ffmpeg -i "http://host/folder/file.m3u8" -bsf:a aac_adtstoasc -vcodec copy -c co
 
 录制的视频为Mac格式的`.mov`文件；[mov在线转换为mp4](https://www.freeconvert.com/mov-to-mp4)
 
+MacPro M1的芯片上soundflower已经不支持，使用[BlackHole](https://github.com/ExistentialAudio/BlackHole)代替
+
 ## javacv 依赖的 com.googlecode.javacpp.Loader无法找到问题
 这个依赖包实际上依赖了javacpp这个jar包，但可能无法自动导入依赖。
 ```

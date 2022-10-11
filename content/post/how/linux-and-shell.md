@@ -1166,6 +1166,10 @@ Bus 001 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
 # -f Read the archive from or write the archive to the specified file.
 tar -czvf ycdh.tar.gz ycdh.jar ycdh_lib tools config log4j.properties build.properties dh.sh noLog.sh updateself.sh
 
+# 打包排除指定目录，例如 tomcat压缩 排除logs和libs两个目录和test.txt文件，注意目录最终不带分隔符
+tar -czvf tomcat.tar.gz --exclude=tomcat/logs --exclude=tomcat/libs --exclude=tomcat/test.txt tomcat
+
+
 #查看文件，但不解压
 tar -tzvf ycdh.tar.gz
 

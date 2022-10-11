@@ -30,6 +30,27 @@ toc=true
 
 ## Current
 
+### Fastbot_iOS
+
+[官方说明](https://mp.weixin.qq.com/s/QhzqBFZygkIS6C69__smyQ)，[用户使用说姐](https://www.cnblogs.com/fnng/p/15738284.html)
+
+### Xcode版本
+
+`xcodebuild -version`查看xcode版本信息
+
+
+
+### 设置开机启动项
+
+[参考](https://www.cnblogs.com/kaerxifa/p/11378558.html)——
+
+- 生产可执行的shell脚本
+- 显示简介 中将打开方式修改为 终端 
+- 系统设置 -- 用户与群组 -- 登录项 添加自定义的脚本
+
+### Xcode.xip删除验证
+
+`sudo xattr -d com.apple.quarantine Xcode.app`
 
 ### Operation not permitted 
 
@@ -313,8 +334,6 @@ brew link python
 ### 查看MacOS版本
 
 ```
-# sw_vers -productVersion 
-
 ➜ sw_vers -productVersion
 10.14.6
 ➜ sw_vers

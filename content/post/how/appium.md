@@ -68,6 +68,7 @@ class TestIOS:
         # https://appium.io/docs/en/drivers/ios-xcuitest/index.html 
         caps = {}
         caps["platformName"] = "ios"
+        caps["platformVersion"] = "16.1"
         caps["automationName"] = "xcuitest"
         caps["bundleId"] = "com.ecpmobile.ecp"
         caps["deviceName"] = "xx的 iPhone"
@@ -99,6 +100,8 @@ class TestIOS:
 脚本保存到 testappium文件夹下，命名为`test.py`
 
 ### 命令行方式执行
+
+独立命令行启动appium `appium -g /tmp/appium.log` 确保使用 node版本为v16.17.1的长期版本，否则appium可能提示`failed to receive to receive any data within the timeout 5000` ，参考官方的[issue 16399](https://github.com/appium/appium/issues/16399)
 
 ```shell
 # 创建虚拟环境

@@ -20,6 +20,50 @@ toc=true
 
 使用现有的环境，还没有按照上面的文档进行搭建操作。
 
+### 安装libimobiledevice 最新版本
+
+目前brew上的最新版本为1.3.0，但不支持iOS 16.0。使用 `brew install --HEAD libimobiledevice`时，提示缺少libimobiledevice-glue-1.0
+
+参考[issue 1217下的comment](https://github.com/libimobiledevice/libimobiledevice/issues/1217#issuecomment-1009402345)，手动创建blue的formula
+
+- brew手动安装`libimobiledevice-glue`
+
+```shell
+#手动创建formula
+brew create "https://github.com/libimobiledevice/libimobiledevice-glue.git"
+#自动进入编辑模式，或手动进入，按照下面的格式编辑
+brew edit libimobiledevice-glue
+
+# 执行安装
+brew install --HEAD libimobiledevice-glue
+```
+
+```ruby
+ class LibimobiledeviceGlue < Formula
+   desc ""
+   homepage ""
+   license ""
+   head "https://github.com/libimobiledevice/libimobiledevice-glue.git"
+
+   depends_on "autoconf" => :build
+   depends_on "automake" => :build
+   depends_on "libtool" => :build
+   depends_on "pkg-config" => :build
+   depends_on "libplist"
+
+   def install
+     system "./autogen.sh", "--prefix=#{prefix}"
+     system "make", "install"
+   end
+
+ end
+```
+
+- 修改libimobiledevice的formula之后安装HEAD
+
+`brew edit libimobiledevice`修改formula，增加 `depends_on "libimobiledevice-glue"`，然后执行 `brew install --HEAD libimobiledevice`
+
+
 ### 手动搬运Mac环境下的appium
 
 目标机器网络环境不佳，另外一台机器上有appium 1.22.3版本的环境。

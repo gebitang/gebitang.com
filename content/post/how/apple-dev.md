@@ -30,6 +30,10 @@ toc=true
 
 ## Current
 
+### iFunBox 同步iPhone文件到Mac
+
+[iFunBox](https://www.i-funbox.com/zh-cn/page-about-us.html)，可以查看安装应用的共享日志文件
+
 ### Fastbot_iOS
 
 [官方说明](https://mp.weixin.qq.com/s/QhzqBFZygkIS6C69__smyQ)，[用户使用说姐](https://www.cnblogs.com/fnng/p/15738284.html)

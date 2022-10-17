@@ -30,6 +30,14 @@ toc=true
 
 ## Current
 
+### brew macos 13 unknown or unsupported macos version dunno 
+
+`brew update-reset`
+
+### brew 国内安装
+
+[Homebrew镜像使用帮助](https://mirrors.tuna.tsinghua.edu.cn/help/homebrew/)，[ustc/homebrew](https://mirrors.ustc.edu.cn/help/brew.git.html)
+
 ### iFunBox 同步iPhone文件到Mac
 
 [iFunBox](https://www.i-funbox.com/zh-cn/page-about-us.html)，可以查看安装应用的共享日志文件

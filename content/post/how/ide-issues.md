@@ -14,6 +14,11 @@ toc = true
 
 ## IDEA
 
+### 全局设置Maven
+
+- Mac： `File`--`New Projects Setup` -- `Preferences for New Projects`
+- Win:  `File`--`New Projects Setup` -- `Settings for New Projects`
+
 ### ignored pom.xml
 
 [Maven创建module出现Ignored pom.xml文件](https://blog.csdn.net/weixin_43901865/article/details/112596443)

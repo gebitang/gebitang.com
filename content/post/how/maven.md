@@ -23,6 +23,38 @@ mvn命令是一段脚本程序。
 
 <!--more-->
 
+## java.lang.NoClassDefFoundError: org/apache/maven/shared/filtering/MavenFilteringException
+
+Execution default-resources of goal org.apache.maven.plugins:maven-resources-plugin:2.6:resoources failed: A required class was missing while executiong 
+
+查看对应的plugin已经下载成功，依赖的plexus-utils包也没有问题。报错信息非常有迷惑性。各种搜索操作，更换Maven版本；删除整个本地仓库；指定依赖
+
+```
+realm =    plugin>org.apache.maven.plugins:maven-resources-plugin:2.6
+strategy = org.codehaus.plexus.classworlds.strategy.SelfFirstStrategy
+urls[0] = file:/D:/safeRepository/org/apache/maven/plugins/maven-resources-plugin/2.6/maven-resources-plugin-2.6.jar
+urls[1] = file:/D:/safeRepository/org/codehaus/plexus/plexus-utils/1.1/plexus-utils-1.1.jar
+Number of foreign imports: 1
+import: Entry[import  from realm ClassRealm[maven.api, parent: null]]
+```
+
+[这里]建议强制指定依赖，但私服上无法下载对应的依赖包，删除1.3依赖包之后，重新编译成功。——————原来只是resources的版本问题，默认的2.6跟3.6.3版本的maven不匹配？！
+
+```
+<plugin>
+     <groupId>org.apache.maven.plugins</groupId>
+     <artifactId>maven-resources-plugin</artifactId>
+     <version>2.7</version>
+     <dependencies>
+         <dependency>
+             <groupId>org.apache.maven.shared</groupId>
+             <artifactId>maven-filtering</artifactId>
+             <version>1.3</version>
+          </dependency>
+      </dependencies>
+</plugin>
+```
+
 ## scope范围
 
 [dependency scope](https://maven.apache.org/guides/introduction/introduction-to-dependency-mechanism.html#dependency-scope) 

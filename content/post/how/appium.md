@@ -20,6 +20,42 @@ toc=true
 
 使用现有的环境，还没有按照上面的文档进行搭建操作。
 
+### Permission denial
+
+各个手机设置不同——
+
+- 小米：在开发者选项里，把“USB调试（安全设置）"打开即可，允许USB调试修改权限或模拟点击
+- oppo/一加：在开发者选项里，把"禁止权限监控"打开（在“应用”部分，最下面）
+
+```
+[UiAutomator2] Relaxing hidden api policy
+[debug] [ADB] Running '/Users/geb/Library/Android/sdk/platform-tools/adb -P 5037 -s 18a281e9 shell 'settings put global hidden_api_policy_pre_p_apps 1;settings put global hidden_api_policy_p_apps 1;settings put global hidden_api_policy 1''
+[debug] [UiAutomator2] Deleting UiAutomator2 session
+[debug] [ADB] Running '/Users/geb/Library/Android/sdk/platform-tools/adb -P 5037 -s 18a281e9 shell am force-stop com.coloros.calculator'
+[UiAutomator2] Restoring hidden api policy to the device default configuration
+[debug] [ADB] Running '/Users/geb/Library/Android/sdk/platform-tools/adb -P 5037 -s 18a281e9 shell 'settings delete global hidden_api_policy_pre_p_apps;settings delete global hidden_api_policy_p_apps;settings delete global hidden_api_policy''
+[debug] [BaseDriver] Event 'newSessionStarted' logged at 1665558963920 (15:16:03 GMT+0800 (China Standard Time))
+[debug] [W3C] Encountered internal error running command: Error executing adbExec. Original error: 'Command '/Users/geb/Library/Android/sdk/platform-tools/adb -P 5037 -s 18a281e9 shell 'settings delete global hidden_api_policy_pre_p_apps;settings delete global hidden_api_policy_p_apps;settings delete global hidden_api_policy'' exited with code 255'; Command output: 
+[debug] [W3C] Exception occurred while executing 'delete':
+[debug] [W3C] java.lang.SecurityException: Permission denial: writing to settings requires:android.permission.WRITE_SECURE_SETTINGS
+[debug] [W3C] 	at com.android.providers.settings.SettingsProvider.enforceWritePermission(SettingsProvider.java:2640)
+[debug] [W3C] 	at com.android.providers.settings.SettingsProvider.mutateGlobalSetting(SettingsProvider.java:1632)
+[debug] [W3C] 	at com.android.providers.settings.SettingsProvider.mutateGlobalSetting(SettingsProvider.java:1624)
+[debug] [W3C] 	at com.android.providers.settings.SettingsProvider.deleteGlobalSetting(SettingsProvider.java:1595)
+[debug] [W3C] 	at com.android.providers.settings.SettingsProvider.call(SettingsProvider.java:661)
+[debug] [W3C] 	at android.content.ContentProvider.call(ContentProvider.java:2473)
+[debug] [W3C] 	at android.content.ContentProvider$Transport.call(ContentProvider.java:521)
+[debug] [W3C] 	at com.android.providers.settings.SettingsService$MyShellCommand.deleteForUser(SettingsService.java:408)
+[debug] [W3C] 	at com.android.providers.settings.SettingsService$MyShellCommand.onCommand(SettingsService.java:282)
+[debug] [W3C] 	at com.android.modules.utils.BasicShellCommandHandler.exec(BasicShellCommandHandler.java:97)
+[debug] [W3C] 	at android.os.ShellCommand.exec(ShellCommand.java:38)
+[debug] [W3C] 	at com.android.providers.settings.SettingsService.onShellCommand(SettingsService.java:50)
+[debug] [W3C] 	at android.os.Binder.shellCommand(Binder.java:970)
+[debug] [W3C] 	at android.os.Binder.onTransact(Binder.java:854)
+[debug] [W3C] 	at android.os.Binder.execTransactInternal(Binder.java:1226)
+[debug] [W3C] 	at android.os.Binder.execTransact(Binder.java:1163)
+```
+
 ### 安装libimobiledevice 最新版本
 
 目前brew上的最新版本为1.3.0，但不支持iOS 16.0。使用 `brew install --HEAD libimobiledevice`时，提示缺少libimobiledevice-glue-1.0

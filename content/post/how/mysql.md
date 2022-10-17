@@ -12,6 +12,15 @@ topics = [
 toc = true
 +++
 
+### 手动设置driver
+
+手动下载驱动jar包，在数据库连接的 `General`下的`Driver`中选择 `Go to Driver`手动添加下载的jar包即可
+
+自动下载的jar包回保存在——
+
+- Mac：`~/Library/Application Support/JetBrains/IntelliJIdea2022.2/jdbc-drivers/MySQL ConnectorJ/8.0.25`
+- Win: `C:\Users\user\AppData\Roaming\JetBrains\IntelliJIdea2022.2/jdbc-drivers/8.0.25`
+
 ### limit offset 
 
 `select * from talbe order by orderedColumn desc limit 2, 1`表示查找的结果列表里，先偏移2个之后第1行。

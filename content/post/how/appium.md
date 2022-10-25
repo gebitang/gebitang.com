@@ -111,6 +111,9 @@ tar -czvf appium.tar.gz appium
 # 解压到目标机器对应相同目录 /usr/local/lib/node_modules
 tar -zxvf appium.tar.gz -C ./
 
+# jar 命令有类似的功能，但不能指定解压目录， 将以下war包解压到当前目录
+jar -xvf test.war 
+
 # 创建软连接启动项目 目录   /usr/local/bin 
 ln -s ../lib/node_modules/appium/build/lib/main.js appium 
 # 这里的坑是：记得前面是源地址，后面的是目标地址。 将后面的软连接连接到源地址上。一开始整错了，没修改；又重新连接了一回，结果就循环了 

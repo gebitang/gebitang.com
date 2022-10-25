@@ -46,4 +46,10 @@ adb shell am broadcast 后面的参数有：
 
 adb shell am broadcast -a com.android.test --es test_string "this is test string" --ei test_int 100 --ez test_boolean true
 
+adb shell pm list packages
 ```
+
+## 导入的依赖无法import
+
+实际上依赖并没有被下载下来，提示 `Failed to resolve dependency xxx`，对应的依赖比较古老，需要在settings.gradle里的依赖中添加 `jcenter()` [参考](https://stackoverflow.com/a/71799874/1087122)
+

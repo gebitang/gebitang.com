@@ -981,6 +981,12 @@ Windows Registry Editor Version 5.00
 
 通常用的三个插件：compare、JSON Viewer、XML tools。通过PM安装、重启即可。
 
+### 离线安装插件 
+
+高版本（v8.4.5）上已经自带PluginManager，下载对应的plugin：通常为 .dll 文件。在plugin文件夹下创建同名的文件夹名称，保存对应的 .dll 文件。重启应用即可
+
+[JSToolNpp](https://sourceforge.net/projects/jsminnpp/)
+
 ## 经纬度查询告别百度
 
 基本告别百度了。搜索“经纬度查询”，第一页没看到可用的信息。

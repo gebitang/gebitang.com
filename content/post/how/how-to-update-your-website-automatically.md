@@ -518,9 +518,17 @@ f1g1ns1.dnspod.net.	64252	IN	A	182.140.167.166
 
 ### 重置远程分支
 
-删除远程分支；`git push original :gh-pages`
+删除远程分支；`git push origin :gh-pages`
 
 如果出错，先清理远程分支，再重新同步远程分支
+
+```
+git push origin :gh-pages
+# Fetch changes from all remotes and locally delete 
+# remote deleted branches/tags etc
+# --prune will do the job :-;
+git fetch --all --prune
+```
 
 ### 配置pipeline
 

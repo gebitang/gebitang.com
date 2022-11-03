@@ -30,6 +30,19 @@ toc=true
 
 ## Current
 
+### 修改terminal中的主机名
+
+`sudo scutil --set HostName xx`
+
+### 修改用户名和文件夹
+
+[更改 macOS 用户帐户和个人文件夹的名称](https://support.apple.com/zh-cn/HT201548)
+
+- 新建管理员账号并登录
+- 修改原/Users/user名称到修改后的名称
+- 用户与帐户中：`Control`+ 点击用户，打开高级选项，修改对应的帐户信息：包括名称、全名、文件夹目录(保持与上一步修改的一致)
+- 保存修改，重启电脑生效
+
 ### brew macos 13 unknown or unsupported macos version dunno 
 
 `brew update-reset`

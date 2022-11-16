@@ -12,6 +12,15 @@ topics = [
 toc = true
 +++
 
+### cast函数
+
+MySQL doesn't permit you to CAST('01' AS INT). It expects instead a SIGNED or UNSIGNED.
+
+```sql
+-- 将string处理为 数字
+select * from tableName order by cast(strColumn as SIGNED);
+```
+
 ### 手动设置driver
 
 手动下载驱动jar包，在数据库连接的 `General`下的`Driver`中选择 `Go to Driver`手动添加下载的jar包即可

@@ -359,6 +359,70 @@ gpg --import private.pgp
 gpg --import publick.key
 ```
 
+#### Renew GPG key
+
+[gist](https://gist.github.com/krisleech/760213ed287ea9da85521c7c9aac1df0)
+
+Given that your key has expired.
+
+```
+$ gpg --list-keys
+$ gpg --edit-key KEYID
+```
+
+Use the expire command to set a new expire date:
+
+```
+gpg> expire
+```    
+
+When prompted type `1y` or however long you want the key to last for.
+
+Select all the subkeys (the primary key, which we just set the expires date for, is key 0):
+
+```
+gpg> key 1
+gpg> key 2
+gpg> expire
+```
+
+A star will sppear before all selected keys.
+
+Since the key has changed we now need to trust it, otherwise we get the error "There is no assurance this key belongs to the named user" when using they key:
+
+```
+gpg> trust
+```
+
+Test it out, do a round trip:
+
+```
+gpg -ea > secret.out
+gpg -d secret.out
+```
+
+Backup the key:
+
+```
+gpg -a --export KEYID > kris.leech.gpg.public
+gpg -a --export-secret-keys KEYID > kris.leech.gpg.private
+```
+
+Move the keys on to something like a USB drive and store it safely in another location.
+
+Publish the public key:
+
+```
+gpg --keyserver keyserver.ubuntu.com --send-keys KEYID
+gpg --keyserver pgp.mit.edu --send-keys KEYID
+```
+
+If you need to copy/paste the public key to a key server:
+
+```
+xclip -i kris.leech.gpgp.public -selection clipboard
+```
+
 **安装pass**
 
 `sudo apt-get install pass`

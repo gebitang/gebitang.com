@@ -30,6 +30,14 @@ toc=true
 
 ## Current
 
+### 屏幕分辨率 
+
+
+参考来源： https://www.ios-resolution.com/   分辨率对应
+https://blog.csdn.net/blog_jihq/article/details/80590767   设备型号对应 
+
+官方所有机型查看 https://www.apple.com.cn/iphone/compare/
+
 ### 修改terminal中的主机名
 
 `sudo scutil --set HostName xx`

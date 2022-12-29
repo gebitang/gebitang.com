@@ -12,6 +12,51 @@ draft = true
 toc=true
 +++
 
+## WDA 
+
+[How To Set Up And Customize WebDriverAgent Server](https://github.com/appium/appium-xcuitest-driver/blob/master/docs/wda-custom-server.md) 入门文档。
+
+- appium在ios端使用WDA作为后端server； wda基于XCTest framework
+
+设置——
+
+- 使用Xcode打开WDA工程
+- 选择 WebDriverAgentRunner 项目
+- 选择 设备 作为 测试目标
+- 选择 `Product --> Test`
+
+启动——可以使用多种启动方式 
+- [iproxy](https://github.com/libimobiledevice/libusbmuxd#iproxy), 使用xcodebuild命令行启动，然后使用iproxy转发端口请求
+- [go-ios](https://github.com/danielpaulus/go-ios) 
+- [tidevice](https://github.com/alibaba/taobao-iphone-device) 进行启动，WDA已经安装的情况下 `tidevice xctest -B com.facebook.wda.WebDriverAgent.Runner`
+
+前提是针对iOS项目已经有通用的签名证书并设置了对应的bundleId等信息。
+
+### libimobiledevice 系列
+
+[github libimobiledevice](https://github.com/libimobiledevice) A cross-platform FOSS library written in C to communicate with iOS devices natively. [official site: libimobiledevice.org](https://libimobiledevice.org/)
+
+包含多个类库——
+- [usbmuxd](https://github.com/libimobiledevice/usbmuxd/) 基础库 A socket daemon to multiplex connections from and to iOS devices. 
+  - 上层库 [libimobiledevice](https://github.com/libimobiledevice/libimobiledevice) A library to communicate with services on iOS devices using native protocols. 包括多种工具与iOS设备交互，例如 idevice_id，ideviceinfo， idevicescreenshot， ideviceprovision 等
+  - 底层库 [libusbmuxd](https://github.com/libimobiledevice/libusbmuxd) A client library for applications to handle usbmux protocol connections with iOS devices.  包括 iproxy，inetcat工具 
+
+### appium-webdriveragent 项目构建
+
+当前使用的版本[v3.16.0](https://github.com/appium/WebDriverAgent/tags?after=v4.0.0)，下载zip源码后，nodejs项目，执行`node ./Scripts/build-webdriveragent.js`——需要确保依赖的npm包已经安装，可先执行`npm install`，即使整体任务失败也没关系，打包wda的依赖安装成功即可。
+
+业务逻辑：  
+- 获取xcode版本
+- 删除用户目录下的DerivedData中wda相关的编译结果 `~/Library/Developer/Xcode/DerivedData/WebDriverAgent-*` 
+- 执行wda编译脚本，默认针对的模拟器构建 `/bin/bash ./Scripts/build.sh`，传递的参数 runner，sim
+- 创建 `uncompressed` 和 `bundles`目录，
+- 将xcode项目文件复制到此目录下，
+- 并将编译生成的 `WebDriverAgent-*` 文件保存当前目录的`DerivedData/WebDriverAgent`
+- 将此目录整体打包为 webdriveragent-xcode_xcodeversion.zip 文件，并保存中 bundles 目录下
+- 将编译打包的`DerivedData/WebDriverAgent/Build/Products/Debug-iphonesimulator/WebDriverAgentRunner-Runner.app`压缩为zip文件 `WebDriverAgentRunner-Runner.app.zip`保存在工程主目录
+- 删除uncopressed目录
+
+
 ## 环境搭建
 
 - 完整版环境搭建 [Setup Appium on Mac OS for Android and iOS App Automation [2022 Update]](https://krishnachetan.medium.com/setup-appium-on-mac-1e06f1178427)
@@ -19,6 +64,31 @@ toc=true
 - [Appium API](https://appium.io/docs/en/about-appium/api/)
 
 使用现有的环境，还没有按照上面的文档进行搭建操作。
+
+### 指定appium使用的Xcode版本
+
+[Running Appium with multiple Xcode versions installed](https://github.com/appium/appium-xcuitest-driver/blob/master/docs/multiple-xcode-versions.md)  
+
+如果有多个Xcode版本——
+
+- 使用 `xcode-select` 工具 
+
+```shell
+# show current default Xcode
+xcode-select --print-path
+# Set default Xcode.
+sudo xcode-select -s /Applications/Xcode13.app/Contents/Developer
+# Run Appium (from command line or with GUI).
+appium
+```
+
+- 使用环境变量
+```shell
+#Set DEVELOPER_DIR environment variable.
+export DEVELOPER_DIR=/Applications/Xcode12.app/Contents/Developer
+#Run Appium from the same shell.
+appium 
+```
 
 ### node环境
 

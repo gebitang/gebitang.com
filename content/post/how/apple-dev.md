@@ -325,7 +325,7 @@ If the output is “Status: signed by a certificate trusted by Mac OS X”, the 
 Right-Click and open with Archive Utility from Finder.
 
 ### 运行多个Xcode版本
-[from Baidu](https://jingyan.baidu.com/article/f0062228091dd1fbd3f0c8de.html)  
+[Running Appium with multiple Xcode versions installed](https://github.com/appium/appium-xcuitest-driver/blob/master/docs/multiple-xcode-versions.md)  
 显示当前版本：`xcode-select --print-path`   
 更换版本 `sudo xcode-select --switch /Applications/Xcode-beta.app/Contents/Developer`
 

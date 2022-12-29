@@ -307,6 +307,24 @@ $ git fetch upstream
 $ git merge upstream/master
 ```
 
+### 无效的 index-pack
+
+提示 `fatal: 过早的文件结束符 (EOF)`， `fatal: fetch-pack: invalid index-pack output`
+
+无效的index-pack 输出。[参考这里的](https://stackoverflow.com/questions/21277806/fatal-early-eof-fatal-index-pack-failed)，有效的——
+
+```
+[core] 
+packedGitLimit = 512m 
+packedGitWindowSize = 512m 
+compression = 9
+[pack] 
+deltaCacheSize = 2047m 
+packSizeLimit = 2047m 
+windowMemory = 2047m
+```
+都设置之后，执行  `git clone --depth 1 --branch $BRANCH $URL` 可以clone出来指定的branch
+
 
 ### 指定branch clone
 ` git clone -b dawn-2.x git@github.com:EOSIO/eos.git`

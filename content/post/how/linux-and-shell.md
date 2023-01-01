@@ -2742,6 +2742,8 @@ zsh
 #安装oh-my-zsh
 sh -c "$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"1
 
+# 手动更新
+omz update 
 ```
 
 ### 命令行直接打开指定文件目录

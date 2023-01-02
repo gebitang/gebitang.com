@@ -64,6 +64,25 @@ go env -w GOPRIVATE=git.xxx.com
 go env -w GOINSECURE=git.xxx.com
 ```
 
+### go 安装与卸载 
+
+[下载](https://go.dev/dl/)、[安装、卸载](https://go.dev/doc/manage-install) 
+
+- 默认安装到`/usr/local/go`目录，可以通过 `go env GOROOT`查看
+- 多版本安装与使用 
+
+```shell
+$ go install golang.org/dl/go1.10.7@latest
+$ go1.10.7 download
+# To run go commands with the newly-downloaded version, append the version number to the go command, as follows:
+$ go1.10.7 version
+go version go1.10.7 linux/amd64
+# When you have multiple versions installed, you can discover where each is installed, look at the version's GOROOT value. For example, run a command such as the following:
+$ go1.10.7 env GOROOT
+```
+
+- 卸载：删除安装目录即可，移除PATH对应的设置。
+
 ## 2021 
 
 ### quorum 

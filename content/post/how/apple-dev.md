@@ -30,6 +30,29 @@ toc=true
 
 ## Current
 
+### 隐藏dock栏图标
+
+[隐藏正在运行程序在Dock中的图标](https://www.anmane.com/yin-cang-dockzhong-zheng-zai-yun-xing-cheng-xu-de-tu-biao/)
+
+- 方法一：修改目标应用的程序包中的Info.plist，加入以下键值
+```
+<key>LSUIElement</key>
+<true/>
+```
+不见得对所有App有效，可能造成程序起不来。
+
+- terminal中使用`LSAppInfo`
+
+```shell
+# hide
+sudo lsappinfo setinfo -app XXX ApplicationType=UIElement
+# show 
+sudo lsappinfo setinfo -app XXX ApplicationType=Foreground
+
+# find xxx, the name of app. 
+lsappinfo | grep ") \""
+```
+
 ### 屏幕分辨率 
 
 

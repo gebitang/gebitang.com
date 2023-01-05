@@ -159,6 +159,52 @@ $ git cat-file tree f6da736647be31514378f51704936fcf40171a07
 
 可配合GUI工具和命令行工具参考。
 
+### 编译安装git 
+
+环境：Oracle Linux 7相当于CentOS 7，但没有gcc编译器，无网络环境，需要手动离线安装gcc先 
+
+[Linux离线安装gcc等依赖包](https://blog.csdn.net/li1325169021/article/details/115385274)，从[这里下载](http://mirrors.aliyun.com/centos/7/os/x86_64/Packages/)
+
+```shell
+# 包含7个文件
+rpm -ivh mpfr-3.1.1-4.el7.x86_64.rpm
+rpm -ivh libmpc-1.0.1-3.el7.x86_64.rpm
+rpm -ivh kernel-headers-3.10.0-862.el7.x86_64.rpm
+rpm -ivh glibc-headers-2.17-222.el7.x86_64.rpm
+rpm -ivh glibc-devel-2.17-222.el7.x86_64.rpm
+rpm -ivh cpp-4.8.5-28.el7.x86_64.rpm
+rpm -ivh gcc-4.8.5-28.el7.x86_64.rpm
+
+# 单独安装glibc-headers时提示依赖glibc，glibc又依赖glibc-common互相依赖 
+rpm -ivh glibc-common-2.17-317.el7.x86_64.rpm
+rpm -ivh glibc-2.17-317.el7.x86_64.rpm
+
+# 都下载后，强制无依赖安装 
+rpm  -ivh  *.rpm --nodeps --force
+
+# make 时提示 zlib.h no such file or directory 需要下载额外两个rpm包
+zlib-1.2.7-18.el7.x86_64.rpm
+zlib-devel-1.2.7-18.el7.x86_64.rpm
+
+```
+
+下载[git源码](https://mirrors.edge.kernel.org/pub/software/scm/git/)，解压到文件目录，进入目录。 
+
+```shell
+# 执行 
+./configue 
+# make 
+make prefix=/usr/local/git all 
+make prefix=/usr/local/git install
+# update PATH
+echo "export PATH=$PATH:/usr/local/git/bin" >> /etc/bashrc
+source /etc/bashrc
+# verify 
+git --version
+
+```
+
+
 ### Filename too long in Git for Windows
 
 [Filename too long in Git for Windows](https://stackoverflow.com/questions/22575662/filename-too-long-in-git-for-windows)

@@ -14,6 +14,10 @@ toc = true
 
 ## Mac shell
 
+### alias传递参数 
+
+alias本身不支持传递命令行参数，但可以通过自定义函数来实现外部参数的使用，类似—— `alias s='UpMachine(){ ssh root@$1;};UpMachine'`
+
 ### 删除以中划线开头的文件
 
 直接使用`rm -fine.name`报错`rm: illegal option -- 8`
@@ -1311,15 +1315,19 @@ root权限，更多信息，[参考](http://www.cnblogs.com/guangbei/archive/201
 
 [用户组操作](https://www.howtogeek.com/50787/add-a-user-to-a-group-or-second-group-on-linux/)，to add the user geek to the group sudo , use the following command:
 
-```
+```shell
 usermod -a -G sudo geek
 
 #查看用户所属的组
 groups
 ```
 
+- 查看当前用户 `whoami`
+- 查看当前用户所属用户组信息 `groups` or `groups username`
+- 指定用户所属用户组的详细信息 `id -a username`
 
-```
+
+```shell
 #查看当前登录用户，需要root权限 w
 # 第一列是用户名,
 # 第二列是连接的终端,tty表示显示器,pts表示远程连接,

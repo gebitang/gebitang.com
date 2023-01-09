@@ -11,6 +11,44 @@ topics = [
 toc = true
 +++
 
+## Android Monkey 
+
+`getSystemInterfaces()`方法依赖底层未开放的系统服务获取到三个对象—— 
+
+- `ActivityManager`：通过调用setActivityController()对整个测试周期进行控制
+- `IWindowManager`：通过IWindowManager提供的方法是的monkey将点击、按键、翻转等事件加入应用中
+- `IPackageManager`：通过IPackageManager获取应用列表，以便在测试时可在多个应用中随机切换
+
+
+- [ActivityManager](https://android.googlesource.com/platform/frameworks/base/+/master/core/java/android/app/ActivityManager.java)
+- [android base soucre](https://github.com/aosp-mirror/platform_frameworks_base)
+- [android platform source](https://github.com/aosp-mirror/platform_development)
+
+```java
+
+/**
+* @hide
+*/
+@UnsupportedAppUsage
+public static IActivityManager getService() {
+    return IActivityManagerSingleton.get();
+}
+private static IActivityTaskManager getTaskService() {
+    return ActivityTaskManager.getService();
+}
+@UnsupportedAppUsage
+private static final Singleton<IActivityManager> IActivityManagerSingleton =
+        new Singleton<IActivityManager>() {
+            @Override
+            protected IActivityManager create() {
+                final IBinder b = ServiceManager.getService(Context.ACTIVITY_SERVICE);
+                final IActivityManager am = IActivityManager.Stub.asInterface(b);
+                return am;
+            }
+        };
+
+```
+
 
 ## Android problem
 

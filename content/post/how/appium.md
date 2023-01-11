@@ -65,6 +65,9 @@ toc=true
 
 使用现有的环境，还没有按照上面的文档进行搭建操作。
 
+简单理解：appium作为web server，实现了JSONWP协议。这样客户端可以语言无关，调用符合规范的http接口即可。后端对接不同的实现，支持不同的平台，例如android、iOS、windows、Web等等。 
+
+
 ### 指定appium使用的Xcode版本
 
 [Running Appium with multiple Xcode versions installed](https://github.com/appium/appium-xcuitest-driver/blob/master/docs/multiple-xcode-versions.md)  

@@ -12,6 +12,63 @@ draft = true
 toc=true
 +++
 
+## appium2.0 
+
+- 2.0依赖node 14+ 和 npm 8+ 
+- 至今（2023-01-16）由于对应的文档还没准备好，[尚未正式发布](https://github.com/appium/appium/discussions/15828)
+- 关键修改是将不同的包进行独立管理，启用了默认变量`$APPIUM_HOME` = `~/.appium`，将会在这里管理各种插件和驱动
+  - appium driver list
+  - appium plugin list 
+
+
+
+使用nvm安装到话，会自动替换appium的软连接。 
+
+```
+➜  ~ npm install -g appium@next
+➜  ~ appium -v
+2.0.0-beta.52
+➜  ~ which appium
+/Users/geb/.nvm/versions/node/v16.17.1/bin/appium
+➜  ~ appium -g /tmp/appium2.log
+[Appium] Welcome to Appium v2.0.0-beta.52 (REV 9600617c52d0d2e48493424c529ac6c945d2775b)
+[Appium] Appium REST http interface listener started on 0.0.0.0:4723
+[Appium] No drivers have been installed in /Users/geb/.appium. Use the "appium driver" command to install the one(s) you want to use.
+[Appium] No plugins have been installed. Use the "appium plugin" command to install the one(s) you want to use.
+
+^C[Appium] Received SIGINT - shutting down
+[debug] [AppiumDriver@9511] There are no active sessions for cleanup
+[HTTP] Waiting until the server is closed
+[HTTP] Received server close event
+```
+
+nvm管理不同的文件夹以支持不同版本的node；安装的应用连接到对应的bin目录下。
+
+```
+➜  ~ ls -l /Users/geb/.nvm/versions/node/v16.17.1/bin/
+total 152400
+lrwxr-xr-x@ 1 geb  staff        35 Jan 16 15:10 appium -> ../lib/node_modules/appium/index.js
+lrwxr-xr-x  1 geb  staff        45 Sep 23 10:44 corepack -> ../lib/node_modules/corepack/dist/corepack.js
+-rwxr-xr-x  1 geb  staff  78027072 Sep 23 10:44 node
+lrwxr-xr-x  1 geb  staff        38 Sep 23 10:44 npm -> ../lib/node_modules/npm/bin/npm-cli.js
+lrwxr-xr-x  1 geb  staff        38 Sep 23 10:44 npx -> ../lib/node_modules/npm/bin/npx-cli.js
+```
+
+独立安装driver和plgin，检查对应依赖是否下载完整（首次安装手动结束后，只有文件夹好像也被认为安装成功，但启动appium后会报错。卸载重新安装对应的driver即可）
+
+```
+➜  ~ appium driver install xcuitest
+✔ Installing 'xcuitest' using NPM install spec 'appium-xcuitest-driver'
+ℹ Driver xcuitest@4.16.9 successfully installed
+- automationName: XCUITest
+- platformNames: ["iOS","tvOS"]
+➜  ~ appium driver install uiautomator2
+✔ Installing 'uiautomator2' using NPM install spec 'appium-uiautomator2-driver'
+ℹ Driver uiautomator2@2.12.2 successfully installed
+- automationName: UiAutomator2
+- platformNames: ["Android"]
+```
+
 ## WDA 
 
 [How To Set Up And Customize WebDriverAgent Server](https://github.com/appium/appium-xcuitest-driver/blob/master/docs/wda-custom-server.md) 入门文档。
@@ -66,6 +123,38 @@ toc=true
 使用现有的环境，还没有按照上面的文档进行搭建操作。
 
 简单理解：appium作为web server，实现了JSONWP协议。这样客户端可以语言无关，调用符合规范的http接口即可。后端对接不同的实现，支持不同的平台，例如android、iOS、windows、Web等等。 
+
+### 多版本支持
+
+[How to install multiple appium versions on my Mac](https://discuss.appium.io/t/how-to-install-multiple-appium-versions-on-my-mac/33085)
+
+本质上，appium是一个[nodejs版本的web server](https://appium.io/docs/en/contributing-to-appium/developers-overview/)，安装好依赖环境之后，只需要将appium安装到不同的目录即可—— 
+
+```shell
+#Install version 1.22.2
+npm install --prefix /opt/appium1.22.2 appium@1.22.2
+#Install version 1.22.3
+npm install --prefix /opt/appium1.22.3 appium@1.22.3
+
+#Start the version 1.22.2
+cd /opt/appium1.20.1
+./node_modules/appium/build/lib/main.js --version
+1.22.2
+% ./node_modules/appium/build/lib/main.js
+[Appium] Welcome to Appium v1.22.2
+[Appium] Appium REST http interface listener started on 0.0.0.0:4723
+
+
+#Start the version 1.22.3
+cd /opt/appium1.22.3
+./node_modules/appium/build/lib/main.js --version
+1.22.3
+./node_modules/appium/build/lib/main.js -p 4724
+[Appium] Welcome to Appium v1.22.3
+[Appium] Non-default server args:
+[Appium] port: 4724
+[Appium] Appium REST http interface listener started on 0.0.0.0:4724
+```
 
 
 ### 指定appium使用的Xcode版本

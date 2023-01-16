@@ -14,6 +14,44 @@ toc = true
 
 ## Mac shell
 
+## nushell
+
+```shell
+
+brew install nushell
+
+➜  ~ nu
+No environment config file found at /Users/geb/Library/Application Support/nushell/env.nu
+Would you like to create one with defaults (Y/n):
+Y
+Environment config file created at: /Users/geb/Library/Application Support/nushell/env.nu
+No config file found at /Users/geb/Library/Application Support/nushell/config.nu
+Would you like to create one with defaults (Y/n):
+Y
+Config file created at: /Users/geb/Library/Application Support/nushell/config.nu
+     __  ,
+ .--()°'.' Welcome to Nushell,
+'|, . ,'   based on the nu language,
+ !_-(_\    where all data is structured!
+
+Please join our Discord community at https://discord.gg/NtAbbGn
+Our GitHub repository is at https://github.com/nushell/nushell
+Our Documentation is located at http://nushell.sh
+Tweet us at @nu_shell
+
+It's been this long since Nushell's first commit:
+3yr 8month 1wk 4day 13hr 18min 26sec 172ms 562µs
+
+You can disable this banner using the config nu command
+to modify the config.nu file and setting show_banner to false.
+
+let-env config = {
+    show_banner: false
+    ...
+}
+
+```
+
 ### alias传递参数 
 
 alias本身不支持传递命令行参数，但可以通过自定义函数来实现外部参数的使用，类似—— `alias s='UpMachine(){ ssh root@$1;};UpMachine'`

@@ -851,6 +851,21 @@ netsh wlan set hostednetwork mode=allow ssid=cai key=12345678
 结果： 20180316175313 
 ```
 
+## bat 执行多条命令 
+
+>命令1 & 命令2 & 命令3 … (无论前面命令是否故障,照样执行后面)  
+命令1 && 命令2 &&命令3… (仅当前面命令成功时,才执行后面)  
+命令1 || 命令2 || 命令3… (仅当前面命令失败时.才执行后面)  
+
+```bat
+rem cmd /k 表示cmd后面的命令执行完后不关闭窗口。如果要在执行完成后关闭窗口可以用 /c 
+@echo off
+start cmd /k "echo the first window&& d:&& cd D:\\XXX"
+start cmd /k "echo the second window&& d:&& cd D:\\XXX"
+start cmd /k "echo the third window&& d:&& cd D:\\XXX"
+pause
+```
+
 ## bat注释 
 [bat 的注释方法](https://blog.csdn.net/zhangmiaoping23/article/details/56839106)
 

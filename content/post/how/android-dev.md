@@ -84,3 +84,28 @@ import android.view.IWindowManager;
   - 将当前目录所有内容打包为jar包 `jar cvf android.jar *`
 
 (实操在处理出lasses.dex文件时报错)
+
+## adb 命令实战
+
+>[dumpsys](https://developer.android.com/studio/command-line/dumpsys): dumpsys is a tool that runs on Android devices and provides information about system services. Call dumpsys from the command line using the Android Debug Bridge (ADB) to get diagnostic output for all system services running on a connected device.
+
+### 获取当前包名信息 activity
+
+其他参考[ADB - Android - Getting the name of the current activity](https://stackoverflow.com/questions/13193592/adb-android-getting-the-name-of-the-current-activity)
+
+`adb shell dumpsys activity | grep -E 'mFocusedApp|mResumedActivity'`
+
+### 获取设备相关信息
+
+`adb shell getprop |grep -E 'ro.build|ro.product'` 
+
+- cpu相关： `ro.product.cpu`
+- 版本相关： `ro.build.version`
+
+## 设备常见问题处理
+
+### oppo手机关闭支付风险弹窗
+
+否则在银行类应用连接USB时提示只允许充电。
+
+“手机管家”--“支付保护”--关闭应用

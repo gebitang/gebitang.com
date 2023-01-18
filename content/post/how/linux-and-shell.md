@@ -199,6 +199,12 @@ $-	显示 Shell 使用的当前选项
 s.length = 10
 ```
 
+### command not found
+
+一大批常用命令不可用；通常是因为环境变量被改错了。先临时重新加入即可—— `export PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin:/root/bin` 
+
+然后看看编辑的 bashrc 文件之类的是否有错误，例如 把 `$PATH` 误写为  `%PATH`。
+
 ### journalctl 查询log
 
 [How To Use Journalctl to View and Manipulate Systemd Logs](https://www.digitalocean.com/community/tutorials/how-to-use-journalctl-to-view-and-manipulate-systemd-logs)

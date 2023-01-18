@@ -14,6 +14,8 @@ toc=true
 
 ## appium2.0 
 
+- [Running Appium from Source](https://appium.io/docs/en/contributing-to-appium/appium-from-source/)
+- [Appium in a Nutshell](https://appium.io/docs/en/contributing-to-appium/appium-packages/index.html)，架构关系图
 - 2.0依赖node 14+ 和 npm 8+ 
 - 至今（2023-01-16）由于对应的文档还没准备好，[尚未正式发布](https://github.com/appium/appium/discussions/15828)
 - 关键修改是将不同的包进行独立管理，启用了默认变量`$APPIUM_HOME` = `~/.appium`，将会在这里管理各种插件和驱动

@@ -30,6 +30,9 @@ toc=true
 
 ## Current
 
+### ERR_SSL_PROTOCOL_ERROR 
+
+Mac上的各种浏览器访问[Apple开发者网站](https://developer.apple.com/documentation/xcode/enabling-developer-mode-on-a-device)时，提示证书错误。根据[官方社区](https://discussions.apple.com/thread/251703744)的反馈和本地环境判断：本地wifi环境的问题（因为safari上没有任何插件，依然报`safari can't establish a secure connection to the server "developer.apple.com"`），手机端使用本地wifi也无法打开相同的连接，切换到4G环境后可以正常访问。
 
 ### 隐藏dock栏图标
 

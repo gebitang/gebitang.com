@@ -91,6 +91,14 @@ lrwxr-xr-x  1 geb  staff        38 Sep 23 10:44 npx -> ../lib/node_modules/npm/b
 
 前提是针对iOS项目已经有通用的签名证书并设置了对应的bundleId等信息。
 
+### 证书信任 
+
+企业级证书需要先添加到信任列表之后，才能通过WDA启动起来，否则将会超时报错。 `NoHttpResponseException: xxx failed to respond` 
+
+- 低版本：“设置”>“通用”>“关于本机”>“证书信任设置”。在“针对根证书启用完全信任”下，开启对这个证书的信任。
+- 高版本：“设置”>“通用”>“VPN与设备管理”。在“企业级App”下，开启对这个证书的信任。（不同的应用可能使用了不同的企业级证书）
+
+
 ### libimobiledevice 系列
 
 [github libimobiledevice](https://github.com/libimobiledevice) A cross-platform FOSS library written in C to communicate with iOS devices natively. [official site: libimobiledevice.org](https://libimobiledevice.org/)

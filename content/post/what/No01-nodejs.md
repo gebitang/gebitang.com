@@ -18,6 +18,14 @@ toc = true
 - `mounted()` : it will executed before creating the component.  
 - `created()` : it will executed after creating the component for render.
 
+## requirejs
+
+[Javascript模块化编程（三）](https://www.ruanyifeng.com/blog/2012/11/require_js.html)，目前项目中用到，回顾一下。
+
+## Error: unable to resolve dependency tree
+
+根据提示，重新使用 `npm install --legacy-peer-deps`(安装时忽略所有`peerDependencies`)可以解决，参考[一](https://blog.csdn.net/TIAN20121221/article/details/117173319)，或者[二](https://stackoverflow.com/questions/71582397/eresolve-unable-to-resolve-dependency-tree-while-installing-a-pacakge)
+
 ## TypeScript
 
 [TypeScript](https://www.typescriptlang.org/)做为JS的超集，增强了Type的检查。但检查结果不影响最终的执行，因为依然使用JS相同的runtime。例如`console.log(4/[])`对应JS来说是有效的(- -|自由的过了火?)，返回`Infinity`，对于TS来说检查出问题：`The right-hand side of an arithmetic operation must be of type 'any', 'number', 'bigint' or an enum type.` 但编译到JS之后依然可以正常执行。参考[TypeScript: A Static Type Checker](https://www.typescriptlang.org/docs/handbook/typescript-from-scratch.html#types)
@@ -317,12 +325,14 @@ solution: npm cache clean --force
 
 [node 多版本控制](https://segmentfault.com/a/1190000010252661)
 
-- 安装nvm
-```
+- 安装[nvm](https://github.com/nvm-sh/nvm) 
+
+>Node Version Manager - POSIX-compliant bash script to manage multiple active node.js versions 
+
+```shell
 curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.2/install.sh | bash
 
-或者 Wget:
-
+# 或者 Wget:
 wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.33.2/install.sh | bash
 ```
 - 查看可用版本

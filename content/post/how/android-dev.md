@@ -49,6 +49,14 @@ adb shell am broadcast -a com.android.test --es test_string "this is test string
 adb shell pm list packages
 ```
 
+## android 11签名
+
+安装失败，提示[INSTALL_PARSE_FAILED_NO_CERTIFICATES](https://blog.csdn.net/u012175780/article/details/128647422)，
+
+>Scanning Failed.: No signature found in package of version 2 or newer for xxxx 
+
+需要打开V2(Full APK Signature)， gradle配置 `v2SigningEnabled true`, [参考](https://stackoverflow.com/questions/64364407/app-not-installing-in-android-11-but-works-on-previous-versions)
+
 ## 导入的依赖无法import
 
 实际上依赖并没有被下载下来，提示 `Failed to resolve dependency xxx`，对应的依赖比较古老，需要在settings.gradle里的依赖中添加 `jcenter()` [参考](https://stackoverflow.com/a/71799874/1087122)

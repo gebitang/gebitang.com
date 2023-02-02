@@ -122,6 +122,39 @@ lrwxr-xr-x  1 geb  staff        38 Sep 23 10:44 npx -> ../lib/node_modules/npm/b
 - 可定制 [server 插件](https://appium.github.io/appium/docs/en/2.0/ecosystem/build-plugins/)
 - 自由独立安装 driver，[定制driver](https://appium.github.io/appium/docs/en/2.0/ecosystem/build-drivers/)
 
+
+### 使用缓存build的wda
+
+- [Prevent building WDA with useXctestrunFile or usePrebuiltWDA](https://kazucocoa.wordpress.com/2019/03/15/appium-prevent-building-wda-with-usexctestrunfile-or-useprebuiltwda/)
+- [Re-use existing WDA in create session command](https://kazucocoa.wordpress.com/2019/03/23/appiumre-use-existing-wda-in-create-session-command/)
+
+待验证。。。
+
+## curl 调用api
+
+[Controlling Appium via raw HTTP requests with curl](https://www.headspin.io/blog/controlling-appium-via-raw-http-requests-with-curl)
+
+```shell
+# 0. Check the Appium server is online
+> curl http://localhost:4723/wd/hub/status
+
+# response:
+{"value":{"build":{"version":"1.17.0"}},"sessionId":null,"status":0}
+
+# 1. Create a new session
+> curl -H 'Content-type: application/json' \
+       -X POST \
+       http://localhost:4723/wd/hub/session \
+       -d '{"capabilities": {"alwaysMatch": {"platformName": "iOS", "platformVersion": "13.3", "browserName": "Safari", "deviceName": "iPhone 11"}}}'
+
+# response:
+{"value":{"capabilities":{"webStorageEnabled":false,"locationContextEnabled":false,"browserName":"Safari","platform":"MAC","javascriptEnabled":true,"databaseEnabled":false,"takesScreenshot":true,"networkConnectionEnabled":false,"platformName":"iOS","platformVersion":"13.3","deviceName":"iPhone 11","udid":"140472E9-8733-44FD-B8A1-CDCFF51BD071"},"sessionId":"ac3dbaf9-3b4e-43a2-9416-1a207cdf52da"}}
+
+# save session id
+> export sid="ac3dbaf9-3b4e-43a2-9416-1a207cdf52da"
+```
+
+
 ## WDA 
 
 [How To Set Up And Customize WebDriverAgent Server](https://github.com/appium/appium-xcuitest-driver/blob/master/docs/wda-custom-server.md) 入门文档。

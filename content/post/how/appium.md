@@ -71,6 +71,57 @@ lrwxr-xr-x  1 geb  staff        38 Sep 23 10:44 npx -> ../lib/node_modules/npm/b
 - platformNames: ["Android"]
 ```
 
+### 从appium 1.x 迁移到 appium 2.x
+
+升级须知—— 
+
+- 有哪些不兼容的设置，参考[Breaking Changes](https://appium.github.io/appium/docs/en/2.0/guides/migrating-1-to-2/#breaking-changes)
+- 针对这些不兼容的点，目前项目中是否涉及到，如果改造？ one by one 
+- 除了不兼容的部分，项目中哪些功能依赖到appium到哪些功能？
+- 升级后这些功能点是否依然正常？ one by one 
+
+**Breaking Changes** 
+
+- 默认的server base path，之前为`/wd/hub`，现在不需要了，可以使用 `appium --base-path=/wd/hub`进行设置兼容，不需要修改项目中的设置
+- driver的安装和目录 
+
+1.0 所有的driver和主程序是一起安装的，默认的安装目录在 `/path/to/appium/node_modules`，例如 `/path/to/appium/node_modules/appium-xcuitest-driver/node_modules/appium-webdriveragent`  
+2.0 主程序与driver分离，可以单独指定安装所需的driver， 引入新的变量 `$APPIUM_HOME`，wda的目录在`$APPIUM_HOME/node_modules/appium-xcuitest-driver/node_modules/appium-webdriveragent`  
+
+- driver的命令行参数——可忽略，未使用
+- driver的自动化参数——可忽略，只是返回code不一致
+- driver升级：之前只能随appium一起升级；现在可以独立升级，例如 `appium driver update xcuitest`
+- 协议变更： 2.0依然支持旧的client端。appium api基于 [W3C WebDriver Protocol](https://www.w3.org/TR/webdriver/)，包括"JSONWP" (JSON Wire Protocol) and "MJSONWP" (Mobile JSON Wire Protocol)
+- Capabilities 变更较大，但依然支持旧版本的格式（因为官方维护的client已经默认采用2.0的方式）
+
+标准的capabilities，即官方W3C WebDriver Protocol中指定的capabilities，依然保持现有格式；其他的capabilities必须知道前缀`appium:`，例如 `appium:app`。所有不支持W3C协议的WebDriver客户端将不能创建appium session，可以以类似如下的方式做兼容
+
+```json
+{
+  "platformName": "iOS",
+  "browserName": "Safari",
+  "appium:options": {
+    "platformVersion": "14.4",
+    "deviceName": "iPhone 11",
+    "automationName": "XCUITest"
+  }
+}
+```
+
+- 不再支持的命令（待更新）包括——所有变更到driver层实现的；属于老版本但不属于 W3C Protocol 的。 ——可忽略，未使用
+- 图片分析功能提取到plugin中实现 —— 确认没有使用 appium的'以图定位元素'api的话，可忽略
+- 执行driver 脚本 —— 未使用，可忽略
+- 不支持的参数列表？——针对配置文件的，可忽略
+- 删除老的driver，本身也不再使用 ——可忽略
+- 内部包重命名，例如 `appium-base-driver` --> `@appium/base-driver`
+- ["WD"](https://github.com/admc/wd) javascrip 客户端不再支持，推荐使用 [WebdriverIO](https://webdriver.io/) 
+- [Appium Inspector](https://github.com/appium/appium-inspector) 变更为独立的app，不再依赖 [GUI Appium Desktop](https://github.com/appium/appium-desktop)。需要注意，Desktop版本低于1.21的依赖WD 客户端，所以不兼容2.0
+
+**新Feature** 
+- 支持独立的[配置文件](https://appium.github.io/appium/docs/en/2.0/guides/config/)
+- 可定制 [server 插件](https://appium.github.io/appium/docs/en/2.0/ecosystem/build-plugins/)
+- 自由独立安装 driver，[定制driver](https://appium.github.io/appium/docs/en/2.0/ecosystem/build-drivers/)
+
 ## WDA 
 
 [How To Set Up And Customize WebDriverAgent Server](https://github.com/appium/appium-xcuitest-driver/blob/master/docs/wda-custom-server.md) 入门文档。

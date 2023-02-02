@@ -123,13 +123,6 @@ lrwxr-xr-x  1 geb  staff        38 Sep 23 10:44 npx -> ../lib/node_modules/npm/b
 - 自由独立安装 driver，[定制driver](https://appium.github.io/appium/docs/en/2.0/ecosystem/build-drivers/)
 
 
-### 使用缓存build的wda
-
-- [Prevent building WDA with useXctestrunFile or usePrebuiltWDA](https://kazucocoa.wordpress.com/2019/03/15/appium-prevent-building-wda-with-usexctestrunfile-or-useprebuiltwda/)
-- [Re-use existing WDA in create session command](https://kazucocoa.wordpress.com/2019/03/23/appiumre-use-existing-wda-in-create-session-command/)
-
-待验证。。。
-
 ## curl 调用api
 
 [Controlling Appium via raw HTTP requests with curl](https://www.headspin.io/blog/controlling-appium-via-raw-http-requests-with-curl)
@@ -182,6 +175,12 @@ lrwxr-xr-x  1 geb  staff        38 Sep 23 10:44 npx -> ../lib/node_modules/npm/b
 - 低版本：“设置”>“通用”>“关于本机”>“证书信任设置”。在“针对根证书启用完全信任”下，开启对这个证书的信任。
 - 高版本：“设置”>“通用”>“VPN与设备管理”。在“企业级App”下，开启对这个证书的信任。（不同的应用可能使用了不同的企业级证书）
 
+### 使用缓存build的wda
+
+- [Prevent building WDA with useXctestrunFile or usePrebuiltWDA](https://kazucocoa.wordpress.com/2019/03/15/appium-prevent-building-wda-with-usexctestrunfile-or-useprebuiltwda/)
+- [Re-use existing WDA in create session command](https://kazucocoa.wordpress.com/2019/03/23/appiumre-use-existing-wda-in-create-session-command/)
+
+待验证。。。
 
 ### libimobiledevice 系列
 

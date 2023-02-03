@@ -285,7 +285,7 @@ Mac： 下载pkg文件，命令行安装  `sudo installer -pkg /path/to/you_pkg_
 # 命令行下安装 dmg
 # 1. 挂在 dmg
 sudo hdiutil attach <image>.dmg
-# 2. 安装 pkg
+# 2. 安装 pkg -target 参数指就是 / 
 sudo installer -pkg /Volumes/<image>/<image>.pkg -target /
 # 3. 卸载 dmg
 sudo hdituil detach <image>.dmg

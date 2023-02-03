@@ -12,7 +12,37 @@ topics = [
 toc = true
 +++
 
-## Mac shell
+## ansible 执行远程机器上的脚步找不到可执行文件 
+
+`ansible remote.ip -m shell -a "cd /Users/home/work/dir && ./do.sh"` 脚本种期待jar应用，应用中会执行命令，类似 `appium -v`。提示找不到appium；但如果登陆到原创机器再手动启动，可以正常返回结果。（说明环境变量中没有可执行文件 appium）
+
+[ansible远程执行shell报错:command not found](https://blog.csdn.net/ccgshigao/article/details/110219235)，思路就是要在do.sh的环境中确保可以找到对应的bin文件。涉及到[login shell和no-loginshell的关系](https://tecadmin.net/difference-between-login-and-non-login-shell/)与[区别](https://unix.stackexchange.com/questions/38175/difference-between-login-shell-and-non-login-shell)——
+
+简单理解：当登录到终端时，执行的是login shell；如果从shell环境执行一个shell脚本，则此shell脚本的环境属于非登录shell。两者加载环境变量的方式不同——
+
+login-shell
+
+- Login shell invokes `/etc/profile`
+- `/etc/profile` invokes scripts in `/etc/profile.d/*.sh`
+- Then executes users `~/.bash_profile`
+- `~/.bash_profile` invokes users `~/.bashrc`
+- `~/.bashrc` invokes `/etc/bashrc`
+
+
+no-login shell
+
+- Non login shell first executes `~/.bashrc`
+- Then `~/.bashrc` executes `/etc/bashrc`
+- `/etc/bashrc` calls the scripts in `/etc/profile.d`
+
+![](https://img-blog.csdnimg.cn/20201127083304373.jpeg)
+
+
+## tty 是什么
+
+[What is TTY in Linux?](https://itsfoss.com/what-is-tty-in-linux/)，[Linux 黑话解释：TTY 是什么？](https://linux.cn/article-14093-1.html)
+
+tty for TeletypeWriter. [与console的关系](https://www.cnblogs.com/sparkdev/p/11460821.html)。
 
 ## nushell
 

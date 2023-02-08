@@ -168,6 +168,16 @@ lrwxr-xr-x  1 geb  staff        38 Sep 23 10:44 npx -> ../lib/node_modules/npm/b
 
 前提是针对iOS项目已经有通用的签名证书并设置了对应的bundleId等信息。
 
+### WDA提示 端口占用—— 
+
+>The port #xxxx is occupied by an other process.xxxx 
+
+跟踪了半天，是由于最初是由root用户启动的，执行的iproxy转发也是root用户下的。切换用户之后，`lsof -I:xxx`是看不见root用户启动的进程，但系统端口被占用是可以检测到
+
+tidevice启动wda时也会报错 `sock.bind() Address already in use`
+
+端口被占用是个基础问题
+
 ### 证书信任 
 
 企业级证书需要先添加到信任列表之后，才能通过WDA启动起来，否则将会超时报错。 `NoHttpResponseException: xxx failed to respond` 
@@ -181,6 +191,8 @@ lrwxr-xr-x  1 geb  staff        38 Sep 23 10:44 npx -> ../lib/node_modules/npm/b
 - [Re-use existing WDA in create session command](https://kazucocoa.wordpress.com/2019/03/23/appiumre-use-existing-wda-in-create-session-command/)
 
 待验证。。。
+
+
 
 ### libimobiledevice 系列
 
@@ -197,7 +209,7 @@ lrwxr-xr-x  1 geb  staff        38 Sep 23 10:44 npx -> ../lib/node_modules/npm/b
 
 业务逻辑：  
 - 获取xcode版本
-- 删除用户目录下的DerivedData中wda相关的编译结果 `~/Library/Developer/Xcode/DerivedData/WebDriverAgent-*` 
+- 删除用户目录下的DerivedData中wda相关的(缓存WDA)编译结果 `~/Library/Developer/Xcode/DerivedData/WebDriverAgent-*` 
 - 执行wda编译脚本，默认针对的模拟器构建 `/bin/bash ./Scripts/build.sh`，传递的参数 runner，sim
 - 创建 `uncompressed` 和 `bundles`目录，
 - 将xcode项目文件复制到此目录下，

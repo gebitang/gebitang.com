@@ -466,6 +466,11 @@ Or you can use the shorter scp-like syntax for the SSH protocol:
 生成ssh-key
 ```
 ssh-keygen -t rsa -b 4096 -C "email@address.com"
+
+# create new key pair and add it to agent
+ssh-keygen -t ed25519 -C "email@address.com"
+ssh-agent bash
+ssh-add id_ed25519
 ```
 >添加ssh key（id_rsa_xxx、id_rsa_xxx.pub）到对应的repository，如github、gitlab，即可保证可以从对应的设备上就可以访问对应的repository。</br>
 

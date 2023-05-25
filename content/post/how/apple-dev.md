@@ -30,11 +30,56 @@ toc=true
 
 ## Current
 
+### codesign
+
+- 报错： `errSecInternalComponent`， ssh环境执行codesign时，无法使用证书导致这个报错 [Resolving errSecInternalComponent errors during code signing](https://developer.apple.com/forums/thread/712005)
+
+
+
+```shell
+# 找到可用的证书文件 
+security find-identity -p codesigning
+
+# unlock keychain, need to type password for login user
+security unlock-keychain     
+# Single-quotes prevent the ! from being interpreted
+security unlock-keychain  "=p" 'password!%' "/Users/my/Library/Keychains/login.keychain"
+
+```
+
+正确的使用逻辑可以参考[wda-custom-server.md](https://github.com/appium/appium-xcuitest-driver/blob/master/docs/wda-custom-server.md)
+
+```java
+private List<String> generateXcodebuildCmdline() {
+    final List<String> result = new ArrayList<>();
+    result.add(XCODEBUILD_EXECUTABLE.getAbsolutePath());
+    result.add("clean build-for-testing test-without-building");
+    result.add(String.format("-project %s", WDA_PROJECT.getAbsolutePath()));
+    result.add(String.format("-scheme %s", WDA_SCHEME));
+    result.add(String.format("-destination id=%s", deviceId));
+    result.add(String.format("-configuration %s", WDA_CONFIGURATION));
+    result.add(String.format("IPHONEOS_DEPLOYMENT_TARGET=%s", platformVersion));
+    result.add(String.format("> %s 2>&1 &", XCODEBUILD_LOG.getAbsolutePath()));
+    return result;
+}
+
+private static List<String> generateKeychainUnlockCmdlines() throws Exception {
+    final List<String> result = new ArrayList<>();
+    result.add(String.format("/usr/bin/security -v list-keychains -s %s", KEYCHAIN.getAbsolutePath()));
+    result.add(String.format("/usr/bin/security -v unlock-keychain -p %s %s",
+            KEYCHAIN_PASSWORD, KEYCHAIN.getAbsolutePath()));
+    result.add(String.format("/usr/bin/security set-keychain-settings -t 3600 %s", KEYCHAIN.getAbsolutePath()));
+    return result;
+}
+```
+
+[iOS重签名探索](https://www.jianshu.com/p/6b659c669338) -->[ios_resign_with_ipa](https://github.com/chenhengjie123/iOS_resign_scripts/blob/master/ios_resign_with_ipa)
+
 ### ERR_SSL_PROTOCOL_ERROR 
 
 Mac上的各种浏览器访问[Apple开发者网站](https://developer.apple.com/documentation/xcode/enabling-developer-mode-on-a-device)时，提示证书错误。根据[官方社区](https://discussions.apple.com/thread/251703744)的反馈和本地环境判断：本地wifi环境的问题（因为safari上没有任何插件，依然报`safari can't establish a secure connection to the server "developer.apple.com"`），手机端使用本地wifi也无法打开相同的连接，切换到4G环境后可以正常访问。
 
-### 隐藏dock栏图标
+### 隐藏dock栏图标‘
 
 [隐藏正在运行程序在Dock中的图标](https://www.anmane.com/yin-cang-dockzhong-zheng-zai-yun-xing-cheng-xu-de-tu-biao/)
 

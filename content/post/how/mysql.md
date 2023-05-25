@@ -12,6 +12,12 @@ topics = [
 toc = true
 +++
 
+### Error: "The table does not comply with the requirements by an external plugin" 
+
+[Case 1: no keys](https://lefred.be/content/mysql-group-replication-and-table-design/)
+
+实测集群模式下无主键的表会报上面的错误。
+
 ### cast函数
 
 MySQL doesn't permit you to CAST('01' AS INT). It expects instead a SIGNED or UNSIGNED.

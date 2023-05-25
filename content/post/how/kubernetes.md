@@ -37,6 +37,10 @@ toc = true
   "pure-u-1-1|https://s3-img.meituan.net/v1/mss_3d027b52ec5a4d589e68050845611e68/ff/n0/0n/34/dp_301168.jpg|OCI"
 >}}
 
+## NodePort类型服务
+
+默认情况下，NodePort类型Service可以通过任意节点IP:节点端口访问。
+
 ## k8s 恢复
 
 - [ETCD 集群的备份和恢复](https://blog.csdn.net/qq_34556414/article/details/113882631)

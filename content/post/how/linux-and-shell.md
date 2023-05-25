@@ -37,6 +37,9 @@ no-login shell
 
 ![](https://img-blog.csdnimg.cn/20201127083304373.jpeg)
 
+## ansible -inventory --list
+
+列出配置的所有列表。 `ansible --version`将显示出来[配置文件位置](https://ansible-tran.readthedocs.io/en/latest/docs/intro_configuration.html)，通常位于 `/etc/ansible/ansible.cfg`
 
 ## tty 是什么
 
@@ -680,6 +683,10 @@ Hello, World!
 ```
 
 ### curl form 
+
+### curl call telnet 
+
+`curl -v telnet://8.8.8.8:80`
 
 `curl --help`查看文档 
 

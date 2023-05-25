@@ -22,6 +22,39 @@ toc = true
 
 [Javascript模块化编程（三）](https://www.ruanyifeng.com/blog/2012/11/require_js.html)，目前项目中用到，回顾一下。
 
+##  void 0
+
+`t.abc = void 0; `相当于 `t.abc = undefined;`
+
+## Immediately Invoked Function Expression (IIFE)  
+
+`!function(e){}([function(){}, function(){}])` 
+
+- ! 将函数声明转换为函数表达式。并用来避免函数有返回值。  in JavaScript, function declarations are not allowed to be used as operands in expressions.
+- 参数e表示是两个函数的数组
+
+## 离线安装module 
+
+[offline install npm packages or node_modules](https://stackoverflow.com/questions/42745652/nodejs-and-npm-module-offline-installation)
+
+```shell
+#method 1
+on machine A which has internet access:
+npm install all the packages needed
+upload the node_modules/* to /YOUR-PATH-TO/node-v12.16.2-linux-s390x/lib/node_modules/
+
+#method 2
+on machine A which has internet access:
+>npm install -g npm-bundle
+>npm install -g eslint
+>npm-bundle eslint
+eslint-7.8.1.tgz
+on the target machine which has no internet access:
+>npm install -g ./eslint-7.8.1.tgz
+```
+
+
+
 ## Error: unable to resolve dependency tree
 
 根据提示，重新使用 `npm install --legacy-peer-deps`(安装时忽略所有`peerDependencies`)可以解决，参考[一](https://blog.csdn.net/TIAN20121221/article/details/117173319)，或者[二](https://stackoverflow.com/questions/71582397/eresolve-unable-to-resolve-dependency-tree-while-installing-a-pacakge)
@@ -410,3 +443,8 @@ export PATH=~/.npm-global/bin:$PATH
 ```
 
 使用 `npm config list`查看配置的默认变量；使用`npm list -g`查看已安装的应用
+
+
+实管中心各团队一起深入到一线项目组沟通调研，减少远程信息传递的环节，提高沟通效率，减少沟通误差和信息偏差。在跟岗现场可以更好地了解项目的业务具体情况、项目成员的能力和需求以及项目进展情况。无论是对现有流程的优化，还是对实管中心提供的工具的推广，深入一线能获得更真实的体感和有效反馈。为进一步的迭代调整做好调研准备，避免让推行的流程和工具流于形式。双方充分的沟通是达成共识的基础，基于共识的合作才能为提质增效形成合力，发挥1+1>2的最终效果。
+
+

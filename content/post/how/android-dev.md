@@ -49,6 +49,10 @@ adb shell am broadcast -a com.android.test --es test_string "this is test string
 adb shell pm list packages
 ```
 
+## aapt dump
+
+`aapt dump badging /path/to/your/app.apk | grep versionName`
+
 ## android 11签名
 
 安装失败，提示[INSTALL_PARSE_FAILED_NO_CERTIFICATES](https://blog.csdn.net/u012175780/article/details/128647422)，

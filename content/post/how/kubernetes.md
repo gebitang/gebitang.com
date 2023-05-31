@@ -607,6 +607,24 @@ Please, check the contents of the $HOME/.kube/config file.
 
 ## k8s practice
 
+### 获取log日志
+
+```shell
+#!/bin/bash
+
+# Run the command and capture the output
+out="$(kubectl get pods)"
+
+# Filter the output line by line using grep
+while read -r line; do
+    # -q option is used to suppress the output of grep
+    if echo "$line" | grep -q "pattern"; then
+        # -F' ' option specifies the field separator as -
+        echo "$line" | awk -F' ' 'print {"kc logs -f --singce=1h  " $1  " | grep combineTask"}'
+    fi
+done <<< "$out"
+```
+
 ### 调度管理
 
 cordon，drain，delete

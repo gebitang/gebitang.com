@@ -30,6 +30,41 @@ toc=true
 
 ## Current
 
+### libimobiledevice 
+
+- [libimobiledevice](https://github.com/libimobiledevice/libimobiledevice) 
+`ideviceinfo -u udid -k ProductType` 
+
+get 1.3.1 on Mac from [issue 1123](https://github.com/libimobiledevice/libimobiledevice/issues/1123)
+```shell
+brew uninstall --ignore-dependencies libimobiledevice
+brew uninstall --ignore-dependencies ideviceinstaller
+brew uninstall --ignore-dependencies usbmuxd
+brew uninstall --ignore-dependencies libplist
+sudo rm /var/db/lockdown/*
+brew install --HEAD libplist
+brew install --HEAD usbmuxd
+brew unlink usbmuxd
+brew link usbmuxd
+brew install --HEAD libimobiledevice
+brew install --HEAD ideviceinstaller
+```
+
+
+- [ideviceinstaller](https://github.com/libimobiledevice/ideviceinstaller)
+`ideviceinstaller -u udid -l` list installed packages 
+
+- [libusbmuxd](https://github.com/libimobiledevice/libusbmuxd)
+`iproxy 2222:22`
+
+- [plistutl](https://github.com/libimobiledevice/libplist) 
+
+### profile has not been expllicityly trusted by the user
+
+wda编译安装成功，启动失败。提示无法启动。because it has an invalid code signature, inadequate entitlements or its profile ... 
+
+使用的自定义签名证书和profile需要联网认证，手动点击启动应用时会自动弹出提示框。联网后会自动验证，不会有其他提示。
+
 ### codesign
 
 - 报错： `errSecInternalComponent`， ssh环境执行codesign时，无法使用证书导致这个报错 [Resolving errSecInternalComponent errors during code signing](https://developer.apple.com/forums/thread/712005)

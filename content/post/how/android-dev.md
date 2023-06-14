@@ -49,6 +49,19 @@ adb shell am broadcast -a com.android.test --es test_string "this is test string
 adb shell pm list packages
 ```
 
+## adb connect 
+
+```
+adb connect <device_ip_address>
+adb devices 
+adb disconnect <device_ip_address>
+
+# or 
+adb forward tcp:<local_port> tcp:<remote_port>
+adb connect localhost:<local_port>
+adb disconnect localhost:<local_port>
+```
+
 ## aapt dump
 
 `aapt dump badging /path/to/your/app.apk | grep versionName`

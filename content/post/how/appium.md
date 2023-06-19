@@ -123,6 +123,61 @@ lrwxr-xr-x  1 geb  staff        38 Sep 23 10:44 npx -> ../lib/node_modules/npm/b
 - 自由独立安装 driver，[定制driver](https://appium.github.io/appium/docs/en/2.0/ecosystem/build-drivers/)
 
 
+### appium for android 14 
+
+权限问题：`SecurityException: Permission denial: writing to settings requires:android.permission.WRITE_SECURE_SETTINGS` 
+
+[issue: 13802](https://github.com/appium/appium/issues/13802)， 以及[appium论坛讨论](https://discuss.appium.io/t/i-am-getting-following-error-while-executing-appium-java-script/)
+
+不同设备有对应的设置：
+
+- Oppo/一加：开发者权限--禁止权限监控 开启
+- 如果有：开启 “USB调试(安全设置)”选型
+- 如果有，关闭 “USB验证App”( Verify apps over USB.) 以及 “验证可调试应用的字节码”(Verify bytecode of debuggable apps)
+上述操作设置之后，需要重启手机方可使用
+
+目前的问题：
+1. 只能第一次初始化成功：可以获取截图+页面信息。
+2. 无法点击，总是提示超时
+3. 无法刷新，提示截图失败
+
+从日志看—— 
+- appium端：手机端端socket被挂起，截图请求出现异常
+
+```
+[AndroidUiautomator2Driver@8b7b (38654284)] socket hang up
+[debug] [AndroidUiautomator2Driver@8b7b (38654284)] Encountered internal error running command: UnknownError: An unknown server-side error occurred while processing the command. Original error: Could not proxy command to the remote server. Original error: socket hang up
+[debug] [AndroidUiautomator2Driver@8b7b (38654284)]     at UIA2Proxy.command (/Users/zhiwei/.nvm/versions/node/v18.13.0/lib/node_modules/appium/node_modules/@appium/base-driver/lib/jsonwp-proxy/proxy.js:342:13)
+[debug] [AndroidUiautomator2Driver@8b7b (38654284)]     at processTicksAndRejections (node:internal/process/task_queues:95:5)
+[debug] [AndroidUiautomator2Driver@8b7b (38654284)]     at AndroidUiautomator2Driver.commands.click (/Users/zhiwei/.appium/node_modules/appium-uiautomator2-driver/lib/commands/element.js:81:10)
+[AndroidUiautomator2Driver@de2f (7254fcfd)] socket hang up
+[debug] [AndroidUiautomator2Driver@8b7b (38654284)] Responding to client with driver.getTimeouts() result: {"command":3600000,"implicit":0}
+[debug] [AndroidUiautomator2Driver@8b7b (38654284)] Matched '/screenshot' to command name 'getScreenshot'
+[debug] [AndroidUiautomator2Driver@8b7b (38654284)] Proxying [GET /screenshot] to [GET http://127.0.0.1:8200/session/182ec5cb-2b58-4647-98f1-f535accd800f/screenshot] with no body
+[debug] [AndroidUiautomator2Driver@8b7b (38654284)] Responding to client with driver.getTimeouts() result: {"command":3600000,"implicit":0}
+[AndroidUiautomator2Driver@8b7b (38654284)] socket hang up
+```
+- device端：刚启动之后，uia2的server被强制停止了
+
+```
+06-15 11:36:11.535 D/OplusSmartBrightnessController( 3334): handleMessage MSG_LUX_CHANGED, mLux:162.66734 luxQueue=[162.0, 163.0, 163.0, 162.0, 163.0, 163.0]
+06-15 11:36:11.539 D/AndroidRuntime(13475): Calling main entry com.android.commands.am.Am
+06-15 11:36:11.544 D/UiAutomationConnection(13475): Created on user UserHandle{0}
+06-15 11:36:11.545 I/ActivityManager( 3334): Force stopping io.appium.uiautomator2.server appid=10321 user=0: start instr
+06-15 11:36:11.567 E/ActivityManager( 3334): Unable to freeze binder for 12200: -11
+06-15 11:36:11.569 D/OplusUIFirst_FB( 3334): io.appium.uiautomator2.server remove pid: 12200
+06-15 11:36:11.572 I/ActivityManager( 3334): Killing 12200:io.appium.uiautomator2.server/u0a321 (adj 0): stop io.appium.uiautomator2.server due to start instr
+06-15 11:36:11.574 E/IHansComunication( 9664): HANS printMessageBody: RCV message: type = 3,port = 86870,caller_pid = 3334,caller_uid = 1000,target_pid = 12200,target_uid = 10321,pkg_cmd = -1,rpc = signal/9
+06-15 11:36:11.578 I/OplusHansManager ( 3334): onUidGone(), 10321 io.appium.uiautomator2.server exit SM
+06-15 11:36:11.579 I/OplusHansManager ( 3334): uid=10321, pkg=io.appium.uiautomator2.server F exit SM
+06-15 11:36:11.579 I/OplusHansManager ( 3334): uid=10321, pkg=io.appium.uiautomator2.server F exit(), F stay=196, reason=UidGone
+06-15 11:36:11.580 I/OplusHansManager ( 3334): unfreeze uid: 10321 io.appium.uiautomator2.server pids: [12200] reason: UidGone scene: LcdOn
+06-15 11:36:11.580 I/OplusHansManager ( 3334): uid=10321, pkg=io.appium.uiautomator2.server M exit(), M stay=0
+06-15 11:36:11.580 I/OplusHansManager ( 3334): uid=10321, pkg=io.appium.uiautomator2.server R exit(), R stay=0
+06-15 11:36:11.582 D/SensorService( 3334): onUidStateChanged uid = 10321, state = UID_STATE_IDLE
+06-15 11:36:11.583 D/DisplayManagerService( 3334): Drop pending events for gone uid 10321
+```
+
 ## curl 调用api
 
 [Controlling Appium via raw HTTP requests with curl](https://www.headspin.io/blog/controlling-appium-via-raw-http-requests-with-curl)

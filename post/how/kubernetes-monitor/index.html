@@ -1,4 +1,4 @@
-<!doctype html><html xmlns:wb=http://open.weibo.com/wb lang=en><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="the way to monitor k8s"><meta name=generator content="Hugo 0.110.0"><title>Prometheus And Grafana &#183; 戈壁堂</title><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/pure-min.css><!--[if lte IE 8]><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-old-ie-min.css><![endif]--><!--[if gt IE 8]><!--><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-min.css><!--<![endif]--><!--[if lte IE 8]><link rel=stylesheet href=http://gebitang.com/css/side-menu-old-ie.css><![endif]--><!--[if gt IE 8]><!--><link rel=stylesheet href=http://gebitang.com/css/side-menu.css><!--<![endif]--><link rel=stylesheet href=http://gebitang.com/css/blackburn.css><link rel=stylesheet href=https://use.fontawesome.com/releases/v5.9.0/css/all.css><link href="https://fonts.googleapis.com/css?family=Raleway" rel=stylesheet type=text/css><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<!doctype html><html xmlns:wb=http://open.weibo.com/wb lang=en><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="the way to monitor k8s"><meta name=generator content="Hugo 0.114.0"><title>Prometheus And Grafana &#183; 戈壁堂</title><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/pure-min.css><!--[if lte IE 8]><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-old-ie-min.css><![endif]--><!--[if gt IE 8]><!--><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-min.css><!--<![endif]--><!--[if lte IE 8]><link rel=stylesheet href=http://gebitang.com/css/side-menu-old-ie.css><![endif]--><!--[if gt IE 8]><!--><link rel=stylesheet href=http://gebitang.com/css/side-menu.css><!--<![endif]--><link rel=stylesheet href=http://gebitang.com/css/blackburn.css><link rel=stylesheet href=https://use.fontawesome.com/releases/v5.9.0/css/all.css><link href="https://fonts.googleapis.com/css?family=Raleway" rel=stylesheet type=text/css><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 <link rel=stylesheet href=//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/androidstudio.min.css><script src=//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js></script>
 <script src=//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js></script>
 <script>hljs.initHighlightingOnLoad()</script><link rel="shortcut icon" href=http://gebitang.com/img/favicon.ico type=image/x-icon><link rel=stylesheet href=http://gebitang.com/css/my.css><script src=http://gebitang.com/js/my.js></script></head><body><div id=layout><a href=#menu id=menuLink class=menu-link><span></span></a><div id=menu><a class="pure-menu-heading brand" href=http://gebitang.com/>Gebitang</a><div class=pure-menu><ul class=pure-menu-list><li class=pure-menu-item><a class=pure-menu-link href=http://gebitang.com/><i class='fa fa-home fa-fw'></i>Home</a></li><li class=pure-menu-item><a class=pure-menu-link href=http://gebitang.com/post/><i class='fa fa-list fa-fw'></i>Posts</a></li><li class=pure-menu-item><a class=pure-menu-link href=http://gebitang.com/about/><i class='fa fa-user fa-fw'></i>About</a></li><li class=pure-menu-item><a class=pure-menu-link href=http://gebitang.com/contact/><i class='fa fa-phone fa-fw'></i>Contact</a></li><li class=pure-menu-item><a class=pure-menu-link href=http://gebitang.com/tags/><i class='fa fa-tags fa-fw'></i>Tags</a></li><li class=pure-menu-item><a class=pure-menu-link href=http://gebitang.com/topics/><i class='fa fa-folder fa-fw'></i>Topics</a></li></ul></div><div class="pure-menu social"><ul class=pure-menu-list></ul></div><div><div class=small-print><small><a rel=license href=http://creativecommons.org/licenses/by/4.0/><img alt=知识共享许可协议 style=border-width:0 src=https://i.creativecommons.org/l/by/4.0/80x15.png></a><br>本<span xmlns:dct=http://purl.org/dc/terms/ href=http://purl.org/dc/dcmitype/Text rel=dct:type>作品</span>由<a xmlns:cc=http://creativecommons.org/ns# href=http://gebitang.com property="cc:attributionName" rel=cc:attributionurl>&nbsp;Gebitang&nbsp;&nbsp;</a>采用<a rel=license href=http://creativecommons.org/licenses/by/4.0/>知识共享署名 4.0 国际许可协议</a>进行许可&nbsp;&copy; 2018</small></div><div class=small-print><small></small></div><div class=small-print><small>Built with&nbsp;<a href=https://gohugo.io/ target=_blank>Hugo</a></small>
@@ -410,11 +410,11 @@ Kube State Metrics</p><h2 id=安装>安装</h2><ul><li><a href=https://prometheu
 </span></span><span style=display:flex><span>      <span style=color:#75715e># 集群节点接收流量</span>
 </span></span><span style=display:flex><span>      - <span style=color:#f92672>record</span>: <span style=color:#ae81ff>k8s:node:container_networt_receive_bytes:rate</span>
 </span></span><span style=display:flex><span>        <span style=color:#f92672>expr</span>: |<span style=color:#e6db74>
-</span></span></span><span style=display:flex><span><span style=color:#e6db74>          </span>          <span style=color:#ae81ff>sum by (kubernetes_io_hostname) (rate(container_network_receive_bytes_total{kubernetes_io_hostname!=&#34;&#34;}[1m]))</span>
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>          sum by (kubernetes_io_hostname) (rate(container_network_receive_bytes_total{kubernetes_io_hostname!=&#34;&#34;}[1m]))</span>          
 </span></span><span style=display:flex><span>      <span style=color:#75715e># 集群节点发送流量</span>
 </span></span><span style=display:flex><span>      - <span style=color:#f92672>record</span>: <span style=color:#ae81ff>k8s:node:container_networt_transmit_bytes:rate</span>
 </span></span><span style=display:flex><span>        <span style=color:#f92672>expr</span>: |<span style=color:#e6db74>
-</span></span></span><span style=display:flex><span><span style=color:#e6db74>          </span>          <span style=color:#ae81ff>sum by (kubernetes_io_hostname) (rate(container_network_transmit_bytes_total{kubernetes_io_hostname!=&#34;&#34;}[1m]))</span>
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>          sum by (kubernetes_io_hostname) (rate(container_network_transmit_bytes_total{kubernetes_io_hostname!=&#34;&#34;}[1m]))</span>          
 </span></span><span style=display:flex><span>      <span style=color:#75715e># 集群节点内存使用率</span>
 </span></span><span style=display:flex><span>      - <span style=color:#f92672>record</span>: <span style=color:#ae81ff>k8s:node:memory_usage</span>
 </span></span><span style=display:flex><span>        <span style=color:#f92672>expr</span>: |<span style=color:#e6db74>
@@ -433,94 +433,94 @@ Kube State Metrics</p><h2 id=安装>安装</h2><ul><li><a href=https://prometheu
 </span></span><span style=display:flex><span>      <span style=color:#75715e># 集群cpu 使用核数 core</span>
 </span></span><span style=display:flex><span>      - <span style=color:#f92672>record</span>: <span style=color:#ae81ff>k8s:cluster:cpu:use:total</span>
 </span></span><span style=display:flex><span>        <span style=color:#f92672>expr</span>: |<span style=color:#e6db74>
-</span></span></span><span style=display:flex><span><span style=color:#e6db74>          </span>          <span style=color:#ae81ff>sum  (rate (container_cpu_usage_seconds_total{id=&#34;/&#34;,kubernetes_io_hostname!=&#34;&#34;}[1m]))</span>
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>          sum  (rate (container_cpu_usage_seconds_total{id=&#34;/&#34;,kubernetes_io_hostname!=&#34;&#34;}[1m]))</span>          
 </span></span><span style=display:flex><span>      <span style=color:#75715e># 集群总cpu 总量 core</span>
 </span></span><span style=display:flex><span>      - <span style=color:#f92672>record</span>: <span style=color:#ae81ff>k8s:cluster:cpu:total</span>
 </span></span><span style=display:flex><span>        <span style=color:#f92672>expr</span>: |<span style=color:#e6db74>
-</span></span></span><span style=display:flex><span><span style=color:#e6db74>          </span>          <span style=color:#ae81ff>sum (kube_node_status_allocatable_cpu_cores)</span>
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>          sum (kube_node_status_allocatable_cpu_cores)</span>          
 </span></span><span style=display:flex><span>      <span style=color:#75715e># 集群memory 使用量 bytes</span>
 </span></span><span style=display:flex><span>      - <span style=color:#f92672>record</span>: <span style=color:#ae81ff>k8s:cluster:memory_bytes:use:total</span>
 </span></span><span style=display:flex><span>        <span style=color:#f92672>expr</span>: |<span style=color:#e6db74>
-</span></span></span><span style=display:flex><span><span style=color:#e6db74>          </span>          <span style=color:#ae81ff>sum(container_memory_working_set_bytes{id=&#34;/&#34;,kubernetes_io_hostname!=&#34;&#34;})</span>
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>          sum(container_memory_working_set_bytes{id=&#34;/&#34;,kubernetes_io_hostname!=&#34;&#34;})</span>          
 </span></span><span style=display:flex><span>      <span style=color:#75715e># 集群memory 总量 bytes</span>
 </span></span><span style=display:flex><span>      - <span style=color:#f92672>record</span>: <span style=color:#ae81ff>k8s:cluster:memory_bytes:total</span>
 </span></span><span style=display:flex><span>        <span style=color:#f92672>expr</span>: |<span style=color:#e6db74>
-</span></span></span><span style=display:flex><span><span style=color:#e6db74>          </span>          <span style=color:#ae81ff>sum (kube_node_status_allocatable_memory_bytes)</span>
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>          sum (kube_node_status_allocatable_memory_bytes)</span>          
 </span></span><span style=display:flex><span>      <span style=color:#75715e># 集群file system 使用量</span>
 </span></span><span style=display:flex><span>      - <span style=color:#f92672>record</span>: <span style=color:#ae81ff>k8s:cluster:fs:use:total</span>
 </span></span><span style=display:flex><span>        <span style=color:#f92672>expr</span>: |<span style=color:#e6db74>
-</span></span></span><span style=display:flex><span><span style=color:#e6db74>          </span>          <span style=color:#ae81ff>sum (container_fs_usage_bytes{device=~&#34;^/dev/[sv]d[a-z][1-9]$&#34;,id=&#34;/&#34;,kubernetes_io_hostname!=&#34;&#34;})</span>
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>          sum (container_fs_usage_bytes{device=~&#34;^/dev/[sv]d[a-z][1-9]$&#34;,id=&#34;/&#34;,kubernetes_io_hostname!=&#34;&#34;})</span>          
 </span></span><span style=display:flex><span>      <span style=color:#75715e># 集群file system 总量</span>
 </span></span><span style=display:flex><span>      - <span style=color:#f92672>record</span>: <span style=color:#ae81ff>k8s:cluster:fs:total</span>
 </span></span><span style=display:flex><span>        <span style=color:#f92672>expr</span>: |<span style=color:#e6db74>
-</span></span></span><span style=display:flex><span><span style=color:#e6db74>          </span>          <span style=color:#ae81ff>sum (container_fs_limit_bytes{device=~&#34;^/dev/[sv]d[a-z][1-9]$&#34;,id=&#34;/&#34;,kubernetes_io_hostname!=&#34;&#34;})</span>
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>          sum (container_fs_limit_bytes{device=~&#34;^/dev/[sv]d[a-z][1-9]$&#34;,id=&#34;/&#34;,kubernetes_io_hostname!=&#34;&#34;})</span>          
 </span></span><span style=display:flex><span>      <span style=color:#75715e># 集群节点 内存使用top 7</span>
 </span></span><span style=display:flex><span>      - <span style=color:#f92672>record</span>: <span style=color:#ae81ff>k8s:node:memory:usage:top7</span>
 </span></span><span style=display:flex><span>        <span style=color:#f92672>expr</span>: |<span style=color:#e6db74>
-</span></span></span><span style=display:flex><span><span style=color:#e6db74>          </span>          <span style=color:#ae81ff>topk(7, k8s:node:memory_usage)</span>
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>          topk(7, k8s:node:memory_usage)</span>          
 </span></span><span style=display:flex><span>      <span style=color:#75715e># apiserver 访问量qps</span>
 </span></span><span style=display:flex><span>      - <span style=color:#f92672>record</span>: <span style=color:#ae81ff>k8s:apiserver:qps:rate5m</span>
 </span></span><span style=display:flex><span>        <span style=color:#f92672>expr</span>: |<span style=color:#e6db74>
-</span></span></span><span style=display:flex><span><span style=color:#e6db74>          </span>          <span style=color:#ae81ff>sum(rate(apiserver_request_count[5m])) by (instance)</span>
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>          sum(rate(apiserver_request_count[5m])) by (instance)</span>          
 </span></span><span style=display:flex><span>      <span style=color:#75715e># 集群apiserver 5xx</span>
 </span></span><span style=display:flex><span>      - <span style=color:#f92672>record</span>: <span style=color:#ae81ff>k8s:apiserver:5xx:sum5m</span>
 </span></span><span style=display:flex><span>        <span style=color:#f92672>expr</span>: |<span style=color:#e6db74>
-</span></span></span><span style=display:flex><span><span style=color:#e6db74>          </span>          <span style=color:#ae81ff>sum(increase(apiserver_request_count{code=~&#34;5..&#34;}[5m])) by (instance)</span>
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>          sum(increase(apiserver_request_count{code=~&#34;5..&#34;}[5m])) by (instance)</span>          
 </span></span><span style=display:flex><span>      <span style=color:#75715e># 集群 apiserver 资源请求延迟</span>
 </span></span><span style=display:flex><span>      - <span style=color:#f92672>record</span>: <span style=color:#ae81ff>k8s:apiserver_request_latencies:quantile:sum5m</span>
 </span></span><span style=display:flex><span>        <span style=color:#f92672>expr</span>: |<span style=color:#e6db74>
-</span></span></span><span style=display:flex><span><span style=color:#e6db74>          </span>          <span style=color:#ae81ff>sum by (verb, scope,resource, instance) (rate(apiserver_request_latencies_summary{quantile=&#34;0.9&#34;}[5m]))</span>
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>          sum by (verb, scope,resource, instance) (rate(apiserver_request_latencies_summary{quantile=&#34;0.9&#34;}[5m]))</span>          
 </span></span><span style=display:flex><span>      <span style=color:#75715e># apiserver 资源延迟 0.9 分位</span>
 </span></span><span style=display:flex><span>      - <span style=color:#f92672>record</span>: <span style=color:#ae81ff>k8s:apiserver_request_latencies:top10</span>
 </span></span><span style=display:flex><span>        <span style=color:#f92672>expr</span>: |<span style=color:#e6db74>
-</span></span></span><span style=display:flex><span><span style=color:#e6db74>          </span>          <span style=color:#ae81ff>topk(10,k8s:apiserver_request_latencies:quantile:sum5m)</span>
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>          topk(10,k8s:apiserver_request_latencies:quantile:sum5m)</span>          
 </span></span><span style=display:flex><span>      <span style=color:#75715e># 集群 pod request memory 总量</span>
 </span></span><span style=display:flex><span>      - <span style=color:#f92672>record</span>: <span style=color:#ae81ff>k8s:cluster:pod:request:memory:total</span>
 </span></span><span style=display:flex><span>        <span style=color:#f92672>expr</span>: |<span style=color:#e6db74>
-</span></span></span><span style=display:flex><span><span style=color:#e6db74>          </span>          <span style=color:#ae81ff>sum(kube_pod_container_resource_requests_memory_bytes)</span>
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>          sum(kube_pod_container_resource_requests_memory_bytes)</span>          
 </span></span><span style=display:flex><span>      <span style=color:#75715e># 集群 pod request cpu 总量</span>
 </span></span><span style=display:flex><span>      - <span style=color:#f92672>record</span>: <span style=color:#ae81ff>k8s:cluster:pod:request:cpu:total</span>
 </span></span><span style=display:flex><span>        <span style=color:#f92672>expr</span>: |<span style=color:#e6db74>
-</span></span></span><span style=display:flex><span><span style=color:#e6db74>          </span>          <span style=color:#ae81ff>sum(kube_pod_container_resource_requests_cpu_cores)</span>
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>          sum(kube_pod_container_resource_requests_cpu_cores)</span>          
 </span></span><span style=display:flex><span>      <span style=color:#75715e># 集群 pod 当前数量</span>
 </span></span><span style=display:flex><span>      - <span style=color:#f92672>record</span>: <span style=color:#ae81ff>k8s:cluster:pod:count</span>
 </span></span><span style=display:flex><span>        <span style=color:#f92672>expr</span>: |<span style=color:#e6db74>
-</span></span></span><span style=display:flex><span><span style=color:#e6db74>                </span>                <span style=color:#ae81ff>sum(kube_pod_info)</span>
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>                sum(kube_pod_info)</span>                
 </span></span><span style=display:flex><span>          <span style=color:#75715e># 集群 pod 数量使用百分比</span>
 </span></span><span style=display:flex><span>                <span style=color:#ae81ff>k8s:cluster:pod:count / sum(kube_node_status_allocatable_pods) * 100</span>
 </span></span><span style=display:flex><span>      <span style=color:#75715e># envoy upstrean 发生连接重置</span>
 </span></span><span style=display:flex><span>      - <span style=color:#f92672>record</span>: <span style=color:#ae81ff>k8s:envoy:upstream:rqrx:reset:rate5m:gt0</span>
 </span></span><span style=display:flex><span>        <span style=color:#f92672>expr</span>: |<span style=color:#e6db74>
-</span></span></span><span style=display:flex><span><span style=color:#e6db74>          </span>          <span style=color:#ae81ff>sum by (cluster_name) (rate(envoy_cluster_upstream_rq_rx_reset[5m])) &gt; 0</span>
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>          sum by (cluster_name) (rate(envoy_cluster_upstream_rq_rx_reset[5m])) &gt; 0</span>          
 </span></span><span style=display:flex><span>      <span style=color:#75715e># envoy 出现连接超时</span>
 </span></span><span style=display:flex><span>      - <span style=color:#f92672>record</span>: <span style=color:#ae81ff>k8s:envoy:cx:connect:timeout:rate5m:gt0</span>
 </span></span><span style=display:flex><span>        <span style=color:#f92672>expr</span>: |<span style=color:#e6db74>
-</span></span></span><span style=display:flex><span><span style=color:#e6db74>          </span>          <span style=color:#ae81ff>sum by (cluster_name) (rate(envoy_cluster_upstream_cx_connect_timeout[5m])) &gt; 0</span>
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>          sum by (cluster_name) (rate(envoy_cluster_upstream_cx_connect_timeout[5m])) &gt; 0</span>          
 </span></span><span style=display:flex><span>      <span style=color:#75715e># envoy upstream 连接失败</span>
 </span></span><span style=display:flex><span>      - <span style=color:#f92672>record</span>: <span style=color:#ae81ff>k8s:envoy:cx:connect:fail:rate5m:gt0</span>
 </span></span><span style=display:flex><span>        <span style=color:#f92672>expr</span>: |<span style=color:#e6db74>
-</span></span></span><span style=display:flex><span><span style=color:#e6db74>          </span>          <span style=color:#ae81ff>sum by (cluster_name) (rate(envoy_cluster_upstream_cx_connect_fail[5m])) &gt; 0</span>
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>          sum by (cluster_name) (rate(envoy_cluster_upstream_cx_connect_fail[5m])) &gt; 0</span>          
 </span></span><span style=display:flex><span>      <span style=color:#75715e># envoy 连接重试</span>
 </span></span><span style=display:flex><span>      - <span style=color:#f92672>record</span>: <span style=color:#ae81ff>k8s:envoy:cx:connect:attempts:rate5m:gt0</span>
 </span></span><span style=display:flex><span>        <span style=color:#f92672>expr</span>: |<span style=color:#e6db74>
-</span></span></span><span style=display:flex><span><span style=color:#e6db74>          </span>          <span style=color:#ae81ff>sum by (cluster_name) (rate(envoy_cluster_upstream_cx_connect_attempts_exceeded[5m]))  &gt; 0</span>
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>          sum by (cluster_name) (rate(envoy_cluster_upstream_cx_connect_attempts_exceeded[5m]))  &gt; 0</span>          
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span>  - <span style=color:#f92672>name</span>: <span style=color:#ae81ff>oap</span>
 </span></span><span style=display:flex><span>            - <span style=color:#f92672>record</span>: <span style=color:#ae81ff>oap:http_qps:sum</span>
 </span></span><span style=display:flex><span>            <span style=color:#f92672>expr</span>: |<span style=color:#e6db74>
-</span></span></span><span style=display:flex><span><span style=color:#e6db74>              </span>              <span style=color:#ae81ff>sum by (cluster, kubernetes_namespace, app, handler) (irate(med_http_request_total{oap=&#34;true&#34;}[2m]))</span>
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>              sum by (cluster, kubernetes_namespace, app, handler) (irate(med_http_request_total{oap=&#34;true&#34;}[2m]))</span>              
 </span></span><span style=display:flex><span>    <span style=color:#75715e># http 新增请求数</span>
 </span></span><span style=display:flex><span>            - <span style=color:#f92672>record</span>: <span style=color:#ae81ff>oap:http_incr_1m:sum</span>
 </span></span><span style=display:flex><span>              <span style=color:#f92672>expr</span>: |<span style=color:#e6db74>
-</span></span></span><span style=display:flex><span><span style=color:#e6db74>                </span>                <span style=color:#ae81ff>sum by (cluster, kubernetes_namespace, app, handler) (increase(med_http_request_total{oap=&#34;true&#34;}[1m]))</span>
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>                sum by (cluster, kubernetes_namespace, app, handler) (increase(med_http_request_total{oap=&#34;true&#34;}[1m]))</span>                
 </span></span><span style=display:flex><span>    <span style=color:#75715e># http 新增异常请求数</span>
 </span></span><span style=display:flex><span>            - <span style=color:#f92672>record</span>: <span style=color:#ae81ff>oap:http_err_incr_1m:sum</span>
 </span></span><span style=display:flex><span>              <span style=color:#f92672>expr</span>: |<span style=color:#e6db74>
-</span></span></span><span style=display:flex><span><span style=color:#e6db74>                </span>                <span style=color:#ae81ff>sum by (cluster, kubernetes_namespace, app, handler) (increase(med_http_request_total{oap=&#34;true&#34;, status=~&#34;5.*&#34;}[1m]))</span>
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>                sum by (cluster, kubernetes_namespace, app, handler) (increase(med_http_request_total{oap=&#34;true&#34;, status=~&#34;5.*&#34;}[1m]))</span>                
 </span></span><span style=display:flex><span>    <span style=color:#75715e># http p99延迟</span>
 </span></span><span style=display:flex><span>            - <span style=color:#f92672>record</span>: <span style=color:#ae81ff>oap:http_latency_p99:sum</span>
 </span></span><span style=display:flex><span>              <span style=color:#f92672>expr</span>: |<span style=color:#e6db74>
-</span></span></span><span style=display:flex><span><span style=color:#e6db74>                </span>                <span style=color:#ae81ff>histogram_quantile(0.99, sum by (cluster, kubernetes_namespace, app, handler, le) (rate(med_http_request_duration_milliseconds_bucket{oap=&#34;true&#34;}[2m])))</span>
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>                histogram_quantile(0.99, sum by (cluster, kubernetes_namespace, app, handler, le) (rate(med_http_request_duration_milliseconds_bucket{oap=&#34;true&#34;}[2m])))</span>                
 </span></span><span style=display:flex><span>    <span style=color:#75715e># http 平均延迟</span>
 </span></span><span style=display:flex><span>            - <span style=color:#f92672>record</span>: <span style=color:#ae81ff>oap:http_latency_avg:sum</span>
 </span></span><span style=display:flex><span>              <span style=color:#f92672>expr</span>: <span style=color:#ae81ff>|</span>

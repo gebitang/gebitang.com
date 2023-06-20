@@ -12,6 +12,141 @@ topics = [
 toc = true
 +++
 
+
+### spring 接入SSO 
+
+- **背景说明：**项目使用spring security框架，配置了自己的登录页面（采用ldap认证方式），权限控制依赖SecurityConfig 
+- **需求说明：**有SSO登录的场景，希望已经在其他地方接入了SSO之后，访问当前项目时不需要再次登录
+- **实现核心：**增加自定义的Filter，处理SSO场景（通常检查http请求header中的token信息）根据token信息进行认证，验证通过后，忽略后续的filter
+
+注意事项：  
+
+0. [秒懂SpringBoot之全网最易懂的Spring Security教程](https://shusheng007.top/2023/02/15/springsecurity/)，先理解原理框架
+  - 当http请求进来时，使用severlet的Filter来拦截。
+  - 提取http请求中的认证信息，例如username和password，或者Token。
+  - 从数据库（或者其他地方，例如Redis）中查询用户注册时的信息，然后进行比对，相同则认证成功，反之失败。
+1. filter会按照添加的顺序进行执行，添加filter的第二个参数为`XXFilter.class`类型，避免初始化的空指针问题
+2. `UsernamePasswordAuthenticationToken`使用三个参数，并且第一个参数是 Object类型的 principal，认证时需要包含  principal.username信息。否则报错`Invalid property 'principal.username'`
+3. 验证完成后需要执行 `filterChain.doFilter(request, response);`，忽律剩余的filter内容
+3. security配置项理解说明—— 
+
+
+```java
+@Override
+protected void configure(HttpSecurity http) throws Exception {
+    http
+    .csrf() // 跨站
+    .disable() // 关闭跨站检测
+    // 自定义鉴权过程，无需下面设置
+    // 验证策略
+    .authorizeRequests()
+        // 无需验证路径
+        .antMatchers("/public/**").permitAll()
+       .antMatchers("/user/**").permitAll()
+       // 放行登录
+       .antMatchers("/login").permitAll()
+       .antMatchers(HttpMethod.GET, "/user").hasAuthority("getAllUser") // 拥有权限才可访问
+        // 拥有任一权限即可访问
+        .antMatchers(HttpMethod.GET, "/user").hasAnyAuthority("1","2")
+        // 角色类似，hasRole(),hasAnyRole()
+        .anyRequest().authenticated()
+    .and()
+    // 自定义异常处理
+    .exceptionHandling()
+        .authenticationEntryPoint(myAuthenticationEntryPoint) // 未登录处理
+        .accessDeniedHandler(myAccessDeniedHandler)//权限不足处理
+    .and()
+    // 加入自定义登录校验
+    .addFilterBefore(myUsernamePasswordAuthentication(),UsernamePasswordAuthenticationFilter.class)
+    // 默认放在内存中
+    .rememberMe()
+        .rememberMeServices(rememberMeServices())
+        .key("INTERNAL_SECRET_KEY")
+//       重写 usernamepasswordauthenticationFilter 后，下面的formLogin()设置将失效，需要手动设置到个性化过滤器中
+//        .and()
+//      .formLogin()
+//          .loginPage("/public/unlogin") //未登录跳转页面,设置了authenticationentrypoint后无需设置未登录跳转面
+//          .loginProcessingUrl("/public/login")//登录api
+//            .successForwardUrl("/success")
+//            .failureForwardUrl("/failed")
+//            .usernameParameter("id")
+//            .passwordParameter("password")
+//          .failureHandler(myAuthFailedHandle) //登录失败处理
+//          .successHandler(myAuthSuccessHandle)//登录成功处理
+//            .usernameParameter("id")
+    .and()
+    .logout()//自定义登出
+        .logoutUrl("/public/logout")
+        .logoutSuccessUrl("public/logoutSuccess")
+        .logoutSuccessHandler(myLogoutSuccessHandle);
+}
+```
+
+
+```java
+@Configuration
+@EnableWebSecurity
+public class SecurityConfig extends WebSecurityConfigurerAdapter {
+
+    @Autowired
+    private JwtFilter jwtFilter;
+
+    @Autowired
+    private CustomFilter customFilter;
+
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        http.csrf().disable()
+            .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
+            .addFilterBefore(customFilter, JwtFilter.class)
+            .authorizeRequests()
+                .antMatchers("/secure/**").hasRole("USER")
+                .anyRequest().permitAll()
+            .and()
+            .formLogin() // 允许表单登录
+            .permitAll() // 允许任意用户访问基于表单登录的所有的URL
+            .loginPage("/login‐view") // 自定义登录页,spring security以重定向方式跳转到/login-view 
+            .loginProcessingUrl("/login") // 指定登录处理的URL，也就是用户名、密码表单提交的目的路径
+            .successForwardUrl("/login‐success"); //指定登录成功后的跳转URL 
+    }
+}
+```
+
+```java
+@Component
+public class JwtFilter extends OncePerRequestFilter {
+
+    @Autowired
+    private JwtTokenUtil jwtTokenUtil;
+
+    @Override
+    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
+            throws ServletException, IOException {
+        String header = request.getHeader("Authorization");
+        if (header != null && header.startsWith("Bearer ")) {
+            String token = header.substring(7);
+            final String userName = (String) JWTUtil.parseToken(authToken).getPayload("username");
+            UserDetails userDetails = userDetailsService.loadUserByUsername(userName);
+
+            // 注意，这里使用的是3个参数的构造方法，此构造方法将认证状态设置为true
+            // 第一个参数是 Object类型的 principal，认证时需要包含  principal.username信息
+            UsernamePasswordAuthenticationToken authentication =
+                    new UsernamePasswordAuthenticationToken(userDetails, userDetails.getPassword(), userDetails.getAuthorities());
+            // 设置认证
+            authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+
+            //将认证过了凭证保存到security的上下文中以便于在程序中使用
+            SecurityContextHolder.getContext().setAuthentication(authentication);
+
+            filterChain.doFilter(request, response);
+        }
+        // If the token is not valid, continue with the remaining filters
+        filterChain.doFilter(request, response);
+    }
+}
+```
+
+
 ### 有关signals
 
 `kill -INT $pid` sends the "interrupt" signal to the process with process ID `pid`.  

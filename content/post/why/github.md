@@ -46,3 +46,9 @@ Travis CI还没怎么用上呢，现在都开始迁移到GA([github actions](htt
 事实上，[github Actions](https://github.com/actions)本身也是一个开源组织，要用到的具体Action，例如[checkout@v2](https://github.com/actions/checkout)就是这个组织下的具体项目。
 
 写好的actions可以提交到[商店marketplace](https://github.com/marketplace)
+
+### 注意事项
+
+- 编写的action中需要用到token变量，目前有强制的一年有效期
+- 过期后，新创建一个token，赋于必要的权限 [tokens](https://github.com/settings/tokens)， 需要包含读写权限，所以需要使用classic的token
+- 将这个token的值传递给项目的`/settings/secrets/actions`中定义的token变量

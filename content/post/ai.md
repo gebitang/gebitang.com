@@ -30,3 +30,8 @@ toc=true
 
 可以正常开启聊天之后，代理似乎可以重新切换为autoswitch模式了
 
+## next
+
+- [护照过期线上申请](http://banshi.beijing.gov.cn/pubtask/task/1/110000000000/bea13e6c-b013-457b-aa6b-7feef2a68476.html)
+- [100 欧元:爱沙尼亚电子公民身份](https://zhuanlan.zhihu.com/p/212249614)
+- [become an e-⁠resident](https://www.e-resident.gov.ee/become-an-e-resident/)

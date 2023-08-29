@@ -26,6 +26,10 @@ toc = true
 \>dir ._* /a/s 
 #删除当前目录及所有子目录所有以._开头的文件
 \>del ._* /a/s
+
+.DS_Store
+
+del .DS_Store* /a/s
 ```
 
 ## 开启远程桌面连接 mstsc

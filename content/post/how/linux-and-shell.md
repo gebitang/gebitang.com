@@ -12,6 +12,16 @@ topics = [
 toc = true
 +++
 
+## fastdfs搭建
+
+[FastDFS集群搭建](https://zhuanlan.zhihu.com/p/80256918)
+
+- tracker:跟踪者，负责调度存储服务
+- storage:用于文件存储
+- client:调用tracker
+
+[happyfish100/fastdfs](https://github.com/happyfish100/fastdfs)
+
 ## ansible 执行远程机器上的脚步找不到可执行文件 
 
 `ansible remote.ip -m shell -a "cd /Users/home/work/dir && ./do.sh"` 脚本种期待jar应用，应用中会执行命令，类似 `appium -v`。提示找不到appium；但如果登陆到原创机器再手动启动，可以正常返回结果。（说明环境变量中没有可执行文件 appium）

@@ -258,6 +258,20 @@ tidevice启动wda时也会报错 `sock.bind() Address already in use`
   - 上层库 [libimobiledevice](https://github.com/libimobiledevice/libimobiledevice) A library to communicate with services on iOS devices using native protocols. 包括多种工具与iOS设备交互，例如 idevice_id，ideviceinfo， idevicescreenshot， ideviceprovision 等
   - 底层库 [libusbmuxd](https://github.com/libimobiledevice/libusbmuxd) A client library for applications to handle usbmux protocol connections with iOS devices.  包括 iproxy，inetcat工具 
 
+[Understanding usbmux and the iOS lockdown service](https://jon-gabilondo-angulo-7635.medium.com/understanding-usbmux-and-the-ios-lockdown-service-7f2a1dfd07ae) 介绍底层机制
+
+[Automate iOS devices — The (almost) Mac free way](https://daniel-paulus.medium.com/automate-ios-devices-the-almost-mac-free-way-973e8760f9df)
+
+[ideviceinstaller安装](https://www.cnblogs.com/chen-xia/articles/14268025.html)
+```shell
+$brew uninstall ideviceinstaller
+$brew uninstall libimobiledevice
+$brew install --HEAD libimobiledevice
+$brew link --overwrite libimobiledevice
+$brew install ideviceinstaller
+$brew link --overwrite ideviceinstaller
+```
+
 ### appium-webdriveragent 项目构建
 
 当前使用的版本[v3.16.0](https://github.com/appium/WebDriverAgent/tags?after=v4.0.0)，下载zip源码后，nodejs项目，执行`node ./Scripts/build-webdriveragent.js`——需要确保依赖的npm包已经安装，可先执行`npm install`，即使整体任务失败也没关系，打包wda的依赖安装成功即可。

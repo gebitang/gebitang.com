@@ -123,6 +123,14 @@ lrwxr-xr-x  1 geb  staff        38 Sep 23 10:44 npx -> ../lib/node_modules/npm/b
 - 自由独立安装 driver，[定制driver](https://appium.github.io/appium/docs/en/2.0/ecosystem/build-drivers/)
 
 
+### 低版本xcode编译wda提示
+
+[[Xcode 12.3] WebDriverAgent.xcodeproj Building for iOS, but the embedded framework 'YYCache.framework' was built for iOS + iOS Simulator. ](https://github.com/appium/appium/issues/14952)
+
+本地复现环境：xcode 12.5.1 + appium 1.15.0， 升级到1.22.0之后问题不再复现。 
+
+fix：将编译选项的 `Validate Workplace`从 No 变更为 YES
+
 ### appium for android 14 
 
 权限问题：`SecurityException: Permission denial: writing to settings requires:android.permission.WRITE_SECURE_SETTINGS` 

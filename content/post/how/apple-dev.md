@@ -30,6 +30,10 @@ toc=true
 
 ## Current
 
+### 添加登录后默认生效的环境变量
+
+`~/.bash_profile` 和 `~/.zshrc`默认开机加载
+
 ### libimobiledevice 
 
 - [libimobiledevice](https://github.com/libimobiledevice/libimobiledevice) 

@@ -4,11 +4,10 @@ description = "YKYL"
 tags = [
     "appium"
 ]
-date = "2022-09-19"
+date = "2023-09-19"
 topics = [
     "appium"
 ]
-draft = true
 toc=true
 +++
 

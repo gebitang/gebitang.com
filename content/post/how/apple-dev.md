@@ -63,6 +63,12 @@ brew install --HEAD ideviceinstaller
 
 - [plistutl](https://github.com/libimobiledevice/libplist) 
 
+### iOS 17 不再使用DeviceSupport文件
+
+使用新的DDI(Device Driver Interface)机制与设备沟通。DeviceSupport的方式一直都是非官方方式（尽管已经正常运行了7年时间）—— 在低版本Xcode上指出高版本的iOS系统。后续各种依赖这个的工具可能都不好用了？[go-ios, tidevice, or even idevice libs](https://github.com/filsv/iOSDeviceSupport/issues/169#issuecomment-1642514057)
+
+[官方论坛：Missing iOS 17 device support files](https://developer.apple.com/forums/thread/730947)官方讨论，其中提到的绕过方式满足特定条件可行[SO：How to run on iOS 17 Device using Xcode 14](https://stackoverflow.com/questions/76412754/how-to-run-on-ios-17-device-using-xcode-14)
+
 ### profile has not been expllicityly trusted by the user
 
 wda编译安装成功，启动失败。提示无法启动。because it has an invalid code signature, inadequate entitlements or its profile ... 

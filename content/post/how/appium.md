@@ -71,6 +71,8 @@ lrwxr-xr-x  1 geb  staff        38 Sep 23 10:44 npx -> ../lib/node_modules/npm/b
 - platformNames: ["Android"]
 ```
 
+已经安装了 2.0的beta版本，可以直接升级 `npm i --location=global appium` --> `2.0.0-beta.52 --> 2.1.3`(目前的最新版本230926)
+
 ### 从appium 1.x 迁移到 appium 2.x
 
 升级须知—— 
@@ -121,6 +123,11 @@ lrwxr-xr-x  1 geb  staff        38 Sep 23 10:44 npx -> ../lib/node_modules/npm/b
 - 支持独立的[配置文件](https://appium.github.io/appium/docs/en/2.0/guides/config/)
 - 可定制 [server 插件](https://appium.github.io/appium/docs/en/2.0/ecosystem/build-plugins/)
 - 自由独立安装 driver，[定制driver](https://appium.github.io/appium/docs/en/2.0/ecosystem/build-drivers/)
+
+
+### appium 是否需要每次都编译wda项目
+
+[Could not reuse existing WDA on real iPhone device.](https://github.com/appium/appium/issues/12259) 
 
 
 ### 低版本xcode编译wda提示
@@ -230,6 +237,21 @@ fix：将编译选项的 `Validate Workplace`从 No 变更为 YES
 - [tidevice](https://github.com/alibaba/taobao-iphone-device) 进行启动，WDA已经安装的情况下 `tidevice xctest -B com.facebook.wda.WebDriverAgent.Runner`
 
 前提是针对iOS项目已经有通用的签名证书并设置了对应的bundleId等信息。
+
+### 5.10版本使用xcode 15编译成功，无法启动
+
+提示内容类似——收到店家icon启动，会弹框提示“需要联网进行认证"，联网后会自动激活。
+
+```
+The request to open "com.geb.test.WebDriverAgentRunner.xctrunner" failed.
+Domain: IDELaunchCoreDevice
+Code: 0
+Recovery Suggestion: Verify that the Developer App certificate for your account is trusted on your device. Open Settings on the device and navigate to General -> VPN & Device Management, then select your Developer App certificate to trust it.
+User Info: {
+    DVTErrorCreationDateKey = "2023-09-26 04:06:58 +0000";
+    IDERunOperationFailingWorker = IDELaunchCoreDeviceWorker;
+}
+```
 
 ### WDA提示 端口占用—— 
 

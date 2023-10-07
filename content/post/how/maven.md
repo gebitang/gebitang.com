@@ -55,6 +55,12 @@ import: Entry[import  from realm ClassRealm[maven.api, parent: null]]
 </plugin>
 ```
 
+## 编译报错 fatal error compiling 无效的标记 --release -> [Help 1]
+
+例如 lealone 编译时如果使用 java8 编译，会报这个错误。从新使用 jdk17 编译，正常通过。因为从 java 9 才开始支持 release ，从maven 3.6 开始引入这个参数。 参考[Setting the --release of the Java Compiler](https://maven.apache.org/plugins/maven-compiler-plugin/examples/set-compiler-release.html)
+
+
+
 ## scope范围
 
 [dependency scope](https://maven.apache.org/guides/introduction/introduction-to-dependency-mechanism.html#dependency-scope) 

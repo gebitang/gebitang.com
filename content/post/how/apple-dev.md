@@ -69,6 +69,11 @@ brew install --HEAD ideviceinstaller
 
 [官方论坛：Missing iOS 17 device support files](https://developer.apple.com/forums/thread/730947)官方讨论，其中提到的绕过方式满足特定条件可行[SO：How to run on iOS 17 Device using Xcode 14](https://stackoverflow.com/questions/76412754/how-to-run-on-ios-17-device-using-xcode-14)
 
+使用的新协议[RemoteXPC](https://duo.com/labs/research/apple-t2-xpc)，python项目[pymobiledevice3](https://github.com/doronz88/pymobiledevice3)做了对应的支持。
+
+>Starting at iOS 17.0, Apple introduced the new CoreDevice framework to work with iOS devices. This framework relies on the RemoteXPC protocol. 
+
+
 ### profile has not been expllicityly trusted by the user
 
 wda编译安装成功，启动失败。提示无法启动。because it has an invalid code signature, inadequate entitlements or its profile ... 
@@ -197,6 +202,8 @@ https://blog.csdn.net/blog_jihq/article/details/80590767   设备型号对应
 - 生产可执行的shell脚本
 - 显示简介 中将打开方式修改为 终端 
 - 系统设置 -- 用户与群组 -- 登录项 添加自定义的脚本
+
+MacOS > 13.4: `设置 -- 通用 -- 登录项`
 
 ### Xcode.xip删除验证
 

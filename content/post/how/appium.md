@@ -124,6 +124,12 @@ lrwxr-xr-x  1 geb  staff        38 Sep 23 10:44 npx -> ../lib/node_modules/npm/b
 - 自由独立安装 driver，[定制driver](https://appium.github.io/appium/docs/en/2.0/ecosystem/build-drivers/)
 
 
+[升级](https://www.npmjs.com/package/appium)前需要确保1.x版本被彻底删除。目前还是需要先指定next方式 `npm install --location global appium@next`，目前可以按照2.0.1版本，然后再升级 `npm install --location=global appium@latest` 到最新版本
+
+安装driver时注意npm到registry源地址，似乎只有官方的源才能获取到对应的driver。
+
+`appium/build/lib`下是依据编译后的js代码；`appium/lib`下是真正的源码。
+
 ### appium 是否需要每次都编译wda项目
 
 [Could not reuse existing WDA on real iPhone device.](https://github.com/appium/appium/issues/12259) 
@@ -237,9 +243,21 @@ fix：将编译选项的 `Validate Workplace`从 No 变更为 YES
 
 前提是针对iOS项目已经有通用的签名证书并设置了对应的bundleId等信息。
 
+[#349 tidevice issue](https://github.com/alibaba/taobao-iphone-device/issues/349#issuecomment-1733250910) 
+
+* Looks like iOS 17 is using a new device connectivity stack (named CoreDevice), changes involves:
+  
+  * [communication protocol](https://github.com/doronz88/pymobiledevice3/blob/master/misc/RemoteXPC.md)
+  * A github [PR](https://github.com/doronz88/pymobiledevice3/pull/463/files) in pymobiledevice3 to support mounting "new" developer images on iOS 17.
+* A libimobiledevice [issue](https://github.com/libimobiledevice/libimobiledevice/issues/1452) that records some investigation. Looks like this [comment](https://github.com/libimobiledevice/libimobiledevice/issues/1452#issuecomment-1638859453) has fixed a part of controlling features in pymobiledevice3
+* go-ios [issue](https://github.com/danielpaulus/go-ios/issues/265)
+* appium [issue](https://github.com/appium/appium/issues/18749)
+
+
+
 ### 5.10版本使用xcode 15编译成功，无法启动
 
-提示内容类似——收到店家icon启动，会弹框提示“需要联网进行认证"，联网后会自动激活。
+提示内容类似——手动点击icon启动，会弹框提示“需要联网进行认证"，联网后会自动激活。
 
 ```
 The request to open "com.geb.test.WebDriverAgentRunner.xctrunner" failed.

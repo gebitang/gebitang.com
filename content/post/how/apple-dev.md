@@ -246,6 +246,22 @@ MacOS > 13.4: `设置 -- 通用 -- 登录项`
 
 ![](https://s3-img.meituan.net/v1/mss_3d027b52ec5a4d589e68050845611e68/ff/n0/0n/b2/02_45284.jpg)
 
+### 证书个数限制
+
+个人证书类型可以创建 3个 证书；企业证书 可创建 100 个证书。bundleId可以任意创建，确保全球唯一即可，不同的证书无法创建相同名称的bundleId
+
+[iOS证书签名原理分析](https://juejin.cn/post/6893431013398020103) 解释了下面的过程，[实操演示](https://www.cnblogs.com/jiebba/p/10412688.html)。 
+
+
+**Generate a Certificate Signing Request (CSR)**: In the Apple Developer Portal, navigate to Certificates, Identifiers & Profiles. Under Certificates, select the appropriate certificate type (e.g., Development, Production). Follow the instructions to generate a CSR file. This step is usually done when creating a certificate signing request for a development or distribution certificate.
+
+**Obtain a Certificate from a Certificate Authority (CA)**: Submit the CSR file to a trusted Certificate Authority (CA), such as Apple, to obtain a digital certificate. The CA will verify your identity and issue the certificate, which is often in .cer format.
+
+**Import the Certificate into Keychain Access**: Double-click the .cer file to import it into Keychain Access on your macOS system. The certificate should appear in the "login" keychain.
+
+**Export the Certificate with Private Key as a .p12 file**: In Keychain Access, locate the certificate with the associated private key. Usually, it will have your name or the App ID associated with it. Right-click on the certificate, select "Export", and choose a password for the exported .p12 file. Save the file to your desired location.
+
+
 ### 使用Xcode安装ipa到手机
 
 - 确保ipa已经正确打包

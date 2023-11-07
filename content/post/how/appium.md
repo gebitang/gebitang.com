@@ -130,6 +130,18 @@ lrwxr-xr-x  1 geb  staff        38 Sep 23 10:44 npx -> ../lib/node_modules/npm/b
 
 `appium/build/lib`下是依据编译后的js代码；`appium/lib`下是真正的源码。
 
+### 覆盖旧版本
+
+如果旧版本已经在 `/usr/local/bin/appium` 存在，而新版本安装在了用户目录下。
+
+新版本升级完成之后——
+
+- 先删除对应的`/usr/local/bin/appium` 和指向的appiumm目录
+- 再将用户目录下的 `bin/appium` 和指向的软连接文件   `../lib/node_modules/appium/build/lib/main.js` 中的appium目录都复制
+- 如果提示 Permission Denied 问题，执行   `sudo chmod +x /usr/local/bin/appium`
+
+检查版本。
+
 ### appium 是否需要每次都编译wda项目
 
 [Could not reuse existing WDA on real iPhone device.](https://github.com/appium/appium/issues/12259) 

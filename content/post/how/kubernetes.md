@@ -753,6 +753,15 @@ spec:
         app: my-nginx   #LABEL-C: <--this is the label of the pod, this must be same as LABEL-B
     spec:                
       containers:
+      hostAliases:
+        - ip: "192.168.0.10"
+          hostnames:
+            - "alias1.example.com"
+            - "alias2.example.com"
+        - ip: "192.168.0.20"
+          hostnames:
+            - "alias3.example.com"
+            - "alias4.example.com"
       - name: my-nginx
         image: nginx:alpine
         ports:
@@ -761,6 +770,15 @@ spec:
           limits:
             memory: "128Mi" #128 MB
             cpu: "200m" #200 millicpu (.2 cpu or 20% of the cpu)
+```
+
+从运行中的k8s中获取deployment 
+
+```shell
+# show all in default ns
+kubectl get deployments 
+# extract one
+kubectl get deployment deploy-name -o yaml > name.yaml
 ```
 
 ### 拉取镜像卡住

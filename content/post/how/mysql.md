@@ -12,6 +12,14 @@ topics = [
 toc = true
 +++
 
+## 不忽略空格
+
+MySQL默认情况，字符串比较忽略开头和结尾的空格。如果在查询中指定的值之后有空格，它仍然会与数据库中的值匹配。
+
+可以使用BINARY关键字来进行比较
+
+`SELECT * FROM table_name WHERE BINARY column_name = 'value ';`
+
 ### Error: "The table does not comply with the requirements by an external plugin" 
 
 [Case 1: no keys](https://lefred.be/content/mysql-group-replication-and-table-design/)

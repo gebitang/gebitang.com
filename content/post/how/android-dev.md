@@ -12,10 +12,27 @@ draft = true
 toc=true
 +++
 
-TODO:
-
 - Meson编译scrcpy，[Meson构建系统](https://blog.csdn.net/u010074726/article/details/108695256) 
-- gradle配置优化
+
+按照[官方文档](https://github.com/Genymobile/scrcpy/blob/master/doc/build.md)，满足前提条件之后，编译成功。
+
+- android sdk
+- java 17 
+- brew安装依赖
+
+```shell
+# runtime dependencies
+brew install sdl2 ffmpeg libusb
+
+# client build dependencies
+brew install pkg-config meson
+
+# 实际执行编译构建 
+meson setup x --buildtype=release --strip -Db_lto=true
+ninja -Cx  # DO NOT RUN AS ROOT
+```
+如果安装包错 `unknown or unsupported macOS version: :dunno ` 执行 `brew update-reset` 解决。
+
 
 
 

@@ -126,7 +126,11 @@ lrwxr-xr-x  1 geb  staff        38 Sep 23 10:44 npx -> ../lib/node_modules/npm/b
 
 [升级](https://www.npmjs.com/package/appium)前需要确保1.x版本被彻底删除。目前还是需要先指定next方式 `npm install --location global appium@next`，目前可以按照2.0.1版本，然后再升级 `npm install --location=global appium@latest` 到最新版本
 
-安装driver时注意npm到registry源地址，似乎只有官方的源才能获取到对应的driver。
+安装driver时注意npm到registry源地址，似乎只有官方的源才能获取到对应的driver。 
+
+临时使用`npm --registry https://registry.npmjs.org install --location global appium@next`
+持久使用 `npm config set registry https://registry.npmjs.org`
+
 
 `appium/build/lib`下是依据编译后的js代码；`appium/lib`下是真正的源码。
 

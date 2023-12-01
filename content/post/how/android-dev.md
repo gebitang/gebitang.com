@@ -21,19 +21,66 @@ toc=true
 - brew安装依赖
 
 ```shell
-# runtime dependencies
+# runtime dependencies, check the result, make sure ffmpeg is installed successfully.
 brew install sdl2 ffmpeg libusb
 
 # client build dependencies
 brew install pkg-config meson
 
-# 实际执行编译构建 
-meson setup x --buildtype=release --strip -Db_lto=true
-ninja -Cx  # DO NOT RUN AS ROOT
+# check result
+meson -v
+ninja --version
+
 ```
+
 如果安装包错 `unknown or unsupported macOS version: :dunno ` 执行 `brew update-reset` 解决。
 
+```shell
+# 实际执行编译构建  using x folder 
+meson setup x --buildtype=release --strip -Db_lto=true
+# result 
+The Meson build system
+Version: 1.3.0
+Source dir: /Users/geb/androids/scrcpy
+Build dir: /Users/geb/androids/scrcpy/x
+Build type: native build
+Project name: scrcpy
+Project version: 2.3
+C compiler for the host machine: cc (clang 14.0.3 "Apple clang version 14.0.3 (clang-1403.0.22.14.1)")
+C linker for the host machine: cc ld64 857.1
+Host machine cpu family: aarch64
+Host machine cpu: aarch64
+Found pkg-config: YES (/opt/homebrew/bin/pkg-config) 0.29.2
+Run-time dependency libavformat found: YES 60.3.100
+Run-time dependency libavcodec found: YES 60.3.100
+Run-time dependency libavutil found: YES 58.2.100
+Run-time dependency libswresample found: YES 4.10.100
+Run-time dependency sdl2 found: YES 2.28.5
+Run-time dependency libusb-1.0 found: YES 1.0.26
+Checking for function "strdup" : YES
+Checking for function "asprintf" : YES
+Checking for function "vasprintf" : YES
+Checking for function "nrand48" : YES
+Checking for function "jrand48" : YES
+Checking for function "reallocarray" : NO
+Header "sys/socket.h" has symbol "SOCK_CLOEXEC" : NO
+Configuring config.h using configuration
+Program ./scripts/build-wrapper.sh found: YES (/Users/geb/androids/scrcpy/server/./scripts/build-wrapper.sh)
+Build targets in project: 3
 
+scrcpy 2.3
+
+  User defined options
+    buildtype: release
+    strip    : true
+    b_lto    : true
+
+Found ninja-1.11.1 at /opt/homebrew/bin/ninja
+
+
+# use x folder 
+ninja -Cx  # DO NOT RUN AS ROOT
+```
 
 
 Demo级别：

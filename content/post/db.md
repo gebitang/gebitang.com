@@ -29,6 +29,31 @@ NewSQL: combine SQL and NoSQL ??
 
 ## lealone 
 
+
+[基础操作](https://github.com/lealone/Lealone/issues/165)
+
+```sql
+DROP TABLE IF EXISTS test;
+
+CREATE TABLE IF NOT EXISTS test (f1 int primary key, f2 long);
+
+CREATE TABLE IF NOT EXISTS test (f1 int, f2 long);
+
+
+INSERT INTO test(f1, f2) VALUES(1, 1);
+
+INSERT INTO test(f1, f2) VALUES(1, 1);
+
+INSERT INTO test(f1, f2) VALUES(3,3);
+
+
+ALTER USER root SET password 'xxx';
+
+sqlshell.sh -user root -password 'xxx'
+
+```
+
+
 ### 创建IDE Debug环境
 
 - git clone下代码导入IDEA

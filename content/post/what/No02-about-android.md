@@ -11,6 +11,22 @@ topics = [
 toc = true
 +++
 
+
+```shell
+# 获取所有已安装包
+adb shell pm list packages -f
+
+# 查看当前启动的activity，确定应用的包名 
+adb shell dumpsys window windows
+
+# 查看包名所在路径，得到路径
+adb shell pm path cn.xxx.mobile
+
+#获取包
+adb pull path.on.device local/path/file
+```
+
+
 ## Android Monkey 
 
 `getSystemInterfaces()`方法依赖底层未开放的系统服务获取到三个对象—— 

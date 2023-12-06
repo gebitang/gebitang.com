@@ -3008,3 +3008,16 @@ ls -l file.name | awk '{print $5}'
 
 wc -c < file.name
 ```
+
+### hex查看 二进制查看文件 
+
+[good hex editor/viewer](https://stackoverflow.com/questions/827326/whats-a-good-hex-editor-viewer-for-the-mac)
+
+`xxd filename | less`  
+
+- Open the file in Vim.
+- Run `:%!xxd` (transform buffer to hex)
+- Edit. 
+- Run `:%!xxd -r` (reverse transformation)
+- Save.
+

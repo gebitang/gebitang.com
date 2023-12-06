@@ -32,6 +32,15 @@ NewSQL: combine SQL and NoSQL ??
 
 [基础操作](https://github.com/lealone/Lealone/issues/165)
 
+[把lealone注册为系统服务:](https://github.com/lealone/Lealone/issues/181)
+
+在 windows 可以用 javaw 替换 java，这样可以把 java 程序当成一个后台进程运行，比如 `javaw -jar lealone-5.2.0.jar` 就可以在后台运行 lealone
+
+用 `java -jar lealone-5.2.0.jar -client -sql "shutdown server"` 可以关闭后台的 lealone 进程。
+
+从 lealone-5.2.0 开始支持 shutdown server 语句。
+
+
 ```sql
 DROP TABLE IF EXISTS test;
 

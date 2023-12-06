@@ -11,6 +11,19 @@ topics = [
 toc=true
 +++
 
+
+```shell
+# 打印出指定 Java 进程的线程信息，包括线程 ID、线程名称、线程状态等。
+jcmd 12345 Thread.print
+
+# Java 9 或更高版本
+jhsdb jstack --pid 12345
+```
+
+
+
+
+
 [第二版，1999年](https://2lib.org/book/490277/32b999)、[第三版，2004年](https://2lib.org/book/11045353/7ad5ea)，可对照看。
 
 一个类中的多个`synchronized`的方法：针对当前对象，同一时间多个线程只能执行其中的一个`synchronized`的方法。因为锁是针对对象的，并且每个对象只有一个锁token。

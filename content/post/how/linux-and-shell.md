@@ -3021,3 +3021,7 @@ wc -c < file.name
 - Run `:%!xxd -r` (reverse transformation)
 - Save.
 
+- Joint Photographic Experts Group： jpg = jpeg with header `FF D8 FF`
+- PNG (Portable Network Graphics) `89 50 4E 47 0D 0A 1A 0A` "50 4E 47": These bytes represent the ASCII values for the characters "PNG"
+- WebP `52 49 46 46 XX XX XX XX 57 45 42 50` "52 49 46 46" = RIFF (Resource Interchange File Format) file. "57 45 42 50": These bytes represent the ASCII values for the characters "WEBP"
+

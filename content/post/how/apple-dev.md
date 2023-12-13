@@ -89,6 +89,8 @@ wda编译安装成功，启动失败。提示无法启动。because it has an in
 
 使用的自定义签名证书和profile需要联网认证，手动点击启动应用时会自动弹出提示框。联网后会自动验证，不会有其他提示。
 
+如果第一次点击还是无法自动激活，多尝试两次（也可以先把数据线断开）WDA可以正常打开表示已经完成激活。
+
 ### codesign
 
 - 报错： `errSecInternalComponent`， ssh环境执行codesign时，无法使用证书导致这个报错 [Resolving errSecInternalComponent errors during code signing](https://developer.apple.com/forums/thread/712005)

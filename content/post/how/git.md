@@ -13,6 +13,10 @@ toc = true
 
 ## github 
 
+ssh登录过程好像墙的厉害，不知原因。临时修改为https通过代理的方式。github不再支持直接使用密码登录，需要使用token方式[Cloning with HTTPS URLs](https://docs.github.com/en/get-started/getting-started-with-git/about-remote-repositories#cloning-with-https-urls)
+
+创建对应的token，登录要求输入用户名密码时，输入对应的token即可。 
+
 ### 查看repo的first commit
 
 [参考](https://stackoverflow.com/a/49647826/1087122)，执行——

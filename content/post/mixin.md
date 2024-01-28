@@ -19,6 +19,37 @@ toc=true
 
 <!--more-->
 
+[rum feed](https://github.com/okdaodine/rum-feed)使用的[在线postgresql服务](https://www.elephantsql.com/)和[Quorum open node](https://node.rumsystem.net/)。
+
+## apk重签名
+
+
+- 准备好重签名的文件 
+
+```shell
+keytool -genkey -v -keystore your_keystore_name.keystore -alias your_alias_name -keyalg RSA -keysize 2048 -validity 365
+```
+
+- 下载[apktool](https://github.com/iBotPeaches/Apktool)，配置好执行环境
+- 将apk文件解压`java -jar apktool.jar d -o output_dir name.apk`解压到对应的文件夹
+- 编辑对应的文件
+
+```shell
+# original\META-INF 文件夹中存放的是原本的签名信息
+# apktool.yml 是反编译后生成的文件
+
+# 0. 修改应用名称 res\value\string.xml 文件中的 appName
+# 1. AndroidManifest.xml 的 包名package="your.new.name"
+# 2. apktool.yml 文件 修改 renameManifestPackage 值为新的包名
+# 3. 如果有冲突的privoder，也需要把AndroidManifest文件中对应的provider 进行重命名，例如  provider android:authorities="ccc.li.provider" 
+# Failure [INSTALL_FAILED_CONFLICTING_PROVIDER: Scanning Failed.: Can't install because provider name xxx.provider (in package you.new.package) is already used by original.package]
+# 
+```
+
+- 重新打包为新的apk文件 `apktool b -o new.apk output_dir`
+- 重新签名生成的apk文件 `apksigner sign --ks your.keystore --ks-key-alias your_alias_name --ks-pass pass:123456 new.apk`
+
+
 ## 大群
 
 ### 前端 

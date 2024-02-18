@@ -30,6 +30,50 @@ toc=true
 
 ## Current
 
+### cocoapods环境配置
+
+[cocoapods](https://cocoapods.org/)执行完`sudo gem install cocoapods` 之后，命令后依然提示找不到pod命令。
+
+本质是要找到pod可执行文件的位置：[You can find out where a gem is installed with gem which cocoapods](https://guides.cocoapods.org/using/getting-started.html#getting-started)
+
+```shell
+$ gem which cocoapods
+/Users/eloy/.gem/ruby/2.0.0/gems/cocoapods-0.29.0/lib/cocoapods.rb
+$ /Users/eloy/.gem/ruby/2.0.0/bin/pod install
+```
+
+查看`gem environment`显示环境信息。
+
+```shell
+RubyGems Environment:
+  - RUBYGEMS VERSION: 3.5.4
+  - RUBY VERSION: 3.3.0 (2023-12-25 patchlevel 0) [arm64-darwin23]
+  - INSTALLATION DIRECTORY: /opt/homebrew/lib/ruby/gems/3.3.0
+  - USER INSTALLATION DIRECTORY: /Users/geb/.gem/ruby/3.3.0
+  - RUBY EXECUTABLE: /opt/homebrew/opt/ruby/bin/ruby
+  - GIT EXECUTABLE: /usr/bin/git
+  - EXECUTABLE DIRECTORY: /opt/homebrew/lib/ruby/gems/3.3.0/bin
+  - SPEC CACHE DIRECTORY: /Users/geb/.gem/specs
+  - SYSTEM CONFIGURATION DIRECTORY: /opt/homebrew/Cellar/ruby/3.3.0/etc
+  - RUBYGEMS PLATFORMS:
+     - ruby
+     - arm64-darwin-23
+  - GEM PATHS:
+     - /opt/homebrew/lib/ruby/gems/3.3.0
+     - /Users/geb/.gem/ruby/3.3.0
+     - /opt/homebrew/Cellar/ruby/3.3.0/lib/ruby/gems/3.3.0
+  - GEM CONFIGURATION:
+     - :update_sources => true
+     - :verbose => true
+     - :backtrace => false
+     - :bulk_threshold => 1000
+     - :sources => ["https://gems.ruby-china.com/"]
+     - :concurrent_downloads => 8
+  - REMOTE SOURCES:
+     - https://gems.ruby-china.com/
+  - SHELL PATH:
+```
+
 ### ios 17.0.3 无法验证app 需要互联网连接以验证是否信任开发者
 
 同系统的其他几台设备连接正常，有一台一直报这个错误。udid确认已经添加到证书描述文件中。

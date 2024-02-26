@@ -21,6 +21,105 @@ toc=true
 
 [rum feed](https://github.com/okdaodine/rum-feed)使用的[在线postgresql服务](https://www.elephantsql.com/)和[Quorum open node](https://node.rumsystem.net/)。
 
+## 多版本管理go
+
+```shell
+#命令以安装gvm：
+
+bash < <(curl -s -S -L https://raw.githubusercontent.com/moovweb/gvm/master/binscripts/gvm-installer)
+
+#安装完成后，关闭并重新打开终端，或者运行以下命令以使gvm生效：
+source ~/.gvm/scripts/gvm
+
+gvm listall
+#选择要安装的Go版本，并执行以下命令来安装指定版本的Go：
+gvm install <version>
+#例如，要安装Go 1.17版本，可以运行：
+gvm install go1.17
+# 安装完成后，您可以使用以下命令来切换到已安装的Go版本：
+gvm use <version>
+#例如，要切换到Go 1.17版本，可以运行：
+gvm use go1.17
+
+```
+
+## 多版本管理java
+
+```shell
+# 在Linux系统上安装和管理多个Java版本，可以使用工具管理器来简化此过程。以下是使用sdkman的步骤：
+
+curl -s "https://get.sdkman.io" | bash
+
+#安装完成后，关闭并重新打开终端，或者运行以下命令以使sdkman生效：
+
+
+source "$HOME/.sdkman/bin/sdkman-init.sh"
+
+#列出可用的Java版本：
+sdk list java
+
+#选择要安装的Java版本，并执行以下命令以安装指定版本的Java：
+sdk install java <version>
+#例如，要安装Java 11版本，可以运行：
+sdk install java 11.0.12-zulu
+
+#安装完成后，您可以使用以下命令来切换到已安装的Java版本：
+sdk use java <version>
+
+#例如，要切换到Java 11版本，可以运行：
+sdk use java 11.0.12-zulu
+
+#sdkman只对当前用户有效，因此每个用户可以独立地管理自己的Java版本。
+
+```
+
+## rum节点
+
+转眼两年多了。重新运行rum全节点，文档比较落后，最新源码编译（需要使用go1.19.x版本，安装的1.21版本不支持，所以才使用多版本go环境）的已经使用文档正常启动。单独获取的可执行文件。`api/v1/node`可以get回来node信息。远程连接是提示jwt信息缺失。
+
+需要理由cli命令`.quorum jwt create chain name`先生成jwt token并保存到配置文件`config/peer_options.toml`中。也可以使用help参数一步一步查看使用说明。
+
+```shell
+Usage:
+  quorum jwt create chain [flags]
+
+Flags:
+  -c, --configdir string    config directory (default "config")
+  -p, --peername string     peer name (default "peer")
+  -n, --name string         name of the node jwt
+  -d, --duration duration   duration of node jwt (default 8760h0m0s)
+  -h, --help                help for chain
+
+# 最新的起点命令类似——
+# run fullnode of quorum
+# keystorepass 要改
+# listen/apiport 要改，注意，三个 端口不一样，且 apiport 是 api 专用的
+# peer 不要改！
+
+PSW=password
+nodepath=owner
+
+./quorum fullnode \
+    --keystorepass=$PSW \
+    --keystoredir=keystore/$nodepath \
+    --configdir=config/$nodepath \
+    --datadir=data/$nodepath \
+    --peer=/ip4/101.42.141.118/tcp/62777/p2p/16Uiu2HAm9uziCEHprbzJoBdG9uktUQSYuFY58eW7o5Dz7rKhRn2j \
+    --peer=/ip4/94.23.17.189/tcp/62777/p2p/16Uiu2HAm5waftP3s4oE1EzGF2SyWeK726P5B8BSgFJqSiz6xScGz \
+    --listen=/ip4/0.0.0.0/tcp/62764 \
+    --listen=/ip4/0.0.0.0/tcp/62765/ws \
+    --apiport=62766 \
+    --log-compress=true \
+    --log-max-age=7 \
+    --log-max-backups=100 \
+    --log-max-size=10 \
+    --logfile=logs/$nodepath/quorum.log \
+    --loglevel=info >rum.log  2>&1 &
+
+```
+
+运行成功，目前去中心微博的数据大约1.4G。
+
 ## apk重签名
 
 

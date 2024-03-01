@@ -79,6 +79,9 @@ sdk use java 11.0.12-zulu
 
 需要理由cli命令`.quorum jwt create chain name`先生成jwt token并保存到配置文件`config/peer_options.toml`中。也可以使用help参数一步一步查看使用说明。
 
+可以源码编译了，启动参数有点微调。启动参数需要指定apiHost，否则默认启动的是127.0.0.1，只允许本地连接（netstat -ano |grep port)之后才发现原因（远程连接一直不好使，定位到连接不通的现象）还是看代码最靠谱，根据说明文档启动成功[2024-02-29]
+
+
 ```shell
 Usage:
   quorum jwt create chain [flags]
@@ -100,7 +103,7 @@ PSW=password
 nodepath=owner
 
 ./quorum fullnode \
-    --keystorepass=$PSW \
+    --keystorepwd=$PSW \
     --keystoredir=keystore/$nodepath \
     --configdir=config/$nodepath \
     --datadir=data/$nodepath \
@@ -108,12 +111,14 @@ nodepath=owner
     --peer=/ip4/94.23.17.189/tcp/62777/p2p/16Uiu2HAm5waftP3s4oE1EzGF2SyWeK726P5B8BSgFJqSiz6xScGz \
     --listen=/ip4/0.0.0.0/tcp/62764 \
     --listen=/ip4/0.0.0.0/tcp/62765/ws \
-    --apiport=62766 \
+    --apihost=0.0.0.0 \
+    --apiport=62763 \
     --log-compress=true \
     --log-max-age=7 \
     --log-max-backups=100 \
     --log-max-size=10 \
     --logfile=logs/$nodepath/quorum.log \
+    --enabledevnetwork=false \
     --loglevel=info >rum.log  2>&1 &
 
 ```

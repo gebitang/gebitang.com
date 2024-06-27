@@ -82,6 +82,12 @@ Found ninja-1.11.1 at /opt/homebrew/bin/ninja
 ninja -Cx  # DO NOT RUN AS ROOT
 ```
 
+[单独编译 scrcpy-server.jar](https://github.com/Genymobile/scrcpy/issues/923#issuecomment-552220454) 
+
+```shell
+./gradlew -p server assembleRelease
+cp server/build/outputs/apk/release/server-release-unsigned.apk scrcpy-server.jar
+```
 
 Demo级别：
 

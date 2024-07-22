@@ -603,6 +603,10 @@ distributionUrl=gradle-6.3-all.zip
 # windows
 #distributionUrl=file\:/D:/tools/gradleAll/6.3/gradle-6.3-all.zip
 
+# mirror for gradle  distributions
+# https://mirrors.cloud.tencent.com/gradle/ 
+# https://services.gradle.org/distributions/
+
 ```
 
 ### proxy for gradle

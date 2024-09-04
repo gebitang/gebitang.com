@@ -1,25 +1,97 @@
-<!doctype html><html xmlns:wb=http://open.weibo.com/wb lang=en><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta http-equiv=Content-Security-Policy content="upgrade-insecure-requests"><meta name=description content><meta name=generator content="Hugo 0.129.0"><title>戈壁堂</title>
+<!doctype html><html xmlns:wb=http://open.weibo.com/wb lang=en><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta http-equiv=Content-Security-Policy content="upgrade-insecure-requests"><meta name=description content><meta name=generator content="Hugo 0.134.0"><title>戈壁堂</title>
 <link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/pure-min.css><!--[if lte IE 8]><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-old-ie-min.css><![endif]--><!--[if gt IE 8]><!--><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-min.css><!--<![endif]--><!--[if lte IE 8]><link rel=stylesheet href=http://gebitang.com/css/side-menu-old-ie.css><![endif]--><!--[if gt IE 8]><!--><link rel=stylesheet href=http://gebitang.com/css/side-menu.css><!--<![endif]--><link rel=stylesheet href=http://gebitang.com/css/blackburn.css><link rel=stylesheet href=https://use.fontawesome.com/releases/v5.9.0/css/all.css><link href="https://fonts.googleapis.com/css?family=Raleway" rel=stylesheet type=text/css><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><link rel=alternate type=application/rss+xml title=戈壁堂 href=http://gebitang.com/index.xml><link rel=stylesheet href=//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/androidstudio.min.css><script src=//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js></script><script src=//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js></script><script>hljs.initHighlightingOnLoad()</script><link rel="shortcut icon" href=http://gebitang.com/img/favicon.ico type=image/x-icon><link rel=stylesheet href=http://gebitang.com/css/my.css><script src=http://gebitang.com/js/my.js></script></head><body><div id=layout><a href=#menu id=menuLink class=menu-link><span></span></a><div id=menu><a class="pure-menu-heading brand" href=http://gebitang.com/>Gebitang</a><div class=pure-menu><ul class=pure-menu-list><li class=pure-menu-item><a class=pure-menu-link href=http://gebitang.com/><i class='fa fa-home fa-fw'></i>Home</a></li><li class=pure-menu-item><a class=pure-menu-link href=http://gebitang.com/post/><i class='fa fa-list fa-fw'></i>Posts</a></li><li class=pure-menu-item><a class=pure-menu-link href=http://gebitang.com/about/><i class='fa fa-user fa-fw'></i>About</a></li><li class=pure-menu-item><a class=pure-menu-link href=http://gebitang.com/contact/><i class='fa fa-phone fa-fw'></i>Contact</a></li><li class=pure-menu-item><a class=pure-menu-link href=http://gebitang.com/tags/><i class='fa fa-tags fa-fw'></i>Tags</a></li><li class=pure-menu-item><a class=pure-menu-link href=http://gebitang.com/topics/><i class='fa fa-folder fa-fw'></i>Topics</a></li></ul></div><div class="pure-menu social"><ul class=pure-menu-list><li class=pure-menu-item><a class=pure-menu-link href=http://gebitang.com/index.xml><i class="fas fa-rss"></i>RSS</a></li></ul></div><div><div class=small-print><small><a rel=license href=http://creativecommons.org/licenses/by/4.0/><img alt=知识共享许可协议 style=border-width:0 src=https://i.creativecommons.org/l/by/4.0/80x15.png></a><br>本<span xmlns:dct=http://purl.org/dc/terms/ href=http://purl.org/dc/dcmitype/Text rel=dct:type>作品</span>由<a xmlns:cc=http://creativecommons.org/ns# href=http://gebitang.com property="cc:attributionName" rel=cc:attributionURL>&nbsp;Gebitang&nbsp;&nbsp;</a>采用<a rel=license href=http://creativecommons.org/licenses/by/4.0/>知识共享署名 4.0 国际许可协议</a>进行许可&nbsp;&copy; 2018</small></div><div class=small-print><small></small></div><div class=small-print><small>Built with&nbsp;<a href=https://gohugo.io/ target=_blank>Hugo</a></small>
 <small>Theme&nbsp;<a href=https://github.com/yoshiharuyamashita/blackburn target=_blank>Blackburn</a></small></div><div style=display:none><div class=small-print><small><wb:follow-button uid=2446212465 type=red_1 width=67 height=24></wb:follow-button></small></div></div></div></div><div id=main><div class=header><h1>戈壁堂</h1><h2>Knowledge Is Action</h2></div><div class=content><article><header><h2><a href=http://gebitang.com/post/jiansh/stf/stf%E4%B9%8Bprovider%E7%B3%BB%E5%88%97%E4%BA%8C/>STF之Provider系列二</a></h2><div class=post-meta><div><i class="fa fa-calendar fa-fw"></i>
 <time>2020-03-07</time></div><div><i class="fa fa-folder fa-fw"></i>
 <a class=post-taxonomy-topic href=http://gebitang.com/topics/jiansh>jiansh</a>&nbsp;/
 <a class=post-taxonomy-topic href=http://gebitang.com/topics/stf>STF</a></div><div><i class="fa fa-tags fa-fw"></i>
-<a class=post-taxonomy-tag href=http://gebitang.com/tags/jiansh>jiansh</a></div></div></header><p>link on JianShu EventEmitter node.js 如何使用Promise 系列一后续，现学现卖，逻辑梳理如下—— // Wait for others to acknowledge the device var register = new Promise(function(resolve) { // Tell others we found a device push.send([ wireutil.global , wireutil.envelope(new wire.DeviceIntroductionMessage( device.id , wireutil.toDeviceStatus(device.type) , new wire.ProviderMessage( solo , options.name</p><footer><a href=http://gebitang.com/post/jiansh/stf/stf%E4%B9%8Bprovider%E7%B3%BB%E5%88%97%E4%BA%8C/>Read more<i class="fa fa-angle-double-right fa-fw"></i></a></footer></article><article><header><h2><a href=http://gebitang.com/post/jiansh/stf/stf%E4%B9%8Bprovider%E7%B3%BB%E5%88%97%E4%BA%94/>STF之Provider系列五</a></h2><div class=post-meta><div><i class="fa fa-calendar fa-fw"></i>
+<a class=post-taxonomy-tag href=http://gebitang.com/tags/jiansh>jiansh</a></div></div></header><p><p><a href=https://www.jianshu.com/p/0d624601b8af>link on JianShu</a></p><p><a href=https://www.runoob.com/nodejs/nodejs-event.html>EventEmitter</a>
+<a href=https://www.jianshu.com/p/745e0760cff5>node.js 如何使用Promise</a></p><p><a href=https://www.jianshu.com/p/8984575174b4>系列一</a>后续，现学现卖，逻辑梳理如下——</p></p><footer><a href=http://gebitang.com/post/jiansh/stf/stf%E4%B9%8Bprovider%E7%B3%BB%E5%88%97%E4%BA%8C/>Read more<i class="fa fa-angle-double-right fa-fw"></i></a></footer></article><article><header><h2><a href=http://gebitang.com/post/jiansh/stf/stf%E4%B9%8Bprovider%E7%B3%BB%E5%88%97%E4%BA%94/>STF之Provider系列五</a></h2><div class=post-meta><div><i class="fa fa-calendar fa-fw"></i>
 <time>2020-03-07</time></div><div><i class="fa fa-folder fa-fw"></i>
 <a class=post-taxonomy-topic href=http://gebitang.com/topics/jiansh>jiansh</a>&nbsp;/
 <a class=post-taxonomy-topic href=http://gebitang.com/topics/stf>STF</a></div><div><i class="fa fa-tags fa-fw"></i>
-<a class=post-taxonomy-tag href=http://gebitang.com/tags/jiansh>jiansh</a></div></div></header><p>link on JianShu Mac环境下支持脚本自动部署 需要Mac环境已经安装了XCode，因为环境编译时需要C++的编译器。 #!/bin/bash # base on https://gist.github.com/aamnah/a62d30340de4f7ae98ea57b219d98d14 # NOTES # `which` command will tell you a program is installed ONLY</p><footer><a href=http://gebitang.com/post/jiansh/stf/stf%E4%B9%8Bprovider%E7%B3%BB%E5%88%97%E4%BA%94/>Read more<i class="fa fa-angle-double-right fa-fw"></i></a></footer></article><article><header><h2><a href=http://gebitang.com/post/jiansh/stf/stf%E4%B9%8Bprovider%E7%B3%BB%E5%88%97%E5%85%ADbrew/>STF之Provider系列六：brew</a></h2><div class=post-meta><div><i class="fa fa-calendar fa-fw"></i>
+<a class=post-taxonomy-tag href=http://gebitang.com/tags/jiansh>jiansh</a></div></div></header><p><p><a href=https://www.jianshu.com/p/a358dbb7c05d>link on JianShu</a></p><h2 id=mac环境下支持脚本自动部署>Mac环境下支持脚本自动部署</h2><p>需要Mac环境已经安装了XCode，因为环境编译时需要C++的编译器。</p></p><footer><a href=http://gebitang.com/post/jiansh/stf/stf%E4%B9%8Bprovider%E7%B3%BB%E5%88%97%E4%BA%94/>Read more<i class="fa fa-angle-double-right fa-fw"></i></a></footer></article><article><header><h2><a href=http://gebitang.com/post/jiansh/stf/stf%E4%B9%8Bprovider%E7%B3%BB%E5%88%97%E5%85%ADbrew/>STF之Provider系列六：brew</a></h2><div class=post-meta><div><i class="fa fa-calendar fa-fw"></i>
 <time>2020-03-07</time></div><div><i class="fa fa-folder fa-fw"></i>
 <a class=post-taxonomy-topic href=http://gebitang.com/topics/jiansh>jiansh</a>&nbsp;/
 <a class=post-taxonomy-topic href=http://gebitang.com/topics/stf>STF</a></div><div><i class="fa fa-tags fa-fw"></i>
-<a class=post-taxonomy-tag href=http://gebitang.com/tags/jiansh>jiansh</a></div></div></header><p>link on JianShu STF之Provider系列五支持脚本自动部署。目前国内到网络环境导致使用brew install 各种依赖应用时：1）耗时；2）不稳定。 STF之Do</p><footer><a href=http://gebitang.com/post/jiansh/stf/stf%E4%B9%8Bprovider%E7%B3%BB%E5%88%97%E5%85%ADbrew/>Read more<i class="fa fa-angle-double-right fa-fw"></i></a></footer></article><article><header><h2><a href=http://gebitang.com/post/jiansh/stf/stf%E4%B9%8Bprovider%E7%B3%BB%E5%88%97%E5%9B%9B/>STF之Provider系列四</a></h2><div class=post-meta><div><i class="fa fa-calendar fa-fw"></i>
+<a class=post-taxonomy-tag href=http://gebitang.com/tags/jiansh>jiansh</a></div></div></header><p><p><a href=https://www.jianshu.com/p/1a52b09203b9>link on JianShu</a></p><p><a href=https://www.jianshu.com/p/a358dbb7c05d>STF之Provider系列五</a>支持脚本自动部署。目前国内到网络环境导致使用brew install 各种依赖应用时：1）耗时；2）不稳定。</p></p><footer><a href=http://gebitang.com/post/jiansh/stf/stf%E4%B9%8Bprovider%E7%B3%BB%E5%88%97%E5%85%ADbrew/>Read more<i class="fa fa-angle-double-right fa-fw"></i></a></footer></article><article><header><h2><a href=http://gebitang.com/post/jiansh/stf/stf%E4%B9%8Bprovider%E7%B3%BB%E5%88%97%E5%9B%9B/>STF之Provider系列四</a></h2><div class=post-meta><div><i class="fa fa-calendar fa-fw"></i>
 <time>2020-03-07</time></div><div><i class="fa fa-folder fa-fw"></i>
 <a class=post-taxonomy-topic href=http://gebitang.com/topics/jiansh>jiansh</a>&nbsp;/
 <a class=post-taxonomy-topic href=http://gebitang.com/topics/stf>STF</a></div><div><i class="fa fa-tags fa-fw"></i>
-<a class=post-taxonomy-tag href=http://gebitang.com/tags/jiansh>jiansh</a></div></div></header><p>link on JianShu 环境准备 在一台新的机器上从头搭建STF的provider环境。 需要adb服务 可以执行 stf provider服务模块 新机器上的Node环境为</p><footer><a href=http://gebitang.com/post/jiansh/stf/stf%E4%B9%8Bprovider%E7%B3%BB%E5%88%97%E5%9B%9B/>Read more<i class="fa fa-angle-double-right fa-fw"></i></a></footer></article><article><header><h2><a href=http://gebitang.com/post/jiansh/stf/stf%E4%B9%8Brethinkdb%E4%B8%80/>STF之RethinkDB一</a></h2><div class=post-meta><div><i class="fa fa-calendar fa-fw"></i>
+<a class=post-taxonomy-tag href=http://gebitang.com/tags/jiansh>jiansh</a></div></div></header><p><p><a href=https://www.jianshu.com/p/a3a1740dff18>link on JianShu</a></p><h2 id=环境准备>环境准备</h2><p>在一台新的机器上从头搭建STF的provider环境。</p><ul><li>需要adb服务</li><li>可以执行 stf provider服务模块</li></ul><p>新机器上的Node环境为V12 版本，没有adb环境。 折腾到最后还是跑起来了。记录一下遇到的可能问题：</p></p><footer><a href=http://gebitang.com/post/jiansh/stf/stf%E4%B9%8Bprovider%E7%B3%BB%E5%88%97%E5%9B%9B/>Read more<i class="fa fa-angle-double-right fa-fw"></i></a></footer></article><article><header><h2><a href=http://gebitang.com/post/jiansh/stf/stf%E4%B9%8Brethinkdb%E4%B8%80/>STF之RethinkDB一</a></h2><div class=post-meta><div><i class="fa fa-calendar fa-fw"></i>
 <time>2020-03-07</time></div><div><i class="fa fa-folder fa-fw"></i>
 <a class=post-taxonomy-topic href=http://gebitang.com/topics/jiansh>jiansh</a>&nbsp;/
 <a class=post-taxonomy-topic href=http://gebitang.com/topics/stf>STF</a></div><div><i class="fa fa-tags fa-fw"></i>
-<a class=post-taxonomy-tag href=http://gebitang.com/tags/jiansh>jiansh</a></div></div></header><p>link on JianShu quick start quickstart #install npm install rethinkdb # start from where it is installed. $ rethinkdb ... ... Listening for intracluster connections on port 29015 Listening for client driver connections on port 28015 Listening for administrative HTTP connections on port 8080 Listening on cluster addresses: 127.0.0.1, ::1 Listening on driver addresses: 127.0.0.1, ::1 Listening on http addresses: 127.0.0.1, ::1 To fully expose RethinkDB on the network, bind</p><footer><a href=http://gebitang.com/post/jiansh/stf/stf%E4%B9%8Brethinkdb%E4%B8%80/>Read more<i class="fa fa-angle-double-right fa-fw"></i></a></footer></article><nav class=pagination role=pagination><a href=http://gebitang.com/page/28/><i class="fa fa-chevron-left"></i></a>
-<span>&nbsp;29 / 57&nbsp;</span>
-<a href=http://gebitang.com/page/30/><i class="fa fa-chevron-right"></i></a></nav></div></div></div><script src=http://gebitang.com/js/ui.js></script><script src=http://gebitang.com/js/menus.js></script><script>window.location.hostname!="localhost"&&(function(e,t,n,s,o,i,a){e.GoogleAnalyticsObject=o,e[o]=e[o]||function(){(e[o].q=e[o].q||[]).push(arguments)},e[o].l=1*new Date,i=t.createElement(n),a=t.getElementsByTagName(n)[0],i.async=1,i.src=s,a.parentNode.insertBefore(i,a)}(window,document,"script","//www.google-analytics.com/analytics.js","ga"),ga("create","UA-34303694-1","auto"),ga("send","pageview"))</script><button onclick=topFunction() id=myBtn title="Go to top">Top</button></body></html>
+<a class=post-taxonomy-tag href=http://gebitang.com/tags/jiansh>jiansh</a></div></div></header><p><p><a href=https://www.jianshu.com/p/917faff25782>link on JianShu</a></p><h3 id=quick-start>quick start</h3><p><a href=https://www.rethinkdb.com/docs/quickstart/>quickstart</a></p><pre tabindex=0><code>#install
+npm install rethinkdb 
+# start from where it is installed.
+$ rethinkdb
+...
+...
+Listening for intracluster connections on port 29015
+Listening for client driver connections on port 28015
+Listening for administrative HTTP connections on port 8080
+Listening on cluster addresses: 127.0.0.1, ::1
+Listening on driver addresses: 127.0.0.1, ::1
+Listening on http addresses: 127.0.0.1, ::1
+To fully expose RethinkDB on the network, bind to all addresses by running rethinkdb with the `--bind all` command line option.
+Server ready, &#34;gebitangHoster_wil&#34; c4bc2619-a3aa-4edf-9d4e-5c85aee397ff
+
+#use the drivers from Node.js like this:
+$ node
+r = require(&#39;rethinkdb&#39;);
+r.connect({ host: &#39;localhost&#39;, port: 28015 }, function(err, conn) {
+  if(err) throw err;
+  r.db(&#39;test&#39;).tableCreate(&#39;tv_shows&#39;).run(conn, function(err, res) {
+    if(err) throw err;
+    console.log(res);
+    r.table(&#39;tv_shows&#39;).insert({ name: &#39;Star Trek TNG&#39; }).run(conn, function(err, res)
+    {
+      if(err) throw err;
+      console.log(res);
+    });
+  });
+});
+</code></pr
+  </p>
+
+  
+  <footer>
+    <a href=http://gebitang.com/post/jiansh/stf/stf%E4%B9%8Brethinkdb%E4%B8%80/>Read more<i class="fa fa-angle-double-right fa-fw"></i></a>
+  </footer>
+  
+</article>
+
+  
+
+  
+
+
+<nav class=pagination role=pagination>
+  
+  <a href=http://gebitang.com/page/28/><i class="fa fa-chevron-left"></i></a>
+  
+  <span>&nbsp;29 / 57&nbsp;</span>
+  
+  <a href=http://gebitang.com/page/30/><i class="fa fa-chevron-right"></i></a>
+  
+</nav>
+
+
+
+</div>
+
+</div>
+</div>
+<script src=http://gebitang.com/js/ui.js></script>
+<script src=http://gebitang.com/js/menus.js></script>
+
+
+<script>window.location.hostname!="localhost"&&(function(e,t,n,s,o,i,a){e.GoogleAnalyticsObject=o,e[o]=e[o]||function(){(e[o].q=e[o].q||[]).push(arguments)},e[o].l=1*new Date,i=t.createElement(n),a=t.getElementsByTagName(n)[0],i.async=1,i.src=s,a.parentNode.insertBefore(i,a)}(window,document,"script","//www.google-analytics.com/analytics.js","ga"),ga("create","UA-34303694-1","auto"),ga("send","pageview"))</script>
+
+
+
+
+<button onclick=topFunction() id=myBtn title="Go to top">Top</button>
+</body>
+</html>
+

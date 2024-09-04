@@ -1,1 +1,14 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Appium on 戈壁堂</title><link>http://gebitang.com/tags/appium/</link><description>Recent content in Appium on 戈壁堂</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Tue, 19 Sep 2023 00:00:00 +0000</lastBuildDate><atom:link href="http://gebitang.com/tags/appium/index.xml" rel="self" type="application/rss+xml"/><item><title>Appium, Android, iOS</title><link>http://gebitang.com/post/how/appium/</link><pubDate>Tue, 19 Sep 2023 00:00:00 +0000</pubDate><guid>http://gebitang.com/post/how/appium/</guid><description>appium2.0 Running Appium from Source Appium in a Nutshell，架构关系图 2.0依赖node 14+ 和 npm 8+ 至今（2023-01-16）由于对应的文档还没准备好，尚未正式发布 关键</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Appium on 戈壁堂</title><link>http://gebitang.com/tags/appium/</link><description>Recent content in Appium on 戈壁堂</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Tue, 19 Sep 2023 00:00:00 +0000</lastBuildDate><atom:link href="http://gebitang.com/tags/appium/index.xml" rel="self" type="application/rss+xml"/><item><title>Appium, Android, iOS</title><link>http://gebitang.com/post/how/appium/</link><pubDate>Tue, 19 Sep 2023 00:00:00 +0000</pubDate><guid>http://gebitang.com/post/how/appium/</guid><description>&lt;h2 id="appium20">appium2.0&lt;/h2>
+&lt;ul>
+&lt;li>&lt;a href="https://appium.io/docs/en/contributing-to-appium/appium-from-source/">Running Appium from Source&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://appium.io/docs/en/contributing-to-appium/appium-packages/index.html">Appium in a Nutshell&lt;/a>，架构关系图&lt;/li>
+&lt;li>2.0依赖node 14+ 和 npm 8+&lt;/li>
+&lt;li>至今（2023-01-16）由于对应的文档还没准备好，&lt;a href="https://github.com/appium/appium/discussions/15828">尚未正式发布&lt;/a>&lt;/li>
+&lt;li>关键修改是将不同的包进行独立管理，启用了默认变量&lt;code>$APPIUM_HOME&lt;/code> = &lt;code>~/.appium&lt;/code>，将会在这里管理各种插件和驱动
+&lt;ul>
+&lt;li>appium driver list&lt;/li>
+&lt;li>appium plugin list&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;p>使用nvm安装到话，会自动替换appium的软连接。&lt;/p></description></item></channel></rss>

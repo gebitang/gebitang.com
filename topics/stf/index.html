@@ -1,178 +1,409 @@
-<!doctype html><html xmlns:wb=http://open.weibo.com/wb lang=en><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta http-equiv=Content-Security-Policy content="upgrade-insecure-requests"><meta name=description content><meta name=generator content="Hugo 0.129.0"><title>STF &#183; 戈壁堂</title>
+<!doctype html><html xmlns:wb=http://open.weibo.com/wb lang=en><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta http-equiv=Content-Security-Policy content="upgrade-insecure-requests"><meta name=description content><meta name=generator content="Hugo 0.134.0"><title>STF &#183; 戈壁堂</title>
 <link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/pure-min.css><!--[if lte IE 8]><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-old-ie-min.css><![endif]--><!--[if gt IE 8]><!--><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-min.css><!--<![endif]--><!--[if lte IE 8]><link rel=stylesheet href=http://gebitang.com/css/side-menu-old-ie.css><![endif]--><!--[if gt IE 8]><!--><link rel=stylesheet href=http://gebitang.com/css/side-menu.css><!--<![endif]--><link rel=stylesheet href=http://gebitang.com/css/blackburn.css><link rel=stylesheet href=https://use.fontawesome.com/releases/v5.9.0/css/all.css><link href="https://fonts.googleapis.com/css?family=Raleway" rel=stylesheet type=text/css><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><link rel=alternate type=application/rss+xml title=戈壁堂 href=http://gebitang.com/topics/stf/index.xml><link rel=stylesheet href=//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/androidstudio.min.css><script src=//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js></script><script src=//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js></script><script>hljs.initHighlightingOnLoad()</script><link rel="shortcut icon" href=http://gebitang.com/img/favicon.ico type=image/x-icon><link rel=stylesheet href=http://gebitang.com/css/my.css><script src=http://gebitang.com/js/my.js></script></head><body><div id=layout><a href=#menu id=menuLink class=menu-link><span></span></a><div id=menu><a class="pure-menu-heading brand" href=http://gebitang.com/>Gebitang</a><div class=pure-menu><ul class=pure-menu-list><li class=pure-menu-item><a class=pure-menu-link href=http://gebitang.com/><i class='fa fa-home fa-fw'></i>Home</a></li><li class=pure-menu-item><a class=pure-menu-link href=http://gebitang.com/post/><i class='fa fa-list fa-fw'></i>Posts</a></li><li class=pure-menu-item><a class=pure-menu-link href=http://gebitang.com/about/><i class='fa fa-user fa-fw'></i>About</a></li><li class=pure-menu-item><a class=pure-menu-link href=http://gebitang.com/contact/><i class='fa fa-phone fa-fw'></i>Contact</a></li><li class=pure-menu-item><a class=pure-menu-link href=http://gebitang.com/tags/><i class='fa fa-tags fa-fw'></i>Tags</a></li><li class=pure-menu-item><a class=pure-menu-link href=http://gebitang.com/topics/><i class='fa fa-folder fa-fw'></i>Topics</a></li></ul></div><div class="pure-menu social"><ul class=pure-menu-list><li class=pure-menu-item><a class=pure-menu-link href=http://gebitang.com/topics/stf/index.xml><i class="fas fa-rss"></i>RSS</a></li></ul></div><div><div class=small-print><small><a rel=license href=http://creativecommons.org/licenses/by/4.0/><img alt=知识共享许可协议 style=border-width:0 src=https://i.creativecommons.org/l/by/4.0/80x15.png></a><br>本<span xmlns:dct=http://purl.org/dc/terms/ href=http://purl.org/dc/dcmitype/Text rel=dct:type>作品</span>由<a xmlns:cc=http://creativecommons.org/ns# href=http://gebitang.com property="cc:attributionName" rel=cc:attributionURL>&nbsp;Gebitang&nbsp;&nbsp;</a>采用<a rel=license href=http://creativecommons.org/licenses/by/4.0/>知识共享署名 4.0 国际许可协议</a>进行许可&nbsp;&copy; 2018</small></div><div class=small-print><small></small></div><div class=small-print><small>Built with&nbsp;<a href=https://gohugo.io/ target=_blank>Hugo</a></small>
 <small>Theme&nbsp;<a href=https://github.com/yoshiharuyamashita/blackburn target=_blank>Blackburn</a></small></div><div style=display:none><div class=small-print><small><wb:follow-button uid=2446212465 type=red_1 width=67 height=24></wb:follow-button></small></div></div></div></div><div id=main><div class=header><h1>STF</h1></div><div class=content><article><header><h2><a href=http://gebitang.com/post/how/stf/>STF</a></h2><div class=post-meta><div><i class="fa fa-calendar fa-fw"></i>
 <time>2020-04-27</time></div><div><i class="fa fa-folder fa-fw"></i>
 <a class=post-taxonomy-topic href=http://gebitang.com/topics/stf>stf</a>&nbsp;/
-<a class=post-taxonomy-topic href=http://gebitang.com/topics/tech>tech</a></div></div></header><p>STF的核心功能可以理解为：“同步图像” + “点击”。前者使用minicap完成，后者依赖minitouch。 虽然目前依然是3.4.1版本，但</p><footer><a href=http://gebitang.com/post/how/stf/>Read more<i class="fa fa-angle-double-right fa-fw"></i></a></footer></article><article><header><h2><a href=http://gebitang.com/post/jiansh/stf/app%E5%BC%80%E6%BA%90%E6%B5%8B%E8%AF%95%E6%A1%86%E6%9E%B6%E5%8E%BB%E5%93%AA%E5%84%BF%E4%BA%86/>App开源测试框架去哪儿了</a></h2><div class=post-meta><div><i class="fa fa-calendar fa-fw"></i>
+<a class=post-taxonomy-topic href=http://gebitang.com/topics/tech>tech</a></div></div></header><p><p>STF的核心功能可以理解为：“同步图像” + “点击”。前者使用minicap完成，后者依赖minitouch。</p><p>虽然目前依然是3.4.1版本，但由于增加了很多定制化的内容，所以从——</p></p><footer><a href=http://gebitang.com/post/how/stf/>Read more<i class="fa fa-angle-double-right fa-fw"></i></a></footer></article><article><header><h2><a href=http://gebitang.com/post/jiansh/stf/app%E5%BC%80%E6%BA%90%E6%B5%8B%E8%AF%95%E6%A1%86%E6%9E%B6%E5%8E%BB%E5%93%AA%E5%84%BF%E4%BA%86/>App开源测试框架去哪儿了</a></h2><div class=post-meta><div><i class="fa fa-calendar fa-fw"></i>
 <time>2020-03-07</time></div><div><i class="fa fa-folder fa-fw"></i>
 <a class=post-taxonomy-topic href=http://gebitang.com/topics/jiansh>jiansh</a>&nbsp;/
 <a class=post-taxonomy-topic href=http://gebitang.com/topics/stf>STF</a></div><div><i class="fa fa-tags fa-fw"></i>
-<a class=post-taxonomy-tag href=http://gebitang.com/tags/jiansh>jiansh</a></div></div></header><p>link on JianShu 中文搜索 App开源测试框架，大概率可以看到下面这个文章的变种—— 移动APP自动化测试框架对比 2016年文章，现在的内容依然很多来自这篇</p><footer><a href=http://gebitang.com/post/jiansh/stf/app%E5%BC%80%E6%BA%90%E6%B5%8B%E8%AF%95%E6%A1%86%E6%9E%B6%E5%8E%BB%E5%93%AA%E5%84%BF%E4%BA%86/>Read more<i class="fa fa-angle-double-right fa-fw"></i></a></footer></article><article><header><h2><a href=http://gebitang.com/post/jiansh/stf/app%E6%B5%8B%E8%AF%95%E5%B9%B3%E5%8F%B0%E6%9C%89%E5%93%AA%E4%BA%9B/>App测试平台有哪些</a></h2><div class=post-meta><div><i class="fa fa-calendar fa-fw"></i>
+<a class=post-taxonomy-tag href=http://gebitang.com/tags/jiansh>jiansh</a></div></div></header><p><p><a href=https://www.jianshu.com/p/b0c2af93a4a7>link on JianShu</a></p><p>中文搜索 App开源测试框架，大概率可以看到下面这个文章的变种——</p><ul><li><a href=https://mp.weixin.qq.com/s/pu1TKZhNW2L2BmvpjGzLCw>移动APP自动化测试框架对比</a> 2016年文章，现在的内容依然很多来自这篇的变种；</li></ul><p>文章保存在微信上，依然可以找的，而TMQ(Tencent Mobile Quality Center <a href=http://tmq.qq.com>http://tmq.qq.com</a>)、GT(<a href=http://gt.qq.com>http://gt.qq.com</a>)本身似乎本身随着业务调整已经找不到入口了。现在统一为 WeTest平台</p></p><footer><a href=http://gebitang.com/post/jiansh/stf/app%E5%BC%80%E6%BA%90%E6%B5%8B%E8%AF%95%E6%A1%86%E6%9E%B6%E5%8E%BB%E5%93%AA%E5%84%BF%E4%BA%86/>Read more<i class="fa fa-angle-double-right fa-fw"></i></a></footer></article><article><header><h2><a href=http://gebitang.com/post/jiansh/stf/app%E6%B5%8B%E8%AF%95%E5%B9%B3%E5%8F%B0%E6%9C%89%E5%93%AA%E4%BA%9B/>App测试平台有哪些</a></h2><div class=post-meta><div><i class="fa fa-calendar fa-fw"></i>
 <time>2020-03-07</time></div><div><i class="fa fa-folder fa-fw"></i>
 <a class=post-taxonomy-topic href=http://gebitang.com/topics/jiansh>jiansh</a>&nbsp;/
 <a class=post-taxonomy-topic href=http://gebitang.com/topics/stf>STF</a></div><div><i class="fa fa-tags fa-fw"></i>
-<a class=post-taxonomy-tag href=http://gebitang.com/tags/jiansh>jiansh</a></div></div></header><p>link on JianShu 云测Testinhttps://www.testin.cn/ WeTest腾讯质量开放平台 https://wetest.qq.com/ 阿里移动测试平台 http://mqc.aliyun.com/ 到https://www.</p><footer><a href=http://gebitang.com/post/jiansh/stf/app%E6%B5%8B%E8%AF%95%E5%B9%B3%E5%8F%B0%E6%9C%89%E5%93%AA%E4%BA%9B/>Read more<i class="fa fa-angle-double-right fa-fw"></i></a></footer></article><article><header><h2><a href=http://gebitang.com/post/jiansh/stf/app%E6%B5%8B%E8%AF%95%E6%A1%86%E6%9E%B6%E5%9C%A8%E5%93%AA%E5%84%BF/>App测试框架在哪儿</a></h2><div class=post-meta><div><i class="fa fa-calendar fa-fw"></i>
+<a class=post-taxonomy-tag href=http://gebitang.com/tags/jiansh>jiansh</a></div></div></header><p><p><a href=https://www.jianshu.com/p/5697c60f6b81>link on JianShu</a></p><p>云测Testin<a href=https://www.testin.cn/>https://www.testin.cn/</a></p><p>WeTest腾讯质量开放平台
+<a href=https://wetest.qq.com/>https://wetest.qq.com/</a></p><p>阿里移动测试平台
+<a href=http://mqc.aliyun.com/>http://mqc.aliyun.com/</a> 到<a href=https://www.aliyun.com/product/mqc>https://www.aliyun.com/product/mqc</a></p><p>华为云测试
+<a href=https://deveco.huawei.com/v2/>https://deveco.huawei.com/v2/</a></p><p>百度MTC
+<a href=http://mtc.baidu.com/>http://mtc.baidu.com/</a></p><p>UC 研发效能产品内测邀请——云真机、自动化测试、WEB 前端监控
+<a href=https://yanshu.effirst.com/>https://yanshu.effirst.com/</a></p></p><footer><a href=http://gebitang.com/post/jiansh/stf/app%E6%B5%8B%E8%AF%95%E5%B9%B3%E5%8F%B0%E6%9C%89%E5%93%AA%E4%BA%9B/>Read more<i class="fa fa-angle-double-right fa-fw"></i></a></footer></article><article><header><h2><a href=http://gebitang.com/post/jiansh/stf/app%E6%B5%8B%E8%AF%95%E6%A1%86%E6%9E%B6%E5%9C%A8%E5%93%AA%E5%84%BF/>App测试框架在哪儿</a></h2><div class=post-meta><div><i class="fa fa-calendar fa-fw"></i>
 <time>2020-03-07</time></div><div><i class="fa fa-folder fa-fw"></i>
 <a class=post-taxonomy-topic href=http://gebitang.com/topics/jiansh>jiansh</a>&nbsp;/
 <a class=post-taxonomy-topic href=http://gebitang.com/topics/stf>STF</a></div><div><i class="fa fa-tags fa-fw"></i>
-<a class=post-taxonomy-tag href=http://gebitang.com/tags/jiansh>jiansh</a></div></div></header><p>link on JianShu Appium 目前的事实上通用方案 Macaca 轻量级的Appium，by 阿里巴巴 idb Facebook自己不再维护WebDriverAgent之后，自研了idb</p><footer><a href=http://gebitang.com/post/jiansh/stf/app%E6%B5%8B%E8%AF%95%E6%A1%86%E6%9E%B6%E5%9C%A8%E5%93%AA%E5%84%BF/>Read more<i class="fa fa-angle-double-right fa-fw"></i></a></footer></article><article><header><h2><a href=http://gebitang.com/post/jiansh/stf/brew%E5%85%B3%E9%94%AE%E5%8F%82%E6%95%B0/>brew关键参数</a></h2><div class=post-meta><div><i class="fa fa-calendar fa-fw"></i>
+<a class=post-taxonomy-tag href=http://gebitang.com/tags/jiansh>jiansh</a></div></div></header><p><p><a href=https://www.jianshu.com/p/0fa4bb596f36>link on JianShu</a></p><p><a href=https://github.com/appium/appium>Appium</a> 目前的事实上通用方案</p><p><a href=https://github.com/alibaba/macaca>Macaca</a> 轻量级的Appium，by 阿里巴巴</p><p><a href=https://github.com/facebook/idb>idb</a> Facebook自己不再维护WebDriverAgent之后，自研了idb方案。idb is a flexible command line interface for automating iOS simulators and devices</p></p><footer><a href=http://gebitang.com/post/jiansh/stf/app%E6%B5%8B%E8%AF%95%E6%A1%86%E6%9E%B6%E5%9C%A8%E5%93%AA%E5%84%BF/>Read more<i class="fa fa-angle-double-right fa-fw"></i></a></footer></article><article><header><h2><a href=http://gebitang.com/post/jiansh/stf/brew%E5%85%B3%E9%94%AE%E5%8F%82%E6%95%B0/>brew关键参数</a></h2><div class=post-meta><div><i class="fa fa-calendar fa-fw"></i>
 <time>2020-03-07</time></div><div><i class="fa fa-folder fa-fw"></i>
 <a class=post-taxonomy-topic href=http://gebitang.com/topics/jiansh>jiansh</a>&nbsp;/
 <a class=post-taxonomy-topic href=http://gebitang.com/topics/stf>STF</a></div><div><i class="fa fa-tags fa-fw"></i>
-<a class=post-taxonomy-tag href=http://gebitang.com/tags/jiansh>jiansh</a></div></div></header><p>link on JianShu STF之Provider系列六：brew里介绍里一些基础用法。 -s, --build-from-source: 使用源码方式 --force-bottle: 使用编译好的文件。 在 fetch、install、--C</p><footer><a href=http://gebitang.com/post/jiansh/stf/brew%E5%85%B3%E9%94%AE%E5%8F%82%E6%95%B0/>Read more<i class="fa fa-angle-double-right fa-fw"></i></a></footer></article><article><header><h2><a href=http://gebitang.com/post/jiansh/stf/scala-pkg-pug-angular-directive/>Scala-Pkg-Pug-Angular-directive</a></h2><div class=post-meta><div><i class="fa fa-calendar fa-fw"></i>
+<a class=post-taxonomy-tag href=http://gebitang.com/tags/jiansh>jiansh</a></div></div></header><p><p><a href=https://www.jianshu.com/p/525012a055ad>link on JianShu</a></p><p><a href=https://www.jianshu.com/p/1a52b09203b9>STF之Provider系列六：brew</a>里介绍里一些基础用法。</p></p><footer><a href=http://gebitang.com/post/jiansh/stf/brew%E5%85%B3%E9%94%AE%E5%8F%82%E6%95%B0/>Read more<i class="fa fa-angle-double-right fa-fw"></i></a></footer></article><article><header><h2><a href=http://gebitang.com/post/jiansh/stf/scala-pkg-pug-angular-directive/>Scala-Pkg-Pug-Angular-directive</a></h2><div class=post-meta><div><i class="fa fa-calendar fa-fw"></i>
 <time>2020-03-07</time></div><div><i class="fa fa-folder fa-fw"></i>
 <a class=post-taxonomy-topic href=http://gebitang.com/topics/jiansh>jiansh</a>&nbsp;/
 <a class=post-taxonomy-topic href=http://gebitang.com/topics/stf>STF</a></div><div><i class="fa fa-tags fa-fw"></i>
-<a class=post-taxonomy-tag href=http://gebitang.com/tags/jiansh>jiansh</a></div></div></header><p>link on JianShu 菜鸟教程 官方 tour 创始人说for java programmer Linux中的特殊符号及含义 使用pkg打包node应用 ➜ trynode npm install -g pkg /Users/gebitang/.nvm/versions/node/v8.12.0/bin/pkg -> /Users/gebitang/.nvm/versions/node/v8.12.0/lib/node_modules/pkg/lib-es5/bin.js + pkg@4.4.0 added 242 packages from 222 contributors in 93.107s getting-started cn getting started en</p><footer><a href=http://gebitang.com/post/jiansh/stf/scala-pkg-pug-angular-directive/>Read more<i class="fa fa-angle-double-right fa-fw"></i></a></footer></article><article><header><h2><a href=http://gebitang.com/post/jiansh/stf/stf%E4%B9%8Bdocker-for-mac%E5%A4%B1%E8%B4%A5/>STF之Docker-for-Mac失败</a></h2><div class=post-meta><div><i class="fa fa-calendar fa-fw"></i>
+<a class=post-taxonomy-tag href=http://gebitang.com/tags/jiansh>jiansh</a></div></div></header><p><p><a href=https://www.jianshu.com/p/6b34782416ae>link on JianShu</a></p><p><a href=https://www.runoob.com/scala/scala-functions.html>菜鸟教程</a>
+<a href=https://docs.scala-lang.org/tour/tour-of-scala.html>官方 tour</a>
+<a href=https://docs.scala-lang.org/tutorials/scala-for-java-programmers.html>创始人说for java programmer</a></p></p><footer><a href=http://gebitang.com/post/jiansh/stf/scala-pkg-pug-angular-directive/>Read more<i class="fa fa-angle-double-right fa-fw"></i></a></footer></article><article><header><h2><a href=http://gebitang.com/post/jiansh/stf/stf%E4%B9%8Bdocker-for-mac%E5%A4%B1%E8%B4%A5/>STF之Docker-for-Mac失败</a></h2><div class=post-meta><div><i class="fa fa-calendar fa-fw"></i>
 <time>2020-03-07</time></div><div><i class="fa fa-folder fa-fw"></i>
 <a class=post-taxonomy-topic href=http://gebitang.com/topics/jiansh>jiansh</a>&nbsp;/
 <a class=post-taxonomy-topic href=http://gebitang.com/topics/stf>STF</a></div><div><i class="fa fa-tags fa-fw"></i>
-<a class=post-taxonomy-tag href=http://gebitang.com/tags/jiansh>jiansh</a></div></div></header><p>link on JianShu ###容器访问 外部访问容器 启动容器docker container ls 进入容器 docker attach container_id 退出容器不关闭容器 Ctrl+q Ctrl+q adb basic adb detail How ADB works How ADB works cnblogs A client, which sends commands. The client runs on your development machine. You</p><footer><a href=http://gebitang.com/post/jiansh/stf/stf%E4%B9%8Bdocker-for-mac%E5%A4%B1%E8%B4%A5/>Read more<i class="fa fa-angle-double-right fa-fw"></i></a></footer></article><article><header><h2><a href=http://gebitang.com/post/jiansh/stf/stf%E4%B9%8Bdocker%E7%B3%BB%E5%88%97%E4%B8%80/>STF之Docker系列一</a></h2><div class=post-meta><div><i class="fa fa-calendar fa-fw"></i>
+<a class=post-taxonomy-tag href=http://gebitang.com/tags/jiansh>jiansh</a></div></div></header><p><p><a href=https://www.jianshu.com/p/285868401ca1>link on JianShu</a></p><p>###容器访问
+<a href=https://docker_practice.gitee.io/network/port_mapping.html>外部访问容器</a>
+启动容器<code>docker container ls</code>
+进入容器 <code>docker attach container_id</code>
+退出容器不关闭容器 <code>Ctrl+q Ctrl+q</code></p></p><footer><a href=http://gebitang.com/post/jiansh/stf/stf%E4%B9%8Bdocker-for-mac%E5%A4%B1%E8%B4%A5/>Read more<i class="fa fa-angle-double-right fa-fw"></i></a></footer></article><article><header><h2><a href=http://gebitang.com/post/jiansh/stf/stf%E4%B9%8Bdocker%E7%B3%BB%E5%88%97%E4%B8%80/>STF之Docker系列一</a></h2><div class=post-meta><div><i class="fa fa-calendar fa-fw"></i>
 <time>2020-03-07</time></div><div><i class="fa fa-folder fa-fw"></i>
 <a class=post-taxonomy-topic href=http://gebitang.com/topics/jiansh>jiansh</a>&nbsp;/
 <a class=post-taxonomy-topic href=http://gebitang.com/topics/stf>STF</a></div><div><i class="fa fa-tags fa-fw"></i>
-<a class=post-taxonomy-tag href=http://gebitang.com/tags/jiansh>jiansh</a></div></div></header><p>link on JianShu docker cp foo.txt mycontainer:/foo.txt docker cp mycontainer:/foo.txt foo.txt For emphasis, mycontainer is a container ID, not an image ID. zeromq install require libsodium ./configure &ndash;without-libsodium above not work, see this stf on ubuntu [centos7][stf] 环境搭建 apt-get install android-tools-adb docker run -it &ndash;rm 容器在，镜像不能删除 如果有用这个镜像启动的容</p><footer><a href=http://gebitang.com/post/jiansh/stf/stf%E4%B9%8Bdocker%E7%B3%BB%E5%88%97%E4%B8%80/>Read more<i class="fa fa-angle-double-right fa-fw"></i></a></footer></article><article><header><h2><a href=http://gebitang.com/post/jiansh/stf/stf%E4%B9%8Bnode%E4%B9%B1%E7%82%96/>STF之Node乱炖</a></h2><div class=post-meta><div><i class="fa fa-calendar fa-fw"></i>
+<a class=post-taxonomy-tag href=http://gebitang.com/tags/jiansh>jiansh</a></div></div></header><p><p><a href=https://www.jianshu.com/p/eb873d5fe759>link on JianShu</a></p><p>docker cp foo.txt mycontainer:/foo.txt
+docker cp mycontainer:/foo.txt foo.txt
+For emphasis, mycontainer is a container ID, not an image ID.</p><p><a href=https://kerpanic.wordpress.com/2015/07/09/zero-mq-installation-package-requirements-libsodium-were-not-met/>zeromq install require libsodium</a></p><p>./configure &ndash;without-libsodium
+<a href="https://www.unleashnetworks.com/blog/?p=651">above not work, see this</a></p><p><a href=https://testerhome.com/articles/17696>stf on ubuntu</a>
+<a href=https://testerhome.com/topics/11055>[centos7][stf] 环境搭建</a></p><p>apt-get install android-tools-adb</p><p><a href=https://docker_practice.gitee.io/image/pull.html>docker run -it &ndash;rm</a></p><h3 id=容器在镜像不能删除>容器在，镜像不能删除</h3><p>如果有用这个镜像启动的容器存在（即使容器没有运行），那么同样不可以删除这个镜像。之前讲过，容器是以镜像为基础，再加一层容器存储层，组成这样的多层存储结构去运行的。因此该镜像如果被这个容器所依赖的，那么删除必然会导致故障。如果这些容器是不需要的，应该先将它们删除，然后再来删除镜像。</p></p><footer><a href=http://gebitang.com/post/jiansh/stf/stf%E4%B9%8Bdocker%E7%B3%BB%E5%88%97%E4%B8%80/>Read more<i class="fa fa-angle-double-right fa-fw"></i></a></footer></article><article><header><h2><a href=http://gebitang.com/post/jiansh/stf/stf%E4%B9%8Bnode%E4%B9%B1%E7%82%96/>STF之Node乱炖</a></h2><div class=post-meta><div><i class="fa fa-calendar fa-fw"></i>
 <time>2020-03-07</time></div><div><i class="fa fa-folder fa-fw"></i>
 <a class=post-taxonomy-topic href=http://gebitang.com/topics/jiansh>jiansh</a>&nbsp;/
 <a class=post-taxonomy-topic href=http://gebitang.com/topics/stf>STF</a></div><div><i class="fa fa-tags fa-fw"></i>
-<a class=post-taxonomy-tag href=http://gebitang.com/tags/jiansh>jiansh</a></div></div></header><p>link on JianShu 代码看到哪里记到哪里。可参考Stf源码解读 express 框架中的app.use是什么作用？ app.use([path], function) Use the given middleware function, with optional mount path, defaulting to &ldquo;/&rdquo;. 中间件作用 A Promise is an object representing the eventual completion</p><footer><a href=http://gebitang.com/post/jiansh/stf/stf%E4%B9%8Bnode%E4%B9%B1%E7%82%96/>Read more<i class="fa fa-angle-double-right fa-fw"></i></a></footer></article><article><header><h2><a href=http://gebitang.com/post/jiansh/stf/stf%E4%B9%8Boauth%E6%8E%A2%E7%B4%A2%E4%BA%8C/>STF之OAuth探索二</a></h2><div class=post-meta><div><i class="fa fa-calendar fa-fw"></i>
+<a class=post-taxonomy-tag href=http://gebitang.com/tags/jiansh>jiansh</a></div></div></header><p><p><a href=https://www.jianshu.com/p/cb7429a68438>link on JianShu</a></p><p>代码看到哪里记到哪里。可参考<a href=https://larryzhuo.github.io/2016/12/08/20161208/>Stf源码解读</a></p></p><footer><a href=http://gebitang.com/post/jiansh/stf/stf%E4%B9%8Bnode%E4%B9%B1%E7%82%96/>Read more<i class="fa fa-angle-double-right fa-fw"></i></a></footer></article><article><header><h2><a href=http://gebitang.com/post/jiansh/stf/stf%E4%B9%8Boauth%E6%8E%A2%E7%B4%A2%E4%BA%8C/>STF之OAuth探索二</a></h2><div class=post-meta><div><i class="fa fa-calendar fa-fw"></i>
 <time>2020-03-07</time></div><div><i class="fa fa-folder fa-fw"></i>
 <a class=post-taxonomy-topic href=http://gebitang.com/topics/jiansh>jiansh</a>&nbsp;/
 <a class=post-taxonomy-topic href=http://gebitang.com/topics/stf>STF</a></div><div><i class="fa fa-tags fa-fw"></i>
-<a class=post-taxonomy-tag href=http://gebitang.com/tags/jiansh>jiansh</a></div></div></header><p>link on JianShu github OAuth 参考示例教程，在github申请好OAuth Apps（settings-Developer settings-OAuth Apps-new），配置好对应的认证字</p><footer><a href=http://gebitang.com/post/jiansh/stf/stf%E4%B9%8Boauth%E6%8E%A2%E7%B4%A2%E4%BA%8C/>Read more<i class="fa fa-angle-double-right fa-fw"></i></a></footer></article><article><header><h2><a href=http://gebitang.com/post/jiansh/stf/stf%E4%B9%8Bprovider%E4%B8%80%E9%94%AE%E9%83%A8%E7%BD%B2%E4%B8%80/>STF之Provider一键部署一</a></h2><div class=post-meta><div><i class="fa fa-calendar fa-fw"></i>
+<a class=post-taxonomy-tag href=http://gebitang.com/tags/jiansh>jiansh</a></div></div></header><p><p><a href=https://www.jianshu.com/p/4d70b25cfea8>link on JianShu</a></p><h3 id=github-oauth>github OAuth</h3><p>参考<a href=http://www.ruanyifeng.com/blog/2019/04/github-oauth.html>示例教程</a>，在github<a href=https://github.com/settings/applications/new>申请</a>好OAuth Apps（settings-Developer settings-OAuth Apps-new），配置好对应的认证字段，就可以完成使用了。</p></p><footer><a href=http://gebitang.com/post/jiansh/stf/stf%E4%B9%8Boauth%E6%8E%A2%E7%B4%A2%E4%BA%8C/>Read more<i class="fa fa-angle-double-right fa-fw"></i></a></footer></article><article><header><h2><a href=http://gebitang.com/post/jiansh/stf/stf%E4%B9%8Bprovider%E4%B8%80%E9%94%AE%E9%83%A8%E7%BD%B2%E4%B8%80/>STF之Provider一键部署一</a></h2><div class=post-meta><div><i class="fa fa-calendar fa-fw"></i>
 <time>2020-03-07</time></div><div><i class="fa fa-folder fa-fw"></i>
 <a class=post-taxonomy-topic href=http://gebitang.com/topics/jiansh>jiansh</a>&nbsp;/
 <a class=post-taxonomy-topic href=http://gebitang.com/topics/stf>STF</a></div><div><i class="fa fa-tags fa-fw"></i>
-<a class=post-taxonomy-tag href=http://gebitang.com/tags/jiansh>jiansh</a></div></div></header><p>link on JianShu STF之Provider系列五里的前提条件是已经获取到里源码。在源码目录执行上面到脚本。 问题： 需要有获取到源码到权限 公司网络使用bre</p><footer><a href=http://gebitang.com/post/jiansh/stf/stf%E4%B9%8Bprovider%E4%B8%80%E9%94%AE%E9%83%A8%E7%BD%B2%E4%B8%80/>Read more<i class="fa fa-angle-double-right fa-fw"></i></a></footer></article><article><header><h2><a href=http://gebitang.com/post/jiansh/stf/stf%E4%B9%8Bprovider%E4%B8%80%E9%94%AE%E9%83%A8%E7%BD%B2%E4%BA%8C/>STF之Provider一键部署二</a></h2><div class=post-meta><div><i class="fa fa-calendar fa-fw"></i>
+<a class=post-taxonomy-tag href=http://gebitang.com/tags/jiansh>jiansh</a></div></div></header><p><p><a href=https://www.jianshu.com/p/86e493ccf13a>link on JianShu</a></p><p><a href=https://www.jianshu.com/p/a358dbb7c05d>STF之Provider系列五</a>里的前提条件是已经获取到里源码。在源码目录执行上面到脚本。</p></p><footer><a href=http://gebitang.com/post/jiansh/stf/stf%E4%B9%8Bprovider%E4%B8%80%E9%94%AE%E9%83%A8%E7%BD%B2%E4%B8%80/>Read more<i class="fa fa-angle-double-right fa-fw"></i></a></footer></article><article><header><h2><a href=http://gebitang.com/post/jiansh/stf/stf%E4%B9%8Bprovider%E4%B8%80%E9%94%AE%E9%83%A8%E7%BD%B2%E4%BA%8C/>STF之Provider一键部署二</a></h2><div class=post-meta><div><i class="fa fa-calendar fa-fw"></i>
 <time>2020-03-07</time></div><div><i class="fa fa-folder fa-fw"></i>
 <a class=post-taxonomy-topic href=http://gebitang.com/topics/jiansh>jiansh</a>&nbsp;/
 <a class=post-taxonomy-topic href=http://gebitang.com/topics/stf>STF</a></div><div><i class="fa fa-tags fa-fw"></i>
-<a class=post-taxonomy-tag href=http://gebitang.com/tags/jiansh>jiansh</a></div></div></header><p>link on JianShu TL, DR. 需要过多的准备工作，暂时放弃准备本地化的bottle for brew 针对每个formulae，大概需要这样的几个步骤： 每个formulae都有</p><footer><a href=http://gebitang.com/post/jiansh/stf/stf%E4%B9%8Bprovider%E4%B8%80%E9%94%AE%E9%83%A8%E7%BD%B2%E4%BA%8C/>Read more<i class="fa fa-angle-double-right fa-fw"></i></a></footer></article><article><header><h2><a href=http://gebitang.com/post/jiansh/stf/stf%E4%B9%8Bprovider%E7%B3%BB%E5%88%97%E4%B8%80/>STF之Provider系列一</a></h2><div class=post-meta><div><i class="fa fa-calendar fa-fw"></i>
+<a class=post-taxonomy-tag href=http://gebitang.com/tags/jiansh>jiansh</a></div></div></header><p><p><a href=https://www.jianshu.com/p/a39cc6840a69>link on JianShu</a></p><p>TL, DR.</p><p>需要过多的准备工作，暂时放弃准备本地化的bottle for brew</p><p>针对每个formulae，大概需要这样的几个步骤：</p><ul><li>每个formulae都有不同MacOS下的对应版本，需要都下载下来 from <a href=https://bintray.com/homebrew/bottles>https://bintray.com/homebrew/bottles</a></li><li>针对对应的版本，需要知道对应都cached路径是什么，可以通过<code>brew --cache --force-bottle formulae</code>获取到适用于当前MacOS版本的缓存地址</li><li>在不同到MacOS上重复执行上面两步，才能获取到不同版本下可用的缓存地址</li></ul><p>如何使用源码进行安装，可以先将源码包下载下来，然后复制到cache目录下
+<a href="https://docs.brew.sh/Tips-N'-Tricks#pre-downloading-a-file-for-a-formula">pre-download a formula</a>
+<code>mv source-code.tar.gz $(brew --cache -s formulaName</code></p></p><footer><a href=http://gebitang.com/post/jiansh/stf/stf%E4%B9%8Bprovider%E4%B8%80%E9%94%AE%E9%83%A8%E7%BD%B2%E4%BA%8C/>Read more<i class="fa fa-angle-double-right fa-fw"></i></a></footer></article><article><header><h2><a href=http://gebitang.com/post/jiansh/stf/stf%E4%B9%8Bprovider%E7%B3%BB%E5%88%97%E4%B8%80/>STF之Provider系列一</a></h2><div class=post-meta><div><i class="fa fa-calendar fa-fw"></i>
 <time>2020-03-07</time></div><div><i class="fa fa-folder fa-fw"></i>
 <a class=post-taxonomy-topic href=http://gebitang.com/topics/jiansh>jiansh</a>&nbsp;/
 <a class=post-taxonomy-topic href=http://gebitang.com/topics/stf>STF</a></div><div><i class="fa fa-tags fa-fw"></i>
-<a class=post-taxonomy-tag href=http://gebitang.com/tags/jiansh>jiansh</a></div></div></header><p>link on JianShu 独立服务-未完成 目前local方式已经跑起来，如果进行分布式接入设备？官方提供都都是docker 方式 Provider role The provider role requires the following units, which must be together on a single or</p><footer><a href=http://gebitang.com/post/jiansh/stf/stf%E4%B9%8Bprovider%E7%B3%BB%E5%88%97%E4%B8%80/>Read more<i class="fa fa-angle-double-right fa-fw"></i></a></footer></article><article><header><h2><a href=http://gebitang.com/post/jiansh/stf/stf%E4%B9%8Bprovider%E7%B3%BB%E5%88%97%E4%B8%83%E8%AE%BE%E5%A4%87%E5%85%B1%E4%BA%AB%E4%B8%8E%E8%BF%87%E6%BB%A4/>STF之Provider系列七：设备共享与过滤</a></h2><div class=post-meta><div><i class="fa fa-calendar fa-fw"></i>
+<a class=post-taxonomy-tag href=http://gebitang.com/tags/jiansh>jiansh</a></div></div></header><p><p><a href=https://www.jianshu.com/p/8984575174b4>link on JianShu</a></p><p>独立服务-未完成</p><p>目前local方式已经跑起来，如果进行分布式接入设备？官方提供都都是<a href=https://github.com/openstf/stf/blob/master/doc/DEPLOYMENT.md>docker 方式</a></p><blockquote><p>Provider role
+The provider role requires the following units, which must be together on a single or more hosts.
+<a href=https://github.com/openstf/stf/blob/master/doc/DEPLOYMENT.md#adbdservice>adbd.service</a>
+<a href=https://github.com/openstf/stf/blob/master/doc/DEPLOYMENT.md#stf-providerservice>stf-provider@.service</a></p></p><footer><a href=http://gebitang.com/post/jiansh/stf/stf%E4%B9%8Bprovider%E7%B3%BB%E5%88%97%E4%B8%80/>Read more<i class="fa fa-angle-double-right fa-fw"></i></a></footer></article><article><header><h2><a href=http://gebitang.com/post/jiansh/stf/stf%E4%B9%8Bprovider%E7%B3%BB%E5%88%97%E4%B8%83%E8%AE%BE%E5%A4%87%E5%85%B1%E4%BA%AB%E4%B8%8E%E8%BF%87%E6%BB%A4/>STF之Provider系列七：设备共享与过滤</a></h2><div class=post-meta><div><i class="fa fa-calendar fa-fw"></i>
 <time>2020-03-07</time></div><div><i class="fa fa-folder fa-fw"></i>
 <a class=post-taxonomy-topic href=http://gebitang.com/topics/jiansh>jiansh</a>&nbsp;/
 <a class=post-taxonomy-topic href=http://gebitang.com/topics/stf>STF</a></div><div><i class="fa fa-tags fa-fw"></i>
-<a class=post-taxonomy-tag href=http://gebitang.com/tags/jiansh>jiansh</a></div></div></header><p>link on JianShu STF之复用ADB一里满足了设备复用的场景。 JAVA应用自己管理设备，只需要在使用时提前向STF申请占用即可。 参考这里的API: post-userdevices 只需</p><footer><a href=http://gebitang.com/post/jiansh/stf/stf%E4%B9%8Bprovider%E7%B3%BB%E5%88%97%E4%B8%83%E8%AE%BE%E5%A4%87%E5%85%B1%E4%BA%AB%E4%B8%8E%E8%BF%87%E6%BB%A4/>Read more<i class="fa fa-angle-double-right fa-fw"></i></a></footer></article><article><header><h2><a href=http://gebitang.com/post/jiansh/stf/stf%E4%B9%8Bprovider%E7%B3%BB%E5%88%97%E4%B8%89/>STF之Provider系列三</a></h2><div class=post-meta><div><i class="fa fa-calendar fa-fw"></i>
+<a class=post-taxonomy-tag href=http://gebitang.com/tags/jiansh>jiansh</a></div></div></header><p><p><a href=https://www.jianshu.com/p/36c1dce838f0>link on JianShu</a></p><p><a href=https://www.jianshu.com/p/02a561879ef6>STF之复用ADB一</a>里满足了设备复用的场景。</p></p><footer><a href=http://gebitang.com/post/jiansh/stf/stf%E4%B9%8Bprovider%E7%B3%BB%E5%88%97%E4%B8%83%E8%AE%BE%E5%A4%87%E5%85%B1%E4%BA%AB%E4%B8%8E%E8%BF%87%E6%BB%A4/>Read more<i class="fa fa-angle-double-right fa-fw"></i></a></footer></article><article><header><h2><a href=http://gebitang.com/post/jiansh/stf/stf%E4%B9%8Bprovider%E7%B3%BB%E5%88%97%E4%B8%89/>STF之Provider系列三</a></h2><div class=post-meta><div><i class="fa fa-calendar fa-fw"></i>
 <time>2020-03-07</time></div><div><i class="fa fa-folder fa-fw"></i>
 <a class=post-taxonomy-topic href=http://gebitang.com/topics/jiansh>jiansh</a>&nbsp;/
 <a class=post-taxonomy-topic href=http://gebitang.com/topics/stf>STF</a></div><div><i class="fa fa-tags fa-fw"></i>
-<a class=post-taxonomy-tag href=http://gebitang.com/tags/jiansh>jiansh</a></div></div></header><p>link on JianShu websocket的连接问题还没有解决。 昨天出现的现象是连接设备时，图像连接到了“其他”设备上。 ——今天定位到是因为独立到provid</p><footer><a href=http://gebitang.com/post/jiansh/stf/stf%E4%B9%8Bprovider%E7%B3%BB%E5%88%97%E4%B8%89/>Read more<i class="fa fa-angle-double-right fa-fw"></i></a></footer></article><article><header><h2><a href=http://gebitang.com/post/jiansh/stf/stf%E4%B9%8Bprovider%E7%B3%BB%E5%88%97%E4%BA%8C/>STF之Provider系列二</a></h2><div class=post-meta><div><i class="fa fa-calendar fa-fw"></i>
+<a class=post-taxonomy-tag href=http://gebitang.com/tags/jiansh>jiansh</a></div></div></header><p><p><a href=https://www.jianshu.com/p/c956e0ca5163>link on JianShu</a></p><h3 id=websocket的连接问题还没有解决>websocket的连接问题<del>还没有</del>解决。</h3><p>昨天出现的现象是连接设备时，图像连接到了“其他”设备上。 ——今天定位到是因为独立到provider提供设备时，分配到ws连接地址与也有设备重复。</p></p><footer><a href=http://gebitang.com/post/jiansh/stf/stf%E4%B9%8Bprovider%E7%B3%BB%E5%88%97%E4%B8%89/>Read more<i class="fa fa-angle-double-right fa-fw"></i></a></footer></article><article><header><h2><a href=http://gebitang.com/post/jiansh/stf/stf%E4%B9%8Bprovider%E7%B3%BB%E5%88%97%E4%BA%8C/>STF之Provider系列二</a></h2><div class=post-meta><div><i class="fa fa-calendar fa-fw"></i>
 <time>2020-03-07</time></div><div><i class="fa fa-folder fa-fw"></i>
 <a class=post-taxonomy-topic href=http://gebitang.com/topics/jiansh>jiansh</a>&nbsp;/
 <a class=post-taxonomy-topic href=http://gebitang.com/topics/stf>STF</a></div><div><i class="fa fa-tags fa-fw"></i>
-<a class=post-taxonomy-tag href=http://gebitang.com/tags/jiansh>jiansh</a></div></div></header><p>link on JianShu EventEmitter node.js 如何使用Promise 系列一后续，现学现卖，逻辑梳理如下—— // Wait for others to acknowledge the device var register = new Promise(function(resolve) { // Tell others we found a device push.send([ wireutil.global , wireutil.envelope(new wire.DeviceIntroductionMessage( device.id , wireutil.toDeviceStatus(device.type) , new wire.ProviderMessage( solo , options.name</p><footer><a href=http://gebitang.com/post/jiansh/stf/stf%E4%B9%8Bprovider%E7%B3%BB%E5%88%97%E4%BA%8C/>Read more<i class="fa fa-angle-double-right fa-fw"></i></a></footer></article><article><header><h2><a href=http://gebitang.com/post/jiansh/stf/stf%E4%B9%8Bprovider%E7%B3%BB%E5%88%97%E4%BA%94/>STF之Provider系列五</a></h2><div class=post-meta><div><i class="fa fa-calendar fa-fw"></i>
+<a class=post-taxonomy-tag href=http://gebitang.com/tags/jiansh>jiansh</a></div></div></header><p><p><a href=https://www.jianshu.com/p/0d624601b8af>link on JianShu</a></p><p><a href=https://www.runoob.com/nodejs/nodejs-event.html>EventEmitter</a>
+<a href=https://www.jianshu.com/p/745e0760cff5>node.js 如何使用Promise</a></p><p><a href=https://www.jianshu.com/p/8984575174b4>系列一</a>后续，现学现卖，逻辑梳理如下——</p></p><footer><a href=http://gebitang.com/post/jiansh/stf/stf%E4%B9%8Bprovider%E7%B3%BB%E5%88%97%E4%BA%8C/>Read more<i class="fa fa-angle-double-right fa-fw"></i></a></footer></article><article><header><h2><a href=http://gebitang.com/post/jiansh/stf/stf%E4%B9%8Bprovider%E7%B3%BB%E5%88%97%E4%BA%94/>STF之Provider系列五</a></h2><div class=post-meta><div><i class="fa fa-calendar fa-fw"></i>
 <time>2020-03-07</time></div><div><i class="fa fa-folder fa-fw"></i>
 <a class=post-taxonomy-topic href=http://gebitang.com/topics/jiansh>jiansh</a>&nbsp;/
 <a class=post-taxonomy-topic href=http://gebitang.com/topics/stf>STF</a></div><div><i class="fa fa-tags fa-fw"></i>
-<a class=post-taxonomy-tag href=http://gebitang.com/tags/jiansh>jiansh</a></div></div></header><p>link on JianShu Mac环境下支持脚本自动部署 需要Mac环境已经安装了XCode，因为环境编译时需要C++的编译器。 #!/bin/bash # base on https://gist.github.com/aamnah/a62d30340de4f7ae98ea57b219d98d14 # NOTES # `which` command will tell you a program is installed ONLY</p><footer><a href=http://gebitang.com/post/jiansh/stf/stf%E4%B9%8Bprovider%E7%B3%BB%E5%88%97%E4%BA%94/>Read more<i class="fa fa-angle-double-right fa-fw"></i></a></footer></article><article><header><h2><a href=http://gebitang.com/post/jiansh/stf/stf%E4%B9%8Bprovider%E7%B3%BB%E5%88%97%E5%85%ADbrew/>STF之Provider系列六：brew</a></h2><div class=post-meta><div><i class="fa fa-calendar fa-fw"></i>
+<a class=post-taxonomy-tag href=http://gebitang.com/tags/jiansh>jiansh</a></div></div></header><p><p><a href=https://www.jianshu.com/p/a358dbb7c05d>link on JianShu</a></p><h2 id=mac环境下支持脚本自动部署>Mac环境下支持脚本自动部署</h2><p>需要Mac环境已经安装了XCode，因为环境编译时需要C++的编译器。</p></p><footer><a href=http://gebitang.com/post/jiansh/stf/stf%E4%B9%8Bprovider%E7%B3%BB%E5%88%97%E4%BA%94/>Read more<i class="fa fa-angle-double-right fa-fw"></i></a></footer></article><article><header><h2><a href=http://gebitang.com/post/jiansh/stf/stf%E4%B9%8Bprovider%E7%B3%BB%E5%88%97%E5%85%ADbrew/>STF之Provider系列六：brew</a></h2><div class=post-meta><div><i class="fa fa-calendar fa-fw"></i>
 <time>2020-03-07</time></div><div><i class="fa fa-folder fa-fw"></i>
 <a class=post-taxonomy-topic href=http://gebitang.com/topics/jiansh>jiansh</a>&nbsp;/
 <a class=post-taxonomy-topic href=http://gebitang.com/topics/stf>STF</a></div><div><i class="fa fa-tags fa-fw"></i>
-<a class=post-taxonomy-tag href=http://gebitang.com/tags/jiansh>jiansh</a></div></div></header><p>link on JianShu STF之Provider系列五支持脚本自动部署。目前国内到网络环境导致使用brew install 各种依赖应用时：1）耗时；2）不稳定。 STF之Do</p><footer><a href=http://gebitang.com/post/jiansh/stf/stf%E4%B9%8Bprovider%E7%B3%BB%E5%88%97%E5%85%ADbrew/>Read more<i class="fa fa-angle-double-right fa-fw"></i></a></footer></article><article><header><h2><a href=http://gebitang.com/post/jiansh/stf/stf%E4%B9%8Bprovider%E7%B3%BB%E5%88%97%E5%9B%9B/>STF之Provider系列四</a></h2><div class=post-meta><div><i class="fa fa-calendar fa-fw"></i>
+<a class=post-taxonomy-tag href=http://gebitang.com/tags/jiansh>jiansh</a></div></div></header><p><p><a href=https://www.jianshu.com/p/1a52b09203b9>link on JianShu</a></p><p><a href=https://www.jianshu.com/p/a358dbb7c05d>STF之Provider系列五</a>支持脚本自动部署。目前国内到网络环境导致使用brew install 各种依赖应用时：1）耗时；2）不稳定。</p></p><footer><a href=http://gebitang.com/post/jiansh/stf/stf%E4%B9%8Bprovider%E7%B3%BB%E5%88%97%E5%85%ADbrew/>Read more<i class="fa fa-angle-double-right fa-fw"></i></a></footer></article><article><header><h2><a href=http://gebitang.com/post/jiansh/stf/stf%E4%B9%8Bprovider%E7%B3%BB%E5%88%97%E5%9B%9B/>STF之Provider系列四</a></h2><div class=post-meta><div><i class="fa fa-calendar fa-fw"></i>
 <time>2020-03-07</time></div><div><i class="fa fa-folder fa-fw"></i>
 <a class=post-taxonomy-topic href=http://gebitang.com/topics/jiansh>jiansh</a>&nbsp;/
 <a class=post-taxonomy-topic href=http://gebitang.com/topics/stf>STF</a></div><div><i class="fa fa-tags fa-fw"></i>
-<a class=post-taxonomy-tag href=http://gebitang.com/tags/jiansh>jiansh</a></div></div></header><p>link on JianShu 环境准备 在一台新的机器上从头搭建STF的provider环境。 需要adb服务 可以执行 stf provider服务模块 新机器上的Node环境为</p><footer><a href=http://gebitang.com/post/jiansh/stf/stf%E4%B9%8Bprovider%E7%B3%BB%E5%88%97%E5%9B%9B/>Read more<i class="fa fa-angle-double-right fa-fw"></i></a></footer></article><article><header><h2><a href=http://gebitang.com/post/jiansh/stf/stf%E4%B9%8Brethinkdb%E4%B8%80/>STF之RethinkDB一</a></h2><div class=post-meta><div><i class="fa fa-calendar fa-fw"></i>
+<a class=post-taxonomy-tag href=http://gebitang.com/tags/jiansh>jiansh</a></div></div></header><p><p><a href=https://www.jianshu.com/p/a3a1740dff18>link on JianShu</a></p><h2 id=环境准备>环境准备</h2><p>在一台新的机器上从头搭建STF的provider环境。</p><ul><li>需要adb服务</li><li>可以执行 stf provider服务模块</li></ul><p>新机器上的Node环境为V12 版本，没有adb环境。 折腾到最后还是跑起来了。记录一下遇到的可能问题：</p></p><footer><a href=http://gebitang.com/post/jiansh/stf/stf%E4%B9%8Bprovider%E7%B3%BB%E5%88%97%E5%9B%9B/>Read more<i class="fa fa-angle-double-right fa-fw"></i></a></footer></article><article><header><h2><a href=http://gebitang.com/post/jiansh/stf/stf%E4%B9%8Brethinkdb%E4%B8%80/>STF之RethinkDB一</a></h2><div class=post-meta><div><i class="fa fa-calendar fa-fw"></i>
 <time>2020-03-07</time></div><div><i class="fa fa-folder fa-fw"></i>
 <a class=post-taxonomy-topic href=http://gebitang.com/topics/jiansh>jiansh</a>&nbsp;/
 <a class=post-taxonomy-topic href=http://gebitang.com/topics/stf>STF</a></div><div><i class="fa fa-tags fa-fw"></i>
-<a class=post-taxonomy-tag href=http://gebitang.com/tags/jiansh>jiansh</a></div></div></header><p>link on JianShu quick start quickstart #install npm install rethinkdb # start from where it is installed. $ rethinkdb ... ... Listening for intracluster connections on port 29015 Listening for client driver connections on port 28015 Listening for administrative HTTP connections on port 8080 Listening on cluster addresses: 127.0.0.1, ::1 Listening on driver addresses: 127.0.0.1, ::1 Listening on http addresses: 127.0.0.1, ::1 To fully expose RethinkDB on the network, bind</p><footer><a href=http://gebitang.com/post/jiansh/stf/stf%E4%B9%8Brethinkdb%E4%B8%80/>Read more<i class="fa fa-angle-double-right fa-fw"></i></a></footer></article><article><header><h2><a href=http://gebitang.com/post/jiansh/stf/stf%E4%B9%8Brethinkdb%E4%B8%89-%E8%AE%BE%E5%A4%87%E4%BD%BF%E7%94%A8/>STF之RethinkDB三-设备使用</a></h2><div class=post-meta><div><i class="fa fa-calendar fa-fw"></i>
+<a class=post-taxonomy-tag href=http://gebitang.com/tags/jiansh>jiansh</a></div></div></header><p><p><a href=https://www.jianshu.com/p/917faff25782>link on JianShu</a></p><h3 id=quick-start>quick start</h3><p><a href=https://www.rethinkdb.com/docs/quickstart/>quickstart</a></p><pre tabindex=0><code>#install
+npm install rethinkdb 
+# start from where it is installed.
+$ rethinkdb
+...
+...
+Listening for intracluster connections on port 29015
+Listening for client driver connections on port 28015
+Listening for administrative HTTP connections on port 8080
+Listening on cluster addresses: 127.0.0.1, ::1
+Listening on driver addresses: 127.0.0.1, ::1
+Listening on http addresses: 127.0.0.1, ::1
+To fully expose RethinkDB on the network, bind to all addresses by running rethinkdb with the `--bind all` command line option.
+Server ready, &#34;gebitangHoster_wil&#34; c4bc2619-a3aa-4edf-9d4e-5c85aee397ff
+
+#use the drivers from Node.js like this:
+$ node
+r = require(&#39;rethinkdb&#39;);
+r.connect({ host: &#39;localhost&#39;, port: 28015 }, function(err, conn) {
+  if(err) throw err;
+  r.db(&#39;test&#39;).tableCreate(&#39;tv_shows&#39;).run(conn, function(err, res) {
+    if(err) throw err;
+    console.log(res);
+    r.table(&#39;tv_shows&#39;).insert({ name: &#39;Star Trek TNG&#39; }).run(conn, function(err, res)
+    {
+      if(err) throw err;
+      console.log(res);
+    });
+  });
+});
+</code></pr
+  </p>
+
+  
+  <footer>
+    <a href=http://gebitang.com/post/jiansh/stf/stf%E4%B9%8Brethinkdb%E4%B8%80/>Read more<i class="fa fa-angle-double-right fa-fw"></i></a>
+  </footer>
+  
+</article>
+
+  
+    <article>
+  <header>
+    <h2><a href=http://gebitang.com/post/jiansh/stf/stf%E4%B9%8Brethinkdb%E4%B8%89-%E8%AE%BE%E5%A4%87%E4%BD%BF%E7%94%A8/>STF之RethinkDB三-设备使用</a></h2>
+
+    <div class=post-meta>
+
+  <div>
+    <i class="fa fa-calendar fa-fw"></i>
+    <time>2020-03-07</time>
+  </div>
+
+  
+
+  
+  
+  
+  <div>
+    <i class="fa fa-folder fa-fw"></i>
+    
+      <a class=post-taxonomy-topic href=http://gebitang.com/topics/jiansh>jiansh</a>&nbsp;&#47;
+    
+      <a class=post-taxonomy-topic href=http://gebitang.com/topics/stf>STF</a>
+    
+  </div>
+  
+  
+
+  
+  
+  
+  <div>
+    <i class="fa fa-tags fa-fw"></i>
+    
+      <a class=post-taxonomy-tag href=http://gebitang.com/tags/jiansh>jiansh</a>
+    
+  </div>
+  
+  
+
+</div>
+
+  </header>
+
+  <p>
+  <p><a href=https://www.jianshu.com/p/538e516643aa>link on JianShu</a></p>
+<p><a href=https://www.jianshu.com/p/fac393d47fb2>STF之RethinkDB二</a>
+获取到设备使用、停止使用的切入口之后，甚至不需要了解设备使用的业务逻辑，就可以直接进行数据库操作，完成<strong>记录设备使用时长</strong>的功能。</p>
+  </p>
+
+  
+  <footer>
+    <a href=http://gebitang.com/post/jiansh/stf/stf%E4%B9%8Brethinkdb%E4%B8%89-%E8%AE%BE%E5%A4%87%E4%BD%BF%E7%94%A8/>Read more<i class="fa fa-angle-double-right fa-fw"></i></a>
+  </footer>
+  
+</article>
+
+  
+    <article>
+  <header>
+    <h2><a href=http://gebitang.com/post/jiansh/stf/stf%E4%B9%8Brethinkdb%E4%BA%8C/>STF之RethinkDB二</a></h2>
+
+    <div class=post-meta>
+
+  <div>
+    <i class="fa fa-calendar fa-fw"></i>
+    <time>2020-03-07</time>
+  </div>
+
+  
+
+  
+  
+  
+  <div>
+    <i class="fa fa-folder fa-fw"></i>
+    
+      <a class=post-taxonomy-topic href=http://gebitang.com/topics/jiansh>jiansh</a>&nbsp;&#47;
+    
+      <a class=post-taxonomy-topic href=http://gebitang.com/topics/stf>STF</a>
+    
+  </div>
+  
+  
+
+  
+  
+  
+  <div>
+    <i class="fa fa-tags fa-fw"></i>
+    
+      <a class=post-taxonomy-tag href=http://gebitang.com/tags/jiansh>jiansh</a>
+    
+  </div>
+  
+  
+
+</div>
+
+  </header>
+
+  <p>
+  <p><a href=https://www.jianshu.com/p/fac393d47fb2>link on JianShu</a></p>
+<p><a href=https://www.jianshu.com/p/917faff25782>STF之RethinkDB一</a>结束了数据库rethinkdb的基本使用。</p>
+  </p>
+
+  
+  <footer>
+    <a href=http://gebitang.com/post/jiansh/stf/stf%E4%B9%8Brethinkdb%E4%BA%8C/>Read more<i class="fa fa-angle-double-right fa-fw"></i></a>
+  </footer>
+  
+</article>
+
+  
+    <article>
+  <header>
+    <h2><a href=http://gebitang.com/post/jiansh/stf/stf%E4%B9%8Brethinkdb%E5%9B%9B%E5%AF%BC%E5%85%A5%E5%AF%BC%E5%87%BA/>STF之Rethinkdb四：导入导出</a></h2>
+
+    <div class=post-meta>
+
+  <div>
+    <i class="fa fa-calendar fa-fw"></i>
+    <time>2020-03-07</time>
+  </div>
+
+  
+
+  
+  
+  
+  <div>
+    <i class="fa fa-folder fa-fw"></i>
+    
+      <a class=post-taxonomy-topic href=http://gebitang.com/topics/jiansh>jiansh</a>&nbsp;&#47;
+    
+      <a class=post-taxonomy-topic href=http://gebitang.com/topics/stf>STF</a>
+    
+  </div>
+  
+  
+
+  
+  
+  
+  <div>
+    <i class="fa fa-tags fa-fw"></i>
+    
+      <a class=post-taxonomy-tag href=http://gebitang.com/tags/jiansh>jiansh</a>
+    
+  </div>
+  
+  
+
+</div>
+
+  </header>
+
+  <p>
+  <p><a href=https://www.jianshu.com/p/4eeccb6c8567>link on JianShu</a></p>
+<p><a href=https://rethinkdb.com/docs/backup/>rethinkdb backup</a>
+<a href=https://rethinkdb.com/docs/importing/>rethinkdb import</a></p>
+<pre tabindex=0><code># export
+rethinkdb dump -e stf.usageRecord -f record.tag.gz
+# import
+rethinkdb import -f usageRecord.json --table stf.usageRecord --force
+</code></pre><p>使用导出功能<code>rethinkdb dump</code>需要安装对应的python driver。默认安装的<code>sudo pip install rethinkdb</code>版本为 2.4.2，跟安装的rethinkdb 2.3.6版本不兼容，会提示 <code>No handlers could be found for logger "rethinkdb.logger"</code>的<a href=https://github.com/rethinkdb/rethinkdb/issues/6724>问题</a>。</p></p><footer><a href=http://gebitang.com/post/jiansh/stf/stf%E4%B9%8Brethinkdb%E5%9B%9B%E5%AF%BC%E5%85%A5%E5%AF%BC%E5%87%BA/>Read more<i class="fa fa-angle-double-right fa-fw"></i></a></footer></article><article><header><h2><a href=http://gebitang.com/post/jiansh/stf/stf%E4%B9%8Bstfservice%E6%9C%8D%E5%8A%A1%E8%B0%83%E7%94%A8/>STF之STFService服务调用</a></h2><div class=post-meta><div><i class="fa fa-calendar fa-fw"></i>
 <time>2020-03-07</time></div><div><i class="fa fa-folder fa-fw"></i>
 <a class=post-taxonomy-topic href=http://gebitang.com/topics/jiansh>jiansh</a>&nbsp;/
 <a class=post-taxonomy-topic href=http://gebitang.com/topics/stf>STF</a></div><div><i class="fa fa-tags fa-fw"></i>
-<a class=post-taxonomy-tag href=http://gebitang.com/tags/jiansh>jiansh</a></div></div></header><p>link on JianShu STF之RethinkDB二 获取到设备使用、停止使用的切入口之后，甚至不需要了解设备使用的业务逻辑，就可以直接进行数据库操作，完成记录</p><footer><a href=http://gebitang.com/post/jiansh/stf/stf%E4%B9%8Brethinkdb%E4%B8%89-%E8%AE%BE%E5%A4%87%E4%BD%BF%E7%94%A8/>Read more<i class="fa fa-angle-double-right fa-fw"></i></a></footer></article><article><header><h2><a href=http://gebitang.com/post/jiansh/stf/stf%E4%B9%8Brethinkdb%E4%BA%8C/>STF之RethinkDB二</a></h2><div class=post-meta><div><i class="fa fa-calendar fa-fw"></i>
+<a class=post-taxonomy-tag href=http://gebitang.com/tags/jiansh>jiansh</a></div></div></header><p><p><a href=https://www.jianshu.com/p/380edecf102b>link on JianShu</a></p><p><a href=https://www.jianshu.com/p/82e0d75db14b>STF之环境搭建可能的几个坑</a>里提到过</p></p><footer><a href=http://gebitang.com/post/jiansh/stf/stf%E4%B9%8Bstfservice%E6%9C%8D%E5%8A%A1%E8%B0%83%E7%94%A8/>Read more<i class="fa fa-angle-double-right fa-fw"></i></a></footer></article><article><header><h2><a href=http://gebitang.com/post/jiansh/stf/stf%E4%B9%8Bubuntu18-04%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/>STF之ubuntu18-04环境搭建</a></h2><div class=post-meta><div><i class="fa fa-calendar fa-fw"></i>
 <time>2020-03-07</time></div><div><i class="fa fa-folder fa-fw"></i>
 <a class=post-taxonomy-topic href=http://gebitang.com/topics/jiansh>jiansh</a>&nbsp;/
 <a class=post-taxonomy-topic href=http://gebitang.com/topics/stf>STF</a></div><div><i class="fa fa-tags fa-fw"></i>
-<a class=post-taxonomy-tag href=http://gebitang.com/tags/jiansh>jiansh</a></div></div></header><p>link on JianShu STF之RethinkDB一结束了数据库rethinkdb的基本使用。 梳理一下STF项目中对于数据库到底是如何使用的。——基于目前的理</p><footer><a href=http://gebitang.com/post/jiansh/stf/stf%E4%B9%8Brethinkdb%E4%BA%8C/>Read more<i class="fa fa-angle-double-right fa-fw"></i></a></footer></article><article><header><h2><a href=http://gebitang.com/post/jiansh/stf/stf%E4%B9%8Brethinkdb%E5%9B%9B%E5%AF%BC%E5%85%A5%E5%AF%BC%E5%87%BA/>STF之Rethinkdb四：导入导出</a></h2><div class=post-meta><div><i class="fa fa-calendar fa-fw"></i>
+<a class=post-taxonomy-tag href=http://gebitang.com/tags/jiansh>jiansh</a></div></div></header><p><p><a href=https://www.jianshu.com/p/cc975f72d2d4>link to JianShu</a></p><p>参考：
+<a href=https://testerhome.com/articles/17696>stf on ubuntu</a>
+<a href=https://testerhome.com/topics/11055>[centos7][stf] 环境搭建</a></p><p>一、安装npm</p><pre tabindex=0><code># https://github.com/nvm-sh/nvm
+wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh | bash
+# 主动生效
+export NVM_DIR=&#34;$HOME/.nvm&#34;
+[ -s &#34;$NVM_DIR/nvm.sh&#34; ] &amp;&amp; \. &#34;$NVM_DIR/nvm.sh&#34;  # This loads nvm
+[ -s &#34;$NVM_DIR/bash_completion&#34; ] &amp;&amp; \. &#34;$NVM_DIR/bash_completion&#34;
+</code></pre><p>二、安装nrm</p></p><footer><a href=http://gebitang.com/post/jiansh/stf/stf%E4%B9%8Bubuntu18-04%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/>Read more<i class="fa fa-angle-double-right fa-fw"></i></a></footer></article><article><header><h2><a href=http://gebitang.com/post/jiansh/stf/stf%E4%B9%8Bwindows%E7%8E%AF%E5%A2%83/>STF之Windows环境</a></h2><div class=post-meta><div><i class="fa fa-calendar fa-fw"></i>
 <time>2020-03-07</time></div><div><i class="fa fa-folder fa-fw"></i>
 <a class=post-taxonomy-topic href=http://gebitang.com/topics/jiansh>jiansh</a>&nbsp;/
 <a class=post-taxonomy-topic href=http://gebitang.com/topics/stf>STF</a></div><div><i class="fa fa-tags fa-fw"></i>
-<a class=post-taxonomy-tag href=http://gebitang.com/tags/jiansh>jiansh</a></div></div></header><p>link on JianShu rethinkdb backup rethinkdb import # export rethinkdb dump -e stf.usageRecord -f record.tag.gz # import rethinkdb import -f usageRecord.json --table stf.usageRecord --force 使用导出功能rethinkdb dump需要安装对应的python driver。默认安装的su</p><footer><a href=http://gebitang.com/post/jiansh/stf/stf%E4%B9%8Brethinkdb%E5%9B%9B%E5%AF%BC%E5%85%A5%E5%AF%BC%E5%87%BA/>Read more<i class="fa fa-angle-double-right fa-fw"></i></a></footer></article><article><header><h2><a href=http://gebitang.com/post/jiansh/stf/stf%E4%B9%8Bstfservice%E6%9C%8D%E5%8A%A1%E8%B0%83%E7%94%A8/>STF之STFService服务调用</a></h2><div class=post-meta><div><i class="fa fa-calendar fa-fw"></i>
+<a class=post-taxonomy-tag href=http://gebitang.com/tags/jiansh>jiansh</a></div></div></header><p><p><a href=https://www.jianshu.com/p/519488b80c5e>link on JianShu</a></p><p>Node环境 + 依赖 rethinkdb graphicsmagick zeromq protobuf yasm pkg-config</p><p><a href=https://rethinkdb.com/docs/install/windows/>rethinkdb windows/</a></p><pre tabindex=0><code>#  go to the directory that you unpacked rethinkdb.exe in
+rethinkdb.exe -d c:\RethinkDB\data\
+</code></pre><p><a href=https://sourceforge.net/projects/graphicsmagick/files/graphicsmagick-binaries/1.3.33/>graphicsmagick </a>正常安装完成，可执行gm命令即可。系统安装后会自动添加环境变量 <code>c:\program files\graphicsmagick-1.3.33-q16</code></p></p><footer><a href=http://gebitang.com/post/jiansh/stf/stf%E4%B9%8Bwindows%E7%8E%AF%E5%A2%83/>Read more<i class="fa fa-angle-double-right fa-fw"></i></a></footer></article><article><header><h2><a href=http://gebitang.com/post/jiansh/stf/stf%E4%B9%8Byarn%E4%B8%80/>STF之Yarn一</a></h2><div class=post-meta><div><i class="fa fa-calendar fa-fw"></i>
 <time>2020-03-07</time></div><div><i class="fa fa-folder fa-fw"></i>
 <a class=post-taxonomy-topic href=http://gebitang.com/topics/jiansh>jiansh</a>&nbsp;/
 <a class=post-taxonomy-topic href=http://gebitang.com/topics/stf>STF</a></div><div><i class="fa fa-tags fa-fw"></i>
-<a class=post-taxonomy-tag href=http://gebitang.com/tags/jiansh>jiansh</a></div></div></header><p>link on JianShu STF之环境搭建可能的几个坑里提到过 初始化设备时，提示类似 Setup had an error Error: Service had an error: &ldquo;Error: Not found; no service started.&rdquo; 官方认为有可能是杀毒软件的问题；实测需要手动先</p><footer><a href=http://gebitang.com/post/jiansh/stf/stf%E4%B9%8Bstfservice%E6%9C%8D%E5%8A%A1%E8%B0%83%E7%94%A8/>Read more<i class="fa fa-angle-double-right fa-fw"></i></a></footer></article><article><header><h2><a href=http://gebitang.com/post/jiansh/stf/stf%E4%B9%8Bubuntu18-04%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/>STF之ubuntu18-04环境搭建</a></h2><div class=post-meta><div><i class="fa fa-calendar fa-fw"></i>
+<a class=post-taxonomy-tag href=http://gebitang.com/tags/jiansh>jiansh</a></div></div></header><p><p><a href=https://www.jianshu.com/p/7201f9ba28c3>link on JianShu</a></p><p>Mac环境部署告一段落，同事多次建议为什么不用yarn。STF本身也包含了yarn.lock文件。简单学习一下<a href=https://github.com/yarnpkg/yarn/>yarn</a>
+的相关内容。</p><blockquote><p>Yarn is a package manager for your code. Code is shared through something called a <strong>package</strong> (sometimes referred to as a <strong>module</strong>). A package contains all the code being shared as well as a <code>package.json</code> file which describes the package.</p></p><footer><a href=http://gebitang.com/post/jiansh/stf/stf%E4%B9%8Byarn%E4%B8%80/>Read more<i class="fa fa-angle-double-right fa-fw"></i></a></footer></article><article><header><h2><a href=http://gebitang.com/post/jiansh/stf/stf%E4%B9%8Byarn%E4%BA%8C/>STF之Yarn二</a></h2><div class=post-meta><div><i class="fa fa-calendar fa-fw"></i>
 <time>2020-03-07</time></div><div><i class="fa fa-folder fa-fw"></i>
 <a class=post-taxonomy-topic href=http://gebitang.com/topics/jiansh>jiansh</a>&nbsp;/
 <a class=post-taxonomy-topic href=http://gebitang.com/topics/stf>STF</a></div><div><i class="fa fa-tags fa-fw"></i>
-<a class=post-taxonomy-tag href=http://gebitang.com/tags/jiansh>jiansh</a></div></div></header><p>link to JianShu 参考： stf on ubuntu [centos7][stf] 环境搭建 一、安装npm # https://github.com/nvm-sh/nvm wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh | bash # 主动生效 export NVM_DIR="$HOME/.nvm" [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" 二、安装nrm # https://github.com/Pana/nrm npm install -g nrm #配置私</p><footer><a href=http://gebitang.com/post/jiansh/stf/stf%E4%B9%8Bubuntu18-04%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/>Read more<i class="fa fa-angle-double-right fa-fw"></i></a></footer></article><article><header><h2><a href=http://gebitang.com/post/jiansh/stf/stf%E4%B9%8Bwindows%E7%8E%AF%E5%A2%83/>STF之Windows环境</a></h2><div class=post-meta><div><i class="fa fa-calendar fa-fw"></i>
+<a class=post-taxonomy-tag href=http://gebitang.com/tags/jiansh>jiansh</a></div></div></header><p><p><a href=https://www.jianshu.com/p/9c92020e854d>link on JianShu</a></p><p>yarn的确会快得飞起。 <a href=https://www.jianshu.com/p/7201f9ba28c3>STF之Yarn一</a>中简单使用后，从头开始使用yarn安装STF。</p></p><footer><a href=http://gebitang.com/post/jiansh/stf/stf%E4%B9%8Byarn%E4%BA%8C/>Read more<i class="fa fa-angle-double-right fa-fw"></i></a></footer></article><article><header><h2><a href=http://gebitang.com/post/jiansh/stf/stf%E4%B9%8Bzeromq/>STF之ZeroMQ</a></h2><div class=post-meta><div><i class="fa fa-calendar fa-fw"></i>
 <time>2020-03-07</time></div><div><i class="fa fa-folder fa-fw"></i>
 <a class=post-taxonomy-topic href=http://gebitang.com/topics/jiansh>jiansh</a>&nbsp;/
 <a class=post-taxonomy-topic href=http://gebitang.com/topics/stf>STF</a></div><div><i class="fa fa-tags fa-fw"></i>
-<a class=post-taxonomy-tag href=http://gebitang.com/tags/jiansh>jiansh</a></div></div></header><p>link on JianShu Node环境 + 依赖 rethinkdb graphicsmagick zeromq protobuf yasm pkg-config rethinkdb windows/ # go to the directory that you unpacked rethinkdb.exe in rethinkdb.exe -d c:\RethinkDB\data\ graphicsmagick 正常安装完成，可执行gm命令即可。系统安装后会自动添加环境变量 c:\program files\graphicsmagick-1.3.33-q16 https://zeromq.org/download/ protobuf releases</p><footer><a href=http://gebitang.com/post/jiansh/stf/stf%E4%B9%8Bwindows%E7%8E%AF%E5%A2%83/>Read more<i class="fa fa-angle-double-right fa-fw"></i></a></footer></article><article><header><h2><a href=http://gebitang.com/post/jiansh/stf/stf%E4%B9%8Byarn%E4%B8%80/>STF之Yarn一</a></h2><div class=post-meta><div><i class="fa fa-calendar fa-fw"></i>
+<a class=post-taxonomy-tag href=http://gebitang.com/tags/jiansh>jiansh</a></div></div></header><p><p><a href=https://www.jianshu.com/p/029db9da070b>link on JianShu</a></p><blockquote><p>STF consists of multiple independent processes communicating via <a href=http://zeromq.org/>ZeroMQ</a> and <a href=https://github.com/google/protobuf>Protocol Buffers</a>.</p></blockquote><p>使用ZeroMQ进行zmq socket通信，使用Protocol Buffers定义通信内容。</p></p><footer><a href=http://gebitang.com/post/jiansh/stf/stf%E4%B9%8Bzeromq/>Read more<i class="fa fa-angle-double-right fa-fw"></i></a></footer></article><article><header><h2><a href=http://gebitang.com/post/jiansh/stf/stf%E4%B9%8B%E4%B8%80%E8%88%AC%E4%BE%9D%E8%B5%96%E5%92%8Cphantomjs/>STF之一般依赖和phantomjs</a></h2><div class=post-meta><div><i class="fa fa-calendar fa-fw"></i>
 <time>2020-03-07</time></div><div><i class="fa fa-folder fa-fw"></i>
 <a class=post-taxonomy-topic href=http://gebitang.com/topics/jiansh>jiansh</a>&nbsp;/
 <a class=post-taxonomy-topic href=http://gebitang.com/topics/stf>STF</a></div><div><i class="fa fa-tags fa-fw"></i>
-<a class=post-taxonomy-tag href=http://gebitang.com/tags/jiansh>jiansh</a></div></div></header><p>link on JianShu Mac环境部署告一段落，同事多次建议为什么不用yarn。STF本身也包含了yarn.lock文件。简单学习一下yarn 的相关内容。 Yarn is</p><footer><a href=http://gebitang.com/post/jiansh/stf/stf%E4%B9%8Byarn%E4%B8%80/>Read more<i class="fa fa-angle-double-right fa-fw"></i></a></footer></article><article><header><h2><a href=http://gebitang.com/post/jiansh/stf/stf%E4%B9%8Byarn%E4%BA%8C/>STF之Yarn二</a></h2><div class=post-meta><div><i class="fa fa-calendar fa-fw"></i>
+<a class=post-taxonomy-tag href=http://gebitang.com/tags/jiansh>jiansh</a></div></div></header><p><p><a href=https://www.jianshu.com/p/ae1e013bf99e>link on JianShu</a></p><h2 id=brew-本地安装>brew 本地安装</h2><p>只使用provider服务的话，可以不安装rethinkdb（恰好这是最大的一个文件）。<code>brew install graphicsmagick zeromq protobuf yasm pkg-conf</code></p></p><footer><a href=http://gebitang.com/post/jiansh/stf/stf%E4%B9%8B%E4%B8%80%E8%88%AC%E4%BE%9D%E8%B5%96%E5%92%8Cphantomjs/>Read more<i class="fa fa-angle-double-right fa-fw"></i></a></footer></article><article><header><h2><a href=http://gebitang.com/post/jiansh/stf/stf%E4%B9%8B%E4%BB%8Estf-local%E8%AF%B4%E5%BC%80%E5%8E%BB/>STF之从stf-local说开去</a></h2><div class=post-meta><div><i class="fa fa-calendar fa-fw"></i>
 <time>2020-03-07</time></div><div><i class="fa fa-folder fa-fw"></i>
 <a class=post-taxonomy-topic href=http://gebitang.com/topics/jiansh>jiansh</a>&nbsp;/
 <a class=post-taxonomy-topic href=http://gebitang.com/topics/stf>STF</a></div><div><i class="fa fa-tags fa-fw"></i>
-<a class=post-taxonomy-tag href=http://gebitang.com/tags/jiansh>jiansh</a></div></div></header><p>link on JianShu yarn的确会快得飞起。 STF之Yarn一中简单使用后，从头开始使用yarn安装STF。 进入到bower安装前端模块时，会遇到一些问题</p><footer><a href=http://gebitang.com/post/jiansh/stf/stf%E4%B9%8Byarn%E4%BA%8C/>Read more<i class="fa fa-angle-double-right fa-fw"></i></a></footer></article><article><header><h2><a href=http://gebitang.com/post/jiansh/stf/stf%E4%B9%8Bzeromq/>STF之ZeroMQ</a></h2><div class=post-meta><div><i class="fa fa-calendar fa-fw"></i>
+<a class=post-taxonomy-tag href=http://gebitang.com/tags/jiansh>jiansh</a></div></div></header><p><p><a href=https://www.jianshu.com/p/b536c700cf38>link on JianShu</a></p><p>STF使用命令行<code>stf local</code>方式运行。</p><p><a href=http://www.ruanyifeng.com/blog/2015/05/command-line-with-node.html>Node.js 命令行程序开发教程</a>，执行了 <a href=https://docs.npmjs.com/cli/link>npm link</a>后，实际上执行的就是 <code>lib/cli/index.js</code> 中的命令。</p><p>使用yargs模块实现命令行支持</p></p><footer><a href=http://gebitang.com/post/jiansh/stf/stf%E4%B9%8B%E4%BB%8Estf-local%E8%AF%B4%E5%BC%80%E5%8E%BB/>Read more<i class="fa fa-angle-double-right fa-fw"></i></a></footer></article><article><header><h2><a href=http://gebitang.com/post/jiansh/stf/stf%E4%B9%8B%E5%A4%8D%E7%94%A8adb%E4%B8%80/>STF之复用ADB一</a></h2><div class=post-meta><div><i class="fa fa-calendar fa-fw"></i>
 <time>2020-03-07</time></div><div><i class="fa fa-folder fa-fw"></i>
 <a class=post-taxonomy-topic href=http://gebitang.com/topics/jiansh>jiansh</a>&nbsp;/
 <a class=post-taxonomy-topic href=http://gebitang.com/topics/stf>STF</a></div><div><i class="fa fa-tags fa-fw"></i>
-<a class=post-taxonomy-tag href=http://gebitang.com/tags/jiansh>jiansh</a></div></div></header><p>link on JianShu STF consists of multiple independent processes communicating via ZeroMQ and Protocol Buffers. 使用ZeroMQ进行zmq socket通信，使用Protocol Buffers定义通信内容。 官方指南 ，正式权威</p><footer><a href=http://gebitang.com/post/jiansh/stf/stf%E4%B9%8Bzeromq/>Read more<i class="fa fa-angle-double-right fa-fw"></i></a></footer></article><article><header><h2><a href=http://gebitang.com/post/jiansh/stf/stf%E4%B9%8B%E4%B8%80%E8%88%AC%E4%BE%9D%E8%B5%96%E5%92%8Cphantomjs/>STF之一般依赖和phantomjs</a></h2><div class=post-meta><div><i class="fa fa-calendar fa-fw"></i>
+<a class=post-taxonomy-tag href=http://gebitang.com/tags/jiansh>jiansh</a></div></div></header><p><p><a href=https://www.jianshu.com/p/02a561879ef6>link on JianShu</a></p><p>假如还有一个Java应用也需要连接、管理设备，是否可以和STF共享？</p><p>在重温了官方说明以及google之后，以下方案应该是可行的：</p></p><footer><a href=http://gebitang.com/post/jiansh/stf/stf%E4%B9%8B%E5%A4%8D%E7%94%A8adb%E4%B8%80/>Read more<i class="fa fa-angle-double-right fa-fw"></i></a></footer></article><article><header><h2><a href=http://gebitang.com/post/jiansh/stf/stf%E4%B9%8B%E5%AE%89%E8%A3%85%E5%A4%B1%E8%B4%A5%E9%97%AE%E9%A2%98/>STF之安装失败问题</a></h2><div class=post-meta><div><i class="fa fa-calendar fa-fw"></i>
 <time>2020-03-07</time></div><div><i class="fa fa-folder fa-fw"></i>
 <a class=post-taxonomy-topic href=http://gebitang.com/topics/jiansh>jiansh</a>&nbsp;/
 <a class=post-taxonomy-topic href=http://gebitang.com/topics/stf>STF</a></div><div><i class="fa fa-tags fa-fw"></i>
-<a class=post-taxonomy-tag href=http://gebitang.com/tags/jiansh>jiansh</a></div></div></header><p>link on JianShu brew 本地安装 只使用provider服务的话，可以不安装rethinkdb（恰好这是最大的一个文件）。brew install graphicsmagick zeromq protobuf yasm pkg-conf 如果需要，可以使</p><footer><a href=http://gebitang.com/post/jiansh/stf/stf%E4%B9%8B%E4%B8%80%E8%88%AC%E4%BE%9D%E8%B5%96%E5%92%8Cphantomjs/>Read more<i class="fa fa-angle-double-right fa-fw"></i></a></footer></article><article><header><h2><a href=http://gebitang.com/post/jiansh/stf/stf%E4%B9%8B%E4%BB%8Estf-local%E8%AF%B4%E5%BC%80%E5%8E%BB/>STF之从stf-local说开去</a></h2><div class=post-meta><div><i class="fa fa-calendar fa-fw"></i>
+<a class=post-taxonomy-tag href=http://gebitang.com/tags/jiansh>jiansh</a></div></div></header><p><p><a href=https://www.jianshu.com/p/c597e0a2aca4>link on JianShu</a></p><p>遇到实际的apk包打包问题导致在低版本上不兼容，导致安装失败。 这种情况下STF是给不出来错误提示的。</p><p>看后台log，报错信息类似——</p></p><footer><a href=http://gebitang.com/post/jiansh/stf/stf%E4%B9%8B%E5%AE%89%E8%A3%85%E5%A4%B1%E8%B4%A5%E9%97%AE%E9%A2%98/>Read more<i class="fa fa-angle-double-right fa-fw"></i></a></footer></article><article><header><h2><a href=http://gebitang.com/post/jiansh/stf/stf%E4%B9%8B%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%E4%B8%8D%E6%98%BE%E7%A4%BA-ubuntu18-04/>STF之屏幕截图不显示-ubuntu18-04</a></h2><div class=post-meta><div><i class="fa fa-calendar fa-fw"></i>
 <time>2020-03-07</time></div><div><i class="fa fa-folder fa-fw"></i>
 <a class=post-taxonomy-topic href=http://gebitang.com/topics/jiansh>jiansh</a>&nbsp;/
 <a class=post-taxonomy-topic href=http://gebitang.com/topics/stf>STF</a></div><div><i class="fa fa-tags fa-fw"></i>
-<a class=post-taxonomy-tag href=http://gebitang.com/tags/jiansh>jiansh</a></div></div></header><p>link on JianShu STF使用命令行stf local方式运行。 Node.js 命令行程序开发教程，执行了 npm link后，实际上执行的就是 lib/cli/index.js 中的命令。 使用yargs模块实现</p><footer><a href=http://gebitang.com/post/jiansh/stf/stf%E4%B9%8B%E4%BB%8Estf-local%E8%AF%B4%E5%BC%80%E5%8E%BB/>Read more<i class="fa fa-angle-double-right fa-fw"></i></a></footer></article><article><header><h2><a href=http://gebitang.com/post/jiansh/stf/stf%E4%B9%8B%E5%A4%8D%E7%94%A8adb%E4%B8%80/>STF之复用ADB一</a></h2><div class=post-meta><div><i class="fa fa-calendar fa-fw"></i>
+<a class=post-taxonomy-tag href=http://gebitang.com/tags/jiansh>jiansh</a></div></div></header><p><p><a href=https://www.jianshu.com/p/f6d334c822be>link to JianShu</a></p><p>TL, DR.</p><blockquote><p>GraphicsMagic的依赖不满足，无法支持jpeg图片的resize功能。</p></blockquote><p>解决方案： 安装对应的依赖，目前截图功能使用的为jpeg格式，仅安装jpeg支持即可<code>sudo apt install libjpeg9</code></p></p><footer><a href=http://gebitang.com/post/jiansh/stf/stf%E4%B9%8B%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%E4%B8%8D%E6%98%BE%E7%A4%BA-ubuntu18-04/>Read more<i class="fa fa-angle-double-right fa-fw"></i></a></footer></article><article><header><h2><a href=http://gebitang.com/post/jiansh/stf/stf%E4%B9%8B%E6%96%B0%E5%A2%9E%E9%A1%B5%E9%9D%A2%E4%B8%80%E6%96%B9%E6%A1%88/>STF之新增页面一：方案</a></h2><div class=post-meta><div><i class="fa fa-calendar fa-fw"></i>
 <time>2020-03-07</time></div><div><i class="fa fa-folder fa-fw"></i>
 <a class=post-taxonomy-topic href=http://gebitang.com/topics/jiansh>jiansh</a>&nbsp;/
 <a class=post-taxonomy-topic href=http://gebitang.com/topics/stf>STF</a></div><div><i class="fa fa-tags fa-fw"></i>
-<a class=post-taxonomy-tag href=http://gebitang.com/tags/jiansh>jiansh</a></div></div></header><p>link on JianShu 假如还有一个Java应用也需要连接、管理设备，是否可以和STF共享？ 在重温了官方说明以及google之后，以下方案应该是可行的： PC上</p><footer><a href=http://gebitang.com/post/jiansh/stf/stf%E4%B9%8B%E5%A4%8D%E7%94%A8adb%E4%B8%80/>Read more<i class="fa fa-angle-double-right fa-fw"></i></a></footer></article><article><header><h2><a href=http://gebitang.com/post/jiansh/stf/stf%E4%B9%8B%E5%AE%89%E8%A3%85%E5%A4%B1%E8%B4%A5%E9%97%AE%E9%A2%98/>STF之安装失败问题</a></h2><div class=post-meta><div><i class="fa fa-calendar fa-fw"></i>
+<a class=post-taxonomy-tag href=http://gebitang.com/tags/jiansh>jiansh</a></div></div></header><p><p><a href=https://www.jianshu.com/p/400293c94f03>link on JianShu</a></p><p><a href=https://www.jianshu.com/p/538e516643aa>STF之RethinkDB三:设备使用</a>里已经在数据库里记录里设备使用时长到信息，需要一个前端页面进行展示。</p></p><footer><a href=http://gebitang.com/post/jiansh/stf/stf%E4%B9%8B%E6%96%B0%E5%A2%9E%E9%A1%B5%E9%9D%A2%E4%B8%80%E6%96%B9%E6%A1%88/>Read more<i class="fa fa-angle-double-right fa-fw"></i></a></footer></article><article><header><h2><a href=http://gebitang.com/post/jiansh/stf/stf%E4%B9%8B%E6%96%B0%E5%A2%9E%E9%A1%B5%E9%9D%A2%E4%B8%89%E5%85%88%E7%94%BB%E5%8F%AA%E7%8A%AC/>STF之新增页面三：先画只犬</a></h2><div class=post-meta><div><i class="fa fa-calendar fa-fw"></i>
 <time>2020-03-07</time></div><div><i class="fa fa-folder fa-fw"></i>
 <a class=post-taxonomy-topic href=http://gebitang.com/topics/jiansh>jiansh</a>&nbsp;/
 <a class=post-taxonomy-topic href=http://gebitang.com/topics/stf>STF</a></div><div><i class="fa fa-tags fa-fw"></i>
-<a class=post-taxonomy-tag href=http://gebitang.com/tags/jiansh>jiansh</a></div></div></header><p>link on JianShu 遇到实际的apk包打包问题导致在低版本上不兼容，导致安装失败。 这种情况下STF是给不出来错误提示的。 看后台log，报错信息类似—— 2019-08-27T12:36:04.694Z INF/storage:temp</p><footer><a href=http://gebitang.com/post/jiansh/stf/stf%E4%B9%8B%E5%AE%89%E8%A3%85%E5%A4%B1%E8%B4%A5%E9%97%AE%E9%A2%98/>Read more<i class="fa fa-angle-double-right fa-fw"></i></a></footer></article><article><header><h2><a href=http://gebitang.com/post/jiansh/stf/stf%E4%B9%8B%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%E4%B8%8D%E6%98%BE%E7%A4%BA-ubuntu18-04/>STF之屏幕截图不显示-ubuntu18-04</a></h2><div class=post-meta><div><i class="fa fa-calendar fa-fw"></i>
+<a class=post-taxonomy-tag href=http://gebitang.com/tags/jiansh>jiansh</a></div></div></header><p><p><a href=https://www.jianshu.com/p/536d91d004a8>link on JianShu</a></p><p><a href=https://www.jianshu.com/p/a2a4e186fc77>STF之新增页面三：照猫画虎</a>画虎不成反类犬，一个页面加两天。</p></p><footer><a href=http://gebitang.com/post/jiansh/stf/stf%E4%B9%8B%E6%96%B0%E5%A2%9E%E9%A1%B5%E9%9D%A2%E4%B8%89%E5%85%88%E7%94%BB%E5%8F%AA%E7%8A%AC/>Read more<i class="fa fa-angle-double-right fa-fw"></i></a></footer></article><article><header><h2><a href=http://gebitang.com/post/jiansh/stf/stf%E4%B9%8B%E6%96%B0%E5%A2%9E%E9%A1%B5%E9%9D%A2%E4%B8%89%E7%85%A7%E7%8C%AB%E7%94%BB%E8%99%8E/>STF之新增页面三：照猫画虎</a></h2><div class=post-meta><div><i class="fa fa-calendar fa-fw"></i>
 <time>2020-03-07</time></div><div><i class="fa fa-folder fa-fw"></i>
 <a class=post-taxonomy-topic href=http://gebitang.com/topics/jiansh>jiansh</a>&nbsp;/
 <a class=post-taxonomy-topic href=http://gebitang.com/topics/stf>STF</a></div><div><i class="fa fa-tags fa-fw"></i>
-<a class=post-taxonomy-tag href=http://gebitang.com/tags/jiansh>jiansh</a></div></div></header><p>link to JianShu TL, DR. GraphicsMagic的依赖不满足，无法支持jpeg图片的resize功能。 解决方案： 安装对应的依赖，目前截图功能使用的为jp</p><footer><a href=http://gebitang.com/post/jiansh/stf/stf%E4%B9%8B%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%E4%B8%8D%E6%98%BE%E7%A4%BA-ubuntu18-04/>Read more<i class="fa fa-angle-double-right fa-fw"></i></a></footer></article><article><header><h2><a href=http://gebitang.com/post/jiansh/stf/stf%E4%B9%8B%E6%96%B0%E5%A2%9E%E9%A1%B5%E9%9D%A2%E4%B8%80%E6%96%B9%E6%A1%88/>STF之新增页面一：方案</a></h2><div class=post-meta><div><i class="fa fa-calendar fa-fw"></i>
+<a class=post-taxonomy-tag href=http://gebitang.com/tags/jiansh>jiansh</a></div></div></header><p><p><a href=https://www.jianshu.com/p/a2a4e186fc77>link on JianShu</a></p><p>目前<a href=https://www.jianshu.com/p/b83027a4e295>STF之新增页面二：融合</a>方案对我来说要求还比较高，先照葫芦画瓢吧。</p></p><footer><a href=http://gebitang.com/post/jiansh/stf/stf%E4%B9%8B%E6%96%B0%E5%A2%9E%E9%A1%B5%E9%9D%A2%E4%B8%89%E7%85%A7%E7%8C%AB%E7%94%BB%E8%99%8E/>Read more<i class="fa fa-angle-double-right fa-fw"></i></a></footer></article><article><header><h2><a href=http://gebitang.com/post/jiansh/stf/stf%E4%B9%8B%E6%96%B0%E5%A2%9E%E9%A1%B5%E9%9D%A2%E4%BA%8C%E8%9E%8D%E5%90%88/>STF之新增页面二：融合</a></h2><div class=post-meta><div><i class="fa fa-calendar fa-fw"></i>
 <time>2020-03-07</time></div><div><i class="fa fa-folder fa-fw"></i>
 <a class=post-taxonomy-topic href=http://gebitang.com/topics/jiansh>jiansh</a>&nbsp;/
 <a class=post-taxonomy-topic href=http://gebitang.com/topics/stf>STF</a></div><div><i class="fa fa-tags fa-fw"></i>
-<a class=post-taxonomy-tag href=http://gebitang.com/tags/jiansh>jiansh</a></div></div></header><p>link on JianShu STF之RethinkDB三:设备使用里已经在数据库里记录里设备使用时长到信息，需要一个前端页面进行展示。 STF 二次开发辛酸之路里有提到如</p><footer><a href=http://gebitang.com/post/jiansh/stf/stf%E4%B9%8B%E6%96%B0%E5%A2%9E%E9%A1%B5%E9%9D%A2%E4%B8%80%E6%96%B9%E6%A1%88/>Read more<i class="fa fa-angle-double-right fa-fw"></i></a></footer></article><article><header><h2><a href=http://gebitang.com/post/jiansh/stf/stf%E4%B9%8B%E6%96%B0%E5%A2%9E%E9%A1%B5%E9%9D%A2%E4%B8%89%E5%85%88%E7%94%BB%E5%8F%AA%E7%8A%AC/>STF之新增页面三：先画只犬</a></h2><div class=post-meta><div><i class="fa fa-calendar fa-fw"></i>
+<a class=post-taxonomy-tag href=http://gebitang.com/tags/jiansh>jiansh</a></div></div></header><p><p><a href=https://www.jianshu.com/p/b83027a4e295>link on JianShu</a></p><p>跟着练手： <a href=https://github.com/arcadeJHS/AngularVueIntegration>Code</a> + <a href=https://exmachina.ch/technical/migrating-angular-to-vue/>article</a>已经很周到了。</p></p><footer><a href=http://gebitang.com/post/jiansh/stf/stf%E4%B9%8B%E6%96%B0%E5%A2%9E%E9%A1%B5%E9%9D%A2%E4%BA%8C%E8%9E%8D%E5%90%88/>Read more<i class="fa fa-angle-double-right fa-fw"></i></a></footer></article><article><header><h2><a href=http://gebitang.com/post/jiansh/stf/stf%E4%B9%8B%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%E5%8F%AF%E8%83%BD%E7%9A%84%E5%87%A0%E4%B8%AA%E5%9D%91/>STF之环境搭建可能的几个坑</a></h2><div class=post-meta><div><i class="fa fa-calendar fa-fw"></i>
 <time>2020-03-07</time></div><div><i class="fa fa-folder fa-fw"></i>
 <a class=post-taxonomy-topic href=http://gebitang.com/topics/jiansh>jiansh</a>&nbsp;/
 <a class=post-taxonomy-topic href=http://gebitang.com/topics/stf>STF</a></div><div><i class="fa fa-tags fa-fw"></i>
-<a class=post-taxonomy-tag href=http://gebitang.com/tags/jiansh>jiansh</a></div></div></header><p>link on JianShu STF之新增页面三：照猫画虎画虎不成反类犬，一个页面加两天。 前天把后天接口实现了，昨天一天也没搞定到底怎么画个页面出来。最开始是参考设</p><footer><a href=http://gebitang.com/post/jiansh/stf/stf%E4%B9%8B%E6%96%B0%E5%A2%9E%E9%A1%B5%E9%9D%A2%E4%B8%89%E5%85%88%E7%94%BB%E5%8F%AA%E7%8A%AC/>Read more<i class="fa fa-angle-double-right fa-fw"></i></a></footer></article><article><header><h2><a href=http://gebitang.com/post/jiansh/stf/stf%E4%B9%8B%E6%96%B0%E5%A2%9E%E9%A1%B5%E9%9D%A2%E4%B8%89%E7%85%A7%E7%8C%AB%E7%94%BB%E8%99%8E/>STF之新增页面三：照猫画虎</a></h2><div class=post-meta><div><i class="fa fa-calendar fa-fw"></i>
+<a class=post-taxonomy-tag href=http://gebitang.com/tags/jiansh>jiansh</a></div></div></header><p><p><a href=https://www.jianshu.com/p/82e0d75db14b>link on JianShu</a></p><ol><li><p>Error: listen EADDRINUSE :::8080 at Server.setupListenHandle
+这是端口被占用导致的，更换端口即可</p></li><li><p>fatal: unable to access &lsquo;<a href="https://github.com/AdiDahan/ng-context-menu.git/'">https://github.com/AdiDahan/ng-context-menu.git/'</a>: Could not resolve proxy: localhost
+或者 proxy had an error Error: getaddrinfo ENOTFOUND localhost</p></li></ol><p>本地的hosts文件导致的无法解析localhost，<a href=https://github.com/angular/angular-cli/issues/2227>参考</a>，使用SwitchHosts之类的软件更改hosts之后，生效的host文件需要保留以下内容——</p></p><footer><a href=http://gebitang.com/post/jiansh/stf/stf%E4%B9%8B%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%E5%8F%AF%E8%83%BD%E7%9A%84%E5%87%A0%E4%B8%AA%E5%9D%91/>Read more<i class="fa fa-angle-double-right fa-fw"></i></a></footer></article><article><header><h2><a href=http://gebitang.com/post/jiansh/stf/stf%E4%B9%8B%E7%BD%91%E7%BB%9C%E6%B5%81%E9%87%8F%E7%9B%91%E6%8E%A7/>STF之网络流量监控</a></h2><div class=post-meta><div><i class="fa fa-calendar fa-fw"></i>
 <time>2020-03-07</time></div><div><i class="fa fa-folder fa-fw"></i>
 <a class=post-taxonomy-topic href=http://gebitang.com/topics/jiansh>jiansh</a>&nbsp;/
 <a class=post-taxonomy-topic href=http://gebitang.com/topics/stf>STF</a></div><div><i class="fa fa-tags fa-fw"></i>
-<a class=post-taxonomy-tag href=http://gebitang.com/tags/jiansh>jiansh</a></div></div></header><p>link on JianShu 目前STF之新增页面二：融合方案对我来说要求还比较高，先照葫芦画瓢吧。 参照res/app/settings目录下对代码结构+前端页面对</p><footer><a href=http://gebitang.com/post/jiansh/stf/stf%E4%B9%8B%E6%96%B0%E5%A2%9E%E9%A1%B5%E9%9D%A2%E4%B8%89%E7%85%A7%E7%8C%AB%E7%94%BB%E8%99%8E/>Read more<i class="fa fa-angle-double-right fa-fw"></i></a></footer></article><article><header><h2><a href=http://gebitang.com/post/jiansh/stf/stf%E4%B9%8B%E6%96%B0%E5%A2%9E%E9%A1%B5%E9%9D%A2%E4%BA%8C%E8%9E%8D%E5%90%88/>STF之新增页面二：融合</a></h2><div class=post-meta><div><i class="fa fa-calendar fa-fw"></i>
+<a class=post-taxonomy-tag href=http://gebitang.com/tags/jiansh>jiansh</a></div></div></header><p><p><a href=https://www.jianshu.com/p/c6f1a4e35299>link on JianShu</a></p><p>STF部署在内网环境上，办公网络访问时时快时慢。需要定位一下到底是什么原因。</p><p>使用ping周期性访问服务器地址，记录显示的确网络不稳定——</p></p><footer><a href=http://gebitang.com/post/jiansh/stf/stf%E4%B9%8B%E7%BD%91%E7%BB%9C%E6%B5%81%E9%87%8F%E7%9B%91%E6%8E%A7/>Read more<i class="fa fa-angle-double-right fa-fw"></i></a></footer></article><article><header><h2><a href=http://gebitang.com/post/jiansh/stf/stf%E4%B9%8B%E8%AE%BE%E5%A4%87%E6%8E%A5%E5%85%A5/>STF之设备接入</a></h2><div class=post-meta><div><i class="fa fa-calendar fa-fw"></i>
 <time>2020-03-07</time></div><div><i class="fa fa-folder fa-fw"></i>
 <a class=post-taxonomy-topic href=http://gebitang.com/topics/jiansh>jiansh</a>&nbsp;/
 <a class=post-taxonomy-topic href=http://gebitang.com/topics/stf>STF</a></div><div><i class="fa fa-tags fa-fw"></i>
-<a class=post-taxonomy-tag href=http://gebitang.com/tags/jiansh>jiansh</a></div></div></header><p>link on JianShu 跟着练手： Code + article已经很周到了。 tag-01-angular-app 第一阶段：纯angular方式 $ctrl 含义 $ctrl is the view model object in your controller. This $ctrl is a name you choose (vm is another most common name), if you check your code</p><footer><a href=http://gebitang.com/post/jiansh/stf/stf%E4%B9%8B%E6%96%B0%E5%A2%9E%E9%A1%B5%E9%9D%A2%E4%BA%8C%E8%9E%8D%E5%90%88/>Read more<i class="fa fa-angle-double-right fa-fw"></i></a></footer></article><article><header><h2><a href=http://gebitang.com/post/jiansh/stf/stf%E4%B9%8B%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%E5%8F%AF%E8%83%BD%E7%9A%84%E5%87%A0%E4%B8%AA%E5%9D%91/>STF之环境搭建可能的几个坑</a></h2><div class=post-meta><div><i class="fa fa-calendar fa-fw"></i>
+<a class=post-taxonomy-tag href=http://gebitang.com/tags/jiansh>jiansh</a></div></div></header><p><p><a href=https://www.jianshu.com/p/fba47e162299>link on JianShu</a></p><p>这是个体力活。</p><p>先要把设备信息先记录下来，类似这样都信息需要先手动录入——
+<img src=https://upload-images.jianshu.io/upload_images/3296949-32a7cb6742e5c2b3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240 alt></p><h3 id=打开usb调试>打开USB调试</h3><p>USB调试打开都开关并没有统一到“点击7次内核版本”上，需要在手机信息里试。比如小米是在MIUI到版本上多点击几次——倒是发现了隐藏属性：点击3次内核版本，打开cit测试；点击处理器多次，开启抓log。</p></p><footer><a href=http://gebitang.com/post/jiansh/stf/stf%E4%B9%8B%E8%AE%BE%E5%A4%87%E6%8E%A5%E5%85%A5/>Read more<i class="fa fa-angle-double-right fa-fw"></i></a></footer></article><article><header><h2><a href=http://gebitang.com/post/jiansh/stf/%E5%A4%87%E4%BB%BD3-stf%E4%B9%8Boauth%E6%8E%A2%E7%B4%A2%E4%B8%80/>备份3-STF之OAuth探索一</a></h2><div class=post-meta><div><i class="fa fa-calendar fa-fw"></i>
 <time>2020-03-07</time></div><div><i class="fa fa-folder fa-fw"></i>
 <a class=post-taxonomy-topic href=http://gebitang.com/topics/jiansh>jiansh</a>&nbsp;/
 <a class=post-taxonomy-topic href=http://gebitang.com/topics/stf>STF</a></div><div><i class="fa fa-tags fa-fw"></i>
-<a class=post-taxonomy-tag href=http://gebitang.com/tags/jiansh>jiansh</a></div></div></header><p>link on JianShu Error: listen EADDRINUSE :::8080 at Server.setupListenHandle 这是端口被占用导致的，更换端口即可 fatal: unable to access &lsquo;https://github.com/AdiDahan/ng-context-menu.git/': Could not resolve proxy: localhost 或者 proxy had an error Error: getaddrinfo ENOTFOUND localhost 本地的hosts文件导致的无法解析localho</p><footer><a href=http://gebitang.com/post/jiansh/stf/stf%E4%B9%8B%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%E5%8F%AF%E8%83%BD%E7%9A%84%E5%87%A0%E4%B8%AA%E5%9D%91/>Read more<i class="fa fa-angle-double-right fa-fw"></i></a></footer></article><article><header><h2><a href=http://gebitang.com/post/jiansh/stf/stf%E4%B9%8B%E7%BD%91%E7%BB%9C%E6%B5%81%E9%87%8F%E7%9B%91%E6%8E%A7/>STF之网络流量监控</a></h2><div class=post-meta><div><i class="fa fa-calendar fa-fw"></i>
+<a class=post-taxonomy-tag href=http://gebitang.com/tags/jiansh>jiansh</a></div></div></header><p><p><a href=https://www.jianshu.com/p/1d0202cf5551>link on JianShu</a></p><p>~~<a href=https://www.jianshu.com/p/b39b8dbf1375>STF之OAuth探索一</a>~~删除备份
+<code>2019.07.09 21:56:49 字数 306 阅读 118</code></p></p><footer><a href=http://gebitang.com/post/jiansh/stf/%E5%A4%87%E4%BB%BD3-stf%E4%B9%8Boauth%E6%8E%A2%E7%B4%A2%E4%B8%80/>Read more<i class="fa fa-angle-double-right fa-fw"></i></a></footer></article><article><header><h2><a href=http://gebitang.com/post/jiansh/stf/%E5%AD%A6%E4%B9%A0%E7%94%BB%E6%9E%B6%E6%9E%84%E5%9B%BE/>学习画架构图</a></h2><div class=post-meta><div><i class="fa fa-calendar fa-fw"></i>
 <time>2020-03-07</time></div><div><i class="fa fa-folder fa-fw"></i>
 <a class=post-taxonomy-topic href=http://gebitang.com/topics/jiansh>jiansh</a>&nbsp;/
 <a class=post-taxonomy-topic href=http://gebitang.com/topics/stf>STF</a></div><div><i class="fa fa-tags fa-fw"></i>
-<a class=post-taxonomy-tag href=http://gebitang.com/tags/jiansh>jiansh</a></div></div></header><p>link on JianShu STF部署在内网环境上，办公网络访问时时快时慢。需要定位一下到底是什么原因。 使用ping周期性访问服务器地址，记录显示的确网络不稳定—</p><footer><a href=http://gebitang.com/post/jiansh/stf/stf%E4%B9%8B%E7%BD%91%E7%BB%9C%E6%B5%81%E9%87%8F%E7%9B%91%E6%8E%A7/>Read more<i class="fa fa-angle-double-right fa-fw"></i></a></footer></article><article><header><h2><a href=http://gebitang.com/post/jiansh/stf/stf%E4%B9%8B%E8%AE%BE%E5%A4%87%E6%8E%A5%E5%85%A5/>STF之设备接入</a></h2><div class=post-meta><div><i class="fa fa-calendar fa-fw"></i>
+<a class=post-taxonomy-tag href=http://gebitang.com/tags/jiansh>jiansh</a></div></div></header><p><p><a href=https://www.jianshu.com/p/acc51d387057>link on JianShu</a></p><blockquote><p>解决沟通障碍
+达成共识
+减少歧义</p></blockquote><p><a href=http://www.woshipm.com/pmd/1065960.html>产品经理的高阶能力：架构图的设计与画法&ndash;产品经理</a></p></p><footer><a href=http://gebitang.com/post/jiansh/stf/%E5%AD%A6%E4%B9%A0%E7%94%BB%E6%9E%B6%E6%9E%84%E5%9B%BE/>Read more<i class="fa fa-angle-double-right fa-fw"></i></a></footer></article><article><header><h2><a href=http://gebitang.com/post/jiansh/stf/%E7%B1%BBmonkey%E5%B7%A5%E5%85%B7%E5%AF%B9%E6%AF%94/>类Monkey工具对比</a></h2><div class=post-meta><div><i class="fa fa-calendar fa-fw"></i>
 <time>2020-03-07</time></div><div><i class="fa fa-folder fa-fw"></i>
 <a class=post-taxonomy-topic href=http://gebitang.com/topics/jiansh>jiansh</a>&nbsp;/
 <a class=post-taxonomy-topic href=http://gebitang.com/topics/stf>STF</a></div><div><i class="fa fa-tags fa-fw"></i>
-<a class=post-taxonomy-tag href=http://gebitang.com/tags/jiansh>jiansh</a></div></div></header><p>link on JianShu 这是个体力活。 先要把设备信息先记录下来，类似这样都信息需要先手动录入—— 打开USB调试 USB调试打开都开关并没有统一到“点击7次内核版</p><footer><a href=http://gebitang.com/post/jiansh/stf/stf%E4%B9%8B%E8%AE%BE%E5%A4%87%E6%8E%A5%E5%85%A5/>Read more<i class="fa fa-angle-double-right fa-fw"></i></a></footer></article><article><header><h2><a href=http://gebitang.com/post/jiansh/stf/%E5%A4%87%E4%BB%BD3-stf%E4%B9%8Boauth%E6%8E%A2%E7%B4%A2%E4%B8%80/>备份3-STF之OAuth探索一</a></h2><div class=post-meta><div><i class="fa fa-calendar fa-fw"></i>
-<time>2020-03-07</time></div><div><i class="fa fa-folder fa-fw"></i>
-<a class=post-taxonomy-topic href=http://gebitang.com/topics/jiansh>jiansh</a>&nbsp;/
-<a class=post-taxonomy-topic href=http://gebitang.com/topics/stf>STF</a></div><div><i class="fa fa-tags fa-fw"></i>
-<a class=post-taxonomy-tag href=http://gebitang.com/tags/jiansh>jiansh</a></div></div></header><p>link on JianShu ~~STF之OAuth探索一~~删除备份 2019.07.09 21:56:49 字数 306 阅读 118 新工作第一项要将STF的ldap认证模式修改为SSO方式。 目前的背景是只在交接</p><footer><a href=http://gebitang.com/post/jiansh/stf/%E5%A4%87%E4%BB%BD3-stf%E4%B9%8Boauth%E6%8E%A2%E7%B4%A2%E4%B8%80/>Read more<i class="fa fa-angle-double-right fa-fw"></i></a></footer></article><article><header><h2><a href=http://gebitang.com/post/jiansh/stf/%E5%AD%A6%E4%B9%A0%E7%94%BB%E6%9E%B6%E6%9E%84%E5%9B%BE/>学习画架构图</a></h2><div class=post-meta><div><i class="fa fa-calendar fa-fw"></i>
-<time>2020-03-07</time></div><div><i class="fa fa-folder fa-fw"></i>
-<a class=post-taxonomy-topic href=http://gebitang.com/topics/jiansh>jiansh</a>&nbsp;/
-<a class=post-taxonomy-topic href=http://gebitang.com/topics/stf>STF</a></div><div><i class="fa fa-tags fa-fw"></i>
-<a class=post-taxonomy-tag href=http://gebitang.com/tags/jiansh>jiansh</a></div></div></header><p>link on JianShu 解决沟通障碍 达成共识 减少歧义 产品经理的高阶能力：架构图的设计与画法&ndash;产品经理 如何画好架构图-微信 如何画出一张合格的技术架构</p><footer><a href=http://gebitang.com/post/jiansh/stf/%E5%AD%A6%E4%B9%A0%E7%94%BB%E6%9E%B6%E6%9E%84%E5%9B%BE/>Read more<i class="fa fa-angle-double-right fa-fw"></i></a></footer></article><article><header><h2><a href=http://gebitang.com/post/jiansh/stf/%E7%B1%BBmonkey%E5%B7%A5%E5%85%B7%E5%AF%B9%E6%AF%94/>类Monkey工具对比</a></h2><div class=post-meta><div><i class="fa fa-calendar fa-fw"></i>
-<time>2020-03-07</time></div><div><i class="fa fa-folder fa-fw"></i>
-<a class=post-taxonomy-topic href=http://gebitang.com/topics/jiansh>jiansh</a>&nbsp;/
-<a class=post-taxonomy-topic href=http://gebitang.com/topics/stf>STF</a></div><div><i class="fa fa-tags fa-fw"></i>
-<a class=post-taxonomy-tag href=http://gebitang.com/tags/jiansh>jiansh</a></div></div></header><p>link on JianShu 原生Monkey： 源码参考 实现原理：Java反射获取系统接口，注入事件 http://androidxref.com/5.0.0_r2/xref/development/cmds/monkey/src/com/android/commands/monkey/Monkey.java 控制业务逻辑； http://androidxref.com/5.0.0_r2/xref/development/cmds/monkey/src/com/android/commands/monkey/MonkeyMotionEvent.java 事件注入实现 功能—— 系统自带支持；随机点击、滑</p><footer><a href=http://gebitang.com/post/jiansh/stf/%E7%B1%BBmonkey%E5%B7%A5%E5%85%B7%E5%AF%B9%E6%AF%94/>Read more<i class="fa fa-angle-double-right fa-fw"></i></a></footer></article></div></div></div><script src=http://gebitang.com/js/ui.js></script><script src=http://gebitang.com/js/menus.js></script><script>window.location.hostname!="localhost"&&(function(e,t,n,s,o,i,a){e.GoogleAnalyticsObject=o,e[o]=e[o]||function(){(e[o].q=e[o].q||[]).push(arguments)},e[o].l=1*new Date,i=t.createElement(n),a=t.getElementsByTagName(n)[0],i.async=1,i.src=s,a.parentNode.insertBefore(i,a)}(window,document,"script","//www.google-analytics.com/analytics.js","ga"),ga("create","UA-34303694-1","auto"),ga("send","pageview"))</script><button onclick=topFunction() id=myBtn title="Go to top">Top</button></body></html>
+<a class=post-taxonomy-tag href=http://gebitang.com/tags/jiansh>jiansh</a></div></div></header><p><p><a href=https://www.jianshu.com/p/13d09692a410>link on JianShu</a></p><p>原生<a href=https://developer.android.google.cn/studio/test/monkey>Monkey</a>：</p><p><a href=http://androidxref.com/5.0.0_r2/xref/development/cmds/monkey/src/com/android/commands/monkey/>源码参考</a></p></p><footer><a href=http://gebitang.com/post/jiansh/stf/%E7%B1%BBmonkey%E5%B7%A5%E5%85%B7%E5%AF%B9%E6%AF%94/>Read more<i class="fa fa-angle-double-right fa-fw"></i></a></footer></article></div></div></div><script src=http://gebitang.com/js/ui.js></script><script src=http://gebitang.com/js/menus.js></script><script>window.location.hostname!="localhost"&&(function(e,t,n,s,o,i,a){e.GoogleAnalyticsObject=o,e[o]=e[o]||function(){(e[o].q=e[o].q||[]).push(arguments)},e[o].l=1*new Date,i=t.createElement(n),a=t.getElementsByTagName(n)[0],i.async=1,i.src=s,a.parentNode.insertBefore(i,a)}(window,document,"script","//www.google-analytics.com/analytics.js","ga"),ga("create","UA-34303694-1","auto"),ga("send","pageview"))</script><button onclick=topFunction() id=myBtn title="Go to top">Top</button></body></html>

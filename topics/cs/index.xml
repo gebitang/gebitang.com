@@ -1,1 +1,11 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Cs on 戈壁堂</title><link>http://gebitang.com/topics/cs/</link><description>Recent content in Cs on 戈壁堂</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Wed, 09 May 2018 00:00:00 +0000</lastBuildDate><atom:link href="http://gebitang.com/topics/cs/index.xml" rel="self" type="application/rss+xml"/><item><title>CS course</title><link>http://gebitang.com/post/what/no00-cs-c-family/</link><pubDate>Wed, 09 May 2018 00:00:00 +0000</pubDate><guid>http://gebitang.com/post/what/no00-cs-c-family/</guid><description>Object-C + 可通过类名直接调用这个方法（ java 中的 static 方法相似） - 要实例化这个对象,然后通过实例化的对象来调用该方法 archive before 2023-01-19 双感叹号 两个!是为了把非0值转换</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Cs on 戈壁堂</title><link>http://gebitang.com/topics/cs/</link><description>Recent content in Cs on 戈壁堂</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Wed, 09 May 2018 00:00:00 +0000</lastBuildDate><atom:link href="http://gebitang.com/topics/cs/index.xml" rel="self" type="application/rss+xml"/><item><title>CS course</title><link>http://gebitang.com/post/what/no00-cs-c-family/</link><pubDate>Wed, 09 May 2018 00:00:00 +0000</pubDate><guid>http://gebitang.com/post/what/no00-cs-c-family/</guid><description>&lt;h2 id="object-c">Object-C&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>+&lt;/code> 可通过类名直接调用这个方法（ java 中的 static 方法相似）&lt;/li>
+&lt;li>&lt;code>- &lt;/code> 要实例化这个对象,然后通过实例化的对象来调用该方法&lt;/li>
+&lt;/ul>
+&lt;h2 id="archive">archive&lt;/h2>
+&lt;p>before 2023-01-19&lt;/p>
+&lt;h3 id="双感叹号">双感叹号&lt;/h3>
+&lt;p>两个!是为了把非0值转换成1,而0值还是0。
+在C语言中，所以非0值都表示真。所以!非0值 = 0，而!0 = 1。
+所以!!非0值 = 1，而!!0 = 0&lt;/p></description></item></channel></rss>

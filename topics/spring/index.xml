@@ -1,1 +1,114 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Spring on 戈壁堂</title><link>http://gebitang.com/topics/spring/</link><description>Recent content in Spring on 戈壁堂</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Sun, 07 Mar 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://gebitang.com/topics/spring/index.xml" rel="self" type="application/rss+xml"/><item><title>Spring-boot-project-trial</title><link>http://gebitang.com/post/jiansh/spring/spring-boot-project-trial/</link><pubDate>Sun, 07 Mar 2021 00:00:00 +0000</pubDate><guid>http://gebitang.com/post/jiansh/spring/spring-boot-project-trial/</guid><description>涉及到的问题： Spring boot工程基础 使用bootcase工程完成练习。 yaml文件类型的配置使用，可参考spring yaml 默认位置为/myAppli</description></item><item><title>Mybatis</title><link>http://gebitang.com/post/how/mybatis/</link><pubDate>Thu, 14 Jan 2021 00:00:00 +0000</pubDate><guid>http://gebitang.com/post/how/mybatis/</guid><description>Basic info 工作原理 中文官方文档：入门 中文官方文档mybatis-spring：入门 最后实际用的应该是 mybatis-spring-boot-starter example for spring-boot-starter Mybatis generator 上面三篇读完基本就可以动手了。 JD</description></item><item><title>lettuce-redis--Could-not-get-a-resource-from-the-pool</title><link>http://gebitang.com/post/jiansh/spring/lettuce-redis--could-not-get-a-resource-from-the-pool/</link><pubDate>Sat, 07 Mar 2020 00:00:00 +0000</pubDate><guid>http://gebitang.com/post/jiansh/spring/lettuce-redis--could-not-get-a-resource-from-the-pool/</guid><description>link to JianShu这篇估计因为提到了VPN，至今依然是“仅自己可见” 使用VPN链接公司内网的环境。本地调试链接Redis时是不是会提示：完整</description></item><item><title>Maven-build-lifesycle</title><link>http://gebitang.com/post/jiansh/spring/maven-build-lifesycle/</link><pubDate>Sat, 07 Mar 2020 00:00:00 +0000</pubDate><guid>http://gebitang.com/post/jiansh/spring/maven-build-lifesycle/</guid><description>link on JianShu Introduction to the Build Lifecycle validate - validate the project is correct and all necessary information is available compile - compile the source code of the project test - test the compiled source code using a suitable unit testing framework. These tests should not require the code be packaged or deployed package - take the compiled code and package it in its distributable format, such as a</description></item><item><title>Maven-pom-packaging</title><link>http://gebitang.com/post/jiansh/spring/maven-pom-packaging/</link><pubDate>Sat, 07 Mar 2020 00:00:00 +0000</pubDate><guid>http://gebitang.com/post/jiansh/spring/maven-pom-packaging/</guid><description>link on JianShu What is “pom” packaging in maven? pom packaging is simply a specification that states the primary artifact is not a war or jar, but the pom.xml itself. 只是一直打包形式，打包为pom文件本身。加入当前目录是做完文档模块存在，</description></item><item><title>Spring-boot服务(一)</title><link>http://gebitang.com/post/jiansh/spring/spring-boot%E6%9C%8D%E5%8A%A1%E4%B8%80/</link><pubDate>Sat, 07 Mar 2020 00:00:00 +0000</pubDate><guid>http://gebitang.com/post/jiansh/spring/spring-boot%E6%9C%8D%E5%8A%A1%E4%B8%80/</guid><description>link to JianShu 阿里云 目前阿里云新用户有优惠，89年一年。购买的是劵，然后用劵再正式开通服务，设置好用户名密码，默认22端口开通。可以远程访问。 阿里云</description></item><item><title>Spring-boot服务(二)：aliyun</title><link>http://gebitang.com/post/jiansh/spring/spring-boot%E6%9C%8D%E5%8A%A1%E4%BA%8Caliyun/</link><pubDate>Sat, 07 Mar 2020 00:00:00 +0000</pubDate><guid>http://gebitang.com/post/jiansh/spring/spring-boot%E6%9C%8D%E5%8A%A1%E4%BA%8Caliyun/</guid><description>link on JianShu 从头再来。旧的镜像在我安装gitlab之后Gitlab CE，现在远程登录相当慢。重新初始化了一下镜像。使用强密码策略。 安装zsh+oh</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Spring on 戈壁堂</title><link>http://gebitang.com/topics/spring/</link><description>Recent content in Spring on 戈壁堂</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Sun, 07 Mar 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://gebitang.com/topics/spring/index.xml" rel="self" type="application/rss+xml"/><item><title>Spring-boot-project-trial</title><link>http://gebitang.com/post/jiansh/spring/spring-boot-project-trial/</link><pubDate>Sun, 07 Mar 2021 00:00:00 +0000</pubDate><guid>http://gebitang.com/post/jiansh/spring/spring-boot-project-trial/</guid><description>&lt;p>涉及到的问题：&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>Spring boot工程基础
+使用bootcase工程完成练习。&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>yaml文件类型的配置使用，可参考&lt;a href="https://www.baeldung.com/spring-yaml">spring yaml&lt;/a>
+默认位置为&lt;code>/myApplication/src/main/resources/application.yml&lt;/code> 支持多环境配置&lt;/p></description></item><item><title>Mybatis</title><link>http://gebitang.com/post/how/mybatis/</link><pubDate>Thu, 14 Jan 2021 00:00:00 +0000</pubDate><guid>http://gebitang.com/post/how/mybatis/</guid><description>&lt;h2 id="basic-info">Basic info&lt;/h2>
+&lt;p>&lt;a href="http://www.mybatis.cn/archives/706.html">工作原理&lt;/a>&lt;br>
+&lt;a href="https://mybatis.org/mybatis-3/zh/getting-started.html">中文官方文档：入门&lt;/a>&lt;br>
+&lt;a href="http://mybatis.org/spring/zh/">中文官方文档mybatis-spring：入门&lt;/a>&lt;/p></description></item><item><title>lettuce-redis--Could-not-get-a-resource-from-the-pool</title><link>http://gebitang.com/post/jiansh/spring/lettuce-redis--could-not-get-a-resource-from-the-pool/</link><pubDate>Sat, 07 Mar 2020 00:00:00 +0000</pubDate><guid>http://gebitang.com/post/jiansh/spring/lettuce-redis--could-not-get-a-resource-from-the-pool/</guid><description>&lt;p>&lt;a href="https://www.jianshu.com/p/f998c57071ec">link to JianShu&lt;/a>这篇估计因为提到了VPN，至今依然是“仅自己可见”&lt;/p>
+&lt;p>使用VPN链接公司内网的环境。本地调试链接Redis时是不是会提示：完整log&lt;/p></description></item><item><title>Maven-build-lifesycle</title><link>http://gebitang.com/post/jiansh/spring/maven-build-lifesycle/</link><pubDate>Sat, 07 Mar 2020 00:00:00 +0000</pubDate><guid>http://gebitang.com/post/jiansh/spring/maven-build-lifesycle/</guid><description>&lt;p>&lt;a href="https://www.jianshu.com/p/129f0fb059b9">link on JianShu&lt;/a>&lt;/p>
+&lt;p>&lt;a href="https://maven.apache.org/guides/introduction/introduction-to-the-lifecycle.html">Introduction to the Build Lifecycle&lt;/a>&lt;/p>
+&lt;ul>
+&lt;li>&lt;code>validate&lt;/code> - validate the project is correct and all necessary information is available&lt;/li>
+&lt;li>&lt;code>compile&lt;/code> - compile the source code of the project&lt;/li>
+&lt;li>&lt;code>test&lt;/code> - test the compiled source code using a suitable unit testing framework. These tests should not require the code be packaged or deployed&lt;/li>
+&lt;li>&lt;code>package&lt;/code> - take the compiled code and package it in its distributable format, such as a JAR.&lt;/li>
+&lt;li>&lt;code>verify&lt;/code> - run any checks on results of integration tests to ensure quality criteria are met&lt;/li>
+&lt;li>&lt;code>install&lt;/code> - install the package into the local repository, for use as a dependency in other projects locally&lt;/li>
+&lt;li>&lt;code>deploy&lt;/code> - done in the build environment, copies the final package to the remote repository for sharing with other developers and projects.&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;ul>
+&lt;li>mvn clean package依次执行了clean、resources、compile、testResources、testCompile、test、jar(打包)等７个阶段。&lt;/li>
+&lt;li>mvn clean install依次执行了clean、resources、compile、testResources、testCompile、test、jar(打包)、install等8个阶段。&lt;/li>
+&lt;li>mvn clean deploy依次执行了clean、resources、compile、testResources、testCompile、test、jar(打包)、install、deploy等９个阶段。&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;ul>
+&lt;li>package命令完成了项目编译、单元测试、打包功能，但没有把打好的可执行jar包（war包或其它形式的包）布署到本地maven仓库和远程maven私服仓库&lt;/li>
+&lt;li>install命令完成了项目编译、单元测试、打包功能，同时把打好的可执行jar包（war包或其它形式的包）布署到本地maven仓库，但没有布署到远程maven私服仓库&lt;/li>
+&lt;li>deploy命令完成了项目编译、单元测试、打包功能，同时把打好的可执行jar包（war包或其它形式的包）布署到本地maven仓库和远程maven私服仓库&lt;/li>
+&lt;/ul></description></item><item><title>Maven-pom-packaging</title><link>http://gebitang.com/post/jiansh/spring/maven-pom-packaging/</link><pubDate>Sat, 07 Mar 2020 00:00:00 +0000</pubDate><guid>http://gebitang.com/post/jiansh/spring/maven-pom-packaging/</guid><description>&lt;p>&lt;a href="https://www.jianshu.com/p/dbac10201154">link on JianShu&lt;/a>&lt;/p>
+&lt;p>&lt;a href="https://stackoverflow.com/questions/7692161/what-is-pom-packaging-in-maven">What is “pom” packaging in maven?&lt;/a>&lt;/p>
+&lt;blockquote>
+&lt;p>&lt;code>pom&lt;/code> packaging is simply a specification that states the primary artifact is not a war or jar, but the pom.xml itself.&lt;/p>
+&lt;/blockquote>
+&lt;p>只是一直打包形式，打包为pom文件本身。加入当前目录是做完文档模块存在，显然无法打包为&lt;code>jar&lt;/code>形式。&lt;/p></description></item><item><title>Spring-boot服务(一)</title><link>http://gebitang.com/post/jiansh/spring/spring-boot%E6%9C%8D%E5%8A%A1%E4%B8%80/</link><pubDate>Sat, 07 Mar 2020 00:00:00 +0000</pubDate><guid>http://gebitang.com/post/jiansh/spring/spring-boot%E6%9C%8D%E5%8A%A1%E4%B8%80/</guid><description>&lt;p>&lt;a href="https://www.jianshu.com/p/0b596eab81ea">link to JianShu&lt;/a>&lt;/p>
+&lt;h3 id="阿里云">阿里云&lt;/h3>
+&lt;ol>
+&lt;li>目前阿里云新用户有优惠，89年一年。购买的是劵，然后用劵再正式开通服务，设置好用户名密码，默认22端口开通。可以远程访问。&lt;/li>
+&lt;li>阿里云实例列表&amp;ndash;更多&amp;ndash;网络和安全组&amp;ndash;安全组配置&amp;ndash;配置规则&amp;ndash;增加入网的端口。这样才可以访问对应的端口&lt;/li>
+&lt;li>增加&lt;a href="http://gebitang.com/post/how/linux-and-shell/#%E7%94%A8%E6%88%B7%E7%AE%A1%E7%90%86">日常用户&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://blog.csdn.net/LunaEditor/article/details/83051809">安装mysql服务&lt;/a>&lt;/li>
+&lt;li>安装maven &lt;code>sudo apt install maven&lt;/code>，配置阿里云镜像。创建 &lt;code>.m2/settings.xml&lt;/code>文件，内容如下——&lt;/li>
+&lt;/ol>
+&lt;pre tabindex="0">&lt;code>&amp;lt;settings xmlns=&amp;#34;http://maven.apache.org/SETTINGS/1.0.0&amp;#34;
+ xmlns:xsi=&amp;#34;http://www.w3.org/2001/XMLSchema-instance&amp;#34;
+ xsi:schemaLocation=&amp;#34;http://maven.apache.org/SETTINGS/1.0.0
+ https://maven.apache.org/xsd/settings-1.0.0.xsd&amp;#34;&amp;gt;
+ &amp;lt;localRepository /&amp;gt;
+ &amp;lt;interactiveMode /&amp;gt;
+ &amp;lt;usePluginRegistry /&amp;gt;
+ &amp;lt;offline /&amp;gt;
+ &amp;lt;pluginGroups /&amp;gt;
+ &amp;lt;servers /&amp;gt;
+ &amp;lt;mirrors&amp;gt;
+ &amp;lt;mirror&amp;gt;
+ &amp;lt;id&amp;gt;nexus-aliyun&amp;lt;/id&amp;gt;
+ &amp;lt;mirrorOf&amp;gt;*&amp;lt;/mirrorOf&amp;gt;
+ &amp;lt;name&amp;gt;Nexus aliyun&amp;lt;/name&amp;gt;
+ &amp;lt;url&amp;gt;http://maven.aliyun.com/nexus/content/groups/public&amp;lt;/url&amp;gt;
+ &amp;lt;/mirror&amp;gt;
+ &amp;lt;/mirrors&amp;gt; 
+ &amp;lt;proxies /&amp;gt;
+ &amp;lt;profiles /&amp;gt;
+ &amp;lt;activeProfiles /&amp;gt;
+&amp;lt;/settings&amp;gt;
+&lt;/code>&lt;/pr</description></item><item><title>Spring-boot服务(二)：aliyun</title><link>http://gebitang.com/post/jiansh/spring/spring-boot%E6%9C%8D%E5%8A%A1%E4%BA%8Caliyun/</link><pubDate>Sat, 07 Mar 2020 00:00:00 +0000</pubDate><guid>http://gebitang.com/post/jiansh/spring/spring-boot%E6%9C%8D%E5%8A%A1%E4%BA%8Caliyun/</guid><description>&lt;p>&lt;a href="https://www.jianshu.com/p/25d597023e22">link on JianShu&lt;/a>&lt;/p>
+&lt;p>从头再来。旧的镜像在我安装gitlab之后&lt;a href="https://www.jianshu.com/p/a9c8b9fc61aa">Gitlab CE&lt;/a>，现在远程登录相当慢。重新初始化了一下镜像。使用强密码策略。&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;ol start="0">
+&lt;li>安装zsh+oh my zsh &lt;code>apt-get install -y zsh; sh -c &amp;quot;$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)&amp;quot;&lt;/code>&lt;/li>
+&lt;/ol>
+&lt;/li>
+&lt;li>
+&lt;ol>
+&lt;li>安装Maven, git, java &lt;code>apt-get update; apt-get install -y maven git openjdk-8-jdk&lt;/code>&lt;/li>
+&lt;/ol>
+&lt;/li>
+&lt;li>
+&lt;ol start="2">
+&lt;li>生成SSH public key &lt;code>ssh-keygen -t rsa -b 4096 -C &amp;quot;e@example.com&amp;quot;&lt;/code> 并配置多个key &lt;code>~/.ssh/config&lt;/code> 内容如下&lt;/li>
+&lt;/ol>
+&lt;/li>
+&lt;li>
+&lt;ol start="3">
+&lt;li>&lt;del>安装mysql&lt;/del>，&lt;a href="https://linuxize.com/post/how-to-install-mysql-on-ubuntu-18-04/">how-to-install-mysql-on-ubuntu-18-04&lt;/a>&lt;/li>
+&lt;/ol>
+&lt;/li>
+&lt;li>
+&lt;ol start="4">
+&lt;li>配置安全组策略，打开需要访问的端口。&lt;/li>
+&lt;/ol>
+&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>Host github.com
+ # Specifies the real host name to log into. Numeric IP addresses are also permitted.
+ HostName github.com
+ # Defines the username for the SSH connection.
+ User gebitang
+ # Specifies a file from which the user’s DSA, ECDSA or DSA authentication identity is read.
+ IdentityFile ~/.ssh/id_rsa_github
+Host gitlab.com
+ # Specifies the real host name to log into. Numeric IP addresses are also permitted.
+ HostName gitlab.com
+ # Defines the username for the SSH connection.
+ User gebitang
+ # Specifies a file from which the user’s DSA, ECDSA or DSA authentication identity is read.
+ IdentityFile ~/.ssh/id_rsa
+&lt;/code>&lt;/pr</description></item></channel></rss>

@@ -1,1 +1,76 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Front-End on 戈壁堂</title><link>http://gebitang.com/topics/front-end/</link><description>Recent content in Front-End on 戈壁堂</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Tue, 17 Mar 2020 00:00:00 +0000</lastBuildDate><atom:link href="http://gebitang.com/topics/front-end/index.xml" rel="self" type="application/rss+xml"/><item><title>Electron安装失败</title><link>http://gebitang.com/post/2020/0317-electron-failed-to-install/</link><pubDate>Tue, 17 Mar 2020 00:00:00 +0000</pubDate><guid>http://gebitang.com/post/2020/0317-electron-failed-to-install/</guid><description>8.4.0版本 Mac 删除Cache还是升级了Mixin。 0.10.2版本Mac上需要electron的8.4版本 cat yarn.lock | grep electron Mac上出现跟Wind</description></item><item><title>BASed(一)</title><link>http://gebitang.com/post/jiansh/front-end/based%E4%B8%80/</link><pubDate>Sat, 07 Mar 2020 00:00:00 +0000</pubDate><guid>http://gebitang.com/post/jiansh/front-end/based%E4%B8%80/</guid><description>link on JianShu B &amp;ndash;&amp;gt; A &amp;ndash;&amp;gt; S 学习材料收集一下先： PC端学习项目：vue-element-admin，DaXiang的前端使用的架子来自这个项目。 移动端：</description></item><item><title>BASed(二)</title><link>http://gebitang.com/post/jiansh/front-end/based%E4%BA%8C/</link><pubDate>Sat, 07 Mar 2020 00:00:00 +0000</pubDate><guid>http://gebitang.com/post/jiansh/front-end/based%E4%BA%8C/</guid><description>link on JianShu BASed(一)里提到—— 使用Auth0站点的指南文章01-login 跟着指南做一遍，有点感觉了。 走遍天下都一样，代码永远比文档快。跟</description></item><item><title>前端之路：好懵</title><link>http://gebitang.com/post/jiansh/front-end/%E5%89%8D%E7%AB%AF%E4%B9%8B%E8%B7%AF%E5%A5%BD%E6%87%B5/</link><pubDate>Sat, 07 Mar 2020 00:00:00 +0000</pubDate><guid>http://gebitang.com/post/jiansh/front-end/%E5%89%8D%E7%AB%AF%E4%B9%8B%E8%B7%AF%E5%A5%BD%E6%87%B5/</guid><description>link on JianShu 一个感觉：调试跟黑盒一样，当没有按照预想的方式进行起来时，前端这玩意完全看不出来原因啊。 我添加STF页面时就把一个搜索框放不到正确的位</description></item><item><title>前端之路：学习进度跟踪</title><link>http://gebitang.com/post/jiansh/front-end/%E5%89%8D%E7%AB%AF%E4%B9%8B%E8%B7%AF%E5%AD%A6%E4%B9%A0%E8%BF%9B%E5%BA%A6%E8%B7%9F%E8%B8%AA/</link><pubDate>Sat, 07 Mar 2020 00:00:00 +0000</pubDate><guid>http://gebitang.com/post/jiansh/front-end/%E5%89%8D%E7%AB%AF%E4%B9%8B%E8%B7%AF%E5%AD%A6%E4%B9%A0%E8%BF%9B%E5%BA%A6%E8%B7%9F%E8%B8%AA/</guid><description>link on JianShu 日日不断 angularjs 1.6.10 tutorial angularjs 1.x api API学习每天3个API AIP 文档有41个模块，每天至少阅读1个模块 重新前端专栏58讲，已学20个。每天至少学习一篇。</description></item><item><title>前端之路：第一周总结</title><link>http://gebitang.com/post/jiansh/front-end/%E5%89%8D%E7%AB%AF%E4%B9%8B%E8%B7%AF%E7%AC%AC%E4%B8%80%E5%91%A8%E6%80%BB%E7%BB%93/</link><pubDate>Sat, 07 Mar 2020 00:00:00 +0000</pubDate><guid>http://gebitang.com/post/jiansh/front-end/%E5%89%8D%E7%AB%AF%E4%B9%8B%E8%B7%AF%E7%AC%AC%E4%B8%80%E5%91%A8%E6%80%BB%E7%BB%93/</guid><description>link on JianShu 上周结束后就自己先总结了开发黑白棋时遇到的问题：前端之路：黑白棋一、二 本周以来，大群、小组里都讨论得很热烈。以我目前都水平，暂没有啥参</description></item><item><title>前端之路：组件化一</title><link>http://gebitang.com/post/jiansh/front-end/%E5%89%8D%E7%AB%AF%E4%B9%8B%E8%B7%AF%E7%BB%84%E4%BB%B6%E5%8C%96%E4%B8%80/</link><pubDate>Sat, 07 Mar 2020 00:00:00 +0000</pubDate><guid>http://gebitang.com/post/jiansh/front-end/%E5%89%8D%E7%AB%AF%E4%B9%8B%E8%B7%AF%E7%BB%84%E4%BB%B6%E5%8C%96%E4%B8%80/</guid><description>link on JianShu 授课 第一次进行线上课程。三段论节奏还是很清晰： 组件化演进历史以及三大主流组件（React、Agnular、Vue）的方案 进行需求分析：</description></item><item><title>前端之路：组件化二</title><link>http://gebitang.com/post/jiansh/front-end/%E5%89%8D%E7%AB%AF%E4%B9%8B%E8%B7%AF%E7%BB%84%E4%BB%B6%E5%8C%96%E4%BA%8C/</link><pubDate>Sat, 07 Mar 2020 00:00:00 +0000</pubDate><guid>http://gebitang.com/post/jiansh/front-end/%E5%89%8D%E7%AB%AF%E4%B9%8B%E8%B7%AF%E7%BB%84%E4%BB%B6%E5%8C%96%E4%BA%8C/</guid><description>link on JianShu 轮播图效果+注释说明 w3.org上默认使用duckduckgo搜索引擎，查找站点内容可以使用这样到方式：比如搜索 white-space</description></item><item><title>前端之路：黑白棋一</title><link>http://gebitang.com/post/jiansh/front-end/%E5%89%8D%E7%AB%AF%E4%B9%8B%E8%B7%AF%E9%BB%91%E7%99%BD%E6%A3%8B%E4%B8%80/</link><pubDate>Sat, 07 Mar 2020 00:00:00 +0000</pubDate><guid>http://gebitang.com/post/jiansh/front-end/%E5%89%8D%E7%AB%AF%E4%B9%8B%E8%B7%AF%E9%BB%91%E7%99%BD%E6%A3%8B%E4%B8%80/</guid><description>link on JianShu HTML 5.3 W3C Working Draft, 18 October 2018 HTML Living Standard — Last Updated 18 July 2019 MDN Web/HTML MDN CSS MDN CN JavaScript ECMAScript 6.0 about:blank Object.getOwnPropertyNames(window) 学习搜集整理基本的知识图谱路线图之后，今天开始——黑白棋开发之旅。 规则简述： 8</description></item><item><title>前端之路：黑白棋二</title><link>http://gebitang.com/post/jiansh/front-end/%E5%89%8D%E7%AB%AF%E4%B9%8B%E8%B7%AF%E9%BB%91%E7%99%BD%E6%A3%8B%E4%BA%8C/</link><pubDate>Sat, 07 Mar 2020 00:00:00 +0000</pubDate><guid>http://gebitang.com/post/jiansh/front-end/%E5%89%8D%E7%AB%AF%E4%B9%8B%E8%B7%AF%E9%BB%91%E7%99%BD%E6%A3%8B%E4%BA%8C/</guid><description>link on JianShu 前端之路：黑白棋一里提到：包含悔棋功能时，下棋的落子状态没有显示出来。 因为是现场跟着老师一起做的，总感觉功能是OK的。使用BBEdit</description></item><item><title>有关CORS的资源</title><link>http://gebitang.com/post/jiansh/front-end/%E6%9C%89%E5%85%B3cors%E7%9A%84%E8%B5%84%E6%BA%90/</link><pubDate>Sat, 07 Mar 2020 00:00:00 +0000</pubDate><guid>http://gebitang.com/post/jiansh/front-end/%E6%9C%89%E5%85%B3cors%E7%9A%84%E8%B5%84%E6%BA%90/</guid><description/></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Front-End on 戈壁堂</title><link>http://gebitang.com/topics/front-end/</link><description>Recent content in Front-End on 戈壁堂</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Tue, 17 Mar 2020 00:00:00 +0000</lastBuildDate><atom:link href="http://gebitang.com/topics/front-end/index.xml" rel="self" type="application/rss+xml"/><item><title>Electron安装失败</title><link>http://gebitang.com/post/2020/0317-electron-failed-to-install/</link><pubDate>Tue, 17 Mar 2020 00:00:00 +0000</pubDate><guid>http://gebitang.com/post/2020/0317-electron-failed-to-install/</guid><description>&lt;h3 id="840版本-mac">8.4.0版本 Mac&lt;/h3>
+&lt;p>删除Cache还是升级了Mixin。 0.10.2版本Mac上需要electron的8.4版本 &lt;code>cat yarn.lock | grep electron&lt;/code>&lt;/p></description></item><item><title>BASed(一)</title><link>http://gebitang.com/post/jiansh/front-end/based%E4%B8%80/</link><pubDate>Sat, 07 Mar 2020 00:00:00 +0000</pubDate><guid>http://gebitang.com/post/jiansh/front-end/based%E4%B8%80/</guid><description>&lt;p>&lt;a href="https://www.jianshu.com/p/fe87180af541">link on JianShu&lt;/a>&lt;/p>
+&lt;blockquote>
+&lt;p>B &amp;ndash;&amp;gt; A &amp;ndash;&amp;gt; S&lt;/p>
+&lt;/blockquote>
+&lt;p>学习材料收集一下先：&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;ol>
+&lt;li>PC端学习项目：&lt;a href="https://github.com/PanJiaChen/vue-element-admin">vue-element-admin&lt;/a>，DaXiang的前端使用的架子来自这个项目。&lt;/li>
+&lt;/ol>
+&lt;/li>
+&lt;li>
+&lt;ol start="2">
+&lt;li>移动端：Google搜索 &lt;code>vue js mobile app example&lt;/code>推荐的就是 &lt;a href="https://github.com/NativeScript/NativeScript">NativeScript&lt;/a>了&lt;/li>
+&lt;/ol>
+&lt;/li>
+&lt;li>
+&lt;ol start="3">
+&lt;li>Example示例教学应用是最好的&lt;a href="https://vuejsexamples.com/tag/mobile/">vuejsexamples.com&lt;/a>&lt;/li>
+&lt;/ol>
+&lt;/li>
+&lt;/ul>
+&lt;p>先从PC端学起。最简单的方式就是 &lt;code>clone repo; npm install ; npm run dev&lt;/code>基本上这样能跑起来，就表示环境没有问题。Windows+Mac环境目前都已经跑起来。&lt;/p></description></item><item><title>BASed(二)</title><link>http://gebitang.com/post/jiansh/front-end/based%E4%BA%8C/</link><pubDate>Sat, 07 Mar 2020 00:00:00 +0000</pubDate><guid>http://gebitang.com/post/jiansh/front-end/based%E4%BA%8C/</guid><description>&lt;p>&lt;a href="https://www.jianshu.com/p/42819db35fe6">link on JianShu&lt;/a>&lt;/p>
+&lt;p>&lt;a href="https://www.jianshu.com/p/fe87180af541">BASed(一)&lt;/a>里提到——&lt;/p>
+&lt;blockquote>
+&lt;p>使用Auth0站点的指南文章&lt;a href="https://auth0.com/docs/quickstart/spa/vuejs/01-login">01-login&lt;/a>&lt;/p></description></item><item><title>前端之路：好懵</title><link>http://gebitang.com/post/jiansh/front-end/%E5%89%8D%E7%AB%AF%E4%B9%8B%E8%B7%AF%E5%A5%BD%E6%87%B5/</link><pubDate>Sat, 07 Mar 2020 00:00:00 +0000</pubDate><guid>http://gebitang.com/post/jiansh/front-end/%E5%89%8D%E7%AB%AF%E4%B9%8B%E8%B7%AF%E5%A5%BD%E6%87%B5/</guid><description>&lt;p>&lt;a href="https://www.jianshu.com/p/9efa080a5df7">link on JianShu&lt;/a>&lt;/p>
+&lt;p>一个感觉：调试跟黑盒一样，当没有按照预想的方式进行起来时，前端这玩意完全看不出来原因啊。&lt;/p>
+&lt;p>我添加STF页面时就把一个搜索框放不到正确的位置上去。今天听课，老师写轮播动画时也调试了很久，看得我已经完全懵了。&lt;/p></description></item><item><title>前端之路：学习进度跟踪</title><link>http://gebitang.com/post/jiansh/front-end/%E5%89%8D%E7%AB%AF%E4%B9%8B%E8%B7%AF%E5%AD%A6%E4%B9%A0%E8%BF%9B%E5%BA%A6%E8%B7%9F%E8%B8%AA/</link><pubDate>Sat, 07 Mar 2020 00:00:00 +0000</pubDate><guid>http://gebitang.com/post/jiansh/front-end/%E5%89%8D%E7%AB%AF%E4%B9%8B%E8%B7%AF%E5%AD%A6%E4%B9%A0%E8%BF%9B%E5%BA%A6%E8%B7%9F%E8%B8%AA/</guid><description>&lt;p>&lt;a href="https://www.jianshu.com/p/8319c1e5bcf8">link on JianShu&lt;/a>&lt;/p>
+&lt;blockquote>
+&lt;p>日日不断&lt;/p>
+&lt;/blockquote>
+&lt;p>&lt;a href="https://code.angularjs.org/1.6.10/docs/tutorial/index">angularjs 1.6.10 tutorial&lt;/a>&lt;/p>
+&lt;ol start="0">
+&lt;li>&lt;a href="https://docs.angularjs.org/api">angularjs 1.x api&lt;/a> API学习每天3个API&lt;/li>
+&lt;li>&lt;a href="http://nodejs.cn/api/">AIP 文档&lt;/a>有41个模块，每天至少阅读1个模块&lt;/li>
+&lt;li>&lt;a href="https://time.geekbang.org/column/intro/154">重新前端专栏&lt;/a>58讲，已学20个。每天至少学习一篇。在训练营结束前要至少读2遍。专栏内容要有自己理解的总结整理。&lt;/li>
+&lt;li>跟上训练营的课程内容、练习。&lt;/li>
+&lt;li>根据前3点的学习内容，最后总结出自己的前端知识图谱。&lt;/li>
+&lt;/ol>
+&lt;h2 id="学习时间-trigger">学习时间 trigger&lt;/h2>
+&lt;ul>
+&lt;li>早饭前时间完成1&lt;/li>
+&lt;li>午饭后完成2&lt;/li>
+&lt;li>晚饭前完成3&lt;/li>
+&lt;li>睡觉前完成4&lt;/li>
+&lt;/ul>
+&lt;h3 id="810">8.10&lt;/h3>
+&lt;ul>
+&lt;li>完成&lt;a href="http://nodejs.cn/api/modules.html">modules&lt;/a>模块的阅读。&lt;/li>
+&lt;li>走步的时候听了两节课程内容：涉及很细节的内容。&lt;/li>
+&lt;/ul>
+&lt;p>看文章不如看文档，加载逻辑文档中讲解的最清楚。&lt;a href="http://nodejs.cn/api/modules.html#modules_all_together">伪代码逻辑&lt;/a>&lt;/p></description></item><item><title>前端之路：第一周总结</title><link>http://gebitang.com/post/jiansh/front-end/%E5%89%8D%E7%AB%AF%E4%B9%8B%E8%B7%AF%E7%AC%AC%E4%B8%80%E5%91%A8%E6%80%BB%E7%BB%93/</link><pubDate>Sat, 07 Mar 2020 00:00:00 +0000</pubDate><guid>http://gebitang.com/post/jiansh/front-end/%E5%89%8D%E7%AB%AF%E4%B9%8B%E8%B7%AF%E7%AC%AC%E4%B8%80%E5%91%A8%E6%80%BB%E7%BB%93/</guid><description>&lt;p>&lt;a href="https://www.jianshu.com/p/516291be5b69">link on JianShu&lt;/a>&lt;/p>
+&lt;p>上周结束后就自己先总结了开发黑白棋时遇到的问题：前端之路：黑白棋&lt;a href="https://www.jianshu.com/p/ac64bc43b108">一&lt;/a>、&lt;a href="https://www.jianshu.com/p/97221081158d">二&lt;/a>&lt;/p></description></item><item><title>前端之路：组件化一</title><link>http://gebitang.com/post/jiansh/front-end/%E5%89%8D%E7%AB%AF%E4%B9%8B%E8%B7%AF%E7%BB%84%E4%BB%B6%E5%8C%96%E4%B8%80/</link><pubDate>Sat, 07 Mar 2020 00:00:00 +0000</pubDate><guid>http://gebitang.com/post/jiansh/front-end/%E5%89%8D%E7%AB%AF%E4%B9%8B%E8%B7%AF%E7%BB%84%E4%BB%B6%E5%8C%96%E4%B8%80/</guid><description>&lt;p>&lt;a href="https://www.jianshu.com/p/c6c2ae961441">link on JianShu&lt;/a>&lt;/p>
+&lt;h3 id="授课">授课&lt;/h3>
+&lt;p>第一次进行线上课程。三段论节奏还是很清晰：&lt;/p>
+&lt;ol>
+&lt;li>组件化演进历史以及三大主流组件（React、Agnular、Vue）的方案&lt;/li>
+&lt;li>进行需求分析：自己先分析再进行讲解&lt;/li>
+&lt;li>coding：自己先尝试根据需求进行实现再进行演示——演示有明显的演进思路&lt;/li>
+&lt;/ol>
+&lt;h3 id="上课">上课&lt;/h3>
+&lt;p>第一段还可以作为知识点进行了解；
+第二段已经思路混乱了：需求分析我写的是这样的——&lt;/p></description></item><item><title>前端之路：组件化二</title><link>http://gebitang.com/post/jiansh/front-end/%E5%89%8D%E7%AB%AF%E4%B9%8B%E8%B7%AF%E7%BB%84%E4%BB%B6%E5%8C%96%E4%BA%8C/</link><pubDate>Sat, 07 Mar 2020 00:00:00 +0000</pubDate><guid>http://gebitang.com/post/jiansh/front-end/%E5%89%8D%E7%AB%AF%E4%B9%8B%E8%B7%AF%E7%BB%84%E4%BB%B6%E5%8C%96%E4%BA%8C/</guid><description>&lt;p>&lt;a href="https://www.jianshu.com/p/d603d31c8f31">link on JianShu&lt;/a>&lt;/p>
+&lt;p>&lt;a href="https://codepen.io/gebitang/pen/OJLNOQw">轮播图效果+注释说明&lt;/a>&lt;/p>
+&lt;p>w3.org上默认使用duckduckgo搜索引擎，查找站点内容可以使用这样到方式：比如搜索 &lt;code>white-space&lt;/code>：
+&lt;a href="https://duckduckgo.com/?q=site%3Aw3.org+white-space&amp;amp;search-submit=&amp;amp;ia=web">https://duckduckgo.com/?q=site%3Aw3.org+white-space&amp;amp;search-submit=&amp;amp;ia=web &lt;/a>&lt;/p></description></item><item><title>前端之路：黑白棋一</title><link>http://gebitang.com/post/jiansh/front-end/%E5%89%8D%E7%AB%AF%E4%B9%8B%E8%B7%AF%E9%BB%91%E7%99%BD%E6%A3%8B%E4%B8%80/</link><pubDate>Sat, 07 Mar 2020 00:00:00 +0000</pubDate><guid>http://gebitang.com/post/jiansh/front-end/%E5%89%8D%E7%AB%AF%E4%B9%8B%E8%B7%AF%E9%BB%91%E7%99%BD%E6%A3%8B%E4%B8%80/</guid><description>&lt;p>&lt;a href="https://www.jianshu.com/p/ac64bc43b108">link on JianShu&lt;/a>&lt;/p>
+&lt;p>&lt;a href="https://www.w3.org/TR/2018/WD-html53-20181018/index.html#contents">HTML 5.3 W3C Working Draft, 18 October 2018&lt;/a>
+&lt;a href="https://html.spec.whatwg.org/#toc-semantics">HTML Living Standard — Last Updated 18 July 2019&lt;/a>
+&lt;a href="https://developer.mozilla.org/en-US/docs/Web/HTML">MDN Web/HTML&lt;/a>
+&lt;a href="https://developer.mozilla.org/en-US/docs/Web/CSS">MDN CSS&lt;/a>&lt;/p>
+&lt;p>&lt;a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript">MDN CN JavaScript&lt;/a>
+&lt;a href="http://www.ecma-international.org/ecma-262/6.0/index.html">ECMAScript 6.0&lt;/a>&lt;/p>
+&lt;p>&lt;a href="about:blank">about:blank&lt;/a> &lt;code>Object.getOwnPropertyNames(window)&lt;/code>&lt;/p>
+&lt;p>学习搜集整理基本的知识图谱路线图之后，今天开始——黑白棋开发之旅。&lt;/p></description></item><item><title>前端之路：黑白棋二</title><link>http://gebitang.com/post/jiansh/front-end/%E5%89%8D%E7%AB%AF%E4%B9%8B%E8%B7%AF%E9%BB%91%E7%99%BD%E6%A3%8B%E4%BA%8C/</link><pubDate>Sat, 07 Mar 2020 00:00:00 +0000</pubDate><guid>http://gebitang.com/post/jiansh/front-end/%E5%89%8D%E7%AB%AF%E4%B9%8B%E8%B7%AF%E9%BB%91%E7%99%BD%E6%A3%8B%E4%BA%8C/</guid><description>&lt;p>&lt;a href="https://www.jianshu.com/p/97221081158d">link on JianShu&lt;/a>&lt;/p>
+&lt;p>&lt;a href="https://www.jianshu.com/p/ac64bc43b108">前端之路：黑白棋一&lt;/a>里提到：包含悔棋功能时，下棋的落子状态没有显示出来。&lt;/p></description></item><item><title>有关CORS的资源</title><link>http://gebitang.com/post/jiansh/front-end/%E6%9C%89%E5%85%B3cors%E7%9A%84%E8%B5%84%E6%BA%90/</link><pubDate>Sat, 07 Mar 2020 00:00:00 +0000</pubDate><guid>http://gebitang.com/post/jiansh/front-end/%E6%9C%89%E5%85%B3cors%E7%9A%84%E8%B5%84%E6%BA%90/</guid><description/></item></channel></rss>

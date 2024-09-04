@@ -1,1 +1,8 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Postgres on 戈壁堂</title><link>http://gebitang.com/topics/postgres/</link><description>Recent content in Postgres on 戈壁堂</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Thu, 09 Dec 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://gebitang.com/topics/postgres/index.xml" rel="self" type="application/rss+xml"/><item><title>PostgreSQL</title><link>http://gebitang.com/post/how/postgresql/</link><pubDate>Thu, 09 Dec 2021 00:00:00 +0000</pubDate><guid>http://gebitang.com/post/how/postgresql/</guid><description>聚合整理一下现有的内容。 安装PostgreSQL debian # 安装 $ apt -y install postgresql postgresql-contrib #查看版本 $ /usr/lib/postgresql/10/bin/postgres -V postgres (PostgreSQL) 10.12 (Ubuntu 10.12-0ubuntu0.18.04.1) 安装完成后，默认会增加一个postgres用户</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Postgres on 戈壁堂</title><link>http://gebitang.com/topics/postgres/</link><description>Recent content in Postgres on 戈壁堂</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Thu, 09 Dec 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://gebitang.com/topics/postgres/index.xml" rel="self" type="application/rss+xml"/><item><title>PostgreSQL</title><link>http://gebitang.com/post/how/postgresql/</link><pubDate>Thu, 09 Dec 2021 00:00:00 +0000</pubDate><guid>http://gebitang.com/post/how/postgresql/</guid><description>&lt;p>聚合整理一下现有的内容。&lt;/p>
+&lt;h2 id="安装postgresql-debian">安装PostgreSQL debian&lt;/h2>
+&lt;pre tabindex="0">&lt;code># 安装
+$ apt -y install postgresql postgresql-contrib
+#查看版本
+$ /usr/lib/postgresql/10/bin/postgres -V
+postgres (PostgreSQL) 10.12 (Ubuntu 10.12-0ubuntu0.18.04.1)
+&lt;/code>&lt;/pr</description></item></channel></rss>

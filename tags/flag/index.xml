@@ -22,4 +22,36 @@ Flag到期日，完成度50%。不再谈努力，只在意明确目标，最终�
  &lt;/div>
  
 
-&lt;/div></description></item><item><title>Flags Archives</title><link>http://gebitang.com/post/what/flag-archives/</link><pubDate>Fri, 15 Sep 2017 00:00:00 +0000</pubDate><guid>http://gebitang.com/post/what/flag-archives/</guid><description>日读源码 手倒立 THIS.RECORDING BIG: Blockchain In Go TODO 极客邦直播？ TIM阅读邮件Leo hecCode订阅，进入android开发？ 段永平博客 学习投资理念 Start very small Do only one change at</description></item></channel></rss>
+&lt;/div></description></item><item><title>Flags Archives</title><link>http://gebitang.com/post/what/flag-archives/</link><pubDate>Fri, 15 Sep 2017 00:00:00 +0000</pubDate><guid>http://gebitang.com/post/what/flag-archives/</guid><description>&lt;ul>
+&lt;li>&lt;a href="../soure_code_reading/">日读源码&lt;/a>&lt;/li>
+&lt;li>&lt;a href="../the_road_to_handstand/">手倒立&lt;/a>&lt;/li>
+&lt;li>THIS.RECORDING&lt;/li>
+&lt;li>&lt;a href="https://jeiwan.cc/tags/blockchain/">BIG: Blockchain In Go&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h2 id="todo">TODO&lt;/h2>
+&lt;ul>
+&lt;li>极客邦直播？&lt;/li>
+&lt;li>TIM阅读邮件Leo&lt;/li>
+&lt;li>hecCode订阅，进入android开发？&lt;/li>
+&lt;li>&lt;a href="http://nteswjq.blog.163.com/blog/#m=0">段永平博客&lt;/a> 学习投资理念&lt;/li>
+&lt;/ul>
+&lt;blockquote>
+&lt;ul>
+&lt;li>Start very small&lt;/li>
+&lt;li>Do only one change at a time&lt;/li>
+&lt;li>Be present and enjoy the activity(don&amp;rsquo;t focus on results)&lt;/li>
+&lt;li>Be grateful for every step you take.&lt;/li>
+&lt;/ul>
+&lt;/blockquote>
+&lt;h2 id="ideas">IDEAS&lt;/h2>
+&lt;ul>
+&lt;li>DH工程javadoc注释，分享&lt;/li>
+&lt;li>流程中添加zip包检查逻辑——避免走到了执行阶段才发现条件不符合要求&lt;/li>
+&lt;li>源码阅读理解，以故事的方式解释代码逻辑&lt;/li>
+&lt;li>七牛图床使用&lt;/li>
+&lt;li>&lt;a href="https://jeiwan.cc/tags/blockchain/">BIG：Blockchani In Go&lt;/a>&lt;/li>
+&lt;li>练手：使用Go抓取雪球API，跟踪年报&lt;/li>
+&lt;/ul>
+&lt;h2 id="reading-materials">READING MATERIALS&lt;/h2>
+&lt;p>&lt;a href="http://www.zcfy.cc/article/rest-apis-are-rest-in-peace-apis-long-live-graphql-3935.html">安息吧 REST API，GraphQL 长存&lt;/a>&lt;!-- raw HTML omitted -->
+&lt;a href="https://medium.freecodecamp.org/rest-apis-are-rest-in-peace-apis-long-live-graphql-d412e559d8e4">REST APIs are REST-in-Peace APIs. Long Live GraphQL.&lt;/a>&lt;!-- raw HTML omitted -->&lt;/p></description></item></channel></rss>

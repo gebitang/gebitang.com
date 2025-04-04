@@ -321,6 +321,8 @@ ssh-add coding_id_rsa
 # then it could be cloned normaly.
 ```
 
+使用ssh指定私钥路径： `ssh -i ~/.ssh/id_rsa user@hostname`
+
 
 ### Fork and Sync Repo
 

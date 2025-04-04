@@ -157,6 +157,10 @@ scoop install cloc               # Windows with Scoop
 
 ffmpeg是万能的~ 
 
+```shell
+#ffmpeg -ss [时间点] -i [输入视频] -vframes 1 -qscale:v 2 控制图片质量（值越小质量越高，范围1-31）： [输出图片] 
+ffmpeg -ss 00:05:30 -i input.mp4 -vframes 1 -qscale:v 1 output.jpg
+```
 ## m3u8转mp4 
 
 [gist for m3u8-to-mp4](https://gist.github.com/tzmartin/fb1f4a8e95ef5fb79596bd4719671b5d)——

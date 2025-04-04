@@ -489,6 +489,18 @@ grails war
 [official guides](https://gradle.org/guides/)</br>
 下载完整版本安装后，在安装目录下的`docs/userguide/userguide.html`下有完整的手册
 
+#### 如何使用gradle的缓存 
+
+使用gradle编译时，如何避免每次重新下载gradle-xx-bin 压缩包。
+
+- 查看项目`gradle/wrapper/gradle-wrapper.properties`中配置的 distributionUrl 的gradle版本
+- Gradle用户主目录下的缓存路径（通常为 `~/.gradle/wrapper/dists/`
+- 项目执行构建命令`./gradlew tasks` 会在主目录下生成对应版本的随机目录，例如  `/gradle-8.11.1-bin/bpt9gzteqjrbo1mjrsomdt32c`
+- 手动下载对应的zip包，放到对应的随机目录下
+- 手动创建对应的ok空文件， 例如 `touch gradle-8.11.1-bin.zip.ok` 
+
+此时重新构建项目，则不用再次下载
+
 #### Gradle via scoop
 
 window下的包管理工具 [`scoop`](https://github.com/lukesampson/scoop/wiki)：默认安装在用户目录下，然后再将由scoop安装的包安装到自己的apps目录下。达到不需要提供用户权限选项的目的。

@@ -147,6 +147,27 @@ postgres=#
 
 ```
 
+## Mac只安装client端
+
+```
+HOMEBREW_NO_AUTO_UPDATE=1 brew install libpq
+
+If you need to have libpq first in your PATH, run:
+  echo 'export PATH="/usr/local/opt/libpq/bin:$PATH"' >> ~/.zshrc
+
+For compilers to find libpq you may need to set:
+  export LDFLAGS="-L/usr/local/opt/libpq/lib"
+  export CPPFLAGS="-I/usr/local/opt/libpq/include"
+
+For pkg-config to find libpq you may need to set:
+  export PKG_CONFIG_PATH="/usr/local/opt/libpq/lib/pkgconfig"
+==> Summary
+🍺  /usr/local/Cellar/libpq/17.4_1: 2,393 files, 31.2MB
+==> Running `brew cleanup libpq`...
+Disable this behaviour by setting HOMEBREW_NO_INSTALL_CLEANUP.
+Hide these hints with HOMEBREW_NO_ENV_HINTS (see `man brew`).
+Error: unknown or unsupported macOS version: :sequoia
+```
 
 ## PostgreSQL基础用法
 

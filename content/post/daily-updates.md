@@ -157,6 +157,10 @@ scoop install cloc               # Windows with Scoop
 
 ffmpeg是万能的~ 
 
+```shell
+#ffmpeg -ss [时间点] -i [输入视频] -vframes 1 -qscale:v 2 控制图片质量（值越小质量越高，范围1-31）： [输出图片] 
+ffmpeg -ss 00:05:30 -i input.mp4 -vframes 1 -qscale:v 1 output.jpg
+```
 ## m3u8转mp4 
 
 [gist for m3u8-to-mp4](https://gist.github.com/tzmartin/fb1f4a8e95ef5fb79596bd4719671b5d)——
@@ -484,6 +488,18 @@ grails war
 [极客学院版](http://wiki.jikexueyuan.com/project/gradle/java-quickstart.html)</br>
 [official guides](https://gradle.org/guides/)</br>
 下载完整版本安装后，在安装目录下的`docs/userguide/userguide.html`下有完整的手册
+
+#### 如何使用gradle的缓存 
+
+使用gradle编译时，如何避免每次重新下载gradle-xx-bin 压缩包。
+
+- 查看项目`gradle/wrapper/gradle-wrapper.properties`中配置的 distributionUrl 的gradle版本
+- Gradle用户主目录下的缓存路径（通常为 `~/.gradle/wrapper/dists/`
+- 项目执行构建命令`./gradlew tasks` 会在主目录下生成对应版本的随机目录，例如  `/gradle-8.11.1-bin/bpt9gzteqjrbo1mjrsomdt32c`
+- 手动下载对应的zip包，放到对应的随机目录下
+- 手动创建对应的ok空文件， 例如 `touch gradle-8.11.1-bin.zip.ok` 
+
+此时重新构建项目，则不用再次下载
 
 #### Gradle via scoop
 

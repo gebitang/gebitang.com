@@ -12,6 +12,25 @@ topics = [
 toc = true
 +++
 
+## 将不同数据库存储到不同的物理位置
+
+```shell
+# systemctl stop mysql 
+systemctl stop mysql
+
+# mv /var/lib/mysql/数据库名 /新路径/数据库名
+mv /var/lib/mysql/数据库名 /新路径/数据库名
+
+# 创建符号链接：
+ln -s /新路径/数据库名 /var/lib/mysql/数据库名
+
+#确保权限正确
+chown -R mysql:mysql /新路径/数据库名
+
+systemctl start mysql
+
+```
+
 ## 不忽略空格
 
 MySQL默认情况，字符串比较忽略开头和结尾的空格。如果在查询中指定的值之后有空格，它仍然会与数据库中的值匹配。

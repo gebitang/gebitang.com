@@ -31,6 +31,31 @@ systemctl start mysql
 
 ```
 
+## 手动清理 binlog 
+
+单机模式下可清理；集群模式下按照配置操作
+
+```shell
+# 查看当前数据库的binlog
+SHOW BINARY LOGS;
+
+# 删除 mysql-bin.000003 之前的所有 binlog 文件
+PURGE BINARY LOGS TO 'mysql-bin.000003';
+
+# 删除指定时间之前的 binlog 文件
+PURGE BINARY LOGS BEFORE '2025-04-01 00:00:00';
+
+#MySQL 配置文件（my.cnf 或 my.ini）中设置
+expire_logs_days = 7
+# 运行时修改
+SET GLOBAL expire_logs_days = 7;
+```
+
+# 连接报错 10061 
+
+空间已满可能导致，查看mysql日志—— `/var/log/mysql/error.log` 或 `/var/log/mysqld.log`
+
+
 ## 不忽略空格
 
 MySQL默认情况，字符串比较忽略开头和结尾的空格。如果在查询中指定的值之后有空格，它仍然会与数据库中的值匹配。
